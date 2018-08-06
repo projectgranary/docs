@@ -11,8 +11,6 @@
   * [Track Online Events](user-guide/track-events-in-granary.md)
   * [GA Tracker](user-guide/ga-integration.md)
   * [Firebase Tracker](user-guide/firebase-integration-via-cloud-functions/README.md)
-    * [Firebase User Properties](user-guide/firebase-integration-via-cloud-functions/firebase-user-properties.md)
-    * [GRNRY Firebase Event tracking](user-guide/firebase-integration-via-cloud-functions/grnry-firebase-event-tracking.md)
     * [Setting up Firebase Cloud Functions](user-guide/firebase-integration-via-cloud-functions/setting-up-firebase-cloud-functions.md)
   * [JavaScript Tracker](user-guide/using-the-javascript-tracker/README.md)
     * [Load and Setup](user-guide/using-the-javascript-tracker/setup-js-tracker.md)

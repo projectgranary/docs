@@ -60,7 +60,30 @@ firebase deploy
 
 After the deployment when you create the respective firebase analytics events you can check that the functions have been executed without error by checking in he functions tab of the firebase console. The count of executions has only a small latency so you should see almost imidiate results. If you only have recently declared an event type a conversion it might take a while until you see the respective functions triggered.
 
+
+
 ![](../../.gitbook/assets/coudfunctionsdashboard.png)
 
-### 
+#### GRNRY Firebase Event tracking
+
+As the amount of Events to be labeled as conversions is limited \(and therefore the amount of event types to be forewareded to snowplow\) we would advise that if you plan on tracking many different custom events to consolidate them into one GRNRY\_CUSTOM1 event with up to 25 custom keys \(consistent over all events of this type !\). This might however result in less optimal performance of the forewareding cloud function !. See below for an example:
+
+```java
+Bundle grnryBundle = new Bundle();
+grnryBundle = initBundle(grnryBundle);
+grnryBundle.putString("GRNRY_CUSTOM_PARAMETER_1", "Value 1");
+grnryBundle.putString("GRNRY_CUSTOM_PARAMETER_2", "Value 2");
+grnryBundle.putString("GRNRY_CUSTOM_PARAMETER_3", "Value 3");
+FirebaseAnalytics.getInstance(getApplicationContext()).logEvent("GRNRY_CUSTOM1", grnryBundle);
+```
+
+#### Firebase User Properties
+
+To hand over informations specific to the app installation with every Firebase Analytics Event it is possible to define Firebase user properties.
+
+```java
+FirebaseAnalytics.getInstance(getApplicationContext()).setUserProperty("KEY","VALUE");
+```
+
+We would advise you to use two properties for GRNRY specific, first a GRNRUID which should be random UUID and second a GRNRYSESSIONID \(also a random UUID\) that is reset whenever a new session \(specifics to be defined\) is started.
 
