@@ -64,7 +64,7 @@ After the deployment when you create the respective firebase analytics events yo
 
 ![](../../.gitbook/assets/coudfunctionsdashboard.png)
 
-#### GRNRY Firebase Event tracking
+## GRNRY Firebase Event tracking
 
 As the amount of Events to be labeled as conversions is limited \(and therefore the amount of event types to be forewareded to snowplow\) we would advise that if you plan on tracking many different custom events to consolidate them into one GRNRY\_CUSTOM1 event with up to 25 custom keys \(consistent over all events of this type !\). This might however result in less optimal performance of the forewareding cloud function !. See below for an example:
 
@@ -77,7 +77,7 @@ grnryBundle.putString("GRNRY_CUSTOM_PARAMETER_3", "Value 3");
 FirebaseAnalytics.getInstance(getApplicationContext()).logEvent("GRNRY_CUSTOM1", grnryBundle);
 ```
 
-#### Firebase User Properties
+## Firebase User Properties
 
 To hand over informations specific to the app installation with every Firebase Analytics Event it is possible to define Firebase user properties.
 
@@ -86,4 +86,9 @@ FirebaseAnalytics.getInstance(getApplicationContext()).setUserProperty("KEY","VA
 ```
 
 We would advise you to use two properties for GRNRY specific, first a GRNRUID which should be random UUID and second a GRNRYSESSIONID \(also a random UUID\) that is reset whenever a new session \(specifics to be defined\) is started.
+
+## Tracking Events in-App in WebView content using JavaScript
+
+It is possible to use the Firebase Tracker to track events that occur in the content of a WebView using JavaScript by invoking a native interface in the code of your App. You will find this as part of our Demo App. For complete documentation please refer to [https://firebase.google.com/docs/analytics/android/webview](https://firebase.google.com/docs/analytics/android/webview)   
+By using this method it is possible to define key-value pairs and and define custom events inside of a Webpage, which is tracked by the App \(and therefore will use all user properties set inside the app\).
 
