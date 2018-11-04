@@ -8,6 +8,7 @@
   * [What is a CDP?](concepts/test-page-1.md)
   * [Data Representation](concepts/data-flow.md)
 * [User Guide](user-guide/README.md)
+  * [Tracking across Id-Borders using Granary](user-guide/tracking-across-id-borders-using-granary.md)
   * [Track Online Events](user-guide/track-events-in-granary.md)
   * [GA Tracker](user-guide/ga-integration.md)
   * [Firebase Tracker](user-guide/firebase-integration-via-cloud-functions/README.md)
