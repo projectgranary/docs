@@ -12,17 +12,17 @@ A Python App that extracts a Correlation ID and a Timestamp to be used for creat
 
 {% tabs %}
 {% tab title="Spec" %}
-| Metadata Fields | Payload Fields | Description |
-| :--- | :--- | :--- |
-| key |  | uuid created by Snowplow Kafka Producer |
-| value |  | Payload written by Snowplow |
-|  | _schema_ | Snowplow Event Schema Reference |
-|  | _ipAddress_ | ipAddress if Snowplow is configured to collect this |
-|  | _timestamp_ | time of event creation or reception\(?\) |
-|  | _collector_ | identifies the source platform of the event |
-|  | _body_ | Snowplow Event Data \(depending on `schema`\) |
-|  | _headers_ | HTTP headers |
-|  | ... | ... |
+| Metadata Fields | Description |
+| :--- | :--- |
+| key | uuid created by Snowplow Kafka Producer |
+| value | Payload written by Snowplow |
+| $$-$$ schema | Snowplow Event Schema Reference |
+| $$-$$ ipAddress | ipAddress if Snowplow is configured to collect this |
+| $$-$$ timestamp  | time of event creation or reception\(?\) |
+| $$-$$ collector  | identifies the source platform of the event |
+| $$-$$ body  | Snowplow Event Data \(depending on `schema`\) |
+| $$-$$ headers  | HTTP headers |
+| $$-$$ ...  | ... |
 {% endtab %}
 
 {% tab title="Example" %}
@@ -68,20 +68,69 @@ mobile:
 
 {% tabs %}
 {% tab title="Spec" %}
-| Metadata Fields | Payload Fields | Description |
-| :--- | :--- | :--- |
-| metadata |  | Kafka specific fields |
-| payload |  | Forwarded from input attribute `value`  |
-|  | _schema_ | Snowplow Event Schema Reference |
-|  | _ipAddress_ | ipAddress if Snowplow is configured to collect this |
-|  | _timestamp_ | time of event creation or reception\(?\) |
-|  | _collector_ | identifies the source platform of the event |
-|  | _body_ | Snowplow Event Data \(depending on `schema`\) |
-|  | _headers_ | HTTP headers |
-| payloadid |  |  |
-|  | correlationid | extracted from `payload.body`. Used to group events received from the same tracking entity. |
-|  | eventid | used to deduplicate events |
-|  | created | used to recreate the original order of events |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Payload Fields</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">metadata</td>
+      <td style="text-align:left">Kafka specific fields</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">payload</td>
+      <td style="text-align:left">Forwarded from input attribute <code>value </code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><em></em> schema</td>
+      <td style="text-align:left">Snowplow Event Schema Reference</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><em></em> ipAddress</td>
+      <td style="text-align:left">ipAddress if Snowplow is configured to collect this</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><em></em> timestamp</td>
+      <td style="text-align:left">time of event creation or reception(?)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><em></em> collector</td>
+      <td style="text-align:left">identifies the source platform of the event</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><em></em> body</td>
+      <td style="text-align:left">Snowplow Event Data (depending on <code>schema</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><em></em> headers</td>
+      <td style="text-align:left">HTTP headers</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">payloadid</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">correlationid</td>
+      <td style="text-align:left">
+        <p>extracted from <code>payload.body</code> 
+        </p>
+        <p>Used to group events received from the same tracking entity.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">eventid</td>
+      <td style="text-align:left">used to deduplicate events</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">created</td>
+      <td style="text-align:left">used to recreate the original order of events</td>
+    </tr>
+  </tbody>
+</table>
 {% endtab %}
 
 {% tab title="Example" %}
@@ -112,4 +161,6 @@ mobile:
 ```
 {% endtab %}
 {% endtabs %}
+
+
 
