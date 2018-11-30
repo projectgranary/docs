@@ -2,13 +2,13 @@
 description: 'https://gitlab.alvary.io/grnry/thrift-to-json'
 ---
 
-# thrift2json
+# Metadata Extractor
 
 ![](../.gitbook/assets/dataflow_thrift2json.png)
 
 A Python App that extracts a Correlation ID and a Timestamp to be used for creation and update of profiles as well as keys for queries against the eventstore.
 
-## Input
+## Input Topic `'raw'`
 
 {% tabs %}
 {% tab title="Spec" %}
@@ -64,7 +64,7 @@ mobile:
 {% endtab %}
 {% endtabs %}
 
-## Output
+## Output Topic `'raw-json'`
 
 {% tabs %}
 {% tab title="Spec" %}
