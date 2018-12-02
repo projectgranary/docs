@@ -5,7 +5,7 @@ description: >-
 
 # Event Store
 
-![](../.gitbook/assets/dataflow_eventstore.png)
+![](../.gitbook/assets/eventstore.png)
 
 ## Table `'eventstore'`
 

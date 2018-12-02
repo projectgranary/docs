@@ -4,7 +4,7 @@ description: 'https://gitlab.alvary.io/grnry/kafka-profile-update'
 
 # Profile Store
 
-![](../.gitbook/assets/dataflow_profilestore.png)
+![](../.gitbook/assets/profilestore.png)
 
 ## Table `'profilestore'`
 
