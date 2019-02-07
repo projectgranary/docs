@@ -1,12 +1,6 @@
 # Table of contents
 
 * [About](README.md)
-* [About](about/README.md)
-  * [Goals](about/goals.md)
-  * [Partners](about/partners.md)
-* [Concepts](concepts/README.md)
-  * [What is a CDP?](concepts/test-page-1.md)
-  * [Data Representation](concepts/data-flow.md)
 * [User Guide](user-guide/README.md)
   * [Tracking across Id-Borders using Granary](user-guide/tracking-across-id-borders-using-granary.md)
   * [Track Online Events](user-guide/track-events-in-granary.md)
