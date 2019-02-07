@@ -1,5 +1,5 @@
 ---
-description: 'https://gitlab.alvary.io/grnry/thrift-to-json'
+description: 'https://gitlab.alvary.io/grnry/grnry-extractor'
 ---
 
 # Metadata Extractor
@@ -10,10 +10,112 @@ description: 'https://gitlab.alvary.io/grnry/thrift-to-json'
 
 A Python App that extracts a Correlation ID and a Timestamp to be used for creation and update of profiles as well as keys for queries against the eventstore.
 
+## Configuration
+
+| Name | Type | Default Value | Description |
+| :--- | :--- | :--- | :--- |
+|  |  |  |  |
+
+#### Input Format
+
+The Metadata Extractor can be configured to consume either Thrift or JSON payload. By default, it expects a Thrift payload.
+
+#### Correlation ID Rules
+
+In order to find the right ID in each record, rules as to where to find these IDs in the payload should be specified in a YAML file. For more details, refer to below guidelines and example.
+
+{% tabs %}
+{% tab title="Spec" %}
+A yaml file is expected that contains a set of labeled regular expressions which are all applied to the input message. For matching rules the specified part is extracted and passed into the outgoing message using the rule-label as the name of the forwarded attribute.
+
+The ID extraction rules are defined as follows in the id-extraction-rules.yaml:
+
+* First hierarchy layer is a source categorization \(currently unused\)
+* The second hierarchy layer is used to distinguish between different event types \(currently unused\).
+* The third hierarchy defines the rules to get the correlation ID the format: -&lt;json path separated by "/"&gt; : &lt;regex&gt;
+
+Currently the regex is not used.
+
+Example:
+
+```text
+web:
+    snowplow_js:
+        - body/data/0/duid: ""
+    facebook:
+        - url: "https://facebook.com/(.*?)/"
+```
+
+In the example above a check for a JSON element such as this example 
+
+```text
+{"body": {"data":[{"duid":"abc"}]} }
+```
+
+would be firstly executed and the resulting correlation ID would have the value of 
+
+```text
+body/data/0/duid__abc
+```
+
+If the first check fails, a check for a JSON element like
+
+```text
+{"url":"https://www.google.com"}
+```
+
+would be performed and the resulting correlation ID would be 
+
+```text
+url__https://www.google.com
+```
+
+{% hint style="info" %}
+IMPORTANT!
+
+* The first rule that finds an element wins
+* "\_\_" is forbidden in JSON paths
+* Numbers in JSON paths are only allowed to represent integer keys or array indices, not string number keys
+{% endhint %}
+{% endtab %}
+
+{% tab title="Example" %}
+{% code-tabs %}
+{% code-tabs-item title=" id-extraction-rules.yaml " %}
+```yaml
+web:
+  snowplow_js:
+    - body/data/0/duid: ""
+  snowplow_redirect:
+    - body/se_va: ""
+  facebook:
+    - body/url: "https://facebook.com/(.*?)/"
+  userid:
+    - body/uid: ".*?"
+  allianz:
+    - body/vertragspartner: ".*?"
+    - body/riskhash: ".*?"
+mobile:
+  snowplow_android:
+    - body/data/0/uid: ""
+  appid:
+    - body/aid: ".*?"
+  imei:
+    - body/deviceid: ".*"
+  linkid:
+    - body/se_va: '[-+]?[0-9]*\.?[0-9]*'
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
+
 ## Input Topic `'raw'`
 
 {% tabs %}
 {% tab title="Spec" %}
+Thrift payload with Kafka consumer record fields. The payload will be saved under "value" field and contains the following [fields.](https://gitlab.alvary.io/grnry/grnry-extractor/blob/master/grnry/grnryextractor/res/collector-payload.thrift)
+
 | Metadata Fields | Description |
 | :--- | :--- |
 | key | uuid created by Snowplow Kafka Producer |
@@ -25,44 +127,27 @@ A Python App that extracts a Correlation ID and a Timestamp to be used for creat
 | $$-$$ body  | Snowplow Event Data \(depending on `schema`\) |
 | $$-$$ headers  | HTTP headers |
 | $$-$$ ...  | ... |
+|  |  |
 {% endtab %}
 
 {% tab title="Example" %}
-
-{% endtab %}
-{% endtabs %}
-
-## Configuration
-
-{% tabs %}
-{% tab title="Spec" %}
-A yaml file is expected that contains a set of labeled regular expressions which are all applied to the `value.body` attribute of the input message. For matching rules the specified part is extracted and passed into the outgoing message using the rule-label as the name of the forwarded attribute.
-{% endtab %}
-
-{% tab title="Example" %}
-{% code-tabs %}
-{% code-tabs-item title=" id-extraction-rules.yaml " %}
-```yaml
-web:
-  snowplow:
-    - id: ".*?"
-  facebook:
-    - url: "https://facebook.com/(.*?)/"
-  userid:
-    - uid: ".*?"
-  allianz:
-    - vertragspartner: ".*?"
-    - riskhash: ".*?"
-mobile:
-  appid:
-    - aid: ".*?"
-  imei:
-    - deviceid: ".*"
-  linkid:
-    - se_va: '[-+]?[0-9]*\.?[0-9]*'
+```text
+d
+                                                          10.42.3.107
+�hLB�:
+      �UTF-8
+            �ssc-0.14.0-kafka
+                             ,xMozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+                                                                                                                                                       66http://grnry.pages.alvary.io/demo-app-sprung-tracking/
+                                                                                                                                                                                                               @#/com.snowplowanalytics.snowplow/tp2
+         T�{"schema":"iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4","data":[{"e":"pv","url":"http://grnry.pages.alvary.io/demo-app-sprung-tracking/","page":"Alvary Snowplow Download Test","tv":"js-2.9.0","tna":"AlvarySnowplow","aid":"AlvarySPWeb2AppTest","p":"web","tz":"Europe/Berlin","lang":"de-DE","cs":"UTF-8","f_pdf":"1","f_qt":"0","f_realp":"0","f_wma":"0","f_dir":"0","f_fla":"0","f_java":"0","f_gears":"0","f_ag":"0","res":"3440x1440","cd":"24","cookie":"1","eid":"520e75e5-2f97-4749-b3dc-928bae878c40","dtm":"1547467657277","vp":"1684x1115","ds":"1669x1459","vid":"6","sid":"79c030bb-f0af-43f6-9a8f-b6694dc63ae3","duid":"12abe3a9-2aad-47eb-822d-7f019f54dadd","fp":"1918457671","stm":"1547467657281"}]}^
+                           Host: development.lce.grnry.io$Origin: http://grnry.pages.alvary.io�User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+                                                                                                                                                                                                                                   Accept: */*?Referer: http://grnry.pages.alvary.io/demo-app-sprung-tracking/"Accept-Encoding: gzip, deflate, br7Accept-Language: de-DE, de;q=0.9, en-US;q=0.8, en;q=0.7~Cookie: play-basic-authentication-filter=2cbf913c03bb3f2fe86810cf7ae9595c67500b0d; JSESSIONID=A92B89668196AB35593E0CF9064F9D5Cx-forwarded-proto: https2x-request-id: ce00fde2-b017-45db-b095-b3f6b44b1445$x-envoy-expected-rq-timeout-ms: 3000>x-envoy-original-path: /api/com.snowplowanalytics.snowplow/tp2imeout-Access: <function1>application/json
+                                happlication/json
+                                                 �development.lce.grnry.io
+                                                                          �$c4e78535-d522-4948-b10e-50bd33b8f9e7
+                                                                                                                ziAiglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 {% endtab %}
 {% endtabs %}
 
