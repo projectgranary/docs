@@ -242,10 +242,6 @@ Returned in case of invalid parameter\(s\).
 
 Springboot-based microservice to expose profile data stored in the [Profile Store](dataflow/profile-store.md).
 
-### Paths
-
-* /profiles/{profilesId}
-
 ### Configuration
 
 {% tabs %}
@@ -263,6 +259,10 @@ Springboot-based microservice to expose profile data stored in the [Profile Stor
 | PROFILESTORE\_DB\_SSL\_VALIDATE | false | If server certificate should be validated at secure database conn |
 {% endtab %}
 {% endtabs %}
+
+### Paths
+
+* /profiles/{profilesId}
 
 ### API Methods
 
@@ -321,7 +321,7 @@ Could not find a profile matching this query.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-### Snowplow API endpoints
+## Snowplow API endpoints
 
 If you are using a [tracker](https://github.com/snowplow/snowplow/wiki/trackers) from the Snowplow project you can follow [this instructions](https://docs.grnry.io/~/edit/drafts/-LUjJ4toeH9b8wlj-_8p/user-guide/using-the-javascript-tracker).
 
