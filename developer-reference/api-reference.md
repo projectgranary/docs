@@ -45,7 +45,11 @@ Get events by correlation ID
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves events by their correlation id.
+Retrieves events by their correlation id.  
+  
+Example:  
+  
+`https://playground.lce.grnry.io/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&expand=false&offset=0&pagesize=20`  
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -150,6 +154,16 @@ Returned when no event was found, along with empty result set.
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=405 %}
+{% api-method-response-example-description %}
+Returned when a user is not authorized to retrieve these events.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=503 %}
 {% api-method-response-example-description %}
 Returned in case of invalid parameter\(s\).  
@@ -218,6 +232,16 @@ Example: /events/cookie123/event0815
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
 Returned when the requested object cannot be found.  
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=405 %}
+{% api-method-response-example-description %}
+Returned when the request to retrieve the events is unauthorized.
 {% endapi-method-response-example-description %}
 
 ```
