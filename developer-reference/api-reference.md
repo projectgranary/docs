@@ -144,9 +144,9 @@ Example:
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=404 %}
+{% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
-Returned when no event was found, along with empty result set.   
+Returned in case of invalid parameter\(s\).  
 {% endapi-method-response-example-description %}
 
 ```
@@ -154,7 +154,17 @@ Returned when no event was found, along with empty result set.
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=405 %}
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Access denied. Invalid or no token submitted.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
 {% api-method-response-example-description %}
 Returned when a user is not authorized to retrieve these events.
 {% endapi-method-response-example-description %}
@@ -164,9 +174,9 @@ Returned when a user is not authorized to retrieve these events.
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=503 %}
+{% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-Returned in case of invalid parameter\(s\).  
+Returned when no event was found, along with empty result set.   
 {% endapi-method-response-example-description %}
 
 ```
@@ -229,9 +239,9 @@ Example: /events/cookie123/event0815
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=404 %}
+{% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
-Returned when the requested object cannot be found.  
+Returned in case of invalid parameter\(s\).  
 {% endapi-method-response-example-description %}
 
 ```
@@ -239,7 +249,17 @@ Returned when the requested object cannot be found.
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=405 %}
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Access denied. Invalid or no token submitted.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
 {% api-method-response-example-description %}
 Returned when the request to retrieve the events is unauthorized.
 {% endapi-method-response-example-description %}
@@ -249,9 +269,9 @@ Returned when the request to retrieve the events is unauthorized.
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=503 %}
+{% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-Returned in case of invalid parameter\(s\).  
+Returned when the requested object cannot be found.  
 {% endapi-method-response-example-description %}
 
 ```
@@ -329,6 +349,16 @@ Profile successfully retrieved.
         "age": "56"
         ]
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Access denied. Invalid token submitted.
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 
