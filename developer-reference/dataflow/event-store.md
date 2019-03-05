@@ -11,12 +11,14 @@ description: >-
 
 {% tabs %}
 {% tab title="Spec" %}
-| Key | Description |
-| :--- | :--- |
-| **correlationid**  | groups all events that belong to the same tracking entity \(cookie, device, customer, contact, claim, etc.\) . Part of the Primary Key. |
-| **eventid**  | used to deduplicate events. Part of the Primary Key. |
-| created  | the timestamp of the original event creation |
-| message  | the original payload of the event as it was ingested into Granary encoded as JSON. |
+| Key | Description | Data Type | Default | Null |
+| :--- | :--- | :--- | :--- | :--- |
+| **correlationid**  | Correlation-ID. Groups all events that belong to the same tracking entity \(cookie, device, customer, contact, claim, etc.\). | text | - | `NOT NULL` |
+| **eventid**  | Event-ID. Used to deduplicate events. | uuid | - | `NOT NULL` |
+| created  | Created. The timestamp of the original event creation. | bigint | - | `NOT NULL` |
+| message  | Message. The original payload of the event as it was ingested into Granary encoded as JSON. | jsonb | - | - |
+| eventtype | Event type. Describes type of the event. The type is customizable in Metadata Extractor. This is used to control access to the event. | varchar | `na` | `NOT NULL` |
+| source | Event source. Describes the source of the event. The source is the Granary Harvester of the event. This is used to control access to the event. | varchar | `na` | `NOT NULL` |
 {% endtab %}
 
 {% tab title="Example" %}

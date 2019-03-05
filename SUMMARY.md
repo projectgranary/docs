@@ -22,4 +22,5 @@
   * [Belt Extractor](developer-reference/dataflow/belt-extractor.md)
   * [Event Store](developer-reference/dataflow/event-store.md)
   * [Profile Store](developer-reference/dataflow/profile-store.md)
+  * [Segment Store](developer-reference/dataflow/segment-store.md)
 
