@@ -173,27 +173,27 @@ d
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><em></em> schema</td>
+      <td style="text-align:left">&lt;em&gt;&lt;/em&gt; schema</td>
       <td style="text-align:left">Snowplow Event Schema Reference</td>
     </tr>
     <tr>
-      <td style="text-align:left"><em></em> ipAddress</td>
+      <td style="text-align:left">&lt;em&gt;&lt;/em&gt; ipAddress</td>
       <td style="text-align:left">ipAddress if Snowplow is configured to collect this</td>
     </tr>
     <tr>
-      <td style="text-align:left"><em></em> timestamp</td>
+      <td style="text-align:left">&lt;em&gt;&lt;/em&gt; timestamp</td>
       <td style="text-align:left">time of event creation or reception(?)</td>
     </tr>
     <tr>
-      <td style="text-align:left"><em></em> collector</td>
+      <td style="text-align:left">&lt;em&gt;&lt;/em&gt; collector</td>
       <td style="text-align:left">identifies the source platform of the event</td>
     </tr>
     <tr>
-      <td style="text-align:left"><em></em> body</td>
+      <td style="text-align:left">&lt;em&gt;&lt;/em&gt; body</td>
       <td style="text-align:left">Snowplow Event Data (depending on <code>schema</code>)</td>
     </tr>
     <tr>
-      <td style="text-align:left"><em></em> headers</td>
+      <td style="text-align:left">&lt;em&gt;&lt;/em&gt; headers</td>
       <td style="text-align:left">HTTP headers</td>
     </tr>
     <tr>
