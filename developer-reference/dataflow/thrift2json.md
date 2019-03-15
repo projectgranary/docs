@@ -22,43 +22,52 @@ The Metadata Extractor can be configured to consume either Thrift or JSON payloa
 
 #### Correlation ID Rules
 
-In order to find the right ID in each record, rules as to where to find these IDs in the payload should be specified in a YAML file. For more details, refer to below guidelines and example.
+In order to find the correct ID provided by each record, rules as to where to find these values in the payload should be specified in a YAML file. For more details, refer to below guidelines and example.
 
 {% tabs %}
 {% tab title="Spec" %}
-A yaml file is expected that contains a set of labeled regular expressions which are all applied to the input message. For matching rules the specified part is extracted and passed into the outgoing message using the rule-label as the name of the forwarded attribute.
+A yaml file is expected that contains a set of paths that are searched for in the input message. For matching paths the value paths are used to extract the values and pass them to the outgoing message.
 
 The ID extraction rules are defined as follows in the id-extraction-rules.yaml:
 
-* First hierarchy layer is a source categorization \(currently unused\)
-* The second hierarchy layer is used to distinguish between different event types \(currently unused\).
-* The third hierarchy defines the rules to get the correlation ID the format: -&lt;json path separated by "/"&gt; : &lt;regex&gt;
-
-Currently the regex is not used.
+* The first hierarchy layer is a marker path. If it exists in the current message, then
+* the second hierarchy layer defines the available values in the message and
+* the third hierarchy layer provides a path to get the values from json and for optional fields a static value
 
 Example:
 
 ```text
-web:
-    snowplow_js:
-        - body/data/0/duid: ""
-    facebook:
-        - url: "https://facebook.com/(.*?)/"
+body/data/0/abc:
+  id:
+    - "body/data/0/duid"
+    - "url"
+  type:
+    path: "body/ts"
+    default: "web"
+  hvs:
+    path: "body/origin"
+    default: "snowplow_js"
 ```
 
-In the example above a check for a JSON element such as this example 
+In the example above check for a JSON element such as the following
 
 ```text
-{"body": {"data":[{"duid":"abc"}]} }
+{"body": {"data":[{"abc":"def"}]} }
 ```
 
-would be firstly executed and the resulting correlation ID would have the value of 
+The value of the marker is not used. If it is found, the correlation\_id must be extracted from
 
 ```text
-body/data/0/duid__abc
+{"body": {"data":[{"duid":"1234"}]} }
 ```
 
-If the first check fails, a check for a JSON element like
+In this case the correlation\_id would be 
+
+```text
+correlation_id: "1234"
+```
+
+If this check fails, a check for a JSON element like
 
 ```text
 {"url":"https://www.google.com"}
@@ -67,13 +76,19 @@ If the first check fails, a check for a JSON element like
 would be performed and the resulting correlation ID would be 
 
 ```text
-url__https://www.google.com
+correlation_id: "https://www.google.com"
 ```
+
+The fields event\_type \('type'\) and event\_harvester \('hvs'\) are extracted similarly. Yet there is only one type-path and one hvs-path per marker-path. 
+
+* In case the given path cannot be found, the static value will be returned. 
+* If no static value is provided, the respective value will be set to 'na'.
 
 {% hint style="info" %}
 IMPORTANT!
 
-* The first rule that finds an element wins
+* The first matching marker wins
+* The first id-rule under a matching marker that finds an element wins
 * "\_\_" is forbidden in JSON paths
 * Numbers in JSON paths are only allowed to represent integer keys or array indices, not string number keys
 {% endhint %}
@@ -83,32 +98,38 @@ IMPORTANT!
 {% code-tabs %}
 {% code-tabs-item title=" id-extraction-rules.yaml " %}
 ```yaml
-web:
-  snowplow_js:
-    - body/data/0/duid: ""
-  snowplow_redirect:
-    - body/se_va: ""
-  facebook:
-    - body/url: "https://facebook.com/(.*?)/"
-  userid:
-    - body/uid: ".*?"
-  allianz:
-    - body/vertragspartner: ".*?"
-    - body/riskhash: ".*?"
-mobile:
-  snowplow_android:
-    - body/data/0/uid: ""
-  appid:
-    - body/aid: ".*?"
-  imei:
-    - body/deviceid: ".*"
-  linkid:
-    - body/se_va: '[-+]?[0-9]*\.?[0-9]*'
+body/data/0/duid:
+  id:
+    - "body/data/0/duid"
+  type:
+    path: "body/type"
+    default: "web"
+  hvs:
+    path: "body/origin"
+    default: "snowplow_js"
+body/data/0/cookie:
+  id:
+    - "body/data/eid"
+  type:
+    path: "body/data/0/type"
+    default: "web"
+body/vertragspartner:
+  id:
+    - "body/vertragspartner/id"
+    - "body/riskhash"
+  type:
+    path: "body/type"
+    default: "web"
+  hvs:
+    path: "body/origin"
+    default: "allianz"
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 {% endtab %}
 {% endtabs %}
+
+
 
 ## Input Topic `'raw'`
 
@@ -216,6 +237,15 @@ d
       <td style="text-align:left">created</td>
       <td style="text-align:left">used to recreate the original order of events</td>
     </tr>
+    <tr>
+      <td style="text-align:left">event_type</td>
+      <td style="text-align:left">extracted from event payload or a static value</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">event_harvester</td>
+      <td style="text-align:left">name of the havester instance, extracted from event playload or a static
+        value</td>
+    </tr>
   </tbody>
 </table>
 {% endtab %}
@@ -242,6 +272,8 @@ d
          "correlationid": "cookie_dW5kIG5pZW1hbHMgdmVyZ2Vzc2VuIGVpc2VybiB1bmlvbg==",
          "eventid": "819f785b-82f7-4994-bbd8-992c94bdf7bc",
          "created": 1541345852941,
+         "event_type": "web"
+         "event_harvester": "snowplow_js"
       }
     }
 }
