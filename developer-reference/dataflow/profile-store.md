@@ -33,7 +33,7 @@ Each row in the `profilestore` table consists of a grain. All grains for a uniqu
         the correlation-id in the Event Store.</td>
       <td style="text-align:left">varchar</td>
       <td style="text-align:left">-</td>
-      <td style="text-align:left"><code>NOT NOLL</code>
+      <td style="text-align:left"><code>NOT NULL</code>
       </td>
     </tr>
     <tr>
