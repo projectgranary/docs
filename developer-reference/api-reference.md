@@ -306,7 +306,7 @@ Springboot-based microservice to expose profile data stored in the [Profile Stor
 
 ### Paths
 
-* /profiles/{profilesId}
+* /profiles/{correlationId}
 
 ### API Methods
 
@@ -323,13 +323,13 @@ Retrieves a full dump of the profile.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="correlationId" type="string" required=true %}
-ID of the profile.
+The correlation ID
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authentication" type="string" required=true %}
-Authentication token to enforce RBAC.
+Authentication token
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
