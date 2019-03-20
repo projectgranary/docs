@@ -32,7 +32,7 @@ The profile store is a distributed table in a database. Each tuple in that table
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><b>id </b>
+      <td style="text-align:left"><b>correlation_id </b>
       </td>
       <td style="text-align:left">Correlation ID. Groups all grains that belong to the same profile (cookie,
         device, customer, contact, claim, etc.). This is identical to the correlation-id
