@@ -99,7 +99,7 @@ Example:
 /events/cookie123?from=2017-01-01T00:00:00Z&to=2018-01-01T00:00:00Z&expand=totalCount,message  
 {% endapi-method-response-example-description %}
 
-```
+```javascript
 {  
    "totalCount": 245,
    "events":[  
@@ -230,6 +230,7 @@ Example: /events/cookie123/event0815
 		...
 		...
 		},
+	"created": "2019-03-21T11:54:55.234Z",
 	"_links":{
 		"self":{
 			"href":"https://playground.lce.grnry.io/events/cookie123/event0815"
@@ -342,12 +343,36 @@ Profile successfully retrieved.
 
 ```javascript
 {
-    "id": "693869837493493",
-    "age": "57",
-    "versions": [
-        "ts": "2018-01-01",
-        "age": "56"
-        ]
+    "correlationId": "71f48a4b-c8f3-4937-9691-442384c565d8",
+    "jsonPayload": {
+        "device": {
+            "device_type": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "unknown",
+                    "_in": 1552328425169,
+                    "_origin": "belt-appsprung-web-event",
+                    "_reader": "_all",
+                    "_ttl": "P100Y"
+                }
+            },
+            "operating_system": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "Mac OS",
+                    "_in": 1552328425177,
+                    "_origin": "belt-appsprung-web-event",
+                    "_reader": "_all",
+                    "_ttl": "P100Y"
+                }
+            }
+        },
+        
+        ...
+        ...
+        
+        "_id": "71f48a4b-c8f3-4937-9691-442384c565d8"
+    }
 }
 ```
 {% endapi-method-response-example %}

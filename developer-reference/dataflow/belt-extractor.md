@@ -32,10 +32,12 @@ They are defined by a label, a scale factor, an input topic and a stateless / se
 | $$-$$ collector | identifies the source platform of the event |
 | $$-$$ body | Snowplow Event Data \(according to `schema`\) |
 | $$-$$ headers | HTTP headers |
-| payloadid | attributes extracted from payload.body |
-| $$-$$ correlationid | used to group events received from the same tracking entity. |
-| $$-$$ eventid | used to deduplicate events |
+| payload\_id | attributes extracted from payload.body |
+| $$-$$ correlation\_id | used to group events received from the same tracking entity. |
+| $$-$$ event\_id | used to deduplicate events |
 | $$-$$ created | used to recreate the original order of events |
+| $$-$$ event\_type | extracted from event payload or a static value |
+| $$-$$ event\_harvester | name of the harvester instance, extracted from event payload or a static value |
 {% endtab %}
 
 {% tab title="Example" %}
@@ -56,10 +58,12 @@ They are defined by a label, a scale factor, an input topic and a stateless / se
 		"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
 	},
     {
-      "payloadid" : {
-         "correlationid": "cookie_dW5kIG5pZW1hbHMgdmVyZ2Vzc2VuIGVpc2VybiB1bmlvbg==",
-         "eventid": "819f785b-82f7-4994-bbd8-992c94bdf7bc",
+      "payload_id" : {
+         "correlation_id": "cookie_dW5kIG5pZW1hbHMgdmVyZ2Vzc2VuIGVpc2VybiB1bmlvbg==",
+         "event_id": "819f785b-82f7-4994-bbd8-992c94bdf7bc",
          "created": 1541345852941,
+         "event_type": "web"
+         "event_harvester": "snowplow_js"
       }
     }
 }

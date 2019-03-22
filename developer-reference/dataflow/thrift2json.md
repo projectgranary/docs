@@ -39,7 +39,7 @@ Example:
 ```text
 body/data/0/abc:
   id:
-    - "body/data/0/duid"
+    - "body/data/1/duid"
     - "url"
   type:
     path: "body/ts"
@@ -52,13 +52,13 @@ body/data/0/abc:
 In the example above check for a JSON element such as the following
 
 ```text
-{"body": {"data":[{"abc":"def"}]} }
+{"body": {"data":[{"abc":"def"}...]}}
 ```
 
 The value of the marker is not used. If it is found, the correlation\_id must be extracted from
 
 ```text
-{"body": {"data":[{"duid":"1234"}]} }
+{"body": {"data":[{...},{"duid":"1234"}]...}}
 ```
 
 In this case the correlation\_id would be 
@@ -218,11 +218,11 @@ d
       <td style="text-align:left">HTTP headers</td>
     </tr>
     <tr>
-      <td style="text-align:left">payloadid</td>
+      <td style="text-align:left">payload_id</td>
       <td style="text-align:left"></td>
     </tr>
     <tr>
-      <td style="text-align:left">correlationid</td>
+      <td style="text-align:left">correlation_id</td>
       <td style="text-align:left">
         <p>extracted from <code>payload.body</code> 
         </p>
@@ -230,7 +230,7 @@ d
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">eventid</td>
+      <td style="text-align:left">event_id</td>
       <td style="text-align:left">used to deduplicate events</td>
     </tr>
     <tr>
@@ -268,9 +268,9 @@ d
 		"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
 	},
     {
-      "payloadid" : {
-         "correlationid": "cookie_dW5kIG5pZW1hbHMgdmVyZ2Vzc2VuIGVpc2VybiB1bmlvbg==",
-         "eventid": "819f785b-82f7-4994-bbd8-992c94bdf7bc",
+      "payload_id" : {
+         "correlation_id": "cookie_dW5kIG5pZW1hbHMgdmVyZ2Vzc2VuIGVpc2VybiB1bmlvbg==",
+         "event_id": "819f785b-82f7-4994-bbd8-992c94bdf7bc",
          "created": 1541345852941,
          "event_type": "web"
          "event_harvester": "snowplow_js"
