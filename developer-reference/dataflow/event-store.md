@@ -13,12 +13,12 @@ description: >-
 {% tab title="Spec" %}
 | Key | Description | Data Type | Default | Null |
 | :--- | :--- | :--- | :--- | :--- |
-| **correlation\_id**  | Correlation-ID. Groups all events that belong to the same tracking entity \(cookie, device, customer, contact, claim, etc.\). | text | - | `NOT NULL` |
+| **correlation\_id**  | Correlation-ID. Groups all events that belong to the same tracking entity \(cookie, device, customer, contact, claim, etc.\). | varchar | - | `NOT NULL` |
 | **event\_id**  | Event-ID. Used to deduplicate events. | uuid | - | `NOT NULL` |
 | created  | Created. The timestamp of the original event creation. | bigint | - | `NOT NULL` |
 | message  | Message. The original payload of the event as it was ingested into Granary encoded as JSON. | jsonb | - | - |
-| event\_type | Event type. Describes type of the event. The type is customizable in Metadata Extractor. This is used to control access to the event. | text | `na` | `NOT NULL` |
-| event\_harvester | Event harvester. Describes the source of the event. The source is the Granary Harvester of the event. This is used to control access to the event. | text | `na` | `NOT NULL` |
+| event\_type | Event type. Describes type of the event. The type is customizable in Metadata Extractor. This is used to control access to the event. | varchar | `na` | `NOT NULL` |
+| event\_harvester | Event harvester. Describes the source of the event. The source is the Granary Harvester of the event. This is used to control access to the event. | varchar | `na` | `NOT NULL` |
 {% endtab %}
 
 {% tab title="Example" %}
