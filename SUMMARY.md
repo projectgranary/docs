@@ -24,3 +24,19 @@
   * [Profile Store](developer-reference/dataflow/profile-store.md)
   * [Segment Store](developer-reference/dataflow/segment-store.md)
 
+## Operator Reference
+
+* [Granary Release Notes](operator-reference/granary-release-notes.md)
+* [Installation](operator-reference/installation/README.md)
+  * [Snowplow Scala Stream Collector](operator-reference/installation/snowplow-scala-stream-collector.md)
+  * [Metadata Extractor](operator-reference/installation/metadata-extractor.md)
+  * [Belt Extractor](operator-reference/installation/untitled.md)
+  * [Event Store API](operator-reference/installation/event-store-api.md)
+  * [Granary Kafka Connect](operator-reference/installation/granary-kafka-connect.md)
+  * [Profile Updater](operator-reference/installation/profile-updater.md)
+  * [Profile Store API](operator-reference/installation/profile-store-api.md)
+  * [Segment Store API](operator-reference/installation/segment-store-api.md)
+  * [Citus PostgreSQL](operator-reference/installation/citus-postgresql.md)
+  * [Kafka Manager](operator-reference/installation/kafka-manager.md)
+* [Identity and Access Management](operator-reference/identity-and-access-management.md)
+
