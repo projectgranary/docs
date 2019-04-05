@@ -8,7 +8,9 @@ description: >-
 
 ## Helm Chart Repositories
 
-Stable Helm Charts are to be used for deployment of Granary components with a release version tag \(see [Granary Release Notes](../granary-release-notes.md)\). Whereas Incubator Helm Chart Repo always deploys the latest commit on the master branch of the respective Granary component. Thus, the charts might be under development and change quickly over time.
+The Stable Helm Charts are to be used for deployment of Granary components with a release version \(see [Granary Release Notes](../granary-release-notes.md)\). By default, the Helm Chart version is also used for the Docker Image Tag of the corresponding Granary component.
+
+In turn, the Incubator Helm Chart Repo always deploys the latest commit on the master branch of the respective Granary component. Thus, the charts might be under development and change quickly over time.
 
 #### Stable Helm Chart Repo
 
