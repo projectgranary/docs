@@ -30,7 +30,7 @@ description: Denotes release versions of Granary artifacts.
 | [Belt Extractor](installation/untitled.md) | 0.4.5 |
 | [Profile Updater](installation/profile-updater.md) | 0.4.1 |
 | [Profile Store API](installation/profile-store-api.md) | 0.4.2 |
-| [Segment Table Creator](../developer-reference/dataflow/segment-store.md) | 0.4.1 |
+| [Segment Table Creator](../developer-reference/dataflow/segment-store.md) | 0.4.2 |
 | [Segment Store API](installation/segment-store-api.md) | 0.4.3 \(based on Presto 0.216\) |
 | [Citus PostgreSQL](installation/citus-postgresql.md) | 8.1.1 |
 | [Confluent Kafka](https://github.com/confluentinc/cp-helm-charts/tree/master/charts) | 5.1.2 |
