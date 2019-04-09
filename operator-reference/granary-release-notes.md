@@ -27,7 +27,7 @@ description: Denotes release versions of Granary artifacts.
 | [Metadata Extractor](installation/metadata-extractor.md) | 0.4.2 |
 | [Event Store API](installation/event-store-api.md) | 0.4.3 |
 | [Granary Kafka Connect](installation/granary-kafka-connect.md) | 0.4.1 \(based on Confluent Kafka Connect 5.1.2\) |
-| [Belt Extractor](installation/untitled.md) | 0.4.5 |
+| [Belt Extractor](installation/untitled.md) | 0.4.6 |
 | [Profile Updater](installation/profile-updater.md) | 0.4.1 |
 | [Profile Store API](installation/profile-store-api.md) | 0.4.2 |
 | [Segment Table Creator](../developer-reference/dataflow/segment-store.md) | 0.4.2 |
