@@ -24,7 +24,7 @@ description: Denotes release versions of Granary artifacts.
 | :--- | :--- |
 | [Ambassador](https://github.com/helm/charts/tree/master/stable/ambassador) | 0.40.1 |
 | [Snowplow Scala Stream Collector API](installation/snowplow-scala-stream-collector.md) | 0.4.2 \(based on Snowplow v0.15.0\) |
-| [Metadata Extractor](installation/metadata-extractor.md) | 0.4.2 |
+| [Metadata Extractor](installation/metadata-extractor.md) | 0.4.3 |
 | [Event Store API](installation/event-store-api.md) | 0.4.3 |
 | [Granary Kafka Connect](installation/granary-kafka-connect.md) | 0.4.1 \(based on Confluent Kafka Connect 5.1.2\) |
 | [Belt Extractor](installation/untitled.md) | 0.4.6 |
