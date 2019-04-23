@@ -16,16 +16,16 @@
 
 ## Developer Reference
 
-* [API Reference](developer-reference/api-reference/README.md)
-  * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
-  * [Event Store API](developer-reference/api-reference/event-store-api.md)
-  * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
 * [Data Flow](developer-reference/dataflow/README.md)
   * [Metadata Extractor](developer-reference/dataflow/thrift2json.md)
   * [Belt Extractor](developer-reference/dataflow/belt-extractor.md)
   * [Event Store](developer-reference/dataflow/event-store.md)
   * [Profile Store](developer-reference/dataflow/profile-store.md)
   * [Segment Store](developer-reference/dataflow/segment-store.md)
+* [API Reference](developer-reference/api-reference/README.md)
+  * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
+  * [Event Store API](developer-reference/api-reference/event-store-api.md)
+  * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
 
 ## Operator Reference
 
