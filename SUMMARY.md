@@ -16,7 +16,10 @@
 
 ## Developer Reference
 
-* [API Reference](developer-reference/api-reference.md)
+* [API Reference](developer-reference/api-reference/README.md)
+  * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
+  * [Event Store API](developer-reference/api-reference/event-store-api.md)
+  * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
 * [Data Flow](developer-reference/dataflow/README.md)
   * [Metadata Extractor](developer-reference/dataflow/thrift2json.md)
   * [Belt Extractor](developer-reference/dataflow/belt-extractor.md)
@@ -26,7 +29,8 @@
 
 ## Operator Reference
 
-* [Granary Release Notes](operator-reference/granary-release-notes.md)
+* [Granary Release Notes](operator-reference/granary-release-notes/README.md)
+  * [Known Issues](operator-reference/granary-release-notes/known-issues.md)
 * [Installation](operator-reference/installation/README.md)
   * [Snowplow Scala Stream Collector](operator-reference/installation/snowplow-scala-stream-collector.md)
   * [Metadata Extractor](operator-reference/installation/metadata-extractor.md)
