@@ -96,7 +96,7 @@ The function is expected to return an [Update ](https://gitlab.alvary.io/grnry/b
 ```text
 UPDATE :=
   {
-    "_schema": string,                                          # schema of updtae message, default is "update_1"
+    "_schema": string,                                          # schema of update message, default is "update_2"
     "_operation": "_set" | "_set_with_history" | "_delete",     # default is _set
     "_id": string,
     "_path": \[ string [,string]* \],                           # array of length >= 1
@@ -134,7 +134,7 @@ If unspecified, default values will be used:
 | \_\_path | Empty array \(\[ \]\) |
 | \_\_id | Empty string \(''\) |
 | \_\_value | Empty dictionary \({}\) |
-| \_\_schema | update\_1 |
+| \_\_schema | update\_2 |
 | \_\_operation | \_set |
 {% endtab %}
 
