@@ -20,7 +20,9 @@ Get all Belts
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves full dump of **all** belts in the Belt Store as a list.
+Retrieves full dump of **all** belts in the Belt Store as a list.  
+  
+In order to get results, you must have the required roles as defined in the fields _editor_ or _viewer_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -68,6 +70,9 @@ A list of all belts along with their attributes and total count of belts stored 
             "editor": [
                 "belt_edit"
             ],
+            "viewer": [
+                "belt_view"
+            ],
             "created": 1556236800000,
             "assumedRole": "",
             "requirementsPy": "",
@@ -106,6 +111,9 @@ A list of all belts along with their attributes and total count of belts stored 
             ],
             "editor": [
                 "belt_edit"
+            ],
+            "viewer": [
+                "belt_view"
             ],
             "created": 1556236800000,
             "assumedRole": "",
@@ -146,6 +154,9 @@ A list of all belts along with their attributes and total count of belts stored 
             "editor": [
                 "belt_edit"
             ],
+            "viewer": [
+                "belt_view"
+            ],
             "created": 1556496000000,
             "assumedRole": "",
             "requirementsPy": "",
@@ -184,6 +195,9 @@ A list of all belts along with their attributes and total count of belts stored 
             ],
             "editor": [
                 "belt_edit"
+            ],
+            "viewer": [
+                "belt_view"
             ],
             "created": 1556668800000,
             "assumedRole": "",
@@ -247,7 +261,9 @@ Get a Specific Belt by ID
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves full dump of a specific belt with a specified ID.
+Retrieves full dump of a specific belt with a specified ID.  
+  
+In order to retrieve results here, it is necessary that you either have an _editor_ or _viewer_ role assigned to your profile in keycloak. The editor/viewer role must match the roles defined for the belt.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -287,6 +303,9 @@ JSON with attributes of belt with the specified ID.
     "reader": [],
     "editor": [
         "belt_edit"
+    ],
+    "viewer": [
+        "belt_view"
     ],
     "created": 1556236800000,
     "assumedRole": "",
@@ -353,6 +372,10 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="" type="string" required=false %}
+
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="startOffset" type="string" required=false %}
 Start offset for profiles to be read/modified by this belt
 {% endapi-method-parameter %}
@@ -425,8 +448,8 @@ belt type
 runtime of this belt.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="parameter" type="string" required=false %}
-parameter. eg: customScript, mapper, conditionEval, apiCall
+{% api-method-parameter name="viewer" type="array" required=false %}
+The role\(s\), which should have read access to the belt
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="debug" type="boolean" required=false %}
@@ -646,6 +669,9 @@ A full dump of belt object recently modified
     "reader": [],
     "editor": [
         "belt_edit"
+    ],
+    "viewer": [
+        "belt_view"
     ],
     "created": 1557100800000,
     "assumedRole": "",
