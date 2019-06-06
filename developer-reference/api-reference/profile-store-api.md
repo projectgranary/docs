@@ -20,7 +20,9 @@ Get a Specific Profile
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves a full dump of a profile based on default profile type.
+Retrieves a full dump of a profile based on default profile type.  
+  
+In order to get results, you must have the required roles as defined in the field _reader_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -110,7 +112,9 @@ Get a Specific Profile by ID and Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves a full dump of a profile fetched by ID and profile type.
+Retrieves a full dump of a profile fetched by ID and profile type.  
+  
+In order to get results, you must have the required roles as defined in the field _reader_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -204,7 +208,9 @@ Get all Profiles of a Specific Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves a full dump of all profiles filtered by profile type.
+Retrieves a full dump of all profiles filtered by profile type.  
+  
+In order to get results, you must have the required roles as defined in the field _reader_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}

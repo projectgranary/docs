@@ -1,5 +1,5 @@
 ---
-description: Springboot-based microservice to expose event data stored in the Eventstore.
+description: Springboot-based microservice to expose event data stored in the Event Store.
 ---
 
 # Event Store API
@@ -13,15 +13,15 @@ description: Springboot-based microservice to expose event data stored in the Ev
 
 {% api-method method="get" host="https://api.grnry.io" path="/events/:correlationId" %}
 {% api-method-summary %}
-Get events by correlation ID
+Get Events by Correlation ID
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves events containing the specified correlation id.  
+Retrieves events containing the specified Correlation ID. In order to get results, you must have the required roles as defined in the fields _event\_type_ and _event\_harvester_. Otherwise, you will not get back any results.  
   
 Example:  
   
-`https://playground.lce.grnry.io/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&expand=false&offset=0&pagesize=20`  
+`https://api.grnry.io/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&expand=false&offset=0&pagesize=20`  
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -161,11 +161,11 @@ Returned when no event was found, along with empty result set.
 
 {% api-method method="get" host="https://api.grnry.io" path="/events/:correlationId/:eventId" %}
 {% api-method-summary %}
-Get a specific event by ID and correlation ID
+Get a Specific Event by ID and Correlation ID
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves a single event \(including its message payload\).
+Retrieves a single event \(including its message payload\). In order to get results, you must have the required roles as defined in the fields _event\_type_ and _event\_harvester_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}

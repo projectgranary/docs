@@ -1,5 +1,5 @@
 ---
-description: Springboot-based microservice to expose belts registered in the Beltstore.
+description: Springboot-based microservice to manage belts registered in the Belt Store.
 ---
 
 # Belt API
@@ -27,21 +27,21 @@ In order to get results, you must have the required roles as defined in the fiel
 
 {% api-method-spec %}
 {% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="offset" type="string" required=false %}
-Start offset. Default 0
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="pageSize" type="string" required=false %}
-Number of belts to be returned. Default 20
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
-
 {% api-method-headers %}
 {% api-method-parameter name="Authentication" type="string" required=true %}
 Authentication token
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="pageSize" type="string" required=false %}
+Number of belts to be returned. Default is 20.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="offset" type="string" required=false %}
+Start offset. Default is 0.
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -232,7 +232,7 @@ A list of all belts along with their attributes and total count of belts stored 
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=401 %}
+{% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
 
 {% endapi-method-response-example-description %}
@@ -242,7 +242,7 @@ A list of all belts along with their attributes and total count of belts stored 
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=404 %}
+{% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
 
 {% endapi-method-response-example-description %}
@@ -360,7 +360,9 @@ Create and Store a Belt
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Creates and stores a belt into the Belt Store.
+Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned.   
+  
+In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -449,7 +451,7 @@ runtime of this belt.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="viewer" type="array" required=false %}
-The role\(s\), which should have read access to the belt
+String array containing keycloak roles. The role\(s\), which should have read access to the belt. Default to {"belt\_view"}. 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="debug" type="boolean" required=false %}
@@ -551,7 +553,9 @@ Delete a Specific Belt
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes a specific belt given the ID.
+Deletes a specific belt given the ID.  
+  
+In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -619,9 +623,11 @@ Updates a Belt by ID
 {% api-method-description %}
 Updates attributes of a belt, given its ID.   
   
-For a list of body parameters to send, see above POST /belts documentation. All parameters would be optional. One could update one or multiple attributes at the same time.  
+For a list of body parameters to send, see above POST /belts documentation. All parameters would be optional. One could update one or multiple attributes at the same time. Please note, that you need to provide all belt details in case of a put. Otherwise data might get lost.  
   
-**Important: In the current implementation, belt version will automatically increase by each update.**   
+**Important: In the current implementation, belt version will automatically increase by each update.**  
+  
+In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.  
   
 Body examples:   
   
