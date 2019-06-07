@@ -222,20 +222,35 @@ The profile store is a distributed table in a database. Each tuple in that table
 
 ## Component `Profile Updater`
 
-Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store.  These Profile Updates must follow the specification in [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md\#profile-update-specification](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md#profile-update-specification). Currently there are three operations:
+Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store.  These Profile Updates must follow the specification in [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md\#profile-update-specification](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md#profile-update-specification). Currently there are the following operations:
 
 * `_set` inserts the current garin value at \_latest and overwrites if it already exists.
 * `_set_with_history` inserts the current grain value at \_latest and stores previous \_latest grain value at its insert point in time if it already exists.
 * `_delete` deletes the \_latest grain value at the specified path.
 * `_inc` creates or increments a counter.
+* `_array` __operations modify array grain values.
 
 Each Profile Update carries the the grain value to be merged into the store. The grain values consists of the actual value, denoted as `_v`, and its meta information. \(Currently\) `_v` must be a JSON string or a JSON array of strings.
 
-## Counter
+### Counter
 
 `_inc` operation grain values must be of the form: `initialvalue|stepsize|steps`, e.g., `0|1|1`. This creates or increments counter grain values like `{"_initial":0, "_step":1, "_current":1}`. Please see the above linked spec. 
 
 `initialvalue` defines the counter's start.  `stepsize` defines the width of each counter increment/decrement. `steps` is the number of increments/decrements to do. All three are real numbers, e.g., `10|0.5|-1` defines a   single-step decrement of width 0.5 for the counter starting at 10.
+
+### Arrays
+
+For arrays, Granary offers operations for the in-place modification of grain values. These operation either consider the array as a set of values with distinct entries or as bag of values where duplicates may occur. All array operations can be run with or without the creation of history.
+
+* `_array_append` appends to the \_latest array grain value considered as a bag.
+* `_array_append_with_history` appends to the \_latest array grain value considered as a bag  and stores the previous \_latest grain value at pit of insertion.
+* `_array_put` adds an element to the \_latest array grain value considered as a set \(i.e., unique elements\).
+  * \_array\_put on a non-existing grain \(i.e., it is this grain's creation\) inserts the array as is \(i.e., without de-duplication\)
+* `_array_put_with_history` adds an element to the \_latest array grain value considered as a set \(i.e., unique elements\) and stores the previous \_latest grain value at pit of insertion.
+* `_array_remove` removes all entries from from the \_latest array grain value and stores the previous \_latest grain value at pit of insertion.
+* `_array_remove_with_history` removes all entries from from the \_latest array grain value and stores the previous \_latest grain value at pit of insertion.
+
+On an array modifications, existing grain value meta data \(`_reader, _ttl, _origin, _c`\) remain unchanged. The insertion time \(`_in`\) is updated.
 
 See [https://gitlab.alvary.io/grnry/kafka-profile-update](https://gitlab.alvary.io/grnry/kafka-profile-update)
 
