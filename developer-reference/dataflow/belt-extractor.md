@@ -18,13 +18,17 @@ Belts are used to compute updates for the Costumer Graph stored in the Profile S
 
 They are defined by a label, a scale factor, an input topic and a stateless / serverless Python function that gets invoked for every event received from the respective input topic. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store.
 
-## Input Topic `'raw-json'`
+## Input Topics `['grnry_data_in_...', 'grnry_data_in_...', ...]`
 
 {% tabs %}
 {% tab title="Spec" %}
 | Key | Description |
 | :--- | :--- |
-| metadata | Kafka specific fields |
+| metadata | Kafka fields for Event metadata |
+| $$-$$ grnry-event-type | extracted from event payload or a static value |
+| $$-$$ grnry-event-id | used to deduplicate events |
+| $$-$$ grnry-harvester-name | name of the harvester instance, extracted from event payload or a static value |
+| $$-$$ grnry-correlation-id | used to group events received from the same tracking entity |
 | payload | Forwarded from input attribute `value`  |
 | $$-$$ schema | Snowplow Event Schema Reference |
 | $$-$$ ipAddress | ipAddress if Snowplow is configured to collect this |
@@ -32,19 +36,13 @@ They are defined by a label, a scale factor, an input topic and a stateless / se
 | $$-$$ collector | identifies the source platform of the event |
 | $$-$$ body | Snowplow Event Data \(according to `schema`\) |
 | $$-$$ headers | HTTP headers |
-| payload\_id | attributes extracted from payload.body |
-| $$-$$ correlation\_id | used to group events received from the same tracking entity. |
-| $$-$$ event\_id | used to deduplicate events |
-| $$-$$ created | used to recreate the original order of events |
-| $$-$$ event\_type | extracted from event payload or a static value |
-| $$-$$ event\_harvester | name of the harvester instance, extracted from event payload or a static value |
 {% endtab %}
 
 {% tab title="Example" %}
 ```javascript
 {
-	"metadata": "{\"headers\": null, \"topic\": \"raw\", \"partition\": 0, \"key\": \"9417415d-7359-4ad0-8c3b-46ff4ca78c44\", \"timestamp\": [1, 1540748298485], \"offset\": 1746229}",
-	"payload": {
+	"metadata": "{\"grnry-event-type\": \"eventType\", \"grnry-correlation-id\": \"fhwrhw\", \"grnry-event-id\": \"eventId\", \"grnry-harvester-name\": \"harvesterName\"}",
+	"message": {
 		"body": "{ ... }",
 		"collector": "ssc-0.13.0-kafka",
 		"encoding": "UTF-8",
@@ -56,16 +54,7 @@ They are defined by a label, a scale factor, an input topic and a stateless / se
 		"schema": "iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
 		"timestamp": 1535972952029,
 		"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
-	},
-    {
-      "payload_id" : {
-         "correlation_id": "cookie_dW5kIG5pZW1hbHMgdmVyZ2Vzc2VuIGVpc2VybiB1bmlvbg==",
-         "event_id": "819f785b-82f7-4994-bbd8-992c94bdf7bc",
-         "created": 1541345852941,
-         "event_type": "web"
-         "event_harvester": "snowplow_js"
-      }
-    }
+	}
 }
 ```
 {% endtab %}
@@ -178,7 +167,7 @@ see [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPEC
 | Key | Description |
 | :--- | :--- |
 | \_schema | schema of update message, default is "update\_1" |
-| \_operation | can be either `_set` or `_set_with_history`  or `_delete`, defaults to `_set` |
+| \_operation | can be either `_set` or`_set_with_history`  or `_delete` or one array operation, defaults to `_set`, see [Profile Store](profile-store.md#component-profile-updater) |
 | \_id | identifies the profile that should b updated with this message |
 | \_path | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length &gt;= 1 |
 | \_value | The value that should be set in the profile under the defined `_path` Ignored if \(and only if\) `_operation` is `_delete` |
