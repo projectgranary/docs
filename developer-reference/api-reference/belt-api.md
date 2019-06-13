@@ -11,6 +11,8 @@ description: Springboot-based microservice to manage belts registered in the Bel
 * POST /belts
 * DELETE /belts/{beltId}
 * PUT /belts/{beltId}
+* GET/belts/{beltId}/state
+* POST/belts/{beltId}/state
 
 ## API Endpoints
 
@@ -374,16 +376,16 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
-{% api-method-parameter name="" type="string" required=false %}
-
+{% api-method-parameter name="partitionOffsets" type="object" required=false %}
+A mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="startOffset" type="string" required=false %}
-Start offset for profiles to be read/modified by this belt
+{% api-method-parameter name="extractorVersion" type="string" required=false %}
+Image tag of the belt runtime docker image to be used: default is `latest`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="name" type="string" required=true %}
-Belt name. Needs to be unique
+Belt name: Needs to be unique
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="description" type="string" required=false %}
@@ -399,19 +401,19 @@ String array of affected profile paths
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="replicas" type="integer" required=false %}
-Number of replicas
+Number of replicas: Default is `1`
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="inputTopic" type="array" required=false %}
-String array of input topics for this belt to read from
+{% api-method-parameter name="eventTypes" type="array" required=false %}
+String array of event types to be processed
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="millicpu" type="string" required=false %}
-Deployment specification for this belt.
+Deployment specification for this belt: Default is `200` 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memory" type="string" required=false %}
-Deployment specification for this belt
+Deployment specification for this belt: Default is `512`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="author" type="string" required=false %}
@@ -419,11 +421,11 @@ Author of this belt
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="reader" type="array" required=false %}
-String array containing read permissions of profiles to be read/modified by this belt. Default to {"\_all"}
+String array containing read permissions of profiles to be read/modified by this belt. Default to `{"_all"}`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="editor" type="array" required=false %}
-String array containing Keycloak roles given permission to edit this belt. Default to {"belt\_edit"}
+String array containing Keycloak roles given permission to edit this belt. Default to `{"belt_edit"}`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="assumedRole" type="string" required=false %}
@@ -431,15 +433,11 @@ Assumed roles
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="requirementsPy" type="string" required=false %}
-requirements.txt for belts with python runtime
+`requirements.txt` for belts with python runtime
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorFn" type="string" required=false %}
 extractor function to be executed by this belt
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="eventTypeFilter" type="string" required=false %}
-Filter based on eventType set by grnry-extractor
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="beltType" type="string" required=false %}
@@ -451,11 +449,11 @@ runtime of this belt.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="viewer" type="array" required=false %}
-String array containing keycloak roles. The role\(s\), which should have read access to the belt. Default to {"belt\_view"}. 
+String array containing keycloak roles. The role\(s\), which should have read access to the belt. Default to `{"belt_view"}`. 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="debug" type="boolean" required=false %}
-if belt should be run in debug mode
+if belt should be run in debug mode: Default is `false`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="fetchProfile" type="boolean" required=false %}
@@ -491,7 +489,7 @@ Returns a full dump of belt object created.
     "labels": [],
     "affectedPaths": [],
     "replicas": 0,
-    "inputTopic": [],
+    "eventTypes": [],
     "millicpu": 0,
     "memory": 0,
     "author": "",
@@ -506,7 +504,6 @@ Returns a full dump of belt object created.
     "requirementsPy": "",
     "extractorVersion": "",
     "extractorFn": "",
-    "eventTypeFilter": "",
     "beltType": "",
     "runtime": "",
     "parameter": "",
@@ -515,7 +512,7 @@ Returns a full dump of belt object created.
     "secret": "",
     "secretUsername": "",
     "secretPassword": "",
-    "startOffset": "0"
+    "partitionOffsets": {},
 }
 ```
 {% endapi-method-response-example %}
@@ -715,6 +712,94 @@ Belt with the given ID not found
 
 ```
 
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+### 
+
+{% api-method method="get" host="https://api.grnry.io" path="/belts/:beltId/state" %}
+{% api-method-summary %}
+Get a belt's state
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Retrieve the status of the kubernetes deployment
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="beltId" type="string" required=true %}
+Belt ID
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication token
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "status": "STOPPED"
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="post" host="https://api.grnry.io" path="/belts/:beltId/state" %}
+{% api-method-summary %}
+Manipulate a belt's state
+{% endapi-method-summary %}
+
+{% api-method-description %}
+
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="beltId" type="string" required=true %}
+Belt ID
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication token
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="Action" type="string" required=true %}
+The action to be performed "START" or "STOP"
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "status": "DEPLOYING"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
