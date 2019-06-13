@@ -18,7 +18,7 @@ Belts are used to compute updates for the Costumer Graph stored in the Profile S
 
 They are defined by a label, a scale factor, an input topic and a stateless / serverless Python function that gets invoked for every event received from the respective input topic. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store.
 
-## Input Topic `'raw-json'`
+## Input Topic`'raw-json'`
 
 {% tabs %}
 {% tab title="Spec" %}
@@ -178,7 +178,7 @@ see [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPEC
 | Key | Description |
 | :--- | :--- |
 | \_schema | schema of update message, default is "update\_1" |
-| \_operation | can be either `_set` or `_set_with_history`  or `_delete`, defaults to `_set` |
+| \_operation | can be either `_set` or`_set_with_history`  or `_delete` or one array operation, defaults to `_set`, see [Profile Store](profile-store.md#component-profile-updater) |
 | \_id | identifies the profile that should b updated with this message |
 | \_path | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length &gt;= 1 |
 | \_value | The value that should be set in the profile under the defined `_path` Ignored if \(and only if\) `_operation` is `_delete` |
