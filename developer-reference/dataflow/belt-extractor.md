@@ -153,6 +153,7 @@ def execute(event):
                     "duration"
                 ])
             update.set_value(event['DURATION'])
+            update.set_operation('_set_with_history')
             return update
         except ValueError:
             sys.stderr.write(sys.exc_info())
