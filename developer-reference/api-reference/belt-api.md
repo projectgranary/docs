@@ -377,7 +377,7 @@ Authentication token
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="partitionOffsets" type="object" required=false %}
-A mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers
+A mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. Requires a replica count of `1` at most.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorVersion" type="string" required=false %}
@@ -401,7 +401,7 @@ String array of affected profile paths
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="replicas" type="integer" required=false %}
-Number of replicas: Default is `1`
+Number of replicas; cannot be greater than `1` if `partitionOffsets` is set: Default is `1`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="eventTypes" type="array" required=false %}
@@ -629,7 +629,6 @@ In order to create / update / delete a belt here, it is necessary that you have 
 Body examples:   
   
 `{"name": "belt-updated-1"}`  
-  
 or   
   
 `{"name": "belt-updated-1", "beltType": "someBeltType"}`
@@ -722,11 +721,11 @@ Belt with the given ID not found
 
 {% api-method method="get" host="https://api.grnry.io" path="/belts/:beltId/state" %}
 {% api-method-summary %}
-Get a belt's state
+Get a Belt's state
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieve the status of the kubernetes deployment
+Retrieve the status of the Belt's Kubernetes deployment.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -762,11 +761,14 @@ Authentication token
 
 {% api-method method="post" host="https://api.grnry.io" path="/belts/:beltId/state" %}
 {% api-method-summary %}
-Manipulate a belt's state
+Manipulate a Belt's state
 {% endapi-method-summary %}
 
 {% api-method-description %}
-
+Update the status of the Belt's Kubernetes deployment.  
+  
+Body example:  
+`{"action": "START"}`  
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -784,7 +786,7 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
-{% api-method-parameter name="Action" type="string" required=true %}
+{% api-method-parameter name="action" type="string" required=true %}
 The action to be performed "START" or "STOP"
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
