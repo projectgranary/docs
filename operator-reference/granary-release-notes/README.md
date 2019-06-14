@@ -18,6 +18,8 @@ description: Denotes release versions of Granary artifacts.
   * e.g. `1.3.2` 
 * Component release versions can differ from Granary Platform on `major`, `minor`, and `patch` level.
 
+## 
+
 ## 0.4.2 "Jimi" - 2019-06-14
 
 | Granary Component | Release Version | Release Notes |
