@@ -245,10 +245,10 @@ For arrays, Granary offers operations for the in-place modification of grain val
 * `_array_append` appends to the \_latest array grain value considered as a bag.
 * `_array_append_with_history` appends to the \_latest array grain value considered as a bag  and stores the previous \_latest grain value at pit of insertion.
 * `_array_put` adds an element to the \_latest array grain value considered as a set \(i.e., unique elements\).
-  * \_array\_put on a non-existing grain \(i.e., it is this grain's creation\) inserts the array as is \(i.e., without de-duplication\)
+  * `_array_put` on a non-existing grain \(i.e., it is this grain's creation\) inserts the array as is \(i.e., without de-duplication\)
 * `_array_put_with_history` adds an element to the \_latest array grain value considered as a set \(i.e., unique elements\) and stores the previous \_latest grain value at pit of insertion.
-* `_array_remove` removes all entries from from the \_latest array grain value and stores the previous \_latest grain value at pit of insertion.
-* `_array_remove_with_history` removes all entries from from the \_latest array grain value and stores the previous \_latest grain value at pit of insertion.
+* `_array_remove` removes all entries from the \_latest array grain value.
+* `_array_remove_with_history` removes all entries from the \_latest array grain value and stores the previous \_latest grain value at pit of insertion.
 
 On an array modifications, existing grain value meta data \(`_reader, _ttl, _origin, _c`\) remain unchanged. The insertion time \(`_in`\) is updated.
 
