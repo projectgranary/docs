@@ -20,29 +20,40 @@ They are defined by a label, a scale factor, an input topic and a stateless / se
 
 ## Input Topics `['grnry_data_in_...', 'grnry_data_in_...', ...]`
 
+## Callback Signature
+
+`execute(event_headers, event_payload[, profile])`
+
 {% tabs %}
 {% tab title="Spec" %}
 | Key | Description |
 | :--- | :--- |
-| metadata | Kafka fields for Event metadata |
+| **event\_headers** | Kafka fields for Event metadata |
 | $$-$$ grnry-event-type | extracted from event payload or a static value |
 | $$-$$ grnry-event-id | used to deduplicate events |
 | $$-$$ grnry-harvester-name | name of the harvester instance, extracted from event payload or a static value |
 | $$-$$ grnry-correlation-id | used to group events received from the same tracking entity |
-| payload | Forwarded from input attribute `value`  |
+| $$-$$ grnry-event-timestamp | event processing time set by harvester \(metadata extractor\) |
+| **event\_payload** | Forwarded from input attribute `value`  |
 | $$-$$ schema | Snowplow Event Schema Reference |
 | $$-$$ ipAddress | ipAddress if Snowplow is configured to collect this |
 | $$-$$ timestamp | time of event creation or reception\(?\) |
 | $$-$$ collector | identifies the source platform of the event |
 | $$-$$ body | Snowplow Event Data \(according to `schema`\) |
 | $$-$$ headers | HTTP headers |
+| **profile** | A profile fetched from [profile store](profile-store.md). Only provided if `fetch profile` in [belt definition](../api-reference/belt-api.md) is set to`true.` |
 {% endtab %}
 
 {% tab title="Example" %}
-```javascript
-{
-	"metadata": "{\"grnry-event-type\": \"eventType\", \"grnry-correlation-id\": \"fhwrhw\", \"grnry-event-id\": \"eventId\", \"grnry-harvester-name\": \"harvesterName\"}",
-	"message": {
+```python
+event_headers = {
+			"grnry-event-type":"...",
+			"grnry-event-id":"...",
+			"grnry-correlation-id":"...",
+			"grnry-harvester-name":"...",
+			"grnry-event-timestamp":1535972952300
+		}
+event_payload = {
 		"body": "{ ... }",
 		"collector": "ssc-0.13.0-kafka",
 		"encoding": "UTF-8",
@@ -55,6 +66,73 @@ They are defined by a label, a scale factor, an input topic and a stateless / se
 		"timestamp": 1535972952029,
 		"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
 	}
+	
+profile = {
+  "_id": "0815",
+  "a1": {
+    "_latest": {
+      "_v": "abc",
+      "_c": 0.4,
+      "_in": 123,
+      "_ttl": "P100Y",
+      "_origin": null,
+      "_reader": "_all"
+    }
+  },
+  "a2": {
+    "b1": {
+      "2018-09-21": {
+        "_v": "21",
+        "_c": 0.1,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      },
+      "2018-09-22": {
+        "_v": "22",
+        "_c": 0.2,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      },
+      "_latest": {
+        "_v": "23",
+        "_in": "2018-09-23",
+        "_c": 0.3,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      }
+    },
+    "b2": {
+      "_latest": {
+        "_v": "123456",
+        "_c": 0.4,
+        "_in": "2018-09-20",
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      }
+    }
+  },
+  "a3": {
+    "b3": {
+      "c3": {
+        "d3": {
+          "e3": {
+            "_latest": {
+              "_v": "123456",
+              "_c": 0.5,
+              "_in": "2018-09-20",
+              "_ttl": "P100Y",
+              "_origin": null,
+              "_reader": "_all"
+            }
+          }
+        }
+      }
+    }
+  }
 }
 ```
 {% endtab %}
@@ -131,22 +209,14 @@ If unspecified, default values will be used:
 {% code-tabs %}
 {% code-tabs-item title="callback.py" %}
 ```python
-def execute(event):
-    if event:
-        try:
-            from grnry.beltextractor.update import Update
-            update = Update()
-            update.set_id(event['ID'])
-            update.set_path([
-                    "sessions",
-                    "duration"
-                ])
-            update.set_value(event['DURATION'])
-            update.set_operation('_set_with_history')
-            return update
-        except ValueError:
-            sys.stderr.write(sys.exc_info())
-            return None
+from time import time
+from grnry.beltextractor.update import Update
+
+def execute(event_headers, event_payload, profile=None):
+    print(profile)
+    update = Update(profile['correlationId'],["dummy"]).set_value("Hallo Belt!",0.5,time(),'P1D','Dummy-Belt')
+    update.set_type('TestProfileType')
+    return [update]
 ```
 {% endcode-tabs-item %}
 

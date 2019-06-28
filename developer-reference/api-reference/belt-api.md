@@ -36,6 +36,17 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
+{% api-method-parameter name="expand" type="array" required=false %}
+array of belt states:  
+\* Running  
+\* Stopped  
+\* Paused  
+\* Running\_but\_outdated  
+\* Error  
+\* Deploying  
+\* Stopping
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="pageSize" type="string" required=false %}
 Number of belts to be returned. Default is 20.
 {% endapi-method-parameter %}
@@ -132,6 +143,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "secretUsername": "",
             "secretPassword": "",
             "startOffset": "",
+            "status": "STOPPED",
             "_links": {
                 "self": {
                     "href": "https://development.lce.grnry.io/belts/5"
@@ -174,6 +186,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "secretUsername": "",
             "secretPassword": "",
             "startOffset": "",
+            "status": "STOPPED",
             "_links": {
                 "self": {
                     "href": "https://development.lce.grnry.io/belts/8"
@@ -216,6 +229,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "secretUsername": "",
             "secretPassword": "",
             "startOffset": "0",
+            "status": "STOPPED",
             "_links": {
                 "self": {
                     "href": "https://development.lce.grnry.io/belts/9"
@@ -324,6 +338,7 @@ JSON with attributes of belt with the specified ID.
     "secretUsername": "secretUsername_updated",
     "secretPassword": "secretPassword_updated",
     "startOffset": "25",
+    "status": "STOPPED",
     "_links": {
         "self": {
             "href": "https://development.lce.grnry.io/belts/3"
@@ -376,6 +391,10 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="profileType" type="string" required=false %}
+Profile type to fetch default is `_d`. Only used if \``fetchProfile` is set to true
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="partitionOffsets" type="object" required=false %}
 A mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. Requires a replica count of `1` at most.
 {% endapi-method-parameter %}
