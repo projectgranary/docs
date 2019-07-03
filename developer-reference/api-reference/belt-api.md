@@ -7,12 +7,12 @@ description: Springboot-based microservice to manage belts registered in the Bel
 ## Paths
 
 * GET /belts
-* GET /belts/{beltId}
+* GET /belts/{id}
 * POST /belts
-* DELETE /belts/{beltId}
-* PUT /belts/{beltId}
-* GET/belts/{beltId}/state
-* POST/belts/{beltId}/state
+* DELETE /belts/{id}
+* PUT /belts/{id}
+* GET/belts/{id}/state
+* POST/belts/{id}/state
 
 ## API Endpoints
 
@@ -263,7 +263,7 @@ A list of all belts along with their attributes and total count of belts stored 
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/belts/:beltId" %}
+{% api-method method="get" host="https://api.grnry.io" path="/belts/:id" %}
 {% api-method-summary %}
 Get a Specific Belt by ID
 {% endapi-method-summary %}
@@ -277,7 +277,7 @@ In order to retrieve results here, it is necessary that you either have an _edit
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="beltId" type="string" required=true %}
+{% api-method-parameter name="id" type="string" required=true %}
 The ID of belt
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
@@ -297,7 +297,7 @@ JSON with attributes of belt with the specified ID.
 
 ```
 {
-    "beltId": "3",
+    "id": "3",
     "version": "3",
     "name": "test_log",
     "description": "kube_description_updated_3",
@@ -448,7 +448,7 @@ Assumed roles
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorFn" type="string" required=false %}
-extractor function to be executed by this belt
+extractor function to be executed by this belt 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="beltType" type="string" required=false %}
@@ -493,7 +493,7 @@ Returns a full dump of belt object created.
 
 ```
 {
-    "beltId": "27",
+    "id": "27",
     "version": "1",
     "name": "test-post-23",
     "description": "",
@@ -555,7 +555,7 @@ If a belt with a given name exists already in the Belt Store.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="delete" host="https://api.grnry.io" path="/belts/:beltId" %}
+{% api-method method="delete" host="https://api.grnry.io" path="/belts/:id" %}
 {% api-method-summary %}
 Delete a Specific Belt
 {% endapi-method-summary %}
@@ -569,7 +569,7 @@ In order to create / update / delete a belt here, it is necessary that you have 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="beltId" type="string" required=true %}
+{% api-method-parameter name="id" type="string" required=true %}
 Belt ID
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
@@ -623,7 +623,7 @@ No belt found with given ID
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="put" host="https://api.grnry.io" path="/belts/:beltId" %}
+{% api-method method="put" host="https://api.grnry.io" path="/belts/:id" %}
 {% api-method-summary %}
 Updates a Belt by ID
 {% endapi-method-summary %}
@@ -648,7 +648,7 @@ or
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="beltId" type="string" required=true %}
+{% api-method-parameter name="id" type="string" required=true %}
 Belt ID
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
@@ -668,7 +668,7 @@ A full dump of belt object recently modified
 
 ```
 {
-    "beltId": "15",
+    "id": "15",
     "version": "4",
     "name": "test-put-5",
     "description": "",
@@ -730,7 +730,7 @@ Belt with the given ID not found
 
 ### 
 
-{% api-method method="get" host="https://api.grnry.io" path="/belts/:beltId/state" %}
+{% api-method method="get" host="https://api.grnry.io" path="/belts/:id/state" %}
 {% api-method-summary %}
 Get a Belt's state
 {% endapi-method-summary %}
@@ -742,7 +742,7 @@ Retrieve the status of the Belt's Kubernetes deployment.
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="beltId" type="string" required=true %}
+{% api-method-parameter name="id" type="string" required=true %}
 Belt ID
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
@@ -862,7 +862,7 @@ Possible values for the status attribute in the response body
 | DEPLOYING | Belt is being deployed |
 | STOPPED | Belt is not deployed |
 
-{% api-method method="post" host="https://api.grnry.io" path="/belts/:beltId/state" %}
+{% api-method method="post" host="https://api.grnry.io" path="/belts/:id/state" %}
 {% api-method-summary %}
 Manipulate a Belt's state
 {% endapi-method-summary %}
@@ -877,7 +877,7 @@ Body example:
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="beltId" type="string" required=true %}
+{% api-method-parameter name="id" type="string" required=true %}
 Belt ID
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
