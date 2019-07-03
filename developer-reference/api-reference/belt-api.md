@@ -40,14 +40,12 @@ Authentication token
 array of belt states:  
 \* Running  
 \* Stopped  
-\* Paused  
 \* Running\_but\_outdated  
-\* Error  
 \* Deploying  
-\* Stopping
+\* Failed
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="pageSize" type="string" required=false %}
+{% api-method-parameter name="pagesize" type="string" required=false %}
 Number of belts to be returned. Default is 20.
 {% endapi-method-parameter %}
 
@@ -65,101 +63,27 @@ A list of all belts along with their attributes and total count of belts stored 
 
 ```
 {
-    "totalCount": 13,
-    "belts": [
-        {
-            "beltId": "3",
-            "version": "3",
-            "name": "test_log",
-            "description": "kube_description_updated_3",
-            "labels": [],
-            "affectedPaths": [],
-            "replicas": 0,
-            "inputTopic": [],
-            "millicpu": 0,
-            "memory": 0,
-            "author": "",
-            "reader": [],
-            "editor": [
-                "belt_edit"
-            ],
-            "viewer": [
-                "belt_view"
-            ],
-            "created": 1556236800000,
-            "assumedRole": "",
-            "requirementsPy": "",
-            "extractorVersion": "",
-            "extractorFn": "",
-            "eventTypeFilter": "",
-            "beltType": "",
-            "runtime": "",
-            "parameter": "",
-            "debug": true,
-            "fetchProfile": true,
-            "secret": "secret_updated",
-            "secretUsername": "secretUsername_updated",
-            "secretPassword": "secretPassword_updated",
-            "startOffset": "25",
-            "_links": {
-                "self": {
-                    "href": "https://development.lce.grnry.io/belts/3"
-                }
-            }
+    "totalCount": 502,
+    "_links": {
+        "next": {
+            "href": "https://development.lce.grnry.io/belts?offset=2&pagesize=2&expand="
         },
+        "self": {
+            "href": "https://development.lce.grnry.io/belts?offset=0&pagesize=2&expand="
+        }
+    },
+    "items": [
         {
-            "beltId": "5",
             "version": "1",
-            "name": "kube",
-            "description": "kube_description",
-            "labels": [],
-            "affectedPaths": [],
-            "replicas": 0,
-            "inputTopic": [],
-            "millicpu": 0,
-            "memory": 0,
-            "author": "",
-            "reader": [
-                "_auth"
-            ],
-            "editor": [
-                "belt_edit"
-            ],
-            "viewer": [
-                "belt_view"
-            ],
-            "created": 1556236800000,
-            "assumedRole": "",
-            "requirementsPy": "",
-            "extractorVersion": "",
-            "extractorFn": "",
-            "eventTypeFilter": "",
-            "beltType": "",
-            "runtime": "",
-            "parameter": "",
-            "debug": true,
-            "fetchProfile": true,
-            "secret": "",
-            "secretUsername": "",
-            "secretPassword": "",
-            "startOffset": "",
-            "status": "STOPPED",
-            "_links": {
-                "self": {
-                    "href": "https://development.lce.grnry.io/belts/5"
-                }
-            }
-        },
-        {
-            "beltId": "8",
-            "version": "3",
-            "name": "testbelt03",
+            "name": "kube_test_4",
+            "kubernetesName": "grnry-belt-kube-test-4",
             "description": "",
-            "labels": [],
+            "labels": [
+                "a"
+            ],
             "affectedPaths": [],
             "replicas": 1,
-            "inputTopic": [],
-            "millicpu": 500,
+            "millicpu": 200,
             "memory": 512,
             "author": "",
             "reader": [
@@ -171,40 +95,105 @@ A list of all belts along with their attributes and total count of belts stored 
             "viewer": [
                 "belt_view"
             ],
-            "created": 1556496000000,
+            "created": 1561974412801,
             "assumedRole": "",
             "requirementsPy": "",
-            "extractorVersion": "",
-            "extractorFn": "def execute(event, profile = None):\n    print(\"event:\",event)",
-            "eventTypeFilter": "",
+            "extractorVersion": "feature-scrum-229-metadata-header",
+            "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(event, profile=None):\r\n    print(profile)\r\n    update = Update(profile['correlationId'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n    update.set_type('TestProfileType')\r\n    return [update]\r\n",
+            "eventTypes": [
+                "test_event",
+                "test_event_alt"
+            ],
+            "partitionOffsets": {
+                "grnry_data_in_test_event": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "grnry_data_in_test_event_alt": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },
             "beltType": "",
             "runtime": "",
             "parameter": "",
-            "debug": false,
-            "fetchProfile": false,
-            "secret": "",
-            "secretUsername": "",
-            "secretPassword": "",
-            "startOffset": "",
-            "status": "STOPPED",
+            "debug": true,
+            "fetchProfile": true,
+            "profileType": "_d",
+            "secret": "belt-api-tester",
+            "secretUsername": "username",
+            "secretPassword": "password",
+            "status": "RUNNING",
             "_links": {
                 "self": {
-                    "href": "https://development.lce.grnry.io/belts/8"
+                    "href": "https://development.lce.grnry.io/belts/1011"
                 }
-            }
+            },
+            "id": "1011"
         },
         {
-            "beltId": "9",
             "version": "1",
-            "name": "kube_name_new_01",
-            "description": "",
-            "labels": [],
-            "affectedPaths": [],
-            "replicas": 0,
-            "inputTopic": [],
-            "millicpu": 0,
-            "memory": 0,
-            "author": "",
+            "name": "kube_test_7",
+            "kubernetesName": "grnry-belt-kube-test-7",
+            "description": "kube_description",
+            "labels": [
+                "a",
+                "b",
+                "c"
+            ],
+            "affectedPaths": [
+                "a",
+                "b",
+                "c"
+            ],
+            "replicas": 1,
+            "millicpu": 54,
+            "memory": 1023,
+            "author": "author@grnry.com",
             "reader": [
                 "_auth"
             ],
@@ -214,36 +203,39 @@ A list of all belts along with their attributes and total count of belts stored 
             "viewer": [
                 "belt_view"
             ],
-            "created": 1556668800000,
-            "assumedRole": "",
-            "requirementsPy": "",
-            "extractorVersion": "",
-            "extractorFn": "",
-            "eventTypeFilter": "",
-            "beltType": "",
-            "runtime": "",
-            "parameter": "",
-            "debug": false,
-            "fetchProfile": false,
-            "secret": "",
-            "secretUsername": "",
-            "secretPassword": "",
-            "startOffset": "0",
+            "created": 1561978858485,
+            "assumedRole": "assumeRole",
+            "requirementsPy": "requirementsPy",
+            "extractorVersion": "latest",
+            "extractorFn": "print('hallo welt')",
+            "eventTypes": [
+                "eventType1",
+                "eventType2",
+                "eventType3"
+            ],
+            "partitionOffsets": {
+                "grnry_data_in_eventTypes": [
+                    20
+                ]
+            },
+            "beltType": "customScript",
+            "runtime": "Python",
+            "parameter": "{mapper:[{\"beltId\",\"ida\"}]}",
+            "debug": true,
+            "fetchProfile": true,
+            "profileType": "_d",
+            "secret": "secret",
+            "secretUsername": "secretUsername",
+            "secretPassword": "secretPassword",
             "status": "STOPPED",
             "_links": {
                 "self": {
-                    "href": "https://development.lce.grnry.io/belts/9"
+                    "href": "https://development.lce.grnry.io/belts/1022"
                 }
-            }
-        },
-        ....
+            },
+            "id": "1022"
         }
-    ],
-    "_links": {
-        "self": {
-            "href": "https://development.lce.grnry.io/belts?offset=0&pagesize=20"
-        }
-    }
+    ]
 }
 ```
 {% endapi-method-response-example %}
@@ -772,11 +764,103 @@ Authentication token
 {
     "status": "STOPPED"
 }
+
+ or
+  
+{
+    "status": "FAILED",
+    "deploymentReplicas": "1",
+    "deploymentEvents": [
+        {
+            "lastTransitionTime": "2019-07-01T11:02:38Z",
+            "lastUpdateTime": "2019-07-01T11:02:38Z",
+            "message": "Deployment does not have minimum availability.",
+            "reason": "MinimumReplicasUnavailable",
+            "status": "False",
+            "type": "Available"
+        },
+        {
+            "lastTransitionTime": "2019-07-01T11:12:39Z",
+            "lastUpdateTime": "2019-07-01T11:12:39Z",
+            "message": "ReplicaSet \"grnry-belt-kube-test-5-54f5c68c89\" has timed out progressing.",
+            "reason": "ProgressDeadlineExceeded",
+            "status": "False",
+            "type": "Progressing"
+        }
+    ],
+    "podStatus": [
+        {
+            "name": "grnry-belt-kube-test-5-54f5c68c89-8xf9v",
+            "podEvents": [
+                {
+                    "lastTransitionTime": "2019-07-01T11:02:38Z",
+                    "status": "True",
+                    "type": "Initialized"
+                },
+                {
+                    "lastTransitionTime": "2019-07-01T11:02:38Z",
+                    "message": "containers with unready status: [grnry-belt-kube-test-5]",
+                    "reason": "ContainersNotReady",
+                    "status": "False",
+                    "type": "Ready"
+                },
+                {
+                    "lastTransitionTime": "2019-07-01T11:02:38Z",
+                    "message": "containers with unready status: [grnry-belt-kube-test-5]",
+                    "reason": "ContainersNotReady",
+                    "status": "False",
+                    "type": "ContainersReady"
+                },
+                {
+                    "lastTransitionTime": "2019-07-01T11:02:38Z",
+                    "status": "True",
+                    "type": "PodScheduled"
+                }
+            ],
+            "containerStatus": [
+                {
+                    "image": "gitlab.alvary.io:5000/grnry/belt-extractor:extractorVersion",
+                    "imageID": "",
+                    "lastState": {},
+                    "name": "grnry-belt-kube-test-5",
+                    "ready": false,
+                    "restartCount": 0,
+                    "state": {
+                        "waiting": {
+                            "message": "rpc error: code = Unknown desc = Error: image grnry/belt-extractor:extractorVersion not found",
+                            "reason": "ErrImagePull"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=302 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
+
+Possible values for the status attribute in the response body
+
+| Status | Description |
+| :--- | :--- |
+| RUNNING | Belt is running |
+| FAILED | Belt is deployed but not running |
+| RUNNING\_BUT\_OUTDATED | Belt is running but there is a newer version of it in the database |
+| DEPLOYING | Belt is being deployed |
+| STOPPED | Belt is not deployed |
 
 {% api-method method="post" host="https://api.grnry.io" path="/belts/:beltId/state" %}
 {% api-method-summary %}
