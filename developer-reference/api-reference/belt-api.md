@@ -384,7 +384,7 @@ Authentication token
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="profileType" type="string" required=false %}
-Profile type to fetch default is `_d`. Only used if \``fetchProfile` is set to true
+Profile type to fetch. Defaults to `_d`. Only used if \``fetchProfile` is set to true
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="partitionOffsets" type="object" required=false %}
@@ -392,47 +392,43 @@ A mapping from input topics to respective start offsets which are provided as an
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorVersion" type="string" required=false %}
-Image tag of the belt runtime docker image to be used: default is `latest`
+Image tag of the belt runtime docker image to be used. Defaults to `latest`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="name" type="string" required=true %}
-Belt name: Needs to be unique
+Belt name: Needs to be unique.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="description" type="string" required=false %}
-Belt description
+Belt description.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="labels" type="array" required=false %}
-String array of labels
+String array of labels.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="affectedPaths" type="array" required=false %}
-String array of affected profile paths
+String array of affected profile paths. _Can be omitted as it has no effect on belt deployment yet._
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="replicas" type="integer" required=false %}
-Number of replicas; cannot be greater than `1` if `partitionOffsets` is set: Default is `1`
+Number of replicas; cannot be greater than `1` if `partitionOffsets` is set. Defaults to `1`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="eventTypes" type="array" required=false %}
-String array of event types to be processed
+String array of event types to be processed.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="millicpu" type="string" required=false %}
-Deployment specification for this belt: Default is `200` 
+Deployment specification for this belt. Defaults to `200` 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memory" type="string" required=false %}
-Deployment specification for this belt: Default is `512`
+Deployment specification for this belt. Defaults to  `512`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="author" type="string" required=false %}
-Author of this belt
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="reader" type="array" required=false %}
-String array containing read permissions of profiles to be read/modified by this belt. Default to `{"_all"}`
+Author of this belt.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="editor" type="array" required=false %}
@@ -440,47 +436,47 @@ String array containing Keycloak roles given permission to edit this belt. Defau
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="assumedRole" type="string" required=false %}
-Assumed roles
+Assumed roles. _Can be omitted as it has no effect on belt deployment yet._
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="requirementsPy" type="string" required=false %}
-`requirements.txt` for belts with python runtime
+`requirements.txt` for belts with python runtime.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorFn" type="string" required=false %}
-extractor function to be executed by this belt 
+Extractor function to be executed by this belt.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="beltType" type="string" required=false %}
-belt type
+Belt type. _Can be omitted as it has no effect on belt deployment yet._
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="runtime" type="string" required=false %}
-runtime of this belt.
+Runtime of this belt. `python` as default enforced.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="viewer" type="array" required=false %}
-String array containing keycloak roles. The role\(s\), which should have read access to the belt. Default to `{"belt_view"}`. 
+String array containing keycloak roles. The role\(s\), which should have read access to the belt. Defaults to `{"belt_view"}`. 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="debug" type="boolean" required=false %}
-if belt should be run in debug mode: Default is `false`.
+Determines if belt should be run in debug mode. Defaults to `false`.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="fetchProfile" type="boolean" required=false %}
-if belt should fetch profiles from the Profile Store
+{% api-method-parameter name="fetchProfile" type="string" required=false %}
+Determines if belt should fetch profiles from the Profile Store. Defaults to `FALSE`. Possible values: `["FALSE", "TRUE", "LAZY"]`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="secret" type="string" required=false %}
-Secret name as deployment specification for this belt
+Kubernetes Secret name used by belt to read values from Profile Store.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="secretUsername" type="string" required=false %}
-Username set in the secret
+Username property in secret used by belt to read values from Profile Store.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="secretPassword" type="string" required=false %}
-Password set in the secret
+Password property in secret used by elt to read values from Profile Store.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
