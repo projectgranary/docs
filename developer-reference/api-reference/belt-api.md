@@ -37,12 +37,7 @@ Authentication token
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="expand" type="array" required=false %}
-array of belt states:  
-\* Running  
-\* Stopped  
-\* Running\_but\_outdated  
-\* Deploying  
-\* Failed
+Array of belt states. For possible values, see table at GET belt state definition below.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="pagesize" type="string" required=false %}
@@ -297,43 +292,52 @@ JSON with attributes of belt with the specified ID.
 
 ```
 {
-    "id": "3",
-    "version": "3",
-    "name": "test_log",
-    "description": "kube_description_updated_3",
-    "labels": [],
-    "affectedPaths": [],
-    "replicas": 0,
-    "inputTopic": [],
-    "millicpu": 0,
-    "memory": 0,
-    "author": "",
-    "reader": [],
-    "editor": [
-        "belt_edit"
-    ],
-    "viewer": [
-        "belt_view"
-    ],
-    "created": 1556236800000,
-    "assumedRole": "",
-    "requirementsPy": "",
-    "extractorVersion": "",
-    "extractorFn": "",
-    "eventTypeFilter": "",
-    "beltType": "",
-    "runtime": "",
-    "parameter": "",
-    "debug": true,
-    "fetchProfile": true,
-    "secret": "secret_updated",
-    "secretUsername": "secretUsername_updated",
-    "secretPassword": "secretPassword_updated",
-    "startOffset": "25",
-    "status": "STOPPED",
-    "_links": {
+     "version": "1",
+     "name": "hello-belt",
+     "kubernetesName": "grnry-belt-hello-belt",
+     "description": "Hello Belt Belt",
+     "labels": [],
+     "affectedPaths": [],
+     "replicas": 1,
+     "millicpu": 200,
+     "memory": 512,
+     "author": "User",
+     "reader": [
+       "\"_auth\""
+     ],
+     "editor": [
+       "belt_edit"
+     ],
+     "viewer": [
+       "belt_view"
+     ],
+     "created": 1562744768164,
+     "assumedRole": "",
+     "requirementsPy": "package1==0.0.0\r\npackage2",
+     "extractorVersion": "0.5.0",
+     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
+     "eventTypes": [
+       "test_a",
+       "test_b"
+     ],
+     "partitionOffsets": {},
+     "beltType": "",
+     "runtime": "",
+     "parameter": "",
+     "debug": false,
+     "fetchProfile": "FALSE",
+     "profileType": "test-type",
+     "secret": "",
+     "secretUsername": "",
+     "secretPassword": "",
+     "status": "STOPPED",
+     "volumes": null,
+     "volumeMounts": null,
+     "extraEnv": null,
+     "id": "161",
+     "_links": {
         "self": {
-            "href": "https://development.lce.grnry.io/belts/3"
+            "href": "https://api.grnry.io/belts/161"
         }
     }
 }
@@ -383,12 +387,28 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="extraEnv" type="object" required=false %}
+Additional environment variables for Kubernetes belt deployment.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="volumeMounts" type="object" required=false %}
+Kubernetes volume mount definition for belt deployment.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="volumes" type="object" required=false %}
+Kubernetes volume definition for belt deployment.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="requirementsPy" type="string" required=false %}
+PIP package requirements for belt. E.g. `package1==0.1.0\r\npackage2`
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="profileType" type="string" required=false %}
 Profile type to fetch. Defaults to `_d`. Only used if \``fetchProfile` is set to true
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="partitionOffsets" type="object" required=false %}
-A mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. Requires a replica count of `1` at most.
+Mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. Requires a replica count of `1` at most.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorVersion" type="string" required=false %}
@@ -396,19 +416,11 @@ Image tag of the belt runtime docker image to be used. Defaults to `latest`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="name" type="string" required=true %}
-Belt name: Needs to be unique.
+Unique name of the belt.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="description" type="string" required=false %}
 Belt description.
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="labels" type="array" required=false %}
-String array of labels.
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="affectedPaths" type="array" required=false %}
-String array of affected profile paths. _Can be omitted as it has no effect on belt deployment yet._
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="replicas" type="integer" required=false %}
@@ -420,7 +432,7 @@ String array of event types to be processed.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="millicpu" type="string" required=false %}
-Deployment specification for this belt. Defaults to `200` 
+Deployment specification for this belt. Defaults to "`200` 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memory" type="string" required=false %}
@@ -432,31 +444,15 @@ Author of this belt.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="editor" type="array" required=false %}
-String array containing Keycloak roles given permission to edit this belt. Default to `{"belt_edit"}`
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="assumedRole" type="string" required=false %}
-Assumed roles. _Can be omitted as it has no effect on belt deployment yet._
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="requirementsPy" type="string" required=false %}
-`requirements.txt` for belts with python runtime.
+String array containing Keycloak roles given permission to edit this belt. Default to `["belt_edit"]`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorFn" type="string" required=false %}
 Extractor function to be executed by this belt.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="beltType" type="string" required=false %}
-Belt type. _Can be omitted as it has no effect on belt deployment yet._
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="runtime" type="string" required=false %}
-Runtime of this belt. `python` as default enforced.
-{% endapi-method-parameter %}
-
 {% api-method-parameter name="viewer" type="array" required=false %}
-String array containing keycloak roles. The role\(s\), which should have read access to the belt. Defaults to `{"belt_view"}`. 
+String array containing keycloak roles. The role\(s\), which should have read access to the belt. Defaults to `["belt_view"]`. 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="debug" type="boolean" required=false %}
@@ -468,15 +464,15 @@ Determines if belt should fetch profiles from the Profile Store. Defaults to `FA
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="secret" type="string" required=false %}
-Kubernetes Secret name used by belt to read values from Profile Store.
+Kubernetes Secret name used by belt to read values from Profile Store. **Required when fetchProfile is `TRUE`or `LAZY`**_**.**_
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="secretUsername" type="string" required=false %}
-Username property in secret used by belt to read values from Profile Store.
+Username property in secret used by belt to read values from Profile Store.  **Required when fetchProfile is `TRUE` or `LAZY`.**
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="secretPassword" type="string" required=false %}
-Password property in secret used by elt to read values from Profile Store.
+Password property in secret used by the belt to read values from Profile Store. **Required when fetchProfile is `TRUE` or `LAZY`.**
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -489,37 +485,49 @@ Returns a full dump of belt object created.
 
 ```
 {
-    "id": "27",
-    "version": "1",
-    "name": "test-post-23",
-    "description": "",
-    "labels": [],
-    "affectedPaths": [],
-    "replicas": 0,
-    "eventTypes": [],
-    "millicpu": 0,
-    "memory": 0,
-    "author": "",
-    "reader": [
-        "_auth"
-    ],
-    "editor": [
-        "belt_edit"
-    ],
-    "created": 1557100800000,
-    "assumedRole": "",
-    "requirementsPy": "",
-    "extractorVersion": "",
-    "extractorFn": "",
-    "beltType": "",
-    "runtime": "",
-    "parameter": "",
-    "debug": false,
-    "fetchProfile": false,
-    "secret": "",
-    "secretUsername": "",
-    "secretPassword": "",
-    "partitionOffsets": {},
+     "version": "1",
+     "name": "hello-belt",
+     "kubernetesName": "grnry-belt-hello-belt",
+     "description": "Hello Belt Belt",
+     "labels": [],
+     "affectedPaths": [],
+     "replicas": 1,
+     "millicpu": 200,
+     "memory": 512,
+     "author": "User",
+     "reader": [
+       "\"_auth\""
+     ],
+     "editor": [
+       "belt_edit"
+     ],
+     "viewer": [
+       "belt_view"
+     ],
+     "created": 1562744768164,
+     "assumedRole": "",
+     "requirementsPy": "package1==0.0.0\r\npackage2",
+     "extractorVersion": "0.5.0",
+     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
+     "eventTypes": [
+       "test_a",
+       "test_b"
+     ],
+     "partitionOffsets": {},
+     "beltType": "",
+     "runtime": "",
+     "parameter": "",
+     "debug": false,
+     "fetchProfile": "FALSE",
+     "profileType": "test-type",
+     "secret": "",
+     "secretUsername": "",
+     "secretPassword": "",
+     "status": "STOPPED",
+     "volumes": null,
+     "volumeMounts": null,
+     "extraEnv": null,
+     "id": "161"
 }
 ```
 {% endapi-method-response-example %}
@@ -664,39 +672,49 @@ A full dump of belt object recently modified
 
 ```
 {
-    "id": "15",
-    "version": "4",
-    "name": "test-put-5",
-    "description": "",
-    "labels": [],
-    "affectedPaths": [],
-    "replicas": 0,
-    "inputTopic": [],
-    "millicpu": 0,
-    "memory": 0,
-    "author": "",
-    "reader": [],
-    "editor": [
-        "belt_edit"
-    ],
-    "viewer": [
-        "belt_view"
-    ],
-    "created": 1557100800000,
-    "assumedRole": "",
-    "requirementsPy": "",
-    "extractorVersion": "",
-    "extractorFn": "",
-    "eventTypeFilter": "",
-    "beltType": "",
-    "runtime": "",
-    "parameter": "",
-    "debug": false,
-    "fetchProfile": false,
-    "secret": "",
-    "secretUsername": "",
-    "secretPassword": "",
-    "startOffset": "0"
+     "version": "2",
+     "name": "hello-belt",
+     "kubernetesName": "grnry-belt-hello-belt",
+     "description": "Hello Belt Belt",
+     "labels": [],
+     "affectedPaths": [],
+     "replicas": 1,
+     "millicpu": 200,
+     "memory": 512,
+     "author": "User",
+     "reader": [
+       "\"_auth\""
+     ],
+     "editor": [
+       "belt_edit"
+     ],
+     "viewer": [
+       "belt_view"
+     ],
+     "created": 1562744768164,
+     "assumedRole": "",
+     "requirementsPy": "package1==0.0.0\r\npackage2",
+     "extractorVersion": "0.5.0",
+     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
+     "eventTypes": [
+       "test_a",
+       "test_b"
+     ],
+     "partitionOffsets": {},
+     "beltType": "",
+     "runtime": "",
+     "parameter": "",
+     "debug": false,
+     "fetchProfile": "FALSE",
+     "profileType": "test-type",
+     "secret": "",
+     "secretUsername": "",
+     "secretPassword": "",
+     "status": "STOPPED",
+     "volumes": null,
+     "volumeMounts": null,
+     "extraEnv": null,
+     "id": "161"
 }
 ```
 {% endapi-method-response-example %}
