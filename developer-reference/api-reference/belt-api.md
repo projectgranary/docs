@@ -96,11 +96,11 @@ A list of all belts along with their attributes and total count of belts stored 
             "extractorVersion": "feature-scrum-229-metadata-header",
             "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(event, profile=None):\r\n    print(profile)\r\n    update = Update(profile['correlationId'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n    update.set_type('TestProfileType')\r\n    return [update]\r\n",
             "eventTypes": [
-                "test_event",
-                "test_event_alt"
+                "test-a",
+                "test-b"
             ],
             "partitionOffsets": {
-                "grnry_data_in_test_event": [
+                "grnry_data_in_test-a": [
                     0,
                     0,
                     0,
@@ -126,7 +126,7 @@ A list of all belts along with their attributes and total count of belts stored 
                     0,
                     0
                 ],
-                "grnry_data_in_test_event_alt": [
+                "grnry_data_in_test-b": [
                     0,
                     0,
                     0,
@@ -165,7 +165,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "status": "RUNNING",
             "_links": {
                 "self": {
-                    "href": "https://development.lce.grnry.io/belts/1011"
+                    "href": "https://api.grnry.io/belts/1011"
                 }
             },
             "id": "1011"
@@ -175,16 +175,8 @@ A list of all belts along with their attributes and total count of belts stored 
             "name": "kube_test_7",
             "kubernetesName": "grnry-belt-kube-test-7",
             "description": "kube_description",
-            "labels": [
-                "a",
-                "b",
-                "c"
-            ],
-            "affectedPaths": [
-                "a",
-                "b",
-                "c"
-            ],
+            "labels": [],
+            "affectedPaths": [],
             "replicas": 1,
             "millicpu": 54,
             "memory": 1023,
@@ -199,8 +191,8 @@ A list of all belts along with their attributes and total count of belts stored 
                 "belt_view"
             ],
             "created": 1561978858485,
-            "assumedRole": "assumeRole",
-            "requirementsPy": "requirementsPy",
+            "assumedRole": "",
+            "requirementsPy": "requirement==0.1.0",
             "extractorVersion": "latest",
             "extractorFn": "print('hallo welt')",
             "eventTypes": [
@@ -208,11 +200,7 @@ A list of all belts along with their attributes and total count of belts stored 
                 "eventType2",
                 "eventType3"
             ],
-            "partitionOffsets": {
-                "grnry_data_in_eventTypes": [
-                    20
-                ]
-            },
+            "partitionOffsets": {},
             "beltType": "customScript",
             "runtime": "Python",
             "parameter": "{mapper:[{\"beltId\",\"ida\"}]}",
@@ -225,7 +213,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "status": "STOPPED",
             "_links": {
                 "self": {
-                    "href": "https://development.lce.grnry.io/belts/1022"
+                    "href": "https://api..grnry.io/belts/1022"
                 }
             },
             "id": "1022"
@@ -317,8 +305,8 @@ JSON with attributes of belt with the specified ID.
      "extractorVersion": "0.5.0",
      "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
      "eventTypes": [
-       "test_a",
-       "test_b"
+       "test-a",
+       "test-b"
      ],
      "partitionOffsets": {},
      "beltType": "",
@@ -510,8 +498,8 @@ Returns a full dump of belt object created.
      "extractorVersion": "0.5.0",
      "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
      "eventTypes": [
-       "test_a",
-       "test_b"
+       "test-a",
+       "test-b"
      ],
      "partitionOffsets": {},
      "beltType": "",
@@ -697,8 +685,8 @@ A full dump of belt object recently modified
      "extractorVersion": "0.5.0",
      "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
      "eventTypes": [
-       "test_a",
-       "test_b"
+       "test-a",
+       "test-b"
      ],
      "partitionOffsets": {},
      "beltType": "",
