@@ -1,13 +1,16 @@
 ---
-description: >-
-  https://gitlab.alvary.io/grnry/kafka-connect/tree/master/kafka-connect-to-postgres
+description: This page outlines the storage of raw event data and replay possibilities.
 ---
 
-# Event Store
+# Event Store and Replay
 
-![](../../.gitbook/assets/eventstore.png)
+![Data flow within the raw data zone of Granary](../../.gitbook/assets/events.PNG)
 
-## Table `'eventstore'`
+In the raw data zone of Granary, data is persisted in the Event Store table by the [SCDF Event Store sinks](data-in/eventstore-sink.md). Also, raw data can be replayed back into belts by the Event Feeder.
+
+Data can be retrieved from Event Store using the [Event Store API](../api-reference/event-store-api.md).
+
+## Table `eventstore`
 
 {% tabs %}
 {% tab title="Spec" %}
@@ -30,5 +33,7 @@ description: >-
 {% endtab %}
 {% endtabs %}
 
+## Event Replay
 
+tbd
 

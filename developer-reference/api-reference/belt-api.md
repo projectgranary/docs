@@ -730,8 +730,6 @@ Belt with the given ID not found
 {% endapi-method-spec %}
 {% endapi-method %}
 
-### 
-
 {% api-method method="get" host="https://api.grnry.io" path="/belts/:id/state" %}
 {% api-method-summary %}
 Get a Belt's state
@@ -854,7 +852,7 @@ Authentication token
 {% endapi-method-spec %}
 {% endapi-method %}
 
-Possible values for the status attribute in the response body
+Possible values for the status attribute in the response body are:
 
 | Status | Description |
 | :--- | :--- |

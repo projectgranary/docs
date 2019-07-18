@@ -21,13 +21,17 @@ In Granary, Keycloak acts, on the one hand, as a provider for a security realm, 
 The interfaces that require IAM definitions are driven by [Granary's dataflow](../developer-reference/dataflow/).
 
 * **Belt Extractor**
-  * require technical users to read profiles
+  * Belts require technical users to read profiles
 * **Profile Store API**
-  * requires roles to access a profile's Grains
+  * Users require roles to access a profile's Grains
 * **Event Store API**
-  * requires roles to access typed raw events from certain sources
+  * Users require roles to access typed raw events from certain sources
 * **Segment Store API**
-  * requires technical users to access segment tables for OLAP queries requires roles to access specific segment tables
+  * Users require roles to access specific segment tables
+* **Belt API**
+  * Users require roles to view or edit belts via the API
+* **Spring Cloud Data Flow API**
+  * Users require client scopes to assign roles to users
 * **Groups**
   * are required to map human or technical users to certain roles
 

@@ -4,7 +4,7 @@ description: 'https://gitlab.alvary.io/grnry/belt-extractor'
 
 # Belt Extractor
 
-![](../../.gitbook/assets/belts.png)
+![Data flow within the harmonized data zone of Granary](../../.gitbook/assets/belts.PNG)
 
 Belts are used to compute updates for the Costumer Graph stored in the Profile Store. These updates can represent things like:
 
@@ -18,7 +18,11 @@ Belts are used to compute updates for the Costumer Graph stored in the Profile S
 
 They are defined by a label, a scale factor, an input topic and a stateless / serverless Python function that gets invoked for every event received from the respective input topic. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store.
 
-## Input Topics `['grnry_data_in_...', 'grnry_data_in_...', ...]`
+## Input Topics 
+
+Valid input topics for a 
+
+`['grnry_data_in_...', 'grnry_data_in_...', ...]`
 
 ## Callback Signature
 
@@ -177,7 +181,7 @@ Whereas _GRAIN\_VALUE_ is
 ```text
 GRAIN_VALUE := 
   {
-    "_v": string,                                    # string for now, arbitrary objects later
+    "_v": string,                                    # Json string, Json arry, or counter value
     "_c": double,                                    # default is 1
     "_in": long,                                     # default is now()
     "_ttl": string,                                  # period of time, https://en.wikipedia.org/wiki/ISO_8601#Durations, default is P100Y
@@ -229,19 +233,72 @@ def execute(event_headers, event_payload, profile=None):
 {% endtab %}
 {% endtabs %}
 
+## Dead letter queue
+
+In GRNRY, we have created so called _dead letter queues_. The Belt Extractor's dead letter queue is used to receive all the data that could not be processed correctly.
+
+By default the Belt Extractor's dead letter queue is called: 
+
+```yaml
+belts_dead_letter
+```
+
+In order to rename it one must change the helm deployment parameter:
+
+```yaml
+extraEnv:
+  - name: KAFKA_ERROR_TOPIC
+    value: belts_dead_letter
+```
+
+#### When is something written to the Dead Letter Queue?
+
+The Belt Extractor writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are not written into dead letter queue. Such errors will only be logged and the exception counter is increased.
+
 ## Output Topic `'profile-update'`
 
 {% tabs %}
 {% tab title="Spec" %}
 see [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md)
 
-| Key | Description |
-| :--- | :--- |
-| \_schema | schema of update message, default is "update\_1" |
-| \_operation | can be either `_set` or`_set_with_history`  or `_delete` or one array operation, defaults to `_set`, see [Profile Store](profile-store.md#component-profile-updater) |
-| \_id | identifies the profile that should b updated with this message |
-| \_path | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length &gt;= 1 |
-| \_value | The value that should be set in the profile under the defined `_path` Ignored if \(and only if\) `_operation` is `_delete` |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Key</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">_schema</td>
+      <td style="text-align:left">schema of update message, default is &quot;update_1&quot;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">_operation</td>
+      <td style="text-align:left">can be either <code>_set </code>or<code>_set_with_history  </code>or <code>_delete</code> or
+        one array operation, defaults to <code>_set</code>, see <a href="profile-store.md#component-profile-updater">Profile Store</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">_id</td>
+      <td style="text-align:left">identifies the profile that should b updated with this message</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">_path</td>
+      <td style="text-align:left">The path within the nested structure of a profile that should be updated.
+        In case the path doesn&apos;t exist yet it will be created. An array of
+        length &gt;= 1</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">_value</td>
+      <td style="text-align:left">
+        <p>The value that should be set in the profile under the defined <code>_path</code> .</p>
+        <p>Ignored if (and only if) <code>_operation</code> is <code>_delete</code>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 {% endtab %}
 
 {% tab title="Example" %}

@@ -1,10 +1,14 @@
-# Metadata Extractor
+---
+description: Installs SCDF Server and Skipper
+---
+
+# Spring Cloud Data Flow
 
 ## Chart Home
 
 {% hint style="info" %}
 See for full documentation of all parameters:  
-[https://gitlab.alvary.io/grnry/grnry-extractor/tree/master/helm](https://gitlab.alvary.io/grnry/grnry-extractor/tree/master/helm)
+[https://gitlab.alvary.io/grnry/scdf-apps/tree/master/helm](https://gitlab.alvary.io/grnry/scdf-apps/tree/master/helm)
 {% endhint %}
 
 ## Setup
@@ -12,30 +16,30 @@ See for full documentation of all parameters:
 Install Helm Chart:
 
 ```
-$ helm install grnry-stable/grnry-extractor \
-    --name grnry-metadata-extractor \
+$ helm install grnry-stable/spring-cloud-data-flow \
+    --name spring-cloud-data-flow \
     --version <version> \
-    -f ./grnry-metadata-extractor-values.yaml
+    -f ./spring-cloud-data-flow-values.yaml
 ```
 
 Status check and further instructions:
 
 ```text
-$ helm status grnry-metadata-extractor 
+$ helm status spring-cloud-data-flow
 ```
 
 Upgrade Helm Chart: 
 
 ```text
-$ helm upgrade grnry-metadata-extractor \
-    grnry-stable/grnry-metadata-extractor \
+$ helm upgrade spring-cloud-data-flow \
+    grnry-stable/spring-cloud-data-flow \
     --version <version> \
-    -f ./grnry-metadata-extractor-values.yaml
+    -f ./spring-cloud-data-flow-values.yaml
 ```
 
 Tear down Helm Chart:
 
 ```text
-$ helm delete --purge grnry-metadata-extractor
+$ helm delete --purge spring-cloud-data-flow
 ```
 

@@ -461,7 +461,7 @@ Ad conversion events are implemented as Snowplow unstructured events. [Here](htt
 
 Most ad servers enable you to append custom code to your ad tags. Here's what the zone append functionality looks like in the OpenX adserver \(OnRamp edition\):
 
-![](../../.gitbook/assets/openx.png)
+![](../../../.gitbook/assets/openx.png)
 
  You will need to populate the ad zone append field with Snowplow tags for **every ad zone/unit**which you use to serve ads across your site or network. Read on for the Snowplow HTML code to use for OpenX.
 

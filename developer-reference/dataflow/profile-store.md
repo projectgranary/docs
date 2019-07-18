@@ -1,10 +1,10 @@
 ---
-description: Describes the Profile Store and Profile Update mechanism
+description: This page describes the Profile Store and Profile Update mechanism.
 ---
 
 # Profile Store
 
-![](../../.gitbook/assets/profilestore.png)
+![Data flow within the harmonized data zone of Granary](../../.gitbook/assets/belts.PNG)
 
 The profile store holds integrated data for entities in so-called profiles. Such entities can be customers, customers' contracts or customers' behavior, etc. The profile store holds a profile for each correlation id \[and profile type \(implemented in the near future\). A profile type denotes the abstract notion of an entity, such as customer, contract, or behavior\].
 
@@ -253,4 +253,35 @@ For arrays, Granary offers operations for the in-place modification of grain val
 On an array modifications, existing grain value meta data \(`_reader, _ttl, _origin, _c`\) remain unchanged. The insertion time \(`_in`\) is updated.
 
 See [https://gitlab.alvary.io/grnry/kafka-profile-update](https://gitlab.alvary.io/grnry/kafka-profile-update)
+
+### Dead letter queue
+
+In GRNRY, we have created so called _dead letter queues_. The Profile Updater's dead letter queue is used to receive all the data that could not be processed correctly.
+
+By default the Profile Updater's dead letter queue is called: 
+
+```yaml
+profile-update-dead-letter
+```
+
+In order to rename it one must change the helm deployment parameter:
+
+```yaml
+kafka.deadLetterTopic: "profile-update-dead-letter"
+```
+
+#### When is something written to the Dead Letter Queue?
+
+Profile Updater writes profile updates to dead letter queue in case of:
+
+* operation does not fit to the grain type, e.g. if:
+  * operation is `_inc` and grain type is not `counter`
+  * operation is one of `array_append, _array_append_with_history, _array_put, _array_put_with_history` and grain type is not `array`
+  * operation is one of `_array_remove, _array_remove_with_history` and grain type is not a literal \(`t`\)
+* grain value \(`_v`\) may only be `null` for delete operation 
+* certainty \(`_c`\) is not between 0 and 1
+* creation timestamp \(`_in`\) is negative
+* time to live \(`_ttl`\) does not comply ISO 860 time period
+* time to live \(`_ttl`\) contains a negative number
+* an update is made and the grain type in the profile update contains a grain type that differs from existing grain type in Profile Store
 
