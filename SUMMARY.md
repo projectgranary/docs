@@ -2,6 +2,25 @@
 
 * [About](README.md)
 
+## Learning Granary <a id="learning-grnry-1"></a>
+
+* [Get data into GRNRY](learning-grnry-1/data-in/README.md)
+  * [Getting Started](learning-grnry-1/data-in/getting-started.md)
+  * [Easing development](learning-grnry-1/data-in/easing-development.md)
+  * [Best Practices](learning-grnry-1/data-in/best-practices.md)
+  * [How to test your developments](learning-grnry-1/data-in/how-to-unit-test-your-developments.md)
+* [Tracking Data](learning-grnry-1/tracking-data/README.md)
+  * [Tracking across Id-Borders using Granary](learning-grnry-1/tracking-data/tracking-across-id-borders-using-granary.md)
+  * [Track Online Events](learning-grnry-1/tracking-data/track-events-in-granary.md)
+  * [GA Tracker](learning-grnry-1/tracking-data/ga-integration.md)
+  * [Firebase Tracker](learning-grnry-1/tracking-data/firebase-integration-via-cloud-functions/README.md)
+    * [Setting up Firebase Cloud Functions' Project](learning-grnry-1/tracking-data/firebase-integration-via-cloud-functions/setting-up-firebase-cloud-functions.md)
+  * [JavaScript Tracker](learning-grnry-1/tracking-data/using-the-javascript-tracker/README.md)
+    * [Load and Setup](learning-grnry-1/tracking-data/using-the-javascript-tracker/setup-js-tracker.md)
+    * [Specific Events](learning-grnry-1/tracking-data/using-the-javascript-tracker/use-the-js-tracker.md)
+  * [Google Analytics Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/README.md)
+    * [Snowplow Web \(&App\) Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/snowplow-web-and-app-tracking-+-example-data.md)
+
 ## Developer Reference
 
 * [Data Flow](developer-reference/dataflow/README.md)
@@ -43,23 +62,4 @@
   * [Kafka Manager](operator-reference/installation/kafka-manager.md)
   * [GraphQL API](operator-reference/installation/graphql-api.md)
 * [Identity and Access Management](operator-reference/identity-and-access-management.md)
-
-## Learning Granary <a id="learning-grnry-1"></a>
-
-* [Get data into GRNRY](learning-grnry-1/data-in/README.md)
-  * [Getting Started](learning-grnry-1/data-in/getting-started.md)
-  * [Easing development](learning-grnry-1/data-in/easing-development.md)
-  * [Best Practices](learning-grnry-1/data-in/best-practices.md)
-  * [How to test your developments](learning-grnry-1/data-in/how-to-unit-test-your-developments.md)
-* [Tracking Data](learning-grnry-1/tracking-data/README.md)
-  * [Tracking across Id-Borders using Granary](learning-grnry-1/tracking-data/tracking-across-id-borders-using-granary.md)
-  * [Track Online Events](learning-grnry-1/tracking-data/track-events-in-granary.md)
-  * [GA Tracker](learning-grnry-1/tracking-data/ga-integration.md)
-  * [Firebase Tracker](learning-grnry-1/tracking-data/firebase-integration-via-cloud-functions/README.md)
-    * [Setting up Firebase Cloud Functions' Project](learning-grnry-1/tracking-data/firebase-integration-via-cloud-functions/setting-up-firebase-cloud-functions.md)
-  * [JavaScript Tracker](learning-grnry-1/tracking-data/using-the-javascript-tracker/README.md)
-    * [Load and Setup](learning-grnry-1/tracking-data/using-the-javascript-tracker/setup-js-tracker.md)
-    * [Specific Events](learning-grnry-1/tracking-data/using-the-javascript-tracker/use-the-js-tracker.md)
-  * [Google Analytics Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/README.md)
-    * [Snowplow Web \(&App\) Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/snowplow-web-and-app-tracking-+-example-data.md)
 
