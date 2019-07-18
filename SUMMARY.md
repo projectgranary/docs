@@ -24,13 +24,13 @@
 ## Developer Reference
 
 * [Data Flow](developer-reference/dataflow/README.md)
-  * [Event Store and Replay](developer-reference/dataflow/event-store.md)
   * [Data-In](developer-reference/dataflow/data-in/README.md)
     * [Shared parameters](developer-reference/dataflow/data-in/grnry-components-and-parameters.md)
     * [Source Types](developer-reference/dataflow/data-in/source-types.md)
     * [Scriptable Transform](developer-reference/dataflow/data-in/scriptable-transform.md)
     * [Metadata Extractor](developer-reference/dataflow/data-in/metadata-extractor.md)
     * [EventStore Sink](developer-reference/dataflow/data-in/eventstore-sink.md)
+  * [Event Store and Replay](developer-reference/dataflow/event-store.md)
   * [Profile Store](developer-reference/dataflow/profile-store.md)
   * [Segment Store](developer-reference/dataflow/segment-store.md)
   * [Belt Extractor](developer-reference/dataflow/belt-extractor.md)
