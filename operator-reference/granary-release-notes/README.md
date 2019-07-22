@@ -271,7 +271,21 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/citus-postgresql.md">Citus PostgreSQL</a>
+      <td style="text-align:left"><a href="../installation/graphql-api.md">GraphQL API</a>
+      </td>
+      <td style="text-align:left"><b>0.2.0</b>
+      </td>
+      <td style="text-align:left">Belt UI added</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/granary-ui.md">Granary UI</a>
+      </td>
+      <td style="text-align:left"><b>0.2.0</b>
+      </td>
+      <td style="text-align:left">Belt UI added</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/spring-cloud-data-flow.md">Citus PostgreSQL</a>
       </td>
       <td style="text-align:left">8.1.1</td>
       <td style="text-align:left">-</td>
