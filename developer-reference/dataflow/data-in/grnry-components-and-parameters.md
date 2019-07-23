@@ -22,6 +22,10 @@ grnry.eventTypeName
 
 This parameter stores the name of the event, the harvester is processing. Remember, each harvester processes exactly one event.
 
+{% hint style="info" %}
+Due to technical limitations in the [Event Store API](../../api-reference/event-store-api.md), the `eventTypeName` may not contain "`_`".
+{% endhint %}
+
 ## Dead letter queues
 
 In GRNRY, we have created so called _dead letter queues_. These dead letter queues are used to receive all the data that could not be processed correctly by the transform or metadata extractor steps. They are the output channels for errors. Dead letter queues are available for the [transform](scriptable-transform.md) and the [metadata extractor](metadata-extractor.md) steps.

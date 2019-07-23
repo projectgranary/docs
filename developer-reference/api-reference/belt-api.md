@@ -512,9 +512,34 @@ Returns a full dump of belt object created.
      "secretUsername": "",
      "secretPassword": "",
      "status": "STOPPED",
-     "volumes": null,
-     "volumeMounts": null,
-     "extraEnv": null,
+     "volumes": [
+       {
+          "name": "config-vol",
+          "configMap": {
+            "items": [
+              {
+                 "path": "data",
+                 "key": "data"
+              }
+            ],
+            "name": "grnry-belt-client"
+          }
+       }
+     ],
+     "volumeMounts": [
+       {
+          "mountPath": "/etc/client",
+          "name": "config-vol",
+          "readOnly": true,
+          "subPath": ""
+       }
+     ],
+     "extraEnv":  [
+       {
+          "name": "FOO",
+          "value": "bar"
+       }
+     ],
      "id": "161"
 }
 ```

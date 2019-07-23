@@ -162,6 +162,10 @@ curl <URL to SCDF>/streams/deployments/<stream_name> -i -X POST \
   ""deployer.*.kubernetes.volumes"": ""[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]"" }"
 ```
 
+{% hint style="info" %}
+Due to technical limitations in the [Event Store API](../../developer-reference/api-reference/event-store-api.md), the `eventTypeName` may not contain "`_`".
+{% endhint %}
+
 The different parameters in the JSON are build in the following way:
 
 ```text

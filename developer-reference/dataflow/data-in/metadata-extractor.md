@@ -40,6 +40,10 @@ app.grnry-data-in-metadata.grnry.eventTypeName: "sftp-all"
 
 Please note, that in this sample, the part `app.grnry-data-in-metadata` is the general stream definition.
 
+{% hint style="info" %}
+Due to technical limitations in the [Event Store API](../../api-reference/event-store-api.md), the `eventTypeName` may not contain "`_`".
+{% endhint %}
+
 **Source Parameters:**
 
 The current documentation for the Spring Expression Language \(SpEL\) can be found here:
