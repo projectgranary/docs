@@ -210,8 +210,6 @@ If unspecified, default values will be used:
 {% endtab %}
 
 {% tab title="Example" %}
-{% code-tabs %}
-{% code-tabs-item title="callback.py" %}
 ```python
 from time import time
 from grnry.beltextractor.update import Update
@@ -222,14 +220,6 @@ def execute(event_headers, event_payload, profile=None):
     update.set_type('TestProfileType')
     return [update]
 ```
-{% endcode-tabs-item %}
-
-{% code-tabs-item title=undefined %}
-```
-
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 {% endtab %}
 {% endtabs %}
 
