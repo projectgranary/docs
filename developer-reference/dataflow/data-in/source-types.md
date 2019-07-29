@@ -54,9 +54,9 @@ Currently, there are no GRNRY-specific parameters for HTTP. The benefit of this 
 
 The parameters for the HTTP source can be found here:
 
+{% embed url="https://github.com/spring-cloud-stream-app-starters/http/blob/master/spring-cloud-starter-stream-source-http/README.adoc" caption="SCDF HTTP Source" %}
 
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/httpclient/blob/master/spring-cloud-starter-stream-processor-httpclient/README.adoc" caption="Reference to the SCDF documentation for HTTP" %}
 
 ### JDBC Source
 
