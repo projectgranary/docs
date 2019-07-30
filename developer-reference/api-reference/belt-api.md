@@ -648,7 +648,7 @@ Updates a Belt by ID
 {% api-method-description %}
 Updates attributes of a belt, given its ID.   
   
-For a list of body parameters to send, see above POST /belts documentation. All parameters would be optional. One could update one or multiple attributes at the same time. Please note, that you need to provide all belt details in case of a put. Otherwise data might get lost.  
+For a list of body parameters to send, see above POST /belts documentation. All parameters would be optional, except for the `editor`. One could update one or multiple attributes at the same time. Please note, that you need to provide all belt details in case of a put. Otherwise data might get lost.  
   
 **Important: In the current implementation, belt version will automatically increase by each update.**  
   
@@ -675,6 +675,12 @@ Belt ID
 Authentication Token
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="editor" type="string" required=true %}
+The editors allowed to alter this belt.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
