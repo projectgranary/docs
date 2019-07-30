@@ -56,8 +56,6 @@ The parameters for the HTTP source can be found here:
 
 {% embed url="https://github.com/spring-cloud-stream-app-starters/http/blob/master/spring-cloud-starter-stream-source-http/README.adoc" caption="SCDF HTTP Source" %}
 
-
-
 ### JDBC Source
 
 **Name**: grnry-jdbc
