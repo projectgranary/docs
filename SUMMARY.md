@@ -59,4 +59,5 @@
   * [Kafka Manager](operator-reference/installation/kafka-manager.md)
   * [GraphQL API](operator-reference/installation/graphql-api.md)
 * [Identity and Access Management](operator-reference/identity-and-access-management.md)
+* [Migration guide](operator-reference/migration-guide.md)
 
