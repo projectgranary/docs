@@ -35,8 +35,8 @@
   * [Profile Store](developer-reference/dataflow/profile-store.md)
   * [Segment Store](developer-reference/dataflow/segment-store.md)
 * [API Reference](developer-reference/api-reference/README.md)
-  * [Belt API](developer-reference/api-reference/belt-api.md)
   * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
+  * [Belt API](developer-reference/api-reference/belt-api.md)
   * [Event Store API](developer-reference/api-reference/event-store-api.md)
   * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
 
