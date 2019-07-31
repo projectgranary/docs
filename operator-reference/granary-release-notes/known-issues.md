@@ -119,7 +119,7 @@ description: This page lists known issues to the Granary platform.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">Profile Update</td>
+      <td style="text-align:left">Profile Updater</td>
       <td style="text-align:left">GKI_2019_0011</td>
       <td style="text-align:left">Grain Type Array too easy to disrupt with _set Grain Type Text operation</td>
       <td
@@ -137,12 +137,61 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
+      <td style="text-align:left">Spring Cloud Data Flow</td>
+      <td style="text-align:left">GKI_2019_0013</td>
+      <td style="text-align:left">SCDF API Endpoints only authenticated not authorized.</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/355">#355</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0014</td>
+      <td style="text-align:left">GET belt by name not possible.</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/359">#359</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Granary UI</td>
+      <td style="text-align:left">GKI_2019_0015</td>
+      <td style="text-align:left">Profile Type not supported in Profile Explorer.</td>
+      <td style="text-align:left">0.3.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/react-frontend-admin/issues/62">react-frontend-admin#62</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Granary UI</td>
+      <td style="text-align:left">GKI_2019_0016</td>
+      <td style="text-align:left">Profile links not supported as documented in profile specification.</td>
+      <td
+      style="text-align:left">0.3.0</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/graphql-api/issues/17">graphql-api#17</a>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Spring Cloud Data Flow</td>
+      <td style="text-align:left">GKI_2019_0017</td>
+      <td style="text-align:left">SCDF Event Store Sink fails on unsupported unicode characters.</td>
+      <td
+      style="text-align:left">0.5.0</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/354">#354</a>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Snowplow Collector</td>
+      <td style="text-align:left">GKI_2019_0018</td>
+      <td style="text-align:left">Among others, Snowplow Collector looses connection to Kafka if all brokers
+        are restarted at once.</td>
+      <td style="text-align:left">0.4.3</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/242">#242</a>
+      </td>
     </tr>
   </tbody>
 </table>
