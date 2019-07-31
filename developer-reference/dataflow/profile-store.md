@@ -6,7 +6,7 @@ description: This page describes the Profile Store and Profile Update mechanism.
 
 ![Data flow within the harmonized data zone of Granary](../../.gitbook/assets/belts.PNG)
 
-The profile store holds integrated data for entities in so-called profiles. Such entities can be customers, customers' contracts or customers' behavior, etc. The profile store holds a profile for each correlation id \[and profile type \(implemented in the near future\). A profile type denotes the abstract notion of an entity, such as customer, contract, or behavior\].
+The profile store holds integrated data for entities in so-called profiles. Such entities can be customers, customers' contracts or customers' behavior, etc. The profile store holds a profile for each correlation id and profile type. A profile type denotes the abstract notion of an entity, such as customer, contract, or behavior.
 
 A profile is a JSON document. A profile consists of fragments and grains. Fragments group other fragments and grains. Grains store the information at different points in time. Grain values carry the actual value and respective meta information.
 

@@ -10,7 +10,7 @@ description: Denotes release versions of Granary artifacts.
 
 * [Semantic Release](https://semver.org/) version on `major.minor` level for Granary platform releases and its corresponding features and documentation.
   * e.g. `1.3` 
-* Granary `major.minor` release version defines exactly one combination of Granary components' `patch` level releases.
+* Granary `major.minor.patch` release version defines exactly one combination of Granary components' `patch` level releases.
 
 ### Granary Components
 
