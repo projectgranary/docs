@@ -396,7 +396,7 @@ Profile type to fetch. Defaults to `_d`. Only used if \``fetchProfile` is set to
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="partitionOffsets" type="object" required=false %}
-Mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. Requires a replica count of `1` at most.
+Mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. The offset settings only have an effect on the first start of a Belt. All subsequent \(re-\)starts of configuration update will read the event type topics from consumer group's current offset.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorVersion" type="string" required=false %}
@@ -412,7 +412,7 @@ Belt description.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="replicas" type="integer" required=false %}
-Number of replicas; cannot be greater than `1` if `partitionOffsets` is set. Defaults to `1`
+Number of replicas. Defaults to `1`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="eventTypes" type="array" required=false %}

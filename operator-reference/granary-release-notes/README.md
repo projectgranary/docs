@@ -18,7 +18,29 @@ description: Denotes release versions of Granary artifacts.
   * e.g. `1.3.2` 
 * Component release versions can differ from Granary Platform on `major`, `minor`, and `patch` level.
 
+## 0.5.0 "Amy" - 2019-07-31
 
+| Granary Component | Release Version | Release Notes |
+| :--- | :--- | :--- |
+| [Ambassador](https://github.com/helm/charts/tree/master/stable/ambassador) | 0.40.1 | - |
+| [Snowplow Scala Stream Collector API](../installation/snowplow-scala-stream-collector.md) | 0.4.3 \(based on Snowplow v0.15.0\) | - |
+| [Spring Cloud Dataflow](../installation/spring-cloud-data-flow.md) | 0.5.3 | - |
+| [Event Store API](../installation/event-store-api.md) | 0.4.5 | - |
+| [Event Feeder](../installation/event-feeder.md) | **0.5.3** | Added correct Kafka Header fields for Granary Metadata. |
+| [Belt Extractor](../installation/untitled.md) | **0.5.2** | Fixed replay from given offset behavior. |
+| [Belt API](../installation/belt-api.md) | **0.5.4** | Removed limitation of belt extractor replication of max. 1 in case offset parameter is set. |
+| [Profile Updater](../installation/profile-updater.md) | 0.4.6 | - |
+| [Profile Store API](../installation/profile-store-api.md) | 0.5.1 | - |
+| [Segment Table Creator](../../developer-reference/dataflow/segment-store.md) | 0.4.3 | - |
+| [Segment Store API](../installation/segment-store-api.md) | 0.4.6 \(based on Presto 0.315\) | - |
+| [GraphQL API](../installation/graphql-api.md) | **0.3.1** | Belt List pagination added. |
+| [Granary UI](../installation/granary-ui.md) | **0.3.1** | Belt List pagination added. |
+| [Citus PostgreSQL](../installation/citus-postgresql.md) | 8.1.1 | - |
+| [Confluent Kafka](https://github.com/confluentinc/cp-helm-charts/tree/master/charts) | 5.1.2 | - |
+| [Confluent Zookeeper](https://github.com/confluentinc/cp-helm-charts/tree/master/charts) | 5.1.2 | - |
+| [Kafka Manager](../installation/kafka-manager.md) | 0.4.1 | - |
+| [Keycloak](https://github.com/helm/charts/tree/master/stable/keycloak) | 4.5.0.Final | - |
+| [Grafana](https://github.com/helm/charts/tree/master/stable/grafana) | 6.0.2 | - |
 
 ## RC2 0.5 "Amy" - 2019-07-18
 

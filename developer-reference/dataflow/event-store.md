@@ -62,17 +62,25 @@ Event feeder will create a batch job to read events based on configurable event 
 
 ### Replay Scenario 1 - Deploy new Belt, start few days back, no event feeding
 
-* _1st Deployment:_ Belts consume their Kafka source topic not from offset latest but from a given offset, see [Belt API ](../api-reference/belt-api.md)parameter `offset`, replication in this case is maximum 1.
-* _2nd Deployment:_ Once reached the live event feed, re-deploy the belt without offset settings \(i.e. `latest`\) to allow for higher replication.
+* _1st Deployment:_ Belts consume their Kafka source topic not from offset `latest` but from a given offset, see [Belt API ](../api-reference/belt-api.md)parameter `offset`.
 * No previous grains must be invalidated.
 
-### Replay Scenario 2 - Deploy new belts, start on past data
+### Replay Scenario 2 - Deploy new belts, start on past event data
 
-* Event Feeder reads raw events from Event Store and emits them to a temporary output topic, settings see above.
+* Event Feeder reads raw events from Event Store and emits them to a temporary topic, settings see above.
 * Event Feeder also determines a **Hand-over offset** to switch from temporary to live topic.
-* _1st Deployment:_ Belts consume temporary output from `latest`.
-* _2nd Deployment:_ Belts consume their live source topic not from offset latest but from the **Hand-over offset**, see [Belt API ](../api-reference/belt-api.md)parameter `offset`, replication in this case is maximum 1.
-* _3rd Deployment:_ Once reached the live event feed, re-deploy the belt without offset settings to allow for higher replication.
+* _1st Deployment:_ Belts consume temporary topic from `earlist`. To achieve this, use [Belt API ](../api-reference/belt-api.md)parameter `offset` with zeros for all partitions.
+
+{% hint style="info" %}
+Wait until processing of past events has been finished before starting with _2nd Deployment_.
+{% endhint %}
+
+* _2nd Deployment:_ Belts consume their live source topic not from offset `latest` but from the **Hand-over offset**, see [Belt API ](../api-reference/belt-api.md)parameter `offset`.
+
+{% hint style="info" %}
+_2nd Deployment_ needs to be a new Belt definition in Belt API
+{% endhint %}
+
 * No previous grains must be invalidated.
 
 

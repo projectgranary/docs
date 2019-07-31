@@ -4,14 +4,146 @@ description: This page lists known issues to the Granary platform.
 
 # Known Issues
 
-| Granary Component | Structured Name | Description | Version Occurred | Version Fixed | Ticket |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Profile Updater | GKI\_2019\_0001 | All profile updates fail after database connection failure. | 0.4.1 | - | [\#190](https://gitlab.alvary.io/grnry/scrum/issues/190) |
-| Profile Updater | GKI\_2019\_0002 | \_delete operation deletes only latest grain value but no historic grain values. | 0.4.1 | - | [\#182](https://gitlab.alvary.io/grnry/scrum/issues/182) |
-| Segment Table Creator | GKI\_2019\_0003 | Creating views on segments breaks the segment creation. | 0.4.2 | - | [\#220](https://gitlab.alvary.io/grnry/scrum/issues/220) |
-| Segment Table Creator | GKI\_2019\_0004 | Failing segment creation causes resource contention. | 0.4.2 | - | [\#221](https://gitlab.alvary.io/grnry/scrum/issues/221) |
-| Kafka Connect | GKI\_2019\_0005 | JDBC Connector creates more events than present in source table. | 0.4.1 | - | [\#198](https://gitlab.alvary.io/grnry/scrum/issues/198) [\#199](https://gitlab.alvary.io/grnry/scrum/issues/199) |
-| Segment Store API | GKI\_2019\_0006 | Presto sends too many requests too Keycloak. | 0.4.3 | - | [\#193](https://gitlab.alvary.io/grnry/scrum/issues/193) |
-| Profile Updater | GKI\_2019\_0007 | Profile Updater does not process json.dumps result. | 0.4.1 | - | [\#185](https://gitlab.alvary.io/grnry/scrum/issues/185) |
-| Profile Updater | GKI\_2019\_0008 | Events with negative timestamp causes Profile Updater to crash loop. | 0.4.1 | - | [\#223](https://gitlab.alvary.io/grnry/scrum/issues/223) |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Granary Component</th>
+      <th style="text-align:left">Structured Name</th>
+      <th style="text-align:left">Description</th>
+      <th style="text-align:left">Version Occurred</th>
+      <th style="text-align:left">Version Fixed</th>
+      <th style="text-align:left">Ticket</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">Profile Updater</td>
+      <td style="text-align:left">GKI_2019_0001</td>
+      <td style="text-align:left">All profile updates fail after database connection failure.</td>
+      <td style="text-align:left">0.4.1</td>
+      <td style="text-align:left">not reproducable</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/190">#190</a> (closed)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Profile Updater</td>
+      <td style="text-align:left">GKI_2019_0002</td>
+      <td style="text-align:left">_delete operation deletes only latest grain value but no historic grain
+        values.</td>
+      <td style="text-align:left">0.4.1</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/182">#182</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Segment Table Creator</td>
+      <td style="text-align:left">GKI_2019_0003</td>
+      <td style="text-align:left">Creating views on segments breaks the segment creation.</td>
+      <td style="text-align:left">0.4.2</td>
+      <td style="text-align:left">0.4.3</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/220">#220</a> (closed)</p>
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/219">#219</a> (closed)</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Segment Table Creator</td>
+      <td style="text-align:left">GKI_2019_0004</td>
+      <td style="text-align:left">Failing segment creation causes resource contention.</td>
+      <td style="text-align:left">0.4.2</td>
+      <td style="text-align:left">
+        <p>0.4.3</p>
+        <p>Needs to be fixed in configuration.</p>
+      </td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/221">#221</a> (closed)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><del>Kafka Connect</del>
+      </td>
+      <td style="text-align:left"><del>GKI_2019_0005</del>
+      </td>
+      <td style="text-align:left"><del>JDBC Connector creates more events than present in source table.</del>
+      </td>
+      <td style="text-align:left"><del>0.4.1</del>
+      </td>
+      <td style="text-align:left"><del>-</del>
+      </td>
+      <td style="text-align:left">&lt;del&gt;&lt;/del&gt;<a href="https://gitlab.alvary.io/grnry/scrum/issues/198"><del>#198</del></a><del> </del>
+        <a
+        href="https://gitlab.alvary.io/grnry/scrum/issues/199"><del>#199</del>
+          </a>&lt;del&gt;&lt;/del&gt;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Segment Store API</td>
+      <td style="text-align:left">GKI_2019_0006</td>
+      <td style="text-align:left">Presto sends too many requests too Keycloak.</td>
+      <td style="text-align:left">0.4.3</td>
+      <td style="text-align:left">0.4.6</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/193">#193</a> (closed)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Profile Updater</td>
+      <td style="text-align:left">GKI_2019_0007</td>
+      <td style="text-align:left">Profile Updater does not process json.dumps result.</td>
+      <td style="text-align:left">0.4.1</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/185">#185</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Profile Updater</td>
+      <td style="text-align:left">GKI_2019_0008</td>
+      <td style="text-align:left">Events with negative timestamp causes Profile Updater to crash loop.</td>
+      <td
+      style="text-align:left">0.4.1</td>
+        <td style="text-align:left">0.4.2</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/223">#223</a> (closed)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0009</td>
+      <td style="text-align:left">After deploying a belt, the API returns state &quot;failed&quot; immediately
+        even though deployment is still in progress.</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/323">#323</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Profile Updater</td>
+      <td style="text-align:left">GKI_2019_0010</td>
+      <td style="text-align:left">Profile Updater service throiws runtime exception on unhandled errors
+        instead of retrying.</td>
+      <td style="text-align:left">0.4.4</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/346">#346</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Profile Update</td>
+      <td style="text-align:left">GKI_2019_0011</td>
+      <td style="text-align:left">Grain Type Array too easy to disrupt with _set Grain Type Text operation</td>
+      <td
+      style="text-align:left">0.4.4</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/284">#284</a>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Event Store API</td>
+      <td style="text-align:left">GKI_2019_0012</td>
+      <td style="text-align:left">Event Type must not include character &quot;_&quot;</td>
+      <td style="text-align:left">0.4.3</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+  </tbody>
+</table>
 
