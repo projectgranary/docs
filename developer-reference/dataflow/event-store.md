@@ -20,8 +20,8 @@ Data can be retrieved from Event Store using the [Event Store API](../api-refere
 | **event\_id**  | Event-ID. Used to deduplicate events. | uuid | - | `NOT NULL` |
 | created  | Created. The timestamp of the original event creation. | bigint | - | `NOT NULL` |
 | message  | Message. The original payload of the event as it was ingested into Granary encoded as JSON. | jsonb | - | - |
-| event\_type | Event type. Describes type of the event. The type is customizable in Metadata Extractor. This is used to control access to the event. | varchar | `na` | `NOT NULL` |
-| event\_harvester | Event harvester. Describes the source of the event. The source is the Granary Harvester of the event. This is used to control access to the event. | varchar | `na` | `NOT NULL` |
+| event\_type | Event type. Describes type of the event. The type is customizable in Metadata Extractor. This is used to control access to the event. `event_type` must not include "`_`". | varchar | `na` | `NOT NULL` |
+| event\_harvester | Event harvester. Describes the source of the event. The source is the Granary Harvester of the event. This is used to control access to the event. `event_harvester` must not include "`_`". | varchar | `na` | `NOT NULL` |
 | partition\_id | kafka partition the message was read from | bigint | - | `NOT NULL` |
 | partition\_offset | partition offset the message was read from | bigint | - | `NOT NULL` |
 {% endtab %}
