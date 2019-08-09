@@ -217,7 +217,46 @@ To create this pipeline, we have the following steps:
 1. Register the stream.
 2. Deploy the stream with parameters.
 
-As we already know, how to do so, you can reread the above chapters to get an understanding of what you need to do. 
+Above, we have already seen, what we need to do, to achieve this. Here, are the steps once again in short:
+
+```bash
+curl <URL to SCDF>/streams/definitions?deploy=false \
+ -d "name=<stream_name>&definition=<stream_definition>" \
+ -u <user>:<password> -X POST
+```
+
+In this sample &lt;stream\_definition&gt; is something like:
+
+```text
+:grnry_data_in_<event_type> > grnry-eventstore-pg
+```
+
+Afterwards you deploy the stream, which you can do by executing:
+
+```bash
+curl <URL to SCDF>/streams/deployments/<stream_name> -i -X POST \
+ -H "Content-Type: application/json" -u <user>:<password> \
+ -d "{
+	""app.grnry-eventstore-pg.spring.cloud.kubernetes.secrets.paths"": ""/usr/src/app/db-secret"",
+	""app.grnry-eventstore-pg.spring.datasource.password"": ""${superuser-password}"",
+	""app.grnry-eventstore-pg.spring.datasource.username"": ""${superuser-username}"",
+	""app.grnry-eventstore-pg.eventstore.tableName"": ""public.eventstore"",
+	""app.grnry-eventstore-pg.spring.datasource.url"": ""jdbc:postgresql://grnry-pg-citus:5432/postgres?currentSchema=public"",
+	""app.grnry-eventstore-pg.spring.cloud.stream.bindings.input.consumer.concurrency"": 3,
+	""app.grnry-eventstore-pg.spring.cloud.stream.bindings.input.consumer.partitioned"": true,
+	""deployer.*.kubernetes.imagePullPolicy"": ""Always"",
+	""deployer.*.kubernetes.limits.cpu"": ""500m"",
+	""deployer.*.kubernetes.limits.memory"": "512Mi"",
+	""deployer.*.kubernetes.requests.cpu"": "500m"",
+	""deployer.*.kubernetes.requests.memory"": "512Mi"",
+	""deployer.*.kubernetes.livenessProbeDelay"": "120"",
+	""deployer.*.kubernetes.readinessProbeDelay"": "120"",
+	""deployer.*.kubernetes.volumeMounts"": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]"",
+	""deployer.*.kubernetes.volumes"": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]""
+}
+```
+
+As a result, your stream should be up and running and you should see that from the Kafka topic :grnry\_data\_in\_&lt;event\_type&gt; the events are persisted to the Postgres.
 
 ## Bindings Parameters
 

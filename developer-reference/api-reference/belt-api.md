@@ -36,6 +36,10 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
+{% api-method-parameter name="search" type="string" required=false %}
+Filter belts by name. Belt names need to be url encoded. Default "".
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="expand" type="array" required=false %}
 Array of belt states. For possible values, see table at GET belt state definition below.
 {% endapi-method-parameter %}
