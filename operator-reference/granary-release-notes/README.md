@@ -26,7 +26,7 @@ description: Denotes release versions of Granary artifacts.
 | [Snowplow Scala Stream Collector API](../installation/snowplow-scala-stream-collector.md) | 0.4.3 \(based on Snowplow v0.15.0\) | - |
 | [Spring Cloud Dataflow](../installation/spring-cloud-data-flow.md) | 0.5.3 | - |
 | [Event Store API](../installation/event-store-api.md) | 0.4.5 | - |
-| [Event Feeder](../installation/event-feeder.md) | **0.5.3** | Added correct Kafka Header fields for Granary Metadata. |
+| [Event Feeder](../installation/event-feeder.md) | **0.5.2** | Added correct Kafka Header fields for Granary Metadata. |
 | [Belt Extractor](../installation/untitled.md) | **0.5.2** | Fixed replay from given offset behavior. |
 | [Belt API](../installation/belt-api.md) | **0.5.4** | Removed limitation of belt extractor replication of max. 1 in case offset parameter is set. |
 | [Profile Updater](../installation/profile-updater.md) | 0.4.6 | - |
