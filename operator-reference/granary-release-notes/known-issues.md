@@ -111,8 +111,8 @@ description: This page lists known issues to the Granary platform.
     <tr>
       <td style="text-align:left">Profile Updater</td>
       <td style="text-align:left">GKI_2019_0010</td>
-      <td style="text-align:left">Profile Updater service throiws runtime exception on unhandled errors
-        instead of retrying.</td>
+      <td style="text-align:left">Profile Updater service throws runtime exception on unhandled errors instead
+        of retrying.</td>
       <td style="text-align:left">0.4.4</td>
       <td style="text-align:left">-</td>
       <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/346">#346</a>
@@ -137,12 +137,15 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left">Spring Cloud Data Flow</td>
+      <td style="text-align:left">Spring Cloud Data Flow Server and Skipper</td>
       <td style="text-align:left">GKI_2019_0013</td>
       <td style="text-align:left">SCDF API Endpoints only authenticated not authorized.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/355">#355</a>
+      <td style="text-align:left">0.5.6</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/355">#355</a>
+        </p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -150,8 +153,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2019_0014</td>
       <td style="text-align:left">GET belt by name not possible.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/359">#359</a>
+      <td style="text-align:left">0.5.5</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/359">#359</a>
+        </p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -159,8 +165,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2019_0015</td>
       <td style="text-align:left">Profile Type not supported in Profile Explorer.</td>
       <td style="text-align:left">0.3.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/react-frontend-admin/issues/62">react-frontend-admin#62</a>
+      <td style="text-align:left">0.4.0</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/react-frontend-admin/issues/62">react-frontend-admin#62</a>
+        </p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -169,18 +178,24 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Profile links not supported as documented in profile specification.</td>
       <td
       style="text-align:left">0.3.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/graphql-api/issues/17">graphql-api#17</a>
+        <td style="text-align:left">0.4.0</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/graphql-api/issues/17">graphql-api#17</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
-      <td style="text-align:left">Spring Cloud Data Flow</td>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
       <td style="text-align:left">GKI_2019_0017</td>
       <td style="text-align:left">SCDF Event Store Sink fails on unsupported unicode characters.</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/354">#354</a>
+        <td style="text-align:left">0.5.5</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/354">#354</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>

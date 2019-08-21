@@ -4,7 +4,7 @@
 
 {% hint style="info" %}
 See for full documentation of all parameters:  
-[https://gitlab.alvary.io/grnry/scdf-apps/tree/master/helm](https://gitlab.alvary.io/grnry/scdf-apps/tree/master/helm)
+[https://gitlab.alvary.io/grnry/docker-scdf/tree/master/helm](https://gitlab.alvary.io/grnry/docker-scdf/tree/master/helm)
 {% endhint %}
 
 ## Setup
