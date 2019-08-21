@@ -224,31 +224,40 @@ The profile store is a distributed table in a database. Each tuple in that table
 
 Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store.  These Profile Updates must follow the specification in [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md\#profile-update-specification](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md#profile-update-specification). Currently there are the following operations:
 
-* `_set` inserts the current garin value at \_latest and overwrites if it already exists.
-* `_set_with_history` inserts the current grain value at \_latest and stores previous \_latest grain value at its insert point in time if it already exists.
-* `_delete` deletes the \_latest grain value at the specified path.
-* `_inc` creates or increments a counter.
-* `_array` __operations modify array grain values.
+#### Operations
 
-Each Profile Update carries the the grain value to be merged into the store. The grain values consists of the actual value, denoted as `_v`, and its meta information. \(Currently\) `_v` must be a JSON string or a JSON array of strings.
+| Operation Name | Input Type | Output |
+| :--- | :--- | :--- |
+| _\_set_ | same type as grain\_type | inserts the current grain value at _\_latest_ and overwrites if it already exists. |
+| _\_set\_with\_history_ | same type as grain\_type | inserts the current grain value at _\_latest_ and stores previous _\_latest_ grain value at its insert point in time if it already exists. |
+| _\_delete_ | - | deletes the _\_latest_ grain value at the specified path. |
+| _\_inc_ | _counter_ | creates or increments a counter. |
+| _\_array\_append_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics. |
+| _\_array\_append\_with\_history_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics and stores the previous _\_latest_ grain value at pit of insertion. |
+| _\_array\_put_ | _array_ | adds an element to the _\_latest_ array grain value considered as a set \(i.e., unique elements\). Executed on a non-existing grain \(i.e., it is this grain's creation\) inserts the array as is \(i.e., without de-duplication\) |
+| _\_array\_put\_with\_history_ | _array_ | adds an element to the _\_latest_ array grain value considered as a set \(i.e., unique elements\) and stores the previous _\_latest_ grain value at pit of insertion. |
+|  _\_array\_remove_ | _text_ | removes all elements matching the received string from the _\_latest_ array grain value. |
+| _\_array\_remove\_with\_history_ | _text_ | removes all elements  matching the received string from the _\_latest_ array grain value and stores the previous _\_latest_ grain value at pit of insertion. |
+
+Each Profile Update carries the the grain value to be merged into the store. A grain value consists of the actual value, denoted as `_v`, and its meta information. \(Currently\) `_v` must be a JSON string or a JSON array of strings.
 
 ### Counter
 
-`_inc` operation grain values must be of the form: `initialvalue|stepsize|steps`, e.g., `0|1|1`. This creates or increments counter grain values like `{"_initial":0, "_step":1, "_current":1}`. Please see the above linked spec. 
+The _`_inc` operation's `_v`_ must be of the form: `initialvalue|stepsize|steps`, e.g., `0|1|1`. This creates or increments counter grain values like `{"_initial":0, "_step":1, "_current":1}`. Please see the above linked spec. 
 
-`initialvalue` defines the counter's start.  `stepsize` defines the width of each counter increment/decrement. `steps` is the number of increments/decrements to do. All three are real numbers, e.g., `10|0.5|-1` defines a   single-step decrement of width 0.5 for the counter starting at 10.
+{% hint style="info" %}
+_**Example:**_ The value`"10|0.5|-1"` defines a single-step decrement of width `0.5` for a counter starting at value `10`.
+{% endhint %}
+
+| Parameter | Datatype | Description |
+| :--- | :--- | :--- |
+| `initialvalue` | real number | defines the counter's start value. |
+| `stepsize` | real number | defines the width of each counter increment/decrement |
+| `steps` | real number |  the number of increments/decrements to do |
 
 ### Arrays
 
 For arrays, Granary offers operations for the in-place modification of grain values. These operation either consider the array as a set of values with distinct entries or as bag of values where duplicates may occur. All array operations can be run with or without the creation of history.
-
-* `_array_append` appends to the \_latest array grain value considered as a bag.
-* `_array_append_with_history` appends to the \_latest array grain value considered as a bag  and stores the previous \_latest grain value at pit of insertion.
-* `_array_put` adds an element to the \_latest array grain value considered as a set \(i.e., unique elements\).
-  * `_array_put` on a non-existing grain \(i.e., it is this grain's creation\) inserts the array as is \(i.e., without de-duplication\)
-* `_array_put_with_history` adds an element to the \_latest array grain value considered as a set \(i.e., unique elements\) and stores the previous \_latest grain value at pit of insertion.
-* `_array_remove` removes all entries from the \_latest array grain value.
-* `_array_remove_with_history` removes all entries from the \_latest array grain value and stores the previous \_latest grain value at pit of insertion.
 
 On an array modifications, existing grain value meta data \(`_reader, _ttl, _origin, _c`\) remain unchanged. The insertion time \(`_in`\) is updated.
 
