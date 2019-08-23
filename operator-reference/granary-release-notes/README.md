@@ -44,14 +44,20 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/spring-cloud-data-flow.md"><b>Spring Cloud Dataflow Server and Skipper</b></a>&lt;b&gt;&lt;/b&gt;</td>
       <td
-      style="text-align:left"><b>0.5.6</b>
+      style="text-align:left"><b>0.5.8 (based on Server 2.2.0.RELEASE and Skipper 2.0.3.RELEASE)</b>
         </td>
-        <td style="text-align:left">Keycloak integration for Server and Skipper&apos;s REST endpoint working,
-          fixes known issue GKI_2019_0013.</td>
+        <td style="text-align:left">
+          <ul>
+            <li>Keycloak integration for Server and Skipper&apos;s REST endpoints working,
+              fixes known issue GKI_2019_0013.</li>
+            <li>Server and Skipper&apos;s REST endpoints configurable to work with TLS
+              encryption</li>
+          </ul>
+        </td>
     </tr>
     <tr>
       <td style="text-align:left">Spring Cloud Data Flow Apps</td>
-      <td style="text-align:left"><b>0.5.5</b>
+      <td style="text-align:left"><b>0.5.6</b>
       </td>
       <td style="text-align:left">
         <ul>
