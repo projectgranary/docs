@@ -17,6 +17,7 @@ description: >-
    1. ![](../../.gitbook/assets/dbvis01%20%281%29.png)
    2. ![](../../.gitbook/assets/dbvis02.png) 
    3. ![](../../.gitbook/assets/dbvis03.png) 
+   4. For the URL, ask your friendly Granary Ops Engineer.
 4. Under "Properties" -&gt; "Driver Properties" provide SSL-related properties.
 
    1. SSL = true
@@ -59,7 +60,7 @@ description: >-
 
 4. Get Presto driver from [https://prestodb.github.io/docs/current/installation/jdbc.html](https://prestodb.github.io/docs/current/installation/jdbc.html).
 5. Save driver to C:\Program Files\Tableau\Drivers \(Windows\).
-6. Enter server details.
+6. Enter server details. For the URL, ask your friendly Granary Ops Engineer.
 7. Provide config.properties file. E.g.,
 
    {% code-tabs %}
