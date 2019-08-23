@@ -4,11 +4,13 @@
 
 ## Learning Granary <a id="learning-grnry-1"></a>
 
-* [Get data into GRNRY](learning-grnry-1/data-in/README.md)
+* [Get Data Into Granary](learning-grnry-1/data-in/README.md)
   * [Getting Started](learning-grnry-1/data-in/getting-started.md)
   * [Easing development](learning-grnry-1/data-in/easing-development.md)
   * [Best Practices](learning-grnry-1/data-in/best-practices.md)
   * [How to test your developments](learning-grnry-1/data-in/how-to-unit-test-your-developments.md)
+* [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
+  * [Segment Store API](learning-grnry-1/get-data-out-of-granary/segment-store-api.md)
 * [Tracking Data](learning-grnry-1/tracking-data/README.md)
   * [Tracking across Id-Borders using Granary](learning-grnry-1/tracking-data/tracking-across-id-borders-using-granary.md)
   * [Track Online Events](learning-grnry-1/tracking-data/track-events-in-granary.md)
@@ -32,7 +34,8 @@
     * [EventStore Sink](developer-reference/dataflow/data-in/eventstore-sink.md)
   * [Event Store and Replay](developer-reference/dataflow/event-store.md)
   * [Profile Store](developer-reference/dataflow/profile-store.md)
-  * [Segment Store](developer-reference/dataflow/segment-store.md)
+  * [Segment Store](developer-reference/dataflow/segment-store/README.md)
+    * [Segment Table Creation](developer-reference/dataflow/segment-store/segment-table-creation.md)
   * [Belt Extractor](developer-reference/dataflow/belt-extractor.md)
 * [API Reference](developer-reference/api-reference/README.md)
   * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
@@ -54,6 +57,7 @@
   * [Profile Updater](operator-reference/installation/profile-updater.md)
   * [Profile Store API](operator-reference/installation/profile-store-api.md)
   * [Segment Store API](operator-reference/installation/segment-store-api.md)
+  * [Segment Table Creation](operator-reference/installation/segment-table-creation.md)
   * [Citus PostgreSQL](operator-reference/installation/citus-postgresql.md)
   * [Kafka Manager](operator-reference/installation/kafka-manager.md)
   * [Granary UI](operator-reference/installation/granary-ui.md)

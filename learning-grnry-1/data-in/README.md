@@ -2,7 +2,7 @@
 description: These pages describe how to get data into the platform.
 ---
 
-# Get data into GRNRY
+# Get Data Into Granary
 
 In this chapter we are going to learn, how to get data into the plattform. Before we start, we are going to have a look at the different components and the data-in pipeline.
 

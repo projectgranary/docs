@@ -99,7 +99,7 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store.md">Segment Table Creator</a>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
       </td>
       <td style="text-align:left">0.4.3</td>
       <td style="text-align:left">-</td>
@@ -196,7 +196,7 @@ description: Denotes release versions of Granary artifacts.
 | [Belt API](../installation/belt-api.md) | **0.5.4** | Removed limitation of belt extractor replication of max. 1 in case offset parameter is set. |
 | [Profile Updater](../installation/profile-updater.md) | 0.4.6 | - |
 | [Profile Store API](../installation/profile-store-api.md) | 0.5.1 | - |
-| [Segment Table Creator](../../developer-reference/dataflow/segment-store.md) | 0.4.3 | - |
+| [Segment Table Creator](../../developer-reference/dataflow/segment-store/) | 0.4.3 | - |
 | [Segment Store API](../installation/segment-store-api.md) | 0.4.6 \(based on Presto 0.315\) | - |
 | [GraphQL API](../installation/graphql-api.md) | **0.3.1** | Belt List pagination added. |
 | [Granary UI](../installation/granary-ui.md) | **0.3.1** | Belt List pagination added. |
@@ -281,7 +281,7 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">Zipkin tracing percentage reduced, docu updated</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store.md">Segment Table Creator</a>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
       </td>
       <td style="text-align:left">0.4.3</td>
       <td style="text-align:left">-</td>
@@ -445,7 +445,7 @@ description: Denotes release versions of Granary artifacts.
         API</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store.md">Segment Table Creator</a>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
       </td>
       <td style="text-align:left"><b>0.4.3</b>
       </td>
