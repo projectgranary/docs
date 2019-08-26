@@ -46,7 +46,40 @@ We propose to name the components in the following way:
       </td>
     </tr>
   </tbody>
-</table>## Spring Expression Language \(SpEL\)
+</table>## Scriptable Transform with Python \(Jython\) and Snowplow
+
+The scriptable transform with Python and Snowplow can be used the following way:
+
+At first you need to import the Snowplow Transformers:
+
+```text
+from io.grnry.scdfapps.scriptable.snowplow import SnowplowCollectorPayload
+from io.grnry.scdfapps.scriptable.snowplow import SnowplowSerDe
+```
+
+Then you can access the Snowplow payload as known from Groovy:
+
+```text
+snowplowEvent = SnowplowSerDe.deserialize(payload)
+```
+
+Afterwards, you may access the content of the snowplowEvent using:
+
+```text
+snowplowEvent.getBody()
+```
+
+The result of this method contains a JSON String, which needs to be parsed by you.
+
+Once, you are done with your checks, you may convert the whole SnowplowCollectorPayload object to a JSON string using:
+
+```text
+SnowplowSerDe.toJSON(snowplowEvent)
+```
+
+The result of this is that the whole object is converted to a JSON encoded string. You may pass this back to a variable, such that it is evaluated by SCDF.
+
+## Spring Expression Language \(SpEL\)
 
 The Spring Expression Language is used to define how to pick-up the data from the event in the step [Metadata Extractor](../../developer-reference/dataflow/data-in/metadata-extractor.md).
 
