@@ -157,6 +157,7 @@ A list of all belts along with their attributes and total count of belts stored 
                     0
                 ]
             },
+            "kafkaDestinationTopic": "profile-update",
             "beltType": "",
             "runtime": "",
             "parameter": "",
@@ -205,6 +206,7 @@ A list of all belts along with their attributes and total count of belts stored 
                 "eventType3"
             ],
             "partitionOffsets": {},
+            "kafkaDestinationTopic": "profile-update",
             "beltType": "customScript",
             "runtime": "Python",
             "parameter": "{mapper:[{\"beltId\",\"ida\"}]}",
@@ -313,6 +315,7 @@ JSON with attributes of belt with the specified ID.
        "test-b"
      ],
      "partitionOffsets": {},
+     "kafkaDestinationTopic": "profile-update",
      "beltType": "",
      "runtime": "",
      "parameter": "",
@@ -379,6 +382,10 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="kafkaDestinationTopic" type="string" required=false %}
+Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="extraEnv" type="object" required=false %}
 Additional environment variables for Kubernetes belt deployment.
 {% endapi-method-parameter %}
@@ -506,6 +513,7 @@ Returns a full dump of belt object created.
        "test-b"
      ],
      "partitionOffsets": {},
+     "kafkaDestinationTopic": "profile-update",
      "beltType": "",
      "runtime": "",
      "parameter": "",
@@ -724,6 +732,7 @@ A full dump of belt object recently modified
        "test-b"
      ],
      "partitionOffsets": {},
+     "kafkaDestinationTopic": "profile-update",
      "beltType": "",
      "runtime": "",
      "parameter": "",

@@ -9,7 +9,11 @@ This component generates distributed tables, co-located with distributed Citus s
 
 ## Configure
 
-The creation job is designed to run in a docker container and can be deployed via helm chart. More detailed instructions on how to do that can be found [here.](../../../operator-reference/installation/segment-table-creation.md) In the values.yaml file job needs to be configured via environment variables. `TYPE` determines the generator type. The following variables are required and need to be provided in case there is no default value.
+The creation job runs in a container and can be deployed via helm chart:
+
+`helm install --name <your_name> grnry-stable/segment-table-creation -f <your-values>.yaml --namespace <your-namespace>`
+
+More detailed instructions can be found [here.](../../../operator-reference/installation/segment-table-creation.md) In the _values.yaml_ file configures segment creation parameters. `TYPE` determines the generator type. The following table comprises a complete list of variables \(required if there is no default\).
 
 | Parameter | Description | Default |
 | :--- | :--- | :--- |
@@ -22,15 +26,32 @@ The creation job is designed to run in a docker container and can be deployed vi
 | `DB_USE_SSL` | whether to enforce SSL for DB connection | `true` |
 | `SOURCE_SCHEMA_NAME` | name of schema of source table | `public` |
 | `SOURCE_TABLE_NAME` | name of source table | `profilestore` |
-| `TARGET_SCHEMA_NAME` | name of schema for target segment | `public` |
-| `TARGET_SEGMENT_NAME` | name for target segment, if already existing old segment will be overwritten | `profilestore01` |
-| `CITUS_DIST_COL` | name of the column the source table is and the target segment will be distributed by. currently, this has to be a single column | `id` |
+| `TARGET_SCHEMA_NAME` | name of schema for target segment | `segments` |
+| `TARGET_SEGMENT_NAME` | name for target segment, if already existing old segment will be overwritten | `profilestore_seg` |
+| `COLUMN_PLACEHOLDER` | placeholder for the path name to be used in the pivot transformation function | ? |
+| `TYPE_SEPARATOR` | separator between pivot transformation function and result type | :: |
+| `DEFINITION_SEPARATOR` | separator between name and transformation | = |
+| `TRANSFORMATION_SEPARATOR` | separator between multiple transformations, e.g., `body_txt=message->'body'::text|body_json=replace(message->'body'#>>'{}', '\', '')::jsonb` | \| |
+| `CITUS_DIST_COL` | name of the column the source table is and the target segment will be distributed by. currently, this has to be a single column | correlation\_id |
 | `DEBUG` | whether to print all database statement and responses | `true` |
-| `WHERE_CLAUSE` | where clause as SQL \(without "WHERE" itself\), must not be empty. |  `"pit='_latest'"` |
-| `PROMETHEUS_PUSHGATEWAY` | address of gateway to push prometheus metrics, format `'<host>:<port>'` | - |
+| `SOURCE_WHERE_CLAUSE` | where clause as SQL \(without "WHERE" itself\), must not be empty. |  `"pit='_latest'"` |
+| `PROMETHEUS_PUSHGATEWAY` | address of gateway to push prometheus metrics, format `'<host>:<port>'` |  |
 | `PROMETHEUS_JOB` |  job name for pushgateway, the metrics will be grouped by this name. |  `segmentcreation` |
 
-Additionally, there are pivot generator specific variables as specified below.
+### Segment Indexes
+
+There are parameters to define **indexes** on the resulting segment.
+
+| Parameter | Description | Default |
+| :--- | :--- | :--- |
+| `TARGET_SEGMENT_INDEX_SEPARATOR` | separator between index definitions | \| |
+| `TARGET_SEGMENT_INDEXES` | defines index name and expression. must be in format `<name>=<index expression>.`for example `segidx1=(event_id)` or `segidx2= USING gin (body_json, headers)` | \`\` |
+
+### Generic Generator
+
+The generic generator creates a filtered projection from the source table. Data is selected using the specified where clause.
+
+Also, there are **generic generator** specific variables as specified below.
 
 <table>
   <thead>
@@ -42,72 +63,79 @@ Additionally, there are pivot generator specific variables as specified below.
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><code>ALLOW_EMPTY</code>
+      <td style="text-align:left"><code>GENERIC_COLUMNS</code>
       </td>
-      <td style="text-align:left">whether to remove empty rows from the segment output, <b>remark: pivot generator only</b>
-      </td>
-      <td style="text-align:left"><code>true</code>
-      </td>
+      <td style="text-align:left">source columns to be used without transformation</td>
+      <td style="text-align:left">event_id</td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>SEGMENT_FILTER_CLAUSE</code>
+      <td style="text-align:left"><code>GENERIC_TRANSFORMATIONS</code>
       </td>
-      <td style="text-align:left">where clause as SQL (without <code>WHERE</code> itself) to filter segments
-        after segmentation, e.g., <code>a::text = &apos;\&quot;foo\&quot;&apos;</code> (note
-        that column values are of type <code>jsonb</code>), <b>remark: pivot generator only</b>
+      <td style="text-align:left">columns to be created from transformation. must be in format <code>&lt;name&gt;&lt;definition_separator&gt;&lt;sql expression&gt;&lt;type separator&gt;&lt;type&gt;</code>
       </td>
-      <td style="text-align:left"><code>1=1</code>
+      <td style="text-align:left">
+        <p><code>body_txt=</code>
+        </p>
+        <p><code>message-&gt;&apos;body&apos;::text|</code>
+        </p>
+        <p><code>body_json=</code>
+        </p>
+        <p><code>replace(message-&gt;&apos;body&apos;#&gt;&gt;&apos;{}&apos;, &apos;\&apos;, &apos;&apos;)::jsonb|</code>
+        </p>
+        <p><code>headers=</code>
+        </p>
+        <p><code>message-&gt;&apos;headers&apos;::jsonb</code>
+        </p>
       </td>
     </tr>
+  </tbody>
+</table>### Pivot Generator
+
+Additionally, there are **pivot generator** specific variables as specified below.
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Parameter</th>
+      <th style="text-align:left">Description</th>
+      <th style="text-align:left">Default</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td style="text-align:left"><code>PIVOT_PATHS</code>
       </td>
-      <td style="text-align:left">list of paths to be turned into columns, comma-separated, <b>remark: pivot generator only</b>
-      </td>
-      <td style="text-align:left">if no paths are listed, all available paths will be provided</td>
+      <td style="text-align:left">list of paths to be turned into columns, comma-separated, no explicit
+        spec means all paths</td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left"><code>PIVOT_TRANSFORMATIONS</code>
       </td>
       <td style="text-align:left">
         <p>list of transformations to apply on paths;</p>
-        <p>must be in the format <code>&lt;path_name&gt;&lt;path_separator&gt;&lt;sql expression with placeholder&gt;&lt;type_separator&gt;&lt;result type&gt;</code>
+        <p>must be in the format <code>&lt;path&gt;&lt;definition_separator&gt;&lt;sql expression with placeholder&gt;&lt;type separator&gt;&lt;result type&gt;</code>
         </p>
       </td>
-      <td style="text-align:left">all path names</td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>COLUMN_PLACEHOLDER</code>
+      <td style="text-align:left"><code>PIVOT_ALLOW_EMPTY</code>
       </td>
-      <td style="text-align:left">placeholder for the path name to be used in the pivot transformation function</td>
-      <td
-      style="text-align:left"><code>?</code>
-        </td>
+      <td style="text-align:left">whether to remove empty rows from the segment output</td>
+      <td style="text-align:left"><code>true</code>
+      </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>TYPE_SEPERATOR</code>
+      <td style="text-align:left"><code>PIVOT_SEGMENT_WHERE_CLAUSE</code>
       </td>
-      <td style="text-align:left">separator between pivot transformation function and result type</td>
-      <td
-      style="text-align:left"><code>::</code>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>PATH_SEPERATOR</code>
-      </td>
-      <td style="text-align:left">separator between path name and pivot transformation function</td>
-      <td
-      style="text-align:left"><code>=</code>
-        </td>
+      <td style="text-align:left">where clause as SQL (without <code>WHERE</code> itself) to filter segments
+        after segmentation, e.g., <code>a::text = &apos;\&quot;foo\&quot;&apos;</code> (note
+        that column values are of type <code>jsonb</code>)</td>
+      <td style="text-align:left"></td>
     </tr>
   </tbody>
-</table>### Generic
-
-The generic generator creates a selection of the source table. Data is selected using the specified where clause.
-
-### Pivot
-
-The pivot generator presupposes that the following input columns are present in the source table.
+</table>The pivot generator presupposes that the following input columns are present in the source table.
 
 `<CITUS_DIST_COL>` \(varchar\)
 
@@ -184,7 +212,7 @@ When creating the pivot table you have the option to specify arbitrary transform
 
 E.g. `path1=? #>> a::text` will select the element `a` in the jsonb object `path1` as a text column.
 
-The placeholders and seperators \(`=`, `?` and `::`\) can be customized if they would otherwise conflict with special characters in the sql expression. Note that all values are initially of type `jsonb`!
+The placeholders and separators \(`=`, `?` and `::`\) can be customized if they would otherwise conflict with special characters in the sql expression. Note that all values are initially of type `jsonb`!
 
 Below you can see a full example:
 
@@ -201,16 +229,16 @@ Configuration:
 ```text
 env:
 - name: PIVOT_TRANSFORMATIONS
-  value: a=? > 50::boolean
+  value: a=(CAST((? #> '{}') AS integer) > 50)::boolean
 ```
 
 Result:
 
 | correlation\_id | a |
 | :--- | :--- |
-| 1 | f |
-| 2 | f |
-| 3 | t |
+| 1 | false |
+| 2 | false |
+| 3 | true |
 
 Common transformations could be:
 
@@ -220,12 +248,6 @@ Common transformations could be:
 * Converting to a different type: `path1=CAST((? #> '{}') AS DATE)::date` - `#> '{}'` selects the root element of a jsonb object
 * Computing a boolean expression: `path1=CAST((? #> '{}') AS int) > 30`
 
-####  More Examples
-
-* [sample-cronjob-pivot-customer.yaml](/grnry/segment-table-creation/blob/scrum%23298-enhancing-segment-creation/sample-cronjob-pivot-customer.yaml)
-* [sample-cronjob-pivot-lifeinsurance.yaml](/grnry/segment-table-creation/blob/scrum%23298-enhancing-segment-creation/sample-cronjob-pivot-lifeinsurance.yaml)
-* [sample-cronjob-generic.yaml](/grnry/segment-table-creation/blob/scrum%23298-enhancing-segment-creation/sample-cronjob-generic.yaml)
-
 ## Errors
 
 In case of errors, these are directly thrown and can be detected by the environment running the Docker container \(e.g., Kubernetes\). In case no connection can be established or the Citus master returns an SQL error result, this is the default behaviour of psycopg2. In case executing a command on the workers fails, the master will not return an error. The segmentcreation tool detects this by checking the second last return value of `run_command_on_workers` or `run_command_on_colocated_placements` indicating `success`, according to [psql's `df+` output](https://www.postgresql.org/docs/current/app-psql.html):
@@ -234,10 +256,6 @@ In case of errors, these are directly thrown and can be detected by the environm
 *  `OUT nodename text, OUT nodeport integer, OUT shardid1 bigint, OUT shardid2 bigint, OUT success boolean, OUT result text` for `run_command_on_colocated_placements`
 
 However, this interface is not documented and thus might change in future versions of Citus.
-
-## Metrics
-
-The tool can be configured to push Prometheus metrics to a [Pushgateway](https://github.com/prometheus/pushgateway). This keeps the metrics scrapable after the segment creation instance has terminated. Since the metrics for different segments should be distinguishable by the configured job name, [`honor_labels: true` should be set in the scrape configuration for the pushgateway since the job name would otherwise be overriden](https://github.com/prometheus/pushgateway#about-the-job-and-instance-labels)
 
 The metrics are grouped by the job name set in `PROMETHEUS_JOB`. If the `PROMETHEUS_PUSHGATEWAY` variable is set, the following values are pushed:
 
