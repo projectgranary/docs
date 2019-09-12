@@ -12,5 +12,3 @@ Current Tracking methods:
 * Firebase Analytics by using Firebase Cloud Functions to send conversion events to our endpoint
 * Snowplow for App and Web Tracking
 
-
-
