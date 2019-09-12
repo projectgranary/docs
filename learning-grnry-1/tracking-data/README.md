@@ -9,7 +9,7 @@ Currently we support Tracking of Web and App behaviour by Tracking methods that 
 Current Tracking methods:
 
 * Google Analytics for Web Tracking by using a Snowplow plugin
-* Firebase Analytics by using Firebase Cloudfunctions to send conversion events to our endpoint
+* Firebase Analytics by using Firebase Cloud Functions to send conversion events to our endpoint
 * Snowplow for App and Web Tracking
 
 
