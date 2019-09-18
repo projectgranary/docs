@@ -57,6 +57,12 @@ In addition, there are two further parameters:
 
 The first parameter defines how many partitions there should be at least for the dead letter queue \(more are possible\) and the second one defines whether it is okay to automatically add partitions.
 
+If you want to disable tracing, please add the following optional parameter:
+
+```text
+"spring.sleuth.enabled": false
+```
+
 ### When is something written to the Dead Letter Queue?
 
 The result is, that whenever there is an error in your transform or metadata extractor step, the data is sent to the dead letter queue. There you get the description of the error and the **original** payload. The original payload refers to the data you have received as input for the transform step, meaning the input to your harvester after the source type. By doing so, we make sure, you do not drop the original data of your request and can reprocess it, if wanted.
