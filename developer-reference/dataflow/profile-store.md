@@ -222,22 +222,25 @@ The profile store is a distributed table in a database. Each tuple in that table
 
 ## Component `Profile Updater`
 
-Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store.  These Profile Updates must follow the specification in [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md\#profile-update-specification](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md#profile-update-specification). Currently there are the following operations:
+Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store. These Profile Updates must follow the specification in [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md\#profile-update-specification](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md#profile-update-specification). Currently there are the following operations:
 
 #### Operations
 
 | Operation Name | Input Type | Output |
 | :--- | :--- | :--- |
-| _\_set_ | same type as grain\_type | inserts the current grain value at _\_latest_ and overwrites if it already exists. |
-| _\_set\_with\_history_ | same type as grain\_type | inserts the current grain value at _\_latest_ and stores previous _\_latest_ grain value at its insert point in time if it already exists. |
+| _\_set_ | same type as grain type | inserts the current grain value at _\_latest_ and overwrites if it already exists. |
+| _\_set\_if\_not\_exist_ | same type as grain type | inserts the current grain value at _\_latest_ only if it does not already exist. |
+| _\_set\_with\_history_ | same type as grain type | inserts the current grain value at _\_latest_ and stores previous _\_latest_ grain value at its insert point in time if it already exists. |
+| _\_set\_with\_history\_distinct_ | same type as grain type | will do a _\_set\_with\_history_ only if the new value is distinct from the existing value. |
 | _\_delete_ | - | deletes the _\_latest_ grain value at the specified path. |
 | _\_inc_ | _counter_ | creates or increments a counter. |
 | _\_array\_append_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics. |
 | _\_array\_append\_with\_history_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics and stores the previous _\_latest_ grain value at pit of insertion. |
 | _\_array\_put_ | _array_ | adds an element to the _\_latest_ array grain value considered as a set \(i.e., unique elements\). Executed on a non-existing grain \(i.e., it is this grain's creation\) inserts the array as is \(i.e., without de-duplication\) |
 | _\_array\_put\_with\_history_ | _array_ | adds an element to the _\_latest_ array grain value considered as a set \(i.e., unique elements\) and stores the previous _\_latest_ grain value at pit of insertion. |
+| _\_array\_put\_with\_history\_distinct_ | _array_ | does an _\_array\_put\_with\_history_ only if the new value is distinct from the existing value. |
 |  _\_array\_remove_ | _text_ | removes all elements matching the received string from the _\_latest_ array grain value. |
-| _\_array\_remove\_with\_history_ | _text_ | removes all elements  matching the received string from the _\_latest_ array grain value and stores the previous _\_latest_ grain value at pit of insertion. |
+| _\_array\_remove\_with\_history_ | _text_ | removes all elements matching the received string from the _\_latest_ array grain value and stores the previous _\_latest_ grain value at pit of insertion. |
 
 Each Profile Update carries the the grain value to be merged into the store. A grain value consists of the actual value, denoted as `_v`, and its meta information. \(Currently\) `_v` must be a JSON string or a JSON array of strings.
 
