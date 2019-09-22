@@ -4,6 +4,7 @@
 
 ## Learning Granary <a id="learning-grnry-1"></a>
 
+* [Granary Glossary](learning-grnry-1/granary-glossary.md)
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
   * [Getting Started](learning-grnry-1/data-in/getting-started.md)
   * [Easing development](learning-grnry-1/data-in/easing-development.md)
