@@ -6,8 +6,6 @@ description: On this page you get the technical details about source types.
 
 Source types help you get data into the system. Source types exist for several different application types and are defined in the following. The source types mentioned here are the GRNRY specific source types. However, you may as well use the SCDF source types. For an overview of available source types you may refer to: [https://cloud.spring.io/spring-cloud-stream-app-starters/](https://cloud.spring.io/spring-cloud-stream-app-starters/)
 
-The different source types enable encryption of the data. In addition, there are two parameters you should always set:
-
 ### SFTP Source
 
 **Name**: grnry-sftp
@@ -40,6 +38,8 @@ A sample for the configuration of a SFTP source could look like this:
   "app.grnry-sftp.grnry.eventTypeName":"sftp-all",
 ```
 
+### 
+
 ### HTTP Source
 
 **Name**: grnry-http
@@ -55,6 +55,54 @@ Currently, there are no GRNRY-specific parameters for HTTP. The benefit of this 
 The parameters for the HTTP source can be found here:
 
 {% embed url="https://github.com/spring-cloud-stream-app-starters/http/blob/master/spring-cloud-starter-stream-source-http/README.adoc" caption="SCDF HTTP Source" %}
+
+
+
+### Adobe Analytics Source
+
+**Name**: grnry-adobe-sftp
+
+**Parameters**: See [shared parameters](grnry-components-and-parameters.md).
+
+**Source parameters:**
+
+The Adobe SFTP Source is based on the SFTP source provided by Spring Cloud Dataflow. ****For SFTP server parameters see above.
+
+| **Parameter** | Name |
+| :--- | :--- |
+| grnry-adobe-sftp.lookupTemplateString |  This is the path for the lookup files on the remote repository. The path must contain a placeholder for ${timestamp}. ${timestamp} evaluates to YYYYmmdd-HHiiss and is also taken from the path of the currently inspected file to retrieve the appropriate lookups from remote. **\(String, default: `sftpTarget/demo_${timestamp}-lookup_data.tar.gz)`** |
+| grnry-adobe-sftp.localTemplateString |  This variable specifies where to store the files locally. It incorporates the timestamp \(${timestamp}\) again, as it is used to create folders for the different hours. The timestamp is written as YYYYmmdd-HHiiss **\(String, default: `tmp/lookup/${timestamp}-lookup`\)** |
+| grnry-adobe-sftp.lookupsKeptInMemory |  Specifies how many past lookup files should be kept in memory. It might be the case that there are late arrivals of data which need to be reprocessed. However, the higher this value, the higher the memory consumption of the pod. If you provided a negative value or 0, there will be at max 10 lookups stored. **\(int, default: `1`\)** |
+| grnry-adobe-sftp.deleteContentsOnDiskOnPriorityDelete | Defines whether the contents on disk are deleted, whenever the priority Queue entry is deleted as well. Meaning, whenever a lookup is removed from in-memory, the corresponding files on disk are removed as well. This should prevent high disk usage. Default is true. **\(Boolean, default: `true`\)** |
+| grnry-adobe-sftp.listConfiguration | Defines the lists that should be resolved in the source type. It resolves lists within a column. The entries are splitted using \`--\`. Hence, if you want to define a list for column \`event\_list\`, which is separated by \`;\` you write \`event\_list--,\`. If you wanted to split more entries just add \`--\` and the next entry. **\(String, default: `event_list--,--post_event_list--,--mvvar2--|--post_mvvar2--|--product_list--;--post_product_list--;--mvvar3--|--post_mvvar3--|`\)** |
+| grnry-adobe-sftp.lookupConfiguration |  Write the configuration for Lookups. Each entry consists of three parts: 1. The file name of the file to be looked up, 2. The source column, 3. The target column, The entries are separated by "," in itself. Several entries are separated by ";" **\(String, default: `browser.tsv,browser,browser_name;browser_type.tsv,browser,browser_type;color_depth.tsv,color,color_depth;connection_type.tsv,connection_type,connection_type_name;country.tsv,country,country_name;event.tsv,post_event_list,post_event_list_name;javascript_version.tsv,javascript,javascript_version;languages.tsv,language,language_name;operating_systems.tsv,os,os_name;referrer_type.tsv,ref_type,ref_type_name;resolution.tsv,resolution,resolution_name;search_engines.tsv,search_engine,search_engine_name;event.tsv,event_list,event_list_name`\)** |
+
+A sample of the configuration of a Adobe Analytics source could look like this:
+
+```yaml
+	"app.grnry-adobe-sftp.file.consumer.mode": "lines",
+	"app.grnry-adobe-sftp.file.consumer.with-markers": "false",
+	"app.grnry-adobe-sftp.sftp.auto-create-local-dir": "true",
+	"app.grnry-adobe-sftp.sftp.delete-remote-files": "true",
+	"app.grnry-adobe-sftp.sftp.factory.allow-unknown-keys": "true",
+	"app.grnry-adobe-sftp.sftp.factory.host": "<server-name>",
+	"app.grnry-adobe-sftp.sftp.factory.password": "<server-pass>",
+	"app.grnry-adobe-sftp.sftp.factory.port": "22",
+	"app.grnry-adobe-sftp.sftp.factory.username": "<server-user>",
+	"app.grnry-adobe-sftp.sftp.filename-pattern": "*.tsv",
+	"app.grnry-adobe-sftp.sftp.stream" : "false",
+	"app.grnry-adobe-sftp.sftp.local-dir": "/adobe",
+	"app.grnry-adobe-sftp.sftp.remote-dir": "/adobe",
+	"app.grnry-adobe-sftp.trigger.fixed-delay": "5",
+	"app.grnry-adobe-sftp.trigger.time-unit": "SECONDS",
+	"app.grnry-adobe-sftp.grnry-adobe-sftp.lookupTemplateString": "/adobe/demo_\\${timestamp}-lookup_data.tar.gz",
+	"app.grnry-adobe-sftp.grnry-adobe-sftp.localTemplateString": "/adobe/lookup/\\${timestamp}-lookup",
+	"app.grnry-adobe-sftp.grnry.harvesterName": "adobe-analytics-std-harvester",
+	"app.grnry-adobe-sftp.grnry.eventTypeName": "adobe-analytics",
+
+```
+
+### 
 
 ### JDBC Source
 

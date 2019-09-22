@@ -266,6 +266,19 @@ On an array modifications, existing grain value meta data \(`_reader, _ttl, _ori
 
 See [https://gitlab.alvary.io/grnry/kafka-profile-update](https://gitlab.alvary.io/grnry/kafka-profile-update)
 
+### Profile Update Prioritization / Throtteling
+
+Kafka Profile Updater supports a setup with a low and high priority Profile Updater. The low-prio instance is throtteled by monitoring the Kafka topic lag of the high-prio instance. To enable this setup, the [Profile Updater needs to be installed](../../operator-reference/installation/profile-updater.md) twice with varying input topics but the same throtteling configuration:
+
+| Parameter | Description | Default |
+| :--- | :--- | :--- |
+| `throttle.enabled` | Enable or disable throttling \(enable on low-prio instance\) | `false` |
+| `throttle.group` | The group to monitor \(`kafka.consumerGroup` of the high-prio instance\) | `profile-update` |
+| `throttle.topic` | The topic to monitor \(`kafka.inputTopic` of the high-prio instance\) | `profile-update` |
+| `throttle.lagBarrier` | The maximum total lag of the high-prio instance before throttling will be applied | `100` |
+| `throttle.checkIntervalMs` | Interval \(in milliseconds\) to check current lag of high-prio instance | `60000` |
+| `throttle.waitTimeMs` | If `throttle.lagBarrier` is exceeded each message will be artificially throttled by this amount \(milliseconds\) | `1000` |
+
 ### Dead letter queue
 
 In GRNRY, we have created so called _dead letter queues_. The Profile Updater's dead letter queue is used to receive all the data that could not be processed correctly.
