@@ -268,7 +268,7 @@ See [https://gitlab.alvary.io/grnry/kafka-profile-update](https://gitlab.alvary.
 
 ### Profile Update Prioritization / Throtteling
 
-Kafka Profile Updater supports a setup with a low and high priority Profile Updater. The low-prio instance is throtteled by monitoring the Kafka topic lag of the high-prio instance. To enable this setup, the [Profile Updater needs to be installed](../../operator-reference/installation/profile-updater.md) twice with varying input topics but the same throtteling configuration:
+Kafka Profile Updater supports a setup with a low and high priority Profile Updater. The low-prio instance is throtteled by monitoring the Kafka topic lag of the high-prio instance. To enable this setup, the [Profile Updater needs to be installed](../../operator-reference/installation/profile-updater.md) twice with varying Kafka input topic and consumer group settings. Additionally, the low-prio Profile Updater needs to be deployed with enabled throtteling configuration.
 
 | Parameter | Description | Default |
 | :--- | :--- | :--- |

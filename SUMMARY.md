@@ -63,6 +63,7 @@
   * [Kafka Manager](operator-reference/installation/kafka-manager.md)
   * [Granary UI](operator-reference/installation/granary-ui.md)
   * [GraphQL API](operator-reference/installation/graphql-api.md)
+  * [Zipkin](operator-reference/installation/zipkin.md)
 * [Identity and Access Management](operator-reference/identity-and-access-management.md)
 * [Migration guide](operator-reference/migration-guide.md)
 * [Site Reliability](operator-reference/site-reliability/README.md)
