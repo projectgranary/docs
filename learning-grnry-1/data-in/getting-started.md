@@ -292,9 +292,9 @@ A sample for deployment parameters could look like this:
 
 ```yaml
   "deployer.*.kubernetes.imagePullPolicy": "Always",
-  "deployer.*.kubernetes.limits.cpu": "400m",
+  "deployer.*.kubernetes.limits.cpu": "300m",
   "deployer.*.kubernetes.limits.memory": "512Mi",
-  "deployer.*.kubernetes.requests.cpu": "400m",
+  "deployer.*.kubernetes.requests.cpu": "300m",
   "deployer.*.kubernetes.requests.memory": "512Mi",
   "deployer.*.kubernetes.livenessProbeDelay":"120",
   "deployer.*.kubernetes.readinessProbeDelay":"120",
