@@ -6,6 +6,8 @@ description: >-
 
 # Shared parameters
 
+## Harvester Naming
+
 In this chapter, we are going to have a look at the details and different parameters of the components shipped with GRNRY.
 
 The following parameters are shared across all Granary SCDF extensions:
@@ -25,6 +27,36 @@ This parameter stores the name of the event, the harvester is processing. Rememb
 {% hint style="info" %}
 Due to technical limitations in the [Event Store API](../../api-reference/event-store-api.md), the `eventTypeName` may not contain "`_`".
 {% endhint %}
+
+## Kubernetes Deployment
+
+The following parameters control the Kubernetes deployment of a Granary SCDF component:
+
+```text
+"deployer.*.kubernetes.imagePullPolicy": "IfNotPresent",
+"deployer.*.kubernetes.limits.cpu": "300m",
+"deployer.*.kubernetes.limits.memory": "512Mi",
+"deployer.*.kubernetes.requests.cpu": "300m",
+"deployer.*.kubernetes.requests.memory": "512Mi",
+"deployer.*.kubernetes.livenessProbeDelay":"120",
+"deployer.*.kubernetes.readinessProbeDelay":"120"
+```
+
+### Encryption
+
+Granary SCDF components support symmetric encryption. Therefore the encryption secret containg the key pair needs to be mounted to Granary SCDF component like so:
+
+```text
+"deployer.*.kubernetes.volumeMounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }]",
+"deployer.*.kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]"
+```
+
+To deactivate the encryption, remove the two lines above and overwrite the \(de-\)serializer of each Granary SCDF component:
+
+```text
+"app.script.spring.cloud.stream.kafka.bindings.input.consumer.configuration.value.deserializer":"org.apache.kafka.common.serialization.ByteArrayDeserializer",
+"app.script.spring.cloud.stream.kafka.bindings.output.producer.configuration.value.se
+```
 
 ## Dead letter queues
 
