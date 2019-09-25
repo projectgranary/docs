@@ -44,7 +44,7 @@ The following parameters control the Kubernetes deployment of a Granary SCDF com
 
 ### Encryption
 
-Granary SCDF components support symmetric encryption. Therefore the encryption secret containg the key pair needs to be mounted to Granary SCDF component like so:
+Granary SCDF components support symmetric encryption. Therefore the encryption secret containing the key pair needs to be mounted to Granary SCDF components like so:
 
 ```text
 "deployer.*.kubernetes.volumeMounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }]",
