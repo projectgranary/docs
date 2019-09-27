@@ -49,6 +49,7 @@
 * [Granary Release Notes](operator-reference/granary-release-notes/README.md)
   * [Known Issues](operator-reference/granary-release-notes/known-issues.md)
 * [Installation](operator-reference/installation/README.md)
+  * [Sizing guideline](operator-reference/installation/sizing-guideline.md)
   * [Snowplow Scala Stream Collector](operator-reference/installation/snowplow-scala-stream-collector.md)
   * [Belt Extractor](operator-reference/installation/untitled.md)
   * [Spring Cloud Data Flow](operator-reference/installation/spring-cloud-data-flow.md)
