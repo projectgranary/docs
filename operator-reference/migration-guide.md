@@ -20,5 +20,13 @@ ALTER TABLE public.belts ADD COLUMN IF NOT EXISTS kafka_destination_topic VARCHA
 ALTER TABLE public.belts_log ADD COLUMN IF NOT EXISTS kafka_destination_topic VARCHAR (255) NOT NULL DEFAULT 'profile-update';
 ```
 
-That's it.
+### Install Zipkin Server
+
+Zipkin Server is the only new component in Granary 0.6. Install it as described in [Install Zipkin](installation/zipkin.md).
+
+### Update Granary Components
+
+Update all remaining Granary components to their Granary 0.6 version as denoted in the [release notes](granary-release-notes/). Bolt version indicate an update.
+
+**That's it.**
 
