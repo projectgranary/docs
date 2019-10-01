@@ -23,6 +23,7 @@
     * [Specific Events](learning-grnry-1/tracking-data/using-the-javascript-tracker/use-the-js-tracker.md)
   * [Google Analytics Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/README.md)
     * [Snowplow Web \(&App\) Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/snowplow-web-and-app-tracking-+-example-data.md)
+* [Tracing Granary](learning-grnry-1/tracing-granary.md)
 
 ## Developer Reference
 
