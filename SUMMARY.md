@@ -10,7 +10,7 @@
   * [Easing development](learning-grnry-1/data-in/easing-development.md)
   * [Best Practices](learning-grnry-1/data-in/best-practices.md)
   * [How to test your developments](learning-grnry-1/data-in/how-to-unit-test-your-developments.md)
-* [Model Data In Granary](learning-grnry-1/using-data-in-granary.md)
+* [Modeling data in Granary](learning-grnry-1/using-data-in-granary.md)
 * [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
   * [Segment Store API](learning-grnry-1/get-data-out-of-granary/segment-store-api.md)
 * [Tracing Granary](learning-grnry-1/tracing-granary.md)
