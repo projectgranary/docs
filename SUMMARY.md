@@ -10,8 +10,10 @@
   * [Easing development](learning-grnry-1/data-in/easing-development.md)
   * [Best Practices](learning-grnry-1/data-in/best-practices.md)
   * [How to test your developments](learning-grnry-1/data-in/how-to-unit-test-your-developments.md)
+* [Modeling data in Granary](learning-grnry-1/using-data-in-granary.md)
 * [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
   * [Segment Store API](learning-grnry-1/get-data-out-of-granary/segment-store-api.md)
+* [Tracing Granary](learning-grnry-1/tracing-granary.md)
 * [Tracking Data](learning-grnry-1/tracking-data/README.md)
   * [Tracking across Id-Borders using Granary](learning-grnry-1/tracking-data/tracking-across-id-borders-using-granary.md)
   * [Track Online Events](learning-grnry-1/tracking-data/track-events-in-granary.md)
@@ -23,7 +25,6 @@
     * [Specific Events](learning-grnry-1/tracking-data/using-the-javascript-tracker/use-the-js-tracker.md)
   * [Google Analytics Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/README.md)
     * [Snowplow Web \(&App\) Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/snowplow-web-and-app-tracking-+-example-data.md)
-* [Tracing Granary](learning-grnry-1/tracing-granary.md)
 
 ## Developer Reference
 
