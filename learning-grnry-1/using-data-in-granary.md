@@ -5,7 +5,7 @@ description: >-
   one store to another.
 ---
 
-# Modeling data in Granary
+# Model Data In Granary
 
 ## Belts
 

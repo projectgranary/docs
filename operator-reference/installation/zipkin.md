@@ -12,14 +12,14 @@ See for full documentation of all parameters:
 Install Helm Chart:
 
 ```
-$ helm install grnry-incubator/zipkin \
+$ helm install grnry-stable/zipkin \
     --name zipkin \
     --version <version> \
     -f ./zipkin-values.yaml
 ```
 
 {% hint style="warning" %}
-Zipkin Helm Chart also installs an ElasticSearch.
+By default, Zipkin Helm Chart also installs an ElasticSearch.
 {% endhint %}
 
 Status check and further instructions:
