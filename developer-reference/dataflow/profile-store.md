@@ -279,6 +279,138 @@ Kafka Profile Updater supports a setup with a low and high priority Profile Upda
 | `throttle.checkIntervalMs` | Interval \(in milliseconds\) to check current lag of high-prio instance | `60000` |
 | `throttle.waitTimeMs` | If `throttle.lagBarrier` is exceeded each message will be artificially throttled by this amount \(milliseconds\) | `1000` |
 
+### Scale deployment based on Kafka message backlog
+
+To achieve a scaling of Kafka Updater in case of a high number of pending messages to process, a [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) can be configured. The total count of pending messages of affected Kafka topic is used as trigger to scale the deployment. The custom metrics API provider [prometheus-adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter) is required to expose this metric.
+
+Using following values file, the [prometheus-adapter helm chart](https://github.com/helm/charts/tree/master/stable/prometheus-adapter) can be installed to make the custom metric available within the custom metrics API.
+
+{% code-tabs %}
+{% code-tabs-item title="values.yaml" %}
+```yaml
+[..]
+rules:
+  default: false
+  custom:
+    - seriesQuery: '{__name__=~"^kafka_consumer_consumer_fetch_manager_metrics_records_lag$", topic="profile-batch-update"}'
+      resources:
+        overrides:
+          kubernetes_namespace:
+            resource: namespace
+          kubernetes_pod_name:
+            resource: pod
+      name:
+        matches: ""
+        as: "kafka_processing_lag_profile_batch_update"
+      metricsQuery: 'sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)'
+[..]
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">value</th>
+      <th style="text-align:left">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">rules.default</td>
+      <td style="text-align:left">disable to reduce amount of available metrics</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">rules.custom.seriesQuery</td>
+      <td style="text-align:left">filter for series name which is exposed via prometheus http api request
+        as __name__, additional labels for filtering can be applied</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">rules.custom.resources.overrides.kubernetes_namespace</td>
+      <td style="text-align:left">
+        <p>use prometheus label &quot;kubernetes_namespace&quot; as resource type
+          &quot;namespace&quot; to include in the custom metrics api request.</p>
+        <p></p>
+        <p>Example requests looks like /apis/custom.metrics.k8s.io/v1beta1/namespaces/${kubernetes_namespace}/pods/${kubernetes_pod_name}/metricsName</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">rules.custom.resources.overrides.kubernetes_pod_name</td>
+      <td style="text-align:left">use prometheus label &quot;kubernetes_pod_name&quot; as resource type
+        &quot;pod&quot; to include in the custom metrics api request</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">rules.custom.name.matches</td>
+      <td style="text-align:left">filter metrics if multiple results, regex possible for rewrite</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">rules.custom.name.as</td>
+      <td style="text-align:left">alias name for metric to use in kafka-profile-update helm values file</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">rules.custom.metricsQuery</td>
+      <td style="text-align:left">assembled prometheus query by series name, label matcher and grouped by
+        pod and namespace. Grouped values are summed up.</td>
+    </tr>
+  </tbody>
+</table>For every instance of kafka-profile-update that should be scaled a custom metrics series is required. To achieve this, configure the prometheus-adapter ruleset by duplicating the whole seriesQuery block and adjust topic \(rules.custom.seriesQuery\) and metric name \(rules.custom.name.as\).
+
+To verify the prometheus-adapter is working with the defined ruleset, query the custom metrics endpoint. The kubernetes URL may vary depending on cluster setup. Metrics of empty prometheus response will result in an empty ressources array.
+
+```text
+$ kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/ | jq
+{
+  "kind": "APIResourceList",
+  "apiVersion": "v1",
+  "groupVersion": "custom.metrics.k8s.io/v1beta1",
+  "resources": [
+    {
+      "name": "namespaces/kafka_processing_lag_profile_batch_update",
+      "singularName": "",
+      "namespaced": false,
+      "kind": "MetricValueList",
+      "verbs": [
+        "get"
+      ]
+    },
+    {
+      "name": "pods/kafka_processing_lag_profile_batch_update",
+      "singularName": "",
+      "namespaced": true,
+      "kind": "MetricValueList",
+      "verbs": [
+        "get"
+      ]
+    }
+  ]
+}
+```
+
+Verify HPA condition `AbleToScale`  and `ScalingActive` to be set `True`:
+
+```text
+$ kubectl describe hpa/grnry-kafka-profile-batch-update                                                                            ✔  6418  15:21:22 
+Name:                                  grnry-kafka-profile-batch-update
+Namespace:                             test
+Labels:                                <none>
+Annotations:                           <none>
+CreationTimestamp:                     Wed, 02 Oct 2019 11:06:47 +0200
+Reference:                             Deployment/grnry-kafka-profile-batch-update
+Metrics:                               ( current / target )
+  "kafka_processing_lag_profile_batch_update" on pods:  0 / 1k
+Min replicas:                          1
+Max replicas:                          4
+Deployment pods:                       1 current / 1 desired
+Conditions:
+  Type            Status  Reason            Message
+  ----            ------  ------            -------
+  AbleToScale     True    ReadyForNewScale  recommended size matches current size
+  ScalingActive   True    ValidMetricFound  the HPA was able to successfully calculate a replica count from pods metric kafka_processing_lag_profile_batch_update
+  ScalingLimited  True    TooFewReplicas    the desired replica count is more than the maximum replica count
+```
+
+Although `AbleToScale`  and `ScalingActive` are set `True`, it will take 5 minutes by default to trigger on conditions after initial deploy of the HPA definition. Scaling on processing lag is now working and will scale the deployment as soon as the offset of 1000 messages in processing is reached.
+
 ### Dead letter queue
 
 In GRNRY, we have created so called _dead letter queues_. The Profile Updater's dead letter queue is used to receive all the data that could not be processed correctly.
