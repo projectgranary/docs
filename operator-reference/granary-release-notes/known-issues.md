@@ -124,8 +124,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Grain Type Array too easy to disrupt with _set Grain Type Text operation</td>
       <td
       style="text-align:left">0.4.4</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/284">#284</a>
+        <td style="text-align:left">0.5.0</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/284">#284</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
@@ -199,14 +202,82 @@ description: This page lists known issues to the Granary platform.
         </td>
     </tr>
     <tr>
-      <td style="text-align:left">Snowplow Collector</td>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
       <td style="text-align:left">GKI_2019_0018</td>
-      <td style="text-align:left">Among others, Snowplow Collector looses connection to Kafka if all brokers
-        are restarted at once.</td>
-      <td style="text-align:left">0.4.3</td>
+      <td style="text-align:left">Snowplow GET Events not transformed correctly by Scriptable Transform</td>
+      <td
+      style="text-align:left">0.5.0</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/446">#446</a>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
+      <td style="text-align:left">GKI_2019_0019</td>
+      <td style="text-align:left">Splitting Arrays in Scriptable Transform to multiple Kafka messages is
+        broken.</td>
+      <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/242">#242</a>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/431">#431</a>
       </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0020</td>
+      <td style="text-align:left">partitionOffset set to &quot;null&quot; causes Belt to not start</td>
+      <td
+      style="text-align:left">0.5.0</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/447">#447</a>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0021</td>
+      <td style="text-align:left">Belts deployed by Belt API do not contain Prometheus Scrape annotations.</td>
+      <td
+      style="text-align:left">0.5.0</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/455">#455</a>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0022</td>
+      <td style="text-align:left">DELETE /belt/&lt;id&gt; only deletes belt on database but not on Kubernetes.</td>
+      <td
+      style="text-align:left">0.5.0</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/413">#413</a>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0023</td>
+      <td style="text-align:left">Update of Belt fails witout &quot;editor&quot; present.</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/361">#361</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
+      <td style="text-align:left">GKI_2019_0024</td>
+      <td style="text-align:left">Eventstore Persister does not have a dead letter queue</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/372">#372</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Profile Store API</td>
+      <td style="text-align:left">GKI_2019_0025</td>
+      <td style="text-align:left">GET /type/&lt;profile-type&gt; returns single grains not profiles</td>
+      <td
+      style="text-align:left">0.5.0</td>
+        <td style="text-align:left"></td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/443">#443</a>
+        </td>
     </tr>
   </tbody>
 </table>
