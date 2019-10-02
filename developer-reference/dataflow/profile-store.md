@@ -279,7 +279,7 @@ Kafka Profile Updater supports a setup with a low and high priority Profile Upda
 | `throttle.checkIntervalMs` | Interval \(in milliseconds\) to check current lag of high-prio instance | `60000` |
 | `throttle.waitTimeMs` | If `throttle.lagBarrier` is exceeded each message will be artificially throttled by this amount \(milliseconds\) | `1000` |
 
-### Scale deployment based on Kafka message backlog
+### Scale Profile Updater based on Kafka Topic Lag
 
 To achieve a scaling of Kafka Updater in case of a high number of pending messages to process, a [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) can be configured. The total count of pending messages of affected Kafka topic is used as trigger to scale the deployment. The custom metrics API provider [prometheus-adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter) is required to expose this metric.
 
