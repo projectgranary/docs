@@ -4,7 +4,7 @@ description: 'https://gitlab.alvary.io/grnry/belt-extractor'
 
 # Belt Extractor
 
-![Data flow within the harmonized data zone of Granary](../../.gitbook/assets/belts.PNG)
+![](../../.gitbook/assets/dataflow_profilestore_06_docs.png)
 
 Belts are used to compute updates for the Costumer Graph stored in the Profile Store. These updates can represent things like:
 
