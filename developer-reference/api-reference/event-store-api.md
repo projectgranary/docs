@@ -21,7 +21,7 @@ Retrieves events containing the specified Correlation ID. In order to get result
   
 Example:  
   
-`https://api.grnry.io/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&expand=false&offset=0&pagesize=20`  
+`https://api.grnry.io/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&offset=0&pagesize=20`  
 {% endapi-method-description %}
 
 {% api-method-spec %}
