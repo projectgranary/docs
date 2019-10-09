@@ -122,7 +122,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
       </td>
-      <td style="text-align:left"><b>0.5.0</b>
+      <td style="text-align:left"><b>0.5.1</b>
       </td>
       <td style="text-align:left">
         <ul>
