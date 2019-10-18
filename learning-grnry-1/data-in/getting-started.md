@@ -92,6 +92,22 @@ If you want to know more about the stream definition and the DSL have a look her
 
 This whole stream definition registered the stream with SCDF. As a next step, it is necessary to deploy the pipeline. There, we define additional configuration settings, which we are going to have a look at on page [The different GRNRY components and their prameters in detail](../../developer-reference/dataflow/data-in/). In the chapter mentioned in the link, you will get to know all the different parameters for the source types, the scriptable-transformation and the grnry-data-in-metadata.
 
+{% hint style="danger" %}
+It is necessary to always define the scriptable-transform before the metadata extractor, as some automatic conversions are performed. Even if you did not do anything in there and just return the payload, there are some automatic transformations executed changing the structure, which are required for the metadata extractor to work.
+{% endhint %}
+
+{% hint style="info" %}
+It is also possible to define a short form of the stream definition, in order to make the names of the deployed pods shorter, as there is a limit of 53 characters. The definition could then look like this:
+
+
+
+```text
+jdbc-source: grnry-jdbc-source | script: grnry-scriptable-processor | meta: grnry-data-in-metadata-processor > :grnry_data_in_target
+```
+
+In this case, it is necessary to also define all the parameters for deployment \(see [Deploying the data-in pipeline](getting-started.md#deploying-the-data-in-pipeline)\) with the short names, e.g. `app.script.parameter = "value"`.
+{% endhint %}
+
 Now, let us take a step back and inspect what we actually did there.
 
 ### The data-in pipeline in GRNRY
