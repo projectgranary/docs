@@ -10,48 +10,58 @@ description: >-
 
 Using SCDF, for example for the scriptable transform, it is necessary to provide a Script as a one-liner. As this is very bad to read, it is very likely, you are using a normal editor to create such files. You then want to easily convert these files into one liners.
 
-So, this is our input:
+So, this is our example input:
 
 ```groovy
 import groovy.json.JsonSlurper
 import groovy.json.JsonOutput
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe
-import java.util.logging.Logger
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload
 
-Logger logger = Logger.getLogger("groovy-transform_test")
+import java.nio.charset.StandardCharsets
+
+SnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)
+
 JsonSlurper jsonSlurper = new JsonSlurper()
-try{
-    logger.info("payload: " + payload)
-    def jsonPayload =  jsonSlurper.parseText(new String(payload, 'UTF-8'))
-    def actualPayload =  jsonSlurper.parseText(jsonPayload.body)
-    logger.info("actualPayload " + actualPayload)
-    def data = actualPayload.data[0]
-    logger.info("data: " + data)
-        logger.info("path: " + path)
-        if (data."$path") {
-            logger.info("value: " + (String) data."$path")
-            return JsonOutput.toJson(jsonPayload)
+
+// handle POST body
+if (snowplowEvent.getBody()){
+    def actualPayload =  jsonSlurper.parseText(snowplowEvent.getBody())
+    if (actualPayload?.data && actualPayload?.data[0]) {
+        def data = actualPayload.data[0]
+        if (data?.filterCriteria && data.filterCriteria.equalsIgnoreCase("a")) {
+            return JsonOutput.toJson(snowplowEvent)
         }
-
-}
-catch (Exception e){
-    e.printStackTrace()
-    return null
+    }
 }
 
+// handle GET parameters
+else if (snowplowEvent.getQuerystring()) {
+    def data = URLDecoder.decode(snowplowEvent.getQuerystring(), StandardCharsets.UTF_8.name())
+            .split('&')
+            .inject([:]) { map, token ->
+                token.split('=').with {
+                    if(map.containsKey(it[0])) {
+                        map[it[0]] = ([] + map[it[0]] ?: [map[it[0]]])
+                        map[it[0]].add(it[1])
+                    }
+                    else map[it[0]] = it[1]
+                }
+                map
+            }
+    if (data?.filterCriteria && data.filterCriteria.equalsIgnoreCase("a")) {
+        snowplowEvent.setBody(JsonOutput.toJson([data:[data]]))
+        return JsonOutput.toJson(snowplowEvent)
+    }
+}
 return null
 ```
 
 And we want to convert it to a string, such as this one:
 
 ```groovy
-import groovy.json.JsonSlurper\\nimport groovy.json.JsonOutput\\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe\\nimport java.util.logging.Logger\\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload\\n\\nLogger logger = Logger.getLogger("groovy-transform_test")\\nJsonSlurper jsonSlurper = new JsonSlurper()\\ntry{\\n    logger.info("payload: " + payload)\\n    def jsonPayload =  jsonSlurper.parseText(new String(payload, 'UTF-8'))\\n    def actualPayload =  jsonSlurper.parseText(jsonPayload.body)\\n    logger.info("actualPayload " + actualPayload)\\n    def data = actualPayload.data[0]\\n    logger.info("data: " + data)\\n        logger.info("path: " + path)\\n        if (data."$path") {\\n            logger.info("value: " + (String) data."$path")\\n            return JsonOutput.toJson(jsonPayload)\\n        }\\n\\n}\\ncatch (Exception e){\\n    e.printStackTrace()\\n    return null\\n}\\n\\nreturn null\\n
+import groovy.json.JsonSlurper\r\nimport groovy.json.JsonOutput\r\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe\r\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload\r\n\r\nimport java.nio.charset.StandardCharsets\r\n\r\nSnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)\r\n\r\nJsonSlurper jsonSlurper = new JsonSlurper()\r\n\r\nif (snowplowEvent.getBody()){\r\n    def actualPayload =  jsonSlurper.parseText(snowplowEvent.getBody())\r\n    if (actualPayload?.data && actualPayload?.data[0]) {\r\n        def data = actualPayload.data[0]\r\n        if (data?.filterCriteria && data.filterCriteria.equalsIgnoreCase(\"a\")) {\r\n            return JsonOutput.toJson(snowplowEvent)\r\n        }\r\n    }\r\n}\r\nelse if (snowplowEvent.getQuerystring()) {\r\n    def data = URLDecoder.decode(snowplowEvent.getQuerystring(), StandardCharsets.UTF_8.name())\r\n            .split('&')\r\n            .inject([:]) { map, token ->\r\n                token.split('=').with {\r\n                    if(map.containsKey(it[0])) {\r\n                        map[it[0]] = ([] + map[it[0]] ?: [map[it[0]]])\r\n                        map[it[0]].add(it[1])\r\n                    }\r\n                    else map[it[0]] = it[1]\r\n                }\r\n                map\r\n            }\r\n    if (data?.filterCriteria && data.filterCriteria.equalsIgnoreCase(\"a\")) {\r\n        snowplowEvent.setBody(JsonOutput.toJson([data:[data]]))\r\n        return JsonOutput.toJson(snowplowEvent)\r\n    }\r\n}\r\nreturn null
 ```
-
-This string, can be directly entered into our API call to the SCDF backend. This can be achieved with the following command:
-
-### Windows
 
 In order to achieve this with windows, start PowerShell and navigate to the specific resource. Afterwards, you may execute the following command.
 
