@@ -4,7 +4,7 @@ description: 'https://gitlab.alvary.io/grnry/belt-extractor'
 
 # Belt Extractor
 
-![](../../.gitbook/assets/belts.png)
+![](../../.gitbook/assets/dataflow_profilestore_06_docs.png)
 
 Belts are used to compute updates for the Costumer Graph stored in the Profile Store. These updates can represent things like:
 
@@ -18,31 +18,46 @@ Belts are used to compute updates for the Costumer Graph stored in the Profile S
 
 They are defined by a label, a scale factor, an input topic and a stateless / serverless Python function that gets invoked for every event received from the respective input topic. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store.
 
-## Input Topic `'raw-json'`
+## Input Topics 
+
+Valid input topics for a 
+
+`['grnry_data_in_...', 'grnry_data_in_...', ...]`
+
+## Callback Signature
+
+`execute(event_headers, event_payload[, profile])`
 
 {% tabs %}
 {% tab title="Spec" %}
 | Key | Description |
 | :--- | :--- |
-| metadata | Kafka specific fields |
-| payload | Forwarded from input attribute `value`  |
+| **event\_headers** | Kafka fields for Event metadata |
+| $$-$$ grnry-event-type | extracted from event payload or a static value |
+| $$-$$ grnry-event-id | used to deduplicate events |
+| $$-$$ grnry-harvester-name | name of the harvester instance, extracted from event payload or a static value |
+| $$-$$ grnry-correlation-id | used to group events received from the same tracking entity |
+| $$-$$ grnry-event-timestamp | event processing time set by harvester \(metadata extractor\) |
+| **event\_payload** | Forwarded from input attribute `value`  |
 | $$-$$ schema | Snowplow Event Schema Reference |
 | $$-$$ ipAddress | ipAddress if Snowplow is configured to collect this |
 | $$-$$ timestamp | time of event creation or reception\(?\) |
 | $$-$$ collector | identifies the source platform of the event |
 | $$-$$ body | Snowplow Event Data \(according to `schema`\) |
 | $$-$$ headers | HTTP headers |
-| payloadid | attributes extracted from payload.body |
-| $$-$$ correlationid | used to group events received from the same tracking entity. |
-| $$-$$ eventid | used to deduplicate events |
-| $$-$$ created | used to recreate the original order of events |
+| **profile** | A profile fetched from [profile store](profile-store/). Only provided if `fetch profile` in [belt definition](../api-reference/belt-api.md) is set to`true.` |
 {% endtab %}
 
 {% tab title="Example" %}
-```javascript
-{
-	"metadata": "{\"headers\": null, \"topic\": \"raw\", \"partition\": 0, \"key\": \"9417415d-7359-4ad0-8c3b-46ff4ca78c44\", \"timestamp\": [1, 1540748298485], \"offset\": 1746229}",
-	"payload": {
+```python
+event_headers = {
+			"grnry-event-type":"...",
+			"grnry-event-id":"...",
+			"grnry-correlation-id":"...",
+			"grnry-harvester-name":"...",
+			"grnry-event-timestamp":1535972952300
+		}
+event_payload = {
 		"body": "{ ... }",
 		"collector": "ssc-0.13.0-kafka",
 		"encoding": "UTF-8",
@@ -54,14 +69,74 @@ They are defined by a label, a scale factor, an input topic and a stateless / se
 		"schema": "iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
 		"timestamp": 1535972952029,
 		"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
-	},
-    {
-      "payloadid" : {
-         "correlationid": "cookie_dW5kIG5pZW1hbHMgdmVyZ2Vzc2VuIGVpc2VybiB1bmlvbg==",
-         "eventid": "819f785b-82f7-4994-bbd8-992c94bdf7bc",
-         "created": 1541345852941,
+	}
+	
+profile = {
+  "_id": "0815",
+  "a1": {
+    "_latest": {
+      "_v": "abc",
+      "_c": 0.4,
+      "_in": 123,
+      "_ttl": "P100Y",
+      "_origin": null,
+      "_reader": "_all"
+    }
+  },
+  "a2": {
+    "b1": {
+      "2018-09-21": {
+        "_v": "21",
+        "_c": 0.1,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      },
+      "2018-09-22": {
+        "_v": "22",
+        "_c": 0.2,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      },
+      "_latest": {
+        "_v": "23",
+        "_in": "2018-09-23",
+        "_c": 0.3,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      }
+    },
+    "b2": {
+      "_latest": {
+        "_v": "123456",
+        "_c": 0.4,
+        "_in": "2018-09-20",
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
       }
     }
+  },
+  "a3": {
+    "b3": {
+      "c3": {
+        "d3": {
+          "e3": {
+            "_latest": {
+              "_v": "123456",
+              "_c": 0.5,
+              "_in": "2018-09-20",
+              "_ttl": "P100Y",
+              "_origin": null,
+              "_reader": "_all"
+            }
+          }
+        }
+      }
+    }
+  }
 }
 ```
 {% endtab %}
@@ -106,7 +181,7 @@ Whereas _GRAIN\_VALUE_ is
 ```text
 GRAIN_VALUE := 
   {
-    "_v": string,                                    # string for now, arbitrary objects later
+    "_v": string,                                    # Json string, Json arry, or counter value
     "_c": double,                                    # default is 1
     "_in": long,                                     # default is now()
     "_ttl": string,                                  # period of time, https://en.wikipedia.org/wiki/ISO_8601#Durations, default is P100Y
@@ -135,35 +210,40 @@ If unspecified, default values will be used:
 {% endtab %}
 
 {% tab title="Example" %}
-{% code-tabs %}
-{% code-tabs-item title="callback.py" %}
 ```python
-def execute(event):
-    if event:
-        try:
-            from grnry.beltextractor.update import Update
-            update = Update()
-            update.set_id(event['ID'])
-            update.set_path([
-                    "sessions",
-                    "duration"
-                ])
-            update.set_value(event['DURATION'])
-            return update
-        except ValueError:
-            sys.stderr.write(sys.exc_info())
-            return None
-```
-{% endcode-tabs-item %}
+from time import time
+from grnry.beltextractor.update import Update
 
-{% code-tabs-item title=undefined %}
+def execute(event_headers, event_payload, profile=None):
+    print(profile)
+    update = Update(profile['correlationId'],["dummy"]).set_value("Hallo Belt!",0.5,time(),'P1D','Dummy-Belt')
+    update.set_type('TestProfileType')
+    return [update]
 ```
-
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 {% endtab %}
 {% endtabs %}
+
+## Dead letter queue
+
+In GRNRY, we have created so called _dead letter queues_. The Belt Extractor's dead letter queue is used to receive all the data that could not be processed correctly.
+
+By default the Belt Extractor's dead letter queue is called: 
+
+```yaml
+belts_dead_letter
+```
+
+In order to rename it one must change the helm deployment parameter:
+
+```yaml
+extraEnv:
+  - name: KAFKA_ERROR_TOPIC
+    value: belts_dead_letter
+```
+
+#### When is something written to the Dead Letter Queue?
+
+The Belt Extractor writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are not written into dead letter queue. Such errors will only be logged and the exception counter is increased.
 
 ## Output Topic `'profile-update'`
 
@@ -171,13 +251,44 @@ def execute(event):
 {% tab title="Spec" %}
 see [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md)
 
-| Key | Description |
-| :--- | :--- |
-| \_schema | schema of update message, default is "update\_1" |
-| \_operation | can be either `_set` or `_set_with_history`  or `_delete`, defaults to `_set` |
-| \_id | identifies the profile that should b updated with this message |
-| \_path | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length &gt;= 1 |
-| \_value | The value that should be set in the profile under the defined `_path` Ignored if \(and only if\) `_operation` is `_delete` |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Key</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">_schema</td>
+      <td style="text-align:left">schema of update message, default is &quot;update_1&quot;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">_operation</td>
+      <td style="text-align:left">can be either <code>_set </code>or<code>_set_with_history  </code>or <code>_delete</code> or
+        one array operation, defaults to <code>_set</code>, see <a href="profile-store/#component-profile-updater">Profile Store</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">_id</td>
+      <td style="text-align:left">identifies the profile that should b updated with this message</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">_path</td>
+      <td style="text-align:left">The path within the nested structure of a profile that should be updated.
+        In case the path doesn&apos;t exist yet it will be created. An array of
+        length &gt;= 1</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">_value</td>
+      <td style="text-align:left">
+        <p>The value that should be set in the profile under the defined <code>_path</code> .</p>
+        <p>Ignored if (and only if) <code>_operation</code> is <code>_delete</code>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 {% endtab %}
 
 {% tab title="Example" %}
