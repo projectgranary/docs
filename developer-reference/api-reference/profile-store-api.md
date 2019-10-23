@@ -106,6 +106,10 @@ Could not find a profile matching this query.
 {% endapi-method-spec %}
 {% endapi-method %}
 
+{% hint style="warning" %}
+Deprecated in Granary 0.6
+{% endhint %}
+
 {% api-method method="get" host="https://api.grnry.io" path="/profiles/:profileType/:correlationId" %}
 {% api-method-summary %}
 Get a Specific Profile by ID and Type

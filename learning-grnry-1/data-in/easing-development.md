@@ -24,7 +24,6 @@ SnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)
 
 JsonSlurper jsonSlurper = new JsonSlurper()
 
-// handle POST body
 if (snowplowEvent.getBody()){
     def actualPayload =  jsonSlurper.parseText(snowplowEvent.getBody())
     if (actualPayload?.data && actualPayload?.data[0]) {
@@ -34,18 +33,18 @@ if (snowplowEvent.getBody()){
         }
     }
 }
-
-// handle GET parameters
 else if (snowplowEvent.getQuerystring()) {
-    def data = URLDecoder.decode(snowplowEvent.getQuerystring(), StandardCharsets.UTF_8.name())
+    def data = snowplowEvent.getQuerystring()
             .split('&')
             .inject([:]) { map, token ->
                 token.split('=').with {
-                    if(map.containsKey(it[0])) {
-                        map[it[0]] = ([] + map[it[0]] ?: [map[it[0]]])
-                        map[it[0]].add(it[1])
+                    def key = URLDecoder.decode(it[0], StandardCharsets.UTF_8.name())
+                    def value = URLDecoder.decode(it[1], StandardCharsets.UTF_8.name())
+                    if(map.containsKey(key)) {
+                        map[key] = ([] + map[key] ?: [map[key]])
+                        map[key].add(value)
                     }
-                    else map[it[0]] = it[1]
+                    else map[key] = value
                 }
                 map
             }
@@ -60,7 +59,7 @@ return null
 And we want to convert it to a string, such as this one:
 
 ```groovy
-import groovy.json.JsonSlurper\r\nimport groovy.json.JsonOutput\r\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe\r\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload\r\n\r\nimport java.nio.charset.StandardCharsets\r\n\r\nSnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)\r\n\r\nJsonSlurper jsonSlurper = new JsonSlurper()\r\n\r\nif (snowplowEvent.getBody()){\r\n    def actualPayload =  jsonSlurper.parseText(snowplowEvent.getBody())\r\n    if (actualPayload?.data && actualPayload?.data[0]) {\r\n        def data = actualPayload.data[0]\r\n        if (data?.filterCriteria && data.filterCriteria.equalsIgnoreCase(\"a\")) {\r\n            return JsonOutput.toJson(snowplowEvent)\r\n        }\r\n    }\r\n}\r\nelse if (snowplowEvent.getQuerystring()) {\r\n    def data = URLDecoder.decode(snowplowEvent.getQuerystring(), StandardCharsets.UTF_8.name())\r\n            .split('&')\r\n            .inject([:]) { map, token ->\r\n                token.split('=').with {\r\n                    if(map.containsKey(it[0])) {\r\n                        map[it[0]] = ([] + map[it[0]] ?: [map[it[0]]])\r\n                        map[it[0]].add(it[1])\r\n                    }\r\n                    else map[it[0]] = it[1]\r\n                }\r\n                map\r\n            }\r\n    if (data?.filterCriteria && data.filterCriteria.equalsIgnoreCase(\"a\")) {\r\n        snowplowEvent.setBody(JsonOutput.toJson([data:[data]]))\r\n        return JsonOutput.toJson(snowplowEvent)\r\n    }\r\n}\r\nreturn null
+import groovy.json.JsonSlurper\\r\\nimport groovy.json.JsonOutput\\r\\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe\\r\\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload\\r\\n\\r\\nimport java.nio.charset.StandardCharsets\\r\\n\\r\\nSnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)\\r\\n\\r\\nJsonSlurper jsonSlurper = new JsonSlurper()\\r\\n\\r\\nif (snowplowEvent.getBody()){\\r\\n    def actualPayload =  jsonSlurper.parseText(snowplowEvent.getBody())\\r\\n    if (actualPayload?.data && actualPayload?.data[0]) {\\r\\n        def data = actualPayload.data[0]\\r\\n        if (data?.filterCriteria && data.filterCriteria.equalsIgnoreCase(\\\"a\\\")) {\\r\\n            return JsonOutput.toJson(snowplowEvent)\\r\\n        }\\r\\n    }\\r\\n}\\r\\nelse if (snowplowEvent.getQuerystring()) {\\r\\n    def data = snowplowEvent.getQuerystring()\\r\\n            .split('&')\\r\\n            .inject([:]) { map, token ->\\r\\n                token.split('=').with {\\r\\n                    def key = URLDecoder.decode(it[0], StandardCharsets.UTF_8.name())\\r\\n                    def value = URLDecoder.decode(it[1], StandardCharsets.UTF_8.name())\\r\\n                    if(map.containsKey(key)) {\\r\\n                        map[key] = ([] + map[key] ?: [map[key]])\\r\\n                        map[key].add(value)\\r\\n                    }\\r\\n                    else map[key] = value\\r\\n                }\\r\\n                map\\r\\n            }\\r\\n    if (data?.filterCriteria && data.filterCriteria.equalsIgnoreCase(\\\"a\\\")) {\\r\\n        snowplowEvent.setBody(JsonOutput.toJson([data:[data]]))\\r\\n        return JsonOutput.toJson(snowplowEvent)\\r\\n    }\\r\\n}\\r\\nreturn null
 ```
 
 In order to achieve this with windows, start PowerShell and navigate to the specific resource. Afterwards, you may execute the following command.
