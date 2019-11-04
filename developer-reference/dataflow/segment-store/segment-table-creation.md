@@ -47,6 +47,55 @@ There are parameters to define **indexes** on the resulting segment.
 | `TARGET_SEGMENT_INDEX_SEPARATOR` | separator between index definitions | \| |
 | `TARGET_SEGMENT_INDEXES` | defines index name and expression. must be in format `<name>=<index expression>.`for example `segidx1=(event_id)` or `segidx2= USING gin (body_json, headers)` | \`\` |
 
+### Segment Views
+
+There are parameters to define **views** on the resulting segment. [See readme](https://gitlab.alvary.io/grnry/segment-table-creation/#views). These views can be used to enforce access regulations. Consider profiles with an `/isLocked` grain set to `true` or `false`  as an example. Then, a segment on such profile can contain that grain, which is further used define two complementary views -- one containing _unlocked_ profiles and a second containing _locked_ profiles. 
+
+For this example, the respective configuration could look as follows:
+
+`PIVOT_PATHS: "/pathA,/pathB,/pathC,/isLocked"  
+PIVOT_TRANSFORMATIONS: "/isLocked= ?#>>'{}'::text"  
+TARGET_SEGMENT_VIEWS: "locked:\"/isLocked\" = 'true',unlocked:\"/isLocked\" = 'false'"`
+
+Detailed configuration 
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Parameter</th>
+      <th style="text-align:left">Description</th>
+      <th style="text-align:left">Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>TARGET_SEGMENT_VIEW_SEPARATOR</code>
+      </td>
+      <td style="text-align:left">Separator between view definitions</td>
+      <td style="text-align:left"><code>,</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>TARGET_SEGMENT_VIEW_DEFINITION_SEPARATOR</code>
+      </td>
+      <td style="text-align:left">Separator between view <em>name </em>and view <em>condition</em>
+      </td>
+      <td style="text-align:left"><code>:</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>TARGET_SEGMENT_VIEWS</code>
+      </td>
+      <td style="text-align:left">
+        <p><code>TARGET_SEGMENT_VIEW_SEPARATOR </code>separated list auf views.</p>
+        <p>Definition of a view: <em>name definition-separator condition</em>
+        </p>
+      </td>
+      <td style="text-align:left">-</td>
+    </tr>
+  </tbody>
+</table>One can now set access to the resulting views, containing either unlocked or locked profiles, via Granary's [IAM control](../../../operator-reference/identity-and-access-management.md).
+
 ### Generic Generator
 
 The generic generator creates a filtered projection from the source table. Data is selected using the specified where clause.
