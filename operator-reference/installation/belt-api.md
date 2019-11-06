@@ -4,7 +4,7 @@
 
 {% hint style="info" %}
 See for full documentation of all parameters:  
-[https://gitlab.alvary.io/grnry/belt-api/tree/master/helm](https://gitlab.alvary.io/grnry/eventstore-api/tree/master/helm)
+[https://gitlab.alvary.io/grnry/belt-api/tree/master/helm](https://gitlab.alvary.io/grnry/belt-api/tree/master/helm)
 {% endhint %}
 
 ## Setup
