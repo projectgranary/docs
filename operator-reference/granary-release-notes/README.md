@@ -115,7 +115,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/profile-store-api.md">Profile Store API</a>
       </td>
-      <td style="text-align:left"><b>0.5.2</b>
+      <td style="text-align:left"><b>0.5.3</b>
       </td>
       <td style="text-align:left">Zipkin tracing configurable via Helm.</td>
     </tr>
