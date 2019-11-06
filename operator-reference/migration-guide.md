@@ -4,29 +4,19 @@ description: Explanation of data migration strategies between Granary platform v
 
 # Migration guide
 
-## Upgrade from Granary 0.5 "Amy" to Granary 0.6 "Freddie"
+## Upgrade from Granary 0.6 "Freddie" to Granary 0.7 "Kurt"
 
-To allow a seamless upgrade, only two SQL alter table statements are needed for Belt API.
+To allow a seamless upgrade, only one SQL update on "public.belts" table  are needed for Belt API.
 
-### Alter table "public.belts"
-
-```text
-ALTER TABLE public.belts ADD COLUMN IF NOT EXISTS kafka_destination_topic VARCHAR (255) NOT NULL DEFAULT 'profile-update';
-```
-
-### Alter table "public.belts\_log"
+### Update "public.belts" 
 
 ```text
-ALTER TABLE public.belts_log ADD COLUMN IF NOT EXISTS kafka_destination_topic VARCHAR (255) NOT NULL DEFAULT 'profile-update';
+UPDATE public.belts SET extractor_version = 'latest' where extractor_version ='';
 ```
-
-### Install Zipkin Server
-
-Zipkin Server is the only new component in Granary 0.6. Install it as described in [Install Zipkin](installation/zipkin.md).
 
 ### Update Granary Components
 
-Update all remaining Granary components to their Granary 0.6 version as denoted in the [release notes](granary-release-notes/). Bolt version indicate an update.
+Update all remaining Granary components to their Granary 0.7 version as denoted in the [release notes](granary-release-notes/). Bolt version indicate an update.
 
 **That's it.**
 

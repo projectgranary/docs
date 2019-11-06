@@ -45,7 +45,7 @@ Array of belt states. For possible values, see table at GET belt state definitio
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="pagesize" type="string" required=false %}
-Number of belts to be returned. Default is 20.
+Number of belts to be returned. Default is 20. Maximum is 250.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="string" required=false %}
@@ -370,7 +370,13 @@ Create and Store a Belt
 {% api-method-description %}
 Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned.   
   
-In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.
+In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.  
+  
+**JSON Schema Definitions**  
+  
+Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html  
+  
+Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/Volume.html  
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -383,19 +389,19 @@ Authentication token
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="kafkaDestinationTopic" type="string" required=false %}
-Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic.
+Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either `profile-update` or server env variable `BELT_DESTINATION_TOPIC`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extraEnv" type="object" required=false %}
-Additional environment variables for Kubernetes belt deployment.
+Additional environment variables for Kubernetes belt deployment. Defaults to either `null` or server env variable `BELT_EXTRA_ENV`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="volumeMounts" type="object" required=false %}
-Kubernetes volume mount definition for belt deployment.
+JSON Kubernetes volume mount definition for belt deployment. Defaults to either `null` or server env variable `BELT_VOLUME_MOUNTS`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="volumes" type="object" required=false %}
-Kubernetes volume definition for belt deployment.
+JSON Kubernetes volume definition for belt deployment. Defaults to either `null` or server env variable `BELT_VOLUMES`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="requirementsPy" type="string" required=false %}
@@ -403,7 +409,7 @@ PIP package requirements for belt. E.g. `package1==0.1.0\r\npackage2`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="profileType" type="string" required=false %}
-Profile type to fetch. Defaults to `_d`. Only used if \``fetchProfile` is set to true
+Profile type to fetch. Defaults to `_d`. **Required when fetchProfile is `TRUE`.**
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="partitionOffsets" type="object" required=false %}
@@ -411,7 +417,7 @@ Mapping from input topics to respective start offsets which are provided as an a
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorVersion" type="string" required=false %}
-Image tag of the belt runtime docker image to be used. Defaults to `latest`
+Image tag of the belt runtime docker image to be used. Defaults to either `latest` or server env variable `BELT_EXTRACTOR_VERSION`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="name" type="string" required=true %}
@@ -431,11 +437,11 @@ String array of event types to be processed.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="millicpu" type="string" required=false %}
-Deployment specification for this belt. Defaults to "`200` 
+Deployment specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memory" type="string" required=false %}
-Deployment specification for this belt. Defaults to  `512`
+Deployment specification for this belt. Defaults either to `512` or server env variable `BELT_MEMORY`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="author" type="string" required=false %}
@@ -447,7 +453,8 @@ String array containing Keycloak roles given permission to edit this belt. Defau
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorFn" type="string" required=false %}
-Extractor function to be executed by this belt.
+Extractor function to be executed by this belt.  
+Defaults either to `Hello World` example function or server env variable `BELT_EXTRACTOR_FN`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="viewer" type="array" required=false %}
@@ -524,34 +531,9 @@ Returns a full dump of belt object created.
      "secretUsername": "",
      "secretPassword": "",
      "status": "STOPPED",
-     "volumes": [
-       {
-          "name": "config-vol",
-          "configMap": {
-            "items": [
-              {
-                 "path": "data",
-                 "key": "data"
-              }
-            ],
-            "name": "grnry-belt-client"
-          }
-       }
-     ],
-     "volumeMounts": [
-       {
-          "mountPath": "/etc/client",
-          "name": "config-vol",
-          "readOnly": true,
-          "subPath": ""
-       }
-     ],
-     "extraEnv":  [
-       {
-          "name": "FOO",
-          "value": "bar"
-       }
-     ],
+     "volumes": "{\"volumes\": [{\"name\": \"test\", \"configMap\": {\"name\": \"log-config\", \"items\": [{\"key\": \"log_level\", \"path\": \"log_level\"}]}}]}",
+     "volumeMounts": "{\"volumeMounts\": [{\"name\": \"test\", \"subPath\": \"\", \"readOnly\": true, \"mountPath\": \"/etc/test\", \"secretName\": \"test-certs\"}]}",
+     "extraEnv":  "{\"extraEnv\": [{\"name\": \"FOO\", \"value\": \"bar\"}]}",
      "id": "161"
 }
 ```
