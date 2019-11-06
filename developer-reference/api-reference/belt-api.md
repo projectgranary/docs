@@ -45,11 +45,11 @@ Array of belt states. For possible values, see table at GET belt state definitio
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="pagesize" type="string" required=false %}
-Number of belts to be returned. Default is 20. Maximum is 250.
+Number of belts to be returned. Default is `20`. Maximum is `250`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="string" required=false %}
-Start offset. Default is 0.
+Start offset. Default is `0`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
