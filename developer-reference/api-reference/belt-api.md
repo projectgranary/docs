@@ -45,7 +45,7 @@ Array of belt states. For possible values, see table at GET belt state definitio
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="pagesize" type="string" required=false %}
-Number of belts to be returned. Default is 20.
+Number of belts to be returned. Default is 20. Maxium is 250.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="string" required=false %}
@@ -431,7 +431,7 @@ String array of event types to be processed.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="millicpu" type="string" required=false %}
-Deployment specification for this belt. Defaults to "`200` 
+Deployment specification for this belt. Defaults to `200` 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memory" type="string" required=false %}
