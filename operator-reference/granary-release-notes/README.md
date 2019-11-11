@@ -18,7 +18,182 @@ description: Denotes release versions of Granary artifacts.
   * e.g. `1.3.2` 
 * Component release versions can differ from Granary Platform on `major`, `minor`, and `patch` level.
 
-## Granary 0.6 "Freddie" - 2019-10-02
+
+
+## Granary 0.6.1 "Freddie" - 2019-11-11
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Granary Component</th>
+      <th style="text-align:left">Release Version</th>
+      <th style="text-align:left">Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/ambassador">Ambassador</a>
+      </td>
+      <td style="text-align:left">0.40.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
+      </td>
+      <td style="text-align:left">0.5.0 (based on Snowplow v0.15.0)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
+      </td>
+      <td style="text-align:left">0.5.8 (based on Server 2.2.0.RELEASE and Skipper 2.0.3.RELEASE)</td>
+      <td
+      style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
+      <td style="text-align:left">0.6.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/event-store-api.md">Event Store API</a>
+      </td>
+      <td style="text-align:left">0.5.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/event-feeder.md">Event Feeder</a>
+      </td>
+      <td style="text-align:left">0.5.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/untitled.md">Belt Extractor</a>
+      </td>
+      <td style="text-align:left"><b>0.6.3</b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Prometheus Monitoring added.</li>
+          <li>Python PIP packages can be downloaded behind proxy or from custom repository
+            url.</li>
+          <li>Zipkin Tracing added.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/belt-api.md">Belt API</a>
+      </td>
+      <td style="text-align:left"><b>0.6.3</b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Support for Belt Extractor&apos;s Prometheus Monitoring feature.</li>
+          <li>Support for Belt Extractor&apos;s Python PIP packages proxy / repository
+            feature.</li>
+          <li>Support for default values for all Belt Extractor configuration that does
+            not change throughout one environment.</li>
+          <li>DELETE /belts/{id} endpoint also deletes related Kubernetes resources.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/profile-updater.md">Profile Updater</a>
+      </td>
+      <td style="text-align:left">0.5.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/profile-store-api.md">Profile Store API</a>
+      </td>
+      <td style="text-align:left">0.5.3</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
+      </td>
+      <td style="text-align:left">0.5.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/segment-store-api.md">Segment Store API</a>
+      </td>
+      <td style="text-align:left">0.4.7 (based on Presto 0.315)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/graphql-api.md">GraphQL API</a>
+      </td>
+      <td style="text-align:left"><b>0.5.1</b>
+      </td>
+      <td style="text-align:left">
+        <p>&lt;b&gt;&lt;/b&gt;</p>
+        <ul>
+          <li>Edit state is persisted.</li>
+          <li>Belt Managment View enhanced by Deployment and Profile Fetch configuration
+            fields.</li>
+          <li>Various design updates.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/granary-ui.md">Granary UI</a>
+      </td>
+      <td style="text-align:left"><b>0.5.0</b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Edit state is persisted.</li>
+          <li>Belt Managment View enhanced by Deployment and Profile Fetch configuration
+            fields.</li>
+          <li>Various design updates.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/citus-postgresql.md">Citus PostgreSQL</a>
+      </td>
+      <td style="text-align:left">8.1.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Kafka</a>
+      </td>
+      <td style="text-align:left">5.1.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Zookeeper</a>
+      </td>
+      <td style="text-align:left">5.1.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/kafka-manager.md">Kafka Manager</a>
+      </td>
+      <td style="text-align:left">0.4.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
+      </td>
+      <td style="text-align:left">4.5.0.Final</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
+      </td>
+      <td style="text-align:left">6.0.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/zipkin.md"><b>Zipkin Server</b></a>
+      </td>
+      <td style="text-align:left">0.6.0 (based on Open Zipkin 2.12)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+  </tbody>
+</table>## Granary 0.6 "Freddie" - 2019-10-02
 
 <table>
   <thead>
