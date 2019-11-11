@@ -131,7 +131,7 @@ description: Denotes release versions of Granary artifacts.
         <ul>
           <li>Edit state is persisted.</li>
           <li>Belt Managment View enhanced by Deployment and Profile Fetch configuration
-            fields.</li>
+            fields</li>
           <li>Various design updates.</li>
         </ul>
       </td>
@@ -145,7 +145,7 @@ description: Denotes release versions of Granary artifacts.
         <ul>
           <li>Edit state is persisted.</li>
           <li>Belt Managment View enhanced by Deployment and Profile Fetch configuration
-            fields.</li>
+            fields</li>
           <li>Various design updates.</li>
         </ul>
       </td>
