@@ -61,171 +61,7 @@ A list of all belts along with their attributes and total count of belts stored 
 {% endapi-method-response-example-description %}
 
 ```
-{
-    "totalCount": 502,
-    "_links": {
-        "next": {
-            "href": "https://development.lce.grnry.io/belts?offset=2&pagesize=2&expand="
-        },
-        "self": {
-            "href": "https://development.lce.grnry.io/belts?offset=0&pagesize=2&expand="
-        }
-    },
-    "items": [
-        {
-            "version": "1",
-            "name": "kube_test_4",
-            "kubernetesName": "grnry-belt-kube-test-4",
-            "description": "",
-            "labels": [
-                "a"
-            ],
-            "affectedPaths": [],
-            "replicas": 1,
-            "millicpu": 200,
-            "memory": 512,
-            "author": "",
-            "reader": [
-                "_auth"
-            ],
-            "editor": [
-                "belt_edit"
-            ],
-            "viewer": [
-                "belt_view"
-            ],
-            "created": 1561974412801,
-            "assumedRole": "",
-            "requirementsPy": "",
-            "extractorVersion": "feature-scrum-229-metadata-header",
-            "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(event, profile=None):\r\n    print(profile)\r\n    update = Update(profile['correlationId'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n    update.set_type('TestProfileType')\r\n    return [update]\r\n",
-            "eventTypes": [
-                "test-a",
-                "test-b"
-            ],
-            "partitionOffsets": {
-                "grnry_data_in_test-a": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                "grnry_data_in_test-b": [
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ]
-            },
-            "kafkaDestinationTopic": "profile-update",
-            "beltType": "",
-            "runtime": "",
-            "parameter": "",
-            "debug": true,
-            "fetchProfile": true,
-            "profileType": "_d",
-            "secret": "belt-api-tester",
-            "secretUsername": "username",
-            "secretPassword": "password",
-            "status": "RUNNING",
-            "_links": {
-                "self": {
-                    "href": "https://api.grnry.io/belts/1011"
-                }
-            },
-            "id": "1011"
-        },
-        {
-            "version": "1",
-            "name": "kube_test_7",
-            "kubernetesName": "grnry-belt-kube-test-7",
-            "description": "kube_description",
-            "labels": [],
-            "affectedPaths": [],
-            "replicas": 1,
-            "millicpu": 54,
-            "memory": 1023,
-            "author": "author@grnry.com",
-            "reader": [
-                "_auth"
-            ],
-            "editor": [
-                "belt_edit"
-            ],
-            "viewer": [
-                "belt_view"
-            ],
-            "created": 1561978858485,
-            "assumedRole": "",
-            "requirementsPy": "requirement==0.1.0",
-            "extractorVersion": "latest",
-            "extractorFn": "print('hallo welt')",
-            "eventTypes": [
-                "eventType1",
-                "eventType2",
-                "eventType3"
-            ],
-            "partitionOffsets": {},
-            "kafkaDestinationTopic": "profile-update",
-            "beltType": "customScript",
-            "runtime": "Python",
-            "parameter": "{mapper:[{\"beltId\",\"ida\"}]}",
-            "debug": true,
-            "fetchProfile": true,
-            "profileType": "_d",
-            "secret": "secret",
-            "secretUsername": "secretUsername",
-            "secretPassword": "secretPassword",
-            "status": "STOPPED",
-            "_links": {
-                "self": {
-                    "href": "https://api..grnry.io/belts/1022"
-                }
-            },
-            "id": "1022"
-        }
-    ]
-}
+{    "totalCount": 502,    "_links": {        "next": {            "href": "https://development.lce.grnry.io/belts?offset=2&pagesize=2&expand="        },        "self": {            "href": "https://development.lce.grnry.io/belts?offset=0&pagesize=2&expand="        }    },    "items": [        {            "version": "1",            "name": "kube_test_4",            "kubernetesName": "grnry-belt-kube-test-4",            "description": "",            "labels": [                "a"            ],            "affectedPaths": [],            "replicas": 1,            "millicpu": 200,            "memory": 512,            "author": "",            "reader": [                "_auth"            ],            "editor": [                "belt_edit"            ],            "viewer": [                "belt_view"            ],            "created": 1561974412801,            "assumedRole": "",            "requirementsPy": "",            "extractorVersion": "feature-scrum-229-metadata-header",            "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(event, profile=None):\r\n    print(profile)\r\n    update = Update(profile['correlationId'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n    update.set_type('TestProfileType')\r\n    return [update]\r\n",            "eventTypes": [                "test-a",                "test-b"            ],            "partitionOffsets": {                "grnry_data_in_test-a": [                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0                ],                "grnry_data_in_test-b": [                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0,                    0                ]            },            "kafkaDestinationTopic": "profile-update",            "beltType": "",            "runtime": "",            "parameter": "",            "debug": true,            "fetchProfile": true,            "profileType": "_d",            "secret": "belt-api-tester",            "secretUsername": "username",            "secretPassword": "password",            "status": "RUNNING",            "_links": {                "self": {                    "href": "https://api.grnry.io/belts/1011"                }            },            "id": "1011"        },        {            "version": "1",            "name": "kube_test_7",            "kubernetesName": "grnry-belt-kube-test-7",            "description": "kube_description",            "labels": [],            "affectedPaths": [],            "replicas": 1,            "millicpu": 54,            "memory": 1023,            "author": "author@grnry.com",            "reader": [                "_auth"            ],            "editor": [                "belt_edit"            ],            "viewer": [                "belt_view"            ],            "created": 1561978858485,            "assumedRole": "",            "requirementsPy": "requirement==0.1.0",            "extractorVersion": "latest",            "extractorFn": "print('hallo welt')",            "eventTypes": [                "eventType1",                "eventType2",                "eventType3"            ],            "partitionOffsets": {},            "kafkaDestinationTopic": "profile-update",            "beltType": "customScript",            "runtime": "Python",            "parameter": "{mapper:[{\"beltId\",\"ida\"}]}",            "debug": true,            "fetchProfile": true,            "profileType": "_d",            "secret": "secret",            "secretUsername": "secretUsername",            "secretPassword": "secretPassword",            "status": "STOPPED",            "_links": {                "self": {                    "href": "https://api..grnry.io/belts/1022"                }            },            "id": "1022"        }    ]}
 ```
 {% endapi-method-response-example %}
 
@@ -285,57 +121,7 @@ JSON with attributes of belt with the specified ID.
 {% endapi-method-response-example-description %}
 
 ```
-{
-     "version": "1",
-     "name": "hello-belt",
-     "kubernetesName": "grnry-belt-hello-belt",
-     "description": "Hello Belt Belt",
-     "labels": [],
-     "affectedPaths": [],
-     "replicas": 1,
-     "millicpu": 200,
-     "memory": 512,
-     "author": "User",
-     "reader": [
-       "\"_auth\""
-     ],
-     "editor": [
-       "belt_edit"
-     ],
-     "viewer": [
-       "belt_view"
-     ],
-     "created": 1562744768164,
-     "assumedRole": "",
-     "requirementsPy": "package1==0.0.0\r\npackage2",
-     "extractorVersion": "0.5.0",
-     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
-     "eventTypes": [
-       "test-a",
-       "test-b"
-     ],
-     "partitionOffsets": {},
-     "kafkaDestinationTopic": "profile-update",
-     "beltType": "",
-     "runtime": "",
-     "parameter": "",
-     "debug": false,
-     "fetchProfile": "FALSE",
-     "profileType": "test-type",
-     "secret": "",
-     "secretUsername": "",
-     "secretPassword": "",
-     "status": "STOPPED",
-     "volumes": null,
-     "volumeMounts": null,
-     "extraEnv": null,
-     "id": "161",
-     "_links": {
-        "self": {
-            "href": "https://api.grnry.io/belts/161"
-        }
-    }
-}
+{     "version": "1",     "name": "hello-belt",     "kubernetesName": "grnry-belt-hello-belt",     "description": "Hello Belt Belt",     "labels": [],     "affectedPaths": [],     "replicas": 1,     "millicpu": 200,     "memory": 512,     "author": "User",     "reader": [       "\"_auth\""     ],     "editor": [       "belt_edit"     ],     "viewer": [       "belt_view"     ],     "created": 1562744768164,     "assumedRole": "",     "requirementsPy": "package1==0.0.0\r\npackage2",     "extractorVersion": "0.5.0",     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",     "eventTypes": [       "test-a",       "test-b"     ],     "partitionOffsets": {},     "kafkaDestinationTopic": "profile-update",     "beltType": "",     "runtime": "",     "parameter": "",     "debug": false,     "fetchProfile": "FALSE",     "profileType": "test-type",     "secret": "",     "secretUsername": "",     "secretPassword": "",     "status": "STOPPED",     "volumes": null,     "volumeMounts": null,     "extraEnv": null,     "id": "161",     "_links": {        "self": {            "href": "https://api.grnry.io/belts/161"        }    }}
 ```
 {% endapi-method-response-example %}
 
@@ -370,7 +156,13 @@ Create and Store a Belt
 {% api-method-description %}
 Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned.   
   
-In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.
+In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.  
+  
+**JSON Schema Definitions**  
+  
+Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html  
+  
+Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/Volume.html  
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -383,19 +175,19 @@ Authentication token
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="kafkaDestinationTopic" type="string" required=false %}
-Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic.
+Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either `profile-update` or server env variable `BELT_DESTINATION_TOPIC`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extraEnv" type="object" required=false %}
-Additional environment variables for Kubernetes belt deployment.
+Additional environment variables for Kubernetes belt deployment. Defaults to either `null` or server env variable `BELT_EXTRA_ENV`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="volumeMounts" type="object" required=false %}
-Kubernetes volume mount definition for belt deployment.
+JSON Kubernetes volume mount definition for belt deployment. Defaults to either `null` or server env variable `BELT_VOLUME_MOUNTS`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="volumes" type="object" required=false %}
-Kubernetes volume definition for belt deployment.
+JSON Kubernetes volume definition for belt deployment. Defaults to either `null` or server env variable `BELT_VOLUMES`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="requirementsPy" type="string" required=false %}
@@ -403,7 +195,7 @@ PIP package requirements for belt. E.g. `package1==0.1.0\r\npackage2`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="profileType" type="string" required=false %}
-Profile type to fetch. Defaults to `_d`. Only used if \``fetchProfile` is set to true
+Profile type to fetch. Defaults to `_d`. **Required when fetchProfile is `TRUE`.**
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="partitionOffsets" type="object" required=false %}
@@ -411,7 +203,7 @@ Mapping from input topics to respective start offsets which are provided as an a
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorVersion" type="string" required=false %}
-Image tag of the belt runtime docker image to be used. Defaults to `latest`
+Image tag of the belt runtime docker image to be used. Defaults to either `latest` or server env variable `BELT_EXTRACTOR_VERSION`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="name" type="string" required=true %}
@@ -423,7 +215,7 @@ Belt description.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="replicas" type="integer" required=false %}
-Number of replicas. Defaults to `1`
+Number of replicas. Defaults to `1`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="eventTypes" type="array" required=false %}
@@ -431,11 +223,11 @@ String array of event types to be processed.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="millicpu" type="string" required=false %}
-Deployment specification for this belt. Defaults to `200` 
+Deployment specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU`. 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memory" type="string" required=false %}
-Deployment specification for this belt. Defaults to  `512`
+Deployment specification for this belt. Defaults either to `512` or server env variable `BELT_MEMORY`. 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="author" type="string" required=false %}
@@ -443,11 +235,11 @@ Author of this belt.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="editor" type="array" required=false %}
-String array containing Keycloak roles given permission to edit this belt. Default to `["belt_edit"]`
+String array containing Keycloak roles given permission to edit this belt. Default to `["belt_edit"]`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="extractorFn" type="string" required=false %}
-Extractor function to be executed by this belt.
+Extractor function to be executed by this belt. Defaults either to `Hello World` example function or server env variable `BELT_EXTRACTOR_FN`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="viewer" type="array" required=false %}
@@ -483,77 +275,7 @@ Returns a full dump of belt object created.
 {% endapi-method-response-example-description %}
 
 ```
-{
-     "version": "1",
-     "name": "hello-belt",
-     "kubernetesName": "grnry-belt-hello-belt",
-     "description": "Hello Belt Belt",
-     "labels": [],
-     "affectedPaths": [],
-     "replicas": 1,
-     "millicpu": 200,
-     "memory": 512,
-     "author": "User",
-     "reader": [
-       "\"_auth\""
-     ],
-     "editor": [
-       "belt_edit"
-     ],
-     "viewer": [
-       "belt_view"
-     ],
-     "created": 1562744768164,
-     "assumedRole": "",
-     "requirementsPy": "package1==0.0.0\r\npackage2",
-     "extractorVersion": "0.5.0",
-     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
-     "eventTypes": [
-       "test-a",
-       "test-b"
-     ],
-     "partitionOffsets": {},
-     "kafkaDestinationTopic": "profile-update",
-     "beltType": "",
-     "runtime": "",
-     "parameter": "",
-     "debug": false,
-     "fetchProfile": "FALSE",
-     "profileType": "test-type",
-     "secret": "",
-     "secretUsername": "",
-     "secretPassword": "",
-     "status": "STOPPED",
-     "volumes": [
-       {
-          "name": "config-vol",
-          "configMap": {
-            "items": [
-              {
-                 "path": "data",
-                 "key": "data"
-              }
-            ],
-            "name": "grnry-belt-client"
-          }
-       }
-     ],
-     "volumeMounts": [
-       {
-          "mountPath": "/etc/client",
-          "name": "config-vol",
-          "readOnly": true,
-          "subPath": ""
-       }
-     ],
-     "extraEnv":  [
-       {
-          "name": "FOO",
-          "value": "bar"
-       }
-     ],
-     "id": "161"
-}
+{     "version": "1",     "name": "hello-belt",     "kubernetesName": "grnry-belt-hello-belt",     "description": "Hello Belt Belt",     "labels": [],     "affectedPaths": [],     "replicas": 1,     "millicpu": 200,     "memory": 512,     "author": "User",     "reader": [       "\"_auth\""     ],     "editor": [       "belt_edit"     ],     "viewer": [       "belt_view"     ],     "created": 1562744768164,     "assumedRole": "",     "requirementsPy": "package1==0.0.0\r\npackage2",     "extractorVersion": "0.5.0",     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",     "eventTypes": [       "test-a",       "test-b"     ],     "partitionOffsets": {},     "kafkaDestinationTopic": "profile-update",     "beltType": "",     "runtime": "",     "parameter": "",     "debug": false,     "fetchProfile": "FALSE",     "profileType": "test-type",     "secret": "",     "secretUsername": "",     "secretPassword": "",     "status": "STOPPED",     "volumes": [       {          "name": "config-vol",          "configMap": {            "items": [              {                 "path": "data",                 "key": "data"              }            ],            "name": "grnry-belt-client"          }       }     ],     "volumeMounts": [       {          "mountPath": "/etc/client",          "name": "config-vol",          "readOnly": true,          "subPath": ""       }     ],     "extraEnv":  [       {          "name": "FOO",          "value": "bar"       }     ],     "id": "161"}
 ```
 {% endapi-method-response-example %}
 
@@ -563,11 +285,7 @@ If a belt with a given name exists already in the Belt Store.
 {% endapi-method-response-example-description %}
 
 ```
-{
-    "timestamp": "2019-05-06T09:54:54.074+0000",
-    "message": "test-post-24 : test-post-24 exists already",
-    "details": "uri=/belts"
-}
+{    "timestamp": "2019-05-06T09:54:54.074+0000",    "message": "test-post-24 : test-post-24 exists already",    "details": "uri=/belts"}
 ```
 {% endapi-method-response-example %}
 
@@ -590,7 +308,9 @@ Delete a Specific Belt
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes a specific belt given the ID.  
+Deletes a specific belt given the ID.   
+  
+Deletes the belt definition in the database and all corresponding kubernetes resources if the belt is deployed.  
   
 In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.
 {% endapi-method-description %}
@@ -617,15 +337,7 @@ If delete is successful, content=true. content=false when unsuccessful
 {% endapi-method-response-example-description %}
 
 ```
-{
-    "content": true
-}
-
-or 
-
-{
-    "content": false
-}
+{    "content": true}or {    "content": false}
 ```
 {% endapi-method-response-example %}
 
@@ -702,52 +414,7 @@ A full dump of belt object recently modified
 {% endapi-method-response-example-description %}
 
 ```
-{
-     "version": "2",
-     "name": "hello-belt",
-     "kubernetesName": "grnry-belt-hello-belt",
-     "description": "Hello Belt Belt",
-     "labels": [],
-     "affectedPaths": [],
-     "replicas": 1,
-     "millicpu": 200,
-     "memory": 512,
-     "author": "User",
-     "reader": [
-       "\"_auth\""
-     ],
-     "editor": [
-       "belt_edit"
-     ],
-     "viewer": [
-       "belt_view"
-     ],
-     "created": 1562744768164,
-     "assumedRole": "",
-     "requirementsPy": "package1==0.0.0\r\npackage2",
-     "extractorVersion": "0.5.0",
-     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
-     "eventTypes": [
-       "test-a",
-       "test-b"
-     ],
-     "partitionOffsets": {},
-     "kafkaDestinationTopic": "profile-update",
-     "beltType": "",
-     "runtime": "",
-     "parameter": "",
-     "debug": false,
-     "fetchProfile": "FALSE",
-     "profileType": "test-type",
-     "secret": "",
-     "secretUsername": "",
-     "secretPassword": "",
-     "status": "STOPPED",
-     "volumes": null,
-     "volumeMounts": null,
-     "extraEnv": null,
-     "id": "161"
-}
+{     "version": "2",     "name": "hello-belt",     "kubernetesName": "grnry-belt-hello-belt",     "description": "Hello Belt Belt",     "labels": [],     "affectedPaths": [],     "replicas": 1,     "millicpu": 200,     "memory": 512,     "author": "User",     "reader": [       "\"_auth\""     ],     "editor": [       "belt_edit"     ],     "viewer": [       "belt_view"     ],     "created": 1562744768164,     "assumedRole": "",     "requirementsPy": "package1==0.0.0\r\npackage2",     "extractorVersion": "0.5.0",     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",     "eventTypes": [       "test-a",       "test-b"     ],     "partitionOffsets": {},     "kafkaDestinationTopic": "profile-update",     "beltType": "",     "runtime": "",     "parameter": "",     "debug": false,     "fetchProfile": "FALSE",     "profileType": "test-type",     "secret": "",     "secretUsername": "",     "secretPassword": "",     "status": "STOPPED",     "volumes": null,     "volumeMounts": null,     "extraEnv": null,     "id": "161"}
 ```
 {% endapi-method-response-example %}
 
@@ -805,81 +472,7 @@ Authentication token
 {% endapi-method-response-example-description %}
 
 ```javascript
-{
-    "status": "STOPPED"
-}
-
- or
-  
-{
-    "status": "FAILED",
-    "deploymentReplicas": "1",
-    "deploymentEvents": [
-        {
-            "lastTransitionTime": "2019-07-01T11:02:38Z",
-            "lastUpdateTime": "2019-07-01T11:02:38Z",
-            "message": "Deployment does not have minimum availability.",
-            "reason": "MinimumReplicasUnavailable",
-            "status": "False",
-            "type": "Available"
-        },
-        {
-            "lastTransitionTime": "2019-07-01T11:12:39Z",
-            "lastUpdateTime": "2019-07-01T11:12:39Z",
-            "message": "ReplicaSet \"grnry-belt-kube-test-5-54f5c68c89\" has timed out progressing.",
-            "reason": "ProgressDeadlineExceeded",
-            "status": "False",
-            "type": "Progressing"
-        }
-    ],
-    "podStatus": [
-        {
-            "name": "grnry-belt-kube-test-5-54f5c68c89-8xf9v",
-            "podEvents": [
-                {
-                    "lastTransitionTime": "2019-07-01T11:02:38Z",
-                    "status": "True",
-                    "type": "Initialized"
-                },
-                {
-                    "lastTransitionTime": "2019-07-01T11:02:38Z",
-                    "message": "containers with unready status: [grnry-belt-kube-test-5]",
-                    "reason": "ContainersNotReady",
-                    "status": "False",
-                    "type": "Ready"
-                },
-                {
-                    "lastTransitionTime": "2019-07-01T11:02:38Z",
-                    "message": "containers with unready status: [grnry-belt-kube-test-5]",
-                    "reason": "ContainersNotReady",
-                    "status": "False",
-                    "type": "ContainersReady"
-                },
-                {
-                    "lastTransitionTime": "2019-07-01T11:02:38Z",
-                    "status": "True",
-                    "type": "PodScheduled"
-                }
-            ],
-            "containerStatus": [
-                {
-                    "image": "gitlab.alvary.io:5000/grnry/belt-extractor:extractorVersion",
-                    "imageID": "",
-                    "lastState": {},
-                    "name": "grnry-belt-kube-test-5",
-                    "ready": false,
-                    "restartCount": 0,
-                    "state": {
-                        "waiting": {
-                            "message": "rpc error: code = Unknown desc = Error: image grnry/belt-extractor:extractorVersion not found",
-                            "reason": "ErrImagePull"
-                        }
-                    }
-                }
-            ]
-        }
-    ]
-}
+{    "status": "STOPPED"} or  {    "status": "FAILED",    "deploymentReplicas": "1",    "deploymentEvents": [        {            "lastTransitionTime": "2019-07-01T11:02:38Z",            "lastUpdateTime": "2019-07-01T11:02:38Z",            "message": "Deployment does not have minimum availability.",            "reason": "MinimumReplicasUnavailable",            "status": "False",            "type": "Available"        },        {            "lastTransitionTime": "2019-07-01T11:12:39Z",            "lastUpdateTime": "2019-07-01T11:12:39Z",            "message": "ReplicaSet \"grnry-belt-kube-test-5-54f5c68c89\" has timed out progressing.",            "reason": "ProgressDeadlineExceeded",            "status": "False",            "type": "Progressing"        }    ],    "podStatus": [        {            "name": "grnry-belt-kube-test-5-54f5c68c89-8xf9v",            "podEvents": [                {                    "lastTransitionTime": "2019-07-01T11:02:38Z",                    "status": "True",                    "type": "Initialized"                },                {                    "lastTransitionTime": "2019-07-01T11:02:38Z",                    "message": "containers with unready status: [grnry-belt-kube-test-5]",                    "reason": "ContainersNotReady",                    "status": "False",                    "type": "Ready"                },                {                    "lastTransitionTime": "2019-07-01T11:02:38Z",                    "message": "containers with unready status: [grnry-belt-kube-test-5]",                    "reason": "ContainersNotReady",                    "status": "False",                    "type": "ContainersReady"                },                {                    "lastTransitionTime": "2019-07-01T11:02:38Z",                    "status": "True",                    "type": "PodScheduled"                }            ],            "containerStatus": [                {                    "image": "gitlab.alvary.io:5000/grnry/belt-extractor:extractorVersion",                    "imageID": "",                    "lastState": {},                    "name": "grnry-belt-kube-test-5",                    "ready": false,                    "restartCount": 0,                    "state": {                        "waiting": {                            "message": "rpc error: code = Unknown desc = Error: image grnry/belt-extractor:extractorVersion not found",                            "reason": "ErrImagePull"                        }                    }                }            ]        }    ]}
 ```
 {% endapi-method-response-example %}
 
@@ -946,9 +539,7 @@ The action to be performed "START" or "STOP"
 {% endapi-method-response-example-description %}
 
 ```javascript
-{
-    "status": "DEPLOYING"
-}
+{    "status": "DEPLOYING"}
 ```
 {% endapi-method-response-example %}
 
