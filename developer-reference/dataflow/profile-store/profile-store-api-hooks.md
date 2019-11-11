@@ -64,8 +64,8 @@ Allows the implementation of Hooks which will be executed before the HTTP Respon
   </tbody>
 </table>### **Example Hook Implementation**
 
-{% code-tabs %}
-{% code-tabs-item title="DemoHook.java" %}
+{% tabs %}
+{% tab title="DemoHook.java" %}
 ```java
 package io.grnry.profilestore.hooks;
 
@@ -91,8 +91,8 @@ public class Demo implements Hook {
     }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 {% hint style="info" %}
 **Note:** Ensure that the hook is in the package **io.grnry.profilestore.hooks**. Otherwise the Hook Loader will not find the custom Hook.
@@ -102,8 +102,8 @@ public class Demo implements Hook {
 
 Ensure that the Hook is compiled as a fatJar containing its needed dependencies. 
 
-{% code-tabs %}
-{% code-tabs-item title="build.gradle" %}
+{% tabs %}
+{% tab title="build.gradle" %}
 ```groovy
 dependencies {
        compile project(':hooks-api')
@@ -122,8 +122,8 @@ dependencies {
        }
    }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 ## Deploying a custom Hook
 
