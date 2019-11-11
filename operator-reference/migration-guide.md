@@ -6,7 +6,7 @@ description: Explanation of data migration strategies between Granary platform v
 
 ## Upgrade from Granary 0.5 "Amy" to Granary 0.6 "Freddie"
 
-To allow a seamless upgrade, only two SQL alter table statements are needed for Belt API.
+To allow a seamless upgrade, only three SQL statements are needed for Belt API.
 
 ### Alter table "public.belts"
 
