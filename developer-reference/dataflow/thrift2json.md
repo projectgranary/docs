@@ -95,8 +95,6 @@ IMPORTANT!
 {% endtab %}
 
 {% tab title="Example" %}
-{% code-tabs %}
-{% code-tabs-item title=" id-extraction-rules.yaml " %}
 ```yaml
 body/data/0/duid:
   id:
@@ -124,8 +122,6 @@ body/vertragspartner:
     path: "body/origin"
     default: "allianz"
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 {% endtab %}
 {% endtabs %}
 
