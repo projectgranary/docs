@@ -14,6 +14,12 @@ To allow a seamless upgrade, only two SQL alter table statements are needed for 
 ALTER TABLE public.belts ADD COLUMN IF NOT EXISTS kafka_destination_topic VARCHAR (255) NOT NULL DEFAULT 'profile-update';
 ```
 
+### Update table "public.belts" 
+
+```text
+UPDATE public.belts SET extractor_version = 'latest' where extractor_version ='';
+```
+
 ### Alter table "public.belts\_log"
 
 ```text
