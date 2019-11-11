@@ -207,8 +207,12 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Snowplow GET Events not transformed correctly by Scriptable Transform</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/446">#446</a>
+        <td style="text-align:left">See<a href="../../learning-grnry-1/data-in/scriptable-transform-for-snowplow-events.md"> &quot;Get Data Into Granary&quot; / &quot;Scriptable Transform for Snowplow Events&quot;</a>
+        </td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/446">#446</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
@@ -237,8 +241,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Belts deployed by Belt API do not contain Prometheus Scrape annotations.</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/455">#455</a>
+        <td style="text-align:left">0.6.3</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/455">#455</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
@@ -247,8 +254,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">DELETE /belt/&lt;id&gt; only deletes belt on database but not on Kubernetes.</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/413">#413</a>
+        <td style="text-align:left">0.6.3</td>
+        <td style="text-align:left">
+          <p>&lt;del&gt;&lt;/del&gt;<a href="https://gitlab.alvary.io/grnry/scrum/issues/413">#413</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
