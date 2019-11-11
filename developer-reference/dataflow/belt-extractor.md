@@ -135,8 +135,6 @@ If unspecified, default values will be used:
 {% endtab %}
 
 {% tab title="Example" %}
-{% code-tabs %}
-{% code-tabs-item title="callback.py" %}
 ```python
 def execute(event):
     if event:
@@ -154,14 +152,10 @@ def execute(event):
             sys.stderr.write(sys.exc_info())
             return None
 ```
-{% endcode-tabs-item %}
 
-{% code-tabs-item title=undefined %}
 ```
 
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 {% endtab %}
 {% endtabs %}
 
