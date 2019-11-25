@@ -285,8 +285,7 @@ To achieve a scaling of Kafka Updater in case of a high number of pending messag
 
 Using following values file, the [prometheus-adapter helm chart](https://github.com/helm/charts/tree/master/stable/prometheus-adapter) can be installed to make the custom metric available within the custom metrics API.
 
-{% tabs %}
-{% tab title="values.yaml" %}
+{% code title="values.yaml" %}
 ```yaml
 [..]
 rules:
@@ -305,8 +304,7 @@ rules:
       metricsQuery: 'sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)'
 [..]
 ```
-{% endtab %}
-{% endtabs %}
+{% endcode %}
 
 <table>
   <thead>
