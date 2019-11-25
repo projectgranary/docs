@@ -80,6 +80,7 @@ IMPORTANT!
 {% endtab %}
 
 {% tab title="Example" %}
+{% code title=" id-extraction-rules.yaml " %}
 ```yaml
 web:
   snowplow_js:
@@ -103,6 +104,7 @@ mobile:
   linkid:
     - body/se_va: '[-+]?[0-9]*\.?[0-9]*'
 ```
+{% endcode %}
 {% endtab %}
 {% endtabs %}
 
