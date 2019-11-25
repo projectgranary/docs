@@ -139,6 +139,7 @@ If unspecified, default values will be used:
 {% endtab %}
 
 {% tab title="Example" %}
+{% code title="callback.py" %}
 ```python
 def execute(event):
     if event:
@@ -157,6 +158,7 @@ def execute(event):
             sys.stderr.write(sys.exc_info())
             return None
 ```
+{% endcode %}
 
 ```
 
