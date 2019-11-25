@@ -232,6 +232,8 @@ Belts process input and create Profile Updates. The Profile Updater merges such 
 | _\_set\_if\_not\_exist_ | same type as grain type | inserts the current grain value at _\_latest_ only if it does not already exist. |
 | _\_set\_with\_history_ | same type as grain type | inserts the current grain value at _\_latest_ and stores previous _\_latest_ grain value at its insert point in time if it already exists. |
 | _\_set\_with\_history\_distinct_ | same type as grain type | will do a _\_set\_with\_history_ only if the new value is distinct from the existing value. |
+| _\_set\_max/\_set\_min_ | text | inserts the current grain value at  _\_latest_ and, if the value already exists, the old value at _\_latest_ will be overwritten only if the new value is higher \(resp. lower\) than the old one. Numbers will be compared numerically whereas text including dates \(ISO8601\) will be compared lexicographically. |
+| _\_set\_max\_with\_history/\_set\_min\_with\_history_ | text | will do a _\_set\_max_ \(resp. _\_set\_min_\) but will, in case of overwriting, additionally keep the old value at its insert point in time. |
 | _\_delete_ | - | deletes the _\_latest_ grain value at the specified path. |
 | _\_inc_ | _counter_ | creates or increments a counter. |
 | _\_array\_append_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics. |
@@ -285,8 +287,7 @@ To achieve a scaling of Kafka Updater in case of a high number of pending messag
 
 Using following values file, the [prometheus-adapter helm chart](https://github.com/helm/charts/tree/master/stable/prometheus-adapter) can be installed to make the custom metric available within the custom metrics API.
 
-{% tabs %}
-{% tab title="values.yaml" %}
+{% code title="values.yaml" %}
 ```yaml
 [..]
 rules:
@@ -305,8 +306,7 @@ rules:
       metricsQuery: 'sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)'
 [..]
 ```
-{% endtab %}
-{% endtabs %}
+{% endcode %}
 
 <table>
   <thead>

@@ -10,8 +10,7 @@ First you need to install the firebase-functions and the various dependencies us
 
 Once you are set up you can start writing your nodejs cloudfunctions to translate the incomming firebase analytics events into snowplow events. An example of the functions code is provided below with additional comments.  A file with functions for all auomaticly collected Firebase events can be found here &lt;INSERT LINK&gt;
 
-{% tabs %}
-{% tab title="index.js" %}
+{% code title="index.js" %}
 ```javascript
 const functions = require('firebase-functions');
 const snowplow = require('snowplow-tracker');
@@ -49,8 +48,7 @@ t.trackUnstructEvent(event);
 return null; });
 
 ```
-{% endtab %}
-{% endtabs %}
+{% endcode %}
 
 Once you have written your cloud functions you can deploy them using:
 

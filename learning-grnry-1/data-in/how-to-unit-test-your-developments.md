@@ -53,8 +53,7 @@ Behind the `--script` parameter you define the file name of your script to be te
 
 On the command line, you will then receive the following output. The interesting part starts at line 17, where we output the name of the file. Then in line 19/20 the payload is shown. In line 21/22, we inform you that your script is started and 23/24 comes from your application. In line 25/26 the resulting output is written, hence the content which you did return in your groovy script. The script tested is the hello.groovy script checked into the repository:
 
-{% tabs %}
-{% tab title="Output of hello.groovy run with the application" %}
+{% code title="Output of hello.groovy run with the application" %}
 ```bash
 C:\Users\<user>\<path>\scriptable-transform-test>java -jar "build/libs/scriptable-transform-test-1.0-SNAPSHOT.jar" --script=hello.groovy --payload="Payload"
 
@@ -83,8 +82,7 @@ INFORMATION: Here I am executing Groovy
 Jul 17, 2019 2:29:08 PM io.grnry.scriptable.transform.test.RunFileApp run
 INFORMATION: Groovy script returned: Payload has been modified
 ```
-{% endtab %}
-{% endtabs %}
+{% endcode %}
 
 
 

@@ -63,11 +63,13 @@ description: >-
 6. Enter server details. For the URL, ask your friendly Granary Ops Engineer.
 7. Provide config.properties file. E.g.,
 
+   {% code title="config.properties" %}
    ```text
    SSL=true 
    SSLKeyStorePath=<path to trustore>
    SSLKeyStorePassword=changeit
    ```
+   {% endcode %}
 
 8. Enter Granary username and password.
 9. In Keycloak make sure your user has the needed roles \(see point 5. [above](segment-store-api.md#set-up-jdbc-api-config-using-dbvisualizer)\).
