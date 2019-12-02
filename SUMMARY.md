@@ -43,6 +43,7 @@
   * [Segment Store](developer-reference/dataflow/segment-store/README.md)
     * [Segment Table Creation](developer-reference/dataflow/segment-store/segment-table-creation.md)
 * [API Reference](developer-reference/api-reference/README.md)
+  * [Harvester API](developer-reference/api-reference/harvester-api.md)
   * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
   * [Event Store API](developer-reference/api-reference/event-store-api.md)
   * [Belt API](developer-reference/api-reference/belt-api.md)

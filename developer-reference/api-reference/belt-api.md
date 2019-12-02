@@ -415,6 +415,142 @@ A full dump of belt object recently modified
 {% endapi-method-response-example-description %}
 
 ```
+{
+     "version": "2",
+     "name": "hello-belt",
+     "kubernetesName": "grnry-belt-hello-belt",
+     "description": "Hello Belt Belt",
+     "labels": [],
+     "affectedPaths": [],
+     "replicas": 1,
+     "millicpu": 200,
+     "memory": 512,
+     "author": "User",
+     "reader": [
+       "\"_auth\""
+     ],
+     "editor": [
+       "belt_edit"
+     ],
+     "viewer": [
+       "belt_view"
+     ],
+     "created": 1562744768164,
+     "assumedRole": "",
+     "requirementsPy": "package1==0.0.0\r\npackage2",
+     "extractorVersion": "0.5.0",
+     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
+     "eventTypes": [
+       "test-a",
+       "test-b"
+     ],
+     "partitionOffsets": {},
+     "kafkaDestinationTopic": "profile-update",
+     "beltType": "",
+     "runtime": "",
+     "parameter": "",
+     "debug": false,
+     "fetchProfile": "FALSE",
+     "profileType": "test-type",
+     "secret": "",
+     "secretUsername": "",
+     "secretPassword": "",
+     "status": "STOPPED",
+     "volumes": null,
+     "volumeMounts": null,
+     "extraEnv": null,
+     "id": "161"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+If the belt structure contains an invalid event type. 
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": "2019-11-01T15:45:29.385+0000",
+    "message": " : Invalid event type: someUnknownEventType",
+    "details": "uri=/belts/425"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Belt with the given ID not found
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="put" host="https://api.grnry.io" path="/belts/:id" %}
+{% api-method-summary %}
+Updates a Belt by ID
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Updates attributes of a belt, given its ID.   
+  
+For a list of body parameters to send, see above POST /belts documentation. All parameters would be optional, except for the `editor`. One could update one or multiple attributes at the same time. Please note, that you need to provide all belt details in case of a put. Otherwise data might get lost.  
+  
+**Important: In the current implementation, belt version will automatically increase by each update.**  
+  
+In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.  
+  
+Body examples:   
+  
+`{"name": "belt-updated-1"}`  
+or   
+  
+`{"name": "belt-updated-1", "beltType": "someBeltType"}`
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="id" type="string" required=true %}
+Belt ID
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication Token
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="editor" type="string" required=true %}
+The editors allowed to alter this belt.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+A full dump of belt object recently modified
+{% endapi-method-response-example-description %}
+
+```
 {     "version": "2",     "name": "hello-belt",     "kubernetesName": "grnry-belt-hello-belt",     "description": "Hello Belt Belt",     "labels": [],     "affectedPaths": [],     "replicas": 1,     "millicpu": 200,     "memory": 512,     "author": "User",     "reader": [       "\"_auth\""     ],     "editor": [       "belt_edit"     ],     "viewer": [       "belt_view"     ],     "created": 1562744768164,     "assumedRole": "",     "requirementsPy": "package1==0.0.0\r\npackage2",     "extractorVersion": "0.5.0",     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",     "eventTypes": [       "test-a",       "test-b"     ],     "partitionOffsets": {},     "kafkaDestinationTopic": "profile-update",     "beltType": "",     "runtime": "",     "parameter": "",     "debug": false,     "fetchProfile": "FALSE",     "profileType": "test-type",     "secret": "",     "secretUsername": "",     "secretPassword": "",     "status": "STOPPED",     "volumes": null,     "volumeMounts": null,     "extraEnv": null,     "id": "161"}
 ```
 {% endapi-method-response-example %}
