@@ -14,6 +14,7 @@
 * [Model Data In Granary](learning-grnry-1/using-data-in-granary.md)
 * [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
   * [Segment Store API](learning-grnry-1/get-data-out-of-granary/segment-store-api.md)
+  * [Segments as BI Tool Input](learning-grnry-1/get-data-out-of-granary/segments-as-bi-tool-input.md)
 * [Tracing Granary](learning-grnry-1/tracing-granary.md)
 * [Tracking Data](learning-grnry-1/tracking-data/README.md)
   * [Tracking across Id-Borders using Granary](learning-grnry-1/tracking-data/tracking-across-id-borders-using-granary.md)
