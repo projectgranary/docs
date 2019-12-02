@@ -18,10 +18,6 @@ $ helm install grnry-stable/zipkin \
     -f ./zipkin-values.yaml
 ```
 
-{% hint style="warning" %}
-By default, Zipkin Helm Chart also installs an ElasticSearch.
-{% endhint %}
-
 Status check and further instructions:
 
 ```text
