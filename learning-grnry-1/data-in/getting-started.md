@@ -202,7 +202,7 @@ Most of this definition for deployment should be familar to you by now. Let us h
 
 After sending this statement to the SCDF API, SCDF will automatically deploy three containers:
 
-![The created pods in a Kubernetes Cluster](../../.gitbook/assets/grafik%20%2812%29.png)
+![The created pods in a Kubernetes Cluster](../../.gitbook/assets/grafik%20%2813%29.png)
 
 {% hint style="info" %}
 `harvester-sftp-all-std` reflects our stream name. We recommend, that you choose a similar naming convention, to keep up with your deployments.
