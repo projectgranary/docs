@@ -26,7 +26,7 @@ description: >-
 
    ![](../../.gitbook/assets/dbvis05.png)
 
-5. Ask your friendly Granary Ops Engineer to add the needed roles in Granary's Keycloak.
+5. Ask your friendly Granary Ops Engineer to add the following _roles needed to explore the databbase_ via DBVisualizer in Granary's Keycloak.
    1. Go to "clients" -&gt; "jdbc api" -&gt; "roles" -&gt; "add roles".
    2. Add the following roles:
       1. postgresql.information\_schema.tables
@@ -37,15 +37,21 @@ description: >-
       6. system.jdbc.catalogs
       7. system.jdbc.tables
       8. system.jdbc.schemas
-      9. postgresql.segments.&lt;segment name&gt;
    3. In Keycloak assign new roles to your user.
       1. Go to "users" -&gt; "&lt;your user&gt;" -&gt; "role mapping" -&gt; "client roles" -&gt; "jdbc api"
       2. Assign available roles
-6. In DBVisualizer enter Granary username and password
+6. Further ask your Granary Ops Engineer to add the following _roles to access your segement_ of choice via DBVisualizer in Granary's Keycloak.
+   1. Again go to "clients" -&gt; "jdbc api" -&gt; "roles" -&gt; "add roles".
+   2. Add the following role\(s\):
+      1. postgresql.segments.&lt;segment name&gt;
+   3. In Keycloak assign new roles to your user.
+      1. Again go to "users" -&gt; "&lt;your user&gt;" -&gt; "role mapping" -&gt; "client roles" -&gt; "jdbc api"
+      2. Assign available segement roles
+7. In DBVisualizer enter Granary username and password
 
    ![](../../.gitbook/assets/dbvis04.png)
 
-7. Click "Connect".  
+8. Click "Connect".  
 
 ### Configure Tableau to use Segment Store API
 
