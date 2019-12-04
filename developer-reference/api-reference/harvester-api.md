@@ -6,6 +6,18 @@ description: Springboot-based microservice to manage harvesters and event types.
 
 ## Paths
 
+### Source Type Endpoints
+
+* GET /source-types
+* GET /source-types/{source-type-name}
+* GET /source-types/{source-type-name}/{version}
+
+### Harvester Instance Endpoints
+
+tbd
+
+### Event Type Endpoints
+
 * GET /event-types
 * GET /event-types/{event-type-name}
 * POST /event-types
@@ -16,11 +28,7 @@ description: Springboot-based microservice to manage harvesters and event types.
 * PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
 * PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
-* GET /source-types
-* GET /source-types/{source-type-name}
-* GET /source-types/{source-type-name}/{version}
-
-
+* GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/logs
 
 {% api-method method="get" host="https://api.grnry.io" path="/event-types" %}
 {% api-method-summary %}
@@ -394,7 +402,7 @@ If the event type is not modified.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
+{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
 {% api-method-summary %}
 Get Persister for a Specific Event Type
 {% endapi-method-summary %}
@@ -479,7 +487,7 @@ requested :event-type-name \(eventtype-1\) , :event-store-name \(pg\)
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="put" host="" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
+{% api-method method="put" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
 {% api-method-summary %}
 Update Persister Config for a Specific Event Type
 {% endapi-method-summary %}
@@ -568,7 +576,7 @@ The updated stream app version. This version has to be present in the backend sp
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
+{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
 {% api-method-summary %}
 Get State of a Persister for a Specific Event Type
 {% endapi-method-summary %}
@@ -618,7 +626,7 @@ status of :even-type-name \(event-type-1\)
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="put" host="" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
+{% api-method method="put" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
 {% api-method-summary %}
 Update State of a Persister for a Specific Event Type
 {% endapi-method-summary %}
@@ -661,6 +669,67 @@ Authentication token.
             "href": "https://hostname/event-types/eventtype-1/eventstores/pg/persister/state"
         }
     }
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="delete" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method-summary %}
+Delete an Event Type
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Deletes all versions of the given event type, if it is not used by registered belts. This request requires the roles `event_type_read` and `event_type_edit`.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="event-type-name" type="string" required=false %}
+name of the event type to be deleted
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication token
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=204 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=412 %}
+{% api-method-response-example-description %}
+There are registered belts registered, that read from the event type topic so it can't be deleted. The response provides links to all of them.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1574854606738,
+    "message": "event type with name test-event-type-delete is still used by belts: 
+    [https://development.analytics.ventures.syncier.cloud/belts/11,
+     https://development.analytics.ventures.syncier.cloud/belts/12,
+     https://development.analytics.ventures.syncier.cloud/belts/13,
+     https://development.analytics.ventures.syncier.cloud/belts/14,
+     https://development.analytics.ventures.syncier.cloud/belts/15,
+     https://development.analytics.ventures.syncier.cloud/belts/16,
+     https://development.analytics.ventures.syncier.cloud/belts/17,
+     https://development.analytics.ventures.syncier.cloud/belts/18,
+     https://development.analytics.ventures.syncier.cloud/belts/19]",
+    "details": "uri=/event-types/test-event-type-delete"
 }
 ```
 {% endapi-method-response-example %}
@@ -903,67 +972,6 @@ Authentication token.
             "href": "https://hostname/harvesters/source-types/grnry-jdbc/latest"
         }
     }
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
-{% api-method method="delete" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
-{% api-method-summary %}
-Delete an Event Type
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Deletes all versions of the given event type, if it is not used by registered belts. This request requires the roles `event_type_read` and `event_type_edit`.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=false %}
-name of the event type to be deleted
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
-
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
-Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=204 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```
-
-```
-{% endapi-method-response-example %}
-
-{% api-method-response-example httpCode=412 %}
-{% api-method-response-example-description %}
-There are registered belts registered, that read from the event type topic so it can't be deleted. The response provides links to all of them.
-{% endapi-method-response-example-description %}
-
-```
-{
-    "timestamp": 1574854606738,
-    "message": "event type with name test-event-type-delete is still used by belts: 
-    [https://development.analytics.ventures.syncier.cloud/belts/11,
-     https://development.analytics.ventures.syncier.cloud/belts/12,
-     https://development.analytics.ventures.syncier.cloud/belts/13,
-     https://development.analytics.ventures.syncier.cloud/belts/14,
-     https://development.analytics.ventures.syncier.cloud/belts/15,
-     https://development.analytics.ventures.syncier.cloud/belts/16,
-     https://development.analytics.ventures.syncier.cloud/belts/17,
-     https://development.analytics.ventures.syncier.cloud/belts/18,
-     https://development.analytics.ventures.syncier.cloud/belts/19]",
-    "details": "uri=/event-types/test-event-type-delete"
 }
 ```
 {% endapi-method-response-example %}
