@@ -343,7 +343,7 @@ The name of the Kafka topic this Belt will receive events from. Topics are typic
 
 The Python code provided here has to be in the form of a function by the name **callback.py** that can be invoked using the signature `execute(event_headers, event_payload)`where the parameter `event_payload` and `event_headers`are both a Python dictionary containing one event/header from the input topic or a list of dictionaries containing multiple events/headers. The `belt-...` parameters provide context information about the belt instance.
 
-The function is expected to return an [Update ](https://gitlab.alvary.io/grnry/belt-extractor/blob/master/grnry/beltextractor/update.py)object representing an update to a profile in the profile store, following below schema:
+The function can return either `None` , `[]`  or a list of [Update ](https://gitlab.alvary.io/grnry/belt-extractor/blob/master/grnry/beltextractor/update.py)objects representing an update to a profile in the profile store. If the return is not an Update object the belt will continue with the next message. In case it is, the object needs to be following below schema:
 
 ```text
 UPDATE :=
@@ -397,8 +397,7 @@ from grnry.beltextractor.update import Update
 
 def execute(event_headers, event_payload, profile=None):
     print(profile)
-    update = Update(profile['correlationId'],["dummy"]).set_value("Hallo Belt!",0.5,time(),'P1D','Dummy-Belt')
-    update.set_type('TestProfileType')
+    update = Update(profile['correlationId'],["dummy"]).set_value("Hallo Belt!",0.5,time(),'P1D','Dummy-Belt').set_type('TestProfileType').set_operation('_set')
     return [update]
 ```
 {% endtab %}
