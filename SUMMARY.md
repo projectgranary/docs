@@ -7,6 +7,7 @@
 * [Granary Glossary](learning-grnry-1/granary-glossary.md)
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
   * [Getting Started](learning-grnry-1/data-in/getting-started.md)
+  * [Scriptable Transform for Snowplow Events](learning-grnry-1/data-in/scriptable-transform-for-snowplow-events.md)
   * [Easing development](learning-grnry-1/data-in/easing-development.md)
   * [Best Practices](learning-grnry-1/data-in/best-practices.md)
   * [How to test your developments](learning-grnry-1/data-in/how-to-unit-test-your-developments.md)
