@@ -18,7 +18,7 @@ The source type defines where the data comes from. It can be configured to suit 
 
 ### Scriptable Transform
 
-The Scriptable transform is the transformation, where you can implement your custom logic for extraction, such as simple mappings. For more information on the scriptable transform, see [here](scriptable-transform.md).
+The Scriptable transform is the transformation, where you can implement your custom logic for extraction, such as simple mappings. For more information on the scriptable transform, see [here](../../../learning-grnry-1/data-in/scriptable-transform.md).
 
 ### Metadata Extractor
 

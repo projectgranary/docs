@@ -60,7 +60,7 @@ To deactivate the encryption, remove the two lines above and overwrite the \(de-
 
 ## Dead letter queues
 
-In GRNRY, we have created so called _dead letter queues_. These dead letter queues are used to receive all the data that could not be processed correctly by the transform or metadata extractor steps. They are the output channels for errors. Dead letter queues are available for the [transform](scriptable-transform.md) and the [metadata extractor](metadata-extractor.md) steps.
+In GRNRY, we have created so called _dead letter queues_. These dead letter queues are used to receive all the data that could not be processed correctly by the transform or metadata extractor steps. They are the output channels for errors. Dead letter queues are available for the [transform](../../../learning-grnry-1/data-in/scriptable-transform.md) and the [metadata extractor](metadata-extractor.md) steps.
 
 ### Mandatory parameters
 

@@ -6,17 +6,17 @@ description: 'On this page, you get the technical details about our scriptable t
 
 The scriptable transform is a microservice, which should transform incoming data to your desired structure in JSON. You may do any kind of preprocessing here. This microservice receives coding in order to execute the transformation of your choice. It is based on the Scriptable Transform Processor of Spring and can take Groovy, JavaScript, Ruby or Python \(for Java\) as languages.
 
-The scriptable transform typically is the place where you need to write the most information and do mappings etc. his is the main enhancement point for you during the data-in pipeline. You are going to write a script in one of the defined languages for this. In this chapter: [How to test your developments](../../../learning-grnry-1/data-in/how-to-unit-test-your-developments.md) we are showing you, how to write unit tests, which help you in writing your applications without having to deploy them to a cluster the whole time. 
+The scriptable transform typically is the place where you need to write the most information and do mappings etc. his is the main enhancement point for you during the data-in pipeline. You are going to write a script in one of the defined languages for this. In this chapter: [How to test your developments](how-to-unit-test-your-developments.md) we are showing you, how to write unit tests, which help you in writing your applications without having to deploy them to a cluster the whole time. 
 
 In order to process the data within your script, there is the global variable `payload`. This variable holds the data you are getting from the outside and can be used within your function. Please note, that it is not possible to use more than one script, however you might define functions within your script, to which you refer.
 
 In order to get data out of the script, you just return the message/event you want to process in subsequent steps.
 
-Within the script you can do everything you like, such as lookups of configs defined in the file, parameter conjunctions, conditions and loops as long as it fits into one file. It is not possible to define more than one file. In addition it is necessary to convert the file content into a string for deployment, for example by doing as described in the [Easing development](../../../learning-grnry-1/data-in/easing-development.md) section.
+Within the script you can do everything you like, such as lookups of configs defined in the file, parameter conjunctions, conditions and loops as long as it fits into one file. It is not possible to define more than one file. In addition it is necessary to convert the file content into a string for deployment, for example by doing as described in the [Easing development](easing-development.md) section.
 
 **Name**: grnry-scriptable
 
-**Parameters**: See [shared parameters](grnry-components-and-parameters.md).
+**Parameters**: See [shared parameters](../../developer-reference/dataflow/data-in/grnry-components-and-parameters.md).
 
 {% hint style="info" %}
 Currently, there are no GRNRY-specific parameters for JDBC. The benefit of this source type is encryption of the processed messages.
