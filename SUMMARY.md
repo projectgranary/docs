@@ -49,13 +49,13 @@
   * [Event Store API](developer-reference/api-reference/event-store-api.md)
   * [Belt API](developer-reference/api-reference/belt-api.md)
   * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
-* [Kubernetes Client Environment Set Up](developer-reference/kubernetes-client-environment-set-up.md)
 
 ## Operator Reference
 
 * [Granary Release Notes](operator-reference/granary-release-notes/README.md)
   * [Known Issues](operator-reference/granary-release-notes/known-issues.md)
 * [Installation](operator-reference/installation/README.md)
+  * [Kubernetes Client Environment Set Up](operator-reference/installation/kubernetes-client-environment-set-up.md)
   * [Sizing guideline](operator-reference/installation/sizing-guideline.md)
   * [Snowplow Scala Stream Collector](operator-reference/installation/snowplow-scala-stream-collector.md)
   * [Belt Extractor](operator-reference/installation/untitled.md)
