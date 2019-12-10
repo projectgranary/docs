@@ -49,6 +49,7 @@
   * [Event Store API](developer-reference/api-reference/event-store-api.md)
   * [Belt API](developer-reference/api-reference/belt-api.md)
   * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
+* [Kubernetes Client Environment Set Up](developer-reference/kubernetes-client-environment-set-up.md)
 
 ## Operator Reference
 
