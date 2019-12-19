@@ -24,6 +24,10 @@ The Scriptable transform is the transformation, where you can implement your cus
 
 The metadata extractor extracts information, such as the correlation ID, the event type or the harvester name from the payload and sets it to the header fields. Here, you basically need to define mappings in SpEL. More information on the [metadata extractor](metadata-extractor.md).
 
+### Sessionizing Processor
+
+The sessionizing processor consumes the output of the metadata extractor to group the data based on a common key \(correlationId plus optional attribute\). Its using a "session window" algorithm, you can read more about it here: [https://kafka.apache.org/20/documentation/streams/developer-guide/dsl-api.html\#session-windows](https://kafka.apache.org/20/documentation/streams/developer-guide/dsl-api.html#session-windows)
+
 ### EventStore Sink
 
 The EventStore Sink persists data from the data\_in\_grnry\_&lt;event&gt; topic and persists it into the database. More information on the [Eventstore Sink](eventstore-sink.md).
