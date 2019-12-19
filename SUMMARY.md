@@ -6,6 +6,7 @@
 
 * [Granary Glossary](learning-grnry-1/granary-glossary.md)
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
+  * [Sessionize Data](learning-grnry-1/data-in/sessionize-data.md)
   * [Getting Started](learning-grnry-1/data-in/getting-started.md)
   * [Scriptable Transform for Snowplow Events](learning-grnry-1/data-in/scriptable-transform-for-snowplow-events.md)
   * [Easing development](learning-grnry-1/data-in/easing-development.md)
@@ -32,6 +33,7 @@
 
 * [Data Flow](developer-reference/dataflow/README.md)
   * [Data-In](developer-reference/dataflow/data-in/README.md)
+    * [Sessionizing Processor](developer-reference/dataflow/data-in/sessionizing-processor.md)
     * [Shared parameters](developer-reference/dataflow/data-in/grnry-components-and-parameters.md)
     * [Source Types](developer-reference/dataflow/data-in/source-types.md)
     * [Scriptable Transform](developer-reference/dataflow/data-in/scriptable-transform.md)
