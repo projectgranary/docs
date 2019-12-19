@@ -27,7 +27,7 @@ tbd
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister
 * PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
-* PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
+* POST /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/logs
 
 {% api-method method="get" host="https://api.grnry.io" path="/event-types" %}
@@ -626,7 +626,7 @@ status of :even-type-name \(event-type-1\)
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="put" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
+{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
 {% api-method-summary %}
 Update State of a Persister for a Specific Event Type
 {% endapi-method-summary %}
@@ -653,6 +653,12 @@ Name of the event store.
 Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="action" type="string" required=false %}
+Updates the status of this persister. Possible values: `START` , `STOP`.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
