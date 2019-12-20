@@ -35,11 +35,12 @@ Valid input topics for a
 | Key | Description |
 | :--- | :--- |
 | **event\_headers** | Kafka fields for Event metadata |
-| $$-$$ grnry-event-type | extracted from event payload or a static value |
+| $$-$$ grnry-event-type | event type as specified during harvester definition |
 | $$-$$ grnry-event-id | used to deduplicate events |
 | $$-$$ grnry-harvester-name | name of the harvester instance, extracted from event payload or a static value |
 | $$-$$ grnry-correlation-id | used to group events received from the same tracking entity |
 | $$-$$ grnry-event-timestamp | event processing time set by harvester \(metadata extractor\) |
+| $$-$$ grnry-event-type-version | version of event type registered with the harvester |
 | **event\_payload** | Forwarded from input attribute `value`  |
 | $$-$$ schema | Snowplow Event Schema Reference |
 | $$-$$ ipAddress | ipAddress if Snowplow is configured to collect this |
@@ -159,35 +160,41 @@ Similar to the single payload approach, the callback signature accepted by the b
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"8be4a767-7ee0-4bb0-addd-6eab0c6e1b22",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009867086"
+      "grnry-event-timestamp":"1574009867086",
+      "grnry-event-type-version":"1"
+
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"b785b078-e0ef-408f-b77c-2794f1e3a6ea",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009868613"
+      "grnry-event-timestamp":"1574009868613",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"f388c58b-5eb9-4507-898b-023d42e01033",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009869741"
+      "grnry-event-timestamp":"1574009869741",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"a214b0d1-b65c-4106-946a-9a32992ab32b",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009870936"
+      "grnry-event-timestamp":"1574009870936",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"688a3c08-2a3e-4123-be4e-0cf07d84edbe",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009871830"
+      "grnry-event-timestamp":"1574009871830",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
@@ -201,7 +208,8 @@ Similar to the single payload approach, the callback signature accepted by the b
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"be8bf4f8-2ad2-468e-bf28-b50fe76ffef3",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009985150"
+      "grnry-event-timestamp":"1574009985150",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
@@ -215,35 +223,40 @@ Similar to the single payload approach, the callback signature accepted by the b
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"62131936-fdec-4b19-8f61-c079bdee50bf",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009986587"
+      "grnry-event-timestamp":"1574009986587",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"9a07a1e2-6410-4caa-918d-3cce0bf3f120",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574010000674"
+      "grnry-event-timestamp":"1574010000674",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"7366d0a9-ca8a-4a1d-99fb-db4a7a641569",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574010029556"
+      "grnry-event-timestamp":"1574010029556",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"616e88b5-eaa0-4d3b-8cee-e217c87712aa",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574010091429"
+      "grnry-event-timestamp":"1574010091429",
+      "grnry-event-type-version":"1"
    },
    {
       "grnry-harvester-name":"snowplow-a-std-harvester",
       "grnry-event-type":"snowplow-a",
       "grnry-event-id":"ea1dd492-fbd5-4a66-b613-d0e464451e6e",
       "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574010091432"
+      "grnry-event-timestamp":"1574010091432",
+      "grnry-event-type-version":"1"
    },
  ...
 ]
