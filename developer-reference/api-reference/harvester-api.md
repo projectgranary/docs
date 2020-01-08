@@ -27,7 +27,7 @@ tbd
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister
 * PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
-* POST /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
+* PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/logs
 
 {% api-method method="get" host="https://api.grnry.io" path="/event-types" %}
