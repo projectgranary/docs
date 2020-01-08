@@ -217,9 +217,8 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Splitting Arrays in Scriptable Transform to multiple Kafka messages is
         broken.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/431">#431</a>
-      </td>
+      <td style="text-align:left">0.7.0</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/431">#431</a> (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">Belt API</td>
@@ -237,9 +236,8 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Belts deployed by Belt API do not contain Prometheus Scrape annotations.</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/455">#455</a>
-        </td>
+        <td style="text-align:left">0.6.3</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/455">#455</a> (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">Belt API</td>
@@ -247,16 +245,15 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">DELETE /belt/&lt;id&gt; only deletes belt on database but not on Kubernetes.</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/413">#413</a>
-        </td>
+        <td style="text-align:left">0.6.3</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/413">#413</a> (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">Belt API</td>
       <td style="text-align:left">GKI_2019_0023</td>
       <td style="text-align:left">Update of Belt fails witout &quot;editor&quot; present.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left"></td>
+      <td style="text-align:left">-</td>
       <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/361">#361</a>
       </td>
     </tr>
@@ -265,7 +262,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2019_0024</td>
       <td style="text-align:left">Eventstore Persister does not have a dead letter queue</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left"></td>
+      <td style="text-align:left">-</td>
       <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/372">#372</a>
       </td>
     </tr>
@@ -275,9 +272,51 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GET /type/&lt;profile-type&gt; returns single grains not profiles</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left"></td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/443">#443</a>
-        </td>
+        <td style="text-align:left">0.6.0</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/443">#443</a> (closed)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0026</td>
+      <td style="text-align:left">Belt updates in the Belt API are not properly logged</td>
+      <td style="text-align:left">0.6.0</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">#493</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0027</td>
+      <td style="text-align:left">Belt leaves consumer group when callback function is in loop or taking
+        to long</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">#504</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0028</td>
+      <td style="text-align:left">POST /belts/{id}/state is not secured by a role</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">#524</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
+      <td style="text-align:left">GKI_2019_0029</td>
+      <td style="text-align:left">Persister did not recover after multiple restarts (&gt;50) because data
+        base was not available</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">#516</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0030</td>
+      <td style="text-align:left">Provide a Docker image for Belt Extractor Runtime that supports GRNRY
+        processes to be executed as a non-root user</td>
+      <td style="text-align:left">0.6.0</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">#507</td>
     </tr>
   </tbody>
 </table>
