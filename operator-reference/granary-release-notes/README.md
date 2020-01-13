@@ -195,10 +195,17 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/event-explorer-ui.md">Event Explorer UI</a>
-      </td>
-      <td style="text-align:left">0.2.0</td>
-      <td style="text-align:left">tba</td>
+      <td style="text-align:left"><a href="../installation/event-explorer-ui.md"><b>Event Explorer UI</b></a>&lt;b&gt;&lt;/b&gt;</td>
+      <td
+      style="text-align:left"><b>0.2.0</b>
+        </td>
+        <td style="text-align:left">A customizable Event Viewer that allows to browse and filter Event Payload
+          for a given Correlation ID. The ordered list of events can be categorized
+          / labeled using custom rules and the layout for showing event payloads
+          can be customized using templates. The UI is implemented as an Angular
+          SPA and redirects to Keycloak for authentication. Only runtime dependency
+          are GRNRY REST APIs. The component aims to support use cases around Development
+          and Debugging of Granary Apps as well as Interactive Customer Support.</td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/citus-postgresql.md">Citus PostgreSQL</a>
