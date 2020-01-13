@@ -18,7 +18,7 @@ description: Denotes release versions of Granary artifacts.
   * e.g. `1.3.2` 
 * Component release versions can differ from Granary Platform on `major`, `minor`, and `patch` level.
 
-## Granary 0.7 "Kurt" - 2020-01-09
+## Granary 0.7 "Kurt" - 2020-01-10
 
 <table>
   <thead>
@@ -104,7 +104,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/profile-updater.md">Profile Updater</a>
       </td>
-      <td style="text-align:left"><b>0.5.2</b>
+      <td style="text-align:left"><b>0.5.3</b>
       </td>
       <td style="text-align:left">New Profile Update operations set_max and set_min (incl. History) added</td>
     </tr>
