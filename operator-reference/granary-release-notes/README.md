@@ -195,6 +195,12 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
+      <td style="text-align:left"><a href="../installation/event-explorer-ui.md">Event Explorer UI</a>
+      </td>
+      <td style="text-align:left">0.2.0</td>
+      <td style="text-align:left">tba</td>
+    </tr>
+    <tr>
       <td style="text-align:left"><a href="../installation/citus-postgresql.md">Citus PostgreSQL</a>
       </td>
       <td style="text-align:left">8.1.1</td>
