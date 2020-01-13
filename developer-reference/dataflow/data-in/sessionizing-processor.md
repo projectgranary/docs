@@ -35,7 +35,7 @@ Default:
 
 `1800  # (1800 seconds = 30 minutes)`
 
-If you are processing already sessionized data \(i.e. your payload contains a session id, which you have configured via`sessionizing.sessionizingAttributeExpression`\) make sure your `sessionizing.inactivityGap` value reflects the sessionizing of your source data, e.g., is not smaller than the gap used by the source.
+If you are processing already sessionized data \(= your payload contains a session id which you have configured \(`sessionizing.sessionizingAttributeExpression`\) make sure your inactivityGap value is not smaller than the inactivity gap used by the source to sessionize the data.
 
 #### sessionizing.gracePeriod
 
