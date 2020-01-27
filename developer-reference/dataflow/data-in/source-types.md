@@ -145,7 +145,7 @@ A sample of the configuration of a JDBC source could look like this:
 | :--- | :--- |
 | consumer.input-topic | The input Topic to read from. Default value: `snowplow`. |
 | consumer.concurrency | The concurrency of the inbound consumer. Default value: `6`. |
-| consumer.resetOffsets | Wether to reset offsets on the consumer to the value provided by startOffset. Default value: `true`. |
+| consumer.resetOffsets | Wether to reset offsets on the consumer to the value provided by startOffset. Default value: `false`. |
 | consumer.startOffset | The starting offset for new groups. Allowed values: `earliest` and `latest`. Default value: `latest`. |
 
 A sample of the configuration of a Topic source could look like this:
