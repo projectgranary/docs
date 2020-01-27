@@ -14,7 +14,7 @@ In Granary, Keycloak acts, on the one hand, as a provider for a security realm, 
 
 ## IAM Architecture Chart
 
-![Functional Overview of IAM Architecture](../.gitbook/assets/image%20%282%29.png)
+![Functional Overview of IAM Architecture](../.gitbook/assets/image%20%289%29.png)
 
 ## Interfaces
 
