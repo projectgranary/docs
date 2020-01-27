@@ -84,6 +84,7 @@ Example:
          "eventId":"event0815",
          "correlationId":"cookie123",
          "eventType":"web",
+         "eventTypeVersion": 1,
          "eventHarvester":"testsource",
          "message": {
 			 "customer_data" : {
@@ -103,6 +104,7 @@ Example:
          "eventId":"event0817",
          "correlationId":"cookie123",
          "eventType":"web",
+         "eventTypeVersion": 1,
          "eventHarvester":"testsource",
          "message": {
 			 "access_log" : {
@@ -320,6 +322,7 @@ Number of elements to be shown. Defaults to 20.
          "message":null,
          "created":"2018-11-01T11:48:08.000Z",
          "eventType":"web",
+         "eventTypeVersion": 1,
          "eventHarvester":"testsource",
          "_links":{
             "self":{
@@ -333,6 +336,7 @@ Number of elements to be shown. Defaults to 20.
          "message":null,
          "created":"2018-11-01T11:48:07.000Z",
          "eventType":"web",
+         "eventTypeVersion": 1,
          "eventHarvester":"testsource",
          "_links":{
             "self":{
@@ -346,6 +350,7 @@ Number of elements to be shown. Defaults to 20.
          "message":null,
          "created":"2018-11-01T11:48:06.000Z",
          "eventType":"web",
+         "eventTypeVersion": 1,
          "eventHarvester":"testsource",
          "_links":{
             "self":{
@@ -359,6 +364,7 @@ Number of elements to be shown. Defaults to 20.
          "message":null,
          "created":"2018-11-01T11:47:56.000Z",
          "eventType":"web",
+         "eventTypeVersion": 1,
          "eventHarvester":"testsource",
          "_links":{
             "self":{
@@ -372,6 +378,7 @@ Number of elements to be shown. Defaults to 20.
          "message":null,
          "created":"2018-11-01T11:47:55.000Z",
          "eventType":"web",
+         "eventTypeVersion": 1,
          "eventHarvester":"testsource",
          "_links":{
             "self":{
