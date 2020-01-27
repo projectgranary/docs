@@ -6,7 +6,7 @@ Taken from [https://kafka.apache.org/20/documentation/streams/developer-guide/ds
 
 Session windows are used to aggregate key-based events into so-called _sessions_, the process of which is referred to as _sessionization_. Sessions represent a **period of activity** separated by a defined **gap of inactivity** \(or “idleness”\). Any events processed that fall within the inactivity gap of any existing sessions are merged into the existing sessions. If an event falls outside of the session gap, then a new session will be created.
 
-![](../../.gitbook/assets/image%20%283%29.png)
+![](../../.gitbook/assets/image%20%2811%29.png)
 
 ### Example
 
