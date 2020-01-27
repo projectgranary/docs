@@ -27,7 +27,7 @@ tbd
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister
 * PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
-* PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
+* POST /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/logs
 
 {% api-method method="get" host="https://api.grnry.io" path="/event-types" %}
@@ -118,7 +118,7 @@ Offset of the requested page. Default is `0`.
 
 {% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
 {% api-method-summary %}
-Get all Versions of an Event Type
+Get all versions of an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
@@ -264,6 +264,7 @@ Get a Specific Version of an Event Type
 
 {% api-method-description %}
 Get one version of an event type.  
+Version should be "latest" or a valid number greater than or equals to 1.  
 This request requires the role `event_type_read`.
 {% endapi-method-description %}
 
@@ -271,7 +272,7 @@ This request requires the role `event_type_read`.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="version" type="string" required=true %}
-Version of the event type.
+The version of the event type, or "latest" to get the latest version
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="event-type-name" type="string" required=true %}
@@ -301,6 +302,20 @@ Authentication token.
             "href": "https://hostname/event-types/event-type-1/4"
         }
     }
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+If the version is not latest or a valid number greater or equals to 1.
+{% endapi-method-response-example-description %}
+
+```
+{
+   "timestamp":1578934021414,
+   "message":"version : Needs to be a long or latest",
+   "details":"uri=/event-types/test-event-type/invalidVersion"
 }
 ```
 {% endapi-method-response-example %}
