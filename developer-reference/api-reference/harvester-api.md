@@ -1058,7 +1058,8 @@ Authentication token.
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="lines" type="integer" required=false %}
-The last x lines of the log
+The last x lines of the log \(if available\).   
+Valid value are : 1 .. 5000. Default: 5000.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
