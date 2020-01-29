@@ -1202,89 +1202,47 @@ Sample Response
         "app": "grnry-data-in-metadata",
         "version": "latest",
         "deploymentConfiguration": {
-            "kubernetes": {
-                "limits": {
-                    "cpu": "500m",
-                    "memory": "512Mi"
-                },
-                "volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
-                "requests": {
-                    "cpu": "500m",
-                    "memory": "512Mi"
-                },
-                "volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
-                "imagepullpolicy": "Always",
-                "livenessprobedelay": "120",
-                "readinessprobedelay": "120"
-            }
+            "kubernetes.limits.cpu": "500m",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.livenessprobedelay": "120",
+            "kubernetes.readinessprobedelay": "120"
         },
         "appConfiguration": {
-            "spring": {
-                "cloud": {
-                    "stream": {
-                        "kafka": {
-                            "binder": {
-                                "autocreatetopics": "true",
-                                "autoaddpartitions": "true",
-                                "minpartitioncount": "24",
-                                "replicationfactor": "3"
-                            }
-                        },
-                        "bindings": {
-                            "input": {
-                                "consumer": {
-                                    "concurrency": "6",
-                                    "partitioned": "true"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3",
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true"
         }
     },
     "transform": {
         "app": "grnry-scriptable",
         "version": "latest",
         "deploymentConfiguration": {
-            "kubernetes": {
-                "limits": {
-                    "cpu": "500m",
-                    "memory": "512Mi"
-                },
-                "volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
-                "requests": {
-                    "cpu": "500m",
-                    "memory": "512Mi"
-                },
-                "volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
-                "imagepullpolicy": "Always",
-                "livenessprobedelay": "120",
-                "readinessprobedelay": "120"
+            "kubernetes.limits.cpu": "500m",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.livenessprobedelay": "120",
+            "kubernetes.readinessprobedelay": "120"
             }
         },
         "appConfiguration": {
-            "spring": {
-                "cloud": {
-                    "stream": {
-                        "kafka": {
-                            "binder": {
-                                "autocreatetopics": "true",
-                                "autoaddpartitions": "true",
-                                "minpartitioncount": "24",
-                                "replicationfactor": "3"
-                            }
-                        },
-                        "bindings": {
-                            "input": {
-                                "consumer": {
-                                    "concurrency": "6",
-                                    "partitioned": "true"
-                                }
-                            }
-                        }
-                    }
-                }
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3",
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true"
             }
         },
         "language": "groovy",
@@ -1386,90 +1344,46 @@ human readable name. Needs to be unique
         "app": "grnry-data-in-metadata",
         "version": "1",
         "deploymentConfiguration": {
-            "kubernetes": {
-                "requests": {
-                    "memory": "512Mi",
-                    "cpu": "500m"
-                },
-                "livenessprobedelay": "120",
-                "readinessprobedelay": "120",
-                "volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
-                "limits": {
-                    "cpu": "500m",
-                    "memory": "512Mi"
-                },
-                "volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
-                "imagepullpolicy": "Always"
-            }
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.livenessprobedelay": "120",
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.limits.cpu": "500m",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
+            "kubernetes.imagepullpolicy": "Always"
         },
         "appConfiguration": {
-            "spring": {
-                "cloud": {
-                    "stream": {
-                        "kafka": {
-                            "binder": {
-                                "replicationfactor": "3",
-                                "autocreatetopics": "true",
-                                "minpartitioncount": "24",
-                                "autoaddpartitions": "true"
-                            }
-                        },
-                        "bindings": {
-                            "input": {
-                                "consumer": {
-                                    "partitioned": "true",
-                                    "concurrency": "6"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3",
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6"
         }
     },
     "transform": {
         "app": "grnry-scriptable",
         "version": "2",
         "deploymentConfiguration": {
-            "kubernetes": {
-                "readinessprobedelay": "120",
-                "volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
-                "limits": {
-                    "memory": "512Mi",
-                    "cpu": "500m"
-                },
-                "volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
-                "requests": {
-                    "cpu": "500m",
-                    "memory": "512Mi"
-                },
-                "imagepullpolicy": "Always",
-                "livenessprobedelay": "120"
-            }
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.limits.cpu": "500m"
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.livenessprobedelay": "120"
         },
         "appConfiguration": {
-            "spring": {
-                "cloud": {
-                    "stream": {
-                        "bindings": {
-                            "input": {
-                                "consumer": {
-                                    "partitioned": "true",
-                                    "concurrency": "6"
-                                }
-                            }
-                        },
-                        "kafka": {
-                            "binder": {
-                                "replicationfactor": "3",
-                                "autoaddpartitions": "true",
-                                "minpartitioncount": "24",
-                                "autocreatetopics": "true"
-                            }
-                        }
-                    }
-                }
-            }
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true"
         },
         "language": "groovy",
         "script": "return new String(payload , 'UTF-8');"
