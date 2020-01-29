@@ -4,7 +4,7 @@ description: This page describes the Profile Store and Profile Update mechanism.
 
 # Profile Store
 
-![](../../../.gitbook/assets/dataflow_profilestore_06_docs.png)
+![](../../../.gitbook/assets/kurt_dataflow_data_out.PNG)
 
 The profile store holds integrated data for entities in so-called profiles. Such entities can be customers, customers' contracts or customers' behavior, etc. The profile store holds a profile for each correlation id and profile type. A profile type denotes the abstract notion of an entity, such as customer, contract, or behavior.
 

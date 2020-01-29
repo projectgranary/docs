@@ -4,7 +4,7 @@ description: 'https://gitlab.alvary.io/grnry/belt-extractor'
 
 # Belt Extractor
 
-![](../../.gitbook/assets/dataflow_profilestore_06_docs.png)
+![](../../.gitbook/assets/kurt_dataflow_data_out.PNG)
 
 Belts are used to compute updates for the Costumer Graph stored in the Profile Store. These updates can represent things like:
 

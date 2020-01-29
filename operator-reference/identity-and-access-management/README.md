@@ -14,11 +14,11 @@ In Granary, Keycloak acts, on the one hand, as a provider for a security realm, 
 
 ## IAM Architecture Chart
 
-![Functional Overview of IAM Architecture](../.gitbook/assets/image%20%289%29.png)
+![Functional Overview of IAM Architecture](../../.gitbook/assets/image%20%289%29.png)
 
 ## Interfaces
 
-The interfaces that require IAM definitions are driven by [Granary's dataflow](../developer-reference/dataflow/).
+The interfaces that require IAM definitions are driven by [Granary's dataflow](../../developer-reference/dataflow/).
 
 * **Belt Extractor**
   * Belts require technical users to read profiles

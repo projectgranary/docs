@@ -14,6 +14,8 @@ description: >-
 
 ## API Methods
 
+Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#profile-api-a-k-a-profile-store-api) for roles a user needs to interact with Profile Store API.
+
 {% api-method method="get" host="https://api.grnry.io" path="/profiles" %}
 {% api-method-summary %}
 Get list of Profile Types

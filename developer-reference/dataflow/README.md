@@ -1,6 +1,6 @@
 # Data Flow
 
-![Data flow across Granary](../../.gitbook/assets/overview.PNG)
+![](../../.gitbook/assets/kurt_dataflow.PNG)
 
 #### Legend:
 
