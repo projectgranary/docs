@@ -4,7 +4,7 @@ description: These pages contain the technical documentation for data-in.
 
 # Data-In
 
-![Data flow within the Data-In zone of Granary](../../../.gitbook/assets/harvester.PNG)
+![](../../../.gitbook/assets/kurt_dataflow_data_in.PNG)
 
 In this chapter, we are going to talk about the technical specificatoin of the data-in pipeline. Let us clarify some names shortly.
 
@@ -29,6 +29,8 @@ The metadata extractor extracts information, such as the correlation ID, the eve
 The EventStore Sink persists data from the data\_in\_grnry\_&lt;event&gt; topic and persists it into the database. More information on the [Eventstore Sink](eventstore-sink.md).
 
 ### API Calls
+
+Consult the [Granary Access Clients Reference](../../../operator-reference/identity-and-access-management/granary-access-clients.md#scdf) for roles a user needs to interact with SCDF API.
 
 If you just want to have a quick look at the API calls, here they are. They are documented in more detail here: [Getting Started](../../../learning-grnry-1/data-in/getting-started.md)
 

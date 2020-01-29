@@ -14,7 +14,9 @@ description: Springboot-based microservice to manage belts registered in the Bel
 * GET/belts/{id}/state
 * POST/belts/{id}/state
 
-## API Endpoints
+## API Methods
+
+Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#belt-api) for roles a user needs to interact with Belt API.
 
 {% api-method method="get" host="https://api.grnry.io" path="/belts" %}
 {% api-method-summary %}

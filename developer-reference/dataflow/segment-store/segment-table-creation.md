@@ -94,7 +94,7 @@ Detailed configuration
       <td style="text-align:left">-</td>
     </tr>
   </tbody>
-</table>One can now set access to the resulting views, containing either unlocked or locked profiles, via Granary's [IAM control](../../../operator-reference/identity-and-access-management.md).
+</table>One can now set access to the resulting views, containing either unlocked or locked profiles, via Granary's [IAM control](../../../operator-reference/identity-and-access-management/).
 
 ### Generic Generator
 

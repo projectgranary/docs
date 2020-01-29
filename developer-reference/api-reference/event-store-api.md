@@ -12,6 +12,8 @@ description: Springboot-based microservice to expose event data stored in the Ev
 
 ## API Methods
 
+Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#event-api-a-k-a-event-store-api) for roles a user needs to interact with Event Store API.
+
 {% api-method method="get" host="https://api.grnry.io" path="/events/:correlationId" %}
 {% api-method-summary %}
 Get Events by Correlation ID

@@ -32,6 +32,10 @@ description: Springboot-based microservice to manage harvesters and event types.
 * POST /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/logs
 
+## API Methods
+
+Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
+
 {% api-method method="get" host="https://api.grnry.io" path="/source-types" %}
 {% api-method-summary %}
 Get all Source Types
