@@ -23,7 +23,7 @@ These clients provide access to the administration of the data flow infrastructu
 
 ### scdf
 
-Requests the user's access rights to operate on Spring Cloud Dataflow. This mainly includes creating and deploying harvesters. Starting from Ganary 0.8, human users should access scdf via Harvester Api only, hence these roles should be granted to technical users \(Harvester API\) only.
+Requests the user's access rights to operate on Spring Cloud Dataflow. This mainly includes creating and deploying harvesters.
 
 | Role | Description |
 | :--- | :--- |
@@ -41,32 +41,19 @@ Requests the user's access rights to manage individual belts. These roles are de
 
 Example roles: `belt_view`, `belt_edit`, `belt_view_privileged`, `belt_edit_privileged`
 
-### harvester-api
-
-Requests the user's access rights to manage harvesters, i.e., creating event types or source types.
-
-| Role | Description |
-| :--- | :--- |
-| `event_type_read` | user can read all event types |
-| `event_type_edit` | user can edit all event types |
-| `source_type_read` | user can read all source types |
-| `source_type_edit` | user can edit all source types |
-| `harvester_read` | user can read all harvester instance |
-| `harvester_edit` | user can edit all harvester instances |
-
 ## Data Out Clients
 
-### profile-api
+### profile-api \(a.k.a. Profile Store API\)
 
 Requests a user's access rights to view certain profile grains in the profile store. If a user requests a profile, it will be build from all grains the user has access to. The required role for each grain is set by the belt writing it to the profilestore. Default value for reader column in the profilestore is `reader = _auth`. If a user has no roles, grains with `reader = _all` will still be accessible.
 
-### event-api
+### event-api \(a.k.a. Event Store API\)
 
 Requests user's access rights to view raw events. All role names in this client are combinations of event type name, event harvester name and an action-specifying suffix, e.i., `read`, separated by underscores.
 
 Example role: `snowplow-a_snowplow-a-std-harvester_read` if the event type name is `snowplow-a` and the event harvester name is `snowplow-a-std-harvester`. 
 
-### jdbc-api
+### jdbc-api \(a.k.a Segment Store API\)
 
 Requests user's access rights to view certain parts of segments and enables technical users to access segment tables for OLAP queries. A jdbc-api role has the following structure  `<catalog>.<schema>.<table>.<column>`.
 
