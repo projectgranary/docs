@@ -17,6 +17,7 @@ description: Springboot-based microservice to manage harvesters and event types.
 * GET /harvesters/instances
 * GET /harvesters/instances/{harvester-name}
 * POST /harvesters/instances
+* PUT /harvesters/instances/{harvester-name}
 
 ### Event Type Endpoints
 
@@ -586,19 +587,7 @@ If the event type is not modified.
 {% endapi-method-response-example-description %}
 
 ```
-{
-   "reason":"No changes detected",
-   "entity":{
-      "name":"test-event-type",
-      "version":2,
-      "correlationIdExpression":"$['test']['path']['correlationId']",
-      "eventIdExpression":"$['test']['path']['eventId']",
-      "timestampExpression":"$['test']['path']['timestamp']",
-      "links":[
-
-      ]
-   }
-}
+{}
 ```
 {% endapi-method-response-example %}
 
@@ -1429,6 +1418,214 @@ harvester name already exists
     "timestamp": 1579697613983,
     "message": "harvester instance with name harvester-post already exists ",
     "details": "uri=/harvesters/instances"
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="put" host="https://api.grnry.io" path="harvesters/instances/:harvester-name" %}
+{% api-method-summary %}
+Update Harvester Instance
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Updates a harvester instance. All body parameters are optional. Harvester name filed `name` is not changeable and will be ignored if provided. Empty fields will be set to `""`, missing fields will remain unchanged. It is not possible to replace apps \(`sourceType`, `metadataExtractor`, `transform`\), only their versions and configs are modifiable.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="harvester-name" type="string" required=false %}
+name of the harvester that should be updated
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="metadataExtractor" type="object" required=false %}
+metadata extractor application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are `version:string` \(registered app version in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="transform" type="object" required=false %}
+scriptable transform application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fileds are  `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` \(script language\), `script:string` \(script that transforms the data\).
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="sourceType" type="object" required=false %}
+existing sourceType that this harvester receives data from. _Optional_ fields are `version:string`, `configuration:map`, `deployerConfiguration:map`, `appConfiguration:map`
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="eventType" type="object" required=false %}
+existing eventType that this harvester should process. Changeable field `version:string`.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="description" type="string" required=false %}
+harvester description
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="displayName" type="string" required=false %}
+human readable name. Needs to be unique.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "name": "harvester-post",
+    "displayName": "Harvester Post",
+    "dlqTopic": "grnry_harvester_dlq_harvester-post",
+    "sourceType": {
+        "name": "grnry-jdbc",
+        "version": "latest",
+        "configuration": {
+            "password" : "secret",
+            "username" : "su",
+            "hostname" : "beefy-db-host"
+        },
+        "deploymentConfiguration": {
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]",
+            "kubernetes.limits.cpu": "400m",
+            "kubernetes.requests.cpu": "400m",
+            "kubernetes.volumeMounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }]",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.imagePullPolicy": "Always",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.livenessProbeDelay": "120",
+            "kubernetes.readinessProbeDelay": "120"
+        },
+        "appConfiguration": {
+        
+        }
+    },
+    "metadataExtractor": {
+        "app": "grnry-data-in-metadata",
+        "version": "1",
+        "deploymentConfiguration": {
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.livenessprobedelay": "120",
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.limits.cpu": "500m",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
+            "kubernetes.imagepullpolicy": "Always"
+        },
+        "appConfiguration": {
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3",
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6"
+        }
+    },
+    "transform": {
+        "app": "grnry-scriptable",
+        "version": "2",
+        "deploymentConfiguration": {
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.limits.cpu": "500m"
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.livenessprobedelay": "120"
+        },
+        "appConfiguration": {
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true"
+        },
+        "language": "groovy",
+        "script": "return new String(payload , 'UTF-8');"
+    },
+    "eventType": {
+        "name": "snowplow-a",
+        "version": "latest"
+    },
+    "_links": {
+        "self": {
+            "href": "https://development.analytics.ventures.syncier.cloud/harvesters/instances/harvester-post"
+        }
+    }
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=304 %}
+{% api-method-response-example-description %}
+Harvester is not modified.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1580290821033,
+    "message": "displayName : string length must be between 3 and 60 but is 101",
+    "details": "uri=/harvesters/instances/demo-set-all"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1580290961327,
+    "message": "Access is denied",
+    "details": "uri=/harvesters/instances/demo-set-all"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1580291007569,
+    "message": "No harvester found with name 'demo-set-all'.",
+    "details": "uri=/harvesters/instances/demo-set-al"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=409 %}
+{% api-method-response-example-description %}
+Another harvester with provided `displayName` is already present.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1580290695918,
+    "message": "harvester with displayName 'Harvester Post' already exists ",
+    "details": "uri=/harvesters/instances/demo-set-all"
 }
 ```
 {% endapi-method-response-example %}
