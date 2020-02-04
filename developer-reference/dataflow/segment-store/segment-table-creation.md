@@ -1,8 +1,15 @@
 # Segment Table Creation
 
-## Segment Table Creation Job
+## Segment Creation Job
 
-This component generates distributed tables, co-located with distributed Citus source tables, which can be understood as materialized views. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. Currently, two different generator types are available:
+This component generates so-called segments, which can be understood as \(materialized\) views on the data. Depending on the selected storage-layer, segments can be views or tables. The available storage layers are: 
+
+* Citus Data PostgreSQL 
+* Amazon Aurora PostgreSQL
+
+Using Citus, segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. Using Aurora, segments are configured to be either tables or views \(allowing to leverage Auroras read replicas\).
+
+Currently, two different segment generator types are available:
 
 * Pivot, which generates tuples from a table comprising key/value-like tuples
 * Generic, which builds a filtered version of the input table.
@@ -18,8 +25,10 @@ More detailed instructions can be found [here.](../../../operator-reference/inst
 | Parameter | Description | Default |
 | :--- | :--- | :--- |
 | `TYPE` | type of generator, `pivot` or `generic` | `pivot` |
-| `DB_HOST` | citus master host | `grnry-pg-citus-master` |
-| `DB_PORT` | citus master port | `5432` |
+| `DB_TYPE` | storage-layer type, `citus` or `aurora` | `citus` |
+| `DB_USE_VIEWS` | flag indicating if generated segment should be a view \(aurora-only\) | `false` |
+| `DB_HOST` | database endpoint \(citus master host or aurora writer/reader endpoint\) | `grnry-pg-citus-master` |
+| `DB_PORT` | database port | `5432` |
 | `DB_USER` | postgres user name | Secret Reference needed |
 | `DB_PASSWORD` | postgres user password | Secret Reference needed |
 | `DB_NAME` | name of the database | Secret Reference needed |
@@ -40,12 +49,12 @@ More detailed instructions can be found [here.](../../../operator-reference/inst
 
 ### Segment Indexes
 
-There are parameters to define **indexes** on the resulting segment.
+There are parameters to define **indexes** on the resulting segment. Note that creating indexes is not possible on segments that are generated as views.
 
 | Parameter | Description | Default |
 | :--- | :--- | :--- |
 | `TARGET_SEGMENT_INDEX_SEPARATOR` | separator between index definitions | \| |
-| `TARGET_SEGMENT_INDEXES` | defines index name and expression. must be in format `<name>=<index expression>.`for example `segidx1=(event_id)` or `segidx2= USING gin (body_json, headers)` | \`\` |
+| `TARGET_SEGMENT_INDEXES` | defines index name and expression. must be in format `<name>=<index expression>.`for example `segidx1=(event_id)` or `segidx2= USING gin (body_json, headers)` |  |
 
 ### Segment Views
 
@@ -94,7 +103,7 @@ Detailed configuration
       <td style="text-align:left">-</td>
     </tr>
   </tbody>
-</table>One can now set access to the resulting views, containing either unlocked or locked profiles, via Granary's [IAM control](../../../operator-reference/identity-and-access-management.md).
+</table>One can now set access to the resulting views, containing either unlocked or locked profiles, via Granary's [IAM control](../../../operator-reference/identity-and-access-management/).
 
 ### Generic Generator
 
