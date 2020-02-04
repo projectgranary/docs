@@ -74,7 +74,7 @@
   * [Granary UI](operator-reference/installation/granary-ui.md)
   * [GraphQL API](operator-reference/installation/graphql-api.md)
   * [Zipkin](operator-reference/installation/zipkin.md)
-* [Identity and Access Management](operator-reference/identity-and-access-management/README.md)
+* [Identity and Access Management](operator-reference/identity-and-access-management.md)
   * [Granary Access Clients](operator-reference/identity-and-access-management/granary-access-clients.md)
   * [Adding Roles to Keycloak Clients](operator-reference/identity-and-access-management/adding-roles-to-keycloak-clients.md)
 * [Migration guide](operator-reference/migration-guide.md)

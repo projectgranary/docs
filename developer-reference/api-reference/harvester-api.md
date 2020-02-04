@@ -18,6 +18,9 @@ description: Springboot-based microservice to manage harvesters and event types.
 * GET /harvesters/instances/{harvester-name}
 * POST /harvesters/instances
 * PUT /harvesters/instances/{harvester-name}
+* DELETE /harvesters/instances/{harvester-name}
+* GET /harvesters/instances/{harvester-name}/state
+* POST /harvesters/instances/{harvester-name}/state
 
 ### Event Type Endpoints
 
@@ -1626,6 +1629,137 @@ Another harvester with provided `displayName` is already present.
     "timestamp": 1580290695918,
     "message": "harvester with displayName 'Harvester Post' already exists ",
     "details": "uri=/harvesters/instances/demo-set-all"
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="delete" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name" %}
+{% api-method-summary %}
+Delete a Harvester
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Deletes the given Harvester.  
+This request requires the role `harvester_edit`.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="harvester-name" type="string" required=true %}
+Name of the Harvester.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication token.
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="get" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name/state" %}
+{% api-method-summary %}
+Get Harvester Instance State
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Get the current state of a harvester instance.  
+This request required the role `harvester_read`.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="harvester-name" type="string" required=true %}
+Name of the harvester.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication token.
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "status": "RUNNING",
+    "_links": {
+        "self": {
+            "href": "https://hostname/harvesters/instances/harvester-1/state"
+        }
+    }
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="post" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name/state" %}
+{% api-method-summary %}
+Post Harvester Instance State
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Start or stop the state of the given Harvester.  
+This request requires the roles `harvester_read` and `harvester_edit`.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="harvester-name" type="string" required=true %}
+Name of the Harvester.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication token.
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "status": "DEPLOYING",
+    "_links": {
+        "self": {
+            "href": "https://hostname/harvesters/instances/harvester-1/state"
+        }
+    }
 }
 ```
 {% endapi-method-response-example %}

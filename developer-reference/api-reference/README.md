@@ -26,5 +26,5 @@ The Authorization header field needs to be send with every request. Since the JW
 Authorization: Bearer <token>
 ```
 
-For more information on Granary's API authentication read the [identity and access management guide](../../operator-reference/identity-and-access-management/).
+For more information on Granary's API authentication read the [identity and access management guide](../../operator-reference/identity-and-access-management.md).
 
