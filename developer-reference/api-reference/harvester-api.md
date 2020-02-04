@@ -968,6 +968,18 @@ status of :even-type-name \(event-type-1\)
 {% endapi-method-spec %}
 {% endapi-method %}
 
+Possible values for the status attribute in the response body are:
+
+| Status | Descriptio |
+| :--- | :--- |
+| UNKNOWN | status could not be determined |
+| STOPPED | persister is not deployed |
+| DEPLOYING | persister is being deployed |
+| STOPPING | persister is being stopped |
+| RUNNING | persister is running |
+| RUNNING\_BUT\_OUTDATED | persister is running but there is a newer version of it in the database |
+| FAILED | persister is deployed but not running |
+
 {% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
 {% api-method-summary %}
 Update State of a Persister for a Specific Event Type
