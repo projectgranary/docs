@@ -6,6 +6,9 @@
 
 * [Granary Glossary](learning-grnry-1/granary-glossary.md)
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
+  * [Event Types](learning-grnry-1/data-in/event-types.md)
+  * [Source Types](learning-grnry-1/data-in/source-types.md)
+  * [Harvesters](learning-grnry-1/data-in/harvesters.md)
   * [Getting Started](learning-grnry-1/data-in/getting-started.md)
   * [Scriptable Transform for Snowplow Events](learning-grnry-1/data-in/scriptable-transform-for-snowplow-events.md)
   * [Easing development](learning-grnry-1/data-in/easing-development.md)
