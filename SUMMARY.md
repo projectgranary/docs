@@ -54,6 +54,7 @@
   * [Event Store API](developer-reference/api-reference/event-store-api.md)
   * [Belt API](developer-reference/api-reference/belt-api.md)
   * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
+  * [Lineage Report](developer-reference/api-reference/lineage-report.md)
 
 ## Operator Reference
 
