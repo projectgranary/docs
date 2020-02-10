@@ -1877,7 +1877,33 @@ Authentication token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "logs": [
+        "\tgroup.id = g-h-snowplow-catch-all",
+        "\theartbeat.interval.ms = 3000",
+        "\tinterceptor.classes = []",
+        "\tinternal.leave.group.on.close = true",
+        "\tisolation.level = read_uncommitted",
+        "\tkey.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer",
+        "\tmax.partition.fetch.bytes = 1048576",
+        "\tmax.poll.interval.ms = 300000",
+        "\tmax.poll.records = 500",
+        "\tmetadata.max.age.ms = 300000",
+        "\tmetric.reporters = []",
+        "\tmetrics.num.samples = 2",
+        "\tmetrics.recording.level = INFO",
+        "\tmetrics.sample.window.ms = 30000",
+        "\tpartition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]",
+        "\treceive.buffer.bytes = 65536",
+        "\treconnect.backoff.max.ms = 1000",
+        "\treconnect.backoff.ms = 50",
+        "\trequest.timeout.ms = 30000",
+        "\tretry.backoff.ms = 100",
+        "\tsasl.client.callback.handler.class = null",
+        "\tsasl.jaas.config = null",
+        ...
+    ]
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
