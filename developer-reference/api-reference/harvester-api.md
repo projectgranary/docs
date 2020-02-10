@@ -1079,7 +1079,43 @@ Valid value are : 1 .. 5000. Default: 5000.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "logs": [
+        "\tsasl.kerberos.service.name = null",
+        "\tsasl.kerberos.ticket.renew.jitter = 0.05",
+        "\tsasl.kerberos.ticket.renew.window.factor = 0.8",
+        "\tsasl.login.callback.handler.class = null",
+        "\tsasl.login.class = null",
+        "\tsasl.login.refresh.buffer.seconds = 300",
+        "\tsasl.login.refresh.min.period.seconds = 60",
+        "\tsasl.login.refresh.window.factor = 0.8",
+        "\tsasl.login.refresh.window.jitter = 0.05",
+        "\tsasl.mechanism = GSSAPI",
+        "\tsecurity.protocol = PLAINTEXT",
+        "\tsend.buffer.bytes = 131072",
+        "\tsession.timeout.ms = 10000",
+        "\tssl.cipher.suites = null",
+        "\tssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]",
+        "\tssl.endpoint.identification.algorithm = https",
+        "\tssl.key.password = null",
+        "\tssl.keymanager.algorithm = SunX509",
+        "\tssl.keystore.location = null",
+        "\tssl.keystore.password = null",
+        "\tssl.keystore.type = JKS",
+        "\tssl.protocol = TLS",
+        "\tssl.provider = null",
+        "\tssl.secure.random.implementation = null",
+        "\tssl.trustmanager.algorithm = PKIX",
+        "\tssl.truststore.location = null",
+        "\tssl.truststore.password = null",
+        "\tssl.truststore.type = JKS",
+        "\tvalue.deserializer = class de.saly.kafka.crypto.DecryptingDeserializer",
+        "",
+        "2020-02-10 09:30:02.221  INFO [g-p-pg-snowplow-a-sink,,,] 1 --- [container-3-C-1] org.apache.kafka.clients.Metadata        : Cluster ID: v8AY3bE6Sou7aXjAfipNQQ",
+        "2020-02-10 09:30:02.221  INFO [g-p-pg-snowplow-a-sink,,,] 1 --- [container-3-C-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=consumer-6, groupId=g-p-pg-snowplow-a] Discovered group coordinator 10.42.2.218:9092 (id: 2147483647 rack: null)",
+        ...
+    ]
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
