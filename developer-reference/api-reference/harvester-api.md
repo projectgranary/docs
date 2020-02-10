@@ -970,7 +970,7 @@ status of :even-type-name \(event-type-1\)
 
 Possible values for the status attribute in the response body are:
 
-| Status | Descriptio |
+| Status | Description |
 | :--- | :--- |
 | UNKNOWN | status could not be determined |
 | STOPPED | persister is not deployed |
@@ -1168,7 +1168,7 @@ returns all details of a given harvester
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="harvester-name" type="string" required=true %}
-
+technical name of harvester
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 {% endapi-method-request %}
@@ -1278,7 +1278,9 @@ Create Harvester
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Creates a new harvester instance. Source type and event type are referenced by `name` and `version` in event\_types and source\_types tables. If no configuration properties are set under `sourceType` \(resp. `eventType`\) configuration from these entities will be applied.
+Creates a new harvester instance. A technical name for the harvester instance will be derived from given `displayName` by removing all special characters, replacing white spaces with hyphens and limiting the length to 20 characters. Should the created harvester name be already in use the last four characters will be replaced by a suffix of numbers.  
+  
+Source type and event type are referenced by `name` and `version` in event\_types and source\_types tables. If no configuration properties are set under `sourceType` \(resp. `eventType`\) configuration from these entities will be applied.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1309,7 +1311,7 @@ harvester description
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="displayName" type="string" required=true %}
-human readable name. Needs to be unique
+human readable name. Needs to be unique. A technical name will be derived from it.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -1479,7 +1481,7 @@ harvester description
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="displayName" type="string" required=false %}
-human readable name. Needs to be unique.
+human readable name. Needs to be unique. Technical name of the harvester will remain unchanged.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -1662,7 +1664,7 @@ This request requires the role `harvester_edit`.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="harvester-name" type="string" required=true %}
-Name of the Harvester.
+Technical name of the Harvester.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -1701,7 +1703,7 @@ This request required the role `harvester_read`.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="harvester-name" type="string" required=true %}
-Name of the harvester.
+Technical name of the harvester.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -1733,6 +1735,20 @@ Authentication token.
 {% endapi-method-spec %}
 {% endapi-method %}
 
+
+
+Possible values for the status attribute in the response body are:
+
+| Status | Description |
+| :--- | :--- |
+| UNKNOWN | status could not be determined |
+| STOPPED | harvester is not deployed |
+| DEPLOYING | harvester is being deployed |
+| STOPPING | harvester is being stopped |
+| RUNNING | harvester is running |
+| RUNNING\_BUT\_OUTDATED | harvester is running but there is a newer version of it in the database |
+| FAILED | harvester is deployed but not running |
+
 {% api-method method="post" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name/state" %}
 {% api-method-summary %}
 Post Harvester Instance State
@@ -1747,7 +1763,7 @@ This request requires the roles `harvester_read` and `harvester_edit`.
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="harvester-name" type="string" required=true %}
-Name of the Harvester.
+technical name of the Harvester.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -1756,6 +1772,12 @@ Name of the Harvester.
 Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="action" type="string" required=false %}
+updates the status of this harvester. Possible values: `START`, `STOP`
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -1773,6 +1795,53 @@ Authentication token.
         }
     }
 }
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="get" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name/logs/:step-name" %}
+{% api-method-summary %}
+Get Harvester Instance Logs
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Get the logs of a specific Step of a specific Harvester Instance.  
+This request requires the role `harvester_read`.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="line" type="string" required=false %}
+Number of maximum lines the log should contain. Default is `500`
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="step-name" type="string" required=true %}
+Name of the Harvester Step.  The name must be `sourceType`, `transform`, or `metadataExtractor`.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="harvester-name" type="string" required=true %}
+Technical name of the Harvester.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication token.
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
