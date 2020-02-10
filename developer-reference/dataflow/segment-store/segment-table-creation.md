@@ -27,7 +27,7 @@ More detailed instructions can be found [here.](../../../operator-reference/inst
 | `TYPE` | type of generator, `pivot` or `generic` | `pivot` |
 | `DB_TYPE` | storage-layer type, `citus` or `aurora` | `citus` |
 | `DB_USE_VIEWS` | flag indicating if generated segment should be a view \(aurora-only\) | `false` |
-| `DB_HOST` | database endpoint \(citus master host or aurora writer/reader endpoint\) | `grnry-pg-citus-master` |
+| `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg-citus-master` |
 | `DB_PORT` | database port | `5432` |
 | `DB_USER` | postgres user name | Secret Reference needed |
 | `DB_PASSWORD` | postgres user password | Secret Reference needed |
