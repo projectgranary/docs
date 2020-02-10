@@ -9,6 +9,7 @@ In order to allow for an easier access to and a smoke test for Granary, a [POSTM
 * [Belt API](belt-api.md)
 * [Event Store API](event-store-api.md)
 * [Profile Store API](profile-store-api.md)
+* [Harvester API](harvester-api.md)
 
 To use it, the following two files need to be imported into POSTMAN:
 
@@ -26,5 +27,5 @@ The Authorization header field needs to be send with every request. Since the JW
 Authorization: Bearer <token>
 ```
 
-For more information on Granary's API authentication read the [identity and access management guide](../../operator-reference/identity-and-access-management.md).
+For more information on Granary's API authentication read the [identity and access management guide](../../operator-reference/identity-and-access-management/).
 
