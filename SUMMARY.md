@@ -41,7 +41,7 @@
     * [Scriptable Transform](developer-reference/dataflow/data-in/scriptable-transform.md)
     * [Metadata Extractor](developer-reference/dataflow/data-in/metadata-extractor.md)
     * [Sessionizing Processor](developer-reference/dataflow/data-in/sessionizing-processor.md)
-    * [EventStore Sinks](developer-reference/dataflow/data-in/eventstore-sink.md)
+    * [EventStore Sink](developer-reference/dataflow/data-in/eventstore-sink.md)
   * [Event Store and Replay](developer-reference/dataflow/event-store.md)
   * [Belt Extractor](developer-reference/dataflow/belt-extractor.md)
   * [Profile Store](developer-reference/dataflow/profile-store/README.md)
