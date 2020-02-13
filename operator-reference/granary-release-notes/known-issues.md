@@ -207,8 +207,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Snowplow GET Events not transformed correctly by Scriptable Transform</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/446">#446</a>
+        <td style="text-align:left">0.6.0</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/446">#446</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
@@ -280,8 +283,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2019_0026</td>
       <td style="text-align:left">Belt updates in the Belt API are not properly logged</td>
       <td style="text-align:left">0.6.0</td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left">#493</td>
+      <td style="text-align:left">0.6.5</td>
+      <td style="text-align:left">
+        <p>#493</p>
+        <p>(closed)</p>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left">Belt API</td>
@@ -297,8 +303,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2019_0028</td>
       <td style="text-align:left">POST /belts/{id}/state is not secured by a role</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left">#524</td>
+      <td style="text-align:left">0.6.5</td>
+      <td style="text-align:left">
+        <p>#524</p>
+        <p>(closed)</p>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left">Spring Cloud Data Flow Apps</td>
