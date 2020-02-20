@@ -60,10 +60,27 @@ Configuration file is ./config.py
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"><b>base_url</b>
+      <td style="text-align:left"><b>api_urls</b>
       </td>
-      <td style="text-align:left">Base URL of the API to be used.</td>
-      <td style="text-align:left"></td>
+      <td style="text-align:left">map of api endpoints to their base urls. <code>fallback</code> will be used
+        in case the api (key) is not in the map.</td>
+      <td style="text-align:left">
+        <p><code>{&quot;harvester-api&quot;:token_url,</code>
+        </p>
+        <p><code>&quot;belt-api&quot;:token_url,</code>
+        </p>
+        <p><code>...,</code>
+        </p>
+        <p><code>&quot;fallback&quot;:token_url}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b>token_url</b>
+      </td>
+      <td style="text-align:left">fallback URL of the API to be used.</td>
+      <td style="text-align:left"><code>&quot;URL&quot;</code>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left"><b>destfile_profilestore</b>
@@ -110,7 +127,18 @@ credentials = {
     "password":"PASSWORD",
     "client_id":"profile-api"
 }
-base_url = "URL"
+token_url = "URL"
+
+api_urls = {
+    "belts": token_url,
+    "harvesters": token_url,
+    "profiles": token_url,
+    "events": token_url,
+    "event-types": token_url,
+    "fallback": token_url # Prevents Errors on changing/extending API's
+                          # Defaults e.g. to token_url. 
+}
+
 destfile_profilestore = "profileStoreExport.csv"
 destfile_eventstore = "eventStoreExport.csv"
 delimiter = "\t"
@@ -121,26 +149,27 @@ correlationIds = []
 ## Example output
 
 ```text
-harvester    eventType           beltId    beltName          correlationId                                                                           profileType                      path
------------  ------------------  --------  ----------------  --------------------------------------------------------------------------------------  -------------------------------  -----------------------------------------------------------------------
-N/A          N/A                 N/A       N/A               data@grnry.io                                                                           account                          /FirstName
-N/A          N/A                 N/A       N/A               data@grnry.io                                                                           account                          /_id@session@profile_store
-N/A          N/A                 N/A       N/A               data@grnry.io                                                                           account                          /_id@session@profile_store
-N/A          N/A                 N/A       N/A               data@grnry.io                                                                           account                          /_id@session@profile_store
-N/A          N/A                 N/A       N/A               data@grnry.io                                                                           account                          /LastName
-N/A          N/A                 N/A       N/A               data@grnry.io                                                                           account                          /Phone
-N/A          N/A                 N/A       N/A               data@grnry.io                                                                           account                          /salesforceid
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /lengths/2018-07
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /lengths/2018-08
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /lengths/2018-09
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /visits/2018-07
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /visits/2018-08
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /visits/2018-09
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /visits/2019-10
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /visits/2019-11
-N/A          N/A                 N/A       myorigin          ProfileA                                                                                agency                           /visits/2019-12
-N/A          N/A                 N/A       N/A               2097-1904                                                                               Airports                         /airports
-N/A          N/A                 N/A       integration-test  e2e-sessionizing-test_da43995b-60ec-4128-837a-8a30008155f0-1576016709266-1576016800289  e2e-sessionizing-test            /number_of_messages
-N/A          snowplow-catch-all  465       e2e-tracing-belt  15                                                                                      E2ETracingProfileType            /e2e-tracing
+harvester    eventType               beltId    beltName          correlationId                                                                           profileType                      path
+-----------  ------------------      --------  ----------------  --------------------------------------------------------------------------------------  -------------------------------  -----------------------------------------------------------------------
+N/A          N/A                     N/A       N/A               data@grnry.io                                                                           account                          /FirstName
+N/A          N/A                     N/A       N/A               data@grnry.io                                                                           account                          /_id@session@profile_store
+N/A          N/A                     N/A       N/A               data@grnry.io                                                                           account                          /_id@session@profile_store
+N/A          N/A                     N/A       N/A               data@grnry.io                                                                           account                          /_id@session@profile_store
+N/A          N/A                     N/A       N/A               data@grnry.io                                                                           account                          /LastName
+N/A          N/A                     N/A       N/A               data@grnry.io                                                                           account                          /Phone
+N/A          N/A                     N/A       N/A               data@grnry.io                                                                           account                          /salesforceid
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /lengths/2018-07
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /lengths/2018-08
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /lengths/2018-09
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /visits/2018-07
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /visits/2018-08
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /visits/2018-09
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /visits/2019-10
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /visits/2019-11
+N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /visits/2019-12
+N/A          N/A                     N/A       N/A               2097-1904                                                                               Airports                         /airports
+N/A          N/A                     N/A       integration-test  e2e-sessionizing-test_da43995b-60ec-4128-837a-8a30008155f0-1576016709266-1576016800289  e2e-sessionizing-test            /number_of_messages
+snowplow-catch-all	snowplow-catch-all	634	    536-test-belt	    a8df2c	                                                                                test-536	                    /opensky
+snowplow-catch-all-	snowplow-catch-all	634	    536-test-belt	    a8df2c	                                                                                test-536	                    /opensky
 ```
 

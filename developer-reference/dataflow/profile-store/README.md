@@ -224,7 +224,7 @@ The profile store is a distributed table in a database. Each tuple in that table
 
 Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store. These Profile Updates must follow the specification in [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md\#profile-update-specification](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md#profile-update-specification). Currently there are the following operations:
 
-#### Operations
+#### Update Operations
 
 | Operation Name | Input Type | Output |
 | :--- | :--- | :--- |
