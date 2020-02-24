@@ -1,8 +1,8 @@
 # API Reference
 
-## **POSTMAN Collection**
+## Postman **Collection**
 
-In order to allow for an easier access to and a smoke test for Granary, a [POSTMAN collection](https://learning.getpostman.com/docs/postman/collections/intro_to_collections/) is provided for all Granary API endpoints. It includes sample requests for:
+In order to allow for an easier access to and a smoke test for Granary, a [Postman collection](https://learning.getpostman.com/docs/postman/collections/intro_to_collections/) is provided for all Granary API endpoints. It includes sample requests for:
 
 * [Spring Cloud Data Flow API](../../learning-grnry-1/data-in/getting-started.md)
 * [Snowplow API](snowplow-api-endpoints.md)

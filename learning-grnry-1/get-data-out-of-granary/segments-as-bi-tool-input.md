@@ -1,4 +1,4 @@
-# Segments as BI Tool Input
+# Aggregation Segments as BI Tool Input
 
 Profiles contain integrated views on your entities. They comprise master data and pre-defined aggregates. If profiles contain \(copies of\) events, then these are a special form of very fine-grained aggregates, which we do not recommend. It is good practice to define what you need  for your use case and store solely what is required. If you cannot integrate or aggregate data, then the entity you profile or the way you model your entity might not be the right choice.
 
