@@ -1,8 +1,8 @@
 ---
-description: This page describes a run-through of creating a Belt with built-in GRNRY
+description: This page describes a run-through of creating a Belt
 ---
 
-# Getting Started
+# How to run a Belt
 
 In order to use Belts with GRNRY, there are two different approaches:
 

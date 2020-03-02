@@ -2,7 +2,7 @@
 description: 'On this page, we are going to discuss best practices for the usage of BELTS.'
 ---
 
-# Data Modeling Best Practices
+# Best Practices for Data Modeling
 
 ### Guiding Principles
 
