@@ -11,7 +11,7 @@
     * [Source Types](learning-grnry-1/data-in/how-to-run-a-harvester/source-types.md)
     * [Harvesters](learning-grnry-1/data-in/how-to-run-a-harvester/harvesters.md)
     * [Deploy and App Configuration](learning-grnry-1/data-in/how-to-run-a-harvester/getting-started.md)
-  * [Easing development](learning-grnry-1/data-in/easing-development/README.md)
+  * [Easing Development](learning-grnry-1/data-in/easing-development/README.md)
     * [How to test your developments](learning-grnry-1/data-in/easing-development/how-to-unit-test-your-developments.md)
   * [Best Practices](learning-grnry-1/data-in/best-practices-1/README.md)
     * [Scriptable Transform for Snowplow Events](learning-grnry-1/data-in/best-practices-1/scriptable-transform-for-snowplow-events.md)
