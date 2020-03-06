@@ -72,7 +72,7 @@ Number of source types returned per page. Default is `20`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="string" required=false %}
-Offset of the requested page. Default is `0`.
+Offset of the requested page. Default is `0`. Must be a whole multiple of `pagesize`. 
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -83,7 +83,7 @@ Offset of the requested page. Default is `0`.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "sourceTypes": [
         {
@@ -167,7 +167,7 @@ Number of source types returned per page. Default is
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="string" required=false %}
-Offset of the requested page. Default is `0` . 
+Offset of the requested page. Default is `0` . Must be a whole multiple of `pagesize`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -178,7 +178,7 @@ Offset of the requested page. Default is `0` .
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "sourceTypes": [
         {
@@ -252,7 +252,7 @@ Authentication token.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "name": "grnry-jdbc",
     "version": "latest",
@@ -310,7 +310,7 @@ Get all Event Types
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get latest version of all event-types.  
+Returns a list of all event types \(latest version of each event type\)  
 This request requires the role `event_type_read`.
 {% endapi-method-description %}
 
@@ -328,7 +328,7 @@ Expand the response with `totalCount`, or `persisters` to show either the count 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="search" type="string" required=false %}
-Filter event types by names containing this search term Default is `""`.
+Filter event types by displaynames containing this search term Default is `""`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="pagesize" type="string" required=false %}
@@ -336,7 +336,7 @@ Number of event types returned per page. Default is `20`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="string" required=false %}
-Offset of the requested page. Default is `0`.
+Offset of the requested page. Default is `0`. Must be a whole multiple of `pagesize`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -347,38 +347,52 @@ Offset of the requested page. Default is `0`.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "_links": {
         "self": {
-            "href": "https://hostname/event-types?search=&offset=0&pagesize=20&expand="
+            "href": "https://grnry-host/event-types?search=&offset=0&pagesize=20&expand="
         }
     },
     "eventTypes": [
-        {
-            "name": "event-type-3",
-            "version": "1",
+       {
+            "name": "snowplow-tracking",
+            "displayName": "snowplow-tracking",
+            "version": 1,
+            "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
+            "eventIdExpression": "#randomUUID()",
+            "timestampExpression": "#nowMillis()",
+            "topicName" : "grnry_data_in_snowplow-tracking",
+            "retentionMs": 3456000000,
+            "partitionCount": 32,
+            "replication": 2,
+            "eventstoreTTL": "P100Y",
+            "description": "",
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/event-type-3/1"
+                    "href": "https://grnry-host/event-types/snowplow-tracking/1"
                 }
             }
         },
         {
-            "name": "postman-event-type",
-            "version": "4",
+            "name": "call-records",
+            "displayName": "call-records",
+            "version" : 10,
+            ....
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/postman-event-type/4"
+                    "href": "https://hostname/event-types/call-records/10"
                 }
             }
         },
         {
-            "name": "postman-test-event-type",
-            "version": "2",
+            "name": "invoices",
+            "displayName": "invoices",
+            "version" : 5,
+            ....
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/postman-test-event-type/2"
+                    "href": "https://hostname/event-types/invoices/5"
                 }
             }
         }
@@ -396,7 +410,7 @@ Get all versions of an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get all versions of a given event type.   
+Get all versions of a given event type.  
 This request requires the role `event_type_read`.
 {% endapi-method-description %}
 
@@ -421,47 +435,45 @@ Authentication token
 All versions of the requested `:event-type-name` \(`postman-event-type`\).
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/postman-event-type"
+            "href": "https://grnry-host/event-types/postman-event-type"
         }
     },
     "eventTypes": [
         {
             "name": "postman-event-type",
+            "displayName:" "postman-event-type",
             "version": "1",
+            ....
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/postman-event-type/1"
+                    "href": "https://grnry-host/event-types/postman-event-type/1"
                 }
             }
         },
         {
             "name": "postman-event-type",
+            "displayName:" "postman-event-type",
             "version": "2",
+            ...
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/postman-event-type/2"
+                    "href": "https://grnry-host/event-types/postman-event-type/2"
                 }
             }
         },
+        ....
         {
             "name": "postman-event-type",
-            "version": "3",
+            "displayName:" "postman-event-type"
+            "version": "12",
+            ....
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/postman-event-type/3"
-                }
-            }
-        },
-        {
-            "name": "postman-event-type",
-            "version": "4",
-            "_links": {
-                "self": {
-                    "href": "https://hostname/event-types/postman-event-type/4"
+                    "href": "https://grnry-host/event-types/postman-event-type/4"
                 }
             }
         }
@@ -491,6 +503,30 @@ Authentication token.
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="eventstoreTTL" type="string" required=false %}
+time-to-live configuration for all eventstores in ISO 8601 Duration format.  
+Default P100Y \(100 years\)
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="replication" type="integer" required=false %}
+Kafka topic replication factor.   
+Default: 3  
+Note: this setting is only available on event type creation and can not be updated afterwards.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="partitionCount" type="integer" required=false %}
+Kafka topic partition count.   
+Default: 32  
+Note: This settting is only available on event type creation and can not be updated afterwards.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="retentionMs" type="number" required=false %}
+kafka topic retention in milliseconds.   
+Used for kafka topic config of segment.ms and retention.ms.  
+Default: 345600000 \( 4 days\)  
+Note: This setting is only available on event type creation and can not be updated afterwards.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="description" type="string" required=false %}
 description of the eventType.
 {% endapi-method-parameter %}
@@ -503,12 +539,13 @@ The SpringEL expression to create the grnry-event-id.
 The SpringEL expression to create the grnry-correlation-id.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="timestampExpression" type="string" required=true %}
-The SpringEL Expression to create the grnry-event-timestamp \(Milliseconds since 1.1.1970 UTC\)
+{% api-method-parameter name="timestampExpression" type="string" required=false %}
+The SpringEL Expression to create the grnry-event-timestamp. Expression has to return milliseconds since 1.1.1970 UTC.  
+Default: \#nowMillis\(\)
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
-Name of the new event type
+{% api-method-parameter name="displayName" type="string" required=true %}
+Displayname of the new event type
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -519,7 +556,7 @@ Name of the new event type
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "name": "event-type-4",
     "version": "1",
@@ -542,16 +579,14 @@ Update an Event Type
 
 {% api-method-description %}
 Fully or partially updates an event type.  
-This requires the requester to assume roles of both `event-type-read` and `event-type-edit`.   
-  
-If no delta is recognized, no update will be made and HTTP 304 will be returned.
+This requires the requester to assume roles of both `event-type-read` and `event-type-edit`.If no delta is recognized, no update will be made and HTTP 304 will be returned.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="event-type-name" type="string" required=true %}
-Name of the event type 
+Name of the event type
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -560,6 +595,32 @@ Name of the event type
 Authentication token
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="displayName" type="string" required=false %}
+The displayname used in the UI
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="timestampExpression" type="string" required=false %}
+The SpringEL expression to create the grnry-event-timestamp. It has to return milliseconds since 1.1.1970 UTC.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="description" type="string" required=false %}
+The description of the event type
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="eventstoreTTL" type="string" required=false %}
+time-to-live configuration for all eventstores in ISO 8601 duration format.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="eventIdExpression" type="string" required=false %}
+The SpringEL expression to create the grnry-event-id
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="correlationIdExpression" type="string" required=false %}
+The SpringEL expression to create the grnry-correlation-id.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -568,19 +629,26 @@ Authentication token
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
-   "name":"test-event-type",
-   "version":"latest",
-   "correlationIdExpression":"$['new']['correlation']['id']",
-   "eventIdExpression":"$['test']['path']['eventId']",
-   "timestampExpression":"$['test']['path']['timestamp']",
-   "_links":{
-      "self":{
-         "href":"http://hostname/event-types/test-event-type/latest"
-      }
-   }
-}
+        "name": "foo-test",
+        "displayName": "my-test-type"
+        "version": 2,
+        "topicName" : "grnry_data_in_foo-test",
+        "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
+        "eventIdExpression": "#randomUUID()",
+        "timestampExpression": "#nowMillis()",
+        "retentionMs": 3456000000,
+        "partitionCount": 32,
+        "replication": 2,
+        "eventstoreTTL": "P100Y",
+        "description": "",
+        "_links": {
+            "self": {
+                "href": "https://grnry-host/event-types/foo-test/2"
+            }
+        }
+    },
 ```
 {% endapi-method-response-example %}
 
@@ -589,7 +657,7 @@ Authentication token
 If the event type is not modified.
 {% endapi-method-response-example-description %}
 
-```
+```text
 {}
 ```
 {% endapi-method-response-example %}
@@ -599,7 +667,7 @@ If the event type is not modified.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
@@ -609,7 +677,7 @@ If the event type is not modified.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
@@ -647,17 +715,17 @@ Authentication token
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
 
 {% api-method-response-example httpCode=412 %}
 {% api-method-response-example-description %}
-There are registered belts registered, that read from the event type topic so it can't be deleted. The response provides links to all of them.
+If there are still belts and/or harvesters referencing the event-type, the deletion will fail.
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp": 1574854606738,
     "message": "event type with name test-event-type-delete is still used by belts: 
@@ -714,13 +782,23 @@ Authentication token.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
-    "name": "event-type-1",
-    "version": "4",
+    "name": "snowplow-webtracking",
+    "displayName: "snowplow-webtracking",
+    "version": 1,
+    "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
+    "eventIdExpression": "#randomUUID()",
+    "timestampExpression": "#nowMillis()",
+    "topicName" : "grnry_data_in_snowplow-webtracking",
+    "retentionMs": 3456000000,
+    "partitionCount": 32,
+    "replication": 2,
+    "eventstoreTTL": "P100Y",
+    "description": "",
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/event-type-1/4"
+            "href": "https://grnry-host/event-types/snowplow-webtracking/1"
         }
     }
 }
@@ -732,7 +810,7 @@ Authentication token.
 If the version is not latest or a valid number greater or equals to 1.
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
    "timestamp":1578934021414,
    "message":"version : Needs to be a long or latest",
@@ -785,7 +863,7 @@ Authentication token.
 requested :event-type-name \(eventtype-1\) , :event-store-name \(pg\)
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "streamName": "grnry-p-pg-postman-eventtype-1",
     "appName": "grnry-eventstore-pg",
@@ -878,7 +956,7 @@ The updated stream app version. This version has to be present in the backend sp
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "streamName": "grnry-p-pg-postman-eventtype-1",
     "appName": "grnry-eventstore-pg",
@@ -953,7 +1031,7 @@ Authentication token.
 status of :even-type-name \(event-type-1\)
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "status": "STOPPED",
     "_links": {
@@ -980,9 +1058,19 @@ Possible values for the status attribute in the response body are:
 | RUNNING\_BUT\_OUTDATED | persister is running but there is a newer version of it in the database |
 | FAILED | persister is deployed but not running |
 
+| Status | Description |
+| :--- | :--- |
+| UNKNOWN | status could not be determined |
+| STOPPED | persister is not deployed |
+| DEPLOYING | persister is being deployed |
+| STOPPING | persister is being stopped |
+| RUNNING | persister is running |
+| RUNNING\_BUT\_OUTDATED | persister is running but there is a newer version of it in the database |
+| FAILED | persister is deployed but not running |
+
 {% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
 {% api-method-summary %}
-Update State of a Persister for a Specific Event Type
+Start/Stop Persister for a Specific Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
@@ -1021,7 +1109,7 @@ Updates the status of this persister. Possible values: `START` , `STOP`
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "status": "DEPLOYING",
     "_links": {
@@ -1066,7 +1154,7 @@ Authentication token.
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="lines" type="integer" required=false %}
-The last x lines of the log \(if available\).   
+The last x lines of the log \(if available\).  
 Valid value are : 1 .. 5000. Default: 5000.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
@@ -1078,7 +1166,7 @@ Valid value are : 1 .. 5000. Default: 5000.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "logs": [
         "\tsasl.kerberos.service.name = null",
@@ -1143,7 +1231,7 @@ Show harvester details with expand=harvesters. Add total count of harvesters wit
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="integer" required=false %}
-Start offset. Default: 0
+Start offset. Default: 0. Must be a whole multiple of `pagesize`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="search" type="string" required=false %}
@@ -1158,7 +1246,7 @@ Filter harvester list by name. Default: ""
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
    "harvesters":[
       {
@@ -1215,7 +1303,7 @@ technical name of harvester
 Sample Response
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "name": "harvester-demo",
     "displayName": "Harvester Demo",
@@ -1501,7 +1589,7 @@ metadata extractor application used by this harvester. Default values for all fi
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="transform" type="object" required=false %}
-scriptable transform application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fileds are  `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` \(script language\), `script:string` \(script that transforms the data\).
+scriptable transform application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are  `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` \(script language\), `script:string` \(script that transforms the data\).
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="sourceType" type="object" required=false %}
@@ -1688,7 +1776,7 @@ Another harvester with provided `displayName` is already present.
 
 {% api-method method="delete" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name" %}
 {% api-method-summary %}
-Delete a Harvester
+Delete a Harvester Instance
 {% endapi-method-summary %}
 
 {% api-method-description %}
@@ -1717,7 +1805,7 @@ Authentication token.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
@@ -1756,7 +1844,7 @@ Authentication token.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "status": "RUNNING",
     "_links": {
@@ -1785,9 +1873,21 @@ Possible values for the status attribute in the response body are:
 | RUNNING\_BUT\_OUTDATED | harvester is running but there is a newer version of it in the database |
 | FAILED | harvester is deployed but not running |
 
+Possible values for the status attribute in the response body are:
+
+| Status | Description |
+| :--- | :--- |
+| UNKNOWN | status could not be determined |
+| STOPPED | harvester is not deployed |
+| DEPLOYING | harvester is being deployed |
+| STOPPING | harvester is being stopped |
+| RUNNING | harvester is running |
+| RUNNING\_BUT\_OUTDATED | harvester is running but there is a newer version of it in the database |
+| FAILED | harvester is deployed but not running |
+
 {% api-method method="post" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name/state" %}
 {% api-method-summary %}
-Post Harvester Instance State
+Start/Stop Harvester Instance
 {% endapi-method-summary %}
 
 {% api-method-description %}
@@ -1822,7 +1922,7 @@ updates the status of this harvester. Possible values: `START`, `STOP`
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "status": "DEPLOYING",
     "_links": {
