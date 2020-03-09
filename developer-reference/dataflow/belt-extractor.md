@@ -365,7 +365,7 @@ UPDATE :=
     "_operation": a valid update operation,                    # default is "_set"
     "_id": string,
     "_path": \[ string [,string]* \],                          # array of length >= 1
-    "_value": GRAIN_VALUE,                                     # ignored if (and only if) "_operation" is "_delete"
+    "_value": GRAIN_VALUE,                                     # must not be null
     "_profile_type": string                                    # default is "_d"
   }
 
@@ -376,7 +376,7 @@ Whereas valid update operations can be found [here](profile-store/#update-operat
 ```text
 GRAIN_VALUE := 
   {
-    "_v": string,                                    # Json object string, Json array string, or string of counter value
+    "_v": string,                                    # Json object string, Json array string, or string of counter value. Value type must fit _operation
     "_c": double,                                    # default is 1
     "_in": long,                                     # default is now()
     "_ttl": string,                                  # period of time, https://en.wikipedia.org/wiki/ISO_8601#Durations, default is "P100Y"
@@ -443,55 +443,14 @@ The Belt Extractor writes events to dead letter queue in case of exceptions are 
 {% tab title="Spec" %}
 see [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md)
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Key</th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>_schema</code>
-      </td>
-      <td style="text-align:left">schema of update message</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>_operation</code>
-      </td>
-      <td style="text-align:left">update operation, default is <code>_set</code>, see <a href="profile-store/#component-profile-updater">Profile Store</a> for
-        more information</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>_id</code>
-      </td>
-      <td style="text-align:left">identifies the profile that should be updated with this message</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>_path</code>
-      </td>
-      <td style="text-align:left">The path within the nested structure of a profile that should be updated.
-        In case the path doesn&apos;t exist yet it will be created. An array of
-        length &gt;= 1</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>_value</code>
-      </td>
-      <td style="text-align:left">
-        <p><em>Mandatory</em>. The grain value that should be set in the profile
-          under the defined <code>_path </code><em>. </em>Needs to be set by <code>set_value()</code>
-        </p>
-        <p>Ignored if (and only if) <code>_operation</code> is <code>_delete</code>,
-          but still must not be <code>None</code>.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>_profile_type</code>
-      </td>
-      <td style="text-align:left">Categorizes the profile to be updated. Default is <code>_d</code>.</td>
-    </tr>
-  </tbody>
-</table>
+| Key | Description |
+| :--- | :--- |
+| `_schema` | schema of update message |
+| `_operation` | update operation, default is `_set`, see [Profile Store](profile-store/#component-profile-updater) for more information |
+| `_id` | identifies the profile that should be updated with this message |
+| `_path` | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length &gt;= 1 |
+| `_value` | _Mandatory_. The grain value that should be set in the profile under the defined `_path` _._ Needs to be set by `set_value()`. For `_delete` operation `_v`is used to specify an array of pits to be deleted from that path. `""`, `[""]` or `[]` will delete `_latest`. |
+| `_profile_type` | Categorizes the profile to be updated. Default is `_d`. |
 {% endtab %}
 
 {% tab title="Example" %}
