@@ -4,7 +4,7 @@
 
 In order to allow for an easier access to and a smoke test for Granary, a [POSTMAN collection](https://learning.getpostman.com/docs/postman/collections/intro_to_collections/) is provided for all Granary API endpoints. It includes sample requests for:
 
-* [Spring Cloud Data Flow API](../../learning-grnry-1/data-in/getting-started.md)
+* [Spring Cloud Data Flow API](../../learning-grnry-1/data-in/how-to-run-a-harvester/getting-started.md)
 * [Snowplow API](snowplow-api-endpoints.md)
 * [Belt API](belt-api.md)
 * [Event Store API](event-store-api.md)

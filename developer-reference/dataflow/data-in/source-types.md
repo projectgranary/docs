@@ -2,7 +2,7 @@
 description: On this page you get the technical details about source types.
 ---
 
-# Source Types
+# Available Source Types
 
 Source types help you get data into the system. Source types exist for several different application types and are defined in the following. The source types mentioned here are the GRNRY specific source types. However, you may as well use the SCDF source types. For an overview of available source types you may refer to: [https://cloud.spring.io/spring-cloud-stream-app-starters/](https://cloud.spring.io/spring-cloud-stream-app-starters/)
 

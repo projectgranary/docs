@@ -234,7 +234,7 @@ Belts process input and create Profile Updates. The Profile Updater merges such 
 | _\_set\_with\_history\_distinct_ | same type as grain type | will do a _\_set\_with\_history_ only if the new value is distinct from the existing value. |
 | _\_set\_max/\_set\_min_ | text | inserts the current grain value at  _\_latest_ and, if the value already exists, the old value at _\_latest_ will be overwritten only if the new value is higher \(resp. lower\) than the old one. Numbers will be compared numerically whereas text including dates \(ISO8601\) will be compared lexicographically. _Note: Always provide full metadata set, since global default values will be set otherwise \(not existing ones\). If the pit=latest_ _value_ _does not change, no metadata update will be done either._ |
 | _\_set\_max\_with\_history/\_set\_min\_with\_history_ | text | will do a _\_set\_max_ \(resp. _\_set\_min_\) but will, in case of overwriting, additionally keep the old value at its insert point in time. |
-| _\_delete_ | - | deletes the _\_latest_ grain value at the specified path. |
+| _\_delete_ | _text_ or _array_ | if value is _`""` or `[""]` or `[]`_, then deletes the _\_latest_ grain value at the specified path. If value is _array_ of _pit_s, then deletes grain values at the specified path and with specified _pit_s. |
 | _\_inc_ | _counter_ | creates or increments a counter. |
 | _\_array\_append_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics. |
 | _\_array\_append\_with\_history_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics and stores the previous _\_latest_ grain value at pit of insertion. |
@@ -435,7 +435,8 @@ Profile Updater writes profile updates to dead letter queue in case of:
   * operation is `_inc` and grain type is not `counter`
   * operation is one of `array_append`, `_array_append_with_history`, `_array_put`, `_array_put_with_history` and grain type is not `array`
   * operation is one of `_array_remove`, `_array_remove_with_history`, `_set_min`, `_set_max`, `_set_min_with_history`, `_set_max_with_history` and grain type is not `text`
-* grain value \(`_v`\) may only be `null` for delete operation 
+* grain value \(`_v`\), for`_delete` operation is not `""` or array of pits
+* grain value array for`_delete` operation contains null values
 * certainty \(`_c`\) is not between 0 and 1
 * creation timestamp \(`_in`\) is negative
 * time to live \(`_ttl`\) does not comply ISO 860 time period

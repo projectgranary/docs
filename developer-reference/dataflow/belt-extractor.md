@@ -16,7 +16,7 @@ Belts are used to compute updates for the Costumer Graph stored in the Profile S
 * the addition of a contract the user has and what the value of that contract is
 * etc.
 
-They are defined by a label, a scale factor, an input topic and a stateless / serverless Python function that gets invoked for every event received from the respective input topic. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store.
+They are defined by a label, a scale factor, an input topic and a stateless/serverless Python function that gets invoked for every event received from the respective input topic. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store. If a function is taking too much time to process a record, it will timeout to prevent errors like infinite loops. The Belt retries and does not recover if the processing time keeps exceeding the timeout. The maximum duration for the function's execution can be configured.
 
 ## Input Topics 
 
@@ -400,6 +400,15 @@ If unspecified, default values will be used:
 | `_schema` | `null` |
 | `_operation` | `"_set"` |
 | `_profile_type` | `"_d"` |
+
+**Callback Timeout**
+
+As described above, a function will timeout if excecution takes too long. Another time limit monitors how often long-running callbacks occur. The latter limit should be smaller than the function timeout. Both timeouts can be configured using environment variables in Belt Extractor via the [Belt API](../api-reference/belt-api.md#create-and-store-a-belt)'s parameter `extraEnvs`:
+
+| Environment Variable | Default |
+| :--- | :--- |
+| CALLBACK\_TIMEOUT\_SEC | 300 |
+| CALLBACK\_LONGRUNNING\_SEC | 180 |
 {% endtab %}
 
 {% tab title="Example" %}
@@ -414,6 +423,8 @@ def execute(event_headers, event_payload, profile=None):
 ```
 {% endtab %}
 {% endtabs %}
+
+
 
 ## Dead letter queue
 

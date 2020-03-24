@@ -32,7 +32,7 @@ The EventStore Sink persists data from the data\_in\_grnry\_&lt;event&gt; topic 
 
 Consult the [Granary Access Clients Reference](../../../operator-reference/identity-and-access-management/granary-access-clients.md#scdf) for roles a user needs to interact with SCDF API.
 
-If you just want to have a quick look at the API calls, here they are. They are documented in more detail here: [Getting Started](../../../learning-grnry-1/data-in/getting-started.md)
+If you just want to have a quick look at the API calls, here they are. They are documented in more detail here: [Getting Started](../../../learning-grnry-1/data-in/how-to-run-a-harvester/getting-started.md)
 
 Registering Apps:
 
