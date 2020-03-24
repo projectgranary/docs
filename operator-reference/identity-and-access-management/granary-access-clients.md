@@ -46,10 +46,14 @@ Example roles: `belt_view`, `belt_edit`, `belt_view_privileged`, `belt_edit_priv
 
 Requests the user's access rights to manage harvesters, i.e., creating event types or source types. Users need also access rights in scdf client.
 
+Event types have two attributes, `editor`and `consumer`specifiying which users are allowed to edit and read the event type. If no `consumer`has been specified all users are allowed to read the event type, else only the ones matching the `consumer` role \(or matching the event type's `editor` role\). Editing the event type is only possible for users matching the provided `editor` role. If no `editor`role is set when creating the event type, the default `event_type_{type}_edit` is used. As the default for `type` is `data_in`, the default editor role is `event_type_data_in_edit`.
+
 | Role | Description |
 | :--- | :--- |
-| `event_type_read` | user can read all event types |
-| `event_type_edit` | user can edit all event types |
+|  | user can read all event types that do not explicitly specify the `consumer` |
+| `my_custom_role` | user can read all event types that specify no `consumer` or specify `consumer`as `my_custom_role`, can edit all event types that specify `editor` as `my_custom_role` |
+| `event_type_data_in_edit` | Default role for a user to read and edit all `data_in` typed event types |
+| `event_type_ttl_edit` | Default role for a user to read and edit all `ttl` typed event types |
 | `source_type_read` | user can read all source types |
 | `source_type_edit` | user can edit all source types |
 | `harvester_read` | user can read all harvester instance |

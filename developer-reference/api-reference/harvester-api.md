@@ -311,7 +311,7 @@ Get all Event Types
 
 {% api-method-description %}
 Returns a list of all event types \(latest version of each event type\)  
-This request requires the role `event_type_read`.
+This request will return all event types, which `consumer` or `editor` matches the or one of the requester's role\(s\). if `consumer` is null, every authenticated user is authorized to see the entity.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -359,6 +359,9 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
             "name": "snowplow-tracking",
             "displayName": "snowplow-tracking",
             "version": 1,
+            "editor": "event_type_data_in_edit",
+            "consumer": null,
+            "type": "data_in",
             "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
             "eventIdExpression": "#randomUUID()",
             "timestampExpression": "#nowMillis()",
@@ -410,8 +413,8 @@ Get all versions of an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get all versions of a given event type.  
-This request requires the role `event_type_read`.
+Get all versions of a given event type.   
+This request will return all versions, if  `consumer` or `editor` matches the requester's role. If `consumer` is null, every authenticated user is authorized.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -491,7 +494,7 @@ Create an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-This request requires the role `event_type_edit`.
+Any authorized user is authorized to create event types. Be aware that you will not be able to update the entity afterwards if your account does not have the role set in `editor`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -503,6 +506,18 @@ Authentication token.
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="consumer" type="string" required=false %}
+The name of user group allowed to consume this event type. If not set, there's no restriction applied and any authenticated user can view event-type details and also consume the data with belts. Defaults to `null`
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="type" type="string" required=false %}
+The type of this event type. Allowed values are: `data_in` , `ttl`. Defaults to `data_in`
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="editor" type="string" required=false %}
+The name of user group allowed to edit this event type. Defaults to `event_type_<type>_edit`.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="eventstoreTTL" type="string" required=false %}
 time-to-live configuration for all eventstores in ISO 8601 Duration format.  
 Default P100Y \(100 years\)
@@ -579,7 +594,9 @@ Update an Event Type
 
 {% api-method-description %}
 Fully or partially updates an event type.  
-This requires the requester to assume roles of both `event-type-read` and `event-type-edit`.If no delta is recognized, no update will be made and HTTP 304 will be returned.
+This requires the requester to assume roles that match the `editor` field. If no delta was recognized, no update will be made and HTTP 304 will be returned.  
+  
+Immutable fields \(like type, partitionCount,.. \) can be part of the request body, but their values need to match the current values, otherwise an error is raised.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -691,7 +708,7 @@ Delete an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes all versions of the given event type, if it is not used by registered belts. This request requires the roles `event_type_read` and `event_type_edit`.
+Deletes all versions of the given event type, if it is not used by registered belts. This request requires the role matching `editor` field.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -754,7 +771,7 @@ Get a Specific Version of an Event Type
 {% api-method-description %}
 Get one version of an event type.  
 Version should be "latest" or a valid number greater than or equals to 1.  
-This request requires the role `event_type_read`.
+This request requires the role matching `consumer` or `editor` field of the event type. If `consumer` is not set, any authenticated user is authorized.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -829,7 +846,7 @@ Get Persister for a Specific Event Type
 
 {% api-method-description %}
 Get the persister of an event type.  
-This request requires the role `event_type_read`.
+This request requires the role matching either `consumer` or `editor`. If `consumer` is null, any authenticated user is authorized. 
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -914,7 +931,7 @@ Update Persister Config for a Specific Event Type
 
 {% api-method-description %}
 Updates the persister configuration of a specific event type.  
-This request requires the role `event_type_edit` and `event_type_read`.
+This request requires the role matching `editor`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1003,7 +1020,7 @@ Get State of a Persister for a Specific Event Type
 
 {% api-method-description %}
 Get the current state of a persister for an event type.  
-This request requires the role `event_type_read`.
+This request requires a role matching `editor` or `consumer`. If `consumer` is null, any authenticated user is authorized.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1075,7 +1092,7 @@ Start/Stop Persister for a Specific Event Type
 
 {% api-method-description %}
 Start or stop the state of a persister for an event type.  
-This request requires the role `event_type_edit` and `event_type_read`.
+This request requires the role matching `editor`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1131,7 +1148,7 @@ Get Persister Logs for a Specific Event Type
 
 {% api-method-description %}
 Get the logs from a persister of an event type.  
-This request requires the role `event_type_read`.
+This request requires the role matching `editor` or `consumer`. if `consumer` is null, any authenticated user is authorized.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1216,7 +1233,7 @@ List all Harvester Instances
 {% endapi-method-summary %}
 
 {% api-method-description %}
-returns a pageable list of all harvesters
+returns a pageable list of all harvesters. Requires role `harvester_read`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1285,7 +1302,7 @@ Get Harvester details
 {% endapi-method-summary %}
 
 {% api-method-description %}
-returns all details of a given harvester
+returns all details of a given harvester. Requires role `harvester_read`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1404,7 +1421,9 @@ Create Harvester
 {% api-method-description %}
 Creates a new harvester instance. A technical name for the harvester instance will be derived from given `displayName` by removing all special characters, replacing white spaces with hyphens and limiting the length to 20 characters. Should the created harvester name be already in use the last four characters will be replaced by a suffix of numbers.  
   
-Source type and event type are referenced by `name` and `version` in event\_types and source\_types tables. If no configuration properties are set under `sourceType` \(resp. `eventType`\) configuration from these entities will be applied.
+Source type and event type are referenced by `name` and `version` in event\_types and source\_types tables. If no configuration properties are set under `sourceType` \(resp. `eventType`\) configuration from these entities will be applied.  
+  
+Requires the role `harvester_edit`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1572,7 +1591,9 @@ Update Harvester Instance
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Updates a harvester instance. All body parameters are optional. Harvester name filed `name` is not changeable and will be ignored if provided. Empty fields will be set to `""`, missing fields will remain unchanged. It is not possible to replace apps \(`sourceType`, `metadataExtractor`, `transform`\), only their versions and configs are modifiable.
+Updates a harvester instance. All body parameters are optional. Harvester name filed `name` is not changeable and will be ignored if provided. Empty fields will be set to `""`, missing fields will remain unchanged. It is not possible to replace apps \(`sourceType`, `metadataExtractor`, `transform`\), only their versions and configs are modifiable.  
+  
+Requires the role `harvester_edit`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1780,7 +1801,7 @@ Delete a Harvester Instance
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes the given Harvester.  
+Deletes the given Harvester. If it is still running, it will automatically stopped before deletion.  
 This request requires the role `harvester_edit`.
 {% endapi-method-description %}
 
@@ -1892,7 +1913,7 @@ Start/Stop Harvester Instance
 
 {% api-method-description %}
 Start or stop the state of the given Harvester.  
-This request requires the roles `harvester_read` and `harvester_edit`.
+This request requires the roles  `harvester_edit`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
