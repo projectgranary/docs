@@ -28,7 +28,22 @@ If you want to overwrite the cluster configuration for a specific topic you can 
 
 For more information feel free to check the Kafka [documentation](https://kafka.apache.org/documentation/).
 
+#### Message size Configuration
 
+Depending on your incoming data \(maximum size per message, not total volume\) you need to increase these kafka settings \(default is one megabyte\):
+
+* message.max.bytes
+* replica.fetch.max.bytes
+
+and also
+
+* fetch.message.max.bytes
+
+on the consumer side.
+
+{% hint style="info" %}
+Be aware that if you use sessionizing in your pipeline, the maximum message size needs to be set to the maximum size of a session.
+{% endhint %}
 
 ## Disaster Recovery Plan
 

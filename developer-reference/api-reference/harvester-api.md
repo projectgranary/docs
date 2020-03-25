@@ -1302,7 +1302,7 @@ Get Harvester details
 {% endapi-method-summary %}
 
 {% api-method-description %}
-returns all details of a given harvester. Requires role `harvester_read`.
+Returns all details of a given harvester. Requires role `harvester_read`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -1397,6 +1397,35 @@ Sample Response
         "language": "groovy",
         "script": "return new String(payload , 'UTF-8');"
     },
+    "sessionizing": {
+        "app": "grnry-sessionizing",
+        "version": "latest",
+        "deploymentConfiguration": {
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.limits.cpu": "500m",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.livenessprobedelay": "120",
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_private.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName: 'grnry-pg-citus-secret' , defaultMode: '256' }}]"
+        },
+        "appConfiguration": {
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+            "spring.cloud.stream.kafka.binder.consumer.maxattempts": "1",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3"
+        },
+        "correlationIdExpression": "headers['grnry-correlation-id']",
+        "sessionizingAttributeExpression": "",
+        "inactivityGapSec": 1800,
+        "gracePeriodSec": 120,
+        "enabled": true
+    },
     "eventType": {
         "name": "snowplow-a",
         "version": "1"
@@ -1429,6 +1458,10 @@ Requires the role `harvester_edit`.
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-body-parameters %}
+{% api-method-parameter name="sessionizing" type="object" required=false %}
+sessionizing application used by this harvster. Contains flag `enabled:boolean` \(if set to false, no other fields should be set\). Default values for all other fields can be specified during harvester api deployment. These _optional_ fields are `app:string` \(registered app in scdf\), `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `correlationIdExpression:string`, `sessionIdExpression:string`, `inactivityGapSec:long`, `gracePeriodSec:long`.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="metadataExtractor" type="object" required=false %}
 metadata extractor application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are `app:string` \(registered app in scdf\), `version:string` \(registered app version in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`.
 {% endapi-method-parameter %}
@@ -1541,6 +1574,35 @@ human readable name. Needs to be unique. A technical name will be derived from i
         "language": "groovy",
         "script": "return new String(payload , 'UTF-8');"
     },
+    "sessionizing": {
+        "app": "grnry-sessionizing",
+        "version": "latest",
+        "deploymentConfiguration": {
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.limits.cpu": "500m",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.livenessprobedelay": "120",
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_private.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName: 'grnry-pg-citus-secret' , defaultMode: '256' }}]"
+        },
+        "appConfiguration": {
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+            "spring.cloud.stream.kafka.binder.consumer.maxattempts": "1",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3"
+        },
+        "correlationIdExpression": "headers['grnry-correlation-id']",
+        "sessionizingAttributeExpression": "",
+        "inactivityGapSec": 1800,
+        "gracePeriodSec": 120,
+        "enabled": true
+    },
     "eventType": {
         "name": "snowplow-a",
         "version": "latest"
@@ -1605,6 +1667,10 @@ name of the harvester that should be updated
 {% endapi-method-path-parameters %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="sessionizing" type="object" required=false %}
+sessionizing application used by this harvester. _Optional_ fields \(can only be set if `sessionizing.enabled=true`\) are `version:string`, `deploymentConfiguration:map`, `appConfiguration:map`, `correlationIdExpression:string`, `sessioningAttributeExpression:string`, `inactivityGapSec:long`, `gracePeriodSec:long`
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="metadataExtractor" type="object" required=false %}
 metadata extractor application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are `version:string` \(registered app version in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`.
 {% endapi-method-parameter %}
@@ -1712,6 +1778,35 @@ human readable name. Needs to be unique. Technical name of the harvester will re
         },
         "language": "groovy",
         "script": "return new String(payload , 'UTF-8');"
+    },
+    "sessionizing": {
+        "app": "grnry-sessionizing",
+        "version": "latest",
+        "deploymentConfiguration": {
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.limits.cpu": "500m",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.livenessprobedelay": "120",
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_private.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName: 'grnry-pg-citus-secret' , defaultMode: '256' }}]"
+        },
+        "appConfiguration": {
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+            "spring.cloud.stream.kafka.binder.consumer.maxattempts": "1",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3"
+        },
+        "correlationIdExpression": "headers['grnry-correlation-id']",
+        "sessionizingAttributeExpression": "",
+        "inactivityGapSec": 1800,
+        "gracePeriodSec": 120,
+        "enabled": true
     },
     "eventType": {
         "name": "snowplow-a",

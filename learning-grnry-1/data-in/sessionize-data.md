@@ -42,14 +42,14 @@ If you want to group data based on inactivity between events, the output varies 
 
 1. Group: \(2019-01-10 10:00 , 2019-01-10 10:13 , 2019-01-10 10:22, 2019-01-10 11:21 , 2019-01-10 11:45\)
 
-## Add Sessionizing to a harvester
+## Create a Harvester With Sessionizing
 
-This section describes how to include the sessionizing processor in manual creation of a harvester. As soon as the [Harvester API](../../developer-reference/api-reference/harvester-api.md) is fully implemented, harvester creation will be completely rest-driven and include sessionizing configuration.
+This section describes how to include the sessionizing processor in [API creation](../../developer-reference/api-reference/harvester-api.md#create-harvester) of a harvester.
 
 ### Registering the SCDF app
 
 {% hint style="info" %}
-This section is an addition to [Getting Started](how-to-run-a-harvester/getting-started.md), it will not explain in detail how to create a harvester, but only how to register the necessary application and how to add the additional processing step to a standard \(non-sessionizing\) harvester. 
+This section is an addition to [Getting Started](how-to-run-a-harvester/getting-started.md), it will not explain in detail how to create a harvester, but only how to register the necessary application and how to add the additional parameters to a standard \(non-sessionizing\) harvester. 
 {% endhint %}
 
 In order to add the additional step to your harvester definition, you need to register an scdf   
@@ -65,21 +65,40 @@ https://<URL to SCDF>/apps/processor/grnry-sessionizing/<version>
 
 using the provided `docker-image-location` and `version`.
 
-### Extending the harvester definition
+### Extending the Harvester Definition
 
-A \(non-sessionizing\) harvester definition looks like this:
-
-```text
-jdbc-source: grnry-jdbc-source | script: grnry-scriptable-processor | meta: grnry-data-in-metadata-processor > :grnry_data_in_target
-```
-
-Add a `| session: grnry-sessionizing-processor` between the grnry-data-in-metadata-processor and the topic sink:
+A minimal sessionizing harvester definition needs to set `sessionizing.enabled` to `true` and looks like this:
 
 ```text
-jdbc-source: grnry-jdbc-source | script: grnry-scriptable-processor | meta: grnry-data-in-metadata-processor | session: grnry-sessionizing-processor > :grnry_data_in_target
+{
+  "displayName": "harvester-1",
+  "sourceType": {
+    "name": "source-type-1",
+    "version": "latest"
+  },
+  "eventType": {
+    "name": "event-type-1",
+    "version": "latest"
+  },
+  "sessionizing": {
+    "enabled": true
+  }
+}
 ```
+
+This configuration will create a harvester with the default sessionizing configuration.
 
 ### Sessionizing Configuration Options
+
+The following parameters are optional and will override the defaults specified in the harvester helm `values.yaml`.
+
+#### sessionizing.app
+
+Refers to the scdf app registered with scdf. Needs to be specified if the harvester should not use the default sessionizng app.
+
+#### sessionizing.version
+
+Refers to the app version registered with scdf. Needs to be specified if the harvester should not use the default sessionizing app version.
 
 #### sessionizing.sessionizingAttributeExpression
 
@@ -93,7 +112,7 @@ Example \(with fallback\):
 
 `safeJsonPath(safeJsonPath(payload , 'body') , 'data[0].sessionId')?:'static-fallback-value'`
 
-#### sessionizing.inactivityGap
+#### sessionizing.inactivityGapSec
 
 Sessions represent periods of activity separated by gaps of inactivity \(or "idleness"\). An event occurring withing the inactivity gap of an existing session is merged into the existing session. If an event occurs after the session gap, it will start a new session. Value in seconds.
 
@@ -103,7 +122,7 @@ Default:
 
 If you are processing already sessionized data \(= your payload contains a session id which you have configured \(`sessionizing.sessionizingAttributeExpression`\) make sure your inactivityGap value is not smaller than the inactivity gap used by the source to sessionize the data.
 
-#### sessionizing.gracePeriod
+#### sessionizing.gracePeriodSec
 
 Number of seconds to wait until the session is actually closed. This does not extend the inactivity gap, it only enables the correct processing of out-of-order data/late-arrivals. The default value of 120 seconds is a reasonable value for realtime streams. If your harvester is pulling data periodically, this value might be increased depending on the anatomy of your data. Value in seconds. 
 
@@ -111,32 +130,51 @@ Default:
 
 `120   # (120 seconds = 2 minutes)`
 
-#### sessionizing.eventTypeName
+#### sessionizing.deploymentConfiguration and sessionizing.appConfiguration
 
-The event type name.
-
-#### sessionizing.harvestName
-
-The harvester name.
-
-### Example Harvester Configuration
-
-In the enhanced harvester definition above we use the alias "session" for the grnry-sessionizing-processor, therefore we need to prefix the configuration options with app.session.
-
-Example with all configuration options set:
+As with other scdf apps certain deployment properties can be provided. Example with all configuration options set for sessionizing:
 
 ```text
-curl <URL to SCDF>/streams/deployments/<stream_name> -i -X POST \
- -H "Content-Type: application/json" -u <user>:<password> \
- -d "{\
-  ""app.session.sessionizing.sessionizingAttributeExpression"":""safeJsonPath(safeJsonPath(payload , 'body') , 'data[0].sessionId')?:'static-fallback-value'"", \
-  ""app.session.sessionizing.inactivityGap"" : 3600 , \
-  ""app.session.sessionizing.gracePeriod"" : 120 , \
-  ""app.session.sessionizing.eventTypeName"": ""${grnry.eventTypeName}"",\
-  ""app.session.sessionizing.harvesterName"": ""${grnry.harvesterName}"",\
-  ""app.session.grnry.harvesterName"" : ""<harvester_name>"" ,\
-  ""app.session.grnry.eventTypeName"" : ""<event_name>"" ,\
- ... // rest of your harvester definition (sourcetype / scritable-transform / metadata extractor)
+{
+    "displayName": "harvester-1",
+    "sourceType": {
+        "name": "source-type-1",
+        "version": "latest"
+    },
+    "eventType": {
+        "name": "event-type-1",
+        "version": "latest"
+    },
+    "sessionizing": {
+        "enabled": true,
+        "app": "grnry-sessionizing",
+        "version": "latest",
+        "correlationIdExpression": "headers['grnry-correlation-id']",
+        "sessionizingAttributeExpression": "safeJsonPath(safeJsonPath(payload , 'body') , 'data[0].sessionId')?:'static-fallback-value'",
+        "inactivityGapSec": 1800,
+        "gracePeriodSec": 120,
+        "deploymentConfiguration": {
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.limits.cpu": "500m",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.livenessprobedelay": "120",
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName: 'grnry-pg-citus-secret' , defaultMode: '256' }}]"
+        },
+        "appConfiguration": {
+            "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+            "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+            "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+            "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+            "spring.cloud.stream.kafka.binder.consumer.maxattempts": "1",
+            "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+            "spring.cloud.stream.kafka.binder.replicationfactor": "3"
+        }
+    }
+}
 ```
 
 ## Consuming Sessionized Data
