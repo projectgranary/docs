@@ -8,9 +8,9 @@ description: Springboot-based microservice to manage harvesters and event types.
 
 ### Source Type Endpoints
 
-* GET /source-types
-* GET /source-types/{source-type-name}
-* GET /source-types/{source-type-name}/{version}
+* GET /harvesters/source-types
+* GET /harvesters/source-types/{source-type-name}
+* GET /harvesters/source-types/{source-type-name}/{version}
 
 ### Harvester Instance Endpoints
 
@@ -40,7 +40,7 @@ description: Springboot-based microservice to manage harvesters and event types.
 
 Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
 
-{% api-method method="get" host="https://api.grnry.io" path="/source-types" %}
+{% api-method method="get" host="https://api.grnry.io" path="/harvesters/source-types" %}
 {% api-method-summary %}
 Get all Source Types
 {% endapi-method-summary %}
@@ -59,10 +59,6 @@ Authentication token.
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
-{% api-method-parameter name="expand" type="string" required=false %}
-Expand the response with `totalCount` to show the count of different source-type-names. Default is `""`.
-{% endapi-method-parameter %}
-
 {% api-method-parameter name="search" type="string" required=false %}
 Filter source types by names containing this search term Default is `""`.
 {% endapi-method-parameter %}
@@ -132,7 +128,7 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/source-types/:source-type-name" %}
+{% api-method method="get" host="https://api.grnry.io" path="/harvesters/source-types/:source-type-name" %}
 {% api-method-summary %}
 Get all versions of an Source Type
 {% endapi-method-summary %}
@@ -157,10 +153,6 @@ Authentication token.
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
-{% api-method-parameter name="expand" type="string" required=false %}
-Expand the response with `totalCount` to show the count of different versions. Default is `""` .
-{% endapi-method-parameter %}
-
 {% api-method-parameter name="pagesize" type="string" required=false %}
 Number of source types returned per page. Default is  
 `20` .
@@ -217,7 +209,7 @@ Offset of the requested page. Default is `0` . Must be a whole multiple of `page
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/source-types/:source-type-name/:version" %}
+{% api-method method="get" host="https://api.grnry.io" path="/harvesters/source-types/:source-type-name/:version" %}
 {% api-method-summary %}
 Get a Specific Version of Source Type
 {% endapi-method-summary %}
@@ -351,7 +343,7 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
 {
     "_links": {
         "self": {
-            "href": "https://grnry-host/event-types?search=&offset=0&pagesize=20&expand="
+            "href": "https://hostname/event-types?search=&offset=0&pagesize=20&expand="
         }
     },
     "eventTypes": [
@@ -373,7 +365,7 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
             "description": "",
             "_links": {
                 "self": {
-                    "href": "https://grnry-host/event-types/snowplow-tracking/1"
+                    "href": "https://hostname/event-types/snowplow-tracking/1"
                 }
             }
         },
@@ -442,7 +434,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
 {
     "_links": {
         "self": {
-            "href": "https://grnry-host/event-types/postman-event-type"
+            "href": "https://hostname/event-types/postman-event-type"
         }
     },
     "eventTypes": [
@@ -453,7 +445,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
             ....
             "_links": {
                 "self": {
-                    "href": "https://grnry-host/event-types/postman-event-type/1"
+                    "href": "https://hostname/event-types/postman-event-type/1"
                 }
             }
         },
@@ -464,7 +456,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
             ...
             "_links": {
                 "self": {
-                    "href": "https://grnry-host/event-types/postman-event-type/2"
+                    "href": "https://hostname/event-types/postman-event-type/2"
                 }
             }
         },
@@ -476,7 +468,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
             ....
             "_links": {
                 "self": {
-                    "href": "https://grnry-host/event-types/postman-event-type/4"
+                    "href": "https://hostname/event-types/postman-event-type/4"
                 }
             }
         }
@@ -662,7 +654,7 @@ The SpringEL expression to create the grnry-correlation-id.
         "description": "",
         "_links": {
             "self": {
-                "href": "https://grnry-host/event-types/foo-test/2"
+                "href": "https://hostname/event-types/foo-test/2"
             }
         }
     },
@@ -746,15 +738,15 @@ If there are still belts and/or harvesters referencing the event-type, the delet
 {
     "timestamp": 1574854606738,
     "message": "event type with name test-event-type-delete is still used by belts: 
-    [https://development.analytics.ventures.syncier.cloud/belts/11,
-     https://development.analytics.ventures.syncier.cloud/belts/12,
-     https://development.analytics.ventures.syncier.cloud/belts/13,
-     https://development.analytics.ventures.syncier.cloud/belts/14,
-     https://development.analytics.ventures.syncier.cloud/belts/15,
-     https://development.analytics.ventures.syncier.cloud/belts/16,
-     https://development.analytics.ventures.syncier.cloud/belts/17,
-     https://development.analytics.ventures.syncier.cloud/belts/18,
-     https://development.analytics.ventures.syncier.cloud/belts/19]",
+    [https://hostname/belts/11,
+     https://hostname/belts/12,
+     https://hostname/belts/13,
+     https://hostname/belts/14,
+     https://hostname/belts/15,
+     https://hostname/belts/16,
+     https://hostname/belts/17,
+     https://hostname/belts/18,
+     https://hostname/belts/19]",
     "details": "uri=/event-types/test-event-type-delete"
 }
 ```
@@ -815,7 +807,7 @@ Authentication token.
     "description": "",
     "_links": {
         "self": {
-            "href": "https://grnry-host/event-types/snowplow-webtracking/1"
+            "href": "https://hostname/event-types/snowplow-webtracking/1"
         }
     }
 }
@@ -869,7 +861,7 @@ Authentication token.
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="expand" type="string" required=false %}
-
+Expand the response with `state` to show the persister state. Default is `""`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -1270,7 +1262,7 @@ Filter harvester list by name. Default: ""
          "name":"harvester-1",
          "_links":{
             "self":{
-               "href":"https://api.acme.com/harvesters/instances/harvester-1"
+               "href":"https://hostname/harvesters/instances/harvester-1"
             }
          }
       },
@@ -1278,7 +1270,7 @@ Filter harvester list by name. Default: ""
          "name":"demo-harvester",
          "_links":{
             "self":{
-               "href":"https://api.acme.com/harvesters/instances/demo-harvester"
+               "href":"https://hostname/harvesters/instances/demo-harvester"
             }
          }
       }
@@ -1286,7 +1278,7 @@ Filter harvester list by name. Default: ""
    "totalCount":2,
    "_links":{
       "self":{
-         "href":"https://api.acme.com/harvesters/instances?search=&offset=0&pagesize=20&expand=totalCount"
+         "href":"https://hostname/harvesters/instances?search=&offset=0&pagesize=20&expand=totalCount"
       }
    }
 }
@@ -1343,7 +1335,7 @@ Sample Response
         "appConfiguration": {},
         "_links": {
             "type": {
-                "href": "https://development.analytics.ventures.syncier.cloud/harvesters/source-types/grnry-jdbc/latest"
+                "href": "https://hostname/harvesters/source-types/grnry-jdbc/latest"
             }
         }
     },
@@ -1432,7 +1424,7 @@ Sample Response
     },
     "_links": {
         "self": {
-            "href": "https://development.analytics.ventures.syncier.cloud/harvesters/instances/harvester-demo"
+            "href": "https://hostname/harvesters/instances/harvester-demo"
         }
     }
 }
@@ -1468,10 +1460,6 @@ metadata extractor application used by this harvester. Default values for all fi
 
 {% api-method-parameter name="transform" type="object" required=false %}
 scriptable transform application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fileds are `app:string` \(registered app in scdf\), `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` \(script language\), `script:string` \(script that transforms the data\).
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="name" type="string" required=true %}
-technical harvester name. Needs to be unique.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="sourceType" type="object" required=true %}
@@ -1609,7 +1597,7 @@ human readable name. Needs to be unique. A technical name will be derived from i
     },
     "_links": {
         "self": {
-            "href": "https://development.analytics.ventures.syncier.cloud/harvesters/instances/harvester-post"
+            "href": "https://hostname/harvesters/instances/harvester-post"
         }
     }
 }
@@ -1814,7 +1802,7 @@ human readable name. Needs to be unique. Technical name of the harvester will re
     },
     "_links": {
         "self": {
-            "href": "https://development.analytics.ventures.syncier.cloud/harvesters/instances/harvester-post"
+            "href": "https://hostname/harvesters/instances/harvester-post"
         }
     }
 }
@@ -1916,7 +1904,7 @@ Authentication token.
 {% endapi-method-request %}
 
 {% api-method-response %}
-{% api-method-response-example httpCode=200 %}
+{% api-method-response-example httpCode=204 %}
 {% api-method-response-example-description %}
 
 {% endapi-method-response-example-description %}
