@@ -1,6 +1,6 @@
 # TTL-expired Grain Processing
 
-TTL-expired grains are picked up periodically by Granary's [Reaper](https://gitlab.alvary.io/grnry/reaper) and written to TTL topics with the following naming schema: `grnry_data_in_<profile-type>`. These grains are then available for further processing by the belts. Profile type here refers to the type of profile, as seen [here](../profile-store/#table-profilestore), with underscores `_`normalized into hyphens `-`. If the resulting topic name exceeds Kafka's limit of 249 characters, it is cut off at the maximum possible length. 
+TTL-expired grains are picked up periodically by Granary's [Reaper ](../profile-store/reaper.md)and written to TTL topics with the following naming schema: `grnry_data_in_<profile-type>`. These grains are then available for further processing by the belts. Profile type here refers to the type of profile, as seen [here](../profile-store/#table-profilestore), with underscores `_`normalized into hyphens `-`. If the resulting topic name exceeds Kafka's limit of 249 characters, it is cut off at the maximum possible length. 
 
 Please note that to comply with data protection law, grains written to the `grnry_data_in_<profile_type>`topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the belt, i.e setting the `fetch_profile`parameter to true. See [Configuration](./#configuration). The correlation ID should be found in both message header and body.
 
