@@ -1,6 +1,6 @@
 # TTL-expired Grain Processing
 
-TTL-expired grains are picked up periodically by Granary's [Reaper](https://gitlab.alvary.io/grnry/reaper) and written to TTL topics retrieved from the grain's corresponding TTL Event Type. These grains are then available for further processing by the belts.
+TTL-expired grains are picked up periodically by Granary's [Reaper](../profile-store/reaper.md) and written to TTL topics retrieved from the grain's corresponding TTL Event Type. These grains are then available for further processing by the belts.
 
 Please note that to comply with data protection law, grains written to the TTL topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the belt, i.e setting the `fetch_profile`parameter to true. See [Configuration](https://app.gitbook.com/@alvary/s/grnry-sd7f6g8sd68sdf7/~/diff/drafts/-M0quiYWAmR7whC99GOZ/developer-reference/dataflow/belt-extractor#configuration/@drafts). The correlation ID should be found in both message header and body.
 
