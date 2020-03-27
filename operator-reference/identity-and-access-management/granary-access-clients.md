@@ -17,6 +17,7 @@ Currently granary uses the following keycloak clients
 * profile-api
 * event-api
 * jdbc-api
+* segment-management-api
 
 ## Administrative Clients
 
@@ -58,6 +59,12 @@ Event types have two attributes, `editor`and `consumer`specifiying which users a
 | `source_type_edit` | user can edit all source types |
 | `harvester_read` | user can read all harvester instance |
 | `harvester_edit` | user can edit all harvester instances |
+
+### segment-management-api
+
+Requests the user's access rights to manage segment jobs. These roles are defines by the segment job author during creation and can be edited by anyone having the specified `editor` role. Each segment job has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array fo all roles necessary for editing it. These roles need to be added as roles in Keycloak and assigned to all authorized users.
+
+Default roles: `segment_job_view`, `segment_job_edit`
 
 ## Data Out Clients
 

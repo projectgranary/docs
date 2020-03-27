@@ -52,6 +52,7 @@
   * [Profile Store](developer-reference/dataflow/profile-store/README.md)
     * [Profile Store API Hooks](developer-reference/dataflow/profile-store/profile-store-api-hooks.md)
   * [Segment Store](developer-reference/dataflow/segment-store/README.md)
+    * [Segment Manager](developer-reference/dataflow/segment-store/segment-manager.md)
     * [Segment Table Creation](developer-reference/dataflow/segment-store/segment-table-creation.md)
 * [API Reference](developer-reference/api-reference/README.md)
   * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
@@ -59,6 +60,7 @@
   * [Event Store API](developer-reference/api-reference/event-store-api.md)
   * [Belt API](developer-reference/api-reference/belt-api.md)
   * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
+  * [Segment Management API](developer-reference/api-reference/segment-management-api.md)
   * [Lineage Report](developer-reference/api-reference/lineage-report.md)
 
 ## Operator Reference
@@ -88,7 +90,8 @@
   * [Granary Access Clients](operator-reference/identity-and-access-management/granary-access-clients.md)
   * [Adding Roles to Keycloak Clients](operator-reference/identity-and-access-management/adding-roles-to-keycloak-clients.md)
 * [Migration guide](operator-reference/migration-guide/README.md)
-  * [Harvester API CI/CD cookbook](operator-reference/migration-guide/ci-cd-cookbook.md)
+  * [Segment Job Migration](operator-reference/migration-guide/segment-job-migration.md)
+  * [Harvester API CI/CD Cookbook](operator-reference/migration-guide/ci-cd-cookbook.md)
 * [Site Reliability](operator-reference/site-reliability/README.md)
   * [Kafka](operator-reference/site-reliability/kafka.md)
   * [Keycloak](operator-reference/site-reliability/keycloak.md)

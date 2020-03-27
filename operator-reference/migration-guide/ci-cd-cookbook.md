@@ -2,7 +2,7 @@
 description: Continous integration / delivery migration guide
 ---
 
-# Harvester API CI/CD cookbook
+# Harvester API CI/CD Cookbook
 
 ## pre-GRNRY 0.8 SCDF-API based CD of harvesters
 

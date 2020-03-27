@@ -30,6 +30,8 @@ description: >-
 | Profiles API, Event API | APIs for extracting Events and Profiles as JSON files given the Keycloak access rights. Not supporting SQL. |
 | Profile Store | Key-value like store to persist profile entities containing \(linked\) grains. |
 | Segments | Structured view on Profile Store or Event Store given an analytical requirement/need. |
+| Segment Manager | Kubernetes Controller to reconcile segment custom resources to segment cron jobs. |
+| Segment Management API | API to CRUD segment custom resources against the Kubernetes API. |
 | Segment Store | SQL interface to query segments. |
 | Sessionizing | Specific session collecting events and processing en bloc \(e.g. within a session campaign success\) |
 | Tracking API | Snowplow Collector API to collect web-tracking events from webpages, mobile apps, etc. |
