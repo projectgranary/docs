@@ -13,5 +13,5 @@ The [Profile Store](../../developer-reference/dataflow/profile-store/#table-prof
 
 ## Belts
 
-The transform step from the Event Store to the Profile Store within Granary is being implemented by so called Belts. Each belt receives data from multiple Kafka Topics, processes it and writes them into an output topic. In most cases, this output topic is then used by a profile updater to write data into the ProfileStore. Documentation about the Belt Extractor, how to design a belt can be found [here](../../developer-reference/dataflow/belt-extractor.md) or if you like you may as well use the Belt API. You can find it's documentation [here](../../developer-reference/api-reference/belt-api.md).
+The transform step from the Event Store to the Profile Store within Granary is being implemented by so called Belts. Each belt receives data from multiple Kafka Topics, processes it and writes them into an output topic. In most cases, this output topic is then used by a profile updater to write data into the ProfileStore. Documentation about the Belt Extractor, how to design a belt can be found [here](../../developer-reference/dataflow/belt-extractor/) or if you like you may as well use the Belt API. You can find it's documentation [here](../../developer-reference/api-reference/belt-api.md).
 

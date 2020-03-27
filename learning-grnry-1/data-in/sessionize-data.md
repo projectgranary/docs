@@ -179,5 +179,5 @@ As with other scdf apps certain deployment properties can be provided. Example w
 
 ## Consuming Sessionized Data
 
-See [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md) for futher details on how to consume the sessionized data in belts.
+See [Belt Extractor](../../developer-reference/dataflow/belt-extractor/) for futher details on how to consume the sessionized data in belts.
 

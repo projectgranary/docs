@@ -2,7 +2,7 @@
 description: This page describes the Profile Store and Profile Update mechanism.
 ---
 
-# Profile Store
+# Profile Store and Reaper
 
 ![](../../../.gitbook/assets/kurt_dataflow_data_out.PNG)
 
