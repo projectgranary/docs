@@ -323,6 +323,36 @@ def execute(event_headers, event_payload, profile=None):
     return updates
 ```
 
+### Callback example for mixed payload processing
+
+`execute(event_headers, event_payload[, profile])`
+
+There are use cases where you want to process events from a topic that contains both single-payload events and multi-payload events. To do so it is necessary to differentiate the two types of events in the callback function as such:
+
+```yaml
+import json
+import sys
+from time import time
+from grnry.beltextractor.update 
+import Update
+import logging
+
+
+def execute(event_headers, event_payload, profile=None):
+    if not event_headers:
+      return None
+      
+    if isinstance(event_headers, dict) and isinstance(event_payload, dict):
+      logging.debug("received single-payload event")
+      # add your code handling single-payload events here 
+    elif isinstance(event_headers, list) and isinstance(event_payload, list):     
+      logging.debug("received multi-payload event")
+      # add your code handling multi-payload events here
+    else:
+      logging.error("event_headers and/or event_payload do not match the expected signature")
+      return None 
+```
+
 ## Configuration
 
 {% tabs %}
