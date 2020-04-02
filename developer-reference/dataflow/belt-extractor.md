@@ -1,10 +1,10 @@
 ---
-description: 'https://gitlab.alvary.io/grnry/belt-extractor'
+description: A function-as-a-service like Python callback runtime
 ---
 
 # Belt Extractor
 
-![](../../.gitbook/assets/kurt_dataflow_data_out.PNG)
+![Data flow within harmonized data zone of Granary](../../.gitbook/assets/kurt_dataflow_data_out.PNG)
 
 Belts are used to compute updates for the Customer Graph stored in the Profile Store. These updates can represent things like:
 

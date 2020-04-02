@@ -105,7 +105,7 @@ The next step is to provide the required configurations for the Belt to run. Sta
 Do not forget to hit the "Save" button.
 {% endhint %}
 
-After the configurations have been set, now the python code for the Belts has to be inserted inside the code block. Main goal of the function is to trigger Profile Store update operations. More information about how to write the execute function can be seen [here](../../developer-reference/dataflow/belt-extractor/#callback-signature). This is how the code should be structured:
+After the configurations have been set, now the python code for the Belts has to be inserted inside the code block. Main goal of the function is to trigger Profile Store update operations. More information about how to write the execute function can be seen [here](../../developer-reference/dataflow/belt-extractor.md#callback-signature). This is how the code should be structured:
 
 ![](../../.gitbook/assets/ui_code.png)
 

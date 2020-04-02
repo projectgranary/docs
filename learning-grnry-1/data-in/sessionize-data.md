@@ -143,5 +143,5 @@ curl <URL to SCDF>/streams/deployments/<stream_name> -i -X POST \
 
 ## Consuming Sessionized Data
 
-See [Belt Extractor](../../developer-reference/dataflow/belt-extractor/) for futher details on how to consume the sessionized data in belts.
+See [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md) for futher details on how to consume the sessionized data in belts.
 

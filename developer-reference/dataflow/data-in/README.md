@@ -4,7 +4,7 @@ description: These pages contain the technical documentation for data-in.
 
 # Data-In
 
-![](../../../.gitbook/assets/kurt_dataflow_data_in.PNG)
+![Data flow within data-in zone of Granary](../../../.gitbook/assets/kurt_dataflow_data_in.PNG)
 
 In this chapter, we are going to talk about the technical specificatoin of the data-in pipeline. Let us clarify some names shortly.
 
