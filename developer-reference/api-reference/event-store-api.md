@@ -96,7 +96,7 @@ Example:
 		 "created":"2018-11-01T11:47:38.000Z"
          "_links":{  
             "self":{  
-               "href":"https://playground.lce.grnry.io/events/cookie123/event0815"
+               "href":"https://hostname/events/cookie123/event0815"
             }
          }
       },
@@ -115,14 +115,14 @@ Example:
 		 "created":"2018-11-01T11:47:59.000Z"
          "_links":{  
             "self":{  
-               "href":"https://playground.lce.grnry.io/events/cookie123/event0817"
+               "href":"https://hostname/events/cookie123/event0817"
             }
          }
       }
    ],
    "_links":{  
       "self":{  
-         "href":"https://playground.lce.grnry.io/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&expand=false&offset=0&pagesize=20"
+         "href":"https://hostname/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&expand=false&offset=0&pagesize=20"
       }
    }
 }
@@ -218,7 +218,7 @@ Example: /events/cookie123/event0815
 	"created": "2019-03-21T11:54:55.234Z",
 	"_links":{
 		"self":{
-			"href":"https://playground.lce.grnry.io/events/cookie123/event0815"
+			"href":"https://hostname/events/cookie123/event0815"
 			}
 		}
 }
@@ -325,7 +325,7 @@ Number of elements to be shown. Defaults to 20.
          "eventHarvester":"testsource",
          "_links":{
             "self":{
-               "href":"http://localhost/events/c2/e30"
+               "href":"http://hostname/events/c2/e30"
             }
          }
       },
@@ -338,7 +338,7 @@ Number of elements to be shown. Defaults to 20.
          "eventHarvester":"testsource",
          "_links":{
             "self":{
-               "href":"http://localhost/events/c2/e29"
+               "href":"http://hostname/events/c2/e29"
             }
          }
       },
@@ -351,7 +351,7 @@ Number of elements to be shown. Defaults to 20.
          "eventHarvester":"testsource",
          "_links":{
             "self":{
-               "href":"http://localhost/events/c2/e28"
+               "href":"http://hostname/events/c2/e28"
             }
          }
       },
@@ -364,7 +364,7 @@ Number of elements to be shown. Defaults to 20.
          "eventHarvester":"testsource",
          "_links":{
             "self":{
-               "href":"http://localhost/events/c2/e18"
+               "href":"http://hostname/events/c2/e18"
             }
          }
       },
@@ -377,17 +377,17 @@ Number of elements to be shown. Defaults to 20.
          "eventHarvester":"testsource",
          "_links":{
             "self":{
-               "href":"http://localhost/events/c2/e17"
+               "href":"http://hostname/events/c2/e17"
             }
          }
       }
    ],
    "_links":{
       "self":{
-         "href":"http://localhost/events?type=web&from=1974-11-19T15:34:48Z&to=2019-12-13T09:12:15Z&expand=totalCount&offset=0&pagesize=20"
+         "href":"http://hostname/events?type=web&from=1974-11-19T15:34:48Z&to=2019-12-13T09:12:15Z&expand=totalCount&offset=0&pagesize=20"
       },
       "next":{
-         "href":"http://localhost/events?type=web&from=1974-11-19T15:34:48Z&to=2019-12-13T09:12:15Z&expand=%5BtotalCount%5D&offset=20&pagesize=20"
+         "href":"http://hostname/events?type=web&from=1974-11-19T15:34:48Z&to=2019-12-13T09:12:15Z&expand=%5BtotalCount%5D&offset=20&pagesize=20"
       }
    }
 }
