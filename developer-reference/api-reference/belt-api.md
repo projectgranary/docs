@@ -79,7 +79,17 @@ A list of all belts along with their attributes and total count of belts stored 
 
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
+Token invalid
+{% endapi-method-response-example-description %}
 
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token found or roles not matching
 {% endapi-method-response-example-description %}
 
 ```
@@ -129,7 +139,17 @@ JSON with attributes of belt with the specified ID.
 
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
+Token invalid
+{% endapi-method-response-example-description %}
 
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or no matching role
 {% endapi-method-response-example-description %}
 
 ```
@@ -292,7 +312,17 @@ If a belt with a given name exists already in the Belt Store.
 
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
+Token invalid
+{% endapi-method-response-example-description %}
 
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or no matching role
 {% endapi-method-response-example-description %}
 
 ```
@@ -344,7 +374,17 @@ If delete is successful, content=true. content=false when unsuccessful
 
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
+Token invalid
+{% endapi-method-response-example-description %}
 
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or no matching role
 {% endapi-method-response-example-description %}
 
 ```
@@ -473,7 +513,17 @@ If the belt structure contains an invalid event type.
 
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
+Token invalid
+{% endapi-method-response-example-description %}
 
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or no matching role
 {% endapi-method-response-example-description %}
 
 ```
@@ -531,9 +581,19 @@ Authentication token
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=302 %}
+{% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
+Token invalid
+{% endapi-method-response-example-description %}
 
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or no matching role
 {% endapi-method-response-example-description %}
 
 ```
@@ -595,6 +655,16 @@ The action to be performed "START" or "STOP"
 
 ```javascript
 {    "status": "DEPLOYING"}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+No valid token
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 
