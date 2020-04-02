@@ -6,7 +6,7 @@ Taken from [https://kafka.apache.org/20/documentation/streams/developer-guide/ds
 
 Session windows are used to aggregate key-based events into so-called _sessions_, the process of which is referred to as _sessionization_. Sessions represent a **period of activity** separated by a defined **gap of inactivity** \(or “idleness”\). Any events processed that fall within the inactivity gap of any existing sessions are merged into the existing sessions. If an event falls outside of the session gap, then a new session will be created.
 
-![](../../.gitbook/assets/image%20%2811%29.png)
+![](../../../.gitbook/assets/image%20%2811%29.png)
 
 ### Example
 
@@ -44,12 +44,12 @@ If you want to group data based on inactivity between events, the output varies 
 
 ## Create a Harvester With Sessionizing
 
-This section describes how to include the sessionizing processor in [API creation](../../developer-reference/api-reference/harvester-api.md#create-harvester) of a harvester.
+This section describes how to include the sessionizing processor in [API creation](../../../developer-reference/api-reference/harvester-api.md#create-harvester) of a harvester.
 
 ### Registering the SCDF app
 
 {% hint style="info" %}
-This section is an addition to [Getting Started](how-to-run-a-harvester/getting-started.md), it will not explain in detail how to create a harvester, but only how to register the necessary application and how to add the additional parameters to a standard \(non-sessionizing\) harvester. 
+This section is an addition to [Getting Started](../how-to-run-a-harvester/getting-started.md), it will not explain in detail how to create a harvester, but only how to register the necessary application and how to add the additional parameters to a standard \(non-sessionizing\) harvester. 
 {% endhint %}
 
 In order to add the additional step to your harvester definition, you need to register an scdf   
@@ -179,5 +179,5 @@ As with other scdf apps certain deployment properties can be provided. Example w
 
 ## Consuming Sessionized Data
 
-See [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md) for futher details on how to consume the sessionized data in belts.
+See [Belt Extractor](../../../developer-reference/dataflow/belt-extractor.md) for futher details on how to consume the sessionized data in belts.
 

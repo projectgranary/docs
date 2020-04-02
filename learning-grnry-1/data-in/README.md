@@ -6,11 +6,15 @@ description: These pages describe how to get data into the platform.
 
 In this chapter we are going to learn, how to get data into the plattform. Before we start, we are going to have a look at the different components and the data-in pipeline.
 
-### Overview
+## Overview
 
-Data-In starts with your source. Your source can be any data you wish to extract from or write into the grnry plattform. This source is the starting point for the development. The source can be anything from web trackers to database tables or S3 buckets. These sources can be consumed by a so-called Source Type. These are source-specific implementations exposing configuration options to connect to the actual source. Already available source type implementations in Granary contain, among others, Kafka Topics, SFTP Servers or JDBC source. 
+Data-In starts with your source. Your source can be any data you wish to extract from or write into the grnry plattform. This source is the starting point for the development. The source can be anything from web trackers to database tables or S3 buckets. These sources can be consumed by a so-called Source Type. These are source-specific implementations exposing configuration options to connect to the actual source. Already available source type implementations in Granary contain, among others, AWS S3, Kafka Topics, SFTP Servers or JDBC source. 
 
-![Data-In Channel](../../.gitbook/assets/grnry_data_in_channel.svg)
+![Granary&apos;s data-in framework](../../.gitbook/assets/grnry_data_in_channel.svg)
+
+{% hint style="info" %}
+Harvesters for _S3_, _SFTP_, and _JDBC_ Source Types follow the same schema as _Kafka Topic_ Source Type.
+{% endhint %}
 
 <table>
   <thead>

@@ -4,9 +4,7 @@ description: >-
   Belts. We provide tools such as converters to convert files to single lines.
 ---
 
-# Easing Development
-
-## Converting a script into a one-liner
+# Converting a script into a one-liner
 
 Using the Belt API, for example for the extractor function, it is necessary to provide a script as a one-liner. As this is very bad to read, it is very likely, you are using a normal editor to create such files. You then want to easily convert these files into one liners.
 

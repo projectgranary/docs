@@ -4,6 +4,10 @@ By rolling out an open source "Customer Data Platform" into the organization's o
 
 The ability to disambiguate customer profiles across systems and devices is a key feature to deliver on this vision, especially when external data sources are incorporated. Other important features include easy-yet-flexible data preparation rules as well as machine learning engines that can infer missing attributes from other customer's records. Privacy-by-design according to European standards is front and center and allow to operate the platform even in regulation-dense industries.
 
+This is what we call _Granary_.
+
+Start your journey by [harvesting your data](learning-grnry-1/using-data-in-granary/) and [turning them into valuable grains](learning-grnry-1/using-data-in-granary/). Leverage their full potential through [Granary's various data out channels](learning-grnry-1/get-data-out-of-granary/).
+
 \#GRNRY  
 
 

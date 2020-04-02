@@ -4,7 +4,7 @@ description: >-
   Granary's Segment Store API which is based on Presto.
 ---
 
-# Segment Store API
+# How to access a Segment
 
 ### Configure DBVisualizer to use Segment Store API
 
