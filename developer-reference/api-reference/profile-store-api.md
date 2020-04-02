@@ -284,6 +284,84 @@ Filters the profile by grain/fragment path\(s\). You can define multiple path as
 {% endapi-method-response-example-description %}
 
 ```
+{
+    "correlationId": "Contract56616",
+    "type": "demo_graph",
+    "jsonPayload": {
+        "customer": {
+            "_latest": {
+                "_c": 1,
+                "_v": "22917",
+                "_in": 1580984726634,
+                "_ttl": "P100Y",
+                "_origin": "Contract",
+                "_reader": "_auth"
+            }
+        },
+        "date": {
+            "enddate": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "None",
+                    "_in": 1580984726613,
+                    "_ttl": "P100Y",
+                    "_origin": "Contract",
+                    "_reader": "_auth"
+                }
+            },
+            "next_payment": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "2020-01-01T00:00:00",
+                    "_in": 1580984726624,
+                    "_ttl": "P100Y",
+                    "_origin": "Contract",
+                    "_reader": "_auth"
+                }
+            },
+            "startdate": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "2019-01-01T00:00:00",
+                    "_in": 1580984726598,
+                    "_ttl": "P100Y",
+                    "_origin": "Contract",
+                    "_reader": "_auth"
+                }
+            }
+        },
+        "product": {
+            "_latest": {
+                "_c": 1,
+                "_v": "life insurance",
+                "_in": 1580984725393,
+                "_ttl": "P100Y",
+                "_origin": "Contract",
+                "_reader": "_auth"
+            }
+        },
+        "_id": "Contract56616"
+    }
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
 
 ```
 {% endapi-method-response-example %}
