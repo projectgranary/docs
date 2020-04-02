@@ -1,12 +1,14 @@
 ---
 description: >-
-  A Springboot/Spring batch microservice that fetches ttl-outdated Profiles from
-  the Profilestore and send them to a Kafka topic.
+  A Springboot/Spring batch microservice that fetches time-to-live (TTL) expired
+  Grains from the Profilestore and send them to a Kafka topic.
 ---
 
 # Reaper
 
-The Granary Reaper is responsible for collecting expired grains, by querying them from the [Profile Store](./) and writing them back into the data pipeline through a TTL Kafka topic. 
+![Reaper Data Flow from Profile Store to Belt Extractor](../../../.gitbook/assets/reaper.PNG)
+
+The Granary Reaper is responsible for collecting expired grains by querying them from the [Profile Store](./) and writing them back into the data pipeline through a TTL Kafka topic. 
 
 ## Configuration
 
@@ -34,7 +36,7 @@ Please note that to comply with the data protection law, TTL grains will not car
 
 ### Kafka Message Header Fields
 
-Description of the header fields can be found in the [Belt Extractor](../belt-extractor/#callback-signature) specification.
+Description of the header fields can be found in the [Belt Extractor](../belt-extractor.md#callback-signature) specification.
 
 | Field Name | Value |
 | :--- | :--- |

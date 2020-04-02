@@ -4,7 +4,7 @@ description: This page outlines the storage of raw event data and replay possibi
 
 # Event Store and Replay
 
-![Data flow within the raw data zone of Granary](../../.gitbook/assets/events.PNG)
+![Data flow within raw data zone of Granary](../../.gitbook/assets/events.PNG)
 
 In the raw data zone of Granary, data is persisted in the Event Store table by the [SCDF Event Store sinks](data-in/eventstore-sink.md). Also, raw data can be replayed back into belts by the Event Feeder.
 
@@ -35,7 +35,7 @@ Data can be retrieved from Event Store using the [Event Store API](../api-refere
 
 ## Event Replay
 
-Event Replay enables [belts](belt-extractor/) to start at a certain point in time in the past and to resume consuming the live event feed after reprocessing the past events.
+Event Replay enables [belts](belt-extractor.md) to start at a certain point in time in the past and to resume consuming the live event feed after reprocessing the past events.
 
 As depicted in the raw data zone chart  above, the replay data flow uses the component **Event Feeder** which reads raw events from the Event Store. The feeder emits those typed events to a temporary Kafka topic which can be consumed by the Belt extractor runtime.
 

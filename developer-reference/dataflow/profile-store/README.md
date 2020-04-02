@@ -4,9 +4,9 @@ description: This page describes the Profile Store and Profile Update mechanism.
 
 # Profile Store and Reaper
 
-![](../../../.gitbook/assets/kurt_dataflow_data_out.PNG)
+![Data flow within harmonized data zone of Granary](../../../.gitbook/assets/dataflow_profile.PNG)
 
-The profile store holds integrated data for entities in so-called profiles. Such entities can be customers, customers' contracts or customers' behavior, etc. The profile store holds a profile for each correlation id and profile type. A profile type denotes the abstract notion of an entity, such as customer, contract, or behavior.
+The Profile Store holds integrated data for entities in so-called profiles. Such entities can be customers, customers' contracts or customers' behavior, etc. The profile store holds a profile for each correlation id and profile type. A profile type denotes the abstract notion of an entity, such as customer, contract, or behavior.
 
 A profile is a JSON document. A profile consists of fragments and grains. Fragments group other fragments and grains. Grains store the information at different points in time. Grain values carry the actual value and respective meta information.
 
@@ -116,7 +116,7 @@ The profile store is a distributed table in a database. Each tuple in that table
     </tr>
     <tr>
       <td style="text-align:left">ttl</td>
-      <td style="text-align:left">Time to life. Allows to delete the grain after a defined duration. Format
+      <td style="text-align:left">Time to life. Allows to modify the grain after a defined duration. Format
         is <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">https://en.wikipedia.org/wiki/ISO_8601#Durations</a>.</td>
       <td
       style="text-align:left">varchar</td>
