@@ -73,12 +73,12 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
             "createdAt": "2020-03-18T18:08:31.850",
             "modifiedAt": "2020-03-18T18:09:17.179",
             "createdBy": {
-                "name": "tu-grnry",
-                "email": "klaus@grnry.io"
+                "name": "foo",
+                "email": "for@bar.io"
             },
             "modifiedBy": {
-                "name": "tu-grnry",
-                "email": "klaus@grnry.io"
+                "name": "foo",
+                "email": "foo@bar.io"
             }
         },
         "roles": {
@@ -100,7 +100,7 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
                 "GENERIC_COLUMNS": "event_id,event_harvester",
                 "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
                 "PROMETHEUS_JOB": "eventstore_int_test_seg1",
-                "PROMETHEUS_PUSHGATEWAY": "grnry-prometheus-pushgateway.monitoring.svc.cluster.local:9091",
+                "PROMETHEUS_PUSHGATEWAY": "prometheus-pushgateway.monitoring.svc.cluster.local:9091",
                 "SOURCE_TABLE_NAME": "eventstore",
                 "SOURCE_WHERE_CLAUSE": "event_harvester = 'adobe'",
                 "TARGET_SEGMENT_INDEXES": "idx1=(event_id, theval02)",
@@ -109,7 +109,7 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
             }
         },
         "links": {
-            "self": "http://localhost:8080/segments/demo-segment-95he0?action=self"
+            "self": "http://hostname:8080/segments/demo-segment-95he0?action=self"
         },
         "labels": [
             "customer",
@@ -117,7 +117,7 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
         ]
     }],
     "links": {
-        "self": "http://localhost:8080/segments?offset=0&pagesize=1&search=demo&action=self"
+        "self": "http://hostname:8080/segments?offset=0&pagesize=1&search=demo&action=self"
     },
     "totalCount": 1
 }
@@ -181,12 +181,12 @@ Authentication token required
         "createdAt": "2020-03-18T18:08:31.850",
         "modifiedAt": "2020-03-18T18:09:17.179",
         "createdBy": {
-            "name": "tu-grnry",
-            "email": "klaus@grnry.io"
+            "name": "foo",
+            "email": "for@bar.io"
         },
         "modifiedBy": {
-            "name": "tu-grnry",
-            "email": "klaus@grnry.io"
+            "name": "foo",
+            "email": "foo@bar.io"
         }
     },
     "roles": {
@@ -208,7 +208,7 @@ Authentication token required
             "GENERIC_COLUMNS": "event_id,event_harvester",
             "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
             "PROMETHEUS_JOB": "eventstore_int_test_seg1",
-            "PROMETHEUS_PUSHGATEWAY": "grnry-prometheus-pushgateway.monitoring.svc.cluster.local:9091",
+            "PROMETHEUS_PUSHGATEWAY": "prometheus-pushgateway.monitoring.svc.cluster.local:9091",
             "SOURCE_TABLE_NAME": "eventstore",
             "SOURCE_WHERE_CLAUSE": "event_harvester = 'adobe'",
             "TARGET_SEGMENT_INDEXES": "idx1=(event_id, theval02)",
@@ -217,7 +217,7 @@ Authentication token required
         }
     },
     "links": {
-        "self": "http://localhost:8080/segments/demo-segment-95he0?action=self"
+        "self": "http://hostname:8080/segments/demo-segment-95he0?action=self"
     },
     "labels": [
         "customer",
@@ -325,8 +325,8 @@ description: optional
         "createdAt": "2020-03-18T18:08:31.850",
         "modifiedAt": "",
         "createdBy": {
-            "name": "tu-grnry",
-            "email": "klaus@grnry.io"
+            "name": "foo",
+            "email": "for@bar.io"
         },
         "modifiedBy": {
             "name": "",
@@ -351,7 +351,7 @@ description: optional
             "GENERIC_COLUMNS": "event_id,event_harvester",
             "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
             "PROMETHEUS_JOB": "eventstore_int_test_seg1",
-            "PROMETHEUS_PUSHGATEWAY": "grnry-prometheus-pushgateway.monitoring.svc.cluster.local:9091",
+            "PROMETHEUS_PUSHGATEWAY": "prometheus-pushgateway.monitoring.svc.cluster.local:9091",
             "SOURCE_TABLE_NAME": "eventstore",
             "SOURCE_WHERE_CLAUSE": "event_harvester = 'adobe'",
             "TARGET_SEGMENT_INDEXES": "idx1=(event_id, theval02)",
@@ -473,12 +473,12 @@ Overwrites `displayName` and `description`.
         "createdAt": "2020-03-18T18:08:31.850",
         "modifiedAt": "2020-03-18T18:09:17.179",
         "createdBy": {
-            "name": "tu-grnry",
-            "email": "klaus@grnry.io"
+            "name": "foo",
+            "email": "for@bar.io"
         },
         "modifiedBy": {
-            "name": "tu-grnry",
-            "email": "klaus@grnry.io"
+            "name": "foo",
+            "email": "foo@bar.io"
         }
     },
     "roles": {
@@ -500,7 +500,7 @@ Overwrites `displayName` and `description`.
             "GENERIC_COLUMNS": "event_id,event_harvester",
             "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
             "PROMETHEUS_JOB": "eventstore_int_test_seg1",
-            "PROMETHEUS_PUSHGATEWAY": "grnry-prometheus-pushgateway.monitoring.svc.cluster.local:9091",
+            "PROMETHEUS_PUSHGATEWAY": "prometheus-pushgateway.monitoring.svc.cluster.local:9091",
             "SOURCE_TABLE_NAME": "eventstore",
             "SOURCE_WHERE_CLAUSE": "event_harvester = 'adobe'",
             "TARGET_SEGMENT_INDEXES": "idx1=(event_id, theval02)",
@@ -666,7 +666,7 @@ This section provides you with a sample object for the `data` attribute. All ava
         "GENERIC_COLUMNS": "event_id,event_harvester",
         "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
         "TARGET_SEGMENT_INDEXES": "idx1=(event_id, theval02)",
-        "PROMETHEUS_PUSHGATEWAY": "grnry-prometheus-pushgateway.monitoring.svc.cluster.local:9091",
+        "PROMETHEUS_PUSHGATEWAY": "prometheus-pushgateway.monitoring.svc.cluster.local:9091",
         "PROMETHEUS_JOB": "eventstore_int_test_seg1",
         "DEBUG": "True"
     }

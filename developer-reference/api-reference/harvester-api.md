@@ -1635,7 +1635,7 @@ harvester name already exists
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="put" host="https://api.grnry.io" path="harvesters/instances/:harvester-name" %}
+{% api-method method="put" host="https://api.grnry.io/" path="harvesters/instances/:harvester-name" %}
 {% api-method-summary %}
 Update Harvester Instance
 {% endapi-method-summary %}

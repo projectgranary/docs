@@ -60,7 +60,7 @@ Profile successfully retrieved.
       "type": "_d",
       "_links": {
         "self": {
-          "href": "http://localhost/profiles/_d?offset=0&pagesize=20"
+          "href": "http://hostname/profiles/_d?offset=0&pagesize=20"
         }
       }
     },
@@ -68,7 +68,7 @@ Profile successfully retrieved.
       "type": "someProfileType",
       "_links": {
         "self": {
-          "href": "http://localhost/profiles/someProfileType?offset=0&pagesize=20"
+          "href": "http://hostname/profiles/someProfileType?offset=0&pagesize=20"
         }
       }
     }
@@ -183,7 +183,7 @@ Start offset. Default is 0
       },
       "_links": {
         "self": {
-          "href": "http://localhost/profiles/someProfileType/15d0f494-2afd-4d79-9fe4-ce6a4add4e2d"
+          "href": "http://hostname/profiles/someProfileType/15d0f494-2afd-4d79-9fe4-ce6a4add4e2d"
         }
       }
     },
@@ -204,14 +204,14 @@ Start offset. Default is 0
       },
       "_links": {
         "self": {
-          "href": "http://localhost/profiles/someProfileType/15d0f494-2afd-4d79-9fe4-ce6a4add4e33"
+          "href": "http://hostname/profiles/someProfileType/15d0f494-2afd-4d79-9fe4-ce6a4add4e33"
         }
       }
     }
   ],
   "_links": {
     "self": {
-      "href": "http://localhost/profiles/someProfileType?offset=0&pagesize=20"
+      "href": "http://hostname/profiles/someProfileType?offset=0&pagesize=20"
     }
   }
 }
