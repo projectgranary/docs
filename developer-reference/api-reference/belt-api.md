@@ -158,8 +158,6 @@ Create and Store a Belt
 {% api-method-description %}
 Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned.   
   
-In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.  
-  
 **JSON Schema Definitions**  
   
 Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html  
@@ -315,7 +313,7 @@ Deletes a specific belt given the ID.
   
 Deletes the belt definition in the database and all corresponding kubernetes resources if the belt is deployed.  
   
-In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.
+The Keycloak user needs to have the _editor_ roles defined for this Belt.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -373,20 +371,9 @@ Updates a Belt by ID
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Updates attributes of a belt, given its ID.   
+Updates attributes of a belt.   
   
-For a list of body parameters to send, see above POST /belts documentation. All parameters would be optional, except for the `editor`. One could update one or multiple attributes at the same time. Please note, that you need to provide all belt details in case of a put. Otherwise data might get lost. I.e. all fields that are not mentioned in the update JSON object will be replaced by their defaults from Belt API source code.  
-  
-**Important: In the current implementation, belt version will automatically increase by each update.**  
-  
-In order to create / update / delete a belt here, it is necessary that you have a _viewer_ role assigned to your profile in keycloak. The editor role must match the roles defined for the belt.  
-  
-Body examples:   
-  
-`{"name": "belt-updated-1"}`  
-or   
-  
-`{"name": "belt-updated-1", "beltType": "someBeltType"}`
+In order to update a belt, a complete JSON representation of the object needs to be provided. For a list of body parameters, see above POST /belts documentation. Empty fields will be set to default values as specified for POST /belts. The Keycloak user needs to have the _editor_ roles defined for this Belt.  
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -402,12 +389,6 @@ Belt ID
 Authentication Token
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
-
-{% api-method-body-parameters %}
-{% api-method-parameter name="editor" type="string" required=true %}
-The editors allowed to alter this belt.
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -466,6 +447,16 @@ A full dump of belt object recently modified
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=304 %}
+{% api-method-response-example-description %}
+The provided body parameters did not override existing values.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
 If the belt structure contains an invalid event type. 
@@ -509,7 +500,9 @@ Get a Belt's state
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieve the status of the Belt's Kubernetes deployment.
+Retrieve the status of the Belt's Kubernetes deployment.  
+  
+In order to get results, you must have the required roles as defined in the fields _editor_ or _viewer_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -567,7 +560,7 @@ Manipulate a Belt's state
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Update the status of the Belt's Kubernetes deployment.  
+Update the status of the Belt's Kubernetes deployment. The Keycloak user needs to have the _editor_ roles defined for this Belt.  
   
 Body example:  
 `{"action": "START"}`  
