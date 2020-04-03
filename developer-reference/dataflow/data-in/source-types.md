@@ -135,7 +135,7 @@ A sample of the configuration of a JDBC source could look like this:
    "app.grnry-jdbc.grnry.eventTypeName":"jdbc",
 ```
 
-## Topic Source
+### Topic Source
 
 **Name:** grnry-topic
 
@@ -154,5 +154,36 @@ A sample of the configuration of a Topic source could look like this:
 "app.grnry-topic-source.consumer.input-topic": "source-topic",
 "app.grnry-topic-source.consumer.concurrency": "10",
 "app.grnry-topic-source.consumer.startOffset": "earliest"
+```
+
+### Amazon S3 Source
+
+**Name**: grnry-aws-s3
+
+**Parameters**: See [shared parameters](grnry-components-and-parameters.md).
+
+**Source parameters:**
+
+The Amazon S3 Source is based on the Amazon S3 source provided by Spring Cloud Dataflow. For non-granary-specific parameters see [here](https://github.com/spring-cloud-stream-app-starters/aws-s3/blob/master/spring-cloud-starter-stream-source-s3/README.adoc).
+
+| **Parameter** | Name |
+| :--- | :--- |
+| grnry-aws-s3.proxyHost | Host name when using a proxy. **\(String, default: `null`\)** |
+| grnry-aws-s3.proxyPort | Service port when using a proxy. **\(Integer, default: `-1`\)** |
+| grnry-aws-s3.nonProxyHosts | List of host names where a direct connection is possible. **\(String, default: `null`\)** |
+
+A sample of the configuration of an Amazon S3 source could look like this:
+
+```yaml
+	"app.grnry-aws-s3.grnry-aws-s3.proxyHost" : "proxy.grnry.io",
+	"app.grnry-aws-s3.grnry-aws-s3.proxyPort" : "1234",
+	"app.grnry-aws-s3.file.consumer.mode": "lines",
+	"app.grnry-aws-s3.s3.auto-create-local-dir": "true",
+	"app.grnry-aws-s3.s3.remote-dir": "BUCKET_NAME",
+	"app.grnry-aws-s3.s3.delete-remote-files": "true",
+	"app.grnry-aws-s3.cloud.aws.credentials.access-key": "ACCESS_KEY",
+	"app.grnry-aws-s3.cloud.aws.credentials.secret-key": "SECRET_KEY",
+	"app.grnry-aws-s3.cloud.aws.region.static": "REGION",
+	"app.grnry-aws-s3.cloud.aws.stack.auto": "false"
 ```
 
