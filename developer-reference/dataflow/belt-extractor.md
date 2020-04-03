@@ -357,15 +357,14 @@ def execute(event_headers, event_payload, profile=None):
     if not event_headers:
       return None
       
-    if isinstance(event_headers, dict) and isinstance(event_payload, dict):
+ if isinstance(event_headers, dict):
       logging.debug("received single-payload event")
       # add your code handling single-payload events here 
     elif isinstance(event_headers, list) and isinstance(event_payload, list):     
       logging.debug("received multi-payload event")
       # add your code handling multi-payload events here
     else:
-      logging.error("event_headers and/or event_payload do not match the expected signature")
-      return None 
+      raise ValueError("event_headers and/or event_payload do not match the expected signature") 
 ```
 
 ## Configuration
