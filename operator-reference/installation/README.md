@@ -36,5 +36,5 @@ In turn, the Incubator Helm Chart Repo always deploys the latest commit on the m
 
 ## Deployment Dependencies
 
-![](../../.gitbook/assets/deployment.PNG)
+![](../../.gitbook/assets/deployment%20%281%29.PNG)
 

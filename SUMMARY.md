@@ -76,6 +76,7 @@
   * [Segment Table Creation](operator-reference/installation/segment-table-creation.md)
   * [Citus PostgreSQL](operator-reference/installation/citus-postgresql.md)
   * [Kafka Manager](operator-reference/installation/kafka-manager.md)
+  * [Reaper](operator-reference/installation/reaper.md)
   * [Granary UI](operator-reference/installation/granary-ui.md)
   * [GraphQL API](operator-reference/installation/graphql-api.md)
   * [Event Explorer UI](operator-reference/installation/event-explorer-ui.md)

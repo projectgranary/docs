@@ -269,6 +269,14 @@ The correlation ID
 Authentication token
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="fragments" type="string" required=false %}
+Filters the profile by grain/fragment path\(s\). You can define multiple path as a comma-separated list.   
+Example:  
+`/customer/name,/coustomer/address,/invoiceDetails`
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
