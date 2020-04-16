@@ -12,16 +12,6 @@ description: Springboot-based microservice to manage harvesters and event types.
 * GET /harvesters/source-types/{source-type-name}
 * GET /harvesters/source-types/{source-type-name}/{version}
 
-### Harvester Instance Endpoints
-
-* GET /harvesters/instances
-* GET /harvesters/instances/{harvester-name}
-* POST /harvesters/instances
-* PUT /harvesters/instances/{harvester-name}
-* DELETE /harvesters/instances/{harvester-name}
-* GET /harvesters/instances/{harvester-name}/state
-* POST /harvesters/instances/{harvester-name}/state
-
 ### Event Type Endpoints
 
 * GET /event-types
@@ -36,9 +26,23 @@ description: Springboot-based microservice to manage harvesters and event types.
 * POST /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/logs
 
+### Harvester Instance Endpoints
+
+* GET /harvesters/instances
+* GET /harvesters/instances/{harvester-name}
+* POST /harvesters/instances
+* PUT /harvesters/instances/{harvester-name}
+* DELETE /harvesters/instances/{harvester-name}
+* GET /harvesters/instances/{harvester-name}/state
+* POST /harvesters/instances/{harvester-name}/state
+
+### 
+
 ## API Methods
 
 Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
+
+### Source Type Endpoints
 
 {% api-method method="get" host="https://api.grnry.io" path="/harvesters/source-types" %}
 {% api-method-summary %}
@@ -124,6 +128,32 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Token invalid.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1586941626155,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/source-types"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or forbidden role.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
@@ -203,6 +233,32 @@ Offset of the requested page. Default is `0` . Must be a whole multiple of `page
         }
     }
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1586941731368,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/source-types/grnry-jdbc"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or forbidden role.
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -292,9 +348,41 @@ Authentication token.
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Token invalid.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or forbidden role.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+No source-type found for the given id + version.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
+
+### Event Type Endpoints
 
 {% api-method method="get" host="https://api.grnry.io" path="/event-types" %}
 {% api-method-summary %}
@@ -395,6 +483,26 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
@@ -474,6 +582,46 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
         }
     ]
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching role.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+No event-type found with that name.
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -575,6 +723,64 @@ Displayname of the new event type
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+If required parameters are missing or parameters are invalid.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586949283490,
+    "message":"displayName : was not able to create event type name from displayName: '?**//$$%%'",
+    "details":"uri=/event-types"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=409 %}
+{% api-method-response-example-description %}
+If displayName not unique.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=500 %}
+{% api-method-response-example-description %}
+Persister already exists for the eventy type.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586949269381,
+    "message":"Could not create event type with name 'persister-already-exists'. Persister already present.",
+    "details":"uri=/event-types"
+}
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
@@ -671,23 +877,41 @@ If the event type is not modified.
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=403 %}
+{% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
-
+Invalided parameter.
 {% endapi-method-response-example-description %}
 
-```text
+```
+{
+    "timestamp":1586949276932,
+    "message":"type : cannot be modified. Must be empty or 'ttl' but is 'data_in'",
+    "details":"uri=/event-types/test-event-type-2"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
 
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=404 %}
+{% api-method-response-example httpCode=403 %}
 {% api-method-response-example-description %}
-
+No token or matching role.
 {% endapi-method-response-example-description %}
 
 ```text
-
+{
+    "timestamp":1586949292725,
+    "message":"Access is denied",
+    "details":"uri=/event-types/test-event-type"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -719,6 +943,16 @@ Authentication token
 {% endapi-method-request %}
 
 {% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=204 %}
 {% api-method-response-example-description %}
 
@@ -726,6 +960,44 @@ Authentication token
 
 ```text
 
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching role.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586949276025,
+    "message":"Access is denied",
+    "details":"uri=/event-types/test-event-type-tp"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+No event type with given name found.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586949280969,
+    "message":"No Entity found with name: test-delete",
+    "details":"uri=/event-types/test-delete"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -748,6 +1020,20 @@ If there are still belts and/or harvesters referencing the event-type, the delet
      https://hostname/belts/18,
      https://hostname/belts/19]",
     "details": "uri=/event-types/test-event-type-delete"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=424 %}
+{% api-method-response-example-description %}
+When event type is still being referenced.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586949288891,
+    "message":"can not delete event type test-delete-harvester, it is still being referenced by harvesters [http://localhost/harvesters/instances/harvester-et-delete?expand=])",
+    "details":"uri=/event-types/test-delete-harvester"
 }
 ```
 {% endapi-method-response-example %}
@@ -824,6 +1110,44 @@ If the version is not latest or a valid number greater or equals to 1.
    "timestamp":1578934021414,
    "message":"version : Needs to be a long or latest",
    "details":"uri=/event-types/test-event-type/invalidVersion"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching role.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586949273019,
+    "message":"Access is denied",
+    "details":"uri=/event-types/test-event-type-partial/latest"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+No event type found for given version.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586949286718,
+    "message":"No Entity found with name: test-event-type and version: 4",
+    "details":"uri=/event-types/test-event-type/4"
 }
 ```
 {% endapi-method-response-example %}
@@ -910,6 +1234,40 @@ requested :event-type-name \(eventtype-1\) , :event-store-name \(pg\)
         }
     }
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586951901861,
+    "message":"Access is denied",
+    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Event store, event type not found.
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -1001,6 +1359,44 @@ The updated stream app version. This version has to be present in the backend sp
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Invalid parameters
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586951900148,
+    "message":"JSON parse error: Unexpected character ('\\' (code 92)): was expecting double-quote to start field name; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('\\' (code 92)): was expecting double-quote to start field name\n at [Source: (PushbackInputStream); line: 1, column: 4]",
+    "details":"uri=/event-types/event-type-empty-update-persister-config/eventstores/pg/persister"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586951904110,
+    "message":"Access is denied",
+    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
+}
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
@@ -1049,6 +1445,40 @@ status of :even-type-name \(event-type-1\)
         }
     }
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586951905187,
+    "message":"Access is denied",
+    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Event store, event type not found.
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -1129,6 +1559,30 @@ Updates the status of this persister. Possible values: `START` , `STOP`
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching role.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586951884736,
+    "message":"Access is denied",
+    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
+}
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
@@ -1164,7 +1618,7 @@ Authentication token.
 {% api-method-query-parameters %}
 {% api-method-parameter name="lines" type="integer" required=false %}
 The last x lines of the log \(if available\).  
-Value range: `1 .. 500`. Default: `500`.
+Valid value are : `1 .. 500`. Default: `500`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -1215,13 +1669,39 @@ Value range: `1 .. 500`. Default: `500`.
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586951905141,
+    "message":"Access is denied",
+    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/logs"
+}
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
 
+### Harvester Instance Endpoints
+
 {% api-method method="get" host="https://api.grnry.io" path="/harvester/instances" %}
 {% api-method-summary %}
-List all Harvester Instances
+Get all Harvester Instances
 {% endapi-method-summary %}
 
 {% api-method-description %}
@@ -1281,6 +1761,30 @@ Filter harvester list by name. Default: ""
          "href":"https://hostname/harvesters/instances?search=&offset=0&pagesize=20&expand=totalCount"
       }
    }
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586952802552,
+    "message":"Access is denied",
+    "details":"uri=/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -1427,6 +1931,40 @@ Sample Response
             "href": "https://hostname/harvesters/instances/harvester-demo"
         }
     }
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Harvester instance does not exist.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586952812431,
+    "message":"no harvester-instance found with name = harvester-delete",
+    "details":"uri=/harvesters/instances/harvester-delete"
 }
 ```
 {% endapi-method-response-example %}
@@ -1614,6 +2152,30 @@ Missing field or bad value
     "timestamp": 1579697549062,
     "message": "Validation failed for argument at index 0 in method: public org.springframework.hateoas.Resource<io.grnry.harvester_api.harvesters.response.HarvesterResponse> io.grnry.harvester_api.harvesters.HarvesterController.addHarvester(io.grnry.harvester_api.harvesters.requests.HarvesterPostRequest), with 1 error(s): [Field error in object 'harvesterPostRequest' on field 'eventType.version': rejected value [null]; codes [NotNull.harvesterPostRequest.eventType.version,NotNull.eventType.version,NotNull.version,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [harvesterPostRequest.eventType.version,eventType.version]; arguments []; default message [eventType.version]]; default message [must not be null]] ",
     "details": "uri=/harvesters/instances"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586952816224,
+    "message":"Access is denied",
+    "details":"uri=/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -1821,7 +2383,7 @@ Harvester is not modified.
 
 {% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
-
+Missing parameter or parameter is invalid.
 {% endapi-method-response-example-description %}
 
 ```
@@ -1913,6 +2475,26 @@ Authentication token.
 
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
@@ -1957,6 +2539,26 @@ Authentication token.
         }
     }
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -2037,6 +2639,40 @@ updates the status of this harvester. Possible values: `START`, `STOP`
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=500 %}
+{% api-method-response-example-description %}
+Failed to start.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp":1586952826375,
+    "message":"failed on start",
+    "details":"uri=/harvesters/instances/fail-on-start/state"
+}
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
@@ -2054,6 +2690,10 @@ This request requires the role `harvester_read`.
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="line" type="string" required=false %}
+Number of maximum lines the log should contain. Default is `500`
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="step-name" type="string" required=true %}
 Name of the Harvester Step.  The name must be `sourceType`, `transform`, or `metadataExtractor`.
 {% endapi-method-parameter %}
@@ -2072,7 +2712,7 @@ Authentication token.
 {% api-method-query-parameters %}
 {% api-method-parameter name="lines" type="integer" required=false %}
 The last x lines of the log \(if available\).  
-Value range: `1 .. 500`. Default: `500`.  
+Value range: `1 .. 500`. Default: `500`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -2111,6 +2751,26 @@ Value range: `1 .. 500`. Default: `500`.
         ...
     ]
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Invalid token.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+No token or matching roles.
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
