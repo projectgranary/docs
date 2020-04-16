@@ -1164,7 +1164,7 @@ Authentication token.
 {% api-method-query-parameters %}
 {% api-method-parameter name="lines" type="integer" required=false %}
 The last x lines of the log \(if available\).  
-Valid value are : 1 .. 5000. Default: 5000.
+Value range: `1 .. 500`. Default: `500`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
 {% endapi-method-request %}
@@ -2054,10 +2054,6 @@ This request requires the role `harvester_read`.
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="line" type="string" required=false %}
-Number of maximum lines the log should contain. Default is `500`
-{% endapi-method-parameter %}
-
 {% api-method-parameter name="step-name" type="string" required=true %}
 Name of the Harvester Step.  The name must be `sourceType`, `transform`, or `metadataExtractor`.
 {% endapi-method-parameter %}
@@ -2072,6 +2068,13 @@ Technical name of the Harvester.
 Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="lines" type="integer" required=false %}
+The last x lines of the log \(if available\).  
+Value range: `1 .. 500`. Default: `500`.  
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
