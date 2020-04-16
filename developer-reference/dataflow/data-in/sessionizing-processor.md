@@ -49,7 +49,15 @@ Default:
 
  The event type name.
 
-#### sessionizing.harvestName
+#### sessionizing.eventTypeVersion
+
+The event type version.
+
+Default:
+
+`1`
+
+#### sessionizing.harvesterName
 
  The harvester name.
 
@@ -65,6 +73,7 @@ sessionizing.sessionizingAttributeExpression: [SpEL-Expression - optional]
 sessionizing.inactivityGap : [long literal in seconds]
 sessionizing.gracePeriod : [long literal in seconds]
 sessionizing.eventTypeName: [String literal]
+sessionizing.eventTypeVersion: [String literal]
 sessionizing.harvesterName : [String literal]
 ```
 
@@ -74,6 +83,7 @@ Example:
 app.grnry-sessionizing-processor.sessionizing.correlationIdExpression: "headers['grnry-correlation-id']",
 app.grnry-sessionizing-processor.sessionizing.sessionizingAttributeExpression: "payload.correlationId",
 app.grnry-sessionizing-processor.sessionizing.eventTypeName: "${grnry.eventTypeName}",
+app.grnry-sessionizing-processor.sessionizing.eventTypeName: "1",
 app.grnry-sessionizing-processor.sessionizing.harvesterName: "${grnry.harvesterName}",
 app.grnry-sessionizing-processor.sessionizing.inactivityGap: 3600,
 app.grnry-sessionizing-processor.sessionizing.gracePeriod : 120,
