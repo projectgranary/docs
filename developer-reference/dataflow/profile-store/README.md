@@ -435,7 +435,8 @@ Profile Updater writes profile updates to dead letter queue in case of:
   * operation is `_inc` and grain type is not `counter`
   * operation is one of `array_append`, `_array_append_with_history`, `_array_put`, `_array_put_with_history` and grain type is not `array`
   * operation is one of `_array_remove`, `_array_remove_with_history`, `_set_min`, `_set_max`, `_set_min_with_history`, `_set_max_with_history` and grain type is not `text`
-* grain value \(`_v`\) may only be `null` for delete operation 
+* grain value \(`_v`\) is null and operation is not `_delete`
+* grain value \(`_v`\) is not null and operation is `_delete` 
 * certainty \(`_c`\) is not between 0 and 1
 * creation timestamp \(`_in`\) is negative
 * time to live \(`_ttl`\) does not comply ISO 860 time period

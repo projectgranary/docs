@@ -241,6 +241,10 @@ If given profile type is not found
 {% endapi-method-spec %}
 {% endapi-method %}
 
+{% hint style="warning" %}
+Profiles and their grains in the JSON response body are unordered. 
+{% endhint %}
+
 {% api-method method="get" host="https://api.grnry.io" path="/profiles/:profileType/:correlationId" %}
 {% api-method-summary %}
 Get a Specific Profile by ID and Type
@@ -370,4 +374,8 @@ Example:
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
+
+{% hint style="warning" %}
+Profiles and their grains in the JSON response body are unordered. 
+{% endhint %}
 
