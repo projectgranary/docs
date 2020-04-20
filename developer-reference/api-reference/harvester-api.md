@@ -67,11 +67,11 @@ Authentication token.
 Filter source types by names containing this search term Default is `""`.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="pagesize" type="string" required=false %}
+{% api-method-parameter name="pagesize" type="number" required=false %}
 Number of source types returned per page. Default is `20`.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="offset" type="string" required=false %}
+{% api-method-parameter name="offset" type="number" required=false %}
 Offset of the requested page. Default is `0`. Must be a whole multiple of `pagesize`. 
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
@@ -129,6 +129,20 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Invalid query parameter value.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587302499600,
+    "message": "pagesize : could not parse value",
+    "details": "uri=/harvesters/source-types"
+}
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
 Token invalid.
@@ -151,7 +165,11 @@ No token or forbidden role.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp":1586949273019,
+    "message":"Access is denied",
+    "details":"uri=/harvesters/source-types"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -183,12 +201,12 @@ Authentication token.
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
-{% api-method-parameter name="pagesize" type="string" required=false %}
+{% api-method-parameter name="pagesize" type="number" required=false %}
 Number of source types returned per page. Default is  
 `20` .
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="offset" type="string" required=false %}
+{% api-method-parameter name="offset" type="number" required=false %}
 Offset of the requested page. Default is `0` . Must be a whole multiple of `pagesize`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
@@ -236,6 +254,20 @@ Offset of the requested page. Default is `0` . Must be a whole multiple of `page
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Invalid query parameter value.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587302383370,
+    "message": "pagesize : could not parse value",
+    "details": "uri=/harvesters/source-types/grnry-adobe-sftp"
+}
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
 Invalid token.
@@ -258,7 +290,11 @@ No token or forbidden role.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp":1586949273019,
+    "message":"Access is denied",
+    "details":"uri=/harvesters/source-types/grnry-jdbc"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -355,7 +391,13 @@ Token invalid.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302632410,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/source-types/grnry-topic/latest"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -365,7 +407,11 @@ No token or forbidden role.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp":1586949273019,
+    "message":"Access is denied",
+    "details":"uri=/harvesters/source-types/grnry-topic/latest"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -375,7 +421,11 @@ No source-type found for the given id + version.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302671116,
+    "message": "No Entity found with name: grnry-topic",
+    "details": "uri=/harvesters/source-types/grnry-topic/gadas"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -411,11 +461,11 @@ Expand the response with `totalCount`, or `persisters` to show either the count 
 Filter event types by displaynames containing this search term Default is `""`.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="pagesize" type="string" required=false %}
+{% api-method-parameter name="pagesize" type="number" required=false %}
 Number of event types returned per page. Default is `20`.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="offset" type="string" required=false %}
+{% api-method-parameter name="offset" type="number" required=false %}
 Offset of the requested page. Default is `0`. Must be a whole multiple of `pagesize`.
 {% endapi-method-parameter %}
 {% endapi-method-query-parameters %}
@@ -484,13 +534,33 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Invalid query parameter value.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587302820790,
+    "message": "pagesize : could not parse value",
+    "details": "uri=/event-types"
+}
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
 Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302709982,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -500,7 +570,11 @@ No token or matching roles.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp":1586949273019,
+    "message":"Access is denied",
+    "details":"uri=/event-types"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -585,23 +659,19 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
 ```
 {% endapi-method-response-example %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```
-
-```
-{% endapi-method-response-example %}
-
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
 Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302919538,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types/adobe-s3"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -611,7 +681,11 @@ No token or matching role.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp":1586949273019,
+    "message":"Access is denied",
+    "details":"uri=/event-types/adobe-s3"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -621,7 +695,11 @@ No event-type found with that name.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302947773,
+    "message": "No Entity found with name: new-entity",
+    "details": "uri=/event-types/new-entity"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -744,7 +822,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303054587,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -754,7 +838,11 @@ No token or matching roles.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp":1586949273019,
+    "message":"Access is denied",
+    "details":"uri=/event-types"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -764,7 +852,11 @@ If displayName not unique.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303130850,
+    "message": "event-type with displayName 'adobe-s3' already exists ",
+    "details": "uri=/event-types"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -897,7 +989,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303365395,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types/test-event-type"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -930,7 +1028,7 @@ Deletes all versions of the given event type, if it is not used by registered be
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=false %}
+{% api-method-parameter name="event-type-name" type="string" required=true %}
 name of the event type to be deleted
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
@@ -969,7 +1067,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303296774,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types/13213"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1120,7 +1224,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303365395,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types/adobe-s3/latest"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1243,7 +1353,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303610533,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types/adobe-s3/eventstores/pg/persister"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1267,7 +1383,11 @@ Event store, event type not found.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303625038,
+    "message": "no eventstore found with name pgd for event type with  name adobe-s3",
+    "details": "uri=/event-types/adobe-s3/eventstores/pgd/persister"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -1380,7 +1500,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303610533,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types/adobe-s3/eventstores/pg/persister"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1454,7 +1580,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303610533,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types/adobe-s3/eventstores/pg/persister/state"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1478,7 +1610,11 @@ Event store, event type not found.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303706388,
+    "message": "no eventstore found with name pdg for event type with  name adobe-s3",
+    "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/state"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -1566,7 +1702,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303610533,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/event-types/adobe-s3/eventstores/pg/persister/state"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1580,6 +1722,20 @@ No token or matching role.
     "timestamp":1586951884736,
     "message":"Access is denied",
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Event store, event type not found.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587303764884,
+    "message": "no eventstore found with name pdg for event type with  name adobe-s3",
+    "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/logs"
 }
 ```
 {% endapi-method-response-example %}
@@ -1693,6 +1849,20 @@ No token or matching roles.
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Event store, event type not found.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587303764884,
+    "message": "no eventstore found with name pdg for event type with  name adobe-s3",
+    "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/logs"
+}
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
@@ -1765,13 +1935,33 @@ Filter harvester list by name. Default: ""
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Invalid query parameter value.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587303981204,
+    "message": "pagesize : could not parse value",
+    "details": "uri=/harvesters/instances"
+}
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
 Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587303950340,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/instances"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1941,7 +2131,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587304034881,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/instances/adobe-s3-std"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1951,7 +2147,11 @@ No token or matching roles.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp":1586952802552,
+    "message":"Access is denied",
+    "details":"uri=/harvesters/instances/adobe-s3-std"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -2162,7 +2362,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587304034881,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/instances"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -2395,6 +2601,22 @@ Missing parameter or parameter is invalid.
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587304034881,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/instances/adobe-s3-std"
+}
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=403 %}
 {% api-method-response-example-description %}
 
@@ -2466,6 +2688,16 @@ Authentication token.
 {% endapi-method-request %}
 
 {% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=204 %}
 {% api-method-response-example-description %}
 
@@ -2482,7 +2714,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587304034881,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/instances/adobe-s3-std"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -2492,7 +2730,11 @@ No token or matching roles.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1580290961327,
+    "message": "Access is denied",
+    "details": "uri=/harvesters/instances/adobe-s3-std"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -2548,7 +2790,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587304034881,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/instances/adobe-s3-std/state"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -2558,7 +2806,25 @@ No token or matching roles.
 {% endapi-method-response-example-description %}
 
 ```
+{
+    "timestamp": 1580290961327,
+    "message": "Access is denied",
+    "details": "uri=/harvesters/instances/adobe-s3-std/state"
+}
+```
+{% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Harvester not found.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1580291007569,
+    "message": "No harvester found with name 'demo-set-all'.",
+    "details": "uri=/harvesters/instances/adobe-s3-stdd/state"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -2646,7 +2912,13 @@ Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587304034881,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/instances/adobe-s3-std"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -2656,7 +2928,25 @@ No token or matching roles.
 {% endapi-method-response-example-description %}
 
 ```
+{
+    "timestamp": 1580290961327,
+    "message": "Access is denied",
+    "details": "uri=/harvesters/instances/adobe-s3-std/state"
+}
+```
+{% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Harvester not found.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1580291007569,
+    "message": "No harvester found with name 'demo-set-all'.",
+    "details": "uri=/harvesters/instances/adobe-s3-stdd/state"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -2754,13 +3044,33 @@ Value range: `1 .. 500`. Default: `500`.
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Invalid step-name.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587304484537,
+    "message": "step-name : must be one of [sourceType, transform, metadataExtractor]",
+    "details": "uri=/harvesters/instances/adobe-s3-std/logs/transformd"
+}
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=401 %}
 {% api-method-response-example-description %}
 Invalid token.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587304456158,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/harvesters/instances/adobe-s3-std/logs/transform"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -2770,7 +3080,25 @@ No token or matching roles.
 {% endapi-method-response-example-description %}
 
 ```
+{
+    "timestamp": 1580290961327,
+    "message": "Access is denied",
+    "details": "uri=/harvesters/instances/adobe-s3-std/logs/transform"
+}
+```
+{% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Harvester not found.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587304521646,
+    "message": "no harvester-instance found with name = adobe-s3d-std",
+    "details": "uri=/harvesters/instances/adobe-s3d-std/logs/transform"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
