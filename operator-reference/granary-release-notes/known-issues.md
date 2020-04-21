@@ -2,7 +2,7 @@
 description: This page lists known issues to the Granary platform.
 ---
 
-# Known Issues
+# Granary Known Issues
 
 <table>
   <thead>
@@ -207,8 +207,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Snowplow GET Events not transformed correctly by Scriptable Transform</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/446">#446</a>
+        <td style="text-align:left">0.6.0</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/446">#446</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
@@ -217,8 +220,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Splitting Arrays in Scriptable Transform to multiple Kafka messages is
         broken.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/431">#431</a>
+      <td style="text-align:left">0.7.0</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/431">#431</a>
+        </p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -237,8 +243,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Belts deployed by Belt API do not contain Prometheus Scrape annotations.</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/455">#455</a>
+        <td style="text-align:left">0.6.3</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/455">#455</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
@@ -247,8 +256,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">DELETE /belt/&lt;id&gt; only deletes belt on database but not on Kubernetes.</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/413">#413</a>
+        <td style="text-align:left">0.6.3</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/413">#413</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
@@ -256,7 +268,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2019_0023</td>
       <td style="text-align:left">Update of Belt fails witout &quot;editor&quot; present.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left"></td>
+      <td style="text-align:left">-</td>
       <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/361">#361</a>
       </td>
     </tr>
@@ -265,7 +277,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2019_0024</td>
       <td style="text-align:left">Eventstore Persister does not have a dead letter queue</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left"></td>
+      <td style="text-align:left">-</td>
       <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/372">#372</a>
       </td>
     </tr>
@@ -275,8 +287,129 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GET /type/&lt;profile-type&gt; returns single grains not profiles</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left"></td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/443">#443</a>
+        <td style="text-align:left">0.6.0</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/443">#443</a>
+          </p>
+          <p>(closed)</p>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0026</td>
+      <td style="text-align:left">Belt updates in the Belt API are not properly logged</td>
+      <td style="text-align:left">0.6.0</td>
+      <td style="text-align:left">0.6.5</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/493">#493</a>
+        </p>
+        <p>(closed)</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0027</td>
+      <td style="text-align:left">Belt leaves consumer group when callback function is in loop or taking
+        to long</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/504">#504</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0028</td>
+      <td style="text-align:left">POST /belts/{id}/state is not secured by a role</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">0.6.5</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/524">#524</a>
+        </p>
+        <p>(closed)</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
+      <td style="text-align:left">GKI_2019_0029</td>
+      <td style="text-align:left">Persister did not recover after multiple restarts (&gt;50) because data
+        base was not available</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/516">#516</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2019_0030</td>
+      <td style="text-align:left">Provide a Docker image for Belt Extractor Runtime that supports GRNRY
+        processes to be executed as a non-root user</td>
+      <td style="text-align:left">0.6.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/507">#507</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
+      <td style="text-align:left">GKI_2020_0001</td>
+      <td style="text-align:left">Kafka-Binder resetOffsets only works for concurrency=1</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">0.7.1</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/532">#532</a>
+        </p>
+        <p>(closed)</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Spring Cloud Data Flow Apps</td>
+      <td style="text-align:left">GKI_2020_0002</td>
+      <td style="text-align:left">Meta Data Extractor allows empty string as JSON message which causes Persister
+        to fail.</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">0.7.1</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/623">#623</a>
+        </p>
+        <p>(closed)</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">all APIs</td>
+      <td style="text-align:left">GKI_2020_0003</td>
+      <td style="text-align:left">Next Link one last page is broken.</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">all API-component versions starting from Granary 0.7.2</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/581">#581</a>
+        </p>
+        <p>(closed)</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Event Store API</td>
+      <td style="text-align:left">GKI_2020_0004</td>
+      <td style="text-align:left">Event Store API returns incomplete event on GET a Specific Event by ID
+        and Correlation ID.</td>
+      <td style="text-align:left">0.6.0</td>
+      <td style="text-align:left">0.6.4</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/607">#607</a>
+        </p>
+        <p>(closed)</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Kafka Profile Updater</td>
+      <td style="text-align:left">GKI_2020_0005</td>
+      <td style="text-align:left">ThrottleControl blocks fast lane topic and batch consumption by creating
+        too many consumers to determine the latest real-time topic offset.</td>
+      <td
+      style="text-align:left">0.5.1</td>
+        <td style="text-align:left">0.5.4</td>
+        <td style="text-align:left">
+          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/578">#578</a>
+          </p>
+          <p>(closed)</p>
         </td>
     </tr>
   </tbody>

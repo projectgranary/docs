@@ -6,7 +6,7 @@ The ability to disambiguate customer profiles across systems and devices is a ke
 
 This is what we call _Granary_.
 
-Start your journey by [harvesting your data](learning-grnry-1/using-data-in-granary/) and [turning them into valuable grains](learning-grnry-1/using-data-in-granary/). Leverage their full potential through [Granary's various data out channels](learning-grnry-1/get-data-out-of-granary/).
+Start your journey by [harvesting your data](learning-grnry-1/data-in/) and [turning them into valuable grains](learning-grnry-1/using-data-in-granary/). Leverage their full potential through [Granary's various data out channels](learning-grnry-1/get-data-out-of-granary/).
 
 \#GRNRY  
 

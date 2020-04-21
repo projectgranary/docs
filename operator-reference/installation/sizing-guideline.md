@@ -27,13 +27,14 @@ Units CPU:
 | snowplow | 3 | 1Gi | 1Gi | 300m | 300m |
 | spring-cloud-data-flow-server | 1 | 640Mi | 4Gi | 500m | 750m |
 | spring-cloud-data-flow-skipper | 1 | 640Mi | 2Gi | 500m | 750m |
-| spring-cloud-data-flow-component | 3-n | 512Mi | 512Mi | 100m | 300m |
+| spring-cloud-data-flow-component | 3-n | 256Mi | 256Mi | 50m | 300m |
 | harvester-api | 1 | 512Mi | 1Gi | 250m | 500m |
 | belt-api | 1 | 512Mi | 1Gi | 250m | 500m |
 | belt-extractor | 1-n | 128Mi | 256Mi | 100m | 300m |
 | eventstore-api | 1 | 1Gi | 1Gi | 250m | 500m |
 | kafka-profile-update | 4 | 1Gi | 1Gi | 100m | 100m |
 | profilestore-api | 1 | 1Gi | 1Gi | 250m | 500m |
+| reaper | 1 | 512Mi | 1Gi | 100m | 250m |
 | segment-management-api | 1 | 512Mi | 1Gi | 100m | 250m |
 | segment-manager | 1 | 128Mi | 128Mi | 100m | 100m |
 | segment-table-creation | 1-n | 128Mi | 128Mi | 50m | 50m |

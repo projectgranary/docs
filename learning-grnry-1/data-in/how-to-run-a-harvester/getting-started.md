@@ -93,7 +93,7 @@ As a minimum for the deployment of these applications, we recommend the followin
 | :--- | :--- |
 | limits.kubernetes.cpu | 300m |
 | limits.memory | 256Mi |
-| requests.cpu | 300m |
+| requests.cpu | 50m |
 | requests.memory | 256Mi |
 
 With these minimally set parameters, you should also increase the liveness probe to 3 minutes \(180s\).

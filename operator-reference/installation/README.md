@@ -22,9 +22,10 @@ In turn, the Incubator Helm Chart Repo always deploys the latest commit on the m
 
 ## Prerequisites
 
-* Kubernetes 1.10.0+ cluster up and running 
+* Kubernetes 1.14.0+ cluster up and running 
 * Kubernetes Namespace set in ~/.kube/config 
-* Helm/Tiller 2.10.0+ installed \(local & cluster\) 
+* Helm/Tiller 2.10.0+ installed \(local & cluster\)
+  * Since Granary 0.8 all Charts also support deployment with Helm 3
 * Granary Stable Helm Repo added to Tiller
 * Have a default storage class set in Kubernetes
 
@@ -36,5 +37,5 @@ In turn, the Incubator Helm Chart Repo always deploys the latest commit on the m
 
 ## Deployment Dependencies
 
-![](../../.gitbook/assets/deployment.PNG)
+![](../../.gitbook/assets/deployment.png)
 

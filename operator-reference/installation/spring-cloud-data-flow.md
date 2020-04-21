@@ -58,7 +58,7 @@ curl -X POST -u <user>:<password> -d \
 https://<URL to SCDF>/apps/<type>/<name>/<version>
 ```
 
-In line 1 we define to create a cURL request using the POST method. After the `-u` parameter, we define the username and password, separated by a colon. The `-d` parameter is used to pass arguments to the URL. The argument is written in line 2 in this case. Here, we specify the location to the docker image built for SCDF and the metadata-jar \(probably located on a maven-compatible repository\). Both parameters need to be specified in a URL encoded format. A sample for the URL location can be found here:
+In line 1 we define to create a cURL request using the POST method. After the `-u` parameter, we define the username and password, separated by a colon. The `-d` parameter is used to pass arguments to the URL. The argument is written in line 2 in this case. Here, we specify the location to the docker image built for SCDF and the metadata-jar \(probably located on a maven-compatible repository\). Both parameters need to be specified in a URL encoded format. A sample for the docker URL location can be found here:
 
 ```bash
 docker%3A%2F%2Fgitlab.alvary.io%3A5000%2Fgrnry%2Fscdf-apps%2Fgrnry-sftp-source%3Alatest
@@ -83,26 +83,33 @@ Further information about using the API for apps can be found in the SCDF docume
 
 ## List of all mandatory scdf-apps
 
-### Persister \(postgres\)
+### Batch Persister \(postgres\)
 
 * Type: `sink`
-* name: **grnry-eventstore-pg**
-* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-eventstore-pg-sink:<version>`
-* metadata-uri: n.a.
+* name: **grnry-eventstore-batch-sink**
+* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-eventstore-batch-sink:<version>`
+* metadata-uri: `maven://io.grnry.scdf-apps:grnry-eventstore-batch-sink:<version>:metadata`
 
 ### Scriptable transform
 
 * Type: `processor`
-* name: **grnry-scriptable**
-* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-eventstore-pg-sink:<version>`
-* metadata-uri: n.a.
+* name: **grnry-scriptable-processor**
+* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-scriptable-processor:<version>`
+* metadata-uri: `maven://io.grnry.scdf-apps:grnry-scriptable-processor:<version>:metadata`
 
 ### Metadata extractor
 
 * Type: `processor`
-* name: **grnry-data-in-metadata**
-* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-eventstore-pg-sink:<version>`
-* metadata-uri: n.a.
+* name: **grnry-data-in-metadata-processor**
+* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-data-in-metadata-processor:<version>`
+* metadata-uri: `maven://io.grnry.scdf-apps:grnry-data-in-metadata-processor:<version>:metadata`
+
+### Sessionizing
+
+* Type: `processor`
+* name: **grnry-sessionizing-processor**
+* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-sessionizing-processor:<version>`
+* metadata-uri: `maven://io.grnry.scdf-apps:grnry-sessionizing-processor:<version>:metadata`
 
 ### Source Types
 
