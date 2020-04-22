@@ -8,7 +8,7 @@ description: >-
 
 ![Reaper Data Flow from Profile Store to Belt Extractor](../../../.gitbook/assets/reaper.PNG)
 
-The Granary Reaper is responsible for collecting expired grains by querying them from the [Profile Store](./) and writing them back into the data pipeline through a TTL Kafka topic. 
+The Granary Reaper is responsible for collecting expired grains by querying them from the [Profile Store](./) according to a CRON schedule and writing them back into the data pipeline through a TTL Kafka topic. 
 
 ## Configuration
 
