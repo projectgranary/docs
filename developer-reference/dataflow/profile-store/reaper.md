@@ -8,11 +8,7 @@ description: >-
 
 ![Reaper Data Flow from Profile Store to Belt Extractor ](../../../.gitbook/assets/reaper%20%281%29.PNG)
 
-The Granary Reaper is responsible for collecting expired grains, by querying them from the [Profile Store](./) and writing them back into the data pipeline through a TTL Kafka topic. 
-
-{% hint style="warning" %}
-Please note that the Reaper's TTL topic\(s\) will have to be manually created if Kafka's `auto.create.topics.enable` is set to `false`. When manually creating the topics please align the retention with the cron schedule of the Granary Reaper.
-{% endhint %}
+The Granary Reaper is responsible for collecting expired grains by querying them from the [Profile Store](./) according to a CRON schedule and writing them back into the data pipeline through a TTL Kafka topic. 
 
 ## Configuration
 
@@ -25,6 +21,16 @@ Please note that the Reaper's TTL topic\(s\) will have to be manually created if
 | PROFILESTORE\_HOSTNAME | Hostname of Profile Store | grnry-pg-citus |
 | PROFILESTORE\_PORT | Port of Profile Store | 5432 |
 | PROFILESTORE\_DB\_NAME | Database name of Profile Store | postgres |
+
+#### Profile Type Naming Convention
+
+Reaper's TTL Kafka topics naming schema: `grnry_data_in_<profile-type>`. 
+
+Profile type here refers to the type of profile as seen in the [Profile Store](./#table-profilestore), with underscores `_`normalized into hyphens `-`. If the resulting topic name exceeds Kafka's limit of 249 characters, it is cut off at the maximum possible length. 
+
+{% hint style="warning" %}
+Please note that the Reaper's TTL Kafka topic\(s\) will have to be manually created if Kafka's `auto.create.topics.enable` is set to `false`. When manually creating the topics, please align the retention with the cron schedule of the Granary Reaper.
+{% endhint %}
 
 ## Output
 
