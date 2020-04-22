@@ -12,11 +12,11 @@ The Granary Reaper is responsible for collecting expired grains by querying them
 
 ## Configuration
 
-| Parameter Name | Description | Default value |
+| Parameter Name | Description | Recommended value for Granary 0.7 |
 | :--- | :--- | :--- |
 | IO\_GRNRY\_REAPER\_BACKWARDS\_COMPATIBLE | Reaper runs on Granary 0.7 feature-level | true |
 | IO\_GRNRY\_REAPER\_GRAIN\_FETCH\_SIZE | Job batch size of grains to read | 100 |
-| IO\_GRNRY\_REAPER\_OUTPUT\_TOPIC\_PREFIX | User-defined prefix of the output topic  | grnry\_data\_in\_ |
+| IO\_GRNRY\_REAPER\_OUTPUT\_TOPIC\_PREFIX | User-defined prefix of the output topic  | grnry\_data\_in\_ttl- |
 | IO\_GRNRY\_REAPER\_DATASOURCE\_TABLE\_NAME | Table name of Profile Store | public.profilestore |
 | PROFILESTORE\_HOSTNAME | Hostname of Profile Store | grnry-pg-citus |
 | PROFILESTORE\_PORT | Port of Profile Store | 5432 |
@@ -24,7 +24,7 @@ The Granary Reaper is responsible for collecting expired grains by querying them
 
 #### Profile Type Naming Convention
 
-Reaper's TTL Kafka topics naming schema: `grnry_data_in_<profile-type>`. 
+Reaper's TTL Kafka topics naming schema: `grnry_data_in_ttl-<profile-type>`. 
 
 Profile type here refers to the type of profile as seen in the [Profile Store](./#table-profilestore), with underscores `_`normalized into hyphens `-`. If the resulting topic name exceeds Kafka's limit of 249 characters, it is cut off at the maximum possible length. 
 

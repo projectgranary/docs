@@ -6,16 +6,16 @@ description: >-
 
 # TTL-expired Grain Processing
 
-Time-to-live \(TTL\) expired grains are picked up periodically by Granary's [Reaper ](../../../developer-reference/dataflow/profile-store/reaper.md)from Profile Store and are written to TTL topics with the following naming schema: `grnry_data_in_<profile-type>`. These grains are then available for further processing by the belts. Profile type here refers to the type of profile, as seen [here](../../../developer-reference/dataflow/profile-store/#table-profilestore), with underscores `_`normalized into hyphens `-`. If the resulting topic name exceeds Kafka's limit of 249 characters, it is cut off at the maximum possible length. 
+Time-to-live \(TTL\) expired grains are picked up periodically by Granary's [Reaper ](../../../developer-reference/dataflow/profile-store/reaper.md)from Profile Store and are written to TTL topics with the following naming schema: `grnry_data_in_ttl-<profile-type>`. These grains are then available for further processing by the belts. Profile type here refers to the type of profile, as seen [here](../../../developer-reference/dataflow/profile-store/#table-profilestore), with underscores `_`normalized into hyphens `-`. If the resulting topic name exceeds Kafka's limit of 249 characters, it is cut off at the maximum possible length. 
 
-Please note that to comply with data protection law, grains written to the `grnry_data_in_<profile_type>`topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the Belt, i.e setting the `fetch_profile`parameter to true. See [Configuration](../../../developer-reference/dataflow/belt-extractor.md#configuration). The Correlation ID should be found in both message header and body.
+Please note that to comply with data protection law, grains written to the `grnry_data_in_ttl-<profile_type>`topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the Belt, i.e setting the `fetch_profile`parameter to true. See [Configuration](../../../developer-reference/dataflow/belt-extractor.md#configuration). The Correlation ID should be found in both message header and body.
 
 ## Reaper Event Definition
 
 Expired grains in the TTL topics carry the following header values:
 
 ```text
-topic: grnry_data_in_<profile_type>
+topic: grnry_data_in_ttl-<profile_type>
 kafka_messageKey: <profile_type>
 grnry-harvester-name: grnry-reaper
 grnry-correlation-id: <correlation_id>
