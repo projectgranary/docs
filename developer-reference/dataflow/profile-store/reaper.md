@@ -12,6 +12,10 @@ The Granary Reaper is responsible for collecting expired grains by querying them
 
 ## Configuration
 
+{% hint style="danger" %}
+Event Type names must be different from Profile Type names so that the Reaper can work correctly.
+{% endhint %}
+
 | Parameter Name | Description | Default value |
 | :--- | :--- | :--- |
 | IO\_GRNRY\_REAPER\_BACKWARDS\_COMPATIBLE | Flag indicating if Reaper runs on 0.7 feature-level, for 0.8+ should be set to `false` | true |
