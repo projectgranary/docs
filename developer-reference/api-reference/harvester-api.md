@@ -2010,6 +2010,7 @@ Sample Response
 {
     "name": "harvester-demo",
     "displayName": "Harvester Demo",
+    "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-demo",
     "sourceType": {
         "name": "grnry-jdbc",
@@ -2228,6 +2229,7 @@ human readable name. Needs to be unique. A technical name will be derived from i
 {
     "name": "harvester-post",
     "displayName": "Harvester Post",
+    "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-post",
     "sourceType": {
         "name": "grnry-jdbc",
@@ -2463,6 +2465,7 @@ human readable name. Needs to be unique. Technical name of the harvester will re
 {
     "name": "harvester-post",
     "displayName": "Harvester Post",
+    "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-post",
     "sourceType": {
         "name": "grnry-jdbc",

@@ -589,7 +589,13 @@ curl -X POST -H "Content-Type: application/json" \
 There is no need to stop and start the harvester on each deployment. If your update api call for your harvester definition did not result in an actual update \(return code `304 NO UPDATE`\) the state of the harvester will still be `RUNNING`. Only changed configuration properties will result in a `RUNNING_BUT_OUTDATED` state and only then it's necessary to stop and start the harvester instance.
 {% endhint %}
 
+### Get Kubernetes Deployments of Harvesters and Persisters
 
+In some scenarios, CI/CD pipelines need to modify a Harvester or Persister's Kubernetes deployment after the deployment via Harvester API.
 
+This can be achieved by taking the `streamName` from a Harvester Instance or Persisters GET details API call and use the Kubernetes deployment label `spring-group-id` like so:
 
+```text
+kubectl get deployments -l spring-group-id=<streamName>
+```
 
