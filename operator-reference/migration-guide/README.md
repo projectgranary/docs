@@ -33,5 +33,9 @@ Harvester Data-in pipeline definition changed with Granary 0.8. See the [Harvest
 
 Segment Creation flow is now Rest API based and does no longer require Helm deployments. See [Segment Job Migration](segment-job-migration.md) for instructions.
 
+### Update Granary Reaper Data Flows
+
+Granary's Reaper got introduced in Granary 0.7. In this version, Kafka topics for TTL-expired grains had to be created manually due to required custom retentions. This is no longer needed in Granary 0.8 because Granary's Reaper creates the Kafka topics for TTL-expired grains automatically via Harvester API's Event Type endpoints. However, Belts consuming TTL-expired grains need to be updated in order to consume those TTL Event Types. 
+
 **That's it.**
 

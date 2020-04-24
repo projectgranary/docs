@@ -56,8 +56,12 @@ the metadata jar can be placed on a maven repository:
 
 `maven://org.springframework.cloud.stream.app:ftl-source-kafka:jar:metadata:2.1.1.RELEASE`
 
+Example for an actual Granary SCDF Source Type:
+
+ `maven://io.grnry.scdf-apps:grnry-jdbc-source:jar:metadata:0.8.0`
+
 {% hint style="info" %}
-If your jar is placed on a private maven repository, you would need to add the address and credentials to the scdf helm chart values file before installing grnry.
+If your jar is placed on a private maven repository, you would need to add the address and credentials to the scdf helm chart values file before installing Granary.
 {% endhint %}
 
 You don't have to upload the jar file to a fully functional maven repository. You just need to make it available via http and then use a `https://your-host/path/to/your.jar` url.
@@ -65,8 +69,6 @@ You don't have to upload the jar file to a fully functional maven repository. Yo
 {% hint style="info" %}
 The version used in the jar url does not have to match the version of the source type or the version of the docker artifact.
 {% endhint %}
-
-TODO - actual rest call - linked when the harvester-api docs are merged
 
 ### Create a New Source Type Entity
 

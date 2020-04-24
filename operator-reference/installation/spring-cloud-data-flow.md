@@ -88,28 +88,28 @@ Further information about using the API for apps can be found in the SCDF docume
 * Type: `sink`
 * name: **grnry-eventstore-batch-sink**
 * uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-eventstore-batch-sink:<version>`
-* metadata-uri: `maven://io.grnry.scdf-apps:grnry-eventstore-batch-sink:<version>:metadata`
+* metadata-uri: `maven://io.grnry.scdf-apps:grnry-eventstore-batch-sink:jar:metadata:<version>`
 
 ### Scriptable transform
 
 * Type: `processor`
 * name: **grnry-scriptable-processor**
 * uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-scriptable-processor:<version>`
-* metadata-uri: `maven://io.grnry.scdf-apps:grnry-scriptable-processor:<version>:metadata`
+* metadata-uri: `maven://io.grnry.scdf-apps:grnry-scriptable-processor:jar:metadata:<version>`
 
 ### Metadata extractor
 
 * Type: `processor`
 * name: **grnry-data-in-metadata-processor**
 * uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-data-in-metadata-processor:<version>`
-* metadata-uri: `maven://io.grnry.scdf-apps:grnry-data-in-metadata-processor:<version>:metadata`
+* metadata-uri: `maven://io.grnry.scdf-apps:grnry-data-in-metadata-processor:jar:metadata:<version>`
 
 ### Sessionizing
 
 * Type: `processor`
 * name: **grnry-sessionizing-processor**
 * uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-sessionizing-processor:<version>`
-* metadata-uri: `maven://io.grnry.scdf-apps:grnry-sessionizing-processor:<version>:metadata`
+* metadata-uri: `maven://io.grnry.scdf-apps:grnry-sessionizing-processor:jar:metadata:<version>`
 
 ### Source Types
 
