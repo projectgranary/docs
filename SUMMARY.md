@@ -27,17 +27,6 @@
   * [Best Practices](learning-grnry-1/get-data-out-of-granary/best-practices/README.md)
     * [Segments as BI Tool Input](learning-grnry-1/get-data-out-of-granary/best-practices/segments-as-bi-tool-input.md)
 * [Tracing Granary](learning-grnry-1/tracing-granary.md)
-* [Tracking Data](learning-grnry-1/tracking-data/README.md)
-  * [Tracking across Id-Borders using Granary](learning-grnry-1/tracking-data/tracking-across-id-borders-using-granary.md)
-  * [Track Online Events](learning-grnry-1/tracking-data/track-events-in-granary.md)
-  * [GA Tracker](learning-grnry-1/tracking-data/ga-integration.md)
-  * [Firebase Tracker](learning-grnry-1/tracking-data/firebase-integration-via-cloud-functions/README.md)
-    * [Setting up Firebase Cloud Functions' Project](learning-grnry-1/tracking-data/firebase-integration-via-cloud-functions/setting-up-firebase-cloud-functions.md)
-  * [JavaScript Tracker](learning-grnry-1/tracking-data/using-the-javascript-tracker/README.md)
-    * [Load and Setup](learning-grnry-1/tracking-data/using-the-javascript-tracker/setup-js-tracker.md)
-    * [Specific Events](learning-grnry-1/tracking-data/using-the-javascript-tracker/use-the-js-tracker.md)
-  * [Google Analytics Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/README.md)
-    * [Snowplow Web \(&App\) Tracking + Example Data](learning-grnry-1/tracking-data/google-analytics-tracking-+-example-data/snowplow-web-and-app-tracking-+-example-data.md)
 * [Granary Glossary](learning-grnry-1/granary-glossary.md)
 
 ## Developer Reference
