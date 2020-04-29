@@ -268,8 +268,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2019_0023</td>
       <td style="text-align:left">Update of Belt fails witout &quot;editor&quot; present.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/361">#361</a>
+      <td style="text-align:left">0.7.0</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/361">#361</a>
+        </p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -411,6 +414,94 @@ description: This page lists known issues to the Granary platform.
           </p>
           <p>(closed)</p>
         </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Reaper</td>
+      <td style="text-align:left">GKI_2020_0006</td>
+      <td style="text-align:left">Reaper doesn&apos;t work in case of event-type == profile-type</td>
+      <td
+      style="text-align:left">0.7.2</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/659">#659</a>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Harvester API</td>
+      <td style="text-align:left">GKI_2020_0007</td>
+      <td style="text-align:left">Harvester API Source-Types Endpoint returns with misleading error message
+        for an existing Source Type but not existing version.</td>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/643">#643</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Harvester API</td>
+      <td style="text-align:left">GKI_2020_0008</td>
+      <td style="text-align:left">Persister and Harvester Instance State POST start return HTTP 500 if already
+        running instead of HTTP 200</td>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/650">#650</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2020_0009</td>
+      <td style="text-align:left">Belt API endpoint returns 400 Bad Request instead of 401 when token is
+        missing</td>
+      <td style="text-align:left">0.7.1</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/640">#640</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Kafka Profile Updater</td>
+      <td style="text-align:left">GKI_2020_0010</td>
+      <td style="text-align:left">Kafka Profile Updater consumers are considered as dead by broker if the
+        are too slow in event processing</td>
+      <td style="text-align:left">0.5.4</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/633">#633</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Segment Managment API</td>
+      <td style="text-align:left">GKI_2020_0011</td>
+      <td style="text-align:left">No API usage metrics are exposed.</td>
+      <td style="text-align:left">0.8.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/609">#609</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">SCDF Apps</td>
+      <td style="text-align:left">GKI_2020_0012</td>
+      <td style="text-align:left">Sessionizing Processor does not support Zipkin tracing.</td>
+      <td style="text-align:left">0.7.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/605">#605</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Event Feeder</td>
+      <td style="text-align:left">GKI_2020_0013</td>
+      <td style="text-align:left">Event Feeder for replaying events to Belts does not support sessionized
+        data.</td>
+      <td style="text-align:left">0.6.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/599">#599</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Segment Table Creator</td>
+      <td style="text-align:left">GKI_2020_0014</td>
+      <td style="text-align:left">Column names from Grain Pathes &gt;63 characters are being cut off in
+        Pivot Segments.</td>
+      <td style="text-align:left">0.5.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/596">#596</a>
+      </td>
     </tr>
   </tbody>
 </table>
