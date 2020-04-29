@@ -13,9 +13,9 @@ In order to allow for an easier access to and a smoke test for Granary, a [POSTM
 
 To use it, the following two files need to be imported into POSTMAN:
 
-{% file src="../../.gitbook/assets/grnry\_0.5.postman\_collection.json" caption="Granary Postman Collection" %}
+{% file src="../../.gitbook/assets/grnry\_0.8.postman\_collection.json" %}
 
-{% file src="../../.gitbook/assets/grnry\_0.5.postman\_environment.json" caption="Granary Postman Collection Environment Values" %}
+{% file src="../../.gitbook/assets/grnry\_0.8.postman\_environment.json" %}
 
 ## **Authentication**
 
