@@ -49,30 +49,51 @@ Start offset. Default is 0.
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-Profile successfully retrieved.
+Profile Types successfully retrieved.
 {% endapi-method-response-example-description %}
 
 ```javascript
 {
-  "totalCount": 2,
-  "profileTypes": [
-    {
-      "type": "_d",
-      "_links": {
-        "self": {
-          "href": "http://hostname/profiles/_d?offset=0&pagesize=20"
+    "totalCount": 10,
+    "profileTypes": [
+        {
+            "type": "_interaction",
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_contract?offset=0&pagesize=5"
+                }
+            }
+        },
+        {
+            "type": "_claim",
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_claim?offset=0&pagesize=5"
+                }
+            }
+        },
+        {
+            "type": "_contract",
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_contract?offset=0&pagesize=5"
+                }
+            }
+        },
+        {
+            "type": "_customer",
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_customer?offset=0&pagesize=5"
+                }
+            }
         }
-      }
-    },
-    {
-      "type": "someProfileType",
-      "_links": {
-        "self": {
-          "href": "http://hostname/profiles/someProfileType?offset=0&pagesize=20"
+    ],
+    "_links": {
+        "next": {
+            "href": "https://hostname/profiles/?offset=5&pagesize=5"
         }
-      }
     }
-  ]
 }
 ```
 {% endapi-method-response-example %}
@@ -129,91 +150,135 @@ Start offset. Default is 0
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-
+A call for all profiles of type "\_contract" with page size 5:  
+  
+https://hostname/profiles/\_contract?pagesize=5
 {% endapi-method-response-example-description %}
 
-```
+```javascript
 {
-  "totalCount": 2,
-  "profiles": [
-    {
-      "correlationId": "15d0f494-2afd-4d79-9fe4-ce6a4add4e2d",
-      "type": "someProfileType",
-      "jsonPayload": {
-        "contentType": {
-          "_latest": {
-            "_c": 0.4,
-            "_v": "text/html",
-            "_in": 1539358945000,
-            "_ttl": "P100Y",
-            "_origin": "myorigin",
-            "_reader": "_all"
-          }
-        },
-        "contentType2": {
-          "_latest": {
-            "_c": 0.4,
-            "_v": "text/html",
-            "_in": 1539358945000,
-            "_ttl": "P100Y",
-            "_origin": "myorigin",
-            "_reader": "_all"
-          },
-          "_nonlatest": {
-            "_c": 0.5,
-            "_v": "text/html",
-            "_in": 1539358945001,
-            "_ttl": "P100Y",
-            "_origin": "myorigin",
-            "_reader": "_all"
-          },
-          "test": {
-            "path": {
-              "_latest": {
-                "_c": 0.4,
-                "_v": "text/html",
-                "_in": 1539358945000,
-                "_ttl": "P100Y",
-                "_origin": "myorigin",
-                "_reader": "_all"
-              }
+    "totalCount": 3737,
+    "profiles": [
+        {
+            "correlationId": "Contract47583",
+            "type": "_contract",
+            "jsonPayload": {
+                "product": {
+                    "_latest": {
+                        "_c": 1,
+                        "_v": "car fully comprehensive insurance",
+                        "_in": 1585747023110,
+                        "_ttl": "P100Y",
+                        "_origin": "/belts/28",
+                        "_reader": "_auth"
+                    }
+                }
+            },
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_contract/Contract47583?fragments="
+                }
             }
-          }
+        },
+        {
+            "correlationId": "Contract47587",
+            "type": "_contract",
+            "jsonPayload": {
+                "customer": {
+                    "_latest": {
+                        "_c": 1,
+                        "_v": "83843",
+                        "_in": 1586421719687,
+                        "_ttl": "P100Y",
+                        "_origin": "/belts/28",
+                        "_reader": "_auth"
+                    }
+                }
+            },
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_contract/Contract47587?fragments="
+                }
+            }
+        },
+        {
+            "correlationId": "Contract80168",
+            "type": "_contract",
+            "jsonPayload": {
+                "date": {
+                    "next_payment": {
+                        "_latest": {
+                            "_c": 1,
+                            "_v": "2020-01-01T00:00:00",
+                            "_in": 1586421718311,
+                            "_ttl": "P100Y",
+                            "_origin": "/belts/28",
+                            "_reader": "_auth"
+                        }
+                    }
+                }
+            },
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_contract/Contract80168?fragments="
+                }
+            }
+        },
+        {
+            "correlationId": "Contract96511",
+            "type": "_contract",
+            "jsonPayload": {
+                "date": {
+                    "enddate": {
+                        "_latest": {
+                            "_c": 1,
+                            "_v": "None",
+                            "_in": 1586421739949,
+                            "_ttl": "P100Y",
+                            "_origin": "/belts/28",
+                            "_reader": "_auth"
+                        }
+                    }
+                }
+            },
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_contract/Contract96511?fragments="
+                }
+            }
+        },
+        {
+            "correlationId": "Contract67199",
+            "type": "_contract",
+            "jsonPayload": {
+                "date": {
+                    "startdate": {
+                        "_latest": {
+                            "_c": 1,
+                            "_v": "2019-01-01T00:00:00",
+                            "_in": 1586421746446,
+                            "_ttl": "P100Y",
+                            "_origin": "/belts/28",
+                            "_reader": "_auth"
+                        }
+                    }
+                }
+            },
+            "_links": {
+                "self": {
+                    "href": "https://hostname/profiles/_contract/Contract67199?fragments="
+                }
+            }
         }
-      },
-      "_links": {
+    ],
+    "_links": {
         "self": {
-          "href": "http://hostname/profiles/someProfileType/15d0f494-2afd-4d79-9fe4-ce6a4add4e2d"
+            "href": "https://hostname/profiles/_contract?offset=0&pagesize=5"
+        },
+        "next": {
+            "href": "https://hostname/profiles/_contract?offset=5&pagesize=5"
         }
-      }
-    },
-    {
-      "correlationId": "15d0f494-2afd-4d79-9fe4-ce6a4add4e33",
-      "type": "someProfileType",
-      "jsonPayload": {
-        "contentType": {
-          "_latest": {
-            "_c": 0.4,
-            "_v": "text/html",
-            "_in": 1539358945000,
-            "_ttl": "P100Y",
-            "_origin": "myorigin",
-            "_reader": "_all"
-          }
-        }
-      },
-      "_links": {
-        "self": {
-          "href": "http://hostname/profiles/someProfileType/15d0f494-2afd-4d79-9fe4-ce6a4add4e33"
-        }
-      }
     }
-  ],
-  "_links": {
-    "self": {
-      "href": "http://hostname/profiles/someProfileType?offset=0&pagesize=20"
-    }
-  }
 }
 ```
 {% endapi-method-response-example %}
@@ -286,67 +351,119 @@ Example:
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-
+A call for a specific profile, given profile type "\_interaction" and correlationId "Session56202":  
+  
+https://hostname/profiles/\_interaction/Session56202
 {% endapi-method-response-example-description %}
 
-```
+```javascript
 {
-    "correlationId": "Contract56616",
-    "type": "demo_graph",
+    "correlationId": "Session56202",
+    "type": "_interaction",
     "jsonPayload": {
-        "customer": {
-            "_latest": {
-                "_c": 1,
-                "_v": "22917",
-                "_in": 1580984726634,
-                "_ttl": "P100Y",
-                "_origin": "Contract",
-                "_reader": "_auth"
-            }
-        },
         "date": {
-            "enddate": {
+            "end": {
                 "_latest": {
                     "_c": 1,
-                    "_v": "None",
-                    "_in": 1580984726613,
+                    "_v": "2018-05-14T14:15:42",
+                    "_in": 1587644709930,
                     "_ttl": "P100Y",
-                    "_origin": "Contract",
+                    "_origin": "/belts/28",
                     "_reader": "_auth"
                 }
             },
-            "next_payment": {
+            "start": {
                 "_latest": {
                     "_c": 1,
-                    "_v": "2020-01-01T00:00:00",
-                    "_in": 1580984726624,
+                    "_v": "2018-05-14T14:05:56",
+                    "_in": 1587644709898,
                     "_ttl": "P100Y",
-                    "_origin": "Contract",
-                    "_reader": "_auth"
-                }
-            },
-            "startdate": {
-                "_latest": {
-                    "_c": 1,
-                    "_v": "2019-01-01T00:00:00",
-                    "_in": 1580984726598,
-                    "_ttl": "P100Y",
-                    "_origin": "Contract",
+                    "_origin": "/belts/28",
                     "_reader": "_auth"
                 }
             }
         },
-        "product": {
+        "_id@_contract@profilestore": {
             "_latest": {
                 "_c": 1,
-                "_v": "life insurance",
-                "_in": 1580984725393,
+                "_v": [
+                    "Contract56242"
+                ],
+                "_in": 1587644709853,
                 "_ttl": "P100Y",
-                "_origin": "Contract",
-                "_reader": "_auth"
+                "_origin": "/belts/28",
+                "_reader": "_pers"
             }
         },
-        "_id": "Contract56616"
+        "_id@_customer@profilestore": {
+            "_latest": {
+                "_c": 1,
+                "_v": [
+                    "Customer65882"
+                ],
+                "_in": 1587644709827,
+                "_ttl": "P100Y",
+                "_origin": "/belts/28",
+                "_reader": "_pers"
+            }
+        },
+        "process": {
+            "context": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "size:56sq,value:60.000£",
+                    "_in": 1587644709773,
+                    "_ttl": "P100Y",
+                    "_origin": "/belts/28",
+                    "_reader": "_pers"
+                }
+            },
+            "counter": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": {
+                        "_step": 1.0,
+                        "_current": 5,
+                        "_initial": 0.0
+                    },
+                    "_in": 1587644710593,
+                    "_ttl": "P100Y",
+                    "_origin": "/belts/28",
+                    "_reader": "_auth"
+                }
+            },
+            "outcome": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "contract",
+                    "_in": 1587644711294,
+                    "_ttl": "P100Y",
+                    "_origin": "/belts/28",
+                    "_reader": "_auth"
+                }
+            },
+            "product": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "home contents insurance",
+                    "_in": 1587644711071,
+                    "_ttl": "P100Y",
+                    "_origin": "/belts/28",
+                    "_reader": "_auth"
+                }
+            },
+            "type": {
+                "_latest": {
+                    "_c": 1,
+                    "_v": "calculate quote",
+                    "_in": 1587644710573,
+                    "_ttl": "P100Y",
+                    "_origin": "/belts/28",
+                    "_reader": "_auth"
+                }
+            }
+        },
+        "_id": "Session56202"
     }
 }
 ```
