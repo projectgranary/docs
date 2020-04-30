@@ -30,8 +30,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">_delete operation deletes only latest grain value but no historic grain
         values.</td>
       <td style="text-align:left">0.4.1</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/182">#182</a>
+      <td style="text-align:left">0.5.5</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/182">#182</a>
+        </p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -461,8 +464,11 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Kafka Profile Updater consumers are considered as dead by broker if the
         are too slow in event processing</td>
       <td style="text-align:left">0.5.4</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/633">#633</a>
+      <td style="text-align:left">0.5.6</td>
+      <td style="text-align:left">
+        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/633">#633</a>
+        </p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -501,6 +507,15 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">-</td>
       <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/596">#596</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Granary UI</td>
+      <td style="text-align:left">GKI_2020_0015</td>
+      <td style="text-align:left">Profile Explorer does not show values for Counter Grains</td>
+      <td style="text-align:left">0.4.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum-ux/issues/53">ux#53</a>
       </td>
     </tr>
   </tbody>

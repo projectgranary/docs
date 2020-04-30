@@ -76,7 +76,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../../learning-grnry-1/data-in/how-to-run-a-harvester/getting-started.md">Spring Cloud Data Flow Apps</a>
       </td>
-      <td style="text-align:left"><b>0.8.0</b>
+      <td style="text-align:left"><b>0.8.1</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
@@ -103,12 +103,16 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/event-feeder.md">Event Feeder</a>
       </td>
-      <td style="text-align:left"><b>0.6.0</b>
+      <td style="text-align:left"><b>0.6.1</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
           <li>Added Event Type version support</li>
+        </ul>
+        <p>Fixes:</p>
+        <ul>
+          <li>Restored AWS Aurora compatibility</li>
         </ul>
       </td>
     </tr>
@@ -154,13 +158,18 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/profile-updater.md">Profile Updater</a>
       </td>
-      <td style="text-align:left"><b>0.5.5</b>
+      <td style="text-align:left"><b>0.5.6</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
           <li>Extended <code>_delete</code> operation with Point-in-time configuration
             possibility</li>
+        </ul>
+        <p>Fixes:</p>
+        <ul>
+          <li>Kafka Profile Updater consumers are considered as dead by broker if the
+            are too slow in event processing (GKI_2020_10)</li>
         </ul>
       </td>
     </tr>
@@ -191,7 +200,7 @@ description: Denotes release versions of Granary artifacts.
         <td style="text-align:left">
           <p>Features:</p>
           <ul>
-            <li>Introcued a Go-languague Kubernetes operator that manages the segment
+            <li>Introduced a Go-languague Kubernetes operator that manages the segment
               custom resources</li>
           </ul>
         </td>
@@ -223,12 +232,16 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/reaper.md">Reaper</a>
       </td>
-      <td style="text-align:left"><b>0.7.2</b>
+      <td style="text-align:left"><b>0.7.3</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
           <li>Added support for Event Type creation during Reaper execution</li>
+        </ul>
+        <p>Fixes:</p>
+        <ul>
+          <li>Restored AWS Aurora compatibility</li>
         </ul>
       </td>
     </tr>
@@ -259,8 +272,9 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/kafka-manager.md">Kafka Manager</a>
       </td>
-      <td style="text-align:left">0.4.3</td>
-      <td style="text-align:left">-</td>
+      <td style="text-align:left"><b>0.4.4</b>
+      </td>
+      <td style="text-align:left">Updated Helm Chart to be deployable with Helm3 and on Kubernetes &gt;=1.14.</td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
@@ -277,8 +291,9 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/zipkin.md">Zipkin Server</a>
       </td>
-      <td style="text-align:left">0.6.0 (based on Open Zipkin 2.12)</td>
-      <td style="text-align:left">-</td>
+      <td style="text-align:left"><b>0.6.1 (based on Open Zipkin 2.12)</b>
+      </td>
+      <td style="text-align:left">Updated Helm Chart to be deployable with Helm3 and on Kubernetes &gt;=1.14.</td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md"><b>Data Lineage Report</b></a>&lt;b&gt;&lt;/b&gt;</td>
