@@ -10,8 +10,6 @@ Time-to-live \(TTL\) expired Grains are picked up periodically by Granary's [Rea
 
 Please note that to comply with data protection law, grains written to the TTL topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the belt, i.e setting the `fetch_profile`parameter to true. See [Configuration](https://app.gitbook.com/@alvary/s/grnry-sd7f6g8sd68sdf7/~/diff/drafts/-M0quiYWAmR7whC99GOZ/developer-reference/dataflow/belt-extractor#configuration/@drafts). The Correlation ID should be found in both message header and body.
 
-## 
-
 ## Use Case Example: Notification
 
 It might be desired to receive notifications about the expiry of certain actions \(grains\). One way to facilitate this is to create a belt, - let's call it a notification belt -, which processes the TTL-expired grains from the topic\(s\) and sends notifications accordingly. 
