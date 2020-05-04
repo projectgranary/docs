@@ -291,7 +291,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/zipkin.md">Zipkin Server</a>
       </td>
-      <td style="text-align:left"><b>0.6.1 (based on Open Zipkin 2.12)</b>
+      <td style="text-align:left"><b>0.6.2 (based on Open Zipkin 2.12)</b>
       </td>
       <td style="text-align:left">Updated Helm Chart to be deployable with Helm3 and on Kubernetes &gt;=1.14.</td>
     </tr>
