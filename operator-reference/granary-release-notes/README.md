@@ -25,7 +25,7 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
-## Granary 0.8 "Lemmy" - 2020-04-30
+## Granary 0.8.0 "Lemmy" - 2020-04-30
 
 <table>
   <thead>
