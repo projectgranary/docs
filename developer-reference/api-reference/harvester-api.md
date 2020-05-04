@@ -36,8 +36,6 @@ description: Springboot-based microservice to manage harvesters and event types.
 * GET /harvesters/instances/{harvester-name}/state
 * POST /harvesters/instances/{harvester-name}/state
 
-### 
-
 ## API Methods
 
 Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
@@ -1869,7 +1867,7 @@ Event store, event type not found.
 
 ### Harvester Instance Endpoints
 
-{% api-method method="get" host="https://api.grnry.io" path="/harvester/instances" %}
+{% api-method method="get" host="https://api.grnry.io" path="/harvesters/instances" %}
 {% api-method-summary %}
 Get all Harvester Instances
 {% endapi-method-summary %}
