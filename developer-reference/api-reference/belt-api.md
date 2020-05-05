@@ -77,7 +77,7 @@ A list of all belts along with their attributes and total count of belts stored 
         {
             "version": "1",
             "name": "kube_test_4",
-            "kubernetesName": "grnry-belt-kube-test-4",
+            "kubernetesName": "grnry-belt-1011",
             "description": "",
             "labels": [
                 "a"
@@ -99,7 +99,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "created": 1561974412801,
             "assumedRole": "",
             "requirementsPy": "",
-            "extractorVersion": "feature-scrum-229-metadata-header",
+            "extractorVersion": "0.8.0",
             "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(event, profile=None):\r\n    print(profile)\r\n    update = Update(profile['correlationId'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n    update.set_type('TestProfileType')\r\n    return [update]\r\n",
             "eventTypes": [
                 "test-a",
@@ -180,7 +180,7 @@ A list of all belts along with their attributes and total count of belts stored 
         {
             "version": "1",
             "name": "kube_test_7",
-            "kubernetesName": "grnry-belt-kube-test-7",
+            "kubernetesName": "grnry-belt-1022",
             "description": "kube_description",
             "labels": [],
             "affectedPaths": [],
@@ -300,7 +300,7 @@ JSON with attributes of belt with the specified ID.
 {
     "version": "1",
     "name": "hello-belt",
-    "kubernetesName": "grnry-belt-hello-belt",
+    "kubernetesName": "grnry-belt-161",
     "description": "Hello Belt Belt",
     "labels": [],
     "affectedPaths": [],
@@ -320,7 +320,7 @@ JSON with attributes of belt with the specified ID.
     "created": 1562744768164,
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
-    "extractorVersion": "0.5.0",
+    "extractorVersion": "0.8.0",
     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
     "eventTypes": [
         "test-a",
@@ -513,7 +513,7 @@ Returns a full dump of belt object created.
 {
     "version": "1",
     "name": "hello-belt",
-    "kubernetesName": "grnry-belt-hello-belt",
+    "kubernetesName": "grnry-belt-161",
     "description": "Hello Belt Belt",
     "labels": [],
     "affectedPaths": [],
@@ -533,7 +533,7 @@ Returns a full dump of belt object created.
     "created": 1562744768164,
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
-    "extractorVersion": "0.5.0",
+    "extractorVersion": "0.8.0",
     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
     "eventTypes": [
         "test-a",
@@ -704,7 +704,7 @@ A full dump of belt object recently modified
 {
      "version": "2",
      "name": "hello-belt",
-     "kubernetesName": "grnry-belt-hello-belt",
+     "kubernetesName": "grnry-belt-161",
      "description": "Hello Belt Belt",
      "labels": [],
      "affectedPaths": [],
@@ -724,7 +724,7 @@ A full dump of belt object recently modified
      "created": 1562744768164,
      "assumedRole": "",
      "requirementsPy": "package1==0.0.0\r\npackage2",
-     "extractorVersion": "0.5.0",
+     "extractorVersion": "0.8.0",
      "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
      "eventTypes": [
        "test-a",
@@ -857,7 +857,7 @@ Authentication token
         {
             "lastTransitionTime": "2019-07-01T11:12:39Z",
             "lastUpdateTime": "2019-07-01T11:12:39Z",
-            "message": "ReplicaSet \"grnry-belt-kube-test-5-54f5c68c89\" has timed out progressing.",
+            "message": "ReplicaSet \"grnry-belt-161-54f5c68c89\" has timed out progressing.",
             "reason": "ProgressDeadlineExceeded",
             "status": "False",
             "type": "Progressing"
@@ -865,7 +865,7 @@ Authentication token
     ],
     "podStatus": [
         {
-            "name": "grnry-belt-kube-test-5-54f5c68c89-8xf9v",
+            "name": "grnry-belt-161-54f5c68c89-8xf9v",
             "podEvents": [
                 {
                     "lastTransitionTime": "2019-07-01T11:02:38Z",
@@ -874,14 +874,14 @@ Authentication token
                 },
                 {
                     "lastTransitionTime": "2019-07-01T11:02:38Z",
-                    "message": "containers with unready status: [grnry-belt-kube-test-5]",
+                    "message": "containers with unready status: [grnry-belt-161]",
                     "reason": "ContainersNotReady",
                     "status": "False",
                     "type": "Ready"
                 },
                 {
                     "lastTransitionTime": "2019-07-01T11:02:38Z",
-                    "message": "containers with unready status: [grnry-belt-kube-test-5]",
+                    "message": "containers with unready status: [grnry-belt-161]",
                     "reason": "ContainersNotReady",
                     "status": "False",
                     "type": "ContainersReady"
@@ -897,7 +897,7 @@ Authentication token
                     "image": "docker-registry:5000/grnry/belt-extractor:extractorVersion",
                     "imageID": "",
                     "lastState": {},
-                    "name": "grnry-belt-kube-test-5",
+                    "name": "grnry-belt-161",
                     "ready": false,
                     "restartCount": 0,
                     "state": {
