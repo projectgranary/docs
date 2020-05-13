@@ -52,13 +52,13 @@ This string, can be directly entered into our call to the Harvester API. This ca
 
 ### Windows
 
-In order to achieve this with windows, start PowerShell and navigate to the specific resource. Afterwards, you may execute the following command.
+Start `PowerShell` and navigate to the specific resource. Afterwards, you execute the following command:
 
 ```bash
-get-content <file_name> -Raw | %{$_ -replace "`r`n","\\n"}
+get-content <file_name> -Raw | %{$_ -replace "`r`n","\n"} | %{$_ -replace "`"","\\`""}
 ```
 
-Make sure to replace `<file_name>` with the name of the file you want to convert to string representation. The part \`r\`n looks for newlines. It might be the case, that this is not working. In such cases, you need either ```r`` or ```n`` separately.
+Make sure to replace `<file_name>` with the name of the file you want to convert to string representation. The part ```r`n`` looks for newlines. It might be the case, that this is not working. In such cases, you need either ```r`` or ```n`` separately.
 
 After executing this command, you may copy and paste the value from command line.
 
@@ -66,7 +66,16 @@ After executing this command, you may copy and paste the value from command line
 
 In order to achieve this with Linux, `sed` helps us. First of all, navigate to the resources path. Then execute:
 
-```text
-cat <file_name> | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\\\n/g'
+```bash
+cat <file_name> | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' | sed -E 's/"/\\\\"/g'
+```
+
+### Mac
+
+Mac behaves same as Linux in case we install the package `gnu-sed` and it's command `gsed`. See:
+
+```bash
+brew install gnu-sed
+cat <file_name> | gsed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' | gsed -E 's/"/\\\\"/g'
 ```
 
