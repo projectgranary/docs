@@ -1,3 +1,9 @@
+---
+description: >-
+  In this chapter, we ingest our first data via the deployed Harvester to the
+  Event Store
+---
+
 # First Data Ingestion
 
 ![](../../.gitbook/assets/grafik%20%285%29.png)

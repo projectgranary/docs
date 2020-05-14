@@ -1,3 +1,7 @@
+---
+description: 'In this chapter, we learn how to access Granary''s APIs.'
+---
+
 # Accessing GRNRY
 
 ## 1. Getting Access
