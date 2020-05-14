@@ -54,19 +54,19 @@ So, how do you get the raw data.
 
 Navigate to the streams area in your SCDF Dashboard:
 
-![](../../.gitbook/assets/grafik%20%289%29.png)
+![](../../.gitbook/assets/grafik%20%2813%29.png)
 
 Now, open one stream:
 
-![](../../.gitbook/assets/grafik%20%288%29.png)
+![](../../.gitbook/assets/grafik%20%2810%29.png)
 
 Next, click on `update stream`:
 
-![](../../.gitbook/assets/grafik%20%2810%29.png)
+![](../../.gitbook/assets/grafik%20%2814%29.png)
 
 Now, click on `Copy to Clipboard`:
 
-![](../../.gitbook/assets/grafik%20%287%29.png)
+![](../../.gitbook/assets/grafik%20%289%29.png)
 
 {% hint style="danger" %}
 The copy to clipboard does not correctly copy your script for scriptable-transform. Therefore, you need to enter it manually using the method specified above. You should add it after executing the script below.

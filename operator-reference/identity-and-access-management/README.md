@@ -14,7 +14,7 @@ In Granary, Keycloak provides security realm, clients, groups, roles, and techni
 
 ## IAM Architecture Chart
 
-![Functional Overview of IAM Architecture](../../.gitbook/assets/image%20%289%29.png)
+![Functional Overview of IAM Architecture](../../.gitbook/assets/image%20%2815%29.png)
 
 ## Interfaces
 
