@@ -4,6 +4,11 @@
 
 ## Learning Granary <a id="learning-grnry-1"></a>
 
+* [Developer Tutorial -BETA](learning-grnry-1/tutorial/README.md)
+  * [Prerequisites: Before we get started](learning-grnry-1/tutorial/prerequisites-before-we-get-started.md)
+  * [Accessing GRNRY](learning-grnry-1/tutorial/accessing-grnry.md)
+  * [Registering new Data Pipeline](learning-grnry-1/tutorial/registering-new-data.md)
+  * [First Data Ingestion](learning-grnry-1/tutorial/first-data-ingestion.md)
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
   * [How to run a Harvester](learning-grnry-1/data-in/how-to-run-a-harvester/README.md)
     * [Event Types](learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md)
