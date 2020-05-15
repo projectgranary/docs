@@ -21,6 +21,7 @@
     * [Sessionize Data](learning-grnry-1/data-in/best-practices-1/sessionize-data.md)
     * [Converting a script into a one-liner](learning-grnry-1/data-in/best-practices-1/easing-development.md)
     * [How to test your developments](learning-grnry-1/data-in/best-practices-1/how-to-unit-test-your-developments.md)
+    * [Retry Mechanism for Snowplow Clients](learning-grnry-1/data-in/best-practices-1/retry-mechanism-for-snowplow-clients.md)
 * [Transform Data In Granary](learning-grnry-1/using-data-in-granary/README.md)
   * [How to run a Belt](learning-grnry-1/using-data-in-granary/getting-started.md)
   * [Best Practices](learning-grnry-1/using-data-in-granary/best-practices/README.md)
