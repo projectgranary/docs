@@ -19,7 +19,7 @@ In order to view data in Grnry we will be using a Database client later in this 
 
 ### Browser
 
-We will also be using a browser to interact with the GNRY UI. Any modern browser will do. We recommend Chrome though.
+We will also be using a browser to interact with the GRNRY UI. Any modern browser will do. We recommend Chrome though.
 
 
 

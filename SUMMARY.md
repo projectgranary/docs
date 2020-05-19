@@ -4,7 +4,7 @@
 
 ## Learning Granary <a id="learning-grnry-1"></a>
 
-* [Developer Tutorial -BETA](learning-grnry-1/tutorial/README.md)
+* [Developer Tutorial \[BETA\]](learning-grnry-1/tutorial/README.md)
   * [Prerequisites: Before we get started](learning-grnry-1/tutorial/prerequisites-before-we-get-started.md)
   * [Accessing GRNRY](learning-grnry-1/tutorial/accessing-grnry.md)
   * [Registering new Data Pipeline](learning-grnry-1/tutorial/registering-new-data.md)

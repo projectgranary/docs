@@ -2,7 +2,7 @@
 description: Learn with an interactive example
 ---
 
-# Developer Tutorial -BETA
+# Developer Tutorial \[BETA\]
 
 ## Feeding Grains into Grnry
 
