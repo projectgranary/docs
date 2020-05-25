@@ -20,7 +20,7 @@ description: Denotes release versions of Granary artifacts.
 
 ## Previous Granary Versions
 
-* [Granary 0.7 Kurt](https://docs.grnry.io/operator-reference/granary-release-notes)
+* [Granary 0.7 Kurt](https://docs.grnry.io/v/0.7-kurt/operator-reference/granary-release-notes)
 * [Granary 0.6 Freddie](https://docs.grnry.io/v/0.6-freddie/operator-reference/granary-release-notes)
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
