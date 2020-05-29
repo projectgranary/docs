@@ -101,7 +101,9 @@ Additionally, there are pivot generator specific variables as specified below.
         </td>
     </tr>
   </tbody>
-</table>### Generic
+</table>
+
+### Generic
 
 The generic generator creates a selection of the source table. Data is selected using the specified where clause.
 

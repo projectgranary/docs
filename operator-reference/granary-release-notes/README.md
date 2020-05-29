@@ -193,7 +193,9 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
   </tbody>
-</table>## 0.5.0 "Amy" - 2019-07-31
+</table>
+
+## 0.5.0 "Amy" - 2019-07-31
 
 | Granary Component | Release Version | Release Notes |
 | :--- | :--- | :--- |
@@ -370,7 +372,9 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
   </tbody>
-</table>## RC1 0.5 "Amy" - 2019-07-03
+</table>
+
+## RC1 0.5 "Amy" - 2019-07-03
 
 <table>
   <thead>
@@ -521,3 +525,4 @@ description: Denotes release versions of Granary artifacts.
     </tr>
   </tbody>
 </table>
+

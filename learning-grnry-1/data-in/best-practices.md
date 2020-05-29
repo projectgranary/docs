@@ -46,7 +46,9 @@ We propose to name the components in the following way:
       </td>
     </tr>
   </tbody>
-</table>## Scriptable Transform with Python \(Jython\) and Snowplow
+</table>
+
+## Scriptable Transform with Python \(Jython\) and Snowplow
 
 The scriptable transform with Python and Snowplow can be used the following way:
 
