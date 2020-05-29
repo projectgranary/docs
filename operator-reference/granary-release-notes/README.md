@@ -300,7 +300,9 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
   </tbody>
-</table>## Granary 0.7.1 "Kurt" - 2020-02-14
+</table>
+
+## Granary 0.7.1 "Kurt" - 2020-02-14
 
 <table>
   <thead>
@@ -458,7 +460,9 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
   </tbody>
-</table>## Granary 0.7 "Kurt" - 2020-01-10
+</table>
+
+## Granary 0.7 "Kurt" - 2020-01-10
 
 <table>
   <thead>
@@ -691,4 +695,6 @@ description: Denotes release versions of Granary artifacts.
     </tr>
   </tbody>
 </table>
+
+
 

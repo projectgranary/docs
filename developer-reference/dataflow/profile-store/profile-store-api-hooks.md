@@ -62,7 +62,9 @@ Allows the implementation of Hooks which will be executed before the HTTP Respon
       </td>
     </tr>
   </tbody>
-</table>### **Example Hook Implementation**
+</table>
+
+### **Example Hook Implementation**
 
 {% code title="DemoHook.java" %}
 ```java
