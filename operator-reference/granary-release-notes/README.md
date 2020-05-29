@@ -195,7 +195,9 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
   </tbody>
-</table>## Granary 0.6 "Freddie" - 2019-10-02
+</table>
+
+## Granary 0.6 "Freddie" - 2019-10-02
 
 <table>
   <thead>
@@ -378,4 +380,6 @@ description: Denotes release versions of Granary artifacts.
     </tr>
   </tbody>
 </table>
+
+
 

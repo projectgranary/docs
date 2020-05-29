@@ -46,7 +46,9 @@ We propose to name the components in the following way:
       </td>
     </tr>
   </tbody>
-</table>## Spring Expression Language \(SpEL\)
+</table>
+
+## Spring Expression Language \(SpEL\)
 
 The Spring Expression Language is used to define how to pick-up the data from the event in the step [Metadata Extractor](../../developer-reference/dataflow/data-in/metadata-extractor.md).
 

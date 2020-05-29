@@ -351,7 +351,9 @@ rules:
         pod and namespace. Grouped values are summed up.</td>
     </tr>
   </tbody>
-</table>For every instance of kafka-profile-update that should be scaled a custom metrics series is required. To achieve this, configure the prometheus-adapter ruleset by duplicating the whole seriesQuery block and adjust topic \(rules.custom.seriesQuery\) and metric name \(rules.custom.name.as\).
+</table>
+
+For every instance of kafka-profile-update that should be scaled a custom metrics series is required. To achieve this, configure the prometheus-adapter ruleset by duplicating the whole seriesQuery block and adjust topic \(rules.custom.seriesQuery\) and metric name \(rules.custom.name.as\).
 
 To verify the prometheus-adapter is working with the defined ruleset, query the custom metrics endpoint. The kubernetes URL may vary depending on cluster setup. Metrics of empty prometheus response will result in an empty ressources array.
 

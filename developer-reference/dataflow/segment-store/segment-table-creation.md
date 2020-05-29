@@ -89,7 +89,9 @@ Also, there are **generic generator** specific variables as specified below.
       </td>
     </tr>
   </tbody>
-</table>### Pivot Generator
+</table>
+
+### Pivot Generator
 
 Additionally, there are **pivot generator** specific variables as specified below.
 
@@ -135,7 +137,9 @@ Additionally, there are **pivot generator** specific variables as specified belo
       <td style="text-align:left"></td>
     </tr>
   </tbody>
-</table>The pivot generator presupposes that the following input columns are present in the source table.
+</table>
+
+The pivot generator presupposes that the following input columns are present in the source table.
 
 `<CITUS_DIST_COL>` \(varchar\)
 

@@ -58,7 +58,9 @@ Data-In starts with your source. Your source can be any data you wish to extract
       <td style="text-align:left">Determines Schema and Meta Data Extration Rules of Events.</td>
     </tr>
   </tbody>
-</table>The source type is the abstraction from the real source and can be configured. It handles all the data we retrieve from the source. The `source type` writes the data into a Kafka channel called `raw`. From there, we have a `transform` step. In this transform step you should convert your data into JSON format. In addition, you may create any additional transformation steps you may like, such as creating session IDs or deleting empty fields. As a result the transform step writes into another Kafka topic called `transformed`.
+</table>
+
+The source type is the abstraction from the real source and can be configured. It handles all the data we retrieve from the source. The `source type` writes the data into a Kafka channel called `raw`. From there, we have a `transform` step. In this transform step you should convert your data into JSON format. In addition, you may create any additional transformation steps you may like, such as creating session IDs or deleting empty fields. As a result the transform step writes into another Kafka topic called `transformed`.
 
 From the `transformed` topic the data is read by the metadata extractor. This metadata extractor extracts information such as the correlation\_id, which is the unique identifier for data. As a result we write into another topic named after the event type. This topic can then be consumed by belts, which we are going to talk about later. The data-in channel ends here. However, there is one additional component, you can deploy, the eventstore sink. The eventstore sink consumes the same Kafka Topic and writes this data into the event store.
 
