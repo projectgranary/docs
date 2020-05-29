@@ -435,7 +435,7 @@ Given multiple requests with the following body:
 
 the belt extractor consuming from a batch Kafka topic can be equipped with the following Python callback function \(see Configuration section\):
 
-```yaml
+```python
 import json
 import sys
 from time import time
@@ -484,7 +484,7 @@ There are use cases where you want to process events from a topic that contains 
 
 
 
-```yaml
+```python
 import json
 import sys
 from time import time
@@ -563,6 +563,28 @@ If unspecified, default values will be used:
 | `_schema` | `set_schema(schema)` | `null` |
 | `_operation` | `set_operation(operation)` | `"_set"` |
 | `_profile_type` | `set_type(profile_type)` | `"_d"` |
+
+**Profile Fetching**
+
+In some cases it is necessary to fetch a Profile from the Profile API. This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the profileClient into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
+
+`profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])`
+
+The profileClient uses the PROFILE\_TYPE environment variable as default. To fetch another profile type it can be passed as a furter optional parameter like this `getProfile(cid,profileType)`. 
+
+If not using the [Belt API](../api-reference/belt-api.md#create-and-store-a-belt) as deployment path, you can configure the profile fetching using the following environment variables:
+
+| Environment Variable | Description | Default |
+| :--- | :--- | :--- |
+| FETCH\_PROFILE | Enable profile fetching | false |
+| PROFILE\_URL | Profilestore base url |  |
+| PROFILE\_TYPE | Default profile type to fetch | \_d |
+| KEYCLOAK\_URL | Keycloak url \(with '/auth'\) |  |
+| KEYCLOAK\_REALM | Realm of GRNRY installation |  |
+| KEYCLOAK\_CLIENT | Client of profile api |  |
+| KEYCLOAK\_SECRET | Kubernetes Secret name with Keycloak user credentials |  |
+| KEYCLOAK\_USER | Attribute name in Kubernetes Secret for Keycloak user name |  |
+| KEYCLOAK\_PASS | Attribute name in Kubernetes Secret for Keycloak user's password |  |
 
 **Callback Timeout**
 

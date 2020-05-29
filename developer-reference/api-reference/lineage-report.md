@@ -118,7 +118,9 @@ Configuration file is ./config.py
       <td style="text-align:left"><code>[]</code> (i.e. use one sample Correlation ID per profile type)</td>
     </tr>
   </tbody>
-</table>### Example Configuration
+</table>
+
+### Example Configuration
 
 ```text
 credentials = {
