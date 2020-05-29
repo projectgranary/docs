@@ -75,6 +75,10 @@ Most of the harvester configuration is covered by defaults, so creating your fir
 
 For the body \(look for the tab with the green dot\) use this JSON:
 
+{% hint style="info" %}
+The name of the Event Type in line 21 must match the Event Type's `name` you created in the previous step of this chapter.
+{% endhint %}
+
 ```javascript
 {
 	"displayName": "Snowplow Customer Sessions",
@@ -104,7 +108,7 @@ For the body \(look for the tab with the green dot\) use this JSON:
 
 Find more detailed explanation on harvester configuration [here](../data-in/how-to-run-a-harvester/harvesters.md).
 
-The script in line 17 of the JSON payload above will filter our events later on and looks actually like this:
+The script in line 18 of the JSON payload above will filter our events later on and looks actually like this:
 
 ```groovy
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowPayloadExtractor
@@ -134,7 +138,7 @@ if (event?.body?.data?.filterCriteria) {
 return null
 ```
 
- Check [this best practice](../data-in/best-practices-1/easing-development.md) how to transform it to a one-liner.
+Check [this best practice](../data-in/best-practices-1/easing-development.md) how to transform it to a one-liner.
 
 With a Status `200 OK`, the return body looks like this:
 
@@ -247,7 +251,7 @@ Again, Granary applied a whole bunch of default configuration. Next up, starting
 
 Within step 3, we created a harvester. In order to be able to consume data, we need to start the harvester. This goes like so:
 
-![Harvester API: POST {{harvester\_url}}/harvesters/instances/snowplow-customer-se/state](../../.gitbook/assets/image%20%2813%29.png)
+![Harvester API: POST /harvesters/instances/snowplow-customer-se/state](../../.gitbook/assets/image%20%2813%29.png)
 
 For the body \(look for the tab with the green dot\) use this JSON:
 

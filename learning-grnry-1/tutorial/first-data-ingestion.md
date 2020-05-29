@@ -4,7 +4,7 @@ description: >-
   Event Store
 ---
 
-# First Data Ingestion
+# Ingesting the first Data
 
 ![](../../.gitbook/assets/grafik%20%285%29.png)
 

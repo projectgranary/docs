@@ -23,3 +23,9 @@ We will also be using a browser to interact with the GRNRY UI. Any modern browse
 
 
 
+{% hint style="warning" %}
+Check out the [Granary glossary](../granary-glossary.md) whenever you encounter an unknown term.
+{% endhint %}
+
+
+
