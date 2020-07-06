@@ -1631,16 +1631,6 @@ Possible values for the status attribute in the response body are:
 | RUNNING\_BUT\_OUTDATED | persister is running but there is a newer version of it in the database |
 | FAILED | persister is deployed but not running |
 
-| Status | Description |
-| :--- | :--- |
-| UNKNOWN | status could not be determined |
-| STOPPED | persister is not deployed |
-| DEPLOYING | persister is being deployed |
-| STOPPING | persister is being stopped |
-| RUNNING | persister is running |
-| RUNNING\_BUT\_OUTDATED | persister is running but there is a newer version of it in the database |
-| FAILED | persister is deployed but not running |
-
 {% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
 {% api-method-summary %}
 Start/Stop Persister for a Specific Event Type
@@ -1747,7 +1737,7 @@ Get Persister Logs for a Specific Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get the logs from a persister of an event type.  
+Get the logs from a persister of an event type. Find information on log format here.  
 This request requires the role matching `editor` or `consumer`. if `consumer` is null, any authenticated user is authorized.
 {% endapi-method-description %}
 
@@ -2833,18 +2823,6 @@ Harvester not found.
 {% endapi-method %}
 
 
-
-Possible values for the status attribute in the response body are:
-
-| Status | Description |
-| :--- | :--- |
-| UNKNOWN | status could not be determined |
-| STOPPED | harvester is not deployed |
-| DEPLOYING | harvester is being deployed |
-| STOPPING | harvester is being stopped |
-| RUNNING | harvester is running |
-| RUNNING\_BUT\_OUTDATED | harvester is running but there is a newer version of it in the database |
-| FAILED | harvester is deployed but not running |
 
 Possible values for the status attribute in the response body are:
 
