@@ -60,7 +60,7 @@ Harvesters for _S3_, _SFTP_, and _JDBC_ Source Types follow the same schema as _
     </tr>
     <tr>
       <td style="text-align:left">Harvester Version</td>
-      <td style="text-align:left">Changes whenever component or configuration changes. K8s labels for havester
+      <td style="text-align:left">Changes whenever component or configuration changes. K8s labels for harvester
         and version.</td>
     </tr>
   </tbody>
