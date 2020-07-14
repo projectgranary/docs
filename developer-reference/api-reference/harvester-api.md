@@ -1966,6 +1966,12 @@ Returns all details of a given harvester. Requires role `harvester_read`.
 technical name of harvester
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="expand" type="string" required=false %}
+Show Harvester state with expand=state.
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -2038,7 +2044,6 @@ Sample Response
             "kubernetes.imagepullpolicy": "Always",
             "kubernetes.livenessprobedelay": "120",
             "kubernetes.readinessprobedelay": "120"
-            }
         },
         "appConfiguration": {
             "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
@@ -2047,7 +2052,6 @@ Sample Response
             "spring.cloud.stream.kafka.binder.replicationfactor": "3",
             "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
             "spring.cloud.stream.bindings.input.consumer.partitioned": "true"
-            }
         },
         "language": "groovy",
         "script": "return new String(payload , 'UTF-8');"
@@ -2084,6 +2088,14 @@ Sample Response
     "eventType": {
         "name": "snowplow-a",
         "version": "1"
+    },
+    "state": {
+        "status": "RUNNING",
+        "_links": {
+            "self": {
+                "href": "https://hostname/harvesters/instances/harvester-demo/state"
+            }
+        }
     },
     "_links": {
         "self": {
@@ -2392,6 +2404,12 @@ name of the harvester that should be updated
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
+{% api-method-query-parameters %}
+{% api-method-parameter name="expand" type="string" required=false %}
+Show Harvester state with expand=state.
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
+
 {% api-method-body-parameters %}
 {% api-method-parameter name="sessionizing" type="object" required=false %}
 sessionizing application used by this harvester. _Optional_ fields \(can only be set if `sessionizing.enabled=true`\) are `version:string`, `deploymentConfiguration:map`, `appConfiguration:map`, `correlationIdExpression:string`, `sessioningAttributeExpression:string`, `inactivityGapSec:long`, `gracePeriodSec:long`
@@ -2439,9 +2457,9 @@ human readable name. Needs to be unique. Technical name of the harvester will re
         "name": "grnry-jdbc",
         "version": "latest",
         "configuration": {
-            "password" : "secret",
-            "username" : "su",
-            "hostname" : "beefy-db-host"
+            "password": "secret",
+            "username": "su",
+            "hostname": "beefy-db-host"
         },
         "deploymentConfiguration": {
             "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]",
@@ -2455,7 +2473,7 @@ human readable name. Needs to be unique. Technical name of the harvester will re
             "kubernetes.readinessProbeDelay": "120"
         },
         "appConfiguration": {
-        
+
         }
     },
     "metadataExtractor": {
@@ -2538,6 +2556,14 @@ human readable name. Needs to be unique. Technical name of the harvester will re
     "eventType": {
         "name": "snowplow-a",
         "version": "latest"
+    },
+    "state": {
+        "status": "RUNNING_BUT_OUTDATED",
+        "_links": {
+            "self": {
+                "href": "https://hostname/harvesters/instances/harvester-demo/state"
+            }
+        }
     },
     "_links": {
         "self": {
