@@ -56,3 +56,7 @@ Units CPU:
 Kubernetes cluster hardware consumption can be reduced and processing speed can be increased in case of managed PostgreSQL offerings are used.
 {% endhint %}
 
+{% hint style="info" %}
+To ensure a guaranteed Quality of Service,  kubernetes`requests`and `limits`have to be set to the same values. Furthermore, if only specifying `requests`or `limits`, kubernetes will automatically assign matching values for`limits` or `requests` respectively.
+{% endhint %}
+
