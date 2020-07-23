@@ -239,8 +239,9 @@ A list of all belts along with their attributes and total count of belts stored 
 
 ```
 {
-    "timestamp": "2020-05-22T20:15:26.003+0000",
-    "message": "Belt name : can not be empty or null.",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'pagesize' must be a natural number but is '-1'.",
     "details": "uri=/belts"
 }
 ```
@@ -253,8 +254,9 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": "2020-05-22T20:40:56.604+0000",
-    "message": "Full authentication is required to access this resource",
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
     "details": "uri=/belts"
 }
 ```
@@ -267,8 +269,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": "2020-05-22T20:16:32.751+0000",
-    "message": "Entity is not accessible: forbidden",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details": "uri=/belts"
 }
 ```
@@ -371,9 +374,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": "2020-05-25T10:31:58.991+0000",
-    "message": "Full authentication is required to access this resource",
-    "details": "uri=/belts/21"
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/belts/161"
 }
 ```
 {% endapi-method-response-example %}
@@ -385,9 +389,10 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": "2020-05-22T20:16:32.751+0000",
-    "message": "Entity is not accessible: forbidden",
-    "details": "uri=/belts/21"
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -399,9 +404,10 @@ When there is no belt found with the specified ID
 
 ```
 {
-    "timestamp": "2020-05-25T10:33:30.014+0000",
-    "message": null,
-    "details": "uri=/belts/22"
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Belt with ID '425' not found.",
+    "details": "uri=/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -591,8 +597,9 @@ If a belt with a given name exists already in the Belt Store.
 
 ```
 {
-    "timestamp": "2019-05-06T09:54:54.074+0000",
-    "message": "test-post-24 : test-post-24 exists already",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'extractorVersion' must not be empty.",
     "details": "uri=/belts"
 }
 ```
@@ -605,8 +612,9 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": "2020-05-25T10:46:28.828+0000",
-    "message": "Full authentication is required to access this resource",
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
     "details": "uri=/belts"
 }
 ```
@@ -619,8 +627,9 @@ Missing role to access this resource.
 
 ```
 {
-    "timestamp": "2020-05-25T10:47:09.002+0000",
-    "message": "Entity is not accessible: forbidden",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details": "uri=/belts"
 }
 ```
@@ -675,9 +684,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": "2020-05-25T10:31:58.991+0000",
-    "message": "Full authentication is required to access this resource",
-    "details": "uri=/belts/21"
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -689,9 +699,10 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": "2020-05-22T20:16:32.751+0000",
-    "message": "Entity is not accessible: forbidden",
-    "details": "uri=/belts/21"
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -703,9 +714,10 @@ No belt found with given ID
 
 ```
 {
-    "timestamp": "2020-05-25T10:33:30.014+0000",
-    "message": null,
-    "details": "uri=/belts/22"
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Belt with ID '425' not found.",
+    "details": "uri=/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -802,9 +814,10 @@ If the belt structure contains an invalid event type.
 
 ```
 {
-    "timestamp": "2019-11-01T15:45:29.385+0000",
-    "message": " : Invalid event type: someUnknownEventType",
-    "details": "uri=/belts/425"
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'beltId' must be a natural number but is 'abcd'.",
+    "details": "uri=/belts/abcd"
 }
 ```
 {% endapi-method-response-example %}
@@ -816,9 +829,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": "2020-05-25T10:31:58.991+0000",
-    "message": "Full authentication is required to access this resource",
-    "details": "uri=/belts/21"
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -830,9 +844,10 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": "2020-05-22T20:16:32.751+0000",
-    "message": "Entity is not accessible: forbidden",
-    "details": "uri=/belts/21"
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -844,9 +859,10 @@ Belt with the given ID not found
 
 ```
 {
-    "timestamp": "2020-05-25T10:33:30.014+0000",
-    "message": null,
-    "details": "uri=/belts/22"
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Belt with ID '425' not found.",
+    "details": "uri=/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -968,9 +984,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": "2020-05-25T10:31:58.991+0000",
-    "message": "Full authentication is required to access this resource",
-    "details": "uri=/belts/21/state"
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -982,9 +999,11 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": "2020-05-22T20:16:32.751+0000",
-    "message": "Entity is not accessible: forbidden",
-    "details": "uri=/belts/21/state"
+{
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -996,9 +1015,10 @@ Belt with given ID not found.
 
 ```
 {
-    "timestamp": "2020-05-25T10:33:30.014+0000",
-    "message": null,
-    "details": "uri=/belts/22/state"
+    "timestamp":1586949273019,
+    "type": "entity_not_found",
+    "message": "Belt with ID '425' not found.",
+    "details": "uri=/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -1067,9 +1087,10 @@ Action is not allowed while belt is in current state or invalid.
 
 ```
 {
-    "timestamp": "2020-06-24T10:41:49.627+0000",
-    "message": "action : current Belt state 'FAILED' does not allow action 'START'",
-    "details": "uri=/belts/58/state"
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'state' cannot be 'START' while Belt status is 'DEPLOYING'.",
+    "details": "uri=/belts/abcd/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1081,9 +1102,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": "2020-05-25T10:31:58.991+0000",
-    "message": "Full authentication is required to access this resource",
-    "details": "uri=/belts/21/state"
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/belts/425/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1095,9 +1117,10 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": "2020-05-22T20:16:32.751+0000",
-    "message": "Entity is not accessible: forbidden",
-    "details": "uri=/belts/21/state"
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/belts/425/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1109,9 +1132,10 @@ Belt with given ID not found.
 
 ```
 {
-    "timestamp": "2020-05-25T10:33:30.014+0000",
-    "message": null,
-    "details": "uri=/belts/22/state"
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Belt with ID '425' not found.",
+    "details": "uri=/belts/425/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1199,9 +1223,10 @@ number of lines to be retrieved per pod. Must be greater than `0` and less than 
 
 ```
 {
-    "timestamp": "2020-07-06T09:31:20.350+0000",
-    "message": "lines : Value is greater than maxValue (500)",
-    "details": "uri=/belts/113/logs"
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'lines' must be in between 1 and 500 but is '750'.",
+    "details": "uri=/belts/abcd/logs"
 }
 ```
 {% endapi-method-response-example %}
@@ -1213,9 +1238,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": "2020-07-03T11:12:15.920+0000",
-    "message": "Invalid authorization header, see WWW-Authenticate header for details",
-    "details": "uri=/belts/59/logs"
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/belts/425/logs"
 }
 ```
 {% endapi-method-response-example %}
@@ -1227,23 +1253,25 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": "2020-07-03T10:39:37.247+0000",
-    "message": "Entity is not accessible: forbidden",
-    "details": "uri=/belts/59/logs"
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/belts/425/logs"
 }
 ```
 {% endapi-method-response-example %}
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-Belt with ginven ID not found.
+Belt with given ID not found.
 {% endapi-method-response-example-description %}
 
 ```
 {
-    "timestamp": "2020-07-03T11:13:25.491+0000",
-    "message": "No entity found with id: 48",
-    "details": "uri=/belts/48/logs"
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Belt with ID '425' not found.",
+    "details": "uri=/belts/425/logs"
 }
 ```
 {% endapi-method-response-example %}

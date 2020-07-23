@@ -135,7 +135,8 @@ Invalid query parameter value.
 ```
 {
     "timestamp": 1587302499600,
-    "message": "pagesize : could not parse value",
+    "type": "bad_parameter_value",
+    "message": "Parameter 'pagesize' must be a natural number but is '-1'.",
     "details": "uri=/harvesters/source-types"
 }
 ```
@@ -149,10 +150,9 @@ Token invalid or missing.
 ```
 {
     "timestamp": 1586941626155,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/source-types"
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/source-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -165,8 +165,9 @@ Missing roles to access this resource.
 ```
 {
     "timestamp":1586949273019,
-    "message":"Access is denied",
-    "details":"uri=/harvesters/source-types"
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/harvesters/source-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -259,8 +260,9 @@ Invalid query parameter value.
 
 ```
 {
-    "timestamp": 1587302383370,
-    "message": "pagesize : could not parse value",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'pagesize' must be a natural number but is '-1'.",
     "details": "uri=/harvesters/source-types/grnry-adobe-sftp"
 }
 ```
@@ -273,11 +275,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1586941731368,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/source-types/grnry-jdbc"
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/source-types/grnry-jdbc"
 }
 ```
 {% endapi-method-response-example %}
@@ -290,7 +291,8 @@ Missing roles to access this resource.
 ```
 {
     "timestamp":1586949273019,
-    "message":"Access is denied",
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/harvesters/source-types/grnry-jdbc"
 }
 ```
@@ -390,11 +392,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587302632410,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/source-types/grnry-topic/latest"
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/source-types/grnry-topic/latest"
 }
 ```
 {% endapi-method-response-example %}
@@ -407,7 +408,8 @@ Missing roles to access this resource.
 ```
 {
     "timestamp":1586949273019,
-    "message":"Access is denied",
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/harvesters/source-types/grnry-topic/latest"
 }
 ```
@@ -421,7 +423,8 @@ No source-type found for the given id + version.
 ```
 {
     "timestamp": 1587302671116,
-    "message": "No Entity found with name: grnry-topic",
+    "type": "entity_not_found",
+    "message": "Source Type 'grnry-topic' not found.",
     "details": "uri=/harvesters/source-types/grnry-topic/gadas"
 }
 ```
@@ -539,8 +542,9 @@ Invalid query parameter value.
 
 ```
 {
-    "timestamp": 1587302820790,
-    "message": "pagesize : could not parse value",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'pagesize' must be a natural number but is '-1'.",
     "details": "uri=/event-types"
 }
 ```
@@ -554,10 +558,9 @@ Token invalid or missing.
 ```
 {
     "timestamp": 1587302709982,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types"
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -570,7 +573,8 @@ Missing roles to access this resource.
 ```
 {
     "timestamp":1586949273019,
-    "message":"Access is denied",
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types"
 }
 ```
@@ -664,11 +668,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587302919538,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types/adobe-s3"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types/adobe-s3"
 }
 ```
 {% endapi-method-response-example %}
@@ -681,7 +684,8 @@ Missing roles to access this resource.
 ```
 {
     "timestamp":1586949273019,
-    "message":"Access is denied",
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/adobe-s3"
 }
 ```
@@ -694,8 +698,9 @@ No event-type found with that name.
 
 ```
 {
-    "timestamp": 1587302947773,
-    "message": "No Entity found with name: new-entity",
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Event Type 'new-entity' not found.",
     "details": "uri=/event-types/new-entity"
 }
 ```
@@ -807,8 +812,9 @@ If required parameters are missing or parameters are invalid.
 
 ```
 {
-    "timestamp":1586949283490,
-    "message":"displayName : was not able to create event type name from displayName: '?**//$$%%'",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'displayName' must not be empty.",
     "details":"uri=/event-types"
 }
 ```
@@ -821,11 +827,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303054587,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -838,7 +843,8 @@ Missing roles to access this resource.
 ```
 {
     "timestamp":1586949273019,
-    "message":"Access is denied",
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types"
 }
 ```
@@ -852,7 +858,8 @@ If displayName not unique.
 ```
 {
     "timestamp": 1587303130850,
-    "message": "event-type with displayName 'adobe-s3' already exists ",
+    "type": "entity_already_exists"
+    "message": "Event Type with displayName 'adobe-s3' already exists.",
     "details": "uri=/event-types"
 }
 ```
@@ -866,7 +873,8 @@ Persister already exists for the eventy type.
 ```
 {
     "timestamp":1586949269381,
-    "message":"Could not create event type with name 'persister-already-exists'. Persister already present.",
+    "type": "unexpected_error",
+    "message":"An unexpected error occurred.",
     "details":"uri=/event-types"
 }
 ```
@@ -964,8 +972,9 @@ Invalid parameter.
 
 ```
 {
-    "timestamp":1586949276932,
-    "message":"type : cannot be modified. Must be empty or 'ttl' but is 'data_in'",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'type' must be empty or 'ttl' but is 'data_in'.",
     "details":"uri=/event-types/test-event-type-2"
 }
 ```
@@ -978,11 +987,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303365395,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types/test-event-type"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types/test-event-type"
 }
 ```
 {% endapi-method-response-example %}
@@ -994,8 +1002,9 @@ Missing roles to access this resource.
 
 ```text
 {
-    "timestamp":1586949292725,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type"
 }
 ```
@@ -1046,11 +1055,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303296774,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types/13213"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types/13213"
 }
 ```
 {% endapi-method-response-example %}
@@ -1062,8 +1070,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586949276025,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type-tp"
 }
 ```
@@ -1077,7 +1086,8 @@ No event type with given name found.
 ```
 {
     "timestamp":1586949280969,
-    "message":"No Entity found with name: test-delete",
+    "type": "entity_not_found",
+    "message": "Event Type 'test-delete' not found.",
     "details":"uri=/event-types/test-delete"
 }
 ```
@@ -1091,7 +1101,8 @@ If there are still belts and/or harvesters referencing the event-type, the delet
 ```text
 {
     "timestamp": 1574854606738,
-    "message": "event type with name test-event-type-delete is still used by belts: 
+    "type": "entity_in_use"
+    "message": "Cannot delete Event Type 'event-type-delete', it is still being referenced by belts: 
     [https://hostname/belts/11,
      https://hostname/belts/12,
      https://hostname/belts/13,
@@ -1100,22 +1111,8 @@ If there are still belts and/or harvesters referencing the event-type, the delet
      https://hostname/belts/16,
      https://hostname/belts/17,
      https://hostname/belts/18,
-     https://hostname/belts/19]",
+     https://hostname/belts/19].",
     "details": "uri=/event-types/test-event-type-delete"
-}
-```
-{% endapi-method-response-example %}
-
-{% api-method-response-example httpCode=424 %}
-{% api-method-response-example-description %}
-When event type is still being referenced.
-{% endapi-method-response-example-description %}
-
-```
-{
-    "timestamp":1586949288891,
-    "message":"can not delete event type test-delete-harvester, it is still being referenced by harvesters [http://localhost/harvesters/instances/harvester-et-delete?expand=])",
-    "details":"uri=/event-types/test-delete-harvester"
 }
 ```
 {% endapi-method-response-example %}
@@ -1189,9 +1186,10 @@ If the version is not latest or a valid number greater or equals to 1.
 
 ```text
 {
-   "timestamp":1578934021414,
-   "message":"version : Needs to be a long or latest",
-   "details":"uri=/event-types/test-event-type/invalidVersion"
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'version' must be a natural number or 'latest' but is '-1'.",
+    "details":"uri=/event-types/test-event-type/invalidVersion"
 }
 ```
 {% endapi-method-response-example %}
@@ -1203,11 +1201,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303365395,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types/adobe-s3/latest"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types/adobe-s3/latest"
 }
 ```
 {% endapi-method-response-example %}
@@ -1220,7 +1217,8 @@ Missing roles to access this resource.
 ```
 {
     "timestamp":1586949273019,
-    "message":"Access is denied",
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type-partial/latest"
 }
 ```
@@ -1233,8 +1231,9 @@ No event type found for given version.
 
 ```
 {
-    "timestamp":1586949286718,
-    "message":"No Entity found with name: test-event-type and version: 4",
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Event Type 'test-event-type' with version '4' not found.",
     "details":"uri=/event-types/test-event-type/4"
 }
 ```
@@ -1332,11 +1331,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303610533,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types/adobe-s3/eventstores/pg/persister"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types/adobe-s3/eventstores/pg/persister"
 }
 ```
 {% endapi-method-response-example %}
@@ -1348,8 +1346,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586951901861,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
 }
 ```
@@ -1363,7 +1362,8 @@ Event store, event type not found.
 ```
 {
     "timestamp": 1587303625038,
-    "message": "no eventstore found with name pgd for event type with  name adobe-s3",
+    "type": "entity_not_found",
+    "message": "Persister 'adobe-s3' not found.",
     "details": "uri=/event-types/adobe-s3/eventstores/pgd/persister"
 }
 ```
@@ -1465,8 +1465,9 @@ Invalid parameters
 
 ```
 {
-    "timestamp":1586951900148,
-    "message":"JSON parse error: Unexpected character ('\\' (code 92)): was expecting double-quote to start field name; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('\\' (code 92)): was expecting double-quote to start field name\n at [Source: (PushbackInputStream); line: 1, column: 4]",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'event_type_name' cannot be null",
     "details":"uri=/event-types/event-type-empty-update-persister-config/eventstores/pg/persister"
 }
 ```
@@ -1479,11 +1480,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303610533,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types/adobe-s3/eventstores/pg/persister"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types/adobe-s3/eventstores/pg/persister"
 }
 ```
 {% endapi-method-response-example %}
@@ -1495,8 +1495,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586951904110,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
 }
 ```
@@ -1559,11 +1560,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303610533,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types/adobe-s3/eventstores/pg/persister/state"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types/adobe-s3/eventstores/pg/persister/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1575,8 +1575,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586951905187,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
 }
 ```
@@ -1589,8 +1590,9 @@ Event store, event type not found.
 
 ```
 {
-    "timestamp": 1587303706388,
-    "message": "no eventstore found with name pdg for event type with  name adobe-s3",
+    "timestamp": 1587303625038,
+    "type": "entity_not_found",
+    "message": "Persister 'adobe-s3' not found.",
     "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/state"
 }
 ```
@@ -1671,11 +1673,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303610533,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/event-types/adobe-s3/eventstores/pg/persister/state"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/event-types/adobe-s3/eventstores/pg/persister/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1687,8 +1688,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586951884736,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
 }
 ```
@@ -1701,9 +1703,10 @@ Event store, event type not found.
 
 ```
 {
-    "timestamp": 1587303764884,
-    "message": "no eventstore found with name pdg for event type with  name adobe-s3",
-    "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/logs"
+     "timestamp": 1587303625038,
+     "type": "entity_not_found",
+     "message": "Persister 'adobe-s3' not found.",
+     "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/logs"
 }
 ```
 {% endapi-method-response-example %}
@@ -1800,7 +1803,12 @@ Token invalid or missing.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/logs"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -1811,8 +1819,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586951905141,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/logs"
 }
 ```
@@ -1825,8 +1834,9 @@ Event store, event type not found.
 
 ```
 {
-    "timestamp": 1587303764884,
-    "message": "no eventstore found with name pdg for event type with  name adobe-s3",
+    "timestamp": 1587303625038,
+    "type": "entity_not_found",
+    "message": "Persister 'adobe-s3' not found.",
     "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/logs"
 }
 ```
@@ -1910,8 +1920,9 @@ Invalid query parameter value.
 
 ```
 {
-    "timestamp": 1587303981204,
-    "message": "pagesize : could not parse value",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'pagesize' must be a natural number but is '-1'.",
     "details": "uri=/harvesters/instances"
 }
 ```
@@ -1924,11 +1935,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587303950340,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/instances"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -1940,8 +1950,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586952802552,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/harvesters/instances"
 }
 ```
@@ -2113,11 +2124,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587304034881,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/instances/adobe-s3-std"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -2129,8 +2139,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586952802552,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/harvesters/instances/adobe-s3-std"
 }
 ```
@@ -2143,8 +2154,9 @@ Harvester instance does not exist.
 
 ```
 {
-    "timestamp":1586952812431,
-    "message":"no harvester-instance found with name = harvester-delete",
+    "timestamp": 1587303625038,
+    "type": "entity_not_found",
+    "message": "Harvester 'harvester-delete' not found.",
     "details":"uri=/harvesters/instances/harvester-delete"
 }
 ```
@@ -2331,8 +2343,9 @@ Missing field or bad value
 
 ```
 {
-    "timestamp": 1579697549062,
-    "message": "Validation failed for argument at index 0 in method: public org.springframework.hateoas.Resource<io.grnry.harvester_api.harvesters.response.HarvesterResponse> io.grnry.harvester_api.harvesters.HarvesterController.addHarvester(io.grnry.harvester_api.harvesters.requests.HarvesterPostRequest), with 1 error(s): [Field error in object 'harvesterPostRequest' on field 'eventType.version': rejected value [null]; codes [NotNull.harvesterPostRequest.eventType.version,NotNull.eventType.version,NotNull.version,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [harvesterPostRequest.eventType.version,eventType.version]; arguments []; default message [eventType.version]]; default message [must not be null]] ",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'eventTyp.version' must not be null.",
     "details": "uri=/harvesters/instances"
 }
 ```
@@ -2345,11 +2358,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587304034881,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/instances"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -2361,8 +2373,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp":1586952816224,
-    "message":"Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details":"uri=/harvesters/instances"
 }
 ```
@@ -2376,7 +2389,8 @@ harvester name already exists
 ```
 {
     "timestamp": 1579697613983,
-    "message": "harvester instance with name harvester-post already exists ",
+    "type": "entity_already_exists",
+    "message": "Harvester 'harvester-post' already exists.",
     "details": "uri=/harvesters/instances"
 }
 ```
@@ -2581,8 +2595,9 @@ Missing parameter or parameter is invalid.
 
 ```
 {
-    "timestamp": 1580290821033,
-    "message": "displayName : string length must be between 3 and 60 but is 101",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'displayName' length must be between 3 and 60 characters but is 101 characters.",
     "details": "uri=/harvesters/instances/demo-set-all"
 }
 ```
@@ -2595,11 +2610,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587304034881,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/instances/adobe-s3-std"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -2611,8 +2625,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": 1580290961327,
-    "message": "Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details": "uri=/harvesters/instances/demo-set-all"
 }
 ```
@@ -2625,8 +2640,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": 1580291007569,
-    "message": "No harvester found with name 'demo-set-all'.",
+    "timestamp": 1587303625038,
+    "type": "entity_not_found",
+    "message": "Harvester 'demo-set-al' not found.",
     "details": "uri=/harvesters/instances/demo-set-al"
 }
 ```
@@ -2640,7 +2656,8 @@ Another harvester with provided `displayName` is already present.
 ```
 {
     "timestamp": 1580290695918,
-    "message": "harvester with displayName 'Harvester Post' already exists ",
+    "type": "entity_already_exists",
+    "message": "Harvester with displayName 'Harvester Post' already exists.",
     "details": "uri=/harvesters/instances/demo-set-all"
 }
 ```
@@ -2692,11 +2709,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587304034881,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/instances/adobe-s3-std"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -2708,8 +2724,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": 1580290961327,
-    "message": "Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details": "uri=/harvesters/instances/adobe-s3-std"
 }
 ```
@@ -2768,11 +2785,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587304034881,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/instances/adobe-s3-std/state"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/instances/adobe-s3-std/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -2784,8 +2800,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": 1580290961327,
-    "message": "Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details": "uri=/harvesters/instances/adobe-s3-std/state"
 }
 ```
@@ -2798,8 +2815,9 @@ Harvester not found.
 
 ```
 {
-    "timestamp": 1580291007569,
-    "message": "No harvester found with name 'demo-set-all'.",
+    "timestamp": 1587303625038,
+    "type": "entity_not_found",
+    "message": "Harvester 'adobe-s3-stdd' not found.",
     "details": "uri=/harvesters/instances/adobe-s3-stdd/state"
 }
 ```
@@ -2878,11 +2896,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587304034881,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/instances/adobe-s3-std"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -2894,8 +2911,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": 1580290961327,
-    "message": "Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details": "uri=/harvesters/instances/adobe-s3-std/state"
 }
 ```
@@ -2909,7 +2927,8 @@ Harvester not found.
 ```
 {
     "timestamp": 1580291007569,
-    "message": "No harvester found with name 'demo-set-all'.",
+    "type": "entity_not_found",
+    "message": "Harvester 'demo-set-all' not found.",
     "details": "uri=/harvesters/instances/adobe-s3-stdd/state"
 }
 ```
@@ -2923,7 +2942,8 @@ Failed to start.
 ```
 {
     "timestamp":1586952826375,
-    "message":"failed on start",
+    "type": "unexpected_error",
+    "message": "An unexpected error occurred.",
     "details":"uri=/harvesters/instances/fail-on-start/state"
 }
 ```
@@ -3016,8 +3036,9 @@ Invalid step-name.
 
 ```
 {
-    "timestamp": 1587304484537,
-    "message": "step-name : must be one of [sourceType, transform, metadataExtractor]",
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'step-name' must be one of [sourceType, transform, metadataExtractor] but is 'srcType'.",
     "details": "uri=/harvesters/instances/adobe-s3-std/logs/transformd"
 }
 ```
@@ -3030,11 +3051,10 @@ Token invalid or missing.
 
 ```
 {
-    "timestamp": 1587304456158,
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Unauthorized",
-    "path": "/harvesters/instances/adobe-s3-std/logs/transform"
+    "timestamp": 1587302709982,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/harvesters/instances/adobe-s3-std/logs/transform"
 }
 ```
 {% endapi-method-response-example %}
@@ -3046,8 +3066,9 @@ Missing roles to access this resource.
 
 ```
 {
-    "timestamp": 1580290961327,
-    "message": "Access is denied",
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
     "details": "uri=/harvesters/instances/adobe-s3-std/logs/transform"
 }
 ```
@@ -3060,8 +3081,9 @@ Harvester not found.
 
 ```
 {
-    "timestamp": 1587304521646,
-    "message": "no harvester-instance found with name = adobe-s3d-std",
+    "timestamp": 1587303625038,
+    "type": "entity_not_found",
+    "message": "Harvester 'adobe-s3-std' not found.",
     "details": "uri=/harvesters/instances/adobe-s3d-std/logs/transform"
 }
 ```

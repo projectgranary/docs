@@ -104,7 +104,12 @@ Access denied. Invalid token submitted.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/profiles"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -288,7 +293,12 @@ https://hostname/profiles/\_contract?pagesize=5
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/profiles"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -298,7 +308,12 @@ If given profile type is not found
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "entity_not_found",
+    "message": "Profiles with profileType '_contract' not found.",
+    "details": "uri=/profiles"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -472,7 +487,12 @@ https://hostname/profiles/\_interaction/Session56202
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/profiles"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -482,7 +502,12 @@ https://hostname/profiles/\_interaction/Session56202
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "entity_not_found",
+    "message": "Profile with correlationId 'Session56202' not found.",
+    "details": "uri=/profiles"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}

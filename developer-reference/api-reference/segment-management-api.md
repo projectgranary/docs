@@ -131,9 +131,9 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
 
 ```
 {
-    "timestamp": "2020-02-09T10:10:10.482",
-    "message": "Internal Server Error: Error",
-    "details": "cause",
+    "timestamp":1586949269381,
+    "type": "unexpected_error",
+    "message":"An unexpected error occured."
 }
 ```
 {% endapi-method-response-example %}
@@ -234,9 +234,9 @@ Authentication token required
 
 ```
 {
-    "timestamp": "2020-03-19T11:07:24+01:00",
-    "message": "Forbidden: Could not access segment with name demo-segment-95he0",
-    "details": null
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
 }
 ```
 {% endapi-method-response-example %}
@@ -248,9 +248,9 @@ Authentication token required
 
 ```
 {
-    "timestamp": "2020-02-09T10:10:10.482",
-    "message": "Internal Server Error: Error",
-    "details": "cause",
+    "timestamp":1586949269381,
+    "type": "unexpected_error",
+    "message":"An unexpected error occured."
 }
 ```
 {% endapi-method-response-example %}
@@ -374,9 +374,9 @@ description: optional
 
 ```
 {
-    "timestamp": "2020-03-19T11:09:36+01:00",
-    "message": "Bad Request: metadata.displayName cannot be empty and needs to be between 4 - 129 characters",
-    "details": null
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'metadata.displayName' must not be empty."
 }
 ```
 {% endapi-method-response-example %}
@@ -388,9 +388,9 @@ description: optional
 
 ```
 {
-    "timestamp": "2020-03-19T11:09:36+01:00",
-    "message": "Segment already exists.",
-    "details": null
+    "timestamp": 1587303130850,
+    "type": "entity_already_exists"
+    "message": "Segment 'Demo Segment' already exists.",
 }
 ```
 {% endapi-method-response-example %}
@@ -402,9 +402,9 @@ description: optional
 
 ```
 {
-    "timestamp": "2020-02-09T10:10:10.482",
-    "message": "Internal Server Error: Error",
-    "details": "cause",
+    "timestamp":1586949269381,
+    "type": "unexpected_error",
+    "message":"An unexpected error occured."
 }
 ```
 {% endapi-method-response-example %}
@@ -526,9 +526,9 @@ Overwrites `displayName` and `description`.
 
 ```
 {
-    "timestamp": "2020-03-19T11:13:06+01:00",
-    "message": "Bad Request: metadata.displayName cannot be empty and needs to be between 4 - 129 characters",
-    "details": null
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'metadata.displayName' must not be empty."
 }
 ```
 {% endapi-method-response-example %}
@@ -540,9 +540,9 @@ Overwrites `displayName` and `description`.
 
 ```
 {
-    "timestamp": "2020-03-19T11:14:04+01:00",
-    "message": "Forbidden: not allowed to update segment demo-segment-95sdf, no roles set",
-    "details": null
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
 }
 ```
 {% endapi-method-response-example %}
@@ -554,9 +554,9 @@ Overwrites `displayName` and `description`.
 
 ```
 {
-    "timestamp": "2020-03-19T11:12:45+01:00",
-    "message": "Not Found: cannot update non existing segment with id: demo-segment-95sdf",
-    "details": null
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Segment with ID 'demo-segment-95he0' not found."
 }
 ```
 {% endapi-method-response-example %}
@@ -568,9 +568,9 @@ Overwrites `displayName` and `description`.
 
 ```
 {
-    "timestamp": "2020-02-09T10:10:10.482",
-    "message": "Internal Server Error: Error",
-    "details": "cause",
+    "timestamp":1586949269381,
+    "type": "unexpected_error",
+    "message":"An unexpected error occured."
 }
 ```
 {% endapi-method-response-example %}
@@ -621,9 +621,9 @@ Authentication token required.
 
 ```
 {
-    "timestamp": "2020-03-19T11:14:04+01:00",
-    "message": "Forbidden: not allowed to delete segment with id: demo-segment-95sdf",
-    "details": null
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
 }
 ```
 {% endapi-method-response-example %}
@@ -635,9 +635,9 @@ Authentication token required.
 
 ```
 {
-    "timestamp": "2020-02-09T10:10:10.482",
-    "message": "Internal Server Error: Error",
-    "details": "cause",
+    "timestamp":1586949269381,
+    "type": "unexpected_error",
+    "message":"An unexpected error occured."
 }
 ```
 {% endapi-method-response-example %}

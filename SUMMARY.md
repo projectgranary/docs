@@ -61,6 +61,7 @@
   * [Belt API](developer-reference/api-reference/belt-api.md)
   * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
   * [Segment Management API](developer-reference/api-reference/segment-management-api.md)
+  * [API Error Codes](developer-reference/api-reference/api-error-codes.md)
   * [Lineage Report](developer-reference/api-reference/lineage-report.md)
 
 ## Operator Reference

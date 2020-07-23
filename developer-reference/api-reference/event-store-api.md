@@ -137,7 +137,12 @@ Returned in case of invalid parameter\(s\).
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'correlationId' must not be null.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -147,7 +152,12 @@ Access denied. Invalid or no token submitted.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -157,7 +167,12 @@ Returned when a user is not authorized to retrieve these events.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -167,7 +182,12 @@ Returned when no event was found, along with empty result set.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "entity_not_found",
+    "message": "Events with correlationId 'cookie123' not found.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -233,7 +253,12 @@ Returned in case of invalid parameter\(s\).
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'correlationId' must not be null.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -243,7 +268,12 @@ Access denied. Invalid or no token submitted.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -253,7 +283,12 @@ Returned when the request to retrieve the events is unauthorized.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -263,7 +298,12 @@ Returned when the requested object cannot be found.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "entity_not_found",
+    "message": "Event with correlationId 'cookie123' not found.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -407,7 +447,12 @@ Number of elements to be shown. Defaults to 20.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 
@@ -417,7 +462,12 @@ If there were no events with given event type found.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": 1587302499600,
+    "type": "entity_not_found",
+    "message": "Events with Event Type 'web' not found.",
+    "details": "uri=/events"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
