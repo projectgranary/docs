@@ -53,6 +53,12 @@ Finally, here are some tips and tricks on how to model the profile store. We pro
 
 * Link different entities together using the semantic  _\_id@profiletype@profilestore_
 * Make use of arrays and counters
-  * [Arrays ](../../../developer-reference/dataflow/profile-store/#arrays)help you in storing multiple information within one grain, such as a number of favourite colours or certain preferences.
+  * [Arrays ](../../../developer-reference/dataflow/profile-store/#arrays)help you storing multiple values within one grain, such as a number of favourite colours or certain preferences. Be aware that the time it takes to update an array will increase with the array size. Very big arrays \(&gt; 1 mb\) may slow down the overall performance of the profile update component. If your data would result is such arrays, please consider splitting it into individual grains and do NOT use the array data type.
   * [Counters](../../../developer-reference/dataflow/profile-store/#counter) help you in keeping track of countable events, such as how many times a certain website has been visited. You should be aware that counters do not necessarily have to be integers.
+
+{% hint style="danger" %}
+Large number of values in arrays \(&gt; 1 mb\) cause the profile updater to drastically slow down. Such long running operations are logged and also metrics are available.
+{% endhint %}
+
+
 

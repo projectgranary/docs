@@ -266,6 +266,10 @@ For arrays, Granary offers operations for the in-place modification of grain val
 
 On an array modifications, existing grain value meta data \(`_reader, _ttl, _origin, _c`\) remain unchanged. The insertion time \(`_in`\) is updated.
 
+{% hint style="info" %}
+Be aware that all array operations have  O\(n\) characteristics \(n = size of the existing array, not just the number of elements you want to add/to set\). If you create arrays with 1000++ elements, these updates will take significantly longer than other operations, which can slow down the processing of certain partitions \(resulting in lags on these partitions when a high volume of data ist processed\).
+{% endhint %}
+
 See [https://gitlab.alvary.io/grnry/kafka-profile-update](https://gitlab.alvary.io/grnry/kafka-profile-update)
 
 ### Profile Update Prioritization / Throtteling
@@ -413,7 +417,7 @@ Conditions:
 
 Although `AbleToScale`  and `ScalingActive` are set `True`, it will take 5 minutes by default to trigger on conditions after initial deploy of the HPA definition. Scaling on processing lag is now working and will scale the deployment as soon as the offset of 1000 messages in processing is reached.
 
-### Dead letter queue
+### Dead Letter Queue \(DLQ\)
 
 In GRNRY, we have created so called _dead letter queues_. The Profile Updater's dead letter queue is used to receive all the data that could not be processed correctly.
 
@@ -429,7 +433,7 @@ In order to rename it one must change the helm deployment parameter:
 kafka.deadLetterTopic: "profile-update-dead-letter"
 ```
 
-#### When is something written to the Dead Letter Queue?
+#### When is Something Written to the Dead Letter Queue?
 
 Profile Updater writes profile update messages to dead letter queue in case:
 
@@ -438,9 +442,48 @@ Profile Updater writes profile update messages to dead letter queue in case:
   * operation is one of `array_append`, `_array_append_with_history`, `_array_put`, `_array_put_with_history` but grain value \(`_v`\) is not an array
   * operation is one of `_array_remove`, `_array_remove_with_history`, `_set_min`, `_set_max`, `_set_min_with_history`, `_set_max_with_history` but grain value \(`_v`\) is not a string
   * operation is`_delete`  but grain value \(`_v`\) is not the empty string \(`""`\) or an array of pits
+* correlationId \(\_id\) is an empty string \(""\)
 * certainty \(`_c`\) is not between 0 and 1
 * creation timestamp \(`_in`\) is negative
 * time to live \(`_ttl`\) does not comply ISO 860 time period
 * time to live \(`_ttl`\) contains a negative number
 * an update is made and the grain type in the profile update contains a grain type that differs from existing grain type in Profile Store
+
+All failed updates sent to the DLQ will be annotated with two additional headers:
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Header</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">grnry-exception-message</td>
+      <td style="text-align:left">
+        <p>A descriptive text why that operation was sent to the DLQ.
+          <br />Examples:</p>
+        <p><code>&quot;Value must be an Array&quot; or &quot;_v can not be null&quot;</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">grnry-exception-stacktrace</td>
+      <td style="text-align:left">Full stack trace of the exception for further analysis</td>
+    </tr>
+  </tbody>
+</table>
+
+### Handling of Unexpected Exceptions
+
+The previous paragraph described the extensive checks that will be applied either before all or after **failed** executions. If any of the checks fails, the update message will simply be sent to the DLQ. But besides these known \(hence expected\) exceptions, other failures might occur \(e.g. database is unavailable, corrupt tables or implementation errors\). By default, the Profile-Updater will retry operations that are failing due to an unexpected exception over and over again with exponential back-off. Accordingly, if the database is temporarily unavailable, the operation should succeed as soon as it is available again. But if the failure is of permanent nature \(like an implementation error\), the profile updater would try to execute the operation indefinitely, blocking the processing of this partition.
+
+The retry behavior can be configured in a way that the Profile Updater will handle failed update messages by sending them to the dead letter queue straight away \(annotated with an exception message and the stacktrace\), instead of entering an infinite retry loop. \(See helm chart documentation.\)
+
+### Handling of Very Long Running Executions
+
+The execution of some operations can take significantly longer if they operate on very big grain values \(e.g. arrays\). You can configure the profile updater to log warnings on long running operations \(default: 1000 ms\) and there are also execution times metrics \(per operation\) available in Prometheus/Grafana to monitor the overall performance/throughput.
+
+As long as the execution time stays below the value set in your  `max.poll.interval.ms` Kafka consumer configuration \(`300000 ms` by default\), operations might take longer, but will eventually succeed. If, on the other hand, the execution time exceeds this value, the operation can no longer be executed successfully and it will result in an endless retry loop, regardless of the selected mode for unexpected exceptions \(re-try vs. sent to DLQ\). In that case you would have to increase your  `max.poll.interval.ms` value.
 
