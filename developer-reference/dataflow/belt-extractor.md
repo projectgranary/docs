@@ -20,15 +20,9 @@ They are defined by a label, a scale factor, an input topic and a stateless/serv
 
 ## Input Topics 
 
-Valid input topics for a 
+Valid input topics for a belt are one or many `grnry_data_in_...` topics which have been created by the chosen Event Type.
 
-`['grnry_data_in_...', 'grnry_data_in_...', ...]`
-
-## Callback Signature
-
-### Single payload processing 
-
-`execute(event_headers, event_payload[, profile])`
+A sample event in those topics looks has got these headers and this event payload:
 
 {% tabs %}
 {% tab title="Spec" %}
@@ -48,11 +42,18 @@ Valid input topics for a
 | $$-$$ collector | identifies the source platform of the event |
 | $$-$$ body | Snowplow Event Data \(according to `schema`\) |
 | $$-$$ headers | HTTP headers |
-| **profile** | A profile fetched from [profile store](profile-store/). Only provided if `fetch profile` in [belt definition](../api-reference/belt-api.md) is set to`true.` |
 {% endtab %}
+{% endtabs %}
 
-{% tab title="Example" %}
-```python
+## Callback Signature
+
+### Single payload processing 
+
+`execute(event_headers, event_payload[, profile])`
+
+where `profile` is a profile fetched from [Profile Store](profile-store/). This is only provided if `fetchProfile` in [Belt definition](../api-reference/belt-api.md#create-and-store-a-belt) is set to `true`.
+
+```yaml
 event_headers = {
 			"grnry-event-type":"...",
 			"grnry-event-id":"...",
@@ -142,8 +143,6 @@ profile = {
   }
 }
 ```
-{% endtab %}
-{% endtabs %}
 
 ### Multiple payloads/batch data processing
 
@@ -641,6 +640,10 @@ extraEnv:
 The Belt Extractor writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are not written into dead letter queue. Such errors will only be logged and the exception counter is increased.
 
 ## Output Topic `'profile-update'`
+
+{% hint style="info" %}
+Messages in the `profile-update` topic have additionally to the headers defined in [input topics](belt-extractor.md#input-topics) section a `grnry-belt-id`header, containing the ID of the Belt that emitted that event.
+{% endhint %}
 
 {% tabs %}
 {% tab title="Spec" %}
