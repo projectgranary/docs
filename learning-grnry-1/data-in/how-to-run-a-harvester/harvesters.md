@@ -339,7 +339,7 @@ A harvester instance can be in one of the following states:
 | :--- | :--- |
 | **RUNNING** | The instance is currently running and operational. |
 | **DEPLOYING** | The instance is currently deployed. |
-| **RUNNING\_BUT\_OUTDATED** | The instance is currently running but there were configuration changes \(updates\) made to this harvester so it has to be stopped + started for them to become effective. |
+| **RUNNING\_BUT\_OUTDATED** | The instance is currently running but there were configuration changes \(updates\) made to the definition of this harvester. The harvester will also be considered outdated, if the event type version in the harvester definition is `latest` and a new version of the event type has been published. The running harvester has to be restarted to apply these changes. |
 | **FAILED** | The instance failed to deploy. |
 | **STOPPING** | The instance is currently being stopped. |
 | **STOPPED** | The instance has stopped. |
