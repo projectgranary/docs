@@ -22,7 +22,7 @@ They are defined by a label, a scale factor, an input topic and a stateless/serv
 
 Valid input topics for a belt are one or many `grnry_data_in_...` topics which have been created by the chosen Event Type.
 
-A sample event in those topics looks has got these headers and this event payload:
+Messages in those input topics consist of event headers and an event payload specified as follows:
 
 {% tabs %}
 {% tab title="Spec" %}
@@ -642,7 +642,7 @@ The Belt Extractor writes events to dead letter queue in case of exceptions are 
 ## Output Topic `'profile-update'`
 
 {% hint style="info" %}
-Messages in the `profile-update` topic have additionally to the headers defined in [input topics](belt-extractor.md#input-topics) section a `grnry-belt-id`header, containing the ID of the Belt that emitted that event.
+Messages in the `profile-update`topic contain a `grnry-belt-id` header besides the zipkin tracing headers. The grnry-headers defined in [input topics](belt-extractor.md#input-topics) section will only be forwarded in case the belt is consuming from a multi-payload kafka topic.
 {% endhint %}
 
 {% tabs %}
