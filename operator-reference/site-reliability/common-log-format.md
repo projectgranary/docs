@@ -146,6 +146,12 @@ logstashPipeline:
     filter {
       grok {
         match => { "message" => "%{TIMESTAMP_ISO8601:timestamp} *%{LOGLEVEL:level} \[%{DATA:application},%{DATA:X-B3-TraceId},%{DATA:X-B3-SpanId},%{DATA:X-Span-Export}] %{DATA:pid} --- *\[%{DATA:thread}] %{DATA:class} *: %{GREEDYDATA:log-message}" }
+        match => { "message" => "\[%{TIMESTAMP_ISO8601:timestamp}\] %{LOGLEVEL:loglevel} \[(?<logger>[^\]]+)\] %{GREEDYDATA:message}" }
+        match => { "message" => "\[%{TIMESTAMP_ISO8601:timestamp}\] %{LOGLEVEL:loglevel} %{GREEDYDATA:message}" }
+        match => { "message" => "%{DATESTAMP:timestamp} %{TZ} \[%{POSINT:pid}\] %{GREEDYDATA:message}" }
+        match => { "message" => "%{TIME:timestamp} %{LOGLEVEL:loglevel}  \[%{DATA:logger}\] %{GREEDYDATA:message}" }
+        match => { "message" => "%{IPORHOST:remote_addr} - %{USERNAME:remote_user} \[%{HTTPDATE:time_local}\] \"%{DATA:request}\" %{INT:status} %{NUMBER:bytes_sent} \"%{DATA:http_referer}\" \"%{DATA:http_user_agent}\"" }
+        match => { "message" => "%{TIMESTAMP_ISO8601:timestamp}    %{LOGLEVEL:loglevel}    %{USERNAME:logger}    %{GREEDYDATA:loggerpackage}    %{GREEDYDATA:message}" }
       }
     }
     output { elasticsearch { hosts => ["http://elasticsearch-master:9200"] index => "%{[@metadata][beat]}-cra-%{[@metadata][version]}" } }

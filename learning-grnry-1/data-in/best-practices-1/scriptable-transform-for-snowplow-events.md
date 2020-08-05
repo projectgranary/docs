@@ -221,7 +221,7 @@ if (event.body && event.body.data && event.body.data[0]
         result = eventString;
     }
 }
-result
+result;
 ```
 {% endtab %}
 {% endtabs %}
