@@ -80,6 +80,8 @@ Example role: `snowplow-a_snowplow-a-std-harvester_read` if the event type name 
 
 ### jdbc-api \(a.k.a. Segment Store API\)
 
+#### Access PostgreSQL
+
 Requests user's access rights to view certain parts of segments and enables technical users to access segment tables for OLAP queries. A jdbc-api role has the following structure  `<catalog>.<schema>.<table>.<column>`.
 
 The following roles are required to view meta information
@@ -93,9 +95,21 @@ The following roles are required to view meta information
 * `system.jdbc.tables`
 * `system.jdbc.schemas`
 
-The following role structure needs to be added for each segment the user needs to access.
+The following role structure needs to be added for each segment the user needs to access:
 
 `postgresql.segments.<segment name>`
 
 Example role for viewing a segment: `postgresql.segments.profiles_seg1` if the segment table name is `profiles_seg1`.
+
+#### Access Kafka Topics
+
+Basicly every kafka topic can be accessed when registered in Presto. To access Kafka Topics, the following role structure needs to be added:
+
+`grnry-kafka.default.<TOPIC_NAME>`
+
+Example role to view access Kafka messages of an Event Type's topic:   
+`grnry-kafka.default.grnry_data_in_<EVENT_TYPE>`
+
+or to view its DLQ \(dead letter queue\):  
+`grnry-kafka.default.grnry_harvester_dlq_<EVENT_TYPE>`
 
