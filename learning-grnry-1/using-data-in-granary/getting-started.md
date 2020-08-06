@@ -97,7 +97,7 @@ By clicking "Create Belt", the Belt is being created and we are being redirected
 Do not forget to hit the "Save" button.
 {% endhint %}
 
-The next step is to provide the required configurations for the Belt to run. Starting from the "Event Types", here we provide the Kafka topics to read from, it can be either one topic or multiple. The attribute "Fetch Profile" is whether to get the profile with matching `profile_type` and `correlation_id` from the Profile Store. Here we have three possibilities, which are explained in detail [here](https://gitlab.alvary.io/grnry/belt-extractor). In case the "Fetch Profile" is set to `true` or `lazy`, we need to provide the Kubernetes secrets containing the username and password for Profile Store API. The secret's keys for username and password properties can be configured as well. All these properties can be seen here:
+The next step is to provide the required configurations for the Belt to run. Starting from the "Event Types", here we provide the Kafka topics to read from, it can be either one topic or multiple. The attribute "Fetch Profile" is whether to get the profile with matching `profile_type` and `correlation_id` from the Profile Store. Here we have three possibilities, which are explained in detail on Belt Extractor page within the Data Flow documentation. In case the "Fetch Profile" is set to `true` or `lazy`, we need to provide the Kubernetes secrets containing the username and password for Profile Store API. The secret's keys for username and password properties can be configured as well. All these properties can be seen here:
 
 ![](../../.gitbook/assets/ui_config.png)
 

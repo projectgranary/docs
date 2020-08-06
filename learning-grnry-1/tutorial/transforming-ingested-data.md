@@ -182,8 +182,8 @@ With a Status `200 OK`, the return body looks like this:
             "containerStatus": [
                 {
                     "containerID": "docker://ee7237f426a57b68f753e205868ad9b3ff72d69d304d1c86b2e72f00ee7e091f",
-                    "image": "gitlab.alvary.io:5000/grnry/belt-extractor:0.8.1",
-                    "imageID": "docker-pullable://gitlab.alvary.io:5000/grnry/belt-extractor@sha256:8fd67bf65b27a2028bb2371d6e5abc7ed52db42d2ada49fbd4f3ef568256de3b",
+                    "image": "hub.syncier.cloud/grnry/belt-extractor:0.8.1",
+                    "imageID": "docker-pullable://hub.syncier.cloud/grnry/belt-extractor@sha256:8fd67bf65b27a2028bb2371d6e5abc7ed52db42d2ada49fbd4f3ef568256de3b",
                     "lastState": {},
                     "name": "grnry-belt-35",
                     "ready": true,

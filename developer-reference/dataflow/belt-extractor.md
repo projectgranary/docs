@@ -518,7 +518,7 @@ The name of the Kafka topic this Belt will receive events from. Topics are typic
 
 The Python code provided here has to be in the form of a function by the name **callback.py** that can be invoked using the signature `execute(event_headers, event_payload)`where the parameter `event_payload` and `event_headers`are both a Python dictionary containing one event/header from the input topic or a list of dictionaries containing multiple events/headers.
 
-The function can return either `None` , `[]`  or a list of [Update ](https://gitlab.alvary.io/grnry/belt-extractor/blob/master/grnry/beltextractor/update.py)objects representing an update to a profile in the profile store. If the return is not an Update object the belt will continue with the next message. In case it is, the object needs to be following below schema:
+The function can return either `None` , `[]`  or a list of Update objects representing an update to a profile in the profile store. If the return is not an Update object the belt will continue with the next message. In case it is, the object needs to be following below schema:
 
 ```text
 UPDATE :=
@@ -647,7 +647,7 @@ Messages in the `profile-update`topic contain a `grnry-belt-id` header besides t
 
 {% tabs %}
 {% tab title="Spec" %}
-see [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md)
+see [Profile specification](https://github.com/syncier/grnry-kafka-profile-update/blob/master/PROFILESPECS.md)
 
 | Key | Description |
 | :--- | :--- |

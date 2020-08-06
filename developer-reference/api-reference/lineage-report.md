@@ -12,7 +12,7 @@ Uses Granary's APIs to export information from Profile Store as well as Event St
 
 ## Usage
 
-The code can be obtained from the [Granary Lineage Report Service repository](https://gitlab.alvary.io/grnry/grnry-lineage-report). For service execution, a Python 3.7 distribution and access to Granary APIs are required. To start the service, run
+The code can be obtained from the [Granary Lineage Report Service repository](https://github.com/syncier/grnry-lineage-report). For service execution, a Python 3.7 distribution and access to Granary APIs are required. To start the service, run
 
 ```text
     ./gen_lineage_report.py

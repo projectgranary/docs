@@ -3,8 +3,7 @@
 ## Chart Home
 
 {% hint style="info" %}
-See for full documentation of all parameters:  
-[https://gitlab.alvary.io/grnry/harvester-api/tree/master/helm](https://gitlab.alvary.io/grnry/harvester-api/tree/master/helm)
+See [Helm Chart's README.md](https://github.com/syncier/grnry-harvester-api/tree/master/helm) for full documentation of all parameters.
 {% endhint %}
 
 ## Prerequisits
@@ -44,6 +43,6 @@ $ helm upgrade grnry-harvester-api \
 Tear down Helm Chart:
 
 ```text
-$ helm delete --purge grnry-harvester-api
+$ helm delete grnry-harvester-api
 ```
 

@@ -3,8 +3,7 @@
 ## Chart Home
 
 {% hint style="info" %}
-See for full documentation of all parameters:  
-[https://github.com/Alvary/charts/tree/master/incubator/citus-postgresql](https://github.com/Alvary/charts/tree/master/incubator/citus-postgresql)
+See [Helm Chart's README.md](https://github.com/syncier/grnry-citus) for full documentation of all parameters.
 {% endhint %}
 
 ## Setup
@@ -12,7 +11,7 @@ See for full documentation of all parameters:
 Install Helm Chart:
 
 ```
-$ helm install grnry-stable/citus-postgresql \
+$ helm install grnry-oss/citus-postgresql \
     --name grnry-citus-postgresql \
     --version <version> \
     -f ./grnry-citus-postgresql-values.yaml
@@ -28,7 +27,7 @@ Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-citus-postgresql \
-    grnry-stable/citus-postgresql \
+    grnry-oss/citus-postgresql \
     --version <version> \
     -f ./grnry-citus-postgresql-values.yaml
 ```
@@ -36,6 +35,6 @@ $ helm upgrade grnry-citus-postgresql \
 Tear down Helm Chart:
 
 ```text
-$ helm delete --purge grnry-citus-postgresql
+$ helm delete grnry-citus-postgresql
 ```
 

@@ -58,7 +58,7 @@ There are parameters to define **indexes** on the resulting segment. Note that c
 
 ### Segment Views
 
-There are parameters to define **views** on the resulting segment. [See readme](https://gitlab.alvary.io/grnry/segment-table-creation/#views). These views can be used to enforce access regulations. Consider profiles with an `/isLocked` grain set to `true` or `false`  as an example. Then, a segment on such profile can contain that grain, which is further used define two complementary views -- one containing _unlocked_ profiles and a second containing _locked_ profiles. 
+There are parameters to define **views** on the resulting segment. These views can be used to enforce access regulations. Consider profiles with an `/isLocked` grain set to `true` or `false`  as an example. Then, a segment on such profile can contain that grain, which is further used define two complementary views -- one containing _unlocked_ profiles and a second containing _locked_ profiles. 
 
 For this example, the respective configuration could look as follows:
 
@@ -214,7 +214,7 @@ The pivot generator presupposes that the following input columns are present in 
 
 `value` \(jsonb\)
 
-As an example see the profile store: [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/README.md\#L28](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/README.md#L28)
+As an example see the ProfileStore:
 
 ```text
 correlation_id varchar NOT NULL,

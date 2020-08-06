@@ -17,13 +17,12 @@ This model allows to create Segment Custom Resources via the K8s API or use the 
 The Segment Manager uses these [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to create a Segment CronJob equal to using the Segment Table Creation script directly via helm.
 
 
-
 ## Model SegmentSpec
 
-The `SegmentSpec` is an object with following attributes `cronjob`, `env`, `envFromSecrets` and `image` . Each attribute is an object itself described below. All optional attributes can be set via [env variables ](https://gitlab.alvary.io/grnry/segment-manager/-/blob/master/pkg/apis/segment/v1alpha1/envs.go)in the Segment Manager to overwrite the defaults.
+The `SegmentSpec` is an object with following attributes `cronjob`, `env`, `envFromSecrets` and `image` . Each attribute is an object itself described below. All optional attributes can be set via environment variables in the Segment Manager to overwrite the defaults.
 
 {% hint style="info" %}
-An example SegmentSpec can be found [here](https://gitlab.alvary.io/grnry/segment-manager/-/blob/master/deploy/crds/segment.grnry.io_v1alpha1_segment_cr.yaml) .
+An example SegmentSpec can be found [here](https://github.com/syncier/grnry-segment-manager/blob/master/deploy/crds/segment.grnry.io_v1alpha1_segment_cr.yaml).
 {% endhint %}
 
 ### Cronjob
@@ -129,14 +128,14 @@ Consult [Segment Table Creation](segment-table-creation.md#configure) what these
 ### Image
 
 {% hint style="info" %}
-For information regarding these attributes consult the[ Kubernetes Docs](https://kubernetes.io/docs/concepts/containers/images/). 
+For information regarding these attributes consult the [Kubernetes Docs](https://kubernetes.io/docs/concepts/containers/images/). 
 {% endhint %}
 
 | Attribute | Default | Required/Optional |
 | :--- | :--- | :--- |
 | pullPolicy | IfNotPresent | Optional |
 | pullSecrets | grnry-base-private-registry-token | Optional |
-| repository | gitlab.alvary.io:5000/grnry/segment-table-creation | Optional |
+| repository | hub.syncier.cloud/grnry/segment-table-creation | Optional |
 | restartPolicy | OnFailure | Optional |
 | tag | 0.7.0 | Optional |
 
@@ -146,7 +145,3 @@ For information regarding these attributes consult the[ Kubernetes Docs](https:/
 
 * [https://github.com/operator-framework/operator-sdk](https://github.com/operator-framework/operator-sdk)
 * [https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-* [https://gitlab.alvary.io/grnry/segment-manager](https://gitlab.alvary.io/grnry/segment-manager)
-
-
-

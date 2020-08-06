@@ -2,9 +2,10 @@
 
 ## Chart Home
 
+The Segment Store API is based on [Presto SQL](https://prestosql.github.io/docs.prestosql.io/339/).
+
 {% hint style="info" %}
-See for full documentation of all parameters:  
-[https://gitlab.alvary.io/grnry/presto-access-control/tree/master/helm](https://gitlab.alvary.io/grnry/presto-access-control/tree/master/helm)
+See [Helm Chart's README.md](https://github.com/syncier/grnry-presto-access-control/tree/master/helm) for full documentation of all parameters.
 {% endhint %}
 
 ## Setup
@@ -36,7 +37,7 @@ $ helm upgrade grnry-segmentstore-api \
 Tear down Helm Chart:
 
 ```text
-$ helm delete --purge grnry-segmentstore-api
+$ helm delete grnry-segmentstore-api
 ```
 
 ### Access to Kafka topics

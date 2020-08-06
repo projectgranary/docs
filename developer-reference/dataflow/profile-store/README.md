@@ -10,8 +10,6 @@ The Profile Store holds integrated data for entities in so-called profiles. Such
 
 A profile is a JSON document. A profile consists of fragments and grains. Fragments group other fragments and grains. Grains store the information at different points in time. Grain values carry the actual value and respective meta information.
 
-[https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md\#profile-specification](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md#profile-specification)
-
 ## Table `profilestore`
 
 The profile store is a distributed table in a database. Each tuple in that table represents some profile's grain at some point in time. A query to the `profilestore` table therefore retrieves a single grain value's information. The full nested JSON data structure that complies with above linked specification must be pulled via the Profile API.
@@ -222,7 +220,7 @@ The profile store is a distributed table in a database. Each tuple in that table
 
 ## Component `Profile Updater`
 
-Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store. These Profile Updates must follow the specification in [https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md\#profile-update-specification](https://gitlab.alvary.io/grnry/kafka-profile-update/blob/master/PROFILESPECS.md#profile-update-specification). Currently there are the following operations:
+Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store. These Profile Updates must follow the [Profile specification](https://github.com/syncier/grnry-kafka-profile-update/blob/master/PROFILESPECS.md). Currently there are the following operations:
 
 #### Update Operations
 
@@ -269,8 +267,6 @@ On an array modifications, existing grain value meta data \(`_reader, _ttl, _ori
 {% hint style="info" %}
 Be aware that all array operations have  O\(n\) characteristics \(n = size of the existing array, not just the number of elements you want to add/to set\). If you create arrays with 1000++ elements, these updates will take significantly longer than other operations, which can slow down the processing of certain partitions \(resulting in lags on these partitions when a high volume of data ist processed\).
 {% endhint %}
-
-See [https://gitlab.alvary.io/grnry/kafka-profile-update](https://gitlab.alvary.io/grnry/kafka-profile-update)
 
 ### Profile Update Prioritization / Throtteling
 

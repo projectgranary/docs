@@ -1,5 +1,5 @@
 ---
-description: API to manage segment jobs via k8s custom resources.
+description: REST API to manage segment jobs via k8s custom resources.
 ---
 
 # Segment Management API
@@ -13,7 +13,7 @@ description: API to manage segment jobs via k8s custom resources.
 * DELETE /segments/{id}
 
 {% hint style="info" %}
-Feel free to check out the [openapi schema](https://gitlab.alvary.io/grnry/segment-management-api/-/blob/master/definitions/openapi.yaml).
+Feel free to check out the [openapi schema](https://github.com/syncier/grnry-segment-management-api/blob/master/definitions/openapi.yaml).
 {% endhint %}
 
 {% hint style="warning" %}
@@ -679,9 +679,4 @@ This section provides you with a sample object for the `data` attribute. All ava
     }
 }
 ```
-
-> For more information see:
->
-> * [https://gitlab.alvary.io/grnry/segment-manager](https://gitlab.alvary.io/grnry/segment-manager)
-> * [https://gitlab.alvary.io/grnry/segment-table-creation](https://gitlab.alvary.io/grnry/segment-table-creation)
 

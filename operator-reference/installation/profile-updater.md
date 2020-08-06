@@ -3,8 +3,7 @@
 ## Chart Home
 
 {% hint style="info" %}
-See for full documentation of all parameters:  
-[https://gitlab.alvary.io/grnry/kafka-profile-update/tree/master/helm](https://gitlab.alvary.io/grnry/kafka-profile-update/tree/master/helm)
+See [Helm Chart's README.md](https://github.com/syncier/grnry-kafka-profile-update/tree/master/helm) for full documentation of all parameters.
 {% endhint %}
 
 ## Setup
@@ -36,6 +35,6 @@ $ helm upgrade grnry-kafka-profile-update \
 Tear down Helm Chart:
 
 ```text
-$ helm delete --purge grnry-kafka-profile-update
+$ helm delete grnry-kafka-profile-update
 ```
 

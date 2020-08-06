@@ -14,7 +14,7 @@ cronjob:
   failedJobsHistoryLimit: 1
 
 image:
-  repository: gitlab.alvary.io:5000/grnry/segment-table-creation
+  repository: hub.syncier.cloud/grnry/segment-table-creation
   pullSecrets: grnry-base-private-registry-token
   restartPolicy: OnFailure
 

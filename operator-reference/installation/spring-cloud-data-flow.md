@@ -3,8 +3,7 @@
 ## Chart Home
 
 {% hint style="info" %}
-See for full documentation of all parameters:  
-[https://gitlab.alvary.io/grnry/docker-scdf/tree/master/helm](https://gitlab.alvary.io/grnry/docker-scdf/tree/master/helm)
+See [Helm Chart's README.md](https://github.com/syncier/grnry-docker-scdf/tree/master/helm) for full documentation of all parameters.
 {% endhint %}
 
 ## Setup
@@ -36,7 +35,7 @@ $ helm upgrade grnry-scdf \
 Tear down Helm Chart:
 
 ```text
-$ helm delete --purge grnry-scdf
+$ helm delete grnry-scdf
 ```
 
 ## Registering the GRNRY SCDF apps
@@ -61,10 +60,10 @@ https://<URL to SCDF>/apps/<type>/<name>/<version>
 In line 1 we define to create a cURL request using the POST method. After the `-u` parameter, we define the username and password, separated by a colon. The `-d` parameter is used to pass arguments to the URL. The argument is written in line 2 in this case. Here, we specify the location to the docker image built for SCDF and the metadata-jar \(probably located on a maven-compatible repository\). Both parameters need to be specified in a URL encoded format. A sample for the docker URL location can be found here:
 
 ```bash
-docker%3A%2F%2Fgitlab.alvary.io%3A5000%2Fgrnry%2Fscdf-apps%2Fgrnry-sftp-source%3Alatest
+docker%3A%2F%2Fhub.syncier.cloud%3A5000%2Fgrnry%2Fscdf-apps%2Fgrnry-sftp-source%3Alatest
 ```
 
-Unencoded this reads: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-sftp-source:latest`. 
+Unencoded this reads: `docker://hub.syncier.cloud/grnry/scdf-apps/grnry-sftp-source:latest`. 
 
 In line 3, we specify the URL where we register the application itself. First, we define the URL to SCDF. Afterwards we need to write apps to tell SCDF that this is about the apps in its registry. Now, we define the type of the app. This can be for example `source` , `processor` or `sink`. The parameter name then is defined by you. You can assign any name you like. All the components provided by GRNRY usually start with `grnry`. The parameter version is optional. It is possible in SCDF to register apps with different versions. In this case the version could be e.g. `0.5.0` or `latest`. A full example of the URL cood look like this:
 
@@ -87,28 +86,28 @@ Further information about using the API for apps can be found in the SCDF docume
 
 * Type: `sink`
 * name: **grnry-eventstore-batch-sink**
-* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-eventstore-batch-sink:<version>`
+* uri: `docker://hub.syncier.cloud/grnry/scdf-apps/grnry-eventstore-batch-sink:<version>`
 * metadata-uri: `maven://io.grnry.scdf-apps:grnry-eventstore-batch-sink:jar:metadata:<version>`
 
 ### Scriptable transform
 
 * Type: `processor`
 * name: **grnry-scriptable-processor**
-* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-scriptable-processor:<version>`
+* uri: `docker://hub.syncier.cloud/grnry/scdf-apps/grnry-scriptable-processor:<version>`
 * metadata-uri: `maven://io.grnry.scdf-apps:grnry-scriptable-processor:jar:metadata:<version>`
 
 ### Metadata extractor
 
 * Type: `processor`
 * name: **grnry-data-in-metadata-processor**
-* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-data-in-metadata-processor:<version>`
+* uri: `docker://hub.syncier.cloud/grnry/scdf-apps/grnry-data-in-metadata-processor:<version>`
 * metadata-uri: `maven://io.grnry.scdf-apps:grnry-data-in-metadata-processor:jar:metadata:<version>`
 
 ### Sessionizing
 
 * Type: `processor`
 * name: **grnry-sessionizing-processor**
-* uri: `docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-sessionizing-processor:<version>`
+* uri: `docker://hub.syncier.cloud/grnry/scdf-apps/grnry-sessionizing-processor:<version>`
 * metadata-uri: `maven://io.grnry.scdf-apps:grnry-sessionizing-processor:jar:metadata:<version>`
 
 ### Source Types

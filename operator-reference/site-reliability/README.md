@@ -6,11 +6,9 @@ description: >-
 
 # Site Reliability
 
-Content shall mostly come from [https://gitlab.alvary.io/grnry/scrum/issues/118](https://gitlab.alvary.io/grnry/scrum/issues/118) 
+These guides propose actions and procedures to avoid and \(if happened\) handle Granary component disasters. It discusses Keycloak \(the IAM tool\), Kafka \(message queue\), Postgres/Citus \(event and profile storage\), Kubernetes Probes, Logging as well as Belt development.
 
-This guide proposes actions and procedures to avoid and \(if happened\) handle Granary component disasters. It discusses Keycloak \(the IAM tool\), Kafka \(message queue\), Postgres/Citus \(event and profile storage\) as well as Belt development.
-
-Some of these actions are part of the standard Granary setup, mainly implemented in helm charts. Others need manual effort by the Granary Platform Administrator.
+Some of these actions are part of the standard Granary setup, mainly implemented in Helm Charts. Others need manual effort by the Granary Platform Administrator.
 
 Be aware of that reliable infrastructure cannot avoid human error. Therefore, make sure all component’s data additionally resides in backup storage.
 

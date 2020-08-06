@@ -125,5 +125,5 @@ dependencies {
 
 ## Deploying a custom Hook
 
-In order to a custom Hook, the Hook fatJar needs to be placed inside the hooks folder `/hooks` used by the Profile Store API's [Dockerfile](https://gitlab.alvary.io/grnry/profilestore-api/blob/master/Dockerfile#L22). A restart of component Profile Store API service with the updated docker image is necessary to use a Hook.
+In order to a custom Hook, the Hook fatJar needs to be placed inside the hooks folder `/hooks` used by the Profile Store API's Dockerfile. A restart of component Profile Store API service with the updated docker image is necessary to use a Hook.
 

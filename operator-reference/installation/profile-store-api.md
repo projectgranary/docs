@@ -3,8 +3,7 @@
 ## Chart Home
 
 {% hint style="info" %}
-See for full documentation of all parameters:  
-[https://gitlab.alvary.io/grnry/profilestore-api/tree/master/helm](https://gitlab.alvary.io/grnry/profilestore-api/tree/master/helm)
+See [Helm Chart's README.md](https://github.com/syncier/grnry-profilestore-api/tree/master/helm) for full documentation of all parameters.
 {% endhint %}
 
 ## Setup
@@ -36,7 +35,7 @@ $ helm upgrade grnry-profilestore-api \
 Tear down Helm Chart:
 
 ```text
-$ helm delete --purge grnry-profilestore-api
+$ helm delete grnry-profilestore-api
 ```
 
 ## Configuration

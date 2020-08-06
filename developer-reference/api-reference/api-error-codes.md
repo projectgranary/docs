@@ -15,4 +15,3 @@ All GRNRY APIs follow a unified, typed error model. See the following table for 
 | `entity_already_exists` | 409 | Harvester 'my-harvester' already exists. |
 | `entity_in_use` | 424 | Cannot delete Event Type 'my-type', it is still being referenced by belts \[..., ..., ..\]. |
 | `unexpected_error` | 500 | An unexpected error occurred. |
-

@@ -178,9 +178,9 @@ curl -X GET -H "Content-Type: application/json" \
         {
             "name": "grnry-http",
             "version": "0.6.0",
-            "description": "GRNRY http source https://gitlab.alvary.io/grnry/scdf-apps/tree/master/grnry-http-source",
+            "description": "GRNRY http source",
             "metadataUri": "maven://org.springframework.cloud.stream.app:http-source-kafka:jar:metadata:2.1.1.RELEASE",
-            "uri": "docker://gitlab.alvary.io:5000/grnry/scdf-apps/grnry-http-source:0.6.0",
+            "uri": "docker://hub.syncier.cloud/grnry/scdf-apps/grnry-http-source:0.6.0",
             "appConfig": {
                 "app.grnry-scriptable.spring.cloud.stream.bindings.output.producer.autoAddPartitions": true,
                 "app.grnry-scriptable.spring.cloud.stream.bindings.output.producer.partitionCount": 12
