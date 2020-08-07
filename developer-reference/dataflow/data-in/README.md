@@ -22,7 +22,7 @@ The Scriptable transform is the transformation, where you can implement your cus
 
 ### Metadata Extractor
 
-The metadata extractor extracts information, such as the correlation ID, the event type or the harvester name from the payload and sets it to the header fields. Here, you basically need to define mappings in SpEL. More information on the [metadata extractor](metadata-extractor.md).
+The metadata extractor extracts information, such as the correlation ID, the event type or the harvester name from the payload and sets it to the header fields. Here, you basically need to define mappings in Spring Expression Language. More information on the [metadata extractor](metadata-extractor.md).
 
 ### Sessionizing Processor
 

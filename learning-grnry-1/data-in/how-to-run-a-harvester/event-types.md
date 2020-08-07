@@ -15,7 +15,7 @@ Event Types categorize incoming data objects \(events\) by certain properties th
 Creating an event type is the initial step to import data into Granary.
 
 {% hint style="info" %}
-Before creating create a harvester, you need to specify the event type of the data that the harvester will import and also register a [source type](source-types.md) specifying a source app implementation.
+Before creating create a harvester, you need to specify the event type of the data that the harvester will import and also register a [source type](../../../operator-reference/installation/harvester-api/source-types.md) specifying a source app implementation.
 {% endhint %}
 
 An event type entity defines rules to extract metadata from incoming data objects. All objects \(json documents\) of the same event type share a common structure. A harvester will extract metadata from these json documents by using [json path evaluation](../best-practices-1/best-practices.md#simple-json-path-evaluations) of Spring Expression Language \([SpringEL](../best-practices-1/best-practices.md#spring-expression-language-spel)\). In case some metadata fields cannot be extracted from the data itself, you can set a [registered functions](../best-practices-1/best-practices.md#use-registered-functions) as the respective expression that generates a suiting value. For each Granary-header an expression needs to be provided.

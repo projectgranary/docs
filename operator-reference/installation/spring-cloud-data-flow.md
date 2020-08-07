@@ -69,7 +69,7 @@ In line 3, we specify the URL where we register the application itself. First, w
 
 ```text
 https://this.is.my.scdf.URL/apps/source/grnry-sftp/latest
-#https://<URL to SCDF     >/apps/<type>/<name    >/<version>
+#https://<URL to SCDF>/apps/<type>/<name>/<version>
 ```
 
 {% hint style="info" %}
@@ -80,7 +80,7 @@ If you wanted to register another component, just exchange the URL above. An ove
 
 Further information about using the API for apps can be found in the SCDF documentation here: [https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/\#resources-registered-applications](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#resources-registered-applications)
 
-## List of all mandatory scdf-apps
+## List of all mandatory SCDF apps
 
 ### Batch Persister \(postgres\)
 
@@ -112,5 +112,5 @@ Further information about using the API for apps can be found in the SCDF docume
 
 ### Source Types
 
-see [Source Types](../../developer-reference/dataflow/data-in/source-types.md) for a list and description of all available source types and [Source Types](../../learning-grnry-1/data-in/how-to-run-a-harvester/source-types.md) how to register them.
+see [Source Types](../../developer-reference/dataflow/data-in/source-types.md) for a list and description of all available source types and [Source Types](harvester-api/source-types.md) how to register them.
 

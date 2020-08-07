@@ -8,15 +8,15 @@ description: >-
 
 ## Prerequisites
 
-Before you can create a harvester, you need to define an [event type](event-types.md) that categorizes the data _structure_ you want to import and a[ source type ](source-types.md)that provides a source app matching your data _source_ \(s3 / jdbc / webservice\).
+Before you can create a harvester, you need to define an [event type](event-types.md) that categorizes the data _structure_ you want to import and a source type that provides a source app matching your data _source_ \(s3 / jdbc / webservice\).
 
 ## Harvester Definition
 
 A harvester is the importing unit of Granary. It consists of
 
-* a _source_, that collects data from an external data source and makes it available to Granary, 
-* a _transform step_, that translates the incoming data into json format, and 
-* a _metadata extractor_ step, that creates the Granary headers to allow further processing. 
+* a [_source_](../../../developer-reference/dataflow/data-in/source-types.md), that collects data from an external data source and makes it available to Granary, 
+* a [_transform step_](../../../developer-reference/dataflow/data-in/scriptable-transform.md), that translates the incoming data into json format, and 
+* a [_metadata extractor_ ](../../../developer-reference/dataflow/data-in/metadata-extractor.md)step, that creates the Granary headers to allow further processing. This step is configured within the event type.
 
 A harvester is event-type-bound and will only process data provided by a single source app.
 

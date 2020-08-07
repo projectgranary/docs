@@ -49,7 +49,7 @@ This section describes how to include the sessionizing processor in [API creatio
 ### Registering the SCDF app
 
 {% hint style="info" %}
-This section is an addition to [Getting Started](../how-to-run-a-harvester/getting-started.md), it will not explain in detail how to create a harvester, but only how to register the necessary application and how to add the additional parameters to a standard \(non-sessionizing\) harvester. 
+This section is an addition to [Getting Started](../../../operator-reference/installation/harvester-api/getting-started.md), it will not explain in detail how to create a harvester, but only how to register the necessary application and how to add the additional parameters to a standard \(non-sessionizing\) harvester. 
 {% endhint %}
 
 In order to add the additional step to your harvester definition, you need to register an scdf   

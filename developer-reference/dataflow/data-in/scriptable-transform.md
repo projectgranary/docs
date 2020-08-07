@@ -4,9 +4,13 @@ description: 'On this page, you get the technical details about our scriptable t
 
 # Scriptable Transform
 
+{% hint style="info" %}
+Refer to the [Granary Data-In Best Practices](../../../learning-grnry-1/data-in/best-practices-1/) to learn how to transform a source type's input to JSON format that is required by an Event Type.
+{% endhint %}
+
 The scriptable transform is a microservice, which should transform incoming data to your desired structure in JSON. You may do any kind of preprocessing here. This microservice receives coding in order to execute the transformation of your choice. It is based on the Scriptable Transform Processor of Spring and can take Groovy, JavaScript, Ruby or Python \(for Java\) as languages.
 
-The scriptable transform typically is the place where you need to write the most information and do mappings etc. his is the main enhancement point for you during the data-in pipeline. You are going to write a script in one of the defined languages for this. In this chapter: [How to test your developments](../../../learning-grnry-1/data-in/best-practices-1/how-to-unit-test-your-developments.md) we are showing you, how to write unit tests, which help you in writing your applications without having to deploy them to a cluster the whole time. 
+The scriptable transform typically is the place where you need to write the most information and do mappings etc. This is the main enhancement point for you during the data-in pipeline. You are going to write a script in one of the defined languages for this. In this chapter: [How to test your developments](../../../learning-grnry-1/data-in/best-practices-1/how-to-unit-test-your-developments.md) we are showing you, how to write unit tests, which help you in writing your applications without having to deploy them to a cluster the whole time. 
 
 In order to process the data within your script, there is the global variable `payload`. This variable holds the data you are getting from the outside and can be used within your function. Please note, that it is not possible to use more than one script, however you might define functions within your script, to which you refer.
 

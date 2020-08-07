@@ -51,7 +51,7 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/harvester-api.md"><b>Harvester API</b></a>&lt;b&gt;&lt;/b&gt;</td>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/harvester-api/"><b>Harvester API</b></a>&lt;b&gt;&lt;/b&gt;</td>
       <td
       style="text-align:left"><b>0.8.1</b>
         </td>
@@ -74,7 +74,7 @@ description: Denotes release versions of Granary artifacts.
       style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../../learning-grnry-1/data-in/how-to-run-a-harvester/getting-started.md">Spring Cloud Data Flow Apps</a>
+      <td style="text-align:left"><a href="../installation/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
       </td>
       <td style="text-align:left"><b>0.8.1</b>
       </td>

@@ -6,8 +6,8 @@ description: On this page you get the technical details about source types.
 
 Source types help you get data into the system. Source types exist for several different application types and are defined in the following. The source types mentioned here are the GRNRY specific source types. However, you may as well use the SCDF source types. For an overview of available source types you may refer to: [https://cloud.spring.io/spring-cloud-stream-app-starters/](https://cloud.spring.io/spring-cloud-stream-app-starters/)
 
-{% hint style="warning" %}
-All Source Types currently work only with one replica. Only exception is the Topic Source.
+{% hint style="info" %}
+Refer to the [Granary Data-In Best Practices](../../../learning-grnry-1/data-in/best-practices-1/) to learn how to transform a source type's input to JSON format that is required by an Event Type.
 {% endhint %}
 
 ### AWS S3 Source
@@ -271,4 +271,8 @@ A sample of the configuration of a Topic source could look like this:
 ```
 
 ### 
+
+{% hint style="warning" %}
+All Source Types currently work only with one replica. Only exception is the Topic Source.
+{% endhint %}
 

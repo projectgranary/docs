@@ -14,9 +14,9 @@ ALTER TABLE public.eventstore ADD COLUMN IF NOT EXISTS event_type_version bigint
 
 ### Install new Granary Components
 
-* [Harvester API](../installation/harvester-api.md)
-  * [Make sure to have registered SCDF Applications in SCDF Server before starting Harvester API](../../learning-grnry-1/data-in/how-to-run-a-harvester/getting-started.md)
-  * [Source Types need to be added manually via SQL](../../learning-grnry-1/data-in/how-to-run-a-harvester/source-types.md#registering-a-new-source-type)
+* [Harvester API](../installation/harvester-api/)
+  * [Make sure to have registered SCDF Applications in SCDF Server before starting Harvester API](../installation/harvester-api/getting-started.md)
+  * [Source Types need to be added manually via SQL](../installation/harvester-api/source-types.md#registering-a-new-source-type)
 * [Segment Manager](../installation/segment-manager.md)
 * [Segment Management API](../installation/segment-creation-api.md)
 * [Reaper](../installation/reaper.md)
