@@ -85,7 +85,7 @@ For ease of development and deployment of the Belts, the Granary platform includ
 
 ![](../../.gitbook/assets/grnryui.png)
 
-Clicking on the new Belt button leads us to the creation of a Belt which can be seen here: 
+Clicking on the new Belt button leads us to the creation of a Belt which can be seen here:
 
 ![](../../.gitbook/assets/ui_name.png)
 
@@ -117,7 +117,7 @@ After all the prerequisites for the Belt creation have been done, we can verify 
 
 ![](../../.gitbook/assets/ui_startbelt%20%281%29.png)
 
-We can go back on the main page and now see that our belt has been shifted to running mode. A Kubernetes pod would reflect this Belt in the Kubernetes cluster.  The Belt we just created can be seen to be running now:
+We can go back on the main page and now see that our belt has been shifted to running mode. A Kubernetes pod would reflect this Belt in the Kubernetes cluster. The Belt we just created can be seen to be running now:
 
 ![](../../.gitbook/assets/ui_beltrunning.png)
 

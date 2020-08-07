@@ -2,7 +2,7 @@
 
 ## Segment Creation Job
 
-This component generates so-called segments, which can be understood as \(materialized\) views on the data. Depending on the selected storage-layer, segments can be views or tables. The available storage layers are: 
+This component generates so-called segments, which can be understood as \(materialized\) views on the data. Depending on the selected storage-layer, segments can be views or tables. The available storage layers are:
 
 * Citus Data PostgreSQL 
 * Amazon Aurora PostgreSQL
@@ -20,32 +20,32 @@ The creation job runs in a container and can be deployed via helm chart:
 
 `helm install --name <your_name> grnry-stable/segment-table-creation -f <your-values>.yaml --namespace <your-namespace>`
 
-More detailed instructions can be found [here.](../../../operator-reference/installation/segment-table-creation.md) In the _values.yaml_ file configures segment creation parameters. `TYPE` determines the generator type. The following table comprises a complete list of variables \(required if there is no default\).
+More detailed instructions can be found [here.](https://github.com/projectgranary/docs/tree/a8c6354c129141b3ae2bab73c2b17240bfedddc4/operator-reference/installation/segment-table-creation.md) In the _values.yaml_ file configures segment creation parameters. `TYPE` determines the generator type. The following table comprises a complete list of variables \(required if there is no default\).
 
-| Parameter | Description | Default |
-| :--- | :--- | :--- |
-| `TYPE` | type of generator, `pivot` or `generic` | `pivot` |
-| `DB_TYPE` | storage-layer type, `citus` or `aurora` | `citus` |
-| `DB_USE_VIEWS` | flag indicating if generated segment should be a view \(aurora-only\) | `false` |
-| `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg-citus-master` |
-| `DB_PORT` | database port | `5432` |
-| `DB_USER` | postgres user name | Secret Reference needed |
-| `DB_PASSWORD` | postgres user password | Secret Reference needed |
-| `DB_NAME` | name of the database | Secret Reference needed |
-| `DB_USE_SSL` | whether to enforce SSL for DB connection | `true` |
-| `SOURCE_SCHEMA_NAME` | name of schema of source table | `public` |
-| `SOURCE_TABLE_NAME` | name of source table | `profilestore` |
-| `TARGET_SCHEMA_NAME` | name of schema for target segment | `segments` |
-| `TARGET_SEGMENT_NAME` | name for target segment, if already existing old segment will be overwritten | `profilestore_seg` |
-| `COLUMN_PLACEHOLDER` | placeholder for the path name to be used in the pivot transformation function | ? |
-| `TYPE_SEPARATOR` | separator between pivot transformation function and result type | :: |
-| `DEFINITION_SEPARATOR` | separator between name and transformation | = |
-| `TRANSFORMATION_SEPARATOR` | separator between multiple transformations, e.g., `body_txt=message->'body'::text|body_json=replace(message->'body'#>>'{}', '\', '')::jsonb` | \| |
-| `CITUS_DIST_COL` | name of the column the source table is and the target segment will be distributed by. currently, this has to be a single column | correlation\_id |
-| `DEBUG` | whether to print all database statement and responses | `true` |
-| `SOURCE_WHERE_CLAUSE` | where clause as SQL \(without "WHERE" itself\), must not be empty. |  `"pit='_latest'"` |
-| `PROMETHEUS_PUSHGATEWAY` | address of gateway to push prometheus metrics, format `'<host>:<port>'` |  |
-| `PROMETHEUS_JOB` |  job name for pushgateway, the metrics will be grouped by this name. |  `segmentcreation` |
+| Parameter | Description | Default |  |
+| :--- | :--- | :--- | :--- |
+| `TYPE` | type of generator, `pivot` or `generic` | `pivot` |  |
+| `DB_TYPE` | storage-layer type, `citus` or `aurora` | `citus` |  |
+| `DB_USE_VIEWS` | flag indicating if generated segment should be a view \(aurora-only\) | `false` |  |
+| `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg-citus-master` |  |
+| `DB_PORT` | database port | `5432` |  |
+| `DB_USER` | postgres user name | Secret Reference needed |  |
+| `DB_PASSWORD` | postgres user password | Secret Reference needed |  |
+| `DB_NAME` | name of the database | Secret Reference needed |  |
+| `DB_USE_SSL` | whether to enforce SSL for DB connection | `true` |  |
+| `SOURCE_SCHEMA_NAME` | name of schema of source table | `public` |  |
+| `SOURCE_TABLE_NAME` | name of source table | `profilestore` |  |
+| `TARGET_SCHEMA_NAME` | name of schema for target segment | `segments` |  |
+| `TARGET_SEGMENT_NAME` | name for target segment, if already existing old segment will be overwritten | `profilestore_seg` |  |
+| `COLUMN_PLACEHOLDER` | placeholder for the path name to be used in the pivot transformation function | ? |  |
+| `TYPE_SEPARATOR` | separator between pivot transformation function and result type | :: |  |
+| `DEFINITION_SEPARATOR` | separator between name and transformation | = |  |
+| `TRANSFORMATION_SEPARATOR` | separator between multiple transformations, e.g., \`body\_txt=message-&gt;'body'::text | body\_json=replace\(message-&gt;'body'\#&gt;&gt;'{}', '\', ''\)::jsonb\` | \| |
+| `CITUS_DIST_COL` | name of the column the source table is and the target segment will be distributed by. currently, this has to be a single column | correlation\_id |  |
+| `DEBUG` | whether to print all database statement and responses | `true` |  |
+| `SOURCE_WHERE_CLAUSE` | where clause as SQL \(without "WHERE" itself\), must not be empty. | `"pit='_latest'"` |  |
+| `PROMETHEUS_PUSHGATEWAY` | address of gateway to push prometheus metrics, format `'<host>:<port>'` |  |  |
+| `PROMETHEUS_JOB` | job name for pushgateway, the metrics will be grouped by this name. | `segmentcreation` |  |
 
 ### Segment Indexes
 
@@ -58,15 +58,15 @@ There are parameters to define **indexes** on the resulting segment. Note that c
 
 ### Segment Views
 
-There are parameters to define **views** on the resulting segment. These views can be used to enforce access regulations. Consider profiles with an `/isLocked` grain set to `true` or `false`  as an example. Then, a segment on such profile can contain that grain, which is further used define two complementary views -- one containing _unlocked_ profiles and a second containing _locked_ profiles. 
+There are parameters to define **views** on the resulting segment. These views can be used to enforce access regulations. Consider profiles with an `/isLocked` grain set to `true` or `false` as an example. Then, a segment on such profile can contain that grain, which is further used define two complementary views -- one containing _unlocked_ profiles and a second containing _locked_ profiles.
 
 For this example, the respective configuration could look as follows:
 
-`PIVOT_PATHS: "/pathA,/pathB,/pathC,/isLocked"  
-PIVOT_TRANSFORMATIONS: "/isLocked= ?#>>'{}'::text"  
+`PIVOT_PATHS: "/pathA,/pathB,/pathC,/isLocked"    
+PIVOT_TRANSFORMATIONS: "/isLocked= ?#>>'{}'::text"    
 TARGET_SEGMENT_VIEWS: "locked:\"/isLocked\" = 'true',unlocked:\"/isLocked\" = 'false'"`
 
-Detailed configuration 
+Detailed configuration
 
 <table>
   <thead>
@@ -87,7 +87,7 @@ Detailed configuration
     <tr>
       <td style="text-align:left"><code>TARGET_SEGMENT_VIEW_DEFINITION_SEPARATOR</code>
       </td>
-      <td style="text-align:left">Separator between view <em>name </em>and view <em>condition</em>
+      <td style="text-align:left">Separator between view <em>name</em> and view <em>condition</em>
       </td>
       <td style="text-align:left"><code>:</code>
       </td>
@@ -96,7 +96,7 @@ Detailed configuration
       <td style="text-align:left"><code>TARGET_SEGMENT_VIEWS</code>
       </td>
       <td style="text-align:left">
-        <p><code>TARGET_SEGMENT_VIEW_SEPARATOR </code>separated list auf views.</p>
+        <p><code>TARGET_SEGMENT_VIEW_SEPARATOR</code> separated list auf views.</p>
         <p>Definition of a view: <em>name definition-separator condition</em>
         </p>
       </td>
@@ -277,7 +277,7 @@ If filtering by paths \(e.g. a in the example above\) the result might contain e
 
 These can be suppressed by setting _ALLOW\_EMPTY_ to _False_. By defining a where clause in _SEGMENT\_FILTER\_CLAUSE_ the output can be further filtered.
 
-####  Transformations of path content
+#### Transformations of path content
 
 When creating the pivot table you have the option to specify arbitrary transformations on specific paths. These have to be valid sql expressions with a placeholder for the path name. You also have to add the data type of the transformation's result. The resulting column in the pivot table will have this data type.
 
@@ -319,8 +319,6 @@ Common transformations could be:
 * Converting to a different type: `path1=CAST((? #> '{}') AS DATE)::date` - `#> '{}'` selects the root element of a jsonb object
 * Computing a boolean expression: `path1=CAST((? #> '{}') AS int) > 30`
 
-#### 
-
 #### Pivot Aliases
 
 It is possible to create aliases for the selected paths. This improves the readability and also allows for more succinct config of your segment. It also allows you to work around very long path names that would cause issues with Postgres-flavored databases 63 character limit for column names. Therefore if you are not using aliases your paths can be at most 63 characters long. When using aliases you have to specify aliases for all the paths you want to select. The order of the aliases needs to match the order of the selected paths. The resulting segment's column names will be the ones of your aliases. When using pivot transformations in conjunction with aliases, you need to refer to columns by their aliases in the transformation statements.
@@ -351,8 +349,8 @@ Result:
 
 In case of errors, these are directly thrown and can be detected by the environment running the Docker container \(e.g., Kubernetes\). In case no connection can be established or the Citus master returns an SQL error result, this is the default behaviour of psycopg2. In case executing a command on the workers fails, the master will not return an error. The segmentcreation tool detects this by checking the second last return value of `run_command_on_workers` or `run_command_on_colocated_placements` indicating `success`, according to [psql's `df+` output](https://www.postgresql.org/docs/current/app-psql.html):
 
-*  `OUT nodename text, OUT nodeport integer, OUT success boolean, OUT result text` for `run_command_on_workers`
-*  `OUT nodename text, OUT nodeport integer, OUT shardid1 bigint, OUT shardid2 bigint, OUT success boolean, OUT result text` for `run_command_on_colocated_placements`
+* `OUT nodename text, OUT nodeport integer, OUT success boolean, OUT result text` for `run_command_on_workers`
+* `OUT nodename text, OUT nodeport integer, OUT shardid1 bigint, OUT shardid2 bigint, OUT success boolean, OUT result text` for `run_command_on_colocated_placements`
 
 However, this interface is not documented and thus might change in future versions of Citus.
 
@@ -361,6 +359,4 @@ The metrics are grouped by the job name set in `PROMETHEUS_JOB`. If the `PROMETH
 * Gauge: `segmentcreation_last_success_unixtime`/`segmentcreation_last_fail_unixtime` for the last success/fail [as recommended via mailing list, can be used to trigger alerts](https://groups.google.com/forum/#!topic/prometheus-developers/rFHMb4vN6cc)
 * Summary: `segmentcreation_duration_seconds`, time needed for segmentcreation
 * Counter: `segmentcreation_inserts`, total number of inserted rows
-
-
 

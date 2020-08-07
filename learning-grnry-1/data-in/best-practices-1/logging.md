@@ -1,5 +1,7 @@
 ---
-description: On this page we explain how to use logging in a belt for easier monitoring.
+description: >-
+  On this page we explain how to use logging in the scriptable transform for
+  easier monitoring.
 ---
 
 # Logging

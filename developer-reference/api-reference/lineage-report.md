@@ -38,7 +38,7 @@ Configuration file is ./config.py
         <p><b>credentials</b>
         </p>
         <ul>
-          <li><b>grant_type</b> 
+          <li><b>grant_type</b>
           </li>
           <li><b>username</b>
           </li>
@@ -171,7 +171,7 @@ N/A          N/A                     N/A       myorigin          ProfileA       
 N/A          N/A                     N/A       myorigin          ProfileA                                                                                agency                           /visits/2019-12
 N/A          N/A                     N/A       N/A               2097-1904                                                                               Airports                         /airports
 N/A          N/A                     N/A       integration-test  e2e-sessionizing-test_da43995b-60ec-4128-837a-8a30008155f0-1576016709266-1576016800289  e2e-sessionizing-test            /number_of_messages
-snowplow-catch-all	snowplow-catch-all	634	    536-test-belt	    a8df2c	                                                                                test-536	                    /opensky
-snowplow-catch-all-	snowplow-catch-all	634	    536-test-belt	    a8df2c	                                                                                test-536	                    /opensky
+snowplow-catch-all    snowplow-catch-all    634        536-test-belt        a8df2c                                                                                    test-536                        /opensky
+snowplow-catch-all-    snowplow-catch-all    634        536-test-belt        a8df2c                                                                                    test-536                        /opensky
 ```
 

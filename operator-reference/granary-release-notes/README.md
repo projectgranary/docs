@@ -117,7 +117,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/untitled.md">Belt Extractor</a>
+      <td style="text-align:left"><a href>Belt Extractor</a>
       </td>
       <td style="text-align:left"><b>0.8.1</b>
       </td>

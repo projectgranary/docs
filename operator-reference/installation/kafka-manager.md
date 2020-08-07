@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-kafka-manager/tree
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/kafka-manager \
     --name grnry-kafka-manager \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-kafka-manager
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-kafka-manager \

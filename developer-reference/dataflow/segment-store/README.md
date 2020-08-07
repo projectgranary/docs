@@ -7,3 +7,4 @@ The Segment Store holds information derived from the Event Store or the Profile 
 The Segment Store is a table or a view in a database. Each tuple in that table represents an event or a profile, comprising selected and projected fields. Note that for profiles, the segments are relational representations of the nested Profile JSON data structure. For events, the segments merely comprise selections and projections.
 
 The subpages describe segment definition and deployment.
+

@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-angular-frontend-e
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/grnry-event-ui \
     --name grnry-event-ui \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-event-ui
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-event-ui \

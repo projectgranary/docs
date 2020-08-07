@@ -12,7 +12,7 @@ A Source Type entity is a combination of a source app, an app-version and some c
 
 ## Source Type Packaging
 
-The source app is a spring cloud stream based java application that is packaged as a docker container and a jar file. Both artefacts need to be published to a repository and they need to be readable by the Granary-installation \(pull secrets etc\). The docker container is used during deployment and will be executed. The jar  will be downloaded once by Granary to parse the exposed configuration parameters. 
+The source app is a spring cloud stream based java application that is packaged as a docker container and a jar file. Both artefacts need to be published to a repository and they need to be readable by the Granary-installation \(pull secrets etc\). The docker container is used during deployment and will be executed. The jar will be downloaded once by Granary to parse the exposed configuration parameters.
 
 {% hint style="info" %}
 The docker artifact is mandatory. The jar file is optional, but without it the Granary installation will not be able to parse the configuration properties and cannot assist the user while configuring the harvester.
@@ -58,7 +58,7 @@ the metadata jar can be placed on a maven repository:
 
 Example for an actual Granary SCDF Source Type:
 
- `maven://io.grnry.scdf-apps:grnry-jdbc-source:jar:metadata:0.8.0`
+`maven://io.grnry.scdf-apps:grnry-jdbc-source:jar:metadata:0.8.0`
 
 {% hint style="info" %}
 If your jar is placed on a private maven repository, you would need to add the address and credentials to the scdf helm chart values file before installing Granary.

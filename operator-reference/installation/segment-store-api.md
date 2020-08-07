@@ -12,7 +12,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-presto-access-cont
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/presto \
     --name grnry-segmentstore-api \
     --version <version> \
@@ -25,7 +25,7 @@ Status check and further instructions:
 $ helm status grnry-segmentstore-api
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-segmentstore-api \

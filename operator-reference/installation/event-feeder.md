@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-event-feeder/tree/
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/event-feeder \
     --name grnry-event-feeder \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-event-feeder
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-event-feeder \

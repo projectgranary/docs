@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-citus) for full do
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-oss/citus-postgresql \
     --name grnry-citus-postgresql \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-citus-postgresql
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-citus-postgresql \

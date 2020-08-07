@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-docker-scdf/tree/m
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/spring-cloud-data-flow \
     --name grnry-scdf \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-scdf
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-scdf \
@@ -63,7 +63,7 @@ In line 1 we define to create a cURL request using the POST method. After the `-
 docker%3A%2F%2Fhub.syncier.cloud%3A5000%2Fgrnry%2Fscdf-apps%2Fgrnry-sftp-source%3Alatest
 ```
 
-Unencoded this reads: `docker://hub.syncier.cloud/grnry/scdf-apps/grnry-sftp-source:latest`. 
+Unencoded this reads: `docker://hub.syncier.cloud/grnry/scdf-apps/grnry-sftp-source:latest`.
 
 In line 3, we specify the URL where we register the application itself. First, we define the URL to SCDF. Afterwards we need to write apps to tell SCDF that this is about the apps in its registry. Now, we define the type of the app. This can be for example `source` , `processor` or `sink`. The parameter name then is defined by you. You can assign any name you like. All the components provided by GRNRY usually start with `grnry`. The parameter version is optional. It is possible in SCDF to register apps with different versions. In this case the version could be e.g. `0.5.0` or `latest`. A full example of the URL cood look like this:
 

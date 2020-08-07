@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-profilestore-api/t
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/profilestore-api \
     --name grnry-profilestore-api \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-profilestore-api
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-profilestore-api \

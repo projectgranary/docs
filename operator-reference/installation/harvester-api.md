@@ -18,7 +18,7 @@ For default configuration recommendations refer to the "Get Data Into Granary" [
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/harvester-api \
     --name grnry-harvester-api \
     --version <version> \
@@ -31,7 +31,7 @@ Status check and further instructions:
 $ helm status grnry-harvester-api
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-harvester-api \

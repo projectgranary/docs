@@ -14,15 +14,15 @@ The Stable Helm Charts are to be used for deployment of Granary components with 
 
 In turn, the Incubator Helm Chart Repo always deploys the latest commit on the master branch of the respective Granary component. Thus, the charts might be under development and change quickly over time.
 
-#### Stable Helm Chart Repo
+### Stable Helm Chart Repo
 
 `helm repo add --username <username> --password <password> grnry-stable https://hub.syncier.cloud/chartrepo/grnry`
 
-#### Incubator Helm Chart Repo
+### Incubator Helm Chart Repo
 
 `helm repo add --username <username> --password <password> grnry-incubator https://hub.syncier.cloud/chartrepo/grnry-snapshot`
 
-#### Open Source Helm Chart Repo
+### Open Source Helm Chart Repo
 
 `helm repo add grnry-oss https://hub.syncier.cloud/chartrepo/grnry-oss`
 
@@ -32,7 +32,6 @@ In turn, the Incubator Helm Chart Repo always deploys the latest commit on the m
 * Kubernetes Namespace set in ~/.kube/config 
 * Helm 3.+ installed locally
 * Granary Stable & Open Source Helm Repo added locally
-
 
 ## Before you start ...
 
@@ -44,7 +43,7 @@ In turn, the Incubator Helm Chart Repo always deploys the latest commit on the m
 * there is basic Granary configuration deployed, see [Granary Base Helm Chart](https://github.com/syncier/grnry-base-deployment/tree/master/helm).
 * there is a TLS certificate for your base FQDN as Kubernetes secret in the cluster to SSL-encrypt ingresses, e.g. using [Cert-Manager](https://docs.cert-manager.io/en/latest/)'s certificate resource
 * there is a PostgreSQL user as Kubernetes secret if you do not choose to run Citus PostgreSQL within the Granary installation.
-* there are Maven repository access credentials as Kubernetes secret in the cluster to download Spring Cloud Data Flow (SCDF) metadata jars.
+* there are Maven repository access credentials as Kubernetes secret in the cluster to download Spring Cloud Data Flow \(SCDF\) metadata jars.
 
 ## Deployment Dependencies
 

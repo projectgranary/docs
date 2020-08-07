@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-react-frontend-adm
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/grnry-ui \
     --name grnry-ui \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-ui
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-ui \

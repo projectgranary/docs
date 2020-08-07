@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-kafka-profile-upda
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/kafka-profile-update \
     --name grnry-kafka-profile-update \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-kafka-profile-update
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-kafka-profile-update \

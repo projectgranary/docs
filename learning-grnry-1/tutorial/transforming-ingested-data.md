@@ -16,13 +16,13 @@ First step of all API interactions via Postman is to obtain a valid Keycloak tok
 
 In Granary, a belt is the resource that transforms incoming events in real-time to updates in the Profile Store. Conceptionally, you can perceive belts as a Function as a Service framework.
 
-To run a belt, we need to provide a Python script that transforms the ingested event's metadata \(as defined in our [Event Type](registering-new-data.md#2-create-event-type-customer-session)\) and the event's payload \(as sent in the previous chapter\) to one or many [Profile Update objects](../../developer-reference/dataflow/belt-extractor.md#configuration). Those profile updates are written to the Profile Store. In the Profile Store, each update is a Grain. A Grain is a single piece of information in a profile and follow [this schema](../../developer-reference/dataflow/profile-store/#table-profilestore). 
+To run a belt, we need to provide a Python script that transforms the ingested event's metadata \(as defined in our [Event Type](registering-new-data.md#2-create-event-type-customer-session)\) and the event's payload \(as sent in the previous chapter\) to one or many [Profile Update objects](../../developer-reference/dataflow/belt-extractor.md#configuration). Those profile updates are written to the Profile Store. In the Profile Store, each update is a Grain. A Grain is a single piece of information in a profile and follow [this schema](../../developer-reference/dataflow/profile-store/#table-profilestore).
 
 Most of the belt configuration is covered by defaults, so creating your first belt goes like this:
 
 ![Belt API Request: POST /belts](../../.gitbook/assets/image%20%2842%29.png)
 
-For the body \(look for the tab with the green dot\) use this JSON and add your name in line 7 before sending: 
+For the body \(look for the tab with the green dot\) use this JSON and add your name in line 7 before sending:
 
 {% hint style="info" %}
 The name of the Event Type in line 17 must match the Event Type's `name` you created in chapter "Registering new Data Pipeline".
@@ -133,7 +133,7 @@ For the body \(look for the tab with the green dot\) use this JSON:
 
 ```javascript
 {
-	"action": "START"
+    "action": "START"
 }
 ```
 

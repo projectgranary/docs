@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-graphql-api/tree/m
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/graphql-api \
     --name graphql-api \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status graphql-api
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade graphql-api \

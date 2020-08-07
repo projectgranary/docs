@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-docker-snowplow/tr
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/snowplow-scala-stream-collector \
     --name grnry-snowplow-scala-stream-collector \
     --version <version> \
@@ -20,10 +20,10 @@ $ helm install grnry-stable/snowplow-scala-stream-collector \
 Status check and further instructions:
 
 ```text
-$ helm status grnry-snowplow-scala-stream-collector 
+$ helm status grnry-snowplow-scala-stream-collector
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-snowplow-scala-stream-collector \
@@ -32,7 +32,7 @@ $ helm upgrade grnry-snowplow-scala-stream-collector \
     -f ./snowplow-ssc-values.yaml
 ```
 
-Tear down Helm Chart: 
+Tear down Helm Chart:
 
 ```text
 $ helm delete grnry-snowplow-scala-stream-collector

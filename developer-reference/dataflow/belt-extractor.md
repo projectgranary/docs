@@ -18,7 +18,7 @@ Belts are used to compute updates for the Costumer Graph stored in the Profile S
 
 They are defined by a label, a scale factor, an input topic and a stateless/serverless Python function that gets invoked for every event received from the respective input topic. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store. If a function is taking too much time to process a record, it will timeout to prevent errors like infinite loops. The Belt retries and does not recover if the processing time keeps exceeding the timeout. The maximum duration for the function's execution can be configured.
 
-## Input Topics 
+## Input Topics
 
 Valid input topics for a belt are one or many `grnry_data_in_...` topics which have been created by the chosen Event Type.
 
@@ -35,7 +35,7 @@ Messages in those input topics consist of event headers and an event payload spe
 | $$-$$ grnry-correlation-id | used to group events received from the same tracking entity |
 | $$-$$ grnry-event-timestamp | event processing time set by harvester \(metadata extractor\) |
 | $$-$$ grnry-event-type-version | version of event type registered with the harvester |
-| **event\_payload** | Forwarded from input attribute `value`  |
+| **event\_payload** | Forwarded from input attribute `value` |
 | $$-$$ schema | Snowplow Event Schema Reference |
 | $$-$$ ipAddress | ipAddress if Snowplow is configured to collect this |
 | $$-$$ timestamp | time of event creation or reception\(?\) |
@@ -47,7 +47,7 @@ Messages in those input topics consist of event headers and an event payload spe
 
 ## Callback Signature
 
-### Single payload processing 
+### Single payload processing
 
 `execute(event_headers, event_payload[, profile])`
 
@@ -55,26 +55,26 @@ where `profile` is a profile fetched from [Profile Store](profile-store/). This 
 
 ```yaml
 event_headers = {
-			"grnry-event-type":"...",
-			"grnry-event-id":"...",
-			"grnry-correlation-id":"...",
-			"grnry-harvester-name":"...",
-			"grnry-event-timestamp":1535972952300
-		}
+            "grnry-event-type":"...",
+            "grnry-event-id":"...",
+            "grnry-correlation-id":"...",
+            "grnry-harvester-name":"...",
+            "grnry-event-timestamp":1535972952300
+        }
 event_payload = {
-		"body": "{ ... }",
-		"collector": "ssc-0.13.0-kafka",
-		"encoding": "UTF-8",
-		"headers": ["Host: aws-eu1.grnry.io", "Accept: text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8", "Accept-Encoding: gzip, deflate, br", "Accept-Language: de-DE, de;q=0.9, en-US;q=0.8, en;q=0.7", "Cookie: _ga=GA1.2.1323636424.1533625971; ajs_anonymous_id=%22058bbd8d-cb74-47e4-aa27-9cc5fa4546aa%22; ajs_group_id=null; ajs_user_id=%22QjAVZpXa7qgJdZs6vGsNMA5M9yH3%22; mp_96b84420a1a32e448f73e7b9ffccebdb_mixpanel=%7B%22distinct_id%22%3A%20%22165133b330da0-0ad91354656274-47e1039-1fa400-165133b330f15e%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D", "Upgrade-Insecure-Requests: 1", "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36", "X-Forwarded-For: 82.207.192.113", "X-Forwarded-Port: 443", "X-Forwarded-Proto: https", "Connection: keep-alive", "Timeout-Access: <function1>"],
-		"hostname": "aws-eu1.grnry.io",
-		"ipAddress": "82.207.192.113",
-		"networkUserId": "631b9979-16b8-44ed-87b1-86b7d92d8223",
-		"path": "/i",
-		"schema": "iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
-		"timestamp": 1535972952029,
-		"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
-	}
-	
+        "body": "{ ... }",
+        "collector": "ssc-0.13.0-kafka",
+        "encoding": "UTF-8",
+        "headers": ["Host: aws-eu1.grnry.io", "Accept: text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8", "Accept-Encoding: gzip, deflate, br", "Accept-Language: de-DE, de;q=0.9, en-US;q=0.8, en;q=0.7", "Cookie: _ga=GA1.2.1323636424.1533625971; ajs_anonymous_id=%22058bbd8d-cb74-47e4-aa27-9cc5fa4546aa%22; ajs_group_id=null; ajs_user_id=%22QjAVZpXa7qgJdZs6vGsNMA5M9yH3%22; mp_96b84420a1a32e448f73e7b9ffccebdb_mixpanel=%7B%22distinct_id%22%3A%20%22165133b330da0-0ad91354656274-47e1039-1fa400-165133b330f15e%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D", "Upgrade-Insecure-Requests: 1", "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36", "X-Forwarded-For: 82.207.192.113", "X-Forwarded-Port: 443", "X-Forwarded-Proto: https", "Connection: keep-alive", "Timeout-Access: <function1>"],
+        "hostname": "aws-eu1.grnry.io",
+        "ipAddress": "82.207.192.113",
+        "networkUserId": "631b9979-16b8-44ed-87b1-86b7d92d8223",
+        "path": "/i",
+        "schema": "iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
+        "timestamp": 1535972952029,
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
+    }
+
 profile = {
   "_id": "0815",
   "a1": {
@@ -187,222 +187,222 @@ Similar to the single payload approach, the callback signature accepted by the b
 
 ```python
 [
-	'{
-		"setNetworkUserId":true,
-		"headersIterator":[
-			"Host: hostname",
-			"X-Request-ID: 438e8",
-			"X-Real-Ip: 127.0.0.1",
-			"X-Forwarded-For: 127.0.0.1",
-			"X-Forwarded-Host: hostname",
-			"X-Forwarded-Port: 443",
-			"X-Forwarded-Proto: https",
-			"X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-			"X-Scheme: https",
-			"X-B3-TraceId: 5f910",
-			"X-B3-SpanId: 5f910",
-			"Authorization: Bearer eyJhb",
-			"User-Agent: PostmanRuntime/7.17.1",
-			"Accept: */*",
-			"Cache-Control: no-cache",
-			"Postman-Token: 3e458",
-			"Accept-Encoding: gzip, deflate",
-			"Timeout-Access: <function1>",
-			"application/json"
-		],
-		"encoding":"UTF-8",
-		"setBody":true,
-		"headersSize":19,
-		"setQuerystring":false,
-		"setPath":true,
-		"refererUri":null,
-		"timestamp":1574009866075,
-		"path":"/com.snowplowanalytics.snowplow/tp2",
-		"setSchema":true,
-		"body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
-		"ipAddress":"127.0.0.1",
-		"schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
-		"setHostname":true,
-		"setUserAgent":true,
-		"setTimestamp":true,
-		"setEncoding":true,
-		"setCollector":true,
-		"setRefererUri":false,
-		"hostname":"hostname",
-		"setHeaders":true,
-		"querystring":null,
-		"headers":[
-			"Host: hostname",
-			"X-Request-ID: 438e8",
-			"X-Real-Ip: 127.0.0.1",
-			"X-Forwarded-For: 127.0.0.1"
-			"X-Forwarded-Host: hostname",
-			"X-Forwarded-Port: 443",
-			"X-Forwarded-Proto: https",
-			"X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-			"X-Scheme: https",
-			"X-B3-TraceId: 5f910",
-			"X-B3-SpanId: 5f910",
-			"Authorization: Bearer eyJhb",
-			"User-Agent: PostmanRuntime/7.17.1",
-			"Accept: */*",
-			"Cache-Control: no-cache",
-			"Postman-Token: 3e458",
-			"Accept-Encoding: gzip, deflate",
-			"Timeout-Access: <function1>",
-			"application/json"
-		],
-		"contentType":"application/json",
-		"setIpAddress":true,
-		"userAgent":"PostmanRuntime/7.17.1",
-		"setContentType":true,
-		"collector":"ssc-0.15.0-kafka",
-		"networkUserId":"4770e"
-	}',
-	'{
-		"setNetworkUserId":true,
-		"headersIterator":[
-			"Host: hostname",
-			"X-Request-ID: e091d",
-			"X-Real-Ip: 127.0.0.1",
-			"X-Forwarded-For: 127.0.0.1",
-			"X-Forwarded-Host: hostname",
-			"X-Forwarded-Port: 443",
-			"X-Forwarded-Proto: https",
-			"X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-			"X-Scheme: https",
-			"X-B3-TraceId: 5f910",
-			"X-B3-SpanId: 5f910",
-			"Authorization: Bearer eyJhb",
-			"User-Agent: PostmanRuntime/7.17.1",
-			"Accept: */*",
-			"Cache-Control: no-cache",
-			"Postman-Token: f0927",
-			"Accept-Encoding: gzip, deflate",
-			"Timeout-Access: <function1>",
-			"application/json"
-		],
-		"encoding":"UTF-8",
-		"setBody":true,
-		"headersSize":19,
-		"setQuerystring":false,
-		"setPath":true,
-		"refererUri":null,
-		"timestamp":1574009867606,
-		"path":"/com.snowplowanalytics.snowplow/tp2",
-		"setSchema":true,
-		"body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
-		"ipAddress":"127.0.0.1",
-		"schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
-		"setHostname":true,
-		"setUserAgent":true,
-		"setTimestamp":true,
-		"setEncoding":true,
-		"setCollector":true,
-		"setRefererUri":false,
-		"hostname":"hostname",
-		"setHeaders":true,
-		"querystring":null,
-		"headers":[
-			"Host: hostname",
-			"X-Request-ID: e091d",
-			"X-Real-Ip: 127.0.0.1",
-			"X-Forwarded-For: 127.0.0.1",
-			"X-Forwarded-Host: hostname",
-			"X-Forwarded-Port: 443",
-			"X-Forwarded-Proto: https",
-			"X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-			"X-Scheme: https",
-			"X-B3-TraceId: 5f910",
-			"X-B3-SpanId: 5f910",
-			"Authorization: Bearer eyJhb",
-			"User-Agent: PostmanRuntime/7.17.1",
-			"Accept: */*",
-			"Cache-Control: no-cache",
-			"Postman-Token: f0927",
-			"Accept-Encoding: gzip, deflate",
-			"Timeout-Access: <function1>",
-			"application/json"
-		],
-		"contentType":"application/json",
-		"setIpAddress":true,
-		"userAgent":"PostmanRuntime/7.17.1",
-		"setContentType":true,
-		"collector":"ssc-0.15.0-kafka",
-		"networkUserId":"0e428"
-	}', 
-	'{
-		"setNetworkUserId":true,
-		"headersIterator":[
-			"Host: hostname",
-			"X-Request-ID: 70b54",
-			"X-Real-Ip: 127.0.0.1",
-			"X-Forwarded-For: 127.0.0.1",
-			"X-Forwarded-Host: hostname",
-			"X-Forwarded-Port: 443",
-			"X-Forwarded-Proto: https",
-			"X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-			"X-Scheme: https",
-			"X-B3-TraceId: 5f910",
-			"X-B3-SpanId: 5f910",
-			"Authorization: Bearer eyJhb",
-			"User-Agent: PostmanRuntime/7.17.1",
-			"Accept: */*",
-			"Cache-Control: no-cache",
-			"Postman-Token: c209b",
-			"Accept-Encoding: gzip, deflate",
-			"Timeout-Access: <function1>",
-			"application/json"
-		],
-		"encoding":"UTF-8",
-		"setBody":true,
-		"headersSize":19,
-		"setQuerystring":false,
-		"setPath":true,
-		"refererUri":null,
-		"timestamp":1574009868734,
-		"path":"/com.snowplowanalytics.snowplow/tp2",
-		"setSchema":true,
-		"body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
-		"ipAddress":"127.0.0.1",
-		"schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
-		"setHostname":true,
-		"setUserAgent":true,
-		"setTimestamp":true,
-		"setEncoding":true,
-		"setCollector":true,
-		"setRefererUri":false,
-		"hostname":"hostname",
-		"setHeaders":true,
-		"querystring":null,
-		"headers":[
-			"Host: hostname",
-			"X-Request-ID: 70b54",
-			"X-Real-Ip: 127.0.0.1",
-			"X-Forwarded-For: 127.0.0.1",
-			"X-Forwarded-Host: hostname",
-			"X-Forwarded-Port: 443",
-			"X-Forwarded-Proto: https",
-			"X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-			"X-Scheme: https",
-			"X-B3-TraceId: 5f910",
-			"X-B3-SpanId: 5f910",
-			"Authorization: Bearer eyJhb",
-			"User-Agent: PostmanRuntime/7.17.1",
-			"Accept: */*",
-			"Cache-Control: no-cache",
-			"Postman-Token: c209b",
-			"Accept-Encoding: gzip, deflate",
-			"Timeout-Access: <function1>",
-			"application/json"
-		],
-		"contentType":"application/json",
-		"setIpAddress":true,
-		"userAgent":"PostmanRuntime/7.17.1",
-		"setContentType":true,
-		"collector":"ssc-0.15.0-kafka",
-		"networkUserId":"f4aa0"
-	}', 
+    '{
+        "setNetworkUserId":true,
+        "headersIterator":[
+            "Host: hostname",
+            "X-Request-ID: 438e8",
+            "X-Real-Ip: 127.0.0.1",
+            "X-Forwarded-For: 127.0.0.1",
+            "X-Forwarded-Host: hostname",
+            "X-Forwarded-Port: 443",
+            "X-Forwarded-Proto: https",
+            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
+            "X-Scheme: https",
+            "X-B3-TraceId: 5f910",
+            "X-B3-SpanId: 5f910",
+            "Authorization: Bearer eyJhb",
+            "User-Agent: PostmanRuntime/7.17.1",
+            "Accept: */*",
+            "Cache-Control: no-cache",
+            "Postman-Token: 3e458",
+            "Accept-Encoding: gzip, deflate",
+            "Timeout-Access: <function1>",
+            "application/json"
+        ],
+        "encoding":"UTF-8",
+        "setBody":true,
+        "headersSize":19,
+        "setQuerystring":false,
+        "setPath":true,
+        "refererUri":null,
+        "timestamp":1574009866075,
+        "path":"/com.snowplowanalytics.snowplow/tp2",
+        "setSchema":true,
+        "body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
+        "ipAddress":"127.0.0.1",
+        "schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
+        "setHostname":true,
+        "setUserAgent":true,
+        "setTimestamp":true,
+        "setEncoding":true,
+        "setCollector":true,
+        "setRefererUri":false,
+        "hostname":"hostname",
+        "setHeaders":true,
+        "querystring":null,
+        "headers":[
+            "Host: hostname",
+            "X-Request-ID: 438e8",
+            "X-Real-Ip: 127.0.0.1",
+            "X-Forwarded-For: 127.0.0.1"
+            "X-Forwarded-Host: hostname",
+            "X-Forwarded-Port: 443",
+            "X-Forwarded-Proto: https",
+            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
+            "X-Scheme: https",
+            "X-B3-TraceId: 5f910",
+            "X-B3-SpanId: 5f910",
+            "Authorization: Bearer eyJhb",
+            "User-Agent: PostmanRuntime/7.17.1",
+            "Accept: */*",
+            "Cache-Control: no-cache",
+            "Postman-Token: 3e458",
+            "Accept-Encoding: gzip, deflate",
+            "Timeout-Access: <function1>",
+            "application/json"
+        ],
+        "contentType":"application/json",
+        "setIpAddress":true,
+        "userAgent":"PostmanRuntime/7.17.1",
+        "setContentType":true,
+        "collector":"ssc-0.15.0-kafka",
+        "networkUserId":"4770e"
+    }',
+    '{
+        "setNetworkUserId":true,
+        "headersIterator":[
+            "Host: hostname",
+            "X-Request-ID: e091d",
+            "X-Real-Ip: 127.0.0.1",
+            "X-Forwarded-For: 127.0.0.1",
+            "X-Forwarded-Host: hostname",
+            "X-Forwarded-Port: 443",
+            "X-Forwarded-Proto: https",
+            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
+            "X-Scheme: https",
+            "X-B3-TraceId: 5f910",
+            "X-B3-SpanId: 5f910",
+            "Authorization: Bearer eyJhb",
+            "User-Agent: PostmanRuntime/7.17.1",
+            "Accept: */*",
+            "Cache-Control: no-cache",
+            "Postman-Token: f0927",
+            "Accept-Encoding: gzip, deflate",
+            "Timeout-Access: <function1>",
+            "application/json"
+        ],
+        "encoding":"UTF-8",
+        "setBody":true,
+        "headersSize":19,
+        "setQuerystring":false,
+        "setPath":true,
+        "refererUri":null,
+        "timestamp":1574009867606,
+        "path":"/com.snowplowanalytics.snowplow/tp2",
+        "setSchema":true,
+        "body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
+        "ipAddress":"127.0.0.1",
+        "schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
+        "setHostname":true,
+        "setUserAgent":true,
+        "setTimestamp":true,
+        "setEncoding":true,
+        "setCollector":true,
+        "setRefererUri":false,
+        "hostname":"hostname",
+        "setHeaders":true,
+        "querystring":null,
+        "headers":[
+            "Host: hostname",
+            "X-Request-ID: e091d",
+            "X-Real-Ip: 127.0.0.1",
+            "X-Forwarded-For: 127.0.0.1",
+            "X-Forwarded-Host: hostname",
+            "X-Forwarded-Port: 443",
+            "X-Forwarded-Proto: https",
+            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
+            "X-Scheme: https",
+            "X-B3-TraceId: 5f910",
+            "X-B3-SpanId: 5f910",
+            "Authorization: Bearer eyJhb",
+            "User-Agent: PostmanRuntime/7.17.1",
+            "Accept: */*",
+            "Cache-Control: no-cache",
+            "Postman-Token: f0927",
+            "Accept-Encoding: gzip, deflate",
+            "Timeout-Access: <function1>",
+            "application/json"
+        ],
+        "contentType":"application/json",
+        "setIpAddress":true,
+        "userAgent":"PostmanRuntime/7.17.1",
+        "setContentType":true,
+        "collector":"ssc-0.15.0-kafka",
+        "networkUserId":"0e428"
+    }', 
+    '{
+        "setNetworkUserId":true,
+        "headersIterator":[
+            "Host: hostname",
+            "X-Request-ID: 70b54",
+            "X-Real-Ip: 127.0.0.1",
+            "X-Forwarded-For: 127.0.0.1",
+            "X-Forwarded-Host: hostname",
+            "X-Forwarded-Port: 443",
+            "X-Forwarded-Proto: https",
+            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
+            "X-Scheme: https",
+            "X-B3-TraceId: 5f910",
+            "X-B3-SpanId: 5f910",
+            "Authorization: Bearer eyJhb",
+            "User-Agent: PostmanRuntime/7.17.1",
+            "Accept: */*",
+            "Cache-Control: no-cache",
+            "Postman-Token: c209b",
+            "Accept-Encoding: gzip, deflate",
+            "Timeout-Access: <function1>",
+            "application/json"
+        ],
+        "encoding":"UTF-8",
+        "setBody":true,
+        "headersSize":19,
+        "setQuerystring":false,
+        "setPath":true,
+        "refererUri":null,
+        "timestamp":1574009868734,
+        "path":"/com.snowplowanalytics.snowplow/tp2",
+        "setSchema":true,
+        "body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
+        "ipAddress":"127.0.0.1",
+        "schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
+        "setHostname":true,
+        "setUserAgent":true,
+        "setTimestamp":true,
+        "setEncoding":true,
+        "setCollector":true,
+        "setRefererUri":false,
+        "hostname":"hostname",
+        "setHeaders":true,
+        "querystring":null,
+        "headers":[
+            "Host: hostname",
+            "X-Request-ID: 70b54",
+            "X-Real-Ip: 127.0.0.1",
+            "X-Forwarded-For: 127.0.0.1",
+            "X-Forwarded-Host: hostname",
+            "X-Forwarded-Port: 443",
+            "X-Forwarded-Proto: https",
+            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
+            "X-Scheme: https",
+            "X-B3-TraceId: 5f910",
+            "X-B3-SpanId: 5f910",
+            "Authorization: Bearer eyJhb",
+            "User-Agent: PostmanRuntime/7.17.1",
+            "Accept: */*",
+            "Cache-Control: no-cache",
+            "Postman-Token: c209b",
+            "Accept-Encoding: gzip, deflate",
+            "Timeout-Access: <function1>",
+            "application/json"
+        ],
+        "contentType":"application/json",
+        "setIpAddress":true,
+        "userAgent":"PostmanRuntime/7.17.1",
+        "setContentType":true,
+        "collector":"ssc-0.15.0-kafka",
+        "networkUserId":"f4aa0"
+    }', 
 ... 
 ]
 ```
@@ -454,7 +454,7 @@ def lookup(dictionary,keys):
                        return value    
                  except:        
                     return None
- 
+
 def makepath(stringpath):    
    path=stringpath.split('/')
    return path
@@ -464,7 +464,7 @@ def create_update(correlation_id, path, value):
    update.set_value(value=value, origin='integration-test', reader='_all')
    update.set_type('toe-436-test')
    return update
-   
+
 def execute(event_headers, event_payload, profile=None):
     if not event_headers:
       return None
@@ -481,8 +481,6 @@ def execute(event_headers, event_payload, profile=None):
 
 There are use cases where you want to process events from a topic that contains both single-payload events and multi-payload events. To do so it is necessary to differentiate the two types of events in the callback function as such:
 
-
-
 ```python
 import json
 import sys
@@ -495,7 +493,7 @@ import logging
 def execute(event_headers, event_payload, profile=None):
     if not event_headers:
       return None
-      
+
  if isinstance(event_headers, dict):
       logging.debug("received single-payload event")
       # add your code handling single-payload events here 
@@ -503,7 +501,7 @@ def execute(event_headers, event_payload, profile=None):
       logging.debug("received multi-payload event")
       # add your code handling multi-payload events here
     else:
-      raise ValueError("event_headers and/or event_payload do not match the expected signature") 
+      raise ValueError("event_headers and/or event_payload do not match the expected signature")
 ```
 
 ## Configuration
@@ -518,7 +516,7 @@ The name of the Kafka topic this Belt will receive events from. Topics are typic
 
 The Python code provided here has to be in the form of a function by the name **callback.py** that can be invoked using the signature `execute(event_headers, event_payload)`where the parameter `event_payload` and `event_headers`are both a Python dictionary containing one event/header from the input topic or a list of dictionaries containing multiple events/headers.
 
-The function can return either `None` , `[]`  or a list of Update objects representing an update to a profile in the profile store. If the return is not an Update object the belt will continue with the next message. In case it is, the object needs to be following below schema:
+The function can return either `None` , `[]` or a list of Update objects representing an update to a profile in the profile store. If the return is not an Update object the belt will continue with the next message. In case it is, the object needs to be following below schema:
 
 ```text
 UPDATE :=
@@ -530,10 +528,9 @@ UPDATE :=
     "_value": GRAIN_VALUE,                                     # must not be null
     "_profile_type": string                                    # default is "_d"
   }
-
 ```
 
-Whereas valid update operations can be found [here](profile-store/#update-operations) and a valid GRAIN\_VALUE  __is defined as follows:
+Whereas valid update operations can be found [here](profile-store/#update-operations) and a valid GRAIN\_VALUE \_\_is defined as follows:
 
 ```text
 GRAIN_VALUE := 
@@ -547,13 +544,13 @@ GRAIN_VALUE :=
   }
 ```
 
-Based on the update object generated by the callback, one ore more JSON update\(s\) will be written to the update topic. Every update object returned by this function must have **at least** the following attribute set: 
+Based on the update object generated by the callback, one ore more JSON update\(s\) will be written to the update topic. Every update object returned by this function must have **at least** the following attribute set:
 
 | Key | Method | Description |
 | :--- | :--- | :--- |
 | `_id` | `Update(id, [path])` | Specifies the profile that should be updated. \(part of constructor\) |
 | `_path` | `Update(id, [path])` | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. \(part of constructor\) |
-| `_value` | `set_value(value, certainty, _in, ttl, origin, reader)` | Contains the value that should be set in the profile under the defined \_path. `set_value()` expects the actual value `_v` and optional `_c`, `_in`, `_ttl`, `_origin`, `_reader`_._ **Example** of a **default grain** value with only __`_v` set:`{ "_v": _v, "_c": 1.0, "_in": time(), "_ttl": "P100Y", "_origin": "/belts/{belt-id}", "_reader": "_auth"` |
+| `_value` | `set_value(value, certainty, _in, ttl, origin, reader)` | Contains the value that should be set in the profile under the defined \_path. `set_value()` expects the actual value `_v` and optional `_c`, `_in`, `_ttl`, `_origin`, `_reader`_._ **Example** of a **default grain** value with only \_\_`_v` set:`{ "_v": _v, "_c": 1.0, "_in": time(), "_ttl": "P100Y", "_origin": "/belts/{belt-id}", "_reader": "_auth"` |
 
 If unspecified, default values will be used:
 
@@ -569,7 +566,7 @@ In some cases it is necessary to fetch a Profile from the Profile API. This can 
 
 `profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])`
 
-The profileClient uses the PROFILE\_TYPE environment variable as default. To fetch another profile type it can be passed as a furter optional parameter like this `getProfile(cid,profileType)`. 
+The profileClient uses the PROFILE\_TYPE environment variable as default. To fetch another profile type it can be passed as a furter optional parameter like this `getProfile(cid,profileType)`.
 
 If not using the [Belt API](../api-reference/belt-api.md#create-and-store-a-belt) as deployment path, you can configure the profile fetching using the following environment variables:
 
@@ -615,13 +612,11 @@ def execute(event_headers, event_payload, profile=None):
 {% endtab %}
 {% endtabs %}
 
-
-
 ## Dead letter queue
 
 In GRNRY, we have created so called _dead letter queues_. The Belt Extractor's dead letter queue is used to receive all the data that could not be processed correctly.
 
-By default the Belt Extractor's dead letter queue is called: 
+By default the Belt Extractor's dead letter queue is called:
 
 ```yaml
 belts_dead_letter
@@ -678,10 +673,7 @@ see [Profile specification](https://github.com/syncier/grnry-kafka-profile-updat
     "_origin": "/belts/123",
   }
 }
-
 ```
 {% endtab %}
 {% endtabs %}
-
-
 

@@ -73,7 +73,7 @@
 * [Installation](operator-reference/installation/README.md)
   * [Sizing guideline](operator-reference/installation/sizing-guideline.md)
   * [Snowplow Scala Stream Collector](operator-reference/installation/snowplow-scala-stream-collector.md)
-  * [Belt Extractor](operator-reference/installation/untitled.md)
+  * [Belt Extractor](operator-reference/installation/belt-extractor.md)
   * [Spring Cloud Data Flow](operator-reference/installation/spring-cloud-data-flow.md)
   * [Harvester API](operator-reference/installation/harvester-api.md)
   * [Belt API](operator-reference/installation/belt-api.md)

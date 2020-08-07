@@ -30,7 +30,6 @@ Allows the implementation of Hooks which will be executed before the HTTP Respon
       <td style="text-align:left">executeBeforeSend</td>
       <td style="text-align:left">
         <p>Intercepts profile and allows mutation before sending to API caller.</p>
-        <p></p>
         <p><b>Parameters:</b>
         </p>
         <p><code>String profileType:</code>Profile Type of the profile.</p>
@@ -39,17 +38,16 @@ Allows the implementation of Hooks which will be executed before the HTTP Respon
         <p><code>JsonNode profile:</code>The profile fetched from Profile Store.</p>
         <p><b>Returns:</b>
         </p>
-        <p><em> </em><code>JsonNode:</code>Possibly mutated profile.</p>
+        <p> <code>JsonNode:</code>Possibly mutated profile.</p>
       </td>
     </tr>
     <tr>
       <td style="text-align:left">shouldExecuteBeforeSend</td>
       <td style="text-align:left">
         <p>Allows the user to implement a method to validate if</p>
-        <p><a href="../../../../io/grnry/profilestore/hooks/Hook.html#executeBeforeSend-java.lang.String-java.lang.String-java.util.Collection-JsonNode-"><code>executeBeforeSend(java.lang.String, java.lang.String, java.util.Collection&lt;java.lang.String&gt;, JsonNode)</code></a> 
+        <p><a href="https://github.com/projectgranary/docs/tree/a8c6354c129141b3ae2bab73c2b17240bfedddc4/io/grnry/profilestore/hooks/Hook.html#executeBeforeSend-java.lang.String-java.lang.String-java.util.Collection-JsonNode-"><code>executeBeforeSend(java.lang.String, java.lang.String, java.util.Collection&lt;java.lang.String&gt;, JsonNode)</code></a>
         </p>
         <p>is called.</p>
-        <p></p>
         <p><b>Parameters:</b>
         </p>
         <p><code>String profileType:</code>Profile Type of the profile.</p>
@@ -58,7 +56,7 @@ Allows the implementation of Hooks which will be executed before the HTTP Respon
         <p><code>JsonNode profile:</code>The profile fetched from Profile Store.</p>
         <p><b>Returns:</b>
         </p>
-        <p><code>Boolean: </code>If executeBeforeSend should be called.</p>
+        <p><code>Boolean:</code> If executeBeforeSend should be called.</p>
       </td>
     </tr>
   </tbody>
@@ -100,7 +98,7 @@ public class Demo implements Hook {
 
 ## **Building a custom Hook**
 
-Ensure that the Hook is compiled as a fatJar containing its needed dependencies. 
+Ensure that the Hook is compiled as a fatJar containing its needed dependencies.
 
 {% code title="build.gradle" %}
 ```groovy
@@ -109,11 +107,11 @@ dependencies {
        compile('com.fasterxml.jackson.core:jackson-databind')
        compileOnly('org.springframework.boot:spring-boot-starter-web') 
    }
-   
+
    bootJar {
        enabled = false // disabled as this Hook has no main class
    }
-   
+
    jar {
        enabled = true
        from {

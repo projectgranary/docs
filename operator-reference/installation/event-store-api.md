@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-eventstore-api/tre
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/eventstore-api \
     --name grnry-eventstore-api \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status grnry-eventstore-api
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade grnry-eventstore-api \

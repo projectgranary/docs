@@ -6,16 +6,15 @@ description: >-
 
 # Segment Manager
 
-The Segment Manager is a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) which reconciles on a custom resource definition for segment jobs. Its main purpose is to ensure that the segment cronjob is up-to-date after any `create`,  `update` or `delete` request against the Kubernetes API.
+The Segment Manager is a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) which reconciles on a custom resource definition for segment jobs. Its main purpose is to ensure that the segment cronjob is up-to-date after any `create`, `update` or `delete` request against the Kubernetes API.
 
 It uses the [Segment Table Creation](segment-table-creation.md) script to start jobs which create [Segments](../../../learning-grnry-1/granary-glossary.md).
 
-A CRD model is provided to improve creation of Segments called `SegmentSpec`. This model holds all the configuration attributes from the Segment Table Creation script.  
+A CRD model is provided to improve creation of Segments called `SegmentSpec`. This model holds all the configuration attributes from the Segment Table Creation script.
 
-This model allows to create Segment Custom Resources via the K8s API or use the [Segment Management API](../../api-reference/segment-management-api.md) . 
+This model allows to create Segment Custom Resources via the K8s API or use the [Segment Management API](../../api-reference/segment-management-api.md) .
 
 The Segment Manager uses these [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to create a Segment CronJob equal to using the Segment Table Creation script directly via helm.
-
 
 ## Model SegmentSpec
 
@@ -36,7 +35,7 @@ An example SegmentSpec can be found [here](https://github.com/syncier/grnry-segm
 
 ### Env
 
-The Env variables allow to configure what the Segment Table Creation script is doing. 
+The Env variables allow to configure what the Segment Table Creation script is doing.
 
 {% hint style="info" %}
 Consult [Segment Table Creation](segment-table-creation.md#configure) for more information.
@@ -63,8 +62,6 @@ Consult [Segment Table Creation](segment-table-creation.md#configure) for more i
 | TARGET\_SEGMENT\_INDEX\_SEPARATOR | \| |
 | TARGET\_SEGMENT\_VIEW\_SEPARATOR | , |
 | TARGET\_SEGMENT\_VIEW\_DEFINITION\_SEPARATOR | : |
-
-
 
 #### General Required Envs:
 
@@ -128,7 +125,7 @@ Consult [Segment Table Creation](segment-table-creation.md#configure) what these
 ### Image
 
 {% hint style="info" %}
-For information regarding these attributes consult the [Kubernetes Docs](https://kubernetes.io/docs/concepts/containers/images/). 
+For information regarding these attributes consult the [Kubernetes Docs](https://kubernetes.io/docs/concepts/containers/images/).
 {% endhint %}
 
 | Attribute | Default | Required/Optional |
@@ -139,9 +136,8 @@ For information regarding these attributes consult the [Kubernetes Docs](https:/
 | restartPolicy | OnFailure | Optional |
 | tag | 0.7.0 | Optional |
 
-
-
 ### Further Information
 
 * [https://github.com/operator-framework/operator-sdk](https://github.com/operator-framework/operator-sdk)
 * [https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
+

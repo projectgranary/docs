@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-docker-zipkin/tree
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/zipkin \
     --name zipkin \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status zipkin
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade zipkin \

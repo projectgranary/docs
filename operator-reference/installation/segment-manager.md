@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-segment-manager/tr
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/segment-manager \
     --name segment-manager \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status segment-manager
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade segment-manager \

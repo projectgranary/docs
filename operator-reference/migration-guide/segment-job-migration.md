@@ -4,7 +4,7 @@ description: Guide to migrate Granary 0.7 Segment Jobs to Granary 0.8
 
 # Segment Job Migration
 
-With previous Granary versions segments where created by starting Cronjobs via Kubernetes, like so: 
+With previous Granary versions segments where created by starting Cronjobs via Kubernetes, like so:
 
 ```text
 cronjob:
@@ -31,10 +31,10 @@ env:
   CITUS_DIST_COL: "correlation_id" 
   TYPE: "pivot" 
   PIVOT_PATHS: "/pathA,/pathB,/pathC"
-  
+
   PIVOT_TRANSFORMATIONS: "/pathC=substring(?#>>'{}', 4, 4)::text"
   PIVOT_ALLOW_EMPTY: "False" 
-  
+
   TARGET_SEGMENT_INDEX_SEPARATOR: "|"
   TARGET_SEGMENT_INDEXES: "idx1=(\"/pathA\")"
 
@@ -55,12 +55,11 @@ envFromSecrets:
   DB_PASSWORD:  
     secret: grnry-secret
     key: superuser-password
-
 ```
 
-In Granary 0.8 the [Segment Management API](../../developer-reference/api-reference/segment-management-api.md) and the [Segment Manager](../../developer-reference/dataflow/segment-store/segment-manager.md) are introduced to reduce the error-proneness and ease the effort of creating and managing segment jobs. 
+In Granary 0.8 the [Segment Management API](../../developer-reference/api-reference/segment-management-api.md) and the [Segment Manager](../../developer-reference/dataflow/segment-store/segment-manager.md) are introduced to reduce the error-proneness and ease the effort of creating and managing segment jobs.
 
-The example above transformed into a Granary 0.8 Segment Job JSON representation: 
+The example above transformed into a Granary 0.8 Segment Job JSON representation:
 
 ```text
 {
@@ -91,9 +90,5 @@ The example above transformed into a Granary 0.8 Segment Job JSON representation
 
 This JSON snippet needs to be sent to the Segment Management API as HTTP request body.
 
-Many of the properties set before are now default values from [Segment Manager](../../developer-reference/dataflow/segment-store/segment-manager.md). 
-
-
-
-
+Many of the properties set before are now default values from [Segment Manager](../../developer-reference/dataflow/segment-store/segment-manager.md).
 

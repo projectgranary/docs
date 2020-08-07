@@ -22,7 +22,7 @@ Important: Incompatible segment custom resources are omitted from all responses 
 
 ## API Methods
 
-Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#segment-management-api) for default roles a user needs to interact with the Segment Management API. However, [different roles](../../operator-reference/identity-and-access-management/granary-access-clients.md#jdbc-api-a-k-a-segment-store-api) apply and are required to  read the created Segments via Segment Store API. 
+Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#segment-management-api) for default roles a user needs to interact with the Segment Management API. However, [different roles](../../operator-reference/identity-and-access-management/granary-access-clients.md#jdbc-api-a-k-a-segment-store-api) apply and are required to read the created Segments via Segment Store API.
 
 {% api-method method="get" host="https://api.grnry.io" path="/segments" %}
 {% api-method-summary %}
@@ -48,7 +48,7 @@ Number of segment jobs to be returned. Default `20`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="string" required=false %}
-A cursor to define the starting point of your request. Default `0`  
+A cursor to define the starting point of your request. Default `0`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="search" type="string" %}
@@ -63,7 +63,7 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "items": [{
         "id": "demo-segment-95he0",
@@ -129,7 +129,7 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp":1586949269381,
     "type": "unexpected_error",
@@ -172,7 +172,7 @@ Authentication token required
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "id": "demo-segment-95he0",
     "metadata": {
@@ -232,7 +232,7 @@ Authentication token required
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
@@ -246,7 +246,7 @@ Authentication token required
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp":1586949269381,
     "type": "unexpected_error",
@@ -277,7 +277,7 @@ Authentication token required.
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="data" type="object" required=true %}
-Data describing your segment job . See below for more information.  
+Data describing your segment job . See below for more information.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="labels" type="array" required=false %}
@@ -286,25 +286,17 @@ Example: `["customerA", "usecaseB"]`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="roles" type="object" required=false %}
-Roles that can edit and view this segment job.  
-  
-`{  
-    "editor": ["string"],  
-    "viewer": ["string"]  
-}`  
-  
-Cannot be `""` or `[]` .
+Roles that can edit and view this segment job.`{    
+"editor": ["string"],    
+"viewer": ["string"]    
+}`Cannot be `""` or `[]` .
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="metadata" type="object" required=true %}
-Metadata describing the segment job.    
-  
-displayName: required  
-description: optional  
-  
-`{   
-   "description": "string",  
-   "displayName": "string"  
+Metadata describing the segment job.displayName: required  
+description: optional`{    
+"description": "string",    
+"displayName": "string"    
 }`
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
@@ -316,7 +308,7 @@ description: optional
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "id": "demo-segment-95he0",
     "metadata": {
@@ -372,7 +364,7 @@ description: optional
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
@@ -386,7 +378,7 @@ description: optional
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp": 1587303130850,
     "type": "entity_already_exists"
@@ -400,7 +392,7 @@ description: optional
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp":1586949269381,
     "type": "unexpected_error",
@@ -453,7 +445,7 @@ Overwrites `editor` and `viewer` if added, otherwise falls back to original vers
 
 {% api-method-parameter name="metadata" type="object" required=true %}
 Metadata describing the segment job.  
-Overwrites `displayName` and `description`.  
+Overwrites `displayName` and `description`.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -464,7 +456,7 @@ Overwrites `displayName` and `description`.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "id": "demo-segment-95he0",
     "metadata": {
@@ -524,7 +516,7 @@ Overwrites `displayName` and `description`.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
@@ -538,7 +530,7 @@ Overwrites `displayName` and `description`.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
@@ -552,7 +544,7 @@ Overwrites `displayName` and `description`.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp": 1587302671116,
     "type": "entity_not_found",
@@ -566,7 +558,7 @@ Overwrites `displayName` and `description`.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp":1586949269381,
     "type": "unexpected_error",
@@ -584,7 +576,7 @@ Delete a Segment Job
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes a segment job.   
+Deletes a segment job.  
 This request requires you to have the correct `editor` role.
 {% endapi-method-description %}
 
@@ -609,7 +601,7 @@ Authentication token required.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
@@ -619,7 +611,7 @@ Authentication token required.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
@@ -633,7 +625,7 @@ Authentication token required.
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 {
     "timestamp":1586949269381,
     "type": "unexpected_error",

@@ -10,7 +10,7 @@ See [Helm Chart's README.md](https://github.com/syncier/grnry-reaper/tree/master
 
 Install Helm Chart:
 
-```
+```text
 $ helm install grnry-stable/reaper \
     --name reaper \
     --version <version> \
@@ -23,7 +23,7 @@ Status check and further instructions:
 $ helm status reaper
 ```
 
-Upgrade Helm Chart: 
+Upgrade Helm Chart:
 
 ```text
 $ helm upgrade reaper \
