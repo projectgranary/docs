@@ -17,6 +17,7 @@ The profile store is a distributed table in a database. Each tuple in that table
 `profilestore` table tuples consist of the following fields.
 
 {% tabs %}
+{% tab title="Spec" %}
 
 
 
@@ -145,7 +146,171 @@ The profile store is a distributed table in a database. Each tuple in that table
   </tbody>
 </table>
 
- {% endtab %} {% tab title="Example" %} \`\`\`javascript // retrieved via Profile API { "\_id": "0815", "a1": { "\_latest": { "\_v": "abc", "\_c": 0.4, "\_in": 123, "\_ttl": "P100Y", "\_origin": null, "\_reader": "\_all" } }, "a2": { "b1": { "2018-09-21": { "\_v": "21", "\_c": 0.1, "\_ttl": "P100Y", "\_origin": null, "\_reader": "\_all" }, "2018-09-22": { "\_v": "22", "\_c": 0.2, "\_ttl": "P100Y", "\_origin": null, "\_reader": "\_all" }, "\_latest": { "\_v": "23", "\_in": "2018-09-23", "\_c": 0.3, "\_ttl": "P100Y", "\_origin": null, "\_reader": "\_all" } }, "b2": { "\_latest": { "\_v": "123456", "\_c": 0.4, "\_in": "2018-09-20", "\_ttl": "P100Y", "\_origin": null, "\_reader": "\_all" } } }, "a3": { "b3": { "c3": { "d3": { "e3": { "\_latest": { "\_v": "123456", "\_c": 0.5, "\_in": "2018-09-20", "\_ttl": "P100Y", "\_origin": null, "\_reader": "\_all" } } } } } } } \`\`\` {% endtab %} {% endtabs %} \#\# Component \`Profile Updater\` Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store. These Profile Updates must follow the \[Profile specification\]\(https://github.com/syncier/grnry-kafka-profile-update/blob/master/PROFILESPECS.md\). Currently there are the following operations: \#\#\#\# Update Operations \| Operation Name \| Input Type \| Output \| \| :--- \| :--- \| :--- \| \| \_\\_set\_ \| same type as grain type \| inserts the current grain value at \_\\_latest\_ and overwrites if it already exists. \| \| \_\\_set\\_if\\_not\\_exist\_ \| same type as grain type \| inserts the current grain value at \_\\_latest\_ only if it does not already exist. \| \| \_\\_set\\_with\\_history\_ \| same type as grain type \| inserts the current grain value at \_\\_latest\_ and stores previous \_\\_latest\_ grain value at its insert point in time if it already exists. \| \| \_\\_set\\_with\\_history\\_distinct\_ \| same type as grain type \| will do a \_\\_set\\_with\\_history\_ only if the new value is distinct from the existing value. \| \| \_\\_set\\_max/\\_set\\_min\_ \| text \| inserts the current grain value at \_\\_latest\_ and, if the value already exists, the old value at \_\\_latest\_ will be overwritten only if the new value is higher \\(resp. lower\\) than the old one. Numbers will be compared numerically whereas text including dates \\(ISO8601\\) will be compared lexicographically. \_Note: Always provide full metadata set, since global default values will be set otherwise \\(not existing ones\\). If the pit=latest\_ \_value\_ \_does not change, no metadata update will be done either.\_ \| \| \_\\_set\\_max\\_with\\_history/\\_set\\_min\\_with\\_history\_ \| text \| will do a \_\\_set\\_max\_ \\(resp. \_\\_set\\_min\_\\) but will, in case of overwriting, additionally keep the old value at its insert point in time. \| \| \_\\_delete\_ \| \_text\_ or \_array\_ \| if value is \_\`""\` or \`\[""\]\` or \`\[\]\`\_, then deletes the \_\\_latest\_ grain value at the specified path. If value is \_array\_ of \_pit\_s, then deletes grain values at the specified path and with specified \_pit\_s. \| \| \_\\_inc\_ \| \_counter\_ \| creates or increments a counter. \| \| \_\\_array\\_append\_ \| \_array\_ \| appends to the \_\\_latest\_ array grain value considered as a bag semantics. \| \| \_\\_array\\_append\\_with\\_history\_ \| \_array\_ \| appends to the \_\\_latest\_ array grain value considered as a bag semantics and stores the previous \_\\_latest\_ grain value at pit of insertion. \| \| \_\\_array\\_put\_ \| \_array\_ \| adds an element to the \_\\_latest\_ array grain value considered as a set \\(i.e., unique elements\\). Executed on a non-existing grain \\(i.e., it is this grain's creation\\) inserts the array as is \\(i.e., without de-duplication\\) \| \| \_\\_array\\_put\\_with\\_history\_ \| \_array\_ \| adds an element to the \_\\_latest\_ array grain value considered as a set \\(i.e., unique elements\\) and stores the previous \_\\_latest\_ grain value at pit of insertion. \| \| \_\\_array\\_put\\_with\\_history\\_distinct\_ \| \_array\_ \| does an \_\\_array\\_put\\_with\\_history\_ only if the new value is distinct from the existing value. \| \| \_\\_array\\_remove\_ \| \_text\_ \| removes all elements matching the received string from the \_\\_latest\_ array grain value. \| \| \_\\_array\\_remove\\_with\\_history\_ \| \_text\_ \| removes all elements matching the received string from the \_\\_latest\_ array grain value and stores the previous \_\\_latest\_ grain value at pit of insertion. \| Each Profile Update carries the the grain value to be merged into the store. A grain value consists of the actual value, denoted as \`\_v\`, and its meta information. \\(Currently\\) \`\_v\` must be a JSON string or a JSON array of strings. \#\#\# Counter The \_\`\_inc\` operation's \`\_v\`\_ must be of the form: \`initialvalue\|stepsize\|steps\`, e.g., \`0\|1\|1\`. This creates or increments counter grain values like \`{"\_initial":0, "\_step":1, "\_current":1}\`. Please see the above linked spec. {% hint style="info" %} \_\*\*Example:\*\*\_ The value\`"10\|0.5\|-1"\` defines a single-step decrement of width \`0.5\` for a counter starting at value \`10\`. {% endhint %} \| Parameter \| Datatype \| Description \| \| :--- \| :--- \| :--- \| \| \`initialvalue\` \| real number \| defines the counter's start value. \| \| \`stepsize\` \| real number \| defines the width of each counter increment/decrement \| \| \`steps\` \| real number \| the number of increments/decrements to do \| \#\#\# Arrays For arrays, Granary offers operations for the in-place modification of grain values. These operation either consider the array as a set of values with distinct entries or as bag of values where duplicates may occur. All array operations can be run with or without the creation of history. On an array modifications, existing grain value meta data \\(\`\_reader, \_ttl, \_origin, \_c\`\\) remain unchanged. The insertion time \\(\`\_in\`\\) is updated. {% hint style="info" %} Be aware that all array operations have O\\(n\\) characteristics \\(n = size of the existing array, not just the number of elements you want to add/to set\\). If you create arrays with 1000++ elements, these updates will take significantly longer than other operations, which can slow down the processing of certain partitions \\(resulting in lags on these partitions when a high volume of data ist processed\\). {% endhint %} \#\#\# Profile Update Prioritization / Throtteling Kafka Profile Updater supports a setup with a low and high priority Profile Updater. The low-prio instance is throtteled by monitoring the Kafka topic lag of the high-prio instance. To enable this setup, the \[Profile Updater needs to be installed\]\(../../../operator-reference/installation/profile-updater.md\) twice with varying Kafka input topic and consumer group settings. Additionally, the low-prio Profile Updater needs to be deployed with enabled throtteling configuration. \| Parameter \| Description \| Default \| \| :--- \| :--- \| :--- \| \| \`throttle.enabled\` \| Enable or disable throttling \\(enable on low-prio instance\\) \| \`false\` \| \| \`throttle.group\` \| The group to monitor \\(\`kafka.consumerGroup\` of the high-prio instance\\) \| \`profile-update\` \| \| \`throttle.topic\` \| The topic to monitor \\(\`kafka.inputTopic\` of the high-prio instance\\) \| \`profile-update\` \| \| \`throttle.lagBarrier\` \| The maximum total lag of the high-prio instance before throttling will be applied \| \`100\` \| \| \`throttle.checkIntervalMs\` \| Interval \\(in milliseconds\\) to check current lag of high-prio instance \| \`60000\` \| \| \`throttle.waitTimeMs\` \| If \`throttle.lagBarrier\` is exceeded each message will be artificially throttled by this amount \\(milliseconds\\) \| \`1000\` \| \#\#\# Scale Profile Updater based on Kafka Topic Lag To achieve a scaling of Kafka Updater in case of a high number of pending messages to process, a \[Horizontal Pod Autoscaler\]\(https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/\) can be configured. The total count of pending messages of affected Kafka topic is used as trigger to scale the deployment. The custom metrics API provider \[prometheus-adapter\]\(https://github.com/DirectXMan12/k8s-prometheus-adapter\) is required to expose this metric. Using following values file, the \[prometheus-adapter helm chart\]\(https://github.com/helm/charts/tree/master/stable/prometheus-adapter\) can be installed to make the custom metric available within the custom metrics API. {% code title="values.yaml" %} \`\`\`yaml \[..\] rules: default: false custom: - seriesQuery: '{\_\_name\_\_=~"^kafka\_consumer\_consumer\_fetch\_manager\_metrics\_records\_lag$", topic="profile-batch-update"}' resources: overrides: kubernetes\_namespace: resource: namespace kubernetes\_pod\_name: resource: pod name: matches: "" as: "kafka\_processing\_lag\_profile\_batch\_update" metricsQuery: 'sum\(&lt;&gt;{&lt;&gt;}\) by \(&lt;&gt;\)' \[..\] \`\`\` {% endcode %}
+{% endtab %}
+
+{% tab title="Example" %}
+```javascript
+// retrieved via Profile API
+{
+  "_id": "0815",
+  "a1": {
+    "_latest": {
+      "_v": "abc",
+      "_c": 0.4,
+      "_in": 123,
+      "_ttl": "P100Y",
+      "_origin": null,
+      "_reader": "_all"
+    }
+  },
+  "a2": {
+    "b1": {
+      "2018-09-21": {
+        "_v": "21",
+        "_c": 0.1,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      },
+      "2018-09-22": {
+        "_v": "22",
+        "_c": 0.2,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      },
+      "_latest": {
+        "_v": "23",
+        "_in": "2018-09-23",
+        "_c": 0.3,
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      }
+    },
+    "b2": {
+      "_latest": {
+        "_v": "123456",
+        "_c": 0.4,
+        "_in": "2018-09-20",
+        "_ttl": "P100Y",
+        "_origin": null,
+        "_reader": "_all"
+      }
+    }
+  },
+  "a3": {
+    "b3": {
+      "c3": {
+        "d3": {
+          "e3": {
+            "_latest": {
+              "_v": "123456",
+              "_c": 0.5,
+              "_in": "2018-09-20",
+              "_ttl": "P100Y",
+              "_origin": null,
+              "_reader": "_all"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+## Component `Profile Updater`
+
+Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store. These Profile Updates must follow the [Profile specification](https://github.com/syncier/grnry-kafka-profile-update/blob/master/PROFILESPECS.md). Currently there are the following operations:
+
+#### Update Operations
+
+| Operation Name | Input Type | Output |
+| :--- | :--- | :--- |
+| _\_set_ | same type as grain type | inserts the current grain value at _\_latest_ and overwrites if it already exists. |
+| _\_set\_if\_not\_exist_ | same type as grain type | inserts the current grain value at _\_latest_ only if it does not already exist. |
+| _\_set\_with\_history_ | same type as grain type | inserts the current grain value at _\_latest_ and stores previous _\_latest_ grain value at its insert point in time if it already exists. |
+| _\_set\_with\_history\_distinct_ | same type as grain type | will do a _\_set\_with\_history_ only if the new value is distinct from the existing value. |
+| _\_set\_max/\_set\_min_ | text | inserts the current grain value at  _\_latest_ and, if the value already exists, the old value at _\_latest_ will be overwritten only if the new value is higher \(resp. lower\) than the old one. Numbers will be compared numerically whereas text including dates \(ISO8601\) will be compared lexicographically. _Note: Always provide full metadata set, since global default values will be set otherwise \(not existing ones\). If the pit=latest_ _value_ _does not change, no metadata update will be done either._ |
+| _\_set\_max\_with\_history/\_set\_min\_with\_history_ | text | will do a _\_set\_max_ \(resp. _\_set\_min_\) but will, in case of overwriting, additionally keep the old value at its insert point in time. |
+| _\_delete_ | _text_ or _array_ | if value is _`""` or `[""]` or `[]`_, then deletes the _\_latest_ grain value at the specified path. If value is _array_ of _pit_s, then deletes grain values at the specified path and with specified _pit_s. |
+| _\_inc_ | _counter_ | creates or increments a counter. |
+| _\_array\_append_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics. |
+| _\_array\_append\_with\_history_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics and stores the previous _\_latest_ grain value at pit of insertion. |
+| _\_array\_put_ | _array_ | adds an element to the _\_latest_ array grain value considered as a set \(i.e., unique elements\). Executed on a non-existing grain \(i.e., it is this grain's creation\) inserts the array as is \(i.e., without de-duplication\) |
+| _\_array\_put\_with\_history_ | _array_ | adds an element to the _\_latest_ array grain value considered as a set \(i.e., unique elements\) and stores the previous _\_latest_ grain value at pit of insertion. |
+| _\_array\_put\_with\_history\_distinct_ | _array_ | does an _\_array\_put\_with\_history_ only if the new value is distinct from the existing value. |
+|  _\_array\_remove_ | _text_ | removes all elements matching the received string from the _\_latest_ array grain value. |
+| _\_array\_remove\_with\_history_ | _text_ | removes all elements matching the received string from the _\_latest_ array grain value and stores the previous _\_latest_ grain value at pit of insertion. |
+
+Each Profile Update carries the the grain value to be merged into the store. A grain value consists of the actual value, denoted as `_v`, and its meta information. \(Currently\) `_v` must be a JSON string or a JSON array of strings.
+
+### Counter
+
+The _`_inc` operation's `_v`_ must be of the form: `initialvalue|stepsize|steps`, e.g., `0|1|1`. This creates or increments counter grain values like `{"_initial":0, "_step":1, "_current":1}`. Please see the above linked spec. 
+
+{% hint style="info" %}
+_**Example:**_ The value`"10|0.5|-1"` defines a single-step decrement of width `0.5` for a counter starting at value `10`.
+{% endhint %}
+
+| Parameter | Datatype | Description |
+| :--- | :--- | :--- |
+| `initialvalue` | real number | defines the counter's start value. |
+| `stepsize` | real number | defines the width of each counter increment/decrement |
+| `steps` | real number |  the number of increments/decrements to do |
+
+### Arrays
+
+For arrays, Granary offers operations for the in-place modification of grain values. These operation either consider the array as a set of values with distinct entries or as bag of values where duplicates may occur. All array operations can be run with or without the creation of history.
+
+On an array modifications, existing grain value meta data \(`_reader, _ttl, _origin, _c`\) remain unchanged. The insertion time \(`_in`\) is updated.
+
+{% hint style="info" %}
+Be aware that all array operations have  O\(n\) characteristics \(n = size of the existing array, not just the number of elements you want to add/to set\). If you create arrays with 1000++ elements, these updates will take significantly longer than other operations, which can slow down the processing of certain partitions \(resulting in lags on these partitions when a high volume of data ist processed\).
+{% endhint %}
+
+### Profile Update Prioritization / Throtteling
+
+Kafka Profile Updater supports a setup with a low and high priority Profile Updater. The low-prio instance is throtteled by monitoring the Kafka topic lag of the high-prio instance. To enable this setup, the [Profile Updater needs to be installed](../../../operator-reference/installation/profile-updater.md) twice with varying Kafka input topic and consumer group settings. Additionally, the low-prio Profile Updater needs to be deployed with enabled throtteling configuration.
+
+| Parameter | Description | Default |
+| :--- | :--- | :--- |
+| `throttle.enabled` | Enable or disable throttling \(enable on low-prio instance\) | `false` |
+| `throttle.group` | The group to monitor \(`kafka.consumerGroup` of the high-prio instance\) | `profile-update` |
+| `throttle.topic` | The topic to monitor \(`kafka.inputTopic` of the high-prio instance\) | `profile-update` |
+| `throttle.lagBarrier` | The maximum total lag of the high-prio instance before throttling will be applied | `100` |
+| `throttle.checkIntervalMs` | Interval \(in milliseconds\) to check current lag of high-prio instance | `60000` |
+| `throttle.waitTimeMs` | If `throttle.lagBarrier` is exceeded each message will be artificially throttled by this amount \(milliseconds\) | `1000` |
+
+### Scale Profile Updater based on Kafka Topic Lag
+
+To achieve a scaling of Kafka Updater in case of a high number of pending messages to process, a [Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) can be configured. The total count of pending messages of affected Kafka topic is used as trigger to scale the deployment. The custom metrics API provider [prometheus-adapter](https://github.com/DirectXMan12/k8s-prometheus-adapter) is required to expose this metric.
+
+Using following values file, the [prometheus-adapter helm chart](https://github.com/helm/charts/tree/master/stable/prometheus-adapter) can be installed to make the custom metric available within the custom metrics API.
+
+{% code title="values.yaml" %}
+```yaml
+[..]
+rules:
+  default: false
+  custom:
+    - seriesQuery: '{__name__=~"^kafka_consumer_consumer_fetch_manager_metrics_records_lag$", topic="profile-batch-update"}'
+      resources:
+        overrides:
+          kubernetes_namespace:
+            resource: namespace
+          kubernetes_pod_name:
+            resource: pod
+      name:
+        matches: ""
+        as: "kafka_processing_lag_profile_batch_update"
+      metricsQuery: 'sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)'
+[..]
+```
+{% endcode %}
 
 <table>
   <thead>
