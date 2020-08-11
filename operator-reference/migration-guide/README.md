@@ -4,38 +4,90 @@ description: Explanation of migration strategies between Granary platform versio
 
 # Migration guide
 
-## Upgrade from Granary 0.7 "Kurt" to Granary 0.8 "Lemmy"
-
-### Alter table "public.eventstore"
-
-```text
-ALTER TABLE public.eventstore ADD COLUMN IF NOT EXISTS event_type_version bigint NOT NULL DEFAULT 1;
-```
-
-### Install new Granary Components
-
-* [Harvester API](../installation/harvester-api/)
-  * [Make sure to have registered SCDF Applications in SCDF Server before starting Harvester API](../installation/harvester-api/getting-started.md)
-  * [Source Types need to be added manually via SQL](../installation/harvester-api/source-types.md#registering-a-new-source-type)
-* [Segment Manager](../installation/segment-manager.md)
-* [Segment Management API](../installation/segment-creation-api.md)
-* [Reaper](../installation/reaper.md)
+## Upgrade from Granary 0.8 "Lemmy" to Granary 0.9 "Marie"
 
 ### Update Granary Components
 
-Update all remaining Granary components to their Granary 0.8 version as denoted in the [release notes](../granary-release-notes/). Bolt version indicate an update.
+Update all remaining Granary components to their Granary 0.9 version as denoted in the [release notes](../granary-release-notes/). Bold versions indicate an update.
 
-### Update Granary Harvesters to use Harvester API
+#### Harvesters
 
-Harvester Data-in pipeline definition changed with Granary 0.8. See the [Harvester API CI/CD Cookbook](ci-cd-cookbook.md) for details.
+To update the SCDF apps, you need to follow these steps first:
 
-### Update Granary Segments to use Segment Managment API
+1. [Register ](../installation/spring-cloud-data-flow.md#registering-the-grnry-scdf-apps)new version of [mandatory SCDF apps](../installation/spring-cloud-data-flow.md#list-of-all-mandatory-scdf-apps) with Spring Cloud Data Flow server
+2. [Import SQL script for Source Types](../installation/harvester-api/source-types.md#registering-a-source-type-with-a-new-version-of-an-existing-source-app) to Source Type database, latest SQL see here
+3. Update defaults for SCDF app versions in Harvester API Helm deployment
+4. Restart Harvester API, if no errors occur, update has been successful
+   1. If errors occur, revisit steps 1-3 and check for issues
 
-Segment Creation flow is now Rest API based and does no longer require Helm deployments. See [Segment Job Migration](segment-job-migration.md) for instructions.
+Once this is done, you can update running Harvester instance models via [PUT API call](../../developer-reference/api-reference/harvester-api.md#update-harvester-instance). Restart the Harvester afterwards.
 
-### Update Granary Reaper Data Flows
+Advocate the usage of the [new common log format for the transform scripts](../../learning-grnry-1/data-in/best-practices-1/logging.md) among use case developers. 
 
-Granary's Reaper got introduced in Granary 0.7. In this version, Kafka topics for TTL-expired grains had to be created manually due to required custom retentions. This is no longer needed in Granary 0.8 because Granary's Reaper creates the Kafka topics for TTL-expired grains automatically via Harvester API's Event Type endpoints. However, Belts consuming TTL-expired grains need to be updated in order to consume those TTL Event Types. 
+#### Belts
+
+To update the Belts, you need to follow these steps first:
+
+1. Update default for Belt version Belt API Helm deployment
+2. Restart Belt API
+
+Once this is done, you can update running Belt models via [PUT API call](../../developer-reference/api-reference/belt-api.md#updates-a-belt-by-id). Restart the Belt afterwards.
+
+Advocate the usage of the [new common log format for the callback scripts](../../learning-grnry-1/using-data-in-granary/best-practices/logging.md) among use case developers.
+
+#### Segments
+
+Update running Segment definitions via [PUT API call](../../developer-reference/api-reference/segment-management-api.md#update-a-segment-job). Wait for the next scheduled execution to get the changes applied.
+
+### Update Segment Store API \(Presto\)
+
+To enable the Kafka topic browsing feature of Granary 0.9, you need to add this configuration to your Helm deployment:
+
+```text
+kafka:
+  enabled: true
+  tables: snowplow,topic1,topic2
+```
+
+| Key | Default value | Description |
+| :--- | :--- | :--- |
+| `kafka.enabled` | true | Switch to enable/disable Kafka connector. |
+| `kafka.tables` | snowplow,topic1,topic2 | List of topic names that are queryable via Presto. If left empty, all Kafka topics can be viewed given the user has a Keycloak role to view the respective topic. |
+
+### Update Kafka Profile Updater
+
+Through the refactoring of Profile Updater, there are some new fields in its Helm Chart:
+
+```text
+kafkaProfileUpdate:
+  concurrency: 1
+  sendAllExceptionsToDLQ: false
+  logLongRunningOperationsMs: 1000
+```
+
+| Key | Default value | Description |
+| :--- | :--- | :--- |
+| `kafkaProfileUpdate.concurrency` | 1 | Denotes the number of Kafka consumers per Profile Updater pod. |
+| `kafkaProfileUpdate.sendAllExceptionsToDLQ` | false | Determines if all exceptions in profile updater's database interaction are directly written to the Dead Letter Queue or  if erroneous updates are being retried. |
+| `kafkaProfileUpdate.loglongRunningOperstionsMs` | 1000 | Threshold to log long running database operations. |
+
+See[ Profile Updater documentation](../../developer-reference/dataflow/profile-store/#when-is-something-written-to-the-dead-letter-queue) for more information. Override the defaults in your Helm deployment in case a different behavior is desired.
+
+There is a breaking change in the Helm deployment imagePullSecrets expects a `List` and no longer a `String`:
+
+```text
+imagePullSecrets: 
+- grnry-dockerconfig
+```
+
+### Update Kafka Manager
+
+There is a breaking change in the Helm deployment imagePullSecrets expects a `List` and no longer a `String`:
+
+```text
+imagePullSecrets: 
+- grnry-dockerconfig
+```
 
 **That's it.**
 

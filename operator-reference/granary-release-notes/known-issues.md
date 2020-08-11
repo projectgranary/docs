@@ -22,7 +22,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">All profile updates fail after database connection failure.</td>
       <td style="text-align:left">0.4.1</td>
       <td style="text-align:left">not reproducable</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/190">#190</a> (closed)</td>
+      <td style="text-align:left">#190 (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">Profile Updater</td>
@@ -32,8 +32,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.4.1</td>
       <td style="text-align:left">0.5.5</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/182">#182</a>
-        </p>
+        <p>#182</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -44,8 +43,8 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.4.2</td>
       <td style="text-align:left">0.4.3</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/220">#220</a> (closed)</p>
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/219">#219</a> (closed)</p>
+        <p>#220 (closed)</p>
+        <p>#219 (closed)</p>
       </td>
     </tr>
     <tr>
@@ -57,7 +56,7 @@ description: This page lists known issues to the Granary platform.
         <p>0.4.3</p>
         <p>Needs to be fixed in configuration.</p>
       </td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/221">#221</a> (closed)</td>
+      <td style="text-align:left">#221 (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left"><del>Kafka Connect</del>
@@ -70,10 +69,8 @@ description: This page lists known issues to the Granary platform.
       </td>
       <td style="text-align:left"><del>-</del>
       </td>
-      <td style="text-align:left">&lt;del&gt;&lt;/del&gt;<a href="https://gitlab.alvary.io/grnry/scrum/issues/198"><del>#198</del></a><del> </del>
-        <a
-        href="https://gitlab.alvary.io/grnry/scrum/issues/199"><del>#199</del>
-          </a>&lt;del&gt;&lt;/del&gt;</td>
+      <td style="text-align:left"><del>#198 #199</del>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left">Segment Store API</td>
@@ -81,16 +78,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Presto sends too many requests too Keycloak.</td>
       <td style="text-align:left">0.4.3</td>
       <td style="text-align:left">0.4.6</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/193">#193</a> (closed)</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">Profile Updater</td>
-      <td style="text-align:left">GKI_2019_0007</td>
-      <td style="text-align:left">Profile Updater does not process json.dumps result.</td>
-      <td style="text-align:left">0.4.1</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/185">#185</a>
-      </td>
+      <td style="text-align:left">#193 (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">Profile Updater</td>
@@ -99,7 +87,7 @@ description: This page lists known issues to the Granary platform.
       <td
       style="text-align:left">0.4.1</td>
         <td style="text-align:left">0.4.2</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/223">#223</a> (closed)</td>
+        <td style="text-align:left">#223 (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">Belt API</td>
@@ -107,8 +95,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">After deploying a belt, the API returns state &quot;failed&quot; immediately
         even though deployment is still in progress.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/323">#323</a>
+      <td style="text-align:left">0.7.0</td>
+      <td style="text-align:left">
+        <p>#323</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -117,8 +107,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Profile Updater service throws runtime exception on unhandled errors instead
         of retrying.</td>
       <td style="text-align:left">0.4.4</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/346">#346</a>
+      <td style="text-align:left">0.6.0</td>
+      <td style="text-align:left">
+        <p>#346</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -129,8 +121,7 @@ description: This page lists known issues to the Granary platform.
       style="text-align:left">0.4.4</td>
         <td style="text-align:left">0.5.0</td>
         <td style="text-align:left">
-          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/284">#284</a>
-          </p>
+          <p>#284</p>
           <p>(closed)</p>
         </td>
     </tr>
@@ -149,8 +140,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">0.5.6</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/355">#355</a>
-        </p>
+        <p>#355</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -161,8 +151,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">0.5.5</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/359">#359</a>
-        </p>
+        <p>#359</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -173,8 +162,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.3.0</td>
       <td style="text-align:left">0.4.0</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/react-frontend-admin/issues/62">react-frontend-admin#62</a>
-        </p>
+        <p>react-frontend-admin#62</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -186,8 +174,7 @@ description: This page lists known issues to the Granary platform.
       style="text-align:left">0.3.0</td>
         <td style="text-align:left">0.4.0</td>
         <td style="text-align:left">
-          <p><a href="https://gitlab.alvary.io/grnry/graphql-api/issues/17">graphql-api#17</a>
-          </p>
+          <p>graphql-api#17</p>
           <p>(closed)</p>
         </td>
     </tr>
@@ -199,8 +186,7 @@ description: This page lists known issues to the Granary platform.
       style="text-align:left">0.5.0</td>
         <td style="text-align:left">0.5.5</td>
         <td style="text-align:left">
-          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/354">#354</a>
-          </p>
+          <p>#354</p>
           <p>(closed)</p>
         </td>
     </tr>
@@ -212,8 +198,7 @@ description: This page lists known issues to the Granary platform.
       style="text-align:left">0.5.0</td>
         <td style="text-align:left">0.6.0</td>
         <td style="text-align:left">
-          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/446">#446</a>
-          </p>
+          <p>#446</p>
           <p>(closed)</p>
         </td>
     </tr>
@@ -225,8 +210,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">0.7.0</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/431">#431</a>
-        </p>
+        <p>#431</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -236,8 +220,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">partitionOffset set to &quot;null&quot; causes Belt to not start</td>
       <td
       style="text-align:left">0.5.0</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/447">#447</a>
+        <td style="text-align:left">0.8.0</td>
+        <td style="text-align:left">
+          <p>#447</p>
+          <p>(closed)</p>
         </td>
     </tr>
     <tr>
@@ -248,8 +234,7 @@ description: This page lists known issues to the Granary platform.
       style="text-align:left">0.5.0</td>
         <td style="text-align:left">0.6.3</td>
         <td style="text-align:left">
-          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/455">#455</a>
-          </p>
+          <p>#455</p>
           <p>(closed)</p>
         </td>
     </tr>
@@ -261,8 +246,7 @@ description: This page lists known issues to the Granary platform.
       style="text-align:left">0.5.0</td>
         <td style="text-align:left">0.6.3</td>
         <td style="text-align:left">
-          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/413">#413</a>
-          </p>
+          <p>#413</p>
           <p>(closed)</p>
         </td>
     </tr>
@@ -273,8 +257,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">0.7.0</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/361">#361</a>
-        </p>
+        <p>#361</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -284,8 +267,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Eventstore Persister does not have a dead letter queue</td>
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/372">#372</a>
-      </td>
+      <td style="text-align:left">#372</td>
     </tr>
     <tr>
       <td style="text-align:left">Profile Store API</td>
@@ -295,8 +277,7 @@ description: This page lists known issues to the Granary platform.
       style="text-align:left">0.5.0</td>
         <td style="text-align:left">0.6.0</td>
         <td style="text-align:left">
-          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/443">#443</a>
-          </p>
+          <p>#443</p>
           <p>(closed)</p>
         </td>
     </tr>
@@ -307,19 +288,20 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.6.0</td>
       <td style="text-align:left">0.6.5</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/493">#493</a>
-        </p>
+        <p>#493</p>
         <p>(closed)</p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">Belt Extractor</td>
       <td style="text-align:left">GKI_2019_0027</td>
       <td style="text-align:left">Belt leaves consumer group when callback function is in loop or taking
         to long</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/504">#504</a>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">
+        <p>#504</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -329,8 +311,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">0.6.5</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/524">#524</a>
-        </p>
+        <p>#524</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -340,8 +321,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Persister did not recover after multiple restarts (&gt;50) because data
         base was not available</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/516">#516</a>
+      <td style="text-align:left">0.9.0</td>
+      <td style="text-align:left">
+        <p>#516</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -350,8 +333,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Provide a Docker image for Belt Extractor Runtime that supports GRNRY
         processes to be executed as a non-root user</td>
       <td style="text-align:left">0.6.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/507">#507</a>
+      <td style="text-align:left">0.9.0</td>
+      <td style="text-align:left">
+        <p>#507</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -361,8 +346,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">0.7.1</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/532">#532</a>
-        </p>
+        <p>#532</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -374,8 +358,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.0</td>
       <td style="text-align:left">0.7.1</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/623">#623</a>
-        </p>
+        <p>#623</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -386,8 +369,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">-</td>
       <td style="text-align:left">all API-component versions starting from Granary 0.7.2</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/581">#581</a>
-        </p>
+        <p>#581</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -399,8 +381,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.6.0</td>
       <td style="text-align:left">0.6.4</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/607">#607</a>
-        </p>
+        <p>#607</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -413,8 +394,7 @@ description: This page lists known issues to the Granary platform.
       style="text-align:left">0.5.1</td>
         <td style="text-align:left">0.5.4</td>
         <td style="text-align:left">
-          <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/578">#578</a>
-          </p>
+          <p>#578</p>
           <p>(closed)</p>
         </td>
     </tr>
@@ -425,8 +405,7 @@ description: This page lists known issues to the Granary platform.
       <td
       style="text-align:left">0.7.2</td>
         <td style="text-align:left">-</td>
-        <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/659">#659</a>
-        </td>
+        <td style="text-align:left">#659</td>
     </tr>
     <tr>
       <td style="text-align:left">Harvester API</td>
@@ -434,8 +413,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Harvester API Source-Types Endpoint returns with misleading error message
         for an existing Source Type but not existing version.</td>
       <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/643">#643</a>
+      <td style="text-align:left">0.9.0</td>
+      <td style="text-align:left">
+        <p>#643</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -444,8 +425,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Persister and Harvester Instance State POST start return HTTP 500 if already
         running instead of HTTP 200</td>
       <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/650">#650</a>
+      <td style="text-align:left">0.9.0</td>
+      <td style="text-align:left">
+        <p>#650</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -454,8 +437,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Belt API endpoint returns 400 Bad Request instead of 401 when token is
         missing</td>
       <td style="text-align:left">0.7.1</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/640">#640</a>
+      <td style="text-align:left">0.8.0</td>
+      <td style="text-align:left">
+        <p>#640</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -466,8 +451,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">0.5.4</td>
       <td style="text-align:left">0.5.6</td>
       <td style="text-align:left">
-        <p><a href="https://gitlab.alvary.io/grnry/scrum/issues/633">#633</a>
-        </p>
+        <p>#633</p>
         <p>(closed)</p>
       </td>
     </tr>
@@ -477,8 +461,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">No API usage metrics are exposed.</td>
       <td style="text-align:left">0.8.0</td>
       <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/609">#609</a>
-      </td>
+      <td style="text-align:left">EXP-85</td>
     </tr>
     <tr>
       <td style="text-align:left">SCDF Apps</td>
@@ -486,8 +469,7 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Sessionizing Processor does not support Zipkin tracing.</td>
       <td style="text-align:left">0.7.0</td>
       <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/605">#605</a>
-      </td>
+      <td style="text-align:left">#605</td>
     </tr>
     <tr>
       <td style="text-align:left">Event Feeder</td>
@@ -496,8 +478,7 @@ description: This page lists known issues to the Granary platform.
         data.</td>
       <td style="text-align:left">0.6.0</td>
       <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/599">#599</a>
-      </td>
+      <td style="text-align:left">#599</td>
     </tr>
     <tr>
       <td style="text-align:left">Segment Table Creator</td>
@@ -505,8 +486,10 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Column names from Grain Pathes &gt;63 characters are being cut off in
         Pivot Segments.</td>
       <td style="text-align:left">0.5.0</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum/issues/596">#596</a>
+      <td style="text-align:left">0.7.3</td>
+      <td style="text-align:left">
+        <p>#596</p>
+        <p>(closed)</p>
       </td>
     </tr>
     <tr>
@@ -514,9 +497,25 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">GKI_2020_0015</td>
       <td style="text-align:left">Profile Explorer does not show values for Counter Grains</td>
       <td style="text-align:left">0.4.0</td>
+      <td style="text-align:left">0.8.0</td>
+      <td style="text-align:left">EXP-7</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">all APIs</td>
+      <td style="text-align:left">GKI_2020_0016</td>
+      <td style="text-align:left">Granary APIs should not trust &quot;forwarded&quot; headers</td>
       <td style="text-align:left">-</td>
-      <td style="text-align:left"><a href="https://gitlab.alvary.io/grnry/scrum-ux/issues/53">ux#53</a>
-      </td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">#739</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">all APIs</td>
+      <td style="text-align:left">GKI_2020_0017</td>
+      <td style="text-align:left">No coherent IAM setup and multi-tenancy on Granary&apos;s API endpoints</td>
+      <td
+      style="text-align:left">-</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left">#732</td>
     </tr>
   </tbody>
 </table>

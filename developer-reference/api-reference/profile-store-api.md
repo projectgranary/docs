@@ -116,6 +116,10 @@ Access denied. Invalid token submitted.
 {% endapi-method-spec %}
 {% endapi-method %}
 
+{% hint style="warning" %}
+Deprecated in Granary 0.9
+{% endhint %}
+
 {% api-method method="get" host="https://api.grnry.io" path="/profiles/:profileType" %}
 {% api-method-summary %}
 Get all Profiles of a Specific Type
@@ -322,6 +326,10 @@ If given profile type is not found
 
 {% hint style="warning" %}
 Profiles and their grains in JSON response body are unordered. 
+{% endhint %}
+
+{% hint style="warning" %}
+Deprecated in Granary 0.9
 {% endhint %}
 
 {% api-method method="get" host="https://api.grnry.io" path="/profiles/:profileType/:correlationId" %}

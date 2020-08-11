@@ -317,37 +317,45 @@ rules:
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left">rules.default</td>
+      <td style="text-align:left"><code>rules.default</code>
+      </td>
       <td style="text-align:left">disable to reduce amount of available metrics</td>
     </tr>
     <tr>
-      <td style="text-align:left">rules.custom.seriesQuery</td>
+      <td style="text-align:left"><code>rules.custom.seriesQuery</code>
+      </td>
       <td style="text-align:left">filter for series name which is exposed via prometheus http api request
         as __name__, additional labels for filtering can be applied</td>
     </tr>
     <tr>
-      <td style="text-align:left">rules.custom.resources.overrides.kubernetes_namespace</td>
+      <td style="text-align:left"><code>rules.custom.resources.overrides.kubernetes_namespace</code>
+      </td>
       <td style="text-align:left">
         <p>use prometheus label &quot;kubernetes_namespace&quot; as resource type
           &quot;namespace&quot; to include in the custom metrics api request.</p>
+        <p></p>
         <p>Example requests looks like /apis/custom.metrics.k8s.io/v1beta1/namespaces/${kubernetes_namespace}/pods/${kubernetes_pod_name}/metricsName</p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">rules.custom.resources.overrides.kubernetes_pod_name</td>
+      <td style="text-align:left"><code>rules.custom.resources.overrides.kubernetes_pod_name</code>
+      </td>
       <td style="text-align:left">use prometheus label &quot;kubernetes_pod_name&quot; as resource type
         &quot;pod&quot; to include in the custom metrics api request</td>
     </tr>
     <tr>
-      <td style="text-align:left">rules.custom.name.matches</td>
+      <td style="text-align:left"><code>rules.custom.name.matches</code>
+      </td>
       <td style="text-align:left">filter metrics if multiple results, regex possible for rewrite</td>
     </tr>
     <tr>
-      <td style="text-align:left">rules.custom.name.as</td>
+      <td style="text-align:left"><code>rules.custom.name.as</code>
+      </td>
       <td style="text-align:left">alias name for metric to use in kafka-profile-update helm values file</td>
     </tr>
     <tr>
-      <td style="text-align:left">rules.custom.metricsQuery</td>
+      <td style="text-align:left"><code>rules.custom.metricsQuery</code>
+      </td>
       <td style="text-align:left">assembled prometheus query by series name, label matcher and grouped by
         pod and namespace. Grouped values are summed up.</td>
     </tr>

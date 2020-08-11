@@ -44,7 +44,7 @@ Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concep
 | segmentstore-api-worker\* | 2 | 2Gi | 2Gi | 250m | 250m |
 | citus-postgres-manager | 1 | 100Mi | 100Mi | 100m | 100m |
 | citus-postgres-master\* | 1 | 8Gi | 8Gi | 2000m | 2000m |
-| citus-postgres-worker\* | 2-5 | 4Gi | 4Gi | 1000m | 1000m |
+| citus-postgres-worker\* | 2 | 4Gi | 4Gi | 1000m | 1000m |
 | kafka-manager | 1 | 128Mi | 256Mi | 100m | 100m |
 | kafka-broker\* | 3 | 4Gi | 4Gi | 1000m | 1000m |
 | zookeper\* | 3 | 1Gi | 1Gi | 500m | 500m |

@@ -20,12 +20,13 @@ description: Denotes release versions of Granary artifacts.
 
 ## Previous Granary Versions
 
+* [Granary 0.8 Lemmy](https://docs.grnry.io/v/0.8-lemmy/operator-reference/granary-release-notes)
 * [Granary 0.7 Kurt](https://docs.grnry.io/v/0.7-kurt/operator-reference/granary-release-notes)
 * [Granary 0.6 Freddie](https://docs.grnry.io/v/0.6-freddie/operator-reference/granary-release-notes)
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
-## Granary 0.8.0 "Lemmy" - 2020-04-30
+## Granary 0.9.0 "Marie" - 2020-08-12
 
 <table>
   <thead>
@@ -39,209 +40,286 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="https://github.com/datawire/ambassador-chart">Ambassador</a>
       </td>
-      <td style="text-align:left"><b>1.0.0</b>
-      </td>
+      <td style="text-align:left">1.0.0</td>
       <td style="text-align:left">see <a href="https://github.com/datawire/ambassador/releases/tag/v1.0.0">Ambassador Release Notes</a>
       </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
       </td>
-      <td style="text-align:left">0.5.1 (based on Snowplow v0.15.0)</td>
-      <td style="text-align:left">-</td>
+      <td style="text-align:left"><b>0.6.1</b> (based on Snowplow v0.15.0)</td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration for Kubernetes Probes</li>
+          <li>Added a probe that determines availability of Kafka brokers</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
+        </ul>
+      </td>
     </tr>
     <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/harvester-api/"><b>Harvester API</b></a>&lt;b&gt;&lt;/b&gt;</td>
-      <td
-      style="text-align:left"><b>0.8.1</b>
-        </td>
-        <td style="text-align:left">
-          <p>Features:</p>
-          <ul>
-            <li>Management of Event Types</li>
-            <li>Management of Harvester Instances</li>
-            <li>Provide Metadata of Source Types (no full management yet)</li>
-            <li>Extensive default configuration options</li>
-            <li>Access to API is secured via Granary Keycloak</li>
-          </ul>
-        </td>
+      <td style="text-align:left"><a href="../installation/harvester-api/">Harvester API</a>
+      </td>
+      <td style="text-align:left"><b>0.9.3</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration for Kubernetes Probes</li>
+          <li>Added a probe that determines availability of database</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
+        </ul>
+        <p>Fixes:</p>
+        <ul>
+          <li>RUNNING_BUT_OUTDATED state returned in case <em>latest</em> event type version
+            is used and <em>latest</em> was updated</li>
+          <li>Harmonized API return codes with other APIs (GKI_2020_0007, GKI_2020_0008)</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
       </td>
-      <td style="text-align:left">0.5.10 (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
+      <td style="text-align:left"><b>0.6.1</b> (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
       <td
-      style="text-align:left">-</td>
+      style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration for Kubernetes Probes</li>
+          <li>Added a probe that determines availability of database</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
+        </ul>
+        </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
+      </td>
+      <td style="text-align:left"><b>0.9.2</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Introduced OpenJ9 JVM to save up to 50% memory consumption</li>
+          <li>Added configuration for Kubernetes Probes</li>
+          <li>Added a probe that determines availability of Kafka brokers and database
+            (GKI_2019_0029)</li>
+          <li>Configured Granary&apos;s common log format</li>
+        </ul>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/event-store-api.md">Event Store API</a>
       </td>
       <td style="text-align:left"><b>0.8.1</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Added a Sink Type that exports events to Postgres and supports batched
-            write transaction to database which results in up to 8x faster performance</li>
-          <li>Added Topic Source Type to import events from a Kafka topic</li>
-          <li>Event Type versionining supported by all Sink Types and Sessionizing Processor</li>
+          <li>Added configuration for Kubernetes Probes</li>
+          <li>Added a probe that determines availability of database</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
         </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/event-store-api.md">Event Store API</a>
-      </td>
-      <td style="text-align:left"><b>0.7.0</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
+        <p>Fixes:</p>
         <ul>
-          <li>Added Event Type version to return payload</li>
+          <li>Harmonized API return codes with other APIs</li>
         </ul>
       </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/event-feeder.md">Event Feeder</a>
       </td>
-      <td style="text-align:left"><b>0.6.1</b>
+      <td style="text-align:left"><b>0.6.5</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Added Event Type version support</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
         </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>Restored AWS Aurora compatibility</li>
-        </ul>
+        <p></p>
       </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href>Belt Extractor</a>
       </td>
-      <td style="text-align:left"><b>0.8.1</b>
+      <td style="text-align:left"><b>0.9.1</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Extended <code>_delete</code> operation with Point-in-time configuration
-            possibility</li>
-          <li>Added an abortion mechanism for long running callback functions</li>
-          <li>Added <code>/belts/{id}</code> as default Profile Update <code>origin</code>
-          </li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>Changed <code>INFO</code> logs in profileclient to <code>DEBUG</code> to reduce
-            noise</li>
+          <li>Configured Granary&apos;s common log format</li>
+          <li>Configured non-root user to run the belt</li>
+          <li>Added belt-id as Kafka header of output messages</li>
         </ul>
       </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/belt-api.md">Belt API</a>
       </td>
-      <td style="text-align:left"><b>0.7.1</b>
+      <td style="text-align:left"><b>0.8.1</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Added checks for existing Event Type to <code>POST /belts</code> and <code>PUT /belts/{id}</code>
-          </li>
+          <li>Added configuration for Kubernetes Probes for Belt-API and Belts</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget for Belt-API and Belts</li>
+          <li>Configured Granary&apos;s common log format</li>
+          <li>Added logic that Belts are deployed with a non-root user</li>
         </ul>
         <p>Fixes:</p>
         <ul>
-          <li>Belt updates behave like a <code>PUT</code>
-          </li>
+          <li>Harmonized API return codes with other APIs (GKI_2020_0009)</li>
         </ul>
       </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/profile-updater.md">Profile Updater</a>
       </td>
-      <td style="text-align:left"><b>0.5.6</b>
+      <td style="text-align:left"><b>0.6.1</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Extended <code>_delete</code> operation with Point-in-time configuration
-            possibility</li>
+          <li>Refactored code-base to become a Spring-Boot application</li>
+          <li>Added configuration for Kubernetes Probes</li>
+          <li>Added a probe that determines availability of Kafka Broker and database</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
         </ul>
         <p>Fixes:</p>
         <ul>
           <li>Kafka Profile Updater consumers are considered as dead by broker if the
-            are too slow in event processing (GKI_2020_10)</li>
+            are too slow in event processing (GKI_2020_0010)</li>
         </ul>
       </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/profile-store-api.md">Profile Store API</a>
       </td>
-      <td style="text-align:left">0.7.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/segment-creation-api.md"><b>Segment Management API</b></a>&lt;b&gt;&lt;/b&gt;</td>
-      <td
-      style="text-align:left"><b>0.8.2</b>
-        </td>
-        <td style="text-align:left">
-          <p>Features:</p>
-          <ul>
-            <li>Introduced API to manage segment custom resources</li>
-            <li>Access to API is secured via Granary Keycloak</li>
-          </ul>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/segment-manager.md"><b>Segment Manager</b></a>&lt;b&gt;&lt;/b&gt;</td>
-      <td
-      style="text-align:left"><b>0.8.4</b>
-        </td>
-        <td style="text-align:left">
-          <p>Features:</p>
-          <ul>
-            <li>Introduced a Go-languague Kubernetes operator that manages the segment
-              custom resources</li>
-          </ul>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
-      </td>
-      <td style="text-align:left">0.7.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/segment-store-api.md">Segment Store API</a>
-      </td>
-      <td style="text-align:left">0.4.8 (based on Presto 0.315)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/graphql-api.md">GraphQL API</a>
-      </td>
-      <td style="text-align:left">0.7.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/granary-ui.md">Granary UI</a>
-      </td>
-      <td style="text-align:left">0.7.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/reaper.md">Reaper</a>
-      </td>
-      <td style="text-align:left"><b>0.7.3</b>
+      <td style="text-align:left"><b>0.8.1</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Added support for Event Type creation during Reaper execution</li>
+          <li>Added configuration for Kubernetes Probes</li>
+          <li>Added a probe that determines availability of database</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
         </ul>
         <p>Fixes:</p>
         <ul>
-          <li>Restored AWS Aurora compatibility</li>
+          <li>Harmonized API return codes with other APIs</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/segment-creation-api.md">Segment Management API</a>
+      </td>
+      <td style="text-align:left"><b>0.9.1</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration for Kubernetes Probes</li>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
+        </ul>
+        <p>Fixes:</p>
+        <ul>
+          <li>Harmonized API return codes with other APIs</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/segment-manager.md">Segment Manager</a>
+      </td>
+      <td style="text-align:left"><b>0.8.6</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
+      </td>
+      <td style="text-align:left"><b>0.7.4</b>
+      </td>
+      <td style="text-align:left">
+        <p>Fixes:</p>
+        <ul>
+          <li>Removed restriction of maximum 63 characters in pivot segment by introducing
+            aliases</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/segment-store-api.md">Segment Store API</a>
+      </td>
+      <td style="text-align:left"><b>0.5.0 (based on Presto 0.339)</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Upgraded Presto to version 339</li>
+          <li>Enabled Topic browsing (via Kafka connector)</li>
+          <li>Added headers to Kafka connector</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/graphql-api.md">GraphQL API</a>
+      </td>
+      <td style="text-align:left"><b>0.9.2</b>
+      </td>
+      <td style="text-align:left">See full <a href="https://github.com/syncier/grnry-graphql-api/releases/tag/0.9.0">release notes</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/granary-ui.md">Granary UI</a>
+      </td>
+      <td style="text-align:left"><b>0.9.2</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added Harvester creation wizard</li>
+          <li>Added Harvester detail &amp; edit view</li>
+          <li>Added Harvester state management</li>
+          <li>Added restart mechanism for Belts</li>
+        </ul>
+        <p>See full <a href="https://github.com/syncier/grnry-react-frontend-admin/releases/tag/0.9.0">release notes</a>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/reaper.md">Reaper</a>
+      </td>
+      <td style="text-align:left"><b>0.7.5</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+          <li>Configured Granary&apos;s common log format</li>
+          <li>Added configuration for log level</li>
         </ul>
       </td>
     </tr>
@@ -272,9 +350,15 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/kafka-manager.md">Kafka Manager</a>
       </td>
-      <td style="text-align:left"><b>0.4.4</b>
+      <td style="text-align:left"><b>0.5.1</b>
       </td>
-      <td style="text-align:left">Updated Helm Chart to be deployable with Helm3 and on Kubernetes &gt;=1.14.</td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
@@ -291,23 +375,23 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/zipkin.md">Zipkin Server</a>
       </td>
-      <td style="text-align:left"><b>0.6.2 (based on Open Zipkin 2.12)</b>
+      <td style="text-align:left"><b>0.6.3</b> (based on Open Zipkin 2.12)</td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
+            Security Context and podDisruptionBudget</li>
+        </ul>
       </td>
-      <td style="text-align:left">Updated Helm Chart to be deployable with Helm3 and on Kubernetes &gt;=1.14.</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md"><b>Data Lineage Report</b></a>&lt;b&gt;&lt;/b&gt;</td>
-      <td
-      style="text-align:left"><b>0.8.1</b>
-        </td>
-        <td style="text-align:left">
-          <p>Features:</p>
-          <ul>
-            <li>Added a Data Lineage Tool that traverses Granary&apos;s APIs to provide
-              lineage information on an Event/Grain&apos;s origin</li>
-          </ul>
-        </td>
+      <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md">Data Lineage Report</a>
+      </td>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">-</td>
     </tr>
   </tbody>
 </table>
+
+>
 

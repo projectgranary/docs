@@ -19,7 +19,7 @@ The EventStore expects that you have filled the following parameters when using 
 
 **Name**: grnry-eventstore-batch-sink
 
-**Parameters:**  See ****[**shared parameters**](https://app.gitbook.com/@alvary/s/grnry-sd7f6g8sd68sdf7/~/drafts/-LzMXU-S20C9QM2JKl7C/v/0.8-lemmy/developer-reference/dataflow/data-in/grnry-components-and-parameters)**.**
+**Parameters:**  See ****[shared parameters](grnry-components-and-parameters.md)**.**
 
 In addition, you will need to fill following parameter.
 
