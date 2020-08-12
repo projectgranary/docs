@@ -6,7 +6,7 @@ description: >-
 
 # Site Reliability
 
-These guides propose actions and procedures to avoid and \(if happened\) handle Granary component disasters. It discusses Keycloak \(the IAM tool\), Kafka \(message queue\), Postgres/Citus \(event and profile storage\), Kubernetes Probes, Logging as well as Belt development.
+These guides propose actions and procedures to avoid and \(if happened\) handle Granary component disasters. It discusses Keycloak \(the IAM tool\), Kafka \(message queue\), Postgres/Citus \(event and profile storage\), Kubernetes Probes and Logging.
 
 Some of these actions are part of the standard Granary setup, mainly implemented in Helm Charts. Others need manual effort by the Granary Platform Administrator.
 
