@@ -50,6 +50,10 @@ Kubernetes also allows to perform a probe by executing a command in the target c
 
 ### Probe Defaults
 
+{% hint style="info" %}
+The defaults can be overwritten in the Helm Chart's value file of each Granary component.
+{% endhint %}
+
 | Property Name | Description | Default |
 | :--- | :--- | :--- |
 | `livenessProbe.periodSeconds` | Period for liveness probe in seconds  | `60` |
@@ -61,7 +65,7 @@ Kubernetes also allows to perform a probe by executing a command in the target c
 | `readinessProbe.failureThreshold` | Number of unsuccessful readiness probes until pod is considered 'not ready'. | `10` |
 | `readinessProbe.successThreshold` | Number of successful readiness probes until pod is considered 'ready'. | `1` |
 
-{% hint style="info" %}
+{% hint style="warning" %}
 Please note that for SCDF source types the probe configuration needs to be set manually when registering the [Source Types](../installation/harvester-api/source-types.md#create-a-new-source-type-entity). To do this you need to add the following to the `deployer_config` column:
 
 `"kubernetes.livenessProbeDelay": "30",  

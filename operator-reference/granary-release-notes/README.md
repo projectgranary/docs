@@ -62,7 +62,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/harvester-api/">Harvester API</a>
       </td>
-      <td style="text-align:left"><b>0.9.3</b>
+      <td style="text-align:left"><b>0.9.4</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
@@ -117,7 +117,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/event-store-api.md">Event Store API</a>
       </td>
-      <td style="text-align:left"><b>0.8.1</b>
+      <td style="text-align:left"><b>0.8.2</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
@@ -150,7 +150,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href>Belt Extractor</a>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/belt-extractor.md">Belt Extractor</a>
       </td>
       <td style="text-align:left"><b>0.9.1</b>
       </td>
@@ -166,7 +166,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/belt-api.md">Belt API</a>
       </td>
-      <td style="text-align:left"><b>0.8.1</b>
+      <td style="text-align:left"><b>0.8.2</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
@@ -228,7 +228,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/segment-creation-api.md">Segment Management API</a>
       </td>
-      <td style="text-align:left"><b>0.9.1</b>
+      <td style="text-align:left"><b>0.9.2</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
@@ -369,7 +369,8 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
       </td>
-      <td style="text-align:left">6.0.2</td>
+      <td style="text-align:left"><b>6.6.0</b>
+      </td>
       <td style="text-align:left">-</td>
     </tr>
     <tr>

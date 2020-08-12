@@ -89,5 +89,9 @@ imagePullSecrets:
 - grnry-dockerconfig
 ```
 
+### **Kubernetes Probe**
+
+Finally pay attention to the newly added [Kubernetes Probes](../site-reliability/kubernetes-liveness-readiness-probes.md) which might trigger unexpected behavior at first.
+
 **That's it.**
 
