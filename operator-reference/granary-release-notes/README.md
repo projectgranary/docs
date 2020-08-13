@@ -26,7 +26,7 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
-## Granary 0.9.0 "Marie" - 2020-08-12
+## Granary 0.9.0 "Marie" - 2020-08-13
 
 <table>
   <thead>
@@ -84,7 +84,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
       </td>
-      <td style="text-align:left"><b>0.6.1</b> (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
+      <td style="text-align:left"><b>0.6.2</b> (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
       <td
       style="text-align:left">
         <p>Features:</p>
@@ -311,7 +311,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/reaper.md">Reaper</a>
       </td>
-      <td style="text-align:left"><b>0.7.5</b>
+      <td style="text-align:left"><b>0.7.8</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
@@ -350,7 +350,7 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/kafka-manager.md">Kafka Manager</a>
       </td>
-      <td style="text-align:left"><b>0.5.1</b>
+      <td style="text-align:left"><b>0.5.3</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
@@ -393,6 +393,4 @@ description: Denotes release versions of Granary artifacts.
     </tr>
   </tbody>
 </table>
-
->
 
