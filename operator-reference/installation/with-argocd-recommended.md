@@ -17,7 +17,7 @@ We recommend using [ArgoCD ](https://argoproj.github.io/argo-cd/)to deploy the G
 * Add a "Application" to your ArgoCD that points to the `argo_project` subdirectory of the copied directory.
 * Add the docker registry and artifactory credentials as a secret to the secrets subdirectory.
   * default expected names are `grnry-dockerconfig` and `artifactory-release-credentials` ; this can be changed but values files of components have to be modified accordingly
-* Configure the Granary base deployment values \(`granary/grnryBaseValues.yaml`, see the Helm chart's README for detailed instructions\)
+* Configure the [Granary base deployment](with-helm/granary-base-deployment.md) values \(`granary/grnryBaseValues.yaml`, see the Helm chart's README for detailed instructions\)
   * Additionally you need to adjust a `namespace` value according to your environment in
     * `granary/citusValues.yaml`
     * `granary/grafanaValues.yaml`

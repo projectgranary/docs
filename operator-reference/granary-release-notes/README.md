@@ -28,6 +28,22 @@ description: Denotes release versions of Granary artifacts.
 
 ## Granary 0.9.0 "Marie" - 2020-08-13
 
+In this new release we focused on **shortening the pipeline** **development cycle** and **improving** **platform stability**.
+
+With the new developer experience features, Granary users are now able to
+
+1. **develop and deploy a Harvester data-in pipeline in** **a matter of minutes** using the new **Harvester UI**.
+2. **view & debug the data in their pipelines during development** using the new **Topic Browser**.
+3. use **a common log format** in Harvesters and Belts in order to **easier find their logs** in log viewer such as Kibana.
+
+The new platform stability features add self-healing capabilities and help Granary operation engineers to
+
+1. run **Kafka Profile Updater** without interruptions and connection losses while **increasing its parallelism at the same resource consumption level** as before.
+2. maintain **the database and Kafka connections of all components at all time** by leveraging Kubernetes Probes.
+3. deploy and update Granary in a streamlined GitOps fashion via ArgoCD with images and charts from hub.syncier.cloud, Syncier’s new Harbor service.
+
+
+
 <table>
   <thead>
     <tr>
