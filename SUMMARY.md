@@ -74,6 +74,7 @@
 * [Installation](operator-reference/installation/README.md)
   * [With ArgoCD \(Recommended\)](operator-reference/installation/with-argocd-recommended.md)
   * [With Helm](operator-reference/installation/with-helm/README.md)
+    * [Granary Base Deployment](operator-reference/installation/with-helm/granary-base-deployment.md)
     * [Citus PostgreSQL](operator-reference/installation/with-helm/citus-postgresql.md)
     * [Snowplow Scala Stream Collector](operator-reference/installation/with-helm/snowplow-scala-stream-collector.md)
     * [Kafka Manager](operator-reference/installation/with-helm/kafka-manager.md)
