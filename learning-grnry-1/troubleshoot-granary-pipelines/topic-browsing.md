@@ -11,7 +11,7 @@ There are cases when the application logs and the tracing information are not en
 ### Prerequisits
 
 {% hint style="info" %}
-To setup Presto for reading topics you need to enable the Kafka \(see [Segment Store API](../../operator-reference/installation/segment-store-api.md#setup)\) Connector and grant proper permissions in Keycloak's "jdbc-api" client to the user who want to query a topic \(see [Granary Access Clients](../../operator-reference/identity-and-access-management/granary-access-clients.md#jdbc-api-a-k-a-segment-store-api)\).
+To setup Presto for reading topics you need to enable the Kafka \(see [Segment Store API](../../operator-reference/installation/with-helm/segment-store-api.md#setup)\) Connector and grant proper permissions in Keycloak's "jdbc-api" client to the user who want to query a topic \(see [Granary Access Clients](../../operator-reference/identity-and-access-management/granary-access-clients.md#jdbc-api-a-k-a-segment-store-api)\).
 {% endhint %}
 
 ### Access topics via Presto

@@ -104,7 +104,7 @@ curl -X POST -u <user>:<password> -d \
 https://scdf-host/apps/source/jdbc/latest
 ```
 
-### View Existing Source Types \(also see [API Docs](../../../developer-reference/api-reference/harvester-api.md#get-all-source-types)\)
+### View Existing Source Types \(also see [API Docs](../../../../developer-reference/api-reference/harvester-api.md#get-all-source-types)\)
 
 #### Example Call GET All Source Types
 

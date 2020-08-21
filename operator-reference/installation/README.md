@@ -6,7 +6,7 @@ description: >-
 
 # Installation
 
-Access Credentials for Granary's source code, Docker Images, and Helm Charts can be obtain via analytics-support@syncier.com.
+Access Credentials for Granary's source code, Docker Images, and Helm Charts can be obtained via analytics-support@syncier.com.
 
 ## Helm Chart Repositories
 

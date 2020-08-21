@@ -66,7 +66,7 @@ The defaults can be overwritten in the Helm Chart's value file of each Granary c
 | `readinessProbe.successThreshold` | Number of successful readiness probes until pod is considered 'ready'. | `1` |
 
 {% hint style="warning" %}
-Please note that for SCDF source types the probe configuration needs to be set manually when registering the [Source Types](../installation/harvester-api/source-types.md#create-a-new-source-type-entity). To do this you need to add the following to the `deployer_config` column:
+Please note that for SCDF source types the probe configuration needs to be set manually when registering the [Source Types](../installation/with-helm/harvester-api/source-types.md#create-a-new-source-type-entity). To do this you need to add the following to the `deployer_config` column:
 
 `"kubernetes.livenessProbeDelay": "30",  
 "kubernetes.livenessProbePeriod": "60",  

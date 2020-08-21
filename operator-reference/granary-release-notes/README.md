@@ -45,7 +45,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
+      <td style="text-align:left"><a href="../installation/with-helm/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
       </td>
       <td style="text-align:left"><b>0.6.1</b> (based on Snowplow v0.15.0)</td>
       <td style="text-align:left">
@@ -60,7 +60,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/harvester-api/">Harvester API</a>
+      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
       </td>
       <td style="text-align:left"><b>0.9.4</b>
       </td>
@@ -82,7 +82,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
+      <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
       </td>
       <td style="text-align:left"><b>0.6.2</b> (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
       <td
@@ -98,7 +98,7 @@ description: Denotes release versions of Granary artifacts.
         </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
+      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
       </td>
       <td style="text-align:left"><b>0.9.2</b>
       </td>
@@ -115,7 +115,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/event-store-api.md">Event Store API</a>
+      <td style="text-align:left"><a href="../installation/with-helm/event-store-api.md">Event Store API</a>
       </td>
       <td style="text-align:left"><b>0.8.2</b>
       </td>
@@ -135,7 +135,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/event-feeder.md">Event Feeder</a>
+      <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
       </td>
       <td style="text-align:left"><b>0.6.5</b>
       </td>
@@ -164,7 +164,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/belt-api.md">Belt API</a>
+      <td style="text-align:left"><a href="../installation/with-helm/belt-api.md">Belt API</a>
       </td>
       <td style="text-align:left"><b>0.8.2</b>
       </td>
@@ -184,7 +184,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/profile-updater.md">Profile Updater</a>
+      <td style="text-align:left"><a href="../installation/with-helm/profile-updater.md">Profile Updater</a>
       </td>
       <td style="text-align:left"><b>0.6.1</b>
       </td>
@@ -206,7 +206,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/profile-store-api.md">Profile Store API</a>
+      <td style="text-align:left"><a href="../installation/with-helm/profile-store-api.md">Profile Store API</a>
       </td>
       <td style="text-align:left"><b>0.8.1</b>
       </td>
@@ -226,7 +226,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/segment-creation-api.md">Segment Management API</a>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/segment-creation-api.md">Segment Management API</a>
       </td>
       <td style="text-align:left"><b>0.9.2</b>
       </td>
@@ -245,7 +245,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/segment-manager.md">Segment Manager</a>
+      <td style="text-align:left"><a href="../installation/with-helm/segment-manager.md">Segment Manager</a>
       </td>
       <td style="text-align:left"><b>0.8.6</b>
       </td>
@@ -272,7 +272,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/segment-store-api.md">Segment Store API</a>
+      <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
       </td>
       <td style="text-align:left"><b>0.5.0 (based on Presto 0.339)</b>
       </td>
@@ -286,14 +286,14 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/graphql-api.md">GraphQL API</a>
+      <td style="text-align:left"><a href="../installation/with-helm/graphql-api.md">GraphQL API</a>
       </td>
       <td style="text-align:left"><b>0.9.2</b>
       </td>
       <td style="text-align:left">See full <a href="https://github.com/syncier/grnry-graphql-api/releases/tag/0.9.0">release notes</a>.</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/granary-ui.md">Granary UI</a>
+      <td style="text-align:left"><a href="../installation/with-helm/granary-ui.md">Granary UI</a>
       </td>
       <td style="text-align:left"><b>0.9.2</b>
       </td>
@@ -309,7 +309,7 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/reaper.md">Reaper</a>
+      <td style="text-align:left"><a href="../installation/with-helm/reaper.md">Reaper</a>
       </td>
       <td style="text-align:left"><b>0.7.8</b>
       </td>
@@ -324,13 +324,13 @@ description: Denotes release versions of Granary artifacts.
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/event-explorer-ui.md">Event Explorer UI</a>
+      <td style="text-align:left"><a href="../installation/with-helm/event-explorer-ui.md">Event Explorer UI</a>
       </td>
       <td style="text-align:left">0.2.0</td>
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/citus-postgresql.md">Citus PostgreSQL</a>
+      <td style="text-align:left"><a href="../installation/with-helm/citus-postgresql.md">Citus PostgreSQL</a>
       </td>
       <td style="text-align:left">8.1.1</td>
       <td style="text-align:left">-</td>
@@ -348,7 +348,7 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/kafka-manager.md">Kafka Manager</a>
+      <td style="text-align:left"><a href="../installation/with-helm/kafka-manager.md">Kafka Manager</a>
       </td>
       <td style="text-align:left"><b>0.5.3</b>
       </td>
@@ -374,7 +374,7 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/zipkin.md">Zipkin Server</a>
+      <td style="text-align:left"><a href="../installation/with-helm/zipkin.md">Zipkin Server</a>
       </td>
       <td style="text-align:left"><b>0.6.3</b> (based on Open Zipkin 2.12)</td>
       <td style="text-align:left">

@@ -75,7 +75,7 @@ https://this.is.my.scdf.URL/apps/source/grnry-sftp/latest
 {% hint style="info" %}
 The docker image provided above is a pre-built component by GRNRY. It supports encryption out of the box and makes your data safer. We highly recommend that you use the images provided by GRNRY.
 
-If you wanted to register another component, just exchange the URL above. An overview on all available components pre-built by GRNRY is available in the subchapters of [Data-In](../../developer-reference/dataflow/data-in/).
+If you wanted to register another component, just exchange the URL above. An overview on all available components pre-built by GRNRY is available in the subchapters of [Data-In](../../../developer-reference/dataflow/data-in/).
 {% endhint %}
 
 Further information about using the API for apps can be found in the SCDF documentation here: [https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/\#resources-registered-applications](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#resources-registered-applications)
@@ -112,5 +112,5 @@ Further information about using the API for apps can be found in the SCDF docume
 
 ### Source Types
 
-see [Source Types](../../developer-reference/dataflow/data-in/source-types.md) for a list and description of all available source types and [Source Types](harvester-api/source-types.md) how to register them.
+see [Source Types](../../../developer-reference/dataflow/data-in/source-types.md) for a list and description of all available source types and [Source Types](harvester-api/source-types.md) how to register them.
 

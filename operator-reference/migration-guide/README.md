@@ -14,8 +14,8 @@ Update all remaining Granary components to their Granary 0.9 version as denoted 
 
 To update the SCDF apps, you need to follow these steps first:
 
-1. [Register ](../installation/spring-cloud-data-flow.md#registering-the-grnry-scdf-apps)new version of [mandatory SCDF apps](../installation/spring-cloud-data-flow.md#list-of-all-mandatory-scdf-apps) with Spring Cloud Data Flow server
-2. [Import SQL script for Source Types](../installation/harvester-api/source-types.md#registering-a-source-type-with-a-new-version-of-an-existing-source-app) to Source Type database, latest SQL see here
+1. [Register ](../installation/with-helm/spring-cloud-data-flow.md#registering-the-grnry-scdf-apps)new version of [mandatory SCDF apps](../installation/with-helm/spring-cloud-data-flow.md#list-of-all-mandatory-scdf-apps) with Spring Cloud Data Flow server
+2. [Import SQL script for Source Types](../installation/with-helm/harvester-api/source-types.md#registering-a-source-type-with-a-new-version-of-an-existing-source-app) to Source Type database, latest SQL see here
 3. Update defaults for SCDF app versions in Harvester API Helm deployment
 4. Restart Harvester API, if no errors occur, update has been successful
    1. If errors occur, revisit steps 1-3 and check for issues
