@@ -22,10 +22,10 @@ An event type entity defines rules to extract metadata from incoming data object
 
 | Attribute | Description |
 | :--- | :--- |
-| name | The name of an event type can only consist of the characters `a-z` , `A-Z` , `0-9` and `-` . Its length can not exceed x chars due to technical limitations. |
+| displayName | The display name of an event type. |
 | correlationIdExpression | A SpringEL rule to extract the correlation id from the event \(or create it using a function\). Granary-header: `grnry-correlation-id`. |
 | eventIdExpression | A SpringEL rule to extract the event id from the event \(or create it using a function\). Granary-header: `grnry-event-id`. |
-| timestampExpression | A SpringEL rule to extract the timestamp \(milliseconds since 1.1.1970 UTC\). _Optional_, if not set the current time is used. Granary-header: `grnry-timestamp`. |
+| timestampExpression | A SpringEL rule to extract the timestamp \(milliseconds since 1.1.1970 UTC\). _Optional_, if not set, the current time is used. Granary-header: `grnry-timestamp`. |
 | description | Description of this specific event type. _Optional_, default is `""`. |
 
 #### Example Call - create event type
@@ -40,7 +40,7 @@ curl -X POST -H "Content-Type: application/json" \
 {% code title="event-type.json" %}
 ```text
 {
-  "name" : "snowplow-web",
+  "displayName" : "snowplow-web",
   "correlationIdExpression" : "#jsonPath(#jsonPath(payload, 'body'), 'data[0].correlationId')",
   "eventIdExpression" : "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].eventId')?:#randomUUID()",
   "timestampExpression" : "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].timestamp')?:#nowMillis()"
