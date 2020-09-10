@@ -2,17 +2,18 @@
 
 ## Segment Creation Job
 
-This component generates so-called segments, which can be understood as \(materialized\) views on the data. Depending on the selected storage-layer, segments can be views or tables. The available storage layers are:
+This component generates so-called segments, which can be understood as \(materialized\) views on the data. Depending on the configuration, segments can be views or tables. The available storage layers are:
 
 * Citus Data PostgreSQL 
-* Amazon Aurora PostgreSQL
+* PostgreSQL \(compatible with Amazon Aurora - allowing to leverage read replicas for view segments\)
 
-Using Citus, segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. Using Aurora, segments are configured to be either tables or views \(allowing to leverage Auroras read replicas\).
+Using Citus, table segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. Using standard PostgreSQL, table segments are normal database tables.
 
-Currently, two different segment generator types are available:
+Currently, three different segment generator types are available:
 
 * Pivot, which generates tuples from a table comprising key/value-like tuples
-* Generic, which builds a filtered version of the input table.
+* Generic, which builds a filtered version of the input table
+* Flexible, which takes a user-given query to create its segment
 
 ## Configure
 
@@ -24,9 +25,9 @@ More detailed instructions can be found [here.](https://github.com/projectgranar
 
 | Parameter | Description | Default |  |
 | :--- | :--- | :--- | :--- |
-| `TYPE` | type of generator, `pivot` or `generic` | `pivot` |  |
-| `DB_TYPE` | storage-layer type, `citus` or `aurora` | `citus` |  |
-| `DB_USE_VIEWS` | flag indicating if generated segment should be a view \(aurora-only\) | `false` |  |
+| `TYPE` | type of generator, `pivot` , `generic` or `flexible` | `pivot` |  |
+| `DB_TYPE` | storage-layer type, `citus` or `postgres` | `citus` |  |
+| `DB_USE_VIEWS` | flag indicating if generated segment should be a view | `false` |  |
 | `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg-citus-master` |  |
 | `DB_PORT` | database port | `5432` |  |
 | `DB_USER` | postgres user name | Secret Reference needed |  |
@@ -344,6 +345,48 @@ Result:
 | 1 | ... | ... | ... |
 | 2 | ... | ... | ... |
 | 3 | ... | ... | ... |
+
+### Flexible Generator
+
+{% hint style="warning" %}
+Flexible Generator is available starting from Granary platform version 0.9.1.
+{% endhint %}
+
+The flexible generator creates a segment based on a query given by the user. There are **flexible generator** specific variables as specified below.
+
+| Parameter | Description | Default |
+| :--- | :--- | :--- |
+| `FLEXIBLE_SOURCE_QUERY` | The source query to create the flexible segment from |  |
+
+The flexible source query is internally used to create a table or view with. The SQL issued by the Segment Table Creation looks like `CREATE TABLE AS {FLEXIBLE_SOURCE_QUERY}` or `CREATE VIEW AS {FLEXIBLE_SOURCE_QUERY}`, respectively.
+
+#### Flexible Example
+
+With the flexible generator you are free to create any segment you want. Below you can see a very basic example:
+
+Source table:
+
+| correlation\_id | profile\_type | path | pit | value | ... |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | \_d | a | \_latest | 20 | ... |
+| 2 | pt | a | \_latest | 30 | ... |
+| 3 | pt | a | \_latest | 40 | ... |
+| 4 | pt | b | \_latest | 80 | ... |
+
+Configuration:
+
+```text
+env:
+- name: FLEXIBLE_SOURCE_QUERY
+  value: select count(profile_type), profile_type from profilestore where value < 50 group by profile_type
+```
+
+Result:
+
+| count | profile\_type |
+| :--- | :--- |
+| 1 | \_d |
+| 2 | pt |
 
 ## Errors
 
