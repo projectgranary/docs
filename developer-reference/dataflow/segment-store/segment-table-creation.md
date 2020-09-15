@@ -8,10 +8,10 @@ description: This page specifies the configuration of segments in Granary.
 
 This component generates so-called segments, which can be understood as relational view on Profile Store or Event Store data. 
 
-Depending on the segments access patterns, segments can be **views** or **tables:**
+Depending on the segment's access pattern, segments can be **views** or **tables:**
 
 * **View segments** are always up-to-date as queries are run at access time against Profile Store / Event Store.
-* **Table segments** are udpated based on a cron schedule, are pre-computed, and can be equipped with additional indexes. During the scheduled pre-computation, the old segment is still fully accessible.
+  * **Table segments** are udpated based on a cron schedule, are pre-computed, and can be equipped with additional indexes. During the scheduled pre-computation, the old segment is still fully accessible.
 
 The available storage layers are:
 
