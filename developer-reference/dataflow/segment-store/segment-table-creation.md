@@ -1,19 +1,30 @@
+---
+description: This page specifies the configuration of segments in Granary.
+---
+
 # Segment Table Creation
 
 ## Segment Creation Job
 
-This component generates so-called segments, which can be understood as \(materialized\) views on the data. Depending on the configuration, segments can be views or tables. The available storage layers are:
+This component generates so-called segments, which can be understood as relational view on Profile Store or Event Store data. 
 
-* Citus Data PostgreSQL 
-* PostgreSQL \(compatible with Amazon Aurora - allowing to leverage read replicas for view segments\)
+Depending on the segments access patterns, segments can be **views** or **tables:**
 
-Using Citus, table segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. Using standard PostgreSQL, table segments are normal database tables.
+* **View segments** are always up-to-date as queries are run at access time against Profile Store / Event Store.
+* **Table segments** are udpated based on a cron schedule, are pre-computed, and can be equipped with additional indexes.
+
+The available storage layers are:
+
+* **PostgreSQL** \(compatible with Amazon Aurora - allowing to leverage read replicas for view segments\)
+* **Citus** Data PostgreSQL
+
+Using standard **PostgreSQ**L, table segments are normal database tables. Using **Citus**, table segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. 
 
 Currently, three different segment generator types are available:
 
-* Pivot, which generates tuples from a table comprising key/value-like tuples
-* Generic, which builds a filtered version of the input table
-* Flexible, which takes a user-given query to create its segment
+* **Pivot**, which generates tuples from a table comprising key/value-like tuples
+* **Generic**, which builds a filtered version of the input table
+* **Flexible**, which takes a user-given query to create its segment
 
 ## Configure
 
