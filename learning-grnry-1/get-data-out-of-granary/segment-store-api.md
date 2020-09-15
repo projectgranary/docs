@@ -26,7 +26,7 @@ description: >-
 
    ![](../../.gitbook/assets/dbvis05.png)
 
-5. Ask your friendly Granary Ops Engineer to add the following _roles needed to explore the databbase_ via DBVisualizer in Granary's Keycloak.
+5. Ask your friendly Granary Ops Engineer to add the following _roles needed to explore the database_ via DBVisualizer in Granary's Keycloak.
    1. Go to "clients" -&gt; "jdbc api" -&gt; "roles" -&gt; "add roles".
    2. Add the following roles:
       1. postgresql.information\_schema.tables

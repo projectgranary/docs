@@ -30,6 +30,7 @@
     * [Converting a script into a one-liner](learning-grnry-1/using-data-in-granary/best-practices/easing-development.md)
     * [Logging](learning-grnry-1/using-data-in-granary/best-practices/logging.md)
 * [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
+  * [How to model a Segment](learning-grnry-1/get-data-out-of-granary/how-to-model-a-segment.md)
   * [How to access a Segment](learning-grnry-1/get-data-out-of-granary/segment-store-api.md)
   * [Best Practices](learning-grnry-1/get-data-out-of-granary/best-practices/README.md)
     * [Segments as BI Tool Input](learning-grnry-1/get-data-out-of-granary/best-practices/segments-as-bi-tool-input.md)
