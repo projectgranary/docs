@@ -2186,11 +2186,11 @@ sessionizing application used by this harvster. Contains flag `enabled:boolean` 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="metadataExtractor" type="object" required=false %}
-metadata extractor application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are `app:string` \(registered app in scdf\), `version:string` \(registered app version in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`.
+metadata extractor application used by this harvester. If not specified, a default metadata extractor app will be deployed. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are `app:string` \(registered app in scdf\), `version:string` \(registered app version in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="transform" type="object" required=false %}
-scriptable transform application used by this harvester. Default values for all fields can be specified during harvester api deployment. _Optional_ fileds are `app:string` \(registered app in scdf\), `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` \(script language\), `script:string` \(script that transforms the data\).
+scriptable transform application used by this harvester. If not specified, a default transform app will be deployed. Default values for all fields can be specified during harvester api deployment. _Optional_ fileds are `app:string` \(registered app in scdf\), `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` \(script language\), `script:string` \(script that transforms the data\).
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="sourceType" type="object" required=true %}

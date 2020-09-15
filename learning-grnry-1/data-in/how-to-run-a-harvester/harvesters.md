@@ -34,10 +34,12 @@ To create a new harvester you have to set at least the following fields:
 | `sourceType` | object | You need to provide at least the `name:string` and the `version:string` of the desired source type. |
 | `eventType` | object | You need to provide at least the `name:string` and the `version:string` of the event type, which you want the the harvester instance to process. |
 | `description` | string | _Optional:_ You can provide a description for the the harvester instance. |
-| `transform` | object | _Optional:_ Defines a scriptable transform application which the harvester instance should use. Default values for all tranform fields can be specified during the deployment of the harvester api.  |
-| `metadataExtractor` | object | _Optional:_ Defines metadata extractor application that the harvester instance should use. Default values for the metadataExtractor fields are specified during the deployment of the harvester api. |
+| `transform` | object | _Optional:_ Defines a scriptable transform application which the harvester instance should use. A default transform app will be deployed in case no custom definition is provided. Default values for all transform fields can be specified during the deployment of the harvester api.  |
+| `metadataExtractor` | object | _Optional:_ Defines metadata extractor application that the harvester instance should use. A default metadata extractor app will be deployed in case no custom definition is provided. Default values for the metadataExtractor fields are specified during the deployment of the harvester api. |
 
+{% hint style="warning" %}
 Optional fields will be filled with pre-defined default values if not provided.
+{% endhint %}
 
 #### Example Create Call \(minimal configuration\)
 
