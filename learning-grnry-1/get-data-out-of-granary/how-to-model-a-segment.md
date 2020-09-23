@@ -6,7 +6,7 @@ description: >-
 
 # How to model a Segment
 
-In the following we want to describe from start to finish how to model and create segments in the [Segment Store](../../developer-reference/dataflow/segment-store/). 
+In the following we want to describe from start to finish how to model and create segments in Granary. Check out the [Segment Store](../../developer-reference/dataflow/segment-store/) and its subpages to learn what a segment is conceptionally. 
 
 ## 1. Decide which data to use
 
