@@ -483,7 +483,7 @@ Belt description.
 Number of replicas. Defaults to `1`
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="eventTypes" type="array" required=false %}
+{% api-method-parameter name="eventTypes" type="array" required=true %}
 String array of event types to be processed. Only event types registered with Harvester API's event type endpoint are valid values. You must have the event type's _consumer_ or _editor_ role assigned in Keycloak to consume an event type in a belt.
 {% endapi-method-parameter %}
 
