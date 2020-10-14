@@ -2424,7 +2424,7 @@ Requires the role `harvester_edit`.
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="harvester-name" type="string" required=false %}
+{% api-method-parameter name="harvester-name" type="string" required=true %}
 name of the harvester that should be updated
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
