@@ -103,7 +103,7 @@ Example role for viewing a segment: `postgresql.segments.profiles_seg1` if the s
 
 #### Access Kafka Topics
 
-Basicly every kafka topic can be accessed when registered in Presto. To access Kafka Topics, the following role structure needs to be added:
+Basically every Kafka Topic can be accessed when registered in Presto. To access Kafka Topics, the following role structure needs to be added:
 
 `grnry-kafka.default.<TOPIC_NAME>`
 
@@ -112,4 +112,10 @@ Example role to view access Kafka messages of an Event Type's topic:
 
 or to view its DLQ \(dead letter queue\):  
 `grnry-kafka.default.grnry_harvester_dlq_<EVENT_TYPE>`
+
+For the **Event Viewer** you have to use the wildcard permission `grnry-kafka`.
+
+{% hint style="warning" %}
+Be aware that this will allow the User to view all Kafka Topics.
+{% endhint %}
 
