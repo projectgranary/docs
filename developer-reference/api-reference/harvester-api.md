@@ -1864,7 +1864,7 @@ Number of harvesters returned, default is 20. Maximum is 250.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="expand" type="string" required=false %}
-Show harvester details with expand=harvesters. Add total count of harvesters with expand=totalCount.
+Include all harvesters' states with `expand=state` in response body.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="offset" type="integer" required=false %}
