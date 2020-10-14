@@ -119,5 +119,3 @@ For the **Event Viewer** you have to use the wildcard permission `grnry-kafka` .
 Be aware that this will allow the User to view all Kafka Topics.
 {% endhint %}
 
-
-
