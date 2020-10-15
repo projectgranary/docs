@@ -2416,7 +2416,7 @@ Update Harvester Instance
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Updates a harvester instance. All body parameters are optional. Harvester name filed `name` is not changeable and will be ignored if provided. Empty fields will be set to `""`, missing fields will remain unchanged. It is not possible to replace apps \(`sourceType`, `metadataExtractor`, `transform`\), only their versions and configs are modifiable.  
+Updates a harvester instance. All body parameters are optional. Harvester name field `name` is not changeable and will be ignored if provided. Empty fields will be set to `""`, missing fields will remain unchanged. It is not possible to replace apps \(`sourceType`, `metadataExtractor`, `transform`\), only their versions and configs are modifiable.  
   
 Requires the role `harvester_edit`.
 {% endapi-method-description %}
