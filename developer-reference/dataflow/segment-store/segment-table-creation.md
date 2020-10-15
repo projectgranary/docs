@@ -367,9 +367,9 @@ The flexible generator creates a segment based on a query given by the user. The
 
 | Parameter | Description | Default |
 | :--- | :--- | :--- |
-| `FLEXIBLE_SOURCE_QUERY` | The source query to create the flexible segment from |  |
+| `SOURCE_QUERY` | The source query to create the flexible segment from |  |
 
-The flexible source query is internally used to create a table or view with. The SQL issued by the Segment Table Creation looks like `CREATE TABLE AS {FLEXIBLE_SOURCE_QUERY}` or `CREATE VIEW AS {FLEXIBLE_SOURCE_QUERY}`, respectively.
+The flexible source query is internally used to create a table or view with. The SQL issued by the Segment Table Creation looks like `CREATE TABLE AS {SOURCE_QUERY}` or `CREATE VIEW AS {SOURCE_QUERY}`, respectively.
 
 #### Flexible Example
 
@@ -388,7 +388,7 @@ Configuration:
 
 ```text
 env:
-- name: FLEXIBLE_SOURCE_QUERY
+- name: SOURCE_QUERY
   value: select count(profile_type), profile_type from profilestore where value < 50 group by profile_type
 ```
 

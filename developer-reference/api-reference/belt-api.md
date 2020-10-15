@@ -304,6 +304,12 @@ The ID of belt
 Authentication Token
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="export" type="string" required=false %}
+if set to `"true"` \(not case sensitive\), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. \(Only the api-generated `id` field will be provided\). Default is `""`.
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -432,6 +438,12 @@ Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kube
 
 {% api-method-spec %}
 {% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="id" type="number" required=false %}
+Creates a belt with a given belt `id`. This `id` needs to be unique. Number in the range of a positive long \(i.e. `1` to `9223372036854775807`\).
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
 {% api-method-headers %}
 {% api-method-parameter name="Authentication" type="string" required=true %}
 Authentication token
@@ -634,9 +646,28 @@ Missing role to access this resource.
 }
 ```
 {% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=500 %}
+{% api-method-response-example-description %}
+Some internal server issue has occurred.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": "2020-10-14T13:06:25.951+0000",
+    "message": "An unexpected error occurred.",
+    "type": "unexpected_error",
+    "details": "uri=/belts/"
+}
+```
+{% endapi-method-response-example %}
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
+
+{% hint style="warning" %}
+Known issue: If the Belt `id` is not provided by the user, the Belt API generates an `id` by taking the maximum existing `id` and adding 1. If a belt with `id` _9223372036854775807_ has already been created, generating a new `id` will fail and return HTTP 500. Counter measures: use some unused `id` by providing it as path parameter or delete belt with `id` _9223372036854775807_.
+{% endhint %}
 
 {% api-method method="delete" host="https://api.grnry.io" path="/belts/:id" %}
 {% api-method-summary %}
