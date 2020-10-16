@@ -17,6 +17,7 @@ description: Springboot-based microservice to manage harvesters and event types.
 * GET /event-types
 * GET /event-types/{event-type-name}
 * POST /event-types
+* POST /event-types/{event-type-name}
 * PUT/event-types/{event-type-name}
 * DELETE /event-types/{event-type-name} 
 * GET/event-types/{event-type-name}/{version}
@@ -31,6 +32,7 @@ description: Springboot-based microservice to manage harvesters and event types.
 * GET /harvesters/instances
 * GET /harvesters/instances/{harvester-name}
 * POST /harvesters/instances
+* POST /harvesters/instances/{harvester-name}
 * PUT /harvesters/instances/{harvester-name}
 * DELETE /harvesters/instances/{harvester-name}
 * GET /harvesters/instances/{harvester-name}/state
@@ -715,7 +717,7 @@ No event-type found with that name.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/event-types" %}
+{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
 {% api-method-summary %}
 Create an Event Type
 {% endapi-method-summary %}
@@ -2185,7 +2187,7 @@ Harvester instance does not exist.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/harvesters/instances" %}
+{% api-method method="post" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name" %}
 {% api-method-summary %}
 Create Harvester
 {% endapi-method-summary %}

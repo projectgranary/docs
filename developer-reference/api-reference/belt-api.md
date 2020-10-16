@@ -9,6 +9,7 @@ description: Springboot-based microservice to manage belts registered in the Bel
 * GET /belts
 * GET /belts/{id}
 * POST /belts
+* POST /belts/{id}
 * DELETE /belts/{id}
 * PUT /belts/{id}
 * GET/belts/{id}/state
@@ -421,7 +422,7 @@ When there is no belt found with the specified ID
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/belts" %}
+{% api-method method="post" host="https://api.grnry.io" path="/belts/:id" %}
 {% api-method-summary %}
 Create and Store a Belt
 {% endapi-method-summary %}
