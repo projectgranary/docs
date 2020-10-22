@@ -51,7 +51,7 @@ Kubernetes also allows to perform a probe by executing a command in the target c
 ### Probe Defaults
 
 {% hint style="info" %}
-The defaults can be overwritten in the Helm Chart's value file of each Granary component.
+The defaults can be overwritten in the Helm Chart's value file of each Granary component. In case you want to change the probe's default handler \(e.g. from `httpGet` to `exec`\), please make sure to disable the default handler \(e.g. `httpGet: null`\). See [Helm documentation](https://helm.sh/docs/chart_template_guide/values_files/#deleting-a-default-key) for details.
 {% endhint %}
 
 | Property Name | Description | Default |
