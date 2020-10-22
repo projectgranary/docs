@@ -701,7 +701,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-No event-type found with that name.
+No event-type found with that name \(case sensitive\).
 {% endapi-method-response-example-description %}
 
 ```
@@ -866,7 +866,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=409 %}
 {% api-method-response-example-description %}
-If displayName not unique.
+If displayName not unique \(case insensitive\).
 {% endapi-method-response-example-description %}
 
 ```
@@ -1094,7 +1094,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-No event type with given name found.
+No event type with given name \(case sensitive\) found.
 {% endapi-method-response-example-description %}
 
 ```
@@ -1240,7 +1240,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-No event type found for given version.
+No event type with given name \(case sensitive\) found for given version.
 {% endapi-method-response-example-description %}
 
 ```
@@ -2171,7 +2171,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-Harvester instance does not exist.
+Harvester instance with given name \(case sensisitive\) does not exist.
 {% endapi-method-response-example-description %}
 
 ```
@@ -2216,31 +2216,31 @@ if set to `"true"` \(not case sensitive\), the harvester default values will be 
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="sessionizing" type="object" required=false %}
-sessionizing application used by this harvster. Contains flag `enabled:boolean` \(if set to false, no other fields should be set\). Default values for all other fields can be specified during harvester api deployment. These _optional_ fields are `app:string` \(registered app in scdf\), `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `correlationIdExpression:string`, `sessionIdExpression:string`, `inactivityGapSec:long`, `gracePeriodSec:long`.
+Sessionizing application used by this harvster. Contains flag `enabled:boolean` \(if set to false, no other fields should be set\). Default values for all other fields can be specified during harvester api deployment. These _optional_ fields are `app:string` \(registered app in scdf\), `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `correlationIdExpression:string`, `sessionIdExpression:string`, `inactivityGapSec:long`, `gracePeriodSec:long`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="metadataExtractor" type="object" required=false %}
-metadata extractor application used by this harvester. If not specified, a default metadata extractor app will be deployed. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are `app:string` \(registered app in scdf\), `version:string` \(registered app version in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`.
+Metadata extractor application used by this harvester. If not specified, a default metadata extractor app will be deployed. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are `app:string` \(registered app in scdf\), `version:string` \(registered app version in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="transform" type="object" required=false %}
-scriptable transform application used by this harvester. If not specified, a default transform app will be deployed. Default values for all fields can be specified during harvester api deployment. _Optional_ fileds are `app:string` \(registered app in scdf\), `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` \(script language\), `script:string` \(script that transforms the data\).
+Scriptable transform application used by this harvester. If not specified, a default transform app will be deployed. Default values for all fields can be specified during harvester api deployment. _Optional_ fileds are `app:string` \(registered app in scdf\), `version:string` \(app version registered in scdf\), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` \(script language\), `script:string` \(script that transforms the data\).
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="sourceType" type="object" required=true %}
-existing sourceType that this harvester receives data from. _Required_ fields are `name:string` and `version:string`. _Optional_ fields are `configuration:map`, `deployerConfiguration:map`, `appConfiguration:map`
+Existing sourceType that this harvester receives data from. _Required_ fields are `name:string` and `version:string`. _Optional_ fields are `configuration:map`, `deployerConfiguration:map`, `appConfiguration:map`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="eventType" type="object" required=true %}
-existing eventType that this harvester should process. _Required_ fields are `name:string` and `version:string`.
+Existing eventType that this harvester should process. _Required_ fields are `name:string` and `version:string`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="description" type="string" required=false %}
-harvester description
+Harvester description
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="displayName" type="string" required=true %}
-human readable name. Needs to be unique. A technical name will be derived from it.
+Human readable name. Needs to be unique. A technical name will be derived from it.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -2417,7 +2417,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=409 %}
 {% api-method-response-example-description %}
-harvester name already exists
+harvester name \(case insesnsitive\) already exists
 {% endapi-method-response-example-description %}
 
 ```
@@ -2669,7 +2669,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-
+Harvester with provided name \(case sensitive\) not found
 {% endapi-method-response-example-description %}
 
 ```
@@ -2844,7 +2844,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-Harvester not found.
+Harvester with provided name \(case sensitive\) not found.
 {% endapi-method-response-example-description %}
 
 ```
