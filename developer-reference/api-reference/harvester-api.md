@@ -693,7 +693,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-No event-type found with that name.
+No event-type found with that name \(case sensitive\).
 {% endapi-method-response-example-description %}
 
 ```
@@ -890,7 +890,7 @@ Update an Event Type
 
 {% api-method-description %}
 Fully or partially updates an event type.  
-This requires the requester to assume roles that match the `editor` field. If no delta was recognized, no update will be made and HTTP 304 will be returned.  
+This requires the requester to assume roles that match the `editor`  field. If no delta was recognized, no update will be made and HTTP 304 will be returned.  
   
 Immutable fields \(like type, partitionCount,.. \) can be part of the request body, but their values need to match the current values, otherwise an error is raised.
 {% endapi-method-description %}
@@ -1226,7 +1226,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-No event type found for given version.
+No event type with given name \(case sensitive\) found for given version.
 {% endapi-method-response-example-description %}
 
 ```
@@ -2160,7 +2160,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-Harvester instance does not exist.
+Harvester instance with given name \(case sensitive\) does not exist.
 {% endapi-method-response-example-description %}
 
 ```
@@ -2217,7 +2217,7 @@ harvester description
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="displayName" type="string" required=true %}
-human readable name. Needs to be unique. A technical name will be derived from it.
+Human readable name. Needs to be unique. A technical name will be derived from it.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
