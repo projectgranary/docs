@@ -439,6 +439,14 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="memoryRequests" type="string" required=false %}
+Memory requests specification for this belt. Defaults to either 512 or server env variable `BELT_MEMORY_REQUESTS`. _Available from Granary 0.9.1 onwards._
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="millicpuRequests" type="string" required=false %}
+CPU requests specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU_REQUESTS`. _Available from Granary 0.9.1 onwards._
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="kafkaDestinationTopic" type="string" required=false %}
 Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either `profile-update` or server env variable `BELT_DESTINATION_TOPIC`.
 {% endapi-method-parameter %}
@@ -488,11 +496,11 @@ String array of event types to be processed. Only event types registered with Ha
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="millicpu" type="string" required=false %}
-Deployment specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU`.
+CPU limit specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memory" type="string" required=false %}
-Deployment specification for this belt. Defaults either to `512` or server env variable `BELT_MEMORY`.
+Memory limit specification for this belt. Defaults either to `512` or server env variable `BELT_MEMORY`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="author" type="string" required=false %}
