@@ -87,7 +87,9 @@ A list of all belts along with their attributes and total count of belts stored 
             "affectedPaths": [],
             "replicas": 1,
             "millicpu": 200,
+            "millicpuRequests": 100,
             "memory": 512,
+            "memoryRequests": 256,
             "author": "",
             "reader": [
                 "_auth"
@@ -188,7 +190,9 @@ A list of all belts along with their attributes and total count of belts stored 
             "affectedPaths": [],
             "replicas": 1,
             "millicpu": 54,
+            "millicpuRequests": 54,
             "memory": 1023,
+            "memoryRequests": 1023,
             "author": "author@grnry.com",
             "reader": [
                 "_auth"
@@ -329,7 +333,9 @@ JSON with attributes of belt with the specified ID.
     "affectedPaths": [],
     "replicas": 1,
     "millicpu": 200,
+    "millicpuRequests": 200,
     "memory": 512,
+    "memoryRequests": 512,
     "author": "User",
     "reader": [
         "\"_auth\""
@@ -452,6 +458,14 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="millicpuRequests" type="string" required=false %}
+CPU requests specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU_REQUESTS`.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="memoryRequests" type="string" required=false %}
+Memory specification for this belt. Defaults to either `512` or server env variable `BELT_MEMORY_REQUESTS`.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="kafkaDestinationTopic" type="string" required=false %}
 Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either `profile-update` or server env variable `BELT_DESTINATION_TOPIC`.
 {% endapi-method-parameter %}
@@ -501,11 +515,11 @@ String array of event types to be processed. Only event types registered with Ha
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="millicpu" type="string" required=false %}
-Deployment specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU`.
+CPU limit specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memory" type="string" required=false %}
-Deployment specification for this belt. Defaults either to `512` or server env variable `BELT_MEMORY`.
+Memory limit specification for this belt. Defaults either to `512` or server env variable `BELT_MEMORY`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="author" type="string" required=false %}
@@ -799,7 +813,9 @@ A full dump of belt object recently modified
      "affectedPaths": [],
      "replicas": 1,
      "millicpu": 200,
+     "millicpuRequests": 200,
      "memory": 512,
+     "memoryRequests": 512,
      "author": "User",
      "reader": [
        "\"_auth\""
