@@ -9,6 +9,7 @@ description: REST API to manage segment jobs via k8s custom resources.
 * GET /segments
 * GET /segments/{id}
 * POST /segments
+* POST /segments/{id}
 * PUT /segments/{id}
 * DELETE /segments/{id}
 
@@ -258,7 +259,7 @@ Authentication token required
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/segments" %}
+{% api-method method="post" host="https://api.grnry.io" path="/segments/:id" %}
 {% api-method-summary %}
 Create Segment Job
 {% endapi-method-summary %}
@@ -269,6 +270,12 @@ Create a new segment job
 
 {% api-method-spec %}
 {% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="id" type="string" required=false %}
+Create a new segment job with the provided `id` . It needs to be a valid `DNS-1123` subdomain and be between `4-134` in length.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
 {% api-method-headers %}
 {% api-method-parameter name="Authentication" type="string" required=true %}
 Authentication token required.

@@ -62,7 +62,7 @@ Event types have two attributes, `editor`and `consumer`specifiying which users a
 
 ### segment-management-api
 
-Requests the user's access rights to manage segment jobs. These roles are defines by the segment job author during creation and can be edited by anyone having the specified `editor` role. Each segment job has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array fo all roles necessary for editing it. These roles need to be added as roles in Keycloak and assigned to all authorized users.
+Requests the user's access rights to manage segment jobs. These roles are defines by the segment job author during creation and can be edited by anyone having the specified `editor` role. Each segment job has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array fo all roles necessary for editing it. These roles need to be added as roles in Keycloak and assigned to all authorized users. To create a new segment job the user needs at least the default `segment_job_edit` role.
 
 Default roles: `segment_job_view`, `segment_job_edit`
 
