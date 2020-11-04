@@ -9,6 +9,7 @@ All GRNRY APIs follow a unified, typed error model. See the following table for 
 | Error Type | HTTP Code | Example Error Message |
 | :--- | :--- | :--- |
 | `bad_parameter_value` | 400 | Parameter 'version' must be a natural number or 'latest' but is '-1'. |
+| `bad_header_value` | 400 | Forwarded header verification failed. Cannot find 'example.com' in specified trusted hosts. |
 | `authentication_error` | 401 | Authentication failed. |
 | `entity_not_accessible` | 403 | Access forbidden due to missing roles. |
 | `entity_not_found` | 404 | Harvester 'my-harvester' not found. |
