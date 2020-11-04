@@ -26,6 +26,10 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
+## Granary 0.9.1 "Marie" - 2020-11-06
+
+
+
 ## Granary 0.9.0 "Marie" - 2020-08-13
 
 In this new release we focused on **shortening the pipeline** **development cycle** and **improving** **platform stability**.
