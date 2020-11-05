@@ -517,6 +517,41 @@ description: This page lists known issues to the Granary platform.
         <td style="text-align:left">-</td>
         <td style="text-align:left">#732</td>
     </tr>
+    <tr>
+      <td style="text-align:left">Granary UI</td>
+      <td style="text-align:left">GKI_2020_0018</td>
+      <td style="text-align:left">Granary UI can be included in other pages as iFrame.</td>
+      <td style="text-align:left">0.4.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">EXP-103</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Segment Store API</td>
+      <td style="text-align:left">GKI_2020_0019</td>
+      <td style="text-align:left">Presto cannot show tables from schemas written in capital letters.</td>
+      <td
+      style="text-align:left">0.5.0</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left">EXP-178</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Reaper</td>
+      <td style="text-align:left">GKI_2020_0020</td>
+      <td style="text-align:left">Reaper does not use client secret to authenticate against Keycloak.</td>
+      <td
+      style="text-align:left">0.8.0</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left">GS-1537</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">all Kafka clients</td>
+      <td style="text-align:left">GKI_2020_0021</td>
+      <td style="text-align:left">Kafka Health Indicator causes many rebalances in Kafka cluster.</td>
+      <td
+      style="text-align:left">-</td>
+        <td style="text-align:left">-</td>
+        <td style="text-align:left">GS-1509</td>
+    </tr>
   </tbody>
 </table>
 
