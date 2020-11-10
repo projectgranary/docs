@@ -49,12 +49,12 @@ import io.grnry.scdfapps.scriptable.snowplow.SnowplowPayloadExtractor
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload
 import com.fasterxml.jackson.databind.ObjectMapper
-​
+
 //deserialized payload
-​SnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)​
+SnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)​
 
 //json String representation of payload with escaped body
-​eventString = SnowplowSerDe.toJSON(snowplowEvent)
+eventString = SnowplowSerDe.toJSON(snowplowEvent)
 
 //normalized (unescaped) json node representation of snowplow event
 normalizedEventString = SnowplowPayloadExtractor.normalizeJson(eventString)
@@ -87,9 +87,9 @@ import io.grnry.scdfapps.scriptable.snowplow.SnowplowPayloadExtractor
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload
 import com.fasterxml.jackson.databind.ObjectMapper
-​
+
 //deserialized payload
-​SnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)​
+SnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)​
 
 //get normalized json String representation of snowplow event with GET parameters at node "queryParameters"
 eventString = SnowplowPayloadExtractor.getActualSnowplowPayload(snowplowEvent)
@@ -121,12 +121,12 @@ import io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload
 import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.json.JsonSlurper
-​
+
 //deserialized payload
 SnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)
 
 //get normalized json String representation of snowplow event with GET parameters at node "queryParameters"
-​eventString = SnowplowPayloadExtractor.getActualSnowplowPayload(snowplowEvent)
+eventString = SnowplowPayloadExtractor.getActualSnowplowPayload(snowplowEvent)
 
 JsonSlurper slurper = new JsonSlurper()
 
@@ -167,12 +167,12 @@ import io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload
 import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.json.JsonSlurper
-​
+
 //deserialized payload
 SnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)
 
 //get normalized json String representation of snowplow event with GET parameters at node "queryParameters"
-​eventString = SnowplowPayloadExtractor.getActualSnowplowPayload(snowplowEvent)
+eventString = SnowplowPayloadExtractor.getActualSnowplowPayload(snowplowEvent)
 
 JsonSlurper slurper = new JsonSlurper()
 
