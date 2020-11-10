@@ -131,7 +131,7 @@ eventString = SnowplowPayloadExtractor.getActualSnowplowPayload(snowplowEvent)
 JsonSlurper slurper = new JsonSlurper()
 
 //Object representation of normalized payload
-event = slurper.parseText(​eventString)
+event = slurper.parseText(eventString)
 
 //use dot operator and array index access to get an object at a specific path in the event
 ue_pr = event.body.data[0].ue_pr
