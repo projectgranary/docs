@@ -24,7 +24,7 @@ A harvester is event-type-bound and will only process data provided by a single 
 
 The steps above will emit events into a \(event type-specific\) kafka topic. So multiple harvesters can pull data of the same type \(like call records\) from different sources and write the data to the same kafka topic. But each harvester has also a dedicated "dead letter queue" kafka topic where unprocessable events \(=errors during transform, missing metadata\) will be written to. The dlq topic is created automatically on harvester creation. The name is part of the harvester entity \(`dlqTopic`\) and can not be changed.
 
-## Creating a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api.md#create-harvester)\)
+## Creating a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/#create-harvester)\)
 
 To create a new harvester you have to set at least the following fields:
 
@@ -271,7 +271,7 @@ curl -X GET -H "Content-Type: application/json" \
 }
 ```
 
-## Updating a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api.md#update-harvester-instance)\)
+## Updating a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/#update-harvester-instance)\)
 
 You can update individual fields of a harvester configuration. If your configuration properties are identical to the current configuration the PUT call will return an empty `304 - NOT MODIFIED` response. If your call did update fields, it will return a `200 - SUCCESS`. If the harvester is already running it's state will change from `RUNNING` to `RUNNING_BUT_OUTDATED`.
 
@@ -292,7 +292,7 @@ update-harvester.json content:
 
 This call updates the `description` of the previously created harvester.
 
-## Starting And Stopping a Harvester \(also see [API Docs](../../../developer-reference/api-reference/harvester-api.md#post-harvester-instance-state)\)
+## Starting And Stopping a Harvester \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/#post-harvester-instance-state)\)
 
 In order to see the current state of a harvester instance you can do:
 
@@ -347,7 +347,7 @@ A harvester instance can be in one of the following states:
 | **STOPPED** | The instance has stopped. |
 | **UNKNOWN** | The state of the instance is unknown. |
 
-## Delete a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api.md#delete-a-harvester)\)
+## Delete a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/#delete-a-harvester)\)
 
 #### Example DELETE call:
 
@@ -357,7 +357,7 @@ curl -X DELETE -H "Content-Type: application/json" \
   https://grnry-host/harvesters/instances/harvester-minimal
 ```
 
-## Harvester Instance Logs \(also see [API Docs](../../../developer-reference/api-reference/harvester-api.md#get-harvester-instance-logs)\)
+## Harvester Instance Logs \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/#get-harvester-instance-logs)\)
 
 It is possible to access the logs of underlying apps of a harvester instance via the API.
 

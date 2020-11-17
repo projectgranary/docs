@@ -20,7 +20,7 @@ To update the SCDF apps, you need to follow these steps first:
 4. Restart Harvester API, if no errors occur, update has been successful
    1. If errors occur, revisit steps 1-3 and check for issues
 
-Once this is done, you can update running Harvester instance models via [PUT API call](../../developer-reference/api-reference/harvester-api.md#update-harvester-instance). Restart the Harvester afterwards.
+Once this is done, you can update running Harvester instance models via [PUT API call](../../developer-reference/api-reference/harvester-api/#update-harvester-instance). Restart the Harvester afterwards.
 
 Advocate the usage of the [new common log format for the transform scripts](../../learning-grnry-1/data-in/best-practices-1/logging.md) among use case developers. 
 

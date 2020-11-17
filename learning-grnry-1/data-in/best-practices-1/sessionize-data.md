@@ -44,7 +44,7 @@ If you want to group data based on inactivity between events, the output varies 
 
 ## Create a Harvester With Sessionizing
 
-This section describes how to include the sessionizing processor in [API creation](../../../developer-reference/api-reference/harvester-api.md#create-harvester) of a harvester.
+This section describes how to include the sessionizing processor in [API creation](../../../developer-reference/api-reference/harvester-api/#create-harvester) of a harvester.
 
 ### Registering the SCDF app
 

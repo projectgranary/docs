@@ -39,7 +39,7 @@ Requests the user's access rights to operate on Spring Cloud Data Flow. This mai
 
 ### belt-api
 
-Requests the user's access rights to manage individual belts. These roles are defined by the belt author during belt definition and can be edited by anyone having the specified editor role. Each belt has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array of all roles necessary for editing it. These values need to be added as roles in Keycloak and assigned to all authorized users.
+Requests the user's access rights to manage individual belts. These roles are defined by the belt author during belt definition and can be edited by anyone having the specified editor role. Each belt has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array of all roles necessary for editing it. These values need to be added as roles in Keycloak and assigned to all authorized users. To create a new belt the user needs at least the default `belt_edit` role.
 
 Example roles: `belt_view`, `belt_edit`, `belt_view_privileged`, `belt_edit_privileged`
 

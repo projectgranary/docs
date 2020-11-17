@@ -436,6 +436,8 @@ Create and Store a Belt
 {% api-method-description %}
 Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned.   
   
+Requires the role `belt_edit`.  
+  
 **JSON Schema Definitions**  
   
 Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html  

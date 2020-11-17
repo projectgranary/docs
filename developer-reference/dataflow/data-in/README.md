@@ -36,5 +36,5 @@ The EventStore Sink persists data from the data\_in\_grnry\_&lt;event&gt; topic 
 
 Consult the [Granary Access Clients Reference](../../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
 
-Check out the user guide [How to run a Harvester](../../../learning-grnry-1/data-in/how-to-run-a-harvester/) or refer to the [Harvester API](../../api-reference/harvester-api.md) documentation for full details.
+Check out the user guide [How to run a Harvester](../../../learning-grnry-1/data-in/how-to-run-a-harvester/) or refer to the [Harvester API](../../api-reference/harvester-api/) documentation for full details.
 

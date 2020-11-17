@@ -233,7 +233,7 @@ It is safe to use a partial event type definition in the update call. The api wi
 
 ### Persister State Management
 
-On the initial creation of the event type a persister is also created, but not started. The configuration of the persister looks similar to the "pre-harvester-api" Persister Stream definition. But all environment specific  configuration options \(database host, username, encryption key locations, etc\) are already available as defaults in the harvester-api deployment \(via helm\). This tutorial will assume that you do not need to adapt the default settings \(which is still possible, please consult the [api docs](../../developer-reference/api-reference/harvester-api.md#event-type-endpoints) \).
+On the initial creation of the event type a persister is also created, but not started. The configuration of the persister looks similar to the "pre-harvester-api" Persister Stream definition. But all environment specific  configuration options \(database host, username, encryption key locations, etc\) are already available as defaults in the harvester-api deployment \(via helm\). This tutorial will assume that you do not need to adapt the default settings \(which is still possible, please consult the [api docs](../../developer-reference/api-reference/harvester-api/#event-type-endpoints) \).
 
 Check the current state of the persister
 

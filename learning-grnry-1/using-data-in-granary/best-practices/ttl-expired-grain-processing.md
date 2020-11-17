@@ -139,7 +139,7 @@ String origin: "/belt123"
 
 ### Step 3: Deploy Belt that consumes Reaper emitted Grains
 
-To act upon a notification, we need to deploy a belt that consumes from the topic `grnry_ttl_feedback`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "feedback". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api.md#create-an-event-type) `ttl`. In the belt callback script, the values in the `execute` function will look like this:
+To act upon a notification, we need to deploy a belt that consumes from the topic `grnry_ttl_feedback`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "feedback". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api/#create-an-event-type) `ttl`. In the belt callback script, the values in the `execute` function will look like this:
 
 #### Event Headers
 
