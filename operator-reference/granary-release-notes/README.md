@@ -26,7 +26,284 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
-## Granary 0.9.1 "Marie" - 2020-11-06
+## Granary 0.9.1 "Marie" - 2020-11-17
+
+Patch release.
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Granary Component</th>
+      <th style="text-align:left">Release Version</th>
+      <th style="text-align:left">Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/granary-base-deployment.md">Granary Base</a>
+      </td>
+      <td style="text-align:left"><b>0.9.3</b>
+      </td>
+      <td style="text-align:left">
+        <p>Fixes:</p>
+        <ul>
+          <li>Improved encryption key generation documentation</li>
+          <li>Added harvester api roles to Keycloak base realm.json</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/datawire/ambassador-chart">Ambassador</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
+      </td>
+      <td style="text-align:left">0.6.1 (based on Snowplow v0.15.0)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
+      </td>
+      <td style="text-align:left"><b>0.9.5</b>
+      </td>
+      <td style="text-align:left">
+        <p>Fixes:</p>
+        <ul>
+          <li>Fixed issues with lower cases event type names if supplying event type
+            display name with mixed casing.</li>
+        </ul>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
+      </td>
+      <td style="text-align:left">0.6.2<b> </b>(based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
+      <td
+      style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
+      </td>
+      <td style="text-align:left"><b>0.9.3</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Kafka header written correctly to messages in Source Types, Scriptable
+            Transform and Metadata Extractor.</li>
+        </ul>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/event-store-api.md">Event Store API</a>
+      </td>
+      <td style="text-align:left">0.8.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
+      </td>
+      <td style="text-align:left"><b>0.6.6</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added configuration to skip the validation that latest Kafka offset is
+            present in Event Store.</li>
+        </ul>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/belt-extractor.md">Belt Extractor</a>
+      </td>
+      <td style="text-align:left"><b>0.9.2</b>
+      </td>
+      <td style="text-align:left">
+        <p>Fixes:</p>
+        <ul>
+          <li>Improved exception handling within Belt callback function so that exceptions
+            are written into dead letter queue, logged, and the exception counter is
+            increased.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/belt-api.md">Belt API</a>
+      </td>
+      <td style="text-align:left"><b>0.8.4</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added Kubernetes requests settings for CPU and memory to Belt model.</li>
+          <li>Extended Belt specific log output with Belt ID as context.</li>
+          <li>Added DLQ name to Belt return model.</li>
+          <li>Added FlyWay for database migrations.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/profile-updater.md">Profile Updater</a>
+      </td>
+      <td style="text-align:left">0.6.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/profile-store-api.md">Profile Store API</a>
+      </td>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/segment-creation-api.md">Segment Management API</a>
+      </td>
+      <td style="text-align:left">0.9.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/segment-manager.md">Segment Manager</a>
+      </td>
+      <td style="text-align:left">0.8.6</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
+      </td>
+      <td style="text-align:left"><b>0.8.1</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added flexibel mode to Segment Creation</li>
+          <li>All modes provide configuration to be persistent or to be using a view</li>
+          <li>Persistent segment creation does not delete old segment while new version
+            is created.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
+      </td>
+      <td style="text-align:left"><b>0.5.1 (based on Presto 0.339)</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Introduced wildcard permissions to view all tables within a DB schema.</li>
+          <li>Introduced write mode (requires specific Keycloak configuration on user
+            level)</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/graphql-api.md">GraphQL API</a>
+      </td>
+      <td style="text-align:left"><b>0.10.0</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added possibility to access Kafka events using GraphQL API.</li>
+        </ul>
+        <p>See full release notes.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/granary-ui.md">Granary UI</a>
+      </td>
+      <td style="text-align:left"><b>0.10.0</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li>Added Event Browser for Belt and Harvester Detail views.</li>
+        </ul>
+        <p>See full release notes.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/reaper.md">Reaper</a>
+      </td>
+      <td style="text-align:left"><b>0.8.0</b>
+      </td>
+      <td style="text-align:left">
+        <p>Features:</p>
+        <ul>
+          <li><b>BREAKING CHANGE</b>: Reaper now requires a special index on Profile
+            Store. See installation documentation for details.</li>
+          <li>Increased performance to now reap multiple thousands expired grains per
+            sec.</li>
+          <li>Added configuration to restrict reaping to certain Profile Type or Grain
+            paths.</li>
+        </ul>
+        <p>Fixes:</p>
+        <ul>
+          <li>Fixed Event Type lookup pagination.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/event-explorer-ui.md">Event Explorer UI</a>
+      </td>
+      <td style="text-align:left">0.2.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/citus-postgresql.md">Citus PostgreSQL</a>
+      </td>
+      <td style="text-align:left">8.1.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Kafka</a>
+      </td>
+      <td style="text-align:left">5.1.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Zookeeper</a>
+      </td>
+      <td style="text-align:left">5.1.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/kafka-manager.md">Kafka Manager</a>
+      </td>
+      <td style="text-align:left">0.5.3</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
+      </td>
+      <td style="text-align:left">4.5.0.Final</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
+      </td>
+      <td style="text-align:left">6.6.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/zipkin.md">Zipkin Server</a>
+      </td>
+      <td style="text-align:left">0.6.3 (based on Open Zipkin 2.12)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md">Data Lineage Report</a>
+      </td>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
