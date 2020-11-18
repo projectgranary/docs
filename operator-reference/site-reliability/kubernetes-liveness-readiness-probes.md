@@ -26,6 +26,8 @@ The GRNRY Kafka Health Indicator checks three different scenarios against the co
 
 If any of the three checks fails the indicator will report service failure.
 
+This check can be disabled by setting the property `management.health.healthindicator-kafka.enabled=false`. In [Harvester API](../installation/with-helm/harvester-api/), this parameter can be provided by default via the `appConfiguration` setting of each harvester step. Whereas in [Kafka Profile Updater](../installation/with-helm/profile-updater.md), it needs to be provided as extra environment variable `MANAGEMENT_HEALTH_HEALTHINDICATORKAFKA_ENABLED=false`.
+
 #### ThrottleControl Health Indicator
 
 The GRNRY ThrottleControl Health Indicator is used in the Profile Updater if throtteling is active and checks that fetching the current lag is happening at the set interval. If the interval is exceeded it will report service failure
