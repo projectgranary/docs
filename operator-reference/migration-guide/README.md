@@ -4,6 +4,29 @@ description: Explanation of migration strategies between Granary platform versio
 
 # Migration guide
 
+## Upgrade from Granary 0.9.0 to Granary 0.9.1
+
+### Reaper
+
+Database changes as denoted in [Reaper installation](../installation/with-helm/reaper.md#index-on-profile-store-for-reaper) needs to be applied.
+
+### Update Graphql API and Granary UI
+
+There is a breaking change in the Helm deployment imagePullSecrets expects a `List` and no longer a `String`:
+
+```text
+imagePullSecrets: 
+- grnry-dockerconfig
+```
+
+### Enable Event Browser
+
+To enable the event browser feature in Granary UI, make sure to configure Keycloeak as denoted in [Granary Access Clients](../identity-and-access-management/granary-access-clients.md#jdbc-api-a-k-a-segment-store-api).
+
+### Update Granary Components
+
+Update all remaining Granary components to their Granary 0.9.1 version as denoted in the [release notes](../granary-release-notes/). Bold versions indicate an update.
+
 ## Upgrade from Granary 0.8 "Lemmy" to Granary 0.9 "Marie"
 
 ### Update Granary Components

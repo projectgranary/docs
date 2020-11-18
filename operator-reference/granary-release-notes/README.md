@@ -211,7 +211,13 @@ Patch release.
         <ul>
           <li>Added possibility to access Kafka events using GraphQL API.</li>
         </ul>
-        <p>See full release notes.</p>
+        <p>Fixes:</p>
+        <ul>
+          <li><b>BREAKING CHANGE:</b> Helm chart uses list for docker secrets, see
+            <a
+            href="../migration-guide/">Migration Guide</a>
+          </li>
+        </ul>
       </td>
     </tr>
     <tr>
@@ -224,7 +230,13 @@ Patch release.
         <ul>
           <li>Added Event Browser for Belt and Harvester Detail views.</li>
         </ul>
-        <p>See full release notes.</p>
+        <p>Fixes:</p>
+        <ul>
+          <li><b>BREAKING CHANGE:</b> Helm chart uses list for docker secrets, see
+            <a
+            href="../migration-guide/">Migration Guide</a>
+          </li>
+        </ul>
       </td>
     </tr>
     <tr>
