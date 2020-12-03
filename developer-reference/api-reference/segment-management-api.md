@@ -21,6 +21,41 @@ Feel free to check out the [openapi schema](https://github.com/syncier/grnry-seg
 Important: Incompatible segment custom resources are omitted from all responses and not updatable via the API. This can happen e.g. when the custom resources does not have annotations.
 {% endhint %}
 
+## Segment Job Sample
+
+This section provides you with a sample object for the `data` attribute. All available attributes are defined in the [Segment Manager](../dataflow/segment-store/segment-manager.md) .
+
+**Example**:
+
+```text
+{
+
+    "cronjob": {
+        "schedule": "*/1 * * * *"
+    },
+    "env": {
+        "SOURCE_TABLE_NAME": "eventstore",
+        "TARGET_SEGMENT_NAME": "eventstore_demo_seg",
+        "SOURCE_WHERE_CLAUSE": "event_harvester = 'adobe'",
+        "CITUS_DIST_COL": "correlation_id",
+        "TYPE": "generic",
+        "GENERIC_COLUMNS": "event_id,event_harvester",
+        "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
+        "TARGET_SEGMENT_INDEXES": "idx1=(event_id, theval02)",
+        "PROMETHEUS_PUSHGATEWAY": "prometheus-pushgateway.monitoring.svc.cluster.local:9091",
+        "PROMETHEUS_JOB": "eventstore_int_test_seg1",
+        "DEBUG": "True"
+    }
+
+    "envFromSecretes": {
+        "DBUser": {
+            "key": "user",
+            "secret": "db-secret"
+        }
+    }
+}
+```
+
 ## API Methods
 
 Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#segment-management-api) for default roles a user needs to interact with the Segment Management API. However, [different roles](../../operator-reference/identity-and-access-management/granary-access-clients.md#jdbc-api-a-k-a-segment-store-api) apply and are required to read the created Segments via Segment Store API.
@@ -122,6 +157,47 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
     },
     "totalCount": 1
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Invalid query parameter value.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": "2020-12-02T20:14:45+01:00",
+    "message": "Parameter 'pagesize' 'null' could not be parsed to int.",
+    "type": "bad_parameter_value",
+    "traceId": null,
+    "invalidParams": [
+        {
+            "name": "pagesize",
+            "reason": "'null' could not be parsed to int"
+        }
+    ]
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Token missing.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+Token invalid.
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 
@@ -228,9 +304,19 @@ Authentication token required
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Token missing.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=403 %}
 {% api-method-response-example-description %}
-
+Token invalid or missing roles to access this resource.
 {% endapi-method-response-example-description %}
 
 ```text
@@ -238,6 +324,20 @@ Authentication token required
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Segment with given ID does not exist.
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Segment with ID 'demo-segment-95he0' not found."
 }
 ```
 {% endapi-method-response-example %}
@@ -368,7 +468,7 @@ description: optional`{
 
 {% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
-
+If required parameters are missing or parameters are invalid.
 {% endapi-method-response-example-description %}
 
 ```text
@@ -380,9 +480,29 @@ description: optional`{
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Token missing.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=403 %}
+{% api-method-response-example-description %}
+Token invalid.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=409 %}
 {% api-method-response-example-description %}
-
+If ID is not unique.
 {% endapi-method-response-example-description %}
 
 ```text
@@ -520,7 +640,7 @@ Overwrites `displayName` and `description`.
 
 {% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
-
+If required parameters are missing or parameters are invalid.
 {% endapi-method-response-example-description %}
 
 ```text
@@ -532,9 +652,19 @@ Overwrites `displayName` and `description`.
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+Token missing.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=403 %}
 {% api-method-response-example-description %}
-
+Token invalid or missing roles to access this resource.
 {% endapi-method-response-example-description %}
 
 ```text
@@ -548,7 +678,7 @@ Overwrites `displayName` and `description`.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-
+Segment with given ID does not exist.
 {% endapi-method-response-example-description %}
 
 ```text
@@ -615,7 +745,7 @@ Authentication token required.
 
 {% api-method-response-example httpCode=403 %}
 {% api-method-response-example-description %}
-
+Token invalid or missing roles to access this resource.
 {% endapi-method-response-example-description %}
 
 ```text
@@ -644,38 +774,5 @@ Authentication token required.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-## Segment Job Data
 
-This section provides you with a sample object for the `data` attribute. All available attributes are defined in the [Segment Manager](../dataflow/segment-store/segment-manager.md) .
-
-**Example**:
-
-```text
-{
-
-    "cronjob": {
-        "schedule": "*/1 * * * *"
-    },
-    "env": {
-        "SOURCE_TABLE_NAME": "eventstore",
-        "TARGET_SEGMENT_NAME": "eventstore_demo_seg",
-        "SOURCE_WHERE_CLAUSE": "event_harvester = 'adobe'",
-        "CITUS_DIST_COL": "correlation_id",
-        "TYPE": "generic",
-        "GENERIC_COLUMNS": "event_id,event_harvester",
-        "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
-        "TARGET_SEGMENT_INDEXES": "idx1=(event_id, theval02)",
-        "PROMETHEUS_PUSHGATEWAY": "prometheus-pushgateway.monitoring.svc.cluster.local:9091",
-        "PROMETHEUS_JOB": "eventstore_int_test_seg1",
-        "DEBUG": "True"
-    }
-
-    "envFromSecretes": {
-        "DBUser": {
-            "key": "user",
-            "secret": "db-secret"
-        }
-    }
-}
-```
 
