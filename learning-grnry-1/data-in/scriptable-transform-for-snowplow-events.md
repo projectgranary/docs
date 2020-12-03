@@ -40,7 +40,7 @@ serde.toJSON(serde.deserialize(payload));
 
 ## Normalize Json Representation of SnowplowEvents
 
-The body of a Snowplow event is stored in a String and therefore will be escaped in the json representation of the object. To get a normalized hence unescaped version you should use the helper method `SnowplowPayloadExtractor.normalizeJson()`. 
+The body of a Snowplow event is stored in a String and therefore will be escaped in the json representation of the object. To get a normalized hence unescaped version you should use the helper method `SnowplowPayloadExtractor.normalizeJson()`.
 
 {% tabs %}
 {% tab title="Groovy" %}
