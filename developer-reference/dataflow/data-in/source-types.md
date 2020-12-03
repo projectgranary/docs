@@ -270,7 +270,43 @@ A sample of the configuration of a Topic source could look like this:
 }
 ```
 
-### 
+### JMS Source
+
+**Name**: grnry-jms
+
+**Parameters**: See [shared parameters](grnry-components-and-parameters.md).
+
+{% hint style="info" %}
+Currently, there are no GRNRY-specific parameters for JMS. The benefit of this source type is the included IBM MQ libraray and the encryption of the processed messages.
+{% endhint %}
+
+**Source parameters:**
+
+The parameters for the JMS source can be found here:
+
+{% embed url="https://github.com/spring-cloud-stream-app-starters/jms/blob/master/spring-cloud-starter-stream-source-jms/README.adoc" %}
+
+The JMS source also bundles IBM MQ JMS Spring Components to allow easy connection to IBM MQ endpoints. The IBM MQ related parameters can be found here:
+
+{% embed url="https://github.com/ibm-messaging/mq-jms-spring/blob/master/README.md" %}
+
+A sample of the configuration of a JMS source could look like this:
+
+```yaml
+"sourceType" : {
+    ...
+    "configuration" : {
+        "jms.destination": "DEV.QUEUE.1",
+        "ibm.mq.connName": "<host>(<port>)",
+        "ibm.mq.user": "<user>",
+        "ibm.mq.password": "<password>"
+    }
+}
+```
+
+
+
+
 
 {% hint style="warning" %}
 All Source Types currently work only with one replica. Only exception is the Topic Source.
