@@ -241,12 +241,18 @@ Identifier of the segment job.
 Authentication token required
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="export" type="string" required=false %}
+If set to `true` \(not case sensitive\), the segment job response will only contain properties a POST body must necessarily contain to create this exact segment job. All properties set to default values and all segment-manager generated properties will be omitted. \(only the api-generated id will be provided\). Default is `false` .
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-
+Response when export flag is `false`
 {% endapi-method-response-example-description %}
 
 ```text
