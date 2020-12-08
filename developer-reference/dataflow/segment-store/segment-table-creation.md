@@ -399,6 +399,10 @@ Result:
 | 1 | \_d |
 | 2 | pt |
 
+{% hint style="warning" %}
+Please note that if you are using `%` signs in your source query \(e.g. `LIKE '%something'`\), they will need to be prefixed with three more `%` signs to work correctly. The example would therefore look like this: `LIKE '%%%%something'`.
+{% endhint %}
+
 ## Errors
 
 In case of errors, these are directly thrown and can be detected by the environment running the Docker container \(e.g., Kubernetes\). In case no connection can be established or the Citus master returns an SQL error result, this is the default behaviour of psycopg2. In case executing a command on the workers fails, the master will not return an error. The segmentcreation tool detects this by checking the second last return value of `run_command_on_workers` or `run_command_on_colocated_placements` indicating `success`, according to [psql's `df+` output](https://www.postgresql.org/docs/current/app-psql.html):
