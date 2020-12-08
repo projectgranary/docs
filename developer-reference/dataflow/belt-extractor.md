@@ -2,7 +2,7 @@
 description: A function-as-a-service like Python callback runtime
 ---
 
-# Belt Extractor
+# Belt Framework
 
 ![Data flow within harmonized data zone of Granary](../../.gitbook/assets/dataflow_profile.PNG)
 
@@ -44,595 +44,6 @@ Messages in those input topics consist of event headers and an event payload spe
 | $$-$$ headers | HTTP headers |
 {% endtab %}
 {% endtabs %}
-
-## Callback Signature
-
-### Single payload processing
-
-`execute(event_headers, event_payload[, profile])`
-
-where `profile` is a profile fetched from [Profile Store](profile-store/). This is only provided if `fetchProfile` in [Belt definition](../api-reference/belt-api.md#create-and-store-a-belt) is set to `true`.
-
-```yaml
-event_headers = {
-            "grnry-event-type":"...",
-            "grnry-event-id":"...",
-            "grnry-correlation-id":"...",
-            "grnry-harvester-name":"...",
-            "grnry-event-timestamp":1535972952300
-        }
-event_payload = {
-        "body": "{ ... }",
-        "collector": "ssc-0.13.0-kafka",
-        "encoding": "UTF-8",
-        "headers": ["Host: aws-eu1.grnry.io", "Accept: text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8", "Accept-Encoding: gzip, deflate, br", "Accept-Language: de-DE, de;q=0.9, en-US;q=0.8, en;q=0.7", "Cookie: _ga=GA1.2.1323636424.1533625971; ajs_anonymous_id=%22058bbd8d-cb74-47e4-aa27-9cc5fa4546aa%22; ajs_group_id=null; ajs_user_id=%22QjAVZpXa7qgJdZs6vGsNMA5M9yH3%22; mp_96b84420a1a32e448f73e7b9ffccebdb_mixpanel=%7B%22distinct_id%22%3A%20%22165133b330da0-0ad91354656274-47e1039-1fa400-165133b330f15e%22%2C%22%24initial_referrer%22%3A%20%22%24direct%22%2C%22%24initial_referring_domain%22%3A%20%22%24direct%22%7D", "Upgrade-Insecure-Requests: 1", "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36", "X-Forwarded-For: 82.207.192.113", "X-Forwarded-Port: 443", "X-Forwarded-Proto: https", "Connection: keep-alive", "Timeout-Access: <function1>"],
-        "hostname": "aws-eu1.grnry.io",
-        "ipAddress": "82.207.192.113",
-        "networkUserId": "631b9979-16b8-44ed-87b1-86b7d92d8223",
-        "path": "/i",
-        "schema": "iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
-        "timestamp": 1535972952029,
-        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
-    }
-
-profile = {
-  "_id": "0815",
-  "a1": {
-    "_latest": {
-      "_v": "abc",
-      "_c": 0.4,
-      "_in": 123,
-      "_ttl": "P100Y",
-      "_origin": null,
-      "_reader": "_all"
-    }
-  },
-  "a2": {
-    "b1": {
-      "2018-09-21": {
-        "_v": "21",
-        "_c": 0.1,
-        "_ttl": "P100Y",
-        "_origin": null,
-        "_reader": "_all"
-      },
-      "2018-09-22": {
-        "_v": "22",
-        "_c": 0.2,
-        "_ttl": "P100Y",
-        "_origin": null,
-        "_reader": "_all"
-      },
-      "_latest": {
-        "_v": "23",
-        "_in": "2018-09-23",
-        "_c": 0.3,
-        "_ttl": "P100Y",
-        "_origin": null,
-        "_reader": "_all"
-      }
-    },
-    "b2": {
-      "_latest": {
-        "_v": "123456",
-        "_c": 0.4,
-        "_in": "2018-09-20",
-        "_ttl": "P100Y",
-        "_origin": null,
-        "_reader": "_all"
-      }
-    }
-  },
-  "a3": {
-    "b3": {
-      "c3": {
-        "d3": {
-          "e3": {
-            "_latest": {
-              "_v": "123456",
-              "_c": 0.5,
-              "_in": "2018-09-20",
-              "_ttl": "P100Y",
-              "_origin": null,
-              "_reader": "_all"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-### Multiple payloads/batch data processing
-
-`execute(event_headers, event_payload[, profile])`
-
-Similar to the single payload approach, the callback signature accepted by the belt framework consists of event\_headers and event\_payload, as well as profiles in case profile fetching is set to true. The only difference is that in this case both event\_headers and event\_payload will both be a _list_ of header and payload _dictionaries_, respectively, looking for example like this:
-
-#### Headers
-
-```yaml
-[
-   {
-      "grnry-harvester-name":"snowplow-a-std-harvester",
-      "grnry-event-type":"snowplow-a",
-      "grnry-event-id":"8be4a767-7ee0-4bb0-addd-6eab0c6e1b22",
-      "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009867086",
-      "grnry-event-type-version":"1"
-
-   },
-   {
-      "grnry-harvester-name":"snowplow-a-std-harvester",
-      "grnry-event-type":"snowplow-a",
-      "grnry-event-id":"b785b078-e0ef-408f-b77c-2794f1e3a6ea",
-      "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009868613",
-      "grnry-event-type-version":"1"
-   },
-   {
-      "grnry-harvester-name":"snowplow-a-std-harvester",
-      "grnry-event-type":"snowplow-a",
-      "grnry-event-id":"f388c58b-5eb9-4507-898b-023d42e01033",
-      "grnry-correlation-id":"23456",
-      "grnry-event-timestamp":"1574009869741",
-      "grnry-event-type-version":"1"
-   },
- ...
-]
-```
-
-#### Payloads
-
-```python
-[
-    '{
-        "setNetworkUserId":true,
-        "headersIterator":[
-            "Host: hostname",
-            "X-Request-ID: 438e8",
-            "X-Real-Ip: 127.0.0.1",
-            "X-Forwarded-For: 127.0.0.1",
-            "X-Forwarded-Host: hostname",
-            "X-Forwarded-Port: 443",
-            "X-Forwarded-Proto: https",
-            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-            "X-Scheme: https",
-            "X-B3-TraceId: 5f910",
-            "X-B3-SpanId: 5f910",
-            "Authorization: Bearer eyJhb",
-            "User-Agent: PostmanRuntime/7.17.1",
-            "Accept: */*",
-            "Cache-Control: no-cache",
-            "Postman-Token: 3e458",
-            "Accept-Encoding: gzip, deflate",
-            "Timeout-Access: <function1>",
-            "application/json"
-        ],
-        "encoding":"UTF-8",
-        "setBody":true,
-        "headersSize":19,
-        "setQuerystring":false,
-        "setPath":true,
-        "refererUri":null,
-        "timestamp":1574009866075,
-        "path":"/com.snowplowanalytics.snowplow/tp2",
-        "setSchema":true,
-        "body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
-        "ipAddress":"127.0.0.1",
-        "schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
-        "setHostname":true,
-        "setUserAgent":true,
-        "setTimestamp":true,
-        "setEncoding":true,
-        "setCollector":true,
-        "setRefererUri":false,
-        "hostname":"hostname",
-        "setHeaders":true,
-        "querystring":null,
-        "headers":[
-            "Host: hostname",
-            "X-Request-ID: 438e8",
-            "X-Real-Ip: 127.0.0.1",
-            "X-Forwarded-For: 127.0.0.1"
-            "X-Forwarded-Host: hostname",
-            "X-Forwarded-Port: 443",
-            "X-Forwarded-Proto: https",
-            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-            "X-Scheme: https",
-            "X-B3-TraceId: 5f910",
-            "X-B3-SpanId: 5f910",
-            "Authorization: Bearer eyJhb",
-            "User-Agent: PostmanRuntime/7.17.1",
-            "Accept: */*",
-            "Cache-Control: no-cache",
-            "Postman-Token: 3e458",
-            "Accept-Encoding: gzip, deflate",
-            "Timeout-Access: <function1>",
-            "application/json"
-        ],
-        "contentType":"application/json",
-        "setIpAddress":true,
-        "userAgent":"PostmanRuntime/7.17.1",
-        "setContentType":true,
-        "collector":"ssc-0.15.0-kafka",
-        "networkUserId":"4770e"
-    }',
-    '{
-        "setNetworkUserId":true,
-        "headersIterator":[
-            "Host: hostname",
-            "X-Request-ID: e091d",
-            "X-Real-Ip: 127.0.0.1",
-            "X-Forwarded-For: 127.0.0.1",
-            "X-Forwarded-Host: hostname",
-            "X-Forwarded-Port: 443",
-            "X-Forwarded-Proto: https",
-            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-            "X-Scheme: https",
-            "X-B3-TraceId: 5f910",
-            "X-B3-SpanId: 5f910",
-            "Authorization: Bearer eyJhb",
-            "User-Agent: PostmanRuntime/7.17.1",
-            "Accept: */*",
-            "Cache-Control: no-cache",
-            "Postman-Token: f0927",
-            "Accept-Encoding: gzip, deflate",
-            "Timeout-Access: <function1>",
-            "application/json"
-        ],
-        "encoding":"UTF-8",
-        "setBody":true,
-        "headersSize":19,
-        "setQuerystring":false,
-        "setPath":true,
-        "refererUri":null,
-        "timestamp":1574009867606,
-        "path":"/com.snowplowanalytics.snowplow/tp2",
-        "setSchema":true,
-        "body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
-        "ipAddress":"127.0.0.1",
-        "schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
-        "setHostname":true,
-        "setUserAgent":true,
-        "setTimestamp":true,
-        "setEncoding":true,
-        "setCollector":true,
-        "setRefererUri":false,
-        "hostname":"hostname",
-        "setHeaders":true,
-        "querystring":null,
-        "headers":[
-            "Host: hostname",
-            "X-Request-ID: e091d",
-            "X-Real-Ip: 127.0.0.1",
-            "X-Forwarded-For: 127.0.0.1",
-            "X-Forwarded-Host: hostname",
-            "X-Forwarded-Port: 443",
-            "X-Forwarded-Proto: https",
-            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-            "X-Scheme: https",
-            "X-B3-TraceId: 5f910",
-            "X-B3-SpanId: 5f910",
-            "Authorization: Bearer eyJhb",
-            "User-Agent: PostmanRuntime/7.17.1",
-            "Accept: */*",
-            "Cache-Control: no-cache",
-            "Postman-Token: f0927",
-            "Accept-Encoding: gzip, deflate",
-            "Timeout-Access: <function1>",
-            "application/json"
-        ],
-        "contentType":"application/json",
-        "setIpAddress":true,
-        "userAgent":"PostmanRuntime/7.17.1",
-        "setContentType":true,
-        "collector":"ssc-0.15.0-kafka",
-        "networkUserId":"0e428"
-    }', 
-    '{
-        "setNetworkUserId":true,
-        "headersIterator":[
-            "Host: hostname",
-            "X-Request-ID: 70b54",
-            "X-Real-Ip: 127.0.0.1",
-            "X-Forwarded-For: 127.0.0.1",
-            "X-Forwarded-Host: hostname",
-            "X-Forwarded-Port: 443",
-            "X-Forwarded-Proto: https",
-            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-            "X-Scheme: https",
-            "X-B3-TraceId: 5f910",
-            "X-B3-SpanId: 5f910",
-            "Authorization: Bearer eyJhb",
-            "User-Agent: PostmanRuntime/7.17.1",
-            "Accept: */*",
-            "Cache-Control: no-cache",
-            "Postman-Token: c209b",
-            "Accept-Encoding: gzip, deflate",
-            "Timeout-Access: <function1>",
-            "application/json"
-        ],
-        "encoding":"UTF-8",
-        "setBody":true,
-        "headersSize":19,
-        "setQuerystring":false,
-        "setPath":true,
-        "refererUri":null,
-        "timestamp":1574009868734,
-        "path":"/com.snowplowanalytics.snowplow/tp2",
-        "setSchema":true,
-        "body":"{\\n  \\"data\\": [\\n    {\\n      \\"correlationId\\": \\"23456\\",\\n      \\"filterCriteria\\": \\"a\\"\\n    }\\n  ],\\n  \\"simple_pairs\\": [\\n    {\\n      \\"cid\\": \\"23456\\",\\n      \\"type\\": \\"_d\\",\\n      \\"value\\": \\"hallo\\",\\n      \\"reader\\": \\"_auth\\",\\n      \\"path\\": \\"contract/VERTRAG-4\\",\\n      \\"origin\\":\\"belt\\"\\n    }\\n  ]\\n}",
-        "ipAddress":"127.0.0.1",
-        "schema":"iglu:com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0",
-        "setHostname":true,
-        "setUserAgent":true,
-        "setTimestamp":true,
-        "setEncoding":true,
-        "setCollector":true,
-        "setRefererUri":false,
-        "hostname":"hostname",
-        "setHeaders":true,
-        "querystring":null,
-        "headers":[
-            "Host: hostname",
-            "X-Request-ID: 70b54",
-            "X-Real-Ip: 127.0.0.1",
-            "X-Forwarded-For: 127.0.0.1",
-            "X-Forwarded-Host: hostname",
-            "X-Forwarded-Port: 443",
-            "X-Forwarded-Proto: https",
-            "X-Original-URI: /api/com.snowplowanalytics.snowplow/tp2",
-            "X-Scheme: https",
-            "X-B3-TraceId: 5f910",
-            "X-B3-SpanId: 5f910",
-            "Authorization: Bearer eyJhb",
-            "User-Agent: PostmanRuntime/7.17.1",
-            "Accept: */*",
-            "Cache-Control: no-cache",
-            "Postman-Token: c209b",
-            "Accept-Encoding: gzip, deflate",
-            "Timeout-Access: <function1>",
-            "application/json"
-        ],
-        "contentType":"application/json",
-        "setIpAddress":true,
-        "userAgent":"PostmanRuntime/7.17.1",
-        "setContentType":true,
-        "collector":"ssc-0.15.0-kafka",
-        "networkUserId":"f4aa0"
-    }', 
-... 
-]
-```
-
-### Callback example for multiple payloads
-
-Given multiple requests with the following body:
-
-```yaml
-{
-  "data": [
-    {
-      "correlationId": "23456",
-      "filterCriteria": "a"
-    }
-  ],
-  "simple_pairs": [
-    {
-      "cid": "23456",
-      "type": "_d",
-      "value": "hallo",
-      "reader": "_auth",
-      "path": "contract/VERTRAG-4",
-      "origin": "/belts/123"
-    }
-  ]
-}
-```
-
-the belt extractor consuming from a batch Kafka topic can be equipped with the following Python callback function \(see Configuration section\):
-
-```python
-import json
-import sys
-from time import time
-from grnry.beltextractor.update 
-import Update
-import logging
-import random
-
-def lookup(dictionary,keys):
-   if type(dictionary)==type(''):
-            dictionary=json.loads(dictionary)
-                try:
-                    if len(keys)>1:
-                       value = lookup(dictionary[keys[0]],keys[1:])
-                    else:
-                       value = dictionary[keys[0]]
-                       return value    
-                 except:        
-                    return None
-
-def makepath(stringpath):    
-   path=stringpath.split('/')
-   return path
-
-def create_update(correlation_id, path, value):
-   update=Update(correlation_id, path, operation='_array_append');
-   update.set_value(value=value, origin='integration-test', reader='_all')
-   update.set_type('toe-436-test')
-   return update
-
-def execute(event_headers, event_payload, profile=None):
-    if not event_headers:
-      return None
-    zipped_events = zip(event_headers, event_payload)    
-    updates = [create_update(event[0]['grnry-correlation-id'], makepath(json.loads(json.loads(event[1])['body'])['simple_pairs'][0]['path']), json.loads(json.loads(event[1])['body'])['simple_pairs'][0]['value']) for event in zipped_events]
-    logging.debug(updates)
-    logging.debug(updates[0]())
-    return updates
-```
-
-### Callback example for mixed payload processing
-
-`execute(event_headers, event_payload[, profile])`
-
-There are use cases where you want to process events from a topic that contains both single-payload events and multi-payload events. To do so it is necessary to differentiate the two types of events in the callback function as such:
-
-```python
-import json
-import sys
-from time import time
-from grnry.beltextractor.update 
-import Update
-import logging
-
-
-def execute(event_headers, event_payload, profile=None):
-    if not event_headers:
-      return None
-
- if isinstance(event_headers, dict):
-      logging.debug("received single-payload event")
-      # add your code handling single-payload events here 
-    elif isinstance(event_headers, list) and isinstance(event_payload, list):     
-      logging.debug("received multi-payload event")
-      # add your code handling multi-payload events here
-    else:
-      raise ValueError("event_headers and/or event_payload do not match the expected signature")
-```
-
-## Configuration
-
-{% tabs %}
-{% tab title="Spec" %}
-#### Input Topic
-
-The name of the Kafka topic this Belt will receive events from. Topics are typically designated by event type, so the consuming belt can assume a fixed schema.
-
-#### Python callback function
-
-The Python code provided here has to be in the form of a function by the name **callback.py** that can be invoked using the signature `execute(event_headers, event_payload)`where the parameter `event_payload` and `event_headers`are both a Python dictionary containing one event/header from the input topic or a list of dictionaries containing multiple events/headers.
-
-The function can return either `None` , `[]` or a list of Update objects representing an update to a profile in the profile store. If the return is not an Update object the belt will continue with the next message. In case it is, the object needs to be following below schema:
-
-```text
-UPDATE :=
-  {
-    "_schema": string,                                         # schema of upddate message, default is null
-    "_operation": a valid update operation,                    # default is "_set"
-    "_id": string,
-    "_path": \[ string [,string]* \],                          # array of length >= 1
-    "_value": GRAIN_VALUE,                                     # must not be null
-    "_profile_type": string                                    # default is "_d"
-  }
-```
-
-Whereas valid update operations can be found [here](profile-store/#update-operations) and a valid GRAIN\_VALUE \_\_is defined as follows:
-
-```text
-GRAIN_VALUE := 
-  {
-    "_v": string,                                    # Json object string, Json array string, or string of counter value. Value type must fit _operation
-    "_c": double,                                    # default is 1
-    "_in": long,                                     # default is now()
-    "_ttl": string,                                  # period of time, https://en.wikipedia.org/wiki/ISO_8601#Durations, default is "P100Y"
-    "_origin": string,                               # default is "/belts/{belt-id}"
-    "_reader": string                                # default is "_all"
-  }
-```
-
-Based on the update object generated by the callback, one ore more JSON update\(s\) will be written to the update topic. Every update object returned by this function must have **at least** the following attribute set:
-
-| Key | Method | Description |
-| :--- | :--- | :--- |
-| `_id` | `Update(id, [path])` | Specifies the profile that should be updated. \(part of constructor\) |
-| `_path` | `Update(id, [path])` | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. \(part of constructor\) |
-| `_value` | `set_value(value, certainty, _in, ttl, origin, reader)` | Contains the value that should be set in the profile under the defined \_path. `set_value()` expects the actual value `_v` and optional `_c`, `_in`, `_ttl`, `_origin`, `_reader`_._ **Example** of a **default grain** value with only \_\_`_v` set:`{ "_v": _v, "_c": 1.0, "_in": time(), "_ttl": "P100Y", "_origin": "/belts/{belt-id}", "_reader": "_auth"` |
-
-If unspecified, default values will be used:
-
-| Attribute Name | Method | Default |
-| :--- | :--- | :--- |
-| `_schema` | `set_schema(schema)` | `null` |
-| `_operation` | `set_operation(operation)` | `"_set"` |
-| `_profile_type` | `set_type(profile_type)` | `"_d"` |
-
-**Profile Fetching**
-
-In some cases it is necessary to fetch a Profile from the Profile API. This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the profileClient into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
-
-`profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])`
-
-The profileClient uses the PROFILE\_TYPE environment variable as default. To fetch another profile type it can be passed as a furter optional parameter like this `getProfile(cid,profileType)`.
-
-If not using the [Belt API](../api-reference/belt-api.md#create-and-store-a-belt) as deployment path, you can configure the profile fetching using the following environment variables:
-
-| Environment Variable | Description | Default |
-| :--- | :--- | :--- |
-| FETCH\_PROFILE | Enable profile fetching | false |
-| PROFILE\_URL | Profilestore base url |  |
-| PROFILE\_TYPE | Default profile type to fetch | \_d |
-| KEYCLOAK\_URL | Keycloak url \(with '/auth'\) |  |
-| KEYCLOAK\_REALM | Realm of GRNRY installation |  |
-| KEYCLOAK\_CLIENT | Client of profile api |  |
-| KEYCLOAK\_SECRET | Kubernetes Secret name with Keycloak user credentials |  |
-| KEYCLOAK\_USER | Attribute name in Kubernetes Secret for Keycloak user name |  |
-| KEYCLOAK\_PASS | Attribute name in Kubernetes Secret for Keycloak user's password |  |
-
-**Callback Timeout**
-
-As described above, a function will timeout if excecution takes too long. Another time limit monitors how often long-running callbacks occur. The latter limit should be smaller than the function timeout. Both timeouts can be configured using environment variables in Belt Extractor via the [Belt API](../api-reference/belt-api.md#create-and-store-a-belt)'s parameter `extraEnvs`:
-
-| Environment Variable | Default |
-| :--- | :--- |
-| CALLBACK\_TIMEOUT\_SEC | 300 |
-| CALLBACK\_LONGRUNNING\_SEC | 180 |
-{% endtab %}
-
-{% tab title="Example" %}
-```python
-from time import time
-from grnry.beltextractor.update import Update
-
-def execute(event_headers, event_payload, profile=None):
-    print(profile)
-    # Create Profile Update object with correlationId (String) and path (Array<String>)
-    update = Update(profile['correlationId'],["dummy"])
-    # Set value of Profile Update
-    update.set_value("Hello Belt!",0.5,time(),'P1D','Dummy-Belt')
-    # Set type of Profile Update
-    update.set_type('TestProfileType')
-    # Set operation of Profile Update
-    update.set_operation('_set')
-    return [update]
-```
-{% endtab %}
-{% endtabs %}
-
-## Dead letter queue
-
-In GRNRY, we have created so called _dead letter queues_. The Belt Extractor's dead letter queue is used to receive all the data that could not be processed correctly.
-
-By default the Belt Extractor's dead letter queue is called:
-
-```yaml
-belts_dead_letter
-```
-
-In order to rename it one must change the helm deployment parameter:
-
-```yaml
-extraEnv:
-  - name: KAFKA_ERROR_TOPIC
-    value: belts_dead_letter
-```
-
-#### When is something written to the Dead Letter Queue?
-
-The Belt Extractor writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are written into dead letter queue, logged and the exception counter is increased.
 
 ## Output Topic `'profile-update'`
 
@@ -676,4 +87,185 @@ see [Profile specification](https://github.com/syncier/grnry-kafka-profile-updat
 ```
 {% endtab %}
 {% endtabs %}
+
+## Belt Configuration
+
+### **Python callback function**
+
+The Python code provided here has to be in the form of a function by the name **callback.py** that can be invoked using the signature `execute(event_headers, event_payload)` where the parameter `event_payload` and `event_headers` are both a Python dictionary containing one event/header from the input topic or a list of dictionaries containing multiple events/headers. See [Belt Callback Signatures](../../learning-grnry-1/using-data-in-granary/best-practices/belt-callback-signatures.md) for more complete examples.
+
+A simple callback example:
+
+```python
+from time import time
+from grnry.beltextractor.update import Update
+
+def execute(event_headers, event_payload, profile=None):
+    print(profile)
+    # Create Profile Update object with correlationId (String) and path (Array<String>)
+    update = Update(profile['correlationId'],["dummy"])
+    # Set value of Profile Update
+    update.set_value("Hello Belt!",0.5,time(),'P1D','Dummy-Belt')
+    # Set type of Profile Update
+    update.set_type('TestProfileType')
+    # Set operation of Profile Update
+    update.set_operation('_set')
+    return [update]
+```
+
+The function can return either `None`, `[]` or a list of `Update` objects representing an update to a profile in the profile store. If the return is not an Update object the belt will continue with the next message. In case it is, the object needs to be following below schema:
+
+```yaml
+UPDATE :=
+  {
+    "_schema": string,                          # schema of upddate message, default is null
+    "_operation": a valid update operation,     # default is "_set"
+    "_id": string,
+    "_path": \[ string [,string]* \],           # array of length >= 1
+    "_value": GRAIN_VALUE,                      # must not be null
+    "_profile_type": string                     # default is "_d"
+  }
+```
+
+Whereas valid update operations can be found [here](profile-store/#update-operations) and a valid `GRAIN_VALUE` is defined as follows:
+
+```yaml
+GRAIN_VALUE :=
+  {
+    "_v": string,                               # Json object string, Json array string, or string of counter value. Value type must fit _operation
+    "_c": double,                               # default is 1
+    "_in": long,                                # default is now()
+    "_ttl": string,                             # period of time, https://en.wikipedia.org/wiki/ISO_8601#Durations, default is "P100Y"
+    "_origin": string,                          # default is "/belts/{belt-id}"
+    "_reader": string                           # default is "_all"
+  }
+```
+
+Based on the `Update` object generated by the callback, one ore more JSON update\(s\) will be written to the profile update topic. Every update object returned by this function must have **at least** the following attribute set:
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Key</th>
+      <th style="text-align:left">Method</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>_id</code>
+      </td>
+      <td style="text-align:left"><code>Update(id, [path])</code>
+      </td>
+      <td style="text-align:left">Specifies the profile that should be updated. (part of constructor)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>_path</code>
+      </td>
+      <td style="text-align:left"><code>Update(id, [path])</code>
+      </td>
+      <td style="text-align:left">The path within the nested structure of a profile that should be updated.
+        In case the path doesn&apos;t exist yet it will be created. (part of constructor)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>_value</code>
+      </td>
+      <td style="text-align:left"><code>set_value(value, certainty, _in, ttl, origin, reader)</code>
+      </td>
+      <td style="text-align:left">
+        <p>Contains the value that should be set in the profile under the defined <code>_path</code>. <code>set_value()</code> expects
+          the actual value <code>_v</code> and optional <code>_c</code>, <code>_in</code>, <code>_ttl</code>, <code>_origin</code>, <code>_reader</code>.</p>
+        <p><b>Example</b> of a <b>default grain</b> value with only <code>_v</code> set:
+          <br
+          /><code>{ &quot;_v&quot;: &quot;foo-bar&quot;, &quot;_c&quot;: 1.0, &quot;_in&quot;: time(), &quot;_ttl&quot;: &quot;P100Y&quot;, &quot;_origin&quot;: &quot;/belts/{belt-id}&quot;, &quot;_reader&quot;: &quot;_auth&quot;}</code>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+If unspecified in the `Update` object, default values will be used:
+
+| Attribute Name | Method | Default |
+| :--- | :--- | :--- |
+| `_schema` | `set_schema(schema)` | `null` |
+| `_operation` | `set_operation(operation)` | `"_set"` |
+| `_profile_type` | `set_type(profile_type)` | `"_d"` |
+
+### **Profile Fetching**
+
+In some cases it is necessary to fetch a Profile from the Profile API. This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the `profileClient` into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
+
+```python
+profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])
+```
+
+The profileClient uses the `PROFILE_TYPE` environment variable as default. To fetch another profile type it can be passed as a further optional parameter like this `getProfile(cid,profileType)`.
+
+If not using the [Belt API](../api-reference/belt-api.md) as deployment path, you can configure the profile fetching using the following environment variables:
+
+| Environment Variable | Description | Default |
+| :--- | :--- | :--- |
+| `FETCH_PROFILE` | Enable profile fetching | `false` |
+| `PROFILE_URL` | Profilestore base url | - |
+| `PROFILE_TYPE` | Default profile type to fetch | `_d` |
+| `KEYCLOAK_URL` | Keycloak url \(with '/auth'\) | - |
+| `KEYCLOAK_REALM` | Realm of GRNRY installation | - |
+| `KEYCLOAK_CLIENT` | Client of profile api | - |
+| `KEYCLOAK_SECRET` | Kubernetes Secret name with Keycloak user credentials | - |
+| `KEYCLOAK_USER` | Attribute name in Kubernetes Secret for Keycloak user name | - |
+| `KEYCLOAK_PASS` | Attribute name in Kubernetes Secret for Keycloak user's password | - |
+
+### **Callback Timeout**
+
+As described above, a function will timeout if excecution takes too long. Another time limit monitors how often long-running callbacks occur. The latter limit should be smaller than the function timeout. Both timeouts can be configured using environment variables in Belt Extractor via the [Belt API](../api-reference/belt-api.md)'s parameter `extraEnvs`:
+
+| Environment Variable | Default |
+| :--- | :--- |
+| `CALLBACK_TIMEOUT_SEC` | `300` |
+| `CALLBACK_LONGRUNNING_SEC` | `180` |
+
+### Retry
+
+If the callback raises a `RetryException`, the processed message will be retried with exponential backoff until the maximum number of retries is reached. The retry behavior can be configured by setting environment variables within the belt container via [Belt API](../api-reference/belt-api.md)'s POST parameter `extraEnvs`:
+
+| Environment Variable | Description | Default |
+| :--- | :--- | :--- |
+| `RETRY_BACK_OFF_INITIAL_INTERVAL_SEC` | initial retry wait time in seconds | `1` |
+| `RETRY_BACK_OFF_INTERVAL_MAX_SEC` | maximum retry wait time in seconds, this parameter must be aligned with Kafka consumer timeouts | `60` |
+| `RETRY_BACK_OF_MULTIPLIER` | base of multiplier for exponential backoff | `2.0` |
+| `RETRY_MAX_RETRIES` | maximum number of retries. Disable by setting it to `0`. A value of `-1` enables unlimited retrying | `-1` |
+
+{% code title="callback.py" %}
+```python
+from grnry.beltextractor.exceptions.exception import RetryException
+
+def execute(event_headers, event, profile=None):
+    raise RetryException('Try again')
+```
+{% endcode %}
+
+## Dead letter queue
+
+In GRNRY, we have created so called _dead letter queues_. The Belt Extractor's dead letter queue is used to receive all the data that could not be processed correctly.
+
+By default the Belt Extractor's dead letter queue is set by the belt api to `grnry_belt_dlq_<belt-id>`. E.g.:
+
+```yaml
+ grnry_belt_dlq_42
+```
+
+In order to rename it one must change the helm deployment parameter:
+
+```yaml
+extraEnv:
+  - name: KAFKA_ERROR_TOPIC
+    value: <my-dead-letter-queue-name>
+```
+
+#### When is something written to the Dead Letter Queue?
+
+The Belt Extractor writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are written into dead letter queue, logged and the exception counter is increased. Moreover, if other exceptions other than RetryException are raised, the `RETRY_MAX_RETRIES` is set to `0`, i.e. the message is will not be retried any longer.
+
+## 
 
