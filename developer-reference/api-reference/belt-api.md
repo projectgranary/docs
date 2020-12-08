@@ -449,7 +449,7 @@ Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kube
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="id" type="number" required=false %}
-Creates a belt with a given belt `id`. This `id` needs to be unique. Number in the range of a positive long \(i.e. `1` to `9223372036854775807`\).
+If provided, creates a belt with a given belt `id`. This `id` needs to be unique. Otherwise an `id` is automatically assigned. Value range for `id` is a positive `Long` value \(i.e. `1` to `9223372036854775807`\).
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -681,10 +681,6 @@ Some internal server issue has occurred.
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
-
-{% hint style="warning" %}
-Known issue: If the Belt `id` is not provided by the user, the Belt API generates an `id` by taking the maximum existing `id` and adding 1. If a belt with `id` _9223372036854775807_ has already been created, generating a new `id` will fail and return HTTP 500. Counter measures: use some unused `id` by providing it as path parameter or delete belt with `id` _9223372036854775807_.
-{% endhint %}
 
 {% api-method method="delete" host="https://api.grnry.io" path="/belts/:id" %}
 {% api-method-summary %}
