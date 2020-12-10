@@ -26,6 +26,209 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
+
+
+## Granary 0.9.2 "Marie" - 2020-12-03
+
+Patch release.
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Granary Component</th>
+      <th style="text-align:left">Release Version</th>
+      <th style="text-align:left">Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/granary-base-deployment.md">Granary Base</a>
+      </td>
+      <td style="text-align:left">0.9.3</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/datawire/ambassador-chart">Ambassador</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
+      </td>
+      <td style="text-align:left">0.6.1 (based on Snowplow v0.15.0)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
+      </td>
+      <td style="text-align:left">0.9.5-</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
+      </td>
+      <td style="text-align:left">0.6.2<b> </b>(based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
+      <td
+      style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
+      </td>
+      <td style="text-align:left"><b>0.9.4</b>
+      </td>
+      <td style="text-align:left">
+        <p>Fixes:</p>
+        <ul>
+          <li>Fixes abnormally high load that Kafka Health check puts on the Kafka cluster.</li>
+        </ul>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/event-store-api.md">Event Store API</a>
+      </td>
+      <td style="text-align:left">0.8.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
+      </td>
+      <td style="text-align:left">0.6.7</td>
+      <td style="text-align:left">
+        <p>-</p>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/belt-extractor.md">Belt Extractor</a>
+      </td>
+      <td style="text-align:left">0.9.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/belt-api.md">Belt API</a>
+      </td>
+      <td style="text-align:left">0.8.4</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/profile-updater.md">Profile Updater</a>
+      </td>
+      <td style="text-align:left"><b>0.6.2</b>
+      </td>
+      <td style="text-align:left">
+        <p>Fixes:</p>
+        <ul>
+          <li>Fixes abnormally high load that Kafka Health check puts on the Kafka cluster.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/profile-store-api.md">Profile Store API</a>
+      </td>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/segment-creation-api.md">Segment Management API</a>
+      </td>
+      <td style="text-align:left">0.9.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/segment-manager.md">Segment Manager</a>
+      </td>
+      <td style="text-align:left">0.8.6</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
+      </td>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
+      </td>
+      <td style="text-align:left">0.5.1 (based on Presto 0.339)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/graphql-api.md">GraphQL API</a>
+      </td>
+      <td style="text-align:left">0.10.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/granary-ui.md">Granary UI</a>
+      </td>
+      <td style="text-align:left">0.10.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/reaper.md">Reaper</a>
+      </td>
+      <td style="text-align:left">0.8.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/event-explorer-ui.md">Event Explorer UI</a>
+      </td>
+      <td style="text-align:left">0.2.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/citus-postgresql.md">Citus PostgreSQL</a>
+      </td>
+      <td style="text-align:left">8.1.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Kafka</a>
+      </td>
+      <td style="text-align:left">5.1.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Zookeeper</a>
+      </td>
+      <td style="text-align:left">5.1.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/kafka-manager.md">Kafka Manager</a>
+      </td>
+      <td style="text-align:left">0.5.3</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
+      </td>
+      <td style="text-align:left">4.5.0.Final</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
+      </td>
+      <td style="text-align:left">6.6.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/zipkin.md">Zipkin Server</a>
+      </td>
+      <td style="text-align:left">0.6.3 (based on Open Zipkin 2.12)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md">Data Lineage Report</a>
+      </td>
+      <td style="text-align:left">0.8.1</td>
+      <td style="text-align:left">-</td>
+    </tr>
+  </tbody>
+</table>
+
 ## Granary 0.9.1 "Marie" - 2020-11-17
 
 Patch release.
@@ -108,7 +311,7 @@ Patch release.
     <tr>
       <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
       </td>
-      <td style="text-align:left"><b>0.6.6</b>
+      <td style="text-align:left"><b>0.6.7</b>
       </td>
       <td style="text-align:left">
         <p>Features:</p>
