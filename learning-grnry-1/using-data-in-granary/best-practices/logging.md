@@ -7,7 +7,7 @@ description: On this page we explain how to use logging in a belt for easier mon
 All belts ship with the GRNRY logger preconfigured. The GRNRY logger will output all its messages with the common log format as specified [here](../../../operator-reference/site-reliability/common-log-format.md). To make use of the GRNRY logger with its additional information such as Zipkin Trace IDs you need to use it as such:
 
 ```python
-from grnry.beltextractor.update import Update
+from grnry.beltextractor.models.update import Update
 import logging
 
 

@@ -38,7 +38,7 @@ For example given this event
 and given this belt function \(see especially end of line 29\)
 
 ```python
-from grnry.beltextractor.update import Update
+from grnry.beltextractor.models.update import Update
 import json
 import sys
 from time import time
@@ -175,8 +175,8 @@ Given the belt code below and the reaped event above, we can do the following:
 * Update the grain's TTL or delete the grain in the Profile Store \(lines 21ff\)
 
 ```python
-from grnry.beltextractor.update import Update
-from grnry.beltextractor.update import DELETE_OPERATION
+from grnry.beltextractor.models.update import Update
+from grnry.beltextractor.models.update import DELETE_OPERATION
 import json
 import requests
 
