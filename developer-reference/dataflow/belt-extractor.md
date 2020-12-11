@@ -233,7 +233,7 @@ If the callback raises a `RetryException`, the processed message will be retried
 | :--- | :--- | :--- |
 | `RETRY_BACK_OFF_INITIAL_INTERVAL_SEC` | initial retry wait time in seconds | `1` |
 | `RETRY_BACK_OFF_INTERVAL_MAX_SEC` | maximum retry wait time in seconds, this parameter must be aligned with Kafka consumer timeouts | `60` |
-| `RETRY_BACK_OF_MULTIPLIER` | base of multiplier for exponential backoff | `2.0` |
+| `RETRY_BACK_OFF_MULTIPLIER` | base of multiplier for exponential backoff | `2.0` |
 | `RETRY_MAX_RETRIES` | maximum number of retries. Disable by setting it to `0`. A value of `-1` enables unlimited retrying | `-1` |
 
 {% code title="callback.py" %}
