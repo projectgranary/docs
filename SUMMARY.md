@@ -108,8 +108,6 @@
 * [Migration guide](operator-reference/migration-guide/README.md)
   * [Harvesters with Topic Source](operator-reference/migration-guide/harvesters-with-topic-source.md)
   * [Belt Extractor 1.0](operator-reference/migration-guide/belt-extractor-1.0.md)
-  * [Harvester API CI/CD Cookbook](operator-reference/migration-guide/ci-cd-cookbook.md)
-  * [Segment Job Migration](operator-reference/migration-guide/segment-job-migration.md)
 * [Site Reliability](operator-reference/site-reliability/README.md)
   * [Common Log Format](operator-reference/site-reliability/common-log-format.md)
   * [Kubernetes Liveness, Readiness Probes](operator-reference/site-reliability/kubernetes-liveness-readiness-probes.md)
