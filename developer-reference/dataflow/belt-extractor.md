@@ -6,7 +6,7 @@ description: A function-as-a-service like Python callback runtime
 
 ![Data flow within harmonized data zone of Granary](../../.gitbook/assets/dataflow_profile.PNG)
 
-Belts are used to compute updates for the Costumer Graph stored in the Profile Store. These updates can represent things like:
+Belts are used to compute updates for profile entities stored in the [Profile Store](profile-store/). These updates can represent things like:
 
 * whether a certain user has reached a goal in a conversion funnel
 * what device type or operating system was used for the most recent visit
@@ -16,13 +16,11 @@ Belts are used to compute updates for the Costumer Graph stored in the Profile S
 * the addition of a contract the user has and what the value of that contract is
 * etc.
 
-They are defined by a label, a scale factor, an input topic and a stateless/serverless Python function that gets invoked for every event received from the respective input topic. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store. If a function is taking too much time to process a record, it will timeout to prevent errors like infinite loops. The Belt retries and does not recover if the processing time keeps exceeding the timeout. The maximum duration for the function's execution can be configured.
+They are defined by a stateless Python function that gets invoked for every event received from the respective [Event Type](../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md) input. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store.
 
-## Input Topics
+## Input Data Format
 
-Valid input topics for a belt are one or many `grnry_data_in_...` topics which have been created by the chosen Event Type.
-
-Messages in those input topics consist of event headers and an event payload specified as follows:
+The Belt framework can consume messages from one or many Event Types. Technically, messages in the Event Type's Kafka topics need to have the following event headers and an arbitrary event payload:
 
 {% tabs %}
 {% tab title="Spec" %}
@@ -45,11 +43,9 @@ Messages in those input topics consist of event headers and an event payload spe
 {% endtab %}
 {% endtabs %}
 
-## Output Topic `'profile-update'`
+## Output Data Format
 
-{% hint style="info" %}
-Messages in the `profile-update`topic contain a `grnry-belt-id` header besides the zipkin tracing headers. The grnry-headers defined in [input topics](belt-extractor.md#input-topics) section will only be forwarded in case the belt is consuming from a multi-payload kafka topic.
-{% endhint %}
+Profile update messages need to comply to the following output data format which is explained in detail in the following paragraphs. 
 
 {% tabs %}
 {% tab title="Spec" %}
@@ -57,7 +53,7 @@ see [Profile specification](https://github.com/syncier/grnry-kafka-profile-updat
 
 | Key | Description |
 | :--- | :--- |
-| `_schema` | schema of update message |
+| `_schema` | _Optional._ Schema of update message \(optional\) |
 | `_operation` | update operation, default is `_set`, see [Profile Store](profile-store/#component-profile-updater) for more information |
 | `_id` | identifies the profile that should be updated with this message |
 | `_path` | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length &gt;= 1 |
@@ -88,9 +84,9 @@ see [Profile specification](https://github.com/syncier/grnry-kafka-profile-updat
 {% endtab %}
 {% endtabs %}
 
-## Belt Configuration
+## **Python callback function**
 
-### **Python callback function**
+The user supplied Belt Python callback function needs to convert the input messages from above to one or many so called **profile updates** \(it is also valid to not return any update\). These updates materialize as **grains** in the Profile Store. Many grains shape a **fragment** whereas many fragments from a **profile,** hence **Profile Store**.
 
 The Python code provided here has to be in the form of a function by the name **callback.py** that can be invoked using the signature `execute(event_headers, event_payload)` where the parameter `event_payload` and `event_headers` are both a Python dictionary containing one event/header from the input topic or a list of dictionaries containing multiple events/headers. See [Belt Callback Signatures](../../learning-grnry-1/using-data-in-granary/best-practices/belt-callback-signatures.md) for more complete examples.
 
@@ -127,7 +123,7 @@ UPDATE :=
   }
 ```
 
-Whereas valid update operations can be found [here](profile-store/#update-operations) and a valid `GRAIN_VALUE` is defined as follows:
+Valid update operations are specified in full detail in the [Profile updater's documentation](profile-store/#component-profile-updater) and a valid `GRAIN_VALUE` is defined as follows:
 
 ```yaml
 GRAIN_VALUE :=
@@ -194,13 +190,19 @@ If unspecified in the `Update` object, default values will be used:
 
 ### **Profile Fetching**
 
-In some cases it is necessary to fetch a Profile from the Profile API. This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the `profileClient` into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
+In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the `profileClient` into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
 
 ```python
 profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])
 ```
 
 The profileClient uses the `PROFILE_TYPE` environment variable as default. To fetch another profile type it can be passed as a further optional parameter like this `getProfile(cid,profileType)`.
+
+Additionally only specific fragments of a profile can be fetched by adding another optional parameter to `getProfile` like this:
+
+```python
+profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'], fragments=['/customer/name','/customer/adress','/invoiceDetails'])
+```
 
 If not using the [Belt API](../api-reference/belt-api.md) as deployment path, you can configure the profile fetching using the following environment variables:
 
@@ -218,7 +220,7 @@ If not using the [Belt API](../api-reference/belt-api.md) as deployment path, yo
 
 ### **Callback Timeout**
 
-As described above, a function will timeout if excecution takes too long. Another time limit monitors how often long-running callbacks occur. The latter limit should be smaller than the function timeout. Both timeouts can be configured using environment variables in Belt Extractor via the [Belt API](../api-reference/belt-api.md)'s parameter `extraEnvs`:
+If a function is taking too much time to process a record, it will timeout to prevent errors like infinite loops. The Belt retries and does not recover if the processing time keeps exceeding the timeout. The maximum duration for the function's execution can be configured. Another time limit monitors how often long-running callbacks occur. The latter limit should be smaller than the function timeout. Both timeouts can be configured using environment variables in Belt via the [Belt API](../api-reference/belt-api.md)'s parameter `extraEnvs`:
 
 | Environment Variable | Default |
 | :--- | :--- |
@@ -247,9 +249,9 @@ def execute(event_headers, event, profile=None):
 
 ## Dead letter queue
 
-In GRNRY, we have created so called _dead letter queues_. The Belt Extractor's dead letter queue is used to receive all the data that could not be processed correctly.
+In GRNRY, we have created so called _dead letter queues_. The Belt's dead letter queue is used to receive all the data that could not be processed correctly.
 
-By default the Belt Extractor's dead letter queue is set by the belt api to `grnry_belt_dlq_<belt-id>`. E.g.:
+By default the Belt's dead letter queue is set by the belt api to `grnry_belt_dlq_<belt-id>`. E.g.:
 
 ```yaml
  grnry_belt_dlq_42
@@ -265,7 +267,7 @@ extraEnv:
 
 #### When is something written to the Dead Letter Queue?
 
-The Belt Extractor writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are written into dead letter queue, logged and the exception counter is increased. Moreover, if other exceptions other than RetryException are raised, the `RETRY_MAX_RETRIES` is set to `0`, i.e. the message is will not be retried any longer.
+The Belt writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are written into dead letter queue, logged and the exception counter is increased. Moreover, if other exceptions other than RetryException are raised, the `RETRY_MAX_RETRIES` is set to `0`, i.e. the message is will not be retried any longer.
 
 ## 
 
