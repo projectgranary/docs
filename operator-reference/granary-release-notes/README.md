@@ -346,7 +346,7 @@ The new platform stability features add self-healing capabilities and help Grana
       <td style="text-align:left">-</td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/citus-postgresql.md">Citus PostgreSQL</a>
+      <td style="text-align:left"><a href>Citus PostgreSQL</a>
       </td>
       <td style="text-align:left">8.1.1</td>
       <td style="text-align:left">-</td>
