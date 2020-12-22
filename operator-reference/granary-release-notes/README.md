@@ -62,7 +62,7 @@ Patch release.
     <tr>
       <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
       </td>
-      <td style="text-align:left">0.9.5-</td>
+      <td style="text-align:left">0.9.5</td>
       <td style="text-align:left">-</td>
     </tr>
     <tr>
