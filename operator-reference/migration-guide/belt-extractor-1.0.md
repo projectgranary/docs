@@ -1,5 +1,5 @@
 ---
-description: Migration Guide to upgrade to Belt Extractor 1.0
+description: Migration guide to upgrade to Belt Extractor 1.0
 ---
 
 # Belt Extractor 1.0

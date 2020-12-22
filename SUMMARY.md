@@ -106,6 +106,7 @@
   * [Granary Access Clients](operator-reference/identity-and-access-management/granary-access-clients.md)
   * [Adding Roles to Keycloak Clients](operator-reference/identity-and-access-management/adding-roles-to-keycloak-clients.md)
 * [Migration guide](operator-reference/migration-guide/README.md)
+  * [Harvesters with Topic Source](operator-reference/migration-guide/harvesters-with-topic-source.md)
   * [Belt Extractor 1.0](operator-reference/migration-guide/belt-extractor-1.0.md)
   * [Harvester API CI/CD Cookbook](operator-reference/migration-guide/ci-cd-cookbook.md)
   * [Segment Job Migration](operator-reference/migration-guide/segment-job-migration.md)

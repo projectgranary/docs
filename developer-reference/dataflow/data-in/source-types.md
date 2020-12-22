@@ -10,6 +10,10 @@ Source types help you get data into the system. Source types exist for several d
 Refer to the [Granary Data-In Best Practices](../../../learning-grnry-1/data-in/best-practices-1/) to learn how to transform a source type's input to JSON format that is required by an Event Type.
 {% endhint %}
 
+{% hint style="warning" %}
+All Source Types only work with **one** replica. Only exception is the Topic Source.
+{% endhint %}
+
 ### AWS S3 Source
 
 **Name**: grnry-aws-s3
@@ -252,10 +256,10 @@ A sample of the configuration of a JDBC source could look like this:
 
 | **Parameter** | Description |
 | :--- | :--- |
-| consumer.input-topic | The input Topic to read from. Default value: `snowplow`. |
-| consumer.concurrency | The concurrency of the inbound consumer. Default value: `6`. |
-| consumer.resetOffsets | Wether to reset offsets on the consumer to the value provided by startOffset. Default value: `false`. |
-| consumer.startOffset | The starting offset for new groups. Allowed values: `earliest` and `latest`. Default value: `latest`. |
+| grnry-topic.inputTopic | The input Topic to read from. Default value: `snowplow`. |
+| grnry-topic.concurrency | The concurrency of the inbound consumer. Default value: `6`. |
+| grnry-topic.resetOffsets | Wether to reset offsets on the consumer to the value provided by startOffset. Default value: `false`. |
+| grnry-topic.startOffset | The starting offset for new groups. Allowed values: `earliest` and `latest`. Default value: `latest`. |
 
 A sample of the configuration of a Topic source could look like this:
 
@@ -263,9 +267,9 @@ A sample of the configuration of a Topic source could look like this:
 "sourceType" : {
     ...
     "configuration" : {
-        "consumer.input-topic": "source-topic",
-        "consumer.concurrency": "10",
-        "consumer.startOffset": "earliest"
+        "grnry-topic.inputTopic": "source-topic",
+        "grnry-topic.concurrency": "10",
+        "grnry-topic.startOffset": "earliest"
     }
 }
 ```
@@ -303,12 +307,4 @@ A sample of the configuration of a JMS source could look like this:
     }
 }
 ```
-
-
-
-
-
-{% hint style="warning" %}
-All Source Types currently work only with one replica. Only exception is the Topic Source.
-{% endhint %}
 
