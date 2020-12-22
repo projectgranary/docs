@@ -6,6 +6,10 @@
 See [Helm Chart's README.md](https://github.com/syncier/grnry-citus) for full documentation of all parameters.
 {% endhint %}
 
+{% hint style="warning" %}
+Deprecated in Granary 0.9. The [Bitnami Postgres Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql) must be used in upcoming versions. 
+{% endhint %}
+
 ## Setup
 
 Install Helm Chart:
