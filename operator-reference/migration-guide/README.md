@@ -10,6 +10,14 @@ description: Explanation of migration strategies between Granary platform versio
 
 Update all remaining Granary components to their Granary 0.9 version as denoted in the [release notes](../granary-release-notes/). Bold versions indicate an update.
 
+### Keycloak version update
+
+With Granary 1.0, Keycloak is updated to version 11. See the subpage [Keycloak 11 migration](keycloak-11-migration.md) for details on how to update.
+
+### Harvester "Topic" Source Type breaking changes
+
+See subpage [Harvesters with Topic Sources](harvesters-with-topic-source.md) for updated parameter names.
+
 ### Belt Callback breaking changes
 
 See subpage [Belt Extractor 1.0](belt-extractor-1.0.md).

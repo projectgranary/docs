@@ -106,6 +106,7 @@
   * [Adding Roles to Keycloak Clients](operator-reference/identity-and-access-management/adding-roles-to-keycloak-clients.md)
 * [Migration guide](operator-reference/migration-guide/README.md)
   * [Harvesters with Topic Source](operator-reference/migration-guide/harvesters-with-topic-source.md)
+  * [Keycloak 11 Migration](operator-reference/migration-guide/keycloak-11-migration.md)
   * [Belt Extractor 1.0](operator-reference/migration-guide/belt-extractor-1.0.md)
 * [Site Reliability](operator-reference/site-reliability/README.md)
   * [Common Log Format](operator-reference/site-reliability/common-log-format.md)
