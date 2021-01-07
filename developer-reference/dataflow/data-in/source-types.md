@@ -218,15 +218,18 @@ A sample of the configuration of a Adobe Analytics source could look like this:
 
 **Parameters**: See [shared parameters](grnry-components-and-parameters.md).
 
-{% hint style="info" %}
-Currently, there are no GRNRY-specific parameters for JDBC. The benefit of this source type is encryption of the processed messages.
-{% endhint %}
-
 **Source parameters:**
 
-The parameters for the JDBC source can be found here:
+The parameters for the underlying JDBC source can be found here:
 
 {% embed url="https://github.com/spring-cloud-stream-app-starters/jdbc/blob/master/spring-cloud-starter-stream-source-jdbc/README.adoc" %}
+
+To cater large source tables, Granary adds a **streaming mode** to the JDBC Source Type. This streaming mode reads all rows from the `jdbc.query` in one poll but emits them to Granary row by row. The advantage of this behavior is that Granary can import data from source tables independent of the amount of memory allocated to Granary's source type. The additional parameters for streaming mode are:
+
+| Parameter | Description |
+| :--- | :--- |
+| `grnry-jdbc.streaming-mode-enabled` | If enabled each imported record is sent separately to Granary while iterating and mapping the result set. Hence no in-memory list containing the whole result set is needed \(if `maxRowsPerUpdate != 0`\). **\(Boolean, default: `false`\)** |
+| `grnry-jdbc.max-rows-per-update` | The `jdbc.update` parameter allows to provide an update logic of the source table to mark rows as read. The `max-rows-per-update` parameter is the max numbers of rows to be updated in a single update query during a poll in streaming mode. Hence, there could be multiple database updates per poll.  `0` means all rows per poll in a single update query.  `-1` means only the last row per poll will be updated.  **\(Integer, default:** `0`**\)** Additionally, this property quantifies the number of rows accessible to the`jdbc.update` sql query via `:{column-name}` as comma separated list per column, e.g. `UPDATE source set MARKED=now() where ID in (:ID)`. |
 
 A sample of the configuration of a JDBC source could look like this:
 
@@ -234,9 +237,10 @@ A sample of the configuration of a JDBC source could look like this:
 "sourceType" : {
     ...
     "configuration" : {
-        "jdbc.max-rows-per-poll": 10000,
         "jdbc.query": "<select_statement>",
         "jdbc.update": "<insert_statement>",
+        "grnry-jdbc.max-rows-per-update": 1000,
+        "grnry-jdbc.streaming-mode-enabled": true,
         "spring.datasource.password": "<password>",
         "spring.datasource.url": "jdbc:postgresql://<url>:<port>/postgres?currentSchema=public",
         "spring.datasource.username": "<user>",
