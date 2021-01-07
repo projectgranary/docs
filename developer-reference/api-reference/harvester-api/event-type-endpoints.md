@@ -742,6 +742,12 @@ Name of the event type
 Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="export" type="string" required=false %}
+If "true" or "True", the event type response will only contain properties a POST body must contain to create this exact event type. All properties set to default values and all api-generated properties will be omitted. Default is `""`.
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -997,6 +1003,12 @@ Name of the event store.
 Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="imported" type="string" required=false %}
+If set to `"true"` \(not case sensitive\), the persister default values will be merged into the provided PUT body while keeping the custom values if provided.
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 
 {% api-method-body-parameters %}
 {% api-method-parameter name="deployerConfig" type="object" required=false %}

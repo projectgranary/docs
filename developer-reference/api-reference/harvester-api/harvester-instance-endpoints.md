@@ -607,6 +607,10 @@ name of the harvester that should be updated
 {% endapi-method-path-parameters %}
 
 {% api-method-query-parameters %}
+{% api-method-parameter name="imported" type="string" required=false %}
+If set to `"true"` \(not case sensitive\), the harvester default values will be merged into the provided PUT body while keeping the custom values if provided.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="expand" type="string" required=false %}
 Show Harvester state with expand=state.
 {% endapi-method-parameter %}
