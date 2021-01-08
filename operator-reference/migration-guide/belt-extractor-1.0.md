@@ -8,8 +8,6 @@ With the Release of Granary 1.0 Aretha the Belt Extractor received extensive ref
 
 As a result of this refactoring import paths changed and current callbacks have to be updated if the `extractorVersion` is upgraded to 1.0 . 
 
-
-
 #### Custom Belt Callback with 0.9 Marie
 
 ```python
@@ -30,5 +28,5 @@ def execute(event_headers, event_payload, profile=None):
     return [update]
 ```
 
-
+Also if you use the option to provide a default extractor function in the Belt API, don't forget to update that as well.
 
