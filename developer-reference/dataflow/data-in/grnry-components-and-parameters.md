@@ -99,5 +99,26 @@ If you want to disable tracing, please add the following optional parameter:
 
 The result is, that whenever there is an error in your transform or metadata extractor step, the data is sent to the dead letter queue. There you get the description of the error and the **original** payload. The original payload refers to the data you have received as input for the transform step, meaning the input to your harvester after the source type. By doing so, we make sure, you do not drop the original data of your request and can reprocess it, if wanted.
 
+## Using kubernetes secrets as configuration
+
+In some cases you do not want to configure your Harvester using plaintext properties. This could be the case if you are using the SFTP Source and have to authenticate at your server. To pass in the credentials using a kubernetes secret you need to do the following:
+
+Instead of passing the credentials to the source as plaintext, use environment variables and make them reference th kubernetes secret:
+
+```javascript
+ "sourceType" : {
+    ...
+    "configuration" : {
+      "sftp.factory.username": ${SECRET_SFTP_USER},
+      "sftp.factory.password": ${SECRET_SFTP_PASSWORD},
+      ...
+    },
+    "deploymentConfiguration": {
+      "deployer.*.kubernetes.secretKeyRefs": "deployer.*.kubernetes.secretKeyRefs=[{envVarName: 'SECRET_SFTP_USER', secretName: 'sftp-secret', dataKey: 'user'},{envVarName: 'SECRET_SFTP_PASSWORD', secretName: 'sftp-secret', dataKey: 'password'}]",
+      ...
+    }
+ }
+```
+
 
 
