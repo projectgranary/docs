@@ -109,12 +109,12 @@ Instead of passing the credentials to the source as plaintext, use environment v
  "sourceType" : {
     ...
     "configuration" : {
-      "sftp.factory.username": ${SECRET_SFTP_USER},
-      "sftp.factory.password": ${SECRET_SFTP_PASSWORD},
+      "sftp.factory.username": "${SECRET_SFTP_USER}",
+      "sftp.factory.password": "${SECRET_SFTP_PASSWORD}",
       ...
     },
     "deploymentConfiguration": {
-      "deployer.*.kubernetes.secretKeyRefs": "deployer.*.kubernetes.secretKeyRefs=[{envVarName: 'SECRET_SFTP_USER', secretName: 'sftp-secret', dataKey: 'user'},{envVarName: 'SECRET_SFTP_PASSWORD', secretName: 'sftp-secret', dataKey: 'password'}]",
+      "kubernetes.secretKeyRefs": "[{envVarName: 'SECRET_SFTP_USER', secretName: 'sftp-secret', dataKey: 'user'},{envVarName: 'SECRET_SFTP_PASSWORD', secretName: 'sftp-secret', dataKey: 'password'}]",
       ...
     }
  }
