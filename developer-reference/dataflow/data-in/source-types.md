@@ -24,7 +24,7 @@ All Source Types only work with **one** replica. Only exception is the Topic Sou
 
 The Amazon S3 Source is based on the Amazon S3 source provided by Spring Cloud Dataflow:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/aws-s3/tree/master/spring-cloud-starter-stream-source-s3" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/aws-s3/tree/master/spring-cloud-starter-stream-source-s3" caption="Reference to the SCDF documentation for S3" %}
 
 Additionally, there are these source specific parameters:
 
@@ -107,7 +107,7 @@ Currently, there are no GRNRY-specific parameters for HTTP. The benefit of this 
 
 The parameters for the HTTP source can be found here:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/http/blob/master/spring-cloud-starter-stream-source-http/README.adoc" caption="SCDF HTTP Source" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/http/blob/master/spring-cloud-starter-stream-source-http/README.adoc" caption="Reference to the SCDF documentation for HTTP endpoint" %}
 
 
 
@@ -222,7 +222,7 @@ A sample of the configuration of a Adobe Analytics source could look like this:
 
 The parameters for the underlying JDBC source can be found here:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/jdbc/blob/master/spring-cloud-starter-stream-source-jdbc/README.adoc" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/jdbc/blob/master/spring-cloud-starter-stream-source-jdbc/README.adoc" caption="Reference to the SCDF documentation for JDBC" %}
 
 To cater large source tables, Granary adds a **streaming mode** to the JDBC Source Type. This streaming mode reads all rows from the `jdbc.query` in one poll but emits them to Granary row by row. The advantage of this behavior is that Granary can import data from source tables independent of the amount of memory allocated to Granary's source type. The additional parameters for streaming mode are:
 
@@ -250,7 +250,9 @@ A sample of the configuration of a JDBC source could look like this:
 }
 ```
 
-### 
+{% hint style="info" %}
+In case your database needs additional dependencies to work via JDBC \(e.g. Oracle\) you either need to fork the source and add the dependency, or add the dependency as a .jar in the Dockerfile.
+{% endhint %}
 
 ### Topic Source
 
@@ -292,7 +294,7 @@ Currently, there are no GRNRY-specific parameters for JMS. The benefit of this s
 
 The parameters for the JMS source can be found here:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/jms/blob/master/spring-cloud-starter-stream-source-jms/README.adoc" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/jms/blob/master/spring-cloud-starter-stream-source-jms/README.adoc" caption="Reference to the SCDF documentation for JMS" %}
 
 The JMS source also bundles IBM MQ JMS Spring Components to allow easy connection to IBM MQ endpoints. The IBM MQ related parameters can be found here:
 

@@ -46,6 +46,7 @@
 
 * [Data Flow](developer-reference/dataflow/README.md)
   * [Data-In](developer-reference/dataflow/data-in/README.md)
+    * [Event Type](developer-reference/dataflow/data-in/event-type.md)
     * [Shared parameters](developer-reference/dataflow/data-in/grnry-components-and-parameters.md)
     * [Available Source Types](developer-reference/dataflow/data-in/source-types.md)
     * [Scriptable Transform](developer-reference/dataflow/data-in/scriptable-transform.md)

@@ -32,24 +32,38 @@ The appropriate parameters for configuration can be found here:
 
 {% embed url="https://github.com/spring-cloud-stream-app-starters/scriptable-transform/blob/master/spring-cloud-starter-stream-processor-scriptable-transform/README.adoc" caption="Scriptable Transform Parameters" %}
 
-A sample for a scriptable processor might look like this:
+A sample for a scriptable processor might look like this: 
 
 ```yaml
-  "app.grnry-scriptable.management.endpoints.web.exposure.include": "prometheus,info,health",
-  "app.grnry-scriptable.management.metrics.export.prometheus.enabled": true,
-  "app.grnry-scriptable.scriptable-transformer.language": "groovy",
-  "app.grnry-scriptable.scriptable-transformer.script": "import groovy.json.JsonOutput\\nclass Vertrag {\\n    String kd_nr\\n    String v_nr\\n    String text\\n}\\ndef splittedRow = (new String(payload)).split(',')\\ndef c = new Vertrag()\\nc.kd_nr = splittedRow[0]\\nc.v_nr = splittedRow[1]\\nc.text = splittedRow[2]\\nreturn JsonOutput.toJson(c)",
-  "app.grnry-scriptable.spring.cloud.stream.kafka.binder.autoCreateTopics" : true,
-  "app.grnry-scriptable.spring.cloud.stream.bindings.input.consumer.concurrency": 3,
-  "app.grnry-scriptable.spring.cloud.stream.bindings.input.consumer.partitioned": true,
-  "app.grnry-scriptable.spring.cloud.stream.bindings.output.producer.partitionCount": 3,
-  "app.grnry-scriptable.spring.cloud.stream.bindings.output.producer.autoAddPartitions": true,
-  "app.grnry-scriptable.spring.cloud.stream.kafka.bindings.input.consumer.resetOffsets": true,
-  "app.grnry-scriptable.spring.cloud.stream.kafka.bindings.input.consumer.startOffset": "earliest",
-  "app.grnry-scriptable.spring.cloud.stream.bindings.harvesterErrors.destination": "grnry_harvester_${grnry.eventTypeName}_error_channel",
-  "app.grnry-scriptable.grnry.harvesterName" : "sftp-all-std-harvester",
-  "app.grnry-scriptable.grnry.eventTypeName" : "sftp-all",
+"transform": {
+        "app": "grnry-scriptable",
+        "version": "latest",
+        "deploymentConfiguration": {
+            "kubernetes.readinessprobedelay": "120",
+            "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
+            "kubernetes.limits.memory": "512Mi",
+            "kubernetes.limits.cpu": "500m"
+            "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+            "kubernetes.requests.cpu": "500m",
+            "kubernetes.requests.memory": "512Mi",
+            "kubernetes.imagepullpolicy": "Always",
+            "kubernetes.livenessprobedelay": "120"
+        },
+        "appConfiguration": {
+            "spring.cloud.stream.kafka.binder.autoCreateTopics" : true,
+            "spring.cloud.stream.bindings.input.consumer.concurrency": 3,
+            "spring.cloud.stream.bindings.input.consumer.partitioned": true,
+            "spring.cloud.stream.bindings.output.producer.partitionCount": 3,
+            "spring.cloud.stream.bindings.output.producer.autoAddPartitions": true,
+            "spring.cloud.stream.kafka.bindings.input.consumer.resetOffsets": true,
+            "spring.cloud.stream.kafka.bindings.input.consumer.startOffset": "earliest",
+            "management.endpoints.web.exposure.include": "prometheus,info,health",
+            "management.metrics.export.prometheus.enabled": true
+        },
+        "language": "groovy",
+        "script": "import groovy.json.JsonOutput\\nclass Vertrag {\\n    String kd_nr\\n    String v_nr\\n    String text\\n}\\ndef splittedRow = (new String(payload)).split(',')\\ndef c = new Vertrag()\\nc.kd_nr = splittedRow[0]\\nc.v_nr = splittedRow[1]\\nc.text = splittedRow[2]\\nreturn JsonOutput.toJson(c)"
+    }
 ```
 
-You should note, that the script with your code is given in scriptable-transformer.script parameter. The data, send to the script, is available via the parameter `payload`, which you can access in your development.
+You should note, that the script with your code is given in the `script` parameter. The data which is sent to the script, is available in the script via the parameter `payload`, which you can access in your development.
 

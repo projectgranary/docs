@@ -65,7 +65,7 @@ Default:
 
 ### Full Example
 
-Additionally, you need to fill the following parameters with Spring Expression Language expressions:
+Additionally, you need to fill the following parameters with [Spring Expression Language](../../../learning-grnry-1/data-in/best-practices-1/best-practices.md) expressions:
 
 ```yaml
 sessionizing.correlationIdExpression : [SpEL-Expression - optional]
@@ -80,26 +80,38 @@ sessionizing.harvesterName : [String literal]
 Example:
 
 ```yaml
-app.grnry-sessionizing-processor.sessionizing.correlationIdExpression: "headers['grnry-correlation-id']",
-app.grnry-sessionizing-processor.sessionizing.sessionizingAttributeExpression: "payload.correlationId",
-app.grnry-sessionizing-processor.sessionizing.eventTypeName: "${grnry.eventTypeName}",
-app.grnry-sessionizing-processor.sessionizing.eventTypeName: "1",
-app.grnry-sessionizing-processor.sessionizing.harvesterName: "${grnry.harvesterName}",
-app.grnry-sessionizing-processor.sessionizing.inactivityGap: 3600,
-app.grnry-sessionizing-processor.sessionizing.gracePeriod : 120,
-app.grnry-sessionizing-processor.grnry.harvesterName: "sftp-all-std-harvester",
-app.grnry-sessionizing-processor.grnry.eventTypeName: "sftp-all" 
+"sessionizing": {
+    "app": "grnry-sessionizing",
+    "version": "latest",
+    "deploymentConfiguration": {
+        "kubernetes.imagepullpolicy": "Always",
+        "kubernetes.limits.cpu": "500m",
+        "kubernetes.limits.memory": "512Mi",
+        "kubernetes.livenessprobedelay": "120",
+        "kubernetes.readinessprobedelay": "120",
+        "kubernetes.requests.cpu": "500m",
+        "kubernetes.requests.memory": "512Mi",
+        "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_private.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+        "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName: 'grnry-pg-citus-secret' , defaultMode: '256' }}]"
+    },
+    "appConfiguration": {
+        "spring.cloud.stream.bindings.input.consumer.concurrency": "6",
+        "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+        "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+        "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+        "spring.cloud.stream.kafka.binder.consumer.maxattempts": "1",
+        "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+        "spring.cloud.stream.kafka.binder.replicationfactor": "3"
+    },
+    "correlationIdExpression": "headers['grnry-correlation-id']",
+    "sessionizingAttributeExpression": "payload.correlationId",
+    "inactivityGapSec": 1800,
+    "gracePeriodSec": 120,
+    "enabled": true
+}
 ```
 
-In the example the part `grnry-sessionizing-processor` \(the app name\) has to be replaced by an alias, if one has been specified in the stream definition.
 
-{% hint style="info" %}
-Due to technical limitations in the [Event Store API](../../api-reference/event-store-api.md), the `eventTypeName`and `harvesterName` may not contain underscores "`_`".
-{% endhint %}
 
-**Source Parameters:**
 
-The current documentation for the Spring Expression Language \(SpEL\) can be found here:
-
-[https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/core.html\#expressions-language-ref](https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/core.html#expressions-language-ref)
 

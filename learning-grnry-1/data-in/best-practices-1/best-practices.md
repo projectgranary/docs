@@ -132,3 +132,9 @@ It is possible to concatenate the resulting Strings of SpEL expressions using `'
   * if "payload.meta.payloadId exists and does not start with "ID-" use payload.meta.payloadId otherwise use payload.meta.alternativePayloadId"`metadata.eventIdExpression=payload.meta.payloadId.startsWith('ID-') ? payload.meta.payloadId : payload.meta.alternativePayloadId`
 * Elvis Operator `"payload.meta.payloadId?:'NOTSET'"`
 
+## Official Documentation
+
+The current documentation for the Spring Expression Language \(SpEL\) can be found here:
+
+{% embed url="https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/core.html\#expressions-language-ref" %}
+

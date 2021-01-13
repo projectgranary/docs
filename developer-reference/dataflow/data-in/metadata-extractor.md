@@ -4,51 +4,48 @@ description: 'On this page, you get the details about the Metadata Extractor'
 
 # Metadata Extractor
 
-The Metadata Extractor is used to extract header information from the message. Therefore four different expressions need to be filled with information based on the Spring Expression Language.
+The Metadata Extractor is used to extract these header information from the message:
 
-* grnry-correlation-id
-* grnry-event-id
-* grnry-event-type
+* grnry-correlation-id 
+* grnry-event-id 
+* grnry-event-type 
+* grnry-event-type-version
 * grnry-harvester-name
+* grnry-event-timestamp
+
+The extraction definitions for these parameters are automatically pulled from the corresponding [Event Type](event-type.md) definition, they will not be set in your medata extractor definition.
 
 **Name**: grnry-data-in-metadata
 
 **Parameters**: See [shared parameters](grnry-components-and-parameters.md).
 
-In addition, the required fields, which you need to fill with Spring Expression Language expressions and their associated type are:
+One sample of a metadata extractor is:
 
 ```yaml
-metadata.correlationIdExpression: SpEL-Expression
-metadata.eventIdExpression: SpEL-Expression
-metadata.timestampExpression: SpEL-Expression
-metadata.harvesterName: Literal
-metadata.eventTypeName: Literal
+"metadataExtractor": {
+    "app": "grnry-data-in-metadata",
+    "version": "latest",
+    "deploymentConfiguration": {
+        "kubernetes.requests.memory": "512Mi",
+        "kubernetes.requests.cpu": "500m",
+        "kubernetes.livenessprobedelay": "120",
+        "kubernetes.readinessprobedelay": "120",
+        "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
+        "kubernetes.limits.cpu": "500m",
+        "kubernetes.limits.memory": "512Mi",
+        "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]",
+        "kubernetes.imagepullpolicy": "Always"
+    },
+    "appConfiguration": {
+        "spring.cloud.stream.kafka.binder.replicationfactor": "3",
+        "spring.cloud.stream.kafka.binder.autocreatetopics": "true",
+        "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
+        "spring.cloud.stream.kafka.binder.autoaddpartitions": "true",
+        "spring.cloud.stream.bindings.input.consumer.partitioned": "true",
+        "spring.cloud.stream.bindings.input.consumer.concurrency": "6"
+    }
+}
 ```
-
-One sample of filling this information is:
-
-```yaml
-app.grnry-data-in-metadata.metadata.correlationIdExpression: "#safeJsonPath(payload, 'kd_nr')?:'NO_CORRELATION_ID'",
-app.grnry-data-in-metadata.metadata.eventIdExpression: "#randomUUID()",
-app.grnry-data-in-metadata.metadata.eventTypeName: "${grnry.eventTypeName}",
-app.grnry-data-in-metadata.metadata.harvesterName: "${grnry.harvesterName}",
-app.grnry-data-in-metadata.metadata.timestampExpression: "#nowMillis()",
-app.grnry-data-in-metadata.grnry.harvesterName: "sftp-all-std-harvester",
-app.grnry-data-in-metadata.grnry.eventTypeName: "sftp-all"
-  
-```
-
-Please note, that in this sample, the part `app.grnry-data-in-metadata` is the general stream definition.
-
-{% hint style="info" %}
-Due to technical limitations in the [Event Store API](../../api-reference/event-store-api.md), the `eventTypeName` may not contain "`_`".
-{% endhint %}
-
-**Source Parameters:**
-
-The current documentation for the Spring Expression Language \(SpEL\) can be found here:
-
-{% embed url="https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/core.html\#expressions-language-ref" caption="Documentation on the Spring Expression Language" %}
 
 ### 
 

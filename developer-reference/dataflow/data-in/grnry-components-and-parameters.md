@@ -1,6 +1,6 @@
 ---
 description: >-
-  On this page, available Granary SCDF components and their corresponding
+  On this page, available Granary Harvester components and their corresponding
   parameters are described.
 ---
 
@@ -30,74 +30,69 @@ Due to technical limitations in the [Event Store API](../../api-reference/event-
 
 ## Kubernetes Deployment
 
-The following parameters control the Kubernetes deployment of a Granary SCDF component:
+The parameters within `deploymentConfiguration` control the Kubernetes deployment of a Granary Harvester component:
 
-```text
-"deployer.*.kubernetes.imagePullPolicy": "IfNotPresent",
-"deployer.*.kubernetes.limits.cpu": "300m",
-"deployer.*.kubernetes.limits.memory": "512Mi",
-"deployer.*.kubernetes.requests.cpu": "300m",
-"deployer.*.kubernetes.requests.memory": "512Mi",
-"deployer.*.kubernetes.livenessProbeDelay":"120",
-"deployer.*.kubernetes.readinessProbeDelay":"120"
+```javascript
+"sourceType" : {
+    "deploymentConfiguration": {
+        "kubernetes.imagePullPolicy": "IfNotPresent",
+        "kubernetes.limits.cpu": "300m",
+        "kubernetes.limits.memory": "512Mi",
+        "kubernetes.requests.cpu": "300m",
+        "kubernetes.requests.memory": "512Mi",
+        "kubernetes.livenessProbeDelay":"120",
+        "kubernetes.readinessProbeDelay":"120"
+    },
+    ...
+ }
 ```
 
 ### Encryption
 
-Granary SCDF components support symmetric encryption. Therefore the encryption secret containing the key pair needs to be mounted to Granary SCDF components like so:
+Granary Harvester components support symmetric encryption. Therefore the encryption secret containing the key pair needs to be mounted to Granary Harvester components like so:
 
-```text
-"deployer.*.kubernetes.volumeMounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }]",
-"deployer.*.kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]"
+```javascript
+"sourceType" : {
+    "deploymentConfiguration": {
+        "kubernetes.volumeMounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }]",
+        "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]"
+    },
+    ...
+ }
 ```
 
-To deactivate the encryption, remove the two lines above and overwrite the \(de-\)serializer of each Granary SCDF component:
+To deactivate the encryption, do not pass in the mounted secrets as shown above and overwrite the \(de-\)serializer within `appConfiguration` of each Granary Harvester component:
 
-```text
-"app.script.spring.cloud.stream.kafka.bindings.input.consumer.configuration.value.deserializer":"org.apache.kafka.common.serialization.ByteArrayDeserializer",
-"app.script.spring.cloud.stream.kafka.bindings.output.producer.configuration.value.se
+```javascript
+"transform" : {
+    "appConfiguration" : {
+        "spring.cloud.stream.kafka.bindings.input.consumer.configuration.value.deserializer":"org.apache.kafka.common.serialization.ByteArrayDeserializer",
+        "spring.cloud.stream.kafka.bindings.output.producer.configuration.value.serializer":"org.apache.kafka.common.serialization.ByteArraySerializer"
+    },
+    ...
+ }
 ```
 
 ## Dead letter queues
 
-In GRNRY, we have created so called _dead letter queues_. These dead letter queues are used to receive all the data that could not be processed correctly by the transform or metadata extractor steps. They are the output channels for errors. Dead letter queues are available for the [transform](scriptable-transform.md) and the [metadata extractor](metadata-extractor.md) steps.
-
-### Mandatory parameters
-
-In order to create these dead letter queues you have to define at least one parameter:
-
-```yaml
-"spring.cloud.stream.bindings.harvesterDlq.destination": <dlq_name>
-```
-
-In this sample &lt;dlq\_name&gt; refers to the name of the Kafka Topic the erroneous data should be sent to. As a convention you should use: 
-
-```yaml
-"grnry_harvester_${grnry.harvesterName}_dead_letter"
-```
-
-`${grnry.harvesterName}` is the variable you have entered for the harvester. Whenever this parameter is not set in your deployment, it will automatically default to: `harvesterDlq`. As this is not very expressive, you should definitely enter a DLQ as proposed above.
-
-### Optional parameters
-
-In addition, there are two further parameters:
-
-```yaml
-"spring.cloud.stream.bindings.harvesterDlq.producer.partitionCount": 6
-"spring.cloud.stream.bindings.harvesterDlq.producer.autoAddPartitions": true
-```
-
-The first parameter defines how many partitions there should be at least for the dead letter queue \(more are possible\) and the second one defines whether it is okay to automatically add partitions.
-
-If you want to disable tracing, please add the following optional parameter:
-
-```text
-"spring.sleuth.enabled": false
-```
+In GRNRY, so called _dead letter queues_ are automatically created for each Harvester. These dead letter queues are used to receive all the data that could not be processed correctly by the [transform](scriptable-transform.md) or [metadata extractor](metadata-extractor.md) steps. They are the output channels for errors.
 
 ### When is something written to the Dead Letter Queue?
 
 The result is, that whenever there is an error in your transform or metadata extractor step, the data is sent to the dead letter queue. There you get the description of the error and the **original** payload. The original payload refers to the data you have received as input for the transform step, meaning the input to your harvester after the source type. By doing so, we make sure, you do not drop the original data of your request and can reprocess it, if wanted.
+
+## Tracing
+
+All Granary Harvester components support tracing with OpenZipkin, an open-sourced distributed tracing system. If you want to disable tracing, please add the following optional parameter:
+
+```javascript
+"transform" : {
+    "appConfiguration" : {
+        "spring.sleuth.enabled": false
+    },
+    ...
+ }
+```
 
 ## Using kubernetes secrets as configuration
 
