@@ -181,8 +181,6 @@ The belt extractor consuming from a batch Kafka topic can be equipped with the f
 {% code title="callback.py" %}
 ```python
 import json
-from grnry.beltextractor.models.update import Update
-
 
 def execute(event_headers, event, profile=None):
 
@@ -527,7 +525,6 @@ the belt extractor consuming from a batch Kafka topic can be equipped with the f
 import json
 import sys
 from time import time
-from grnry.beltextractor.models.update import Update
 import logging
 import random
 
@@ -573,7 +570,6 @@ There are use cases where you want to process events from a topic that contains 
 import json
 import sys
 from time import time
-from grnry.beltextractor.models.update import Update
 import logging
 
 

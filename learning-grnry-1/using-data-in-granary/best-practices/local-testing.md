@@ -24,12 +24,9 @@ To get access to the Artifactory, please get in touch.
 
 In an empty folder create a file called `callback.py` with your custom Belt Extractor callback code.
 
-For this example lets assume the callback looks like this.
+For this example let us assume the callback looks like this.
 
 ```python
-from grnry.beltextractor.models.update import Update
-
-
 def execute(headers, payload, profile=None):
     # This should throw an exception
     correlation_id = payload['correlation_id']
@@ -41,17 +38,17 @@ def execute(headers, payload, profile=None):
 On the same level create a new file called `requirements.txt` with this content.
 
 ```text
-grnry.beltextractor==1.0.0
+grnry-belt==1.0.0
 pytest
 ```
 
 To proceed with testing install the needed dependencies for example with:
 
 ```bash
-pip install -r requirements.txt --extra-index-url https://$PIP_USERNAME:$PIP_PASSWORD@$PIP_URL
+pip install -r requirements.txt --extra-index-url https://$PIP_USERNAME:$PIP_PASSWORD@artifactory.syncier.cloud/artifactory/api/pypi/analytics-pypi-release/simple
 ```
 
-Replace `PIP_USERNAME` , `PIP_PASSWORD` and `PIP_URL` with the proper values provided.
+Replace `PIP_USERNAME` and `PIP_PASSWORD` with the proper values provided.
 
 ### Testing The Callback
 
@@ -99,7 +96,7 @@ Congratulations! Now it is time to write some real tests!
 
 ### Advanced Usage
 
-With the `grnry.beltextractor`  package installed Granary provides access to all methods used in Belt Extractor itself. For testing, more advanced developers now have access to utility functions or the Kafka Consumer / Producer implementations. Be aware that these might change with over upcoming releases. 
+With the `grnry-belt`  package installed Granary provides access to all methods used in Belt Extractor itself. For testing, more advanced developers now have access to utility functions or the Kafka Consumer / Producer implementations. Be aware that these might change with over upcoming releases. 
 
 ### Further Information
 

@@ -94,7 +94,6 @@ A simple callback example:
 
 ```python
 from time import time
-from grnry.beltextractor.update import Update
 
 def execute(event_headers, event_payload, profile=None):
     print(profile)
@@ -240,7 +239,7 @@ If the callback raises a `RetryException`, the processed message will be retried
 
 {% code title="callback.py" %}
 ```python
-from grnry.beltextractor.exceptions.exception import RetryException
+from grnry_belt.exceptions.exception import RetryException
 
 def execute(event_headers, event, profile=None):
     raise RetryException('Try again')

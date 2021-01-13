@@ -13,7 +13,6 @@ So, this is our input:
 ```python
 import json
 import sys
-from grnry.beltextractor.models.update import Update
 
 def lookup(dictionary,keys):
     if type(dictionary)==type(''):
@@ -43,7 +42,7 @@ def execute(event_headers, event_payload, profile = None):
 And we want to convert it to a string, such as this one:
 
 ```python
-import json\nimport sys\nfrom grnry.beltextractor.models.update import Update\n\ndef lookup(dictionary,keys):\n    if type(dictionary)==type(''):\n        dictionary=json.loads(dictionary)\n    try:\n        if len(keys)>1:\n            value = lookup(dictionary[keys[0]],keys[1:])\n        else:\n            value = dictionary[keys[0]]\n        return value\n    except:\n        return None\n\ndef execute(event_headers, event_payload, profile = None):\n    update = []\n    correlation_id= event_headers['grnry-correlation-id']\n    geoAltitude=event_payload['geoAltitude']\n    payload= lookup(profile,['jsonPayload'])\n    opensk = lookup(payload,['openksy'])\n    latest = lookup(opensk,['_latest'])\n    value = lookup(latest,['_v'])\n    update = Update(correlation_id, ['opensky']).set_value(value=str(event_payload['geoAltitude']),_in=int(event_payload['lastContact']), reader='_all')\n    update.set_type('opensky')\n    return update
+import json\nimport sys\n\ndef lookup(dictionary,keys):\n    if type(dictionary)==type(''):\n        dictionary=json.loads(dictionary)\n    try:\n        if len(keys)>1:\n            value = lookup(dictionary[keys[0]],keys[1:])\n        else:\n            value = dictionary[keys[0]]\n        return value\n    except:\n        return None\n\ndef execute(event_headers, event_payload, profile = None):\n    update = []\n    correlation_id= event_headers['grnry-correlation-id']\n    geoAltitude=event_payload['geoAltitude']\n    payload= lookup(profile,['jsonPayload'])\n    opensk = lookup(payload,['openksy'])\n    latest = lookup(opensk,['_latest'])\n    value = lookup(latest,['_v'])\n    update = Update(correlation_id, ['opensky']).set_value(value=str(event_payload['geoAltitude']),_in=int(event_payload['lastContact']), reader='_all')\n    update.set_type('opensky')\n    return update
 ```
 
 This string, can be directly entered into our API call to the Belt API. This can be achieved with the following commands.

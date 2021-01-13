@@ -104,7 +104,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "assumedRole": "",
             "requirementsPy": "",
             "extractorVersion": "0.8.0",
-            "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(event, profile=None):\r\n    print(profile)\r\n    update = Update(profile['correlationId'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n    update.set_type('TestProfileType')\r\n    return [update]\r\n",
+            "extractorFn": "from time import time\r\nfrom grnry_belt.models.update import Update\r\n\r\ndef execute(event, profile=None):\r\n    print(profile)\r\n    update = Update(profile['correlationId'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n    update.set_type('TestProfileType')\r\n    return [update]\r\n",
             "eventTypes": [
                 "test-a",
                 "test-b"
@@ -350,7 +350,7 @@ JSON with attributes of belt with the specified ID.
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
     "extractorVersion": "0.8.0",
-    "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
+    "extractorFn": "from time import time\r\nfrom grnry_belt.models.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
     "eventTypes": [
         "test-a",
         "test-b"
@@ -594,7 +594,7 @@ Returns a full dump of belt object created.
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
     "extractorVersion": "0.8.0",
-    "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
+    "extractorFn": "from time import time\r\nfrom grnry_belt.models.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
     "eventTypes": [
         "test-a",
         "test-b"
@@ -828,7 +828,7 @@ A full dump of belt object recently modified
      "assumedRole": "",
      "requirementsPy": "package1==0.0.0\r\npackage2",
      "extractorVersion": "0.8.0",
-     "extractorFn": "from time import time\r\nfrom grnry.beltextractor.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
+     "extractorFn": "from time import time\r\nfrom grnry_belt.models.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
      "eventTypes": [
        "test-a",
        "test-b"
