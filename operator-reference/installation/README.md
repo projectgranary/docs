@@ -42,7 +42,7 @@ In turn, the Incubator Helm Chart Repo always deploys the latest commit on the m
 * there is a [Prometheus Server](https://prometheus.io/) available to scrape the component's metric endpoint.
 * there is basic Granary configuration deployed, see [Granary Base Helm Chart](with-helm/granary-base-deployment.md).
 * there is a TLS certificate for your base FQDN as Kubernetes secret in the cluster to SSL-encrypt ingresses, e.g. using [Cert-Manager](https://docs.cert-manager.io/en/latest/)'s certificate resource
-* there is a PostgreSQL user as Kubernetes secret if you do not choose to run Citus PostgreSQL within the Granary installation.
+* there is a PostgreSQL user as Kubernetes secret
 * there are Maven repository access credentials as Kubernetes secret in the cluster to download Spring Cloud Data Flow \(SCDF\) metadata jars.
 * there your default Kubernetes Service Account is bound to a [PodSecurityPolicy](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) that allows pods to be deployed - in case you activated Kubernetes' PodSecurityPolicy feature.
 

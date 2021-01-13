@@ -37,7 +37,6 @@ This section provides you with a sample object for the `data` attribute. All ava
         "SOURCE_TABLE_NAME": "eventstore",
         "TARGET_SEGMENT_NAME": "eventstore_demo_seg",
         "SOURCE_WHERE_CLAUSE": "event_harvester = 'adobe'",
-        "CITUS_DIST_COL": "correlation_id",
         "TYPE": "generic",
         "GENERIC_COLUMNS": "event_id,event_harvester",
         "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
@@ -49,7 +48,7 @@ This section provides you with a sample object for the `data` attribute. All ava
 
     "envFromSecretes": {
         "DBUser": {
-            "key": "user",
+            "key": "db-user",
             "secret": "db-secret"
         }
     }
@@ -131,7 +130,6 @@ Fuzzy Search on the `displayName` to filter the list of returned segment jobs.
                 "schedule": "*/10 * * * *"
             },
             "env": {
-                "CITUS_DIST_COL": "correlation_id",
                 "DEBUG": "True",
                 "GENERIC_COLUMNS": "event_id,event_harvester",
                 "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
@@ -286,7 +284,6 @@ Response when export flag is `false`
             "schedule": "*/10 * * * *"
         },
         "env": {
-            "CITUS_DIST_COL": "correlation_id",
             "DEBUG": "True",
             "GENERIC_COLUMNS": "event_id,event_harvester",
             "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
@@ -451,7 +448,6 @@ description: optional`{
             "schedule": "*/1 * * * *"
         },
         "env": {
-            "CITUS_DIST_COL": "correlation_id",
             "DEBUG": "True",
             "GENERIC_COLUMNS": "event_id,event_harvester",
             "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",
@@ -620,7 +616,6 @@ Overwrites `displayName` and `description`.
             "schedule": "*/10 * * * *"
         },
         "env": {
-            "CITUS_DIST_COL": "correlation_id",
             "DEBUG": "True",
             "GENERIC_COLUMNS": "event_id,event_harvester",
             "GENERIC_TRANSFORMATIONS": "theval01=message->'val01'::jsonb|theval02=upper(message->'val02'#>>'{}')::text",

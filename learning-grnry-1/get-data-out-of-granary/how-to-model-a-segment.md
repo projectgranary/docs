@@ -70,12 +70,10 @@ We will set `TARGET_SEGMENT_NAME` to `adobe_events_info`.
 ## 8. Define your database specifics
 
 Define the database-specific parameters of the segment.   
-If you are using Citus, set `DB_TYPE` to `citus`.   
-If you are using PostgreSQL \(or any PostgreSQL flavor like Amazon Aurora\), set `DB_TYPE` to `postgres`.    
-You also need to always set the `CITUS_DIST_COL` parameter which defines on which column Citus would distribute its table. You usually want to set this to `correlation_id`.   
+If you are using PostgreSQL \(or any PostgreSQL flavor like Amazon Aurora\), set `DB_TYPE` to `postgres`.  If you are using Citus, set `DB_TYPE` to `citus` and the `CITUS_DIST_COL` parameter which defines on which column Citus would distribute its table. You usually want to set this to `correlation_id`.  
 If you are still in the development phase of your segment it is also a good idea to set `DEBUG` to `True` so you can later take a look at the logs of the segment creation in case something went wrong.
 
-In our example, we are going to set `DB_TYPE` to `citus`, `CITUS_DIST_COL` to `correlation_id`, and `DEBUG` to `True`.
+In our example, we are going to set `DB_TYPE` to `postgres` and `DEBUG` to `True`.
 
 ## 9. Configure the segment CRD
 
@@ -106,8 +104,7 @@ The complete request we are going to send to the [Segment Management API](../../
             "schedule": "0 * * * *"
         },
         "env": {
-            "CITUS_DIST_COL": "correlation_id",
-            "DB_TYPE": "citus",
+            "DB_TYPE": "postgres",
             "DEBUG": "True",
             "GENERIC_COLUMNS": "event_id,event_harvester",
             "GENERIC_TRANSFORMATIONS": "structure=message->'struc'::jsonb|description=upper(message->'desc'#>>'{}')::text",

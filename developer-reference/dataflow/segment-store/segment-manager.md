@@ -45,9 +45,9 @@ Consult [Segment Table Creation](segment-table-creation.md#configure) for more i
 
 | Attribute | Default |
 | :--- | :--- |
-| DB\_TYPE | citus |
+| DB\_TYPE | postgres |
 | DB\_USE\_VIEWS | False |
-| DB\_HOST | grnry-pg-citus |
+| DB\_HOST | grnry-pg |
 | DB\_USE\_SSL | 5432 |
 | PROMETHEUS\_PUSHGATEWAY | "" |
 | PROMETHEUS\_JOB | segmentcreation |
@@ -68,7 +68,6 @@ Consult [Segment Table Creation](segment-table-creation.md#configure) for more i
 | Attribute |
 | :--- |
 | TARGET\_SEGMENT\_NAME |
-| CITUS\_DIST\_COL |
 | SOURCE\_WHERE\_CLAUSE |
 | TARGET\_SEGMENT\_VIEWS |
 | TARGET\_SEGMENT\_INDEXES |
@@ -99,7 +98,7 @@ You now have the option to choose between a pivot or generic transformation. The
 
 EnvFromSecrets are represented as a map where the key is used as a env variable for the Segment Creation Script and the value is [SecretKeyRef](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables) .
 
-The secret is set by the Segment Manager and defaults to `grnry-pg-citus-secret`. If needed, overwrite it with the env variable `DB_SECRET` in the Segment Manager.
+The secret is set by the Segment Manager and defaults to `grnry-pg`. If needed, overwrite it with the env variable `DB_SECRET` in the Segment Manager.
 
 {% hint style="info" %}
 Consult [Segment Table Creation](segment-table-creation.md#configure) what these values do.
@@ -110,17 +109,17 @@ Consult [Segment Table Creation](segment-table-creation.md#configure) what these
 ```text
 "envFromSecrets": {
     "DB_USER": {
-        "secret": "grnry-secret",
-        "key": "superuser-username"
+        "secret": "grnry-pg-credentials",
+        "key": "postgresql-username"
     }
 }
 ```
 
 | Attribute | Default | Required/Optional |
 | :--- | :--- | :--- |
-| DB\_USER | key: `superuser-username` | Optional |
-| DB\_NAME | key: `superuser-database` | Optional |
-| DB\_PASSWORD | key: `superuser-password` | Optional |
+| DB\_USER | key: `postgresql-username` | Optional |
+| DB\_NAME | key: `postgresql-database` | Optional |
+| DB\_PASSWORD | key: `postgresql-password` | Optional |
 
 ### Image
 

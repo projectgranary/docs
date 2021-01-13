@@ -18,7 +18,7 @@ The available storage layers are:
 * **PostgreSQL** \(compatible with Amazon Aurora - allowing to leverage read replicas for view segments\)
 * **Citus** Data PostgreSQL
 
-Using standard **PostgreSQ**L, table segments are normal database tables. Using **Citus**, table segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. 
+Using standard **PostgreSQL**, table segments are normal database tables. Using **Citus**, table segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. 
 
 Currently, three different segment generator types are available:
 
@@ -37,12 +37,12 @@ More detailed instructions can be found [here.](https://github.com/projectgranar
 | Parameter | Description | Default |  |
 | :--- | :--- | :--- | :--- |
 | `TYPE` | type of generator, `pivot` , `generic` or `flexible` | `pivot` |  |
-| `DB_TYPE` | storage-layer type, `citus` or `postgres` | `citus` |  |
+| `DB_TYPE` | storage-layer type, `citus` or `postgres` | `postgres` |  |
 | `DB_USE_VIEWS` | flag indicating if generated segment should be a view | `false` |  |
-| `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg-citus-master` |  |
+| `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg` |  |
 | `DB_PORT` | database port | `5432` |  |
-| `DB_USER` | postgres user name | Secret Reference needed |  |
-| `DB_PASSWORD` | postgres user password | Secret Reference needed |  |
+| `DB_USER` | database user name | Secret Reference needed |  |
+| `DB_PASSWORD` | database user password | Secret Reference needed |  |
 | `DB_NAME` | name of the database | Secret Reference needed |  |
 | `DB_USE_SSL` | whether to enforce SSL for DB connection | `true` |  |
 | `SOURCE_SCHEMA_NAME` | name of schema of source table | `public` |  |
@@ -220,7 +220,7 @@ Additionally, there are **pivot generator** specific variables as specified belo
 
 The pivot generator presupposes that the following input columns are present in the source table.
 
-`<CITUS_DIST_COL>` \(varchar\)
+`<CITUS_DIST_COL>` \(varchar, only necessary if `DB_TYPE=citus`\)
 
 `path` \(text/varchar\)
 
@@ -405,12 +405,7 @@ Please note that if you are using `%` signs in your source query \(e.g. `LIKE '%
 
 ## Errors
 
-In case of errors, these are directly thrown and can be detected by the environment running the Docker container \(e.g., Kubernetes\). In case no connection can be established or the Citus master returns an SQL error result, this is the default behaviour of psycopg2. In case executing a command on the workers fails, the master will not return an error. The segmentcreation tool detects this by checking the second last return value of `run_command_on_workers` or `run_command_on_colocated_placements` indicating `success`, according to [psql's `df+` output](https://www.postgresql.org/docs/current/app-psql.html):
-
-* `OUT nodename text, OUT nodeport integer, OUT success boolean, OUT result text` for `run_command_on_workers`
-* `OUT nodename text, OUT nodeport integer, OUT shardid1 bigint, OUT shardid2 bigint, OUT success boolean, OUT result text` for `run_command_on_colocated_placements`
-
-However, this interface is not documented and thus might change in future versions of Citus.
+In case of errors, these are directly thrown and can be detected by the environment running the Docker container \(e.g., Kubernetes\). In case no connection can be established or the database returns an SQL error result, this is the default behaviour of psycopg2. 
 
 The metrics are grouped by the job name set in `PROMETHEUS_JOB`. If the `PROMETHEUS_PUSHGATEWAY` variable is set, the following values are pushed:
 

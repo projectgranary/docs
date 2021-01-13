@@ -45,7 +45,7 @@ Event feeder will create a batch job to read events based on configurable event 
 
 | Parameter \(env variable name\) | Description | Example Value |
 | :--- | :--- | :--- |
-| EVENTSTORE\_HOSTNAME | hostname of the postgres instance | `grnry-pg-citus` |
+| EVENTSTORE\_HOSTNAME | hostname of the postgres instance | `grnry-pg` |
 | EVENTSTORE\_PORT | port of the postgres instance | `5432` |
 | EVENTSTORE\_DB\_NAME | database name on postgres instance | `postgres` |
 | IO.GRNRY.EVENTFEEDER.DATASOURCE-TABLE-NAME | table name on postgres instance | `public.eventstore` |

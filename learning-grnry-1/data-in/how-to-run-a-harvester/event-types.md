@@ -183,8 +183,8 @@ curl -X GET -H "Content-Type: application/json" \
     "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
     "spring.cloud.stream.kafka.binder.replicationfactor": "3",
     "spring.datasource.password": "${superuser-password}",
-    "spring.datasource.url": "jdbc:postgresql://grnry-pg-citus:5432/postgres?currentSchema=public",
-    "spring.datasource.username": "${superuser-username}"
+    "spring.datasource.url": "jdbc:postgresql://grnry-pg:5432/postgres?currentSchema=public",
+    "spring.datasource.username": "${postgresql-username}"
   },
   "deployerConfig": {
     "kubernetes.imagepullpolicy": "Always",
@@ -195,7 +195,7 @@ curl -X GET -H "Content-Type: application/json" \
     "kubernetes.requests.cpu": "500m",
     "kubernetes.requests.memory": "512Mi",
     "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
-    "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]"
+    "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-credentials' , defaultMode : '256' }}]"
   },
   "eventTypeName": "test",
   "eventstoreType": "pg",
@@ -233,8 +233,8 @@ curl -X PUT -H "Content-Type: application/json" \
         "spring.cloud.stream.kafka.binder.minpartitioncount": "24",
         "spring.cloud.stream.kafka.binder.replicationfactor": "3",
         "spring.datasource.password": "${superuser-password}",
-        "spring.datasource.url": "jdbc:postgresql://grnry-pg-citus:5432/postgres?currentSchema=public",
-        "spring.datasource.username": "${superuser-username}"
+        "spring.datasource.url": "jdbc:postgresql://grnry-pg:5432/postgres?currentSchema=public",
+        "spring.datasource.username": "${postgresql-username}"
     },
     "deployerConfig": {
         "kubernetes.imagepullpolicy": "Always",
@@ -245,7 +245,7 @@ curl -X PUT -H "Content-Type: application/json" \
         "kubernetes.requests.cpu": "500m",
         "kubernetes.requests.memory": "512Mi",
         "kubernetes.volumemounts": "[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]",
-        "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]"
+        "kubernetes.volumes": "[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-credentials' , defaultMode : '256' }}]"
     }
 }
 ```

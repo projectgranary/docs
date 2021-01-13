@@ -1,8 +1,8 @@
-# PostgreSQL/Citus
+# PostgreSQL
 
 ## DB Backup and Recovery
 
-The following shows the setup of a Citus backup using Barman. This allows a point-in-time recovery with zero data loss.
+The following shows the setup of a database backup using Barman. This allows a point-in-time recovery with zero data loss.
 
 Basic architecture looks like this: A Barman backup node per Postgres node \(this case is demonstrated here, Barman supports backup of multiple servers in one node\).
 
@@ -159,11 +159,5 @@ In any case, we recommend to closely monitore the database.
 
 Finally, for the disaster case when the disk is full and Postgres does not work \(e.g. [VACUUM FULL](https://www.postgresql.org/docs/11/sql-vacuum.html) cannot run\), we suggest to place some dummy file \(say 500MB\) on the volumes where the database stores its data files. Sounds weird, but one can easily remove that dummy file in case of full disks and enable the database to function again.
 
-## Replication
 
-t.b.c.
-
-* Decide on replication based on shards or nodes
-* Implement replication
-* Test
 

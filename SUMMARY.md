@@ -115,5 +115,5 @@
   * [Kubernetes Liveness, Readiness Probes](operator-reference/site-reliability/kubernetes-liveness-readiness-probes.md)
   * [Kafka](operator-reference/site-reliability/kafka.md)
   * [Keycloak](operator-reference/site-reliability/keycloak.md)
-  * [PostgreSQL/Citus](operator-reference/site-reliability/postgresql-citus.md)
+  * [PostgreSQL](operator-reference/site-reliability/postgresql-citus.md)
 

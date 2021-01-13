@@ -69,7 +69,7 @@ harvester: sourceType/deployConfiguration:
 
 ```yaml
 kubernetes.volumeMounts=[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }] 
-kubernetes.volumes=[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-dev-secret' , defaultMode : '256' }}]
+kubernetes.volumes=[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-credentials' , defaultMode : '256' }}]
 ```
 
 harvester: sourceType/appConfiguration:
@@ -81,8 +81,8 @@ kubernetes.secrets.paths=/usr/src/app/db-secret
 harvester: sourceType/configuration:
 
 ```yaml
-spring.datasource.password=${superuser-password} 
-spring.datasource.username=${superuser-username}
+spring.datasource.password=${postgresql-password} 
+spring.datasource.username=${postgresql-username}
 ```
 
 ### Recommended parameter settings

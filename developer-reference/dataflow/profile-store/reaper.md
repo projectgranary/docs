@@ -35,7 +35,7 @@ Event Type names must be different from Profile Type names so that the Reaper ca
 | IO\_GRNRY\_REAPER\_INCLUDED\_PROFILE\_TYPES | A comma-separated list of Profile types to include in the result set |  |
 | IO\_GRNRY\_REAPER\_INCLUDED\_PROFILE\_PATHS | A comma-separated list of paths to include in the result set |  |
 | IO\_GRNRY\_REAPER\_INNER\_JOIN\_TABLE | Name of a table that will be joined on path with the result set to allow arbitrary selection. If this option is used the INCLUDED\_PROFILE\_TYPES and INCLUDED\_PROFILE\_PATHS options are inactive. Please note that when using this option the columns in the where clause have to be prefixed with a. \(for Profilestore\) or b. \(for the inner-join table\) |  |
-| PROFILESTORE\_HOSTNAME | Hostname of Profile Store | grnry-pg-citus |
+| PROFILESTORE\_HOSTNAME | Hostname of Profile Store | grnry-pg |
 | PROFILESTORE\_PORT | Port of Profile Store | 5432 |
 | PROFILESTORE\_DB\_NAME | Database name of Profile Store | postgres |
 
