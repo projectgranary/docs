@@ -41,5 +41,9 @@ INSERT INTO belts_log (belt_id, name, description, labels, affected_paths,
     ON CONFLICT DO NOTHING;
 ```
 
+### Citus breaking changes
+
+Since Citus is deprecated in Granary 1.0, a few default configurations of different Granary components changed. So if you want to continue to use Citus, see [Citus Deprecation](citus-deprecation.md) for more information. 
+
 **That's it.**
 
