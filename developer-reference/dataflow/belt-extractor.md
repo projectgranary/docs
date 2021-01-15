@@ -187,6 +187,24 @@ If unspecified in the `Update` object, default values will be used:
 | `_operation` | `set_operation(operation)` | `"_set"` |
 | `_profile_type` | `set_type(profile_type)` | `"_d"` |
 
+{% hint style="info" %}
+The **Update** object is injected into the callback and does **not** require an additional import statement.
+{% endhint %}
+
+### **Callback Validation**
+
+The provided callback will be validated on startup of the Belt. In case of errors the Belt will provide a log and transition into FAILED state.
+
+Following rules are validated:
+
+* A method called `execute` needs to be present in callback
+* The execute method can only have 2 or 3 parameters
+* If `FETCH_PROFILE` is `lazy` or `false` 
+  * The execute method can have only 2 parameters
+  * In case of a 3rd parameter a default needs to be provided e.g. `profile=None` 
+* If `FETCH_PROFILE` is `true` 
+  * The execute method needs to have exactly 3 parameters
+
 ### **Profile Fetching**
 
 In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the `profileClient` into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:

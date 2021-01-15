@@ -21,12 +21,14 @@ def execute(event_headers, event_payload, profile=None):
 #### Custom Belt Callback with 1.0 Aretha
 
 ```python
-from grnry_belt.models.update import Update
-
 def execute(event_headers, event_payload, profile=None):
     ...
     return [update]
 ```
+
+{% hint style="info" %}
+The **Update** object is injected into the callback and does **not** require an additional import statement.
+{% endhint %}
 
 Also if you use the option to provide a default extractor function in the Belt API, don't forget to update that as well.
 
