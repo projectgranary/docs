@@ -229,7 +229,7 @@ To cater large source tables, Granary adds a **streaming mode** to the JDBC Sour
 | Parameter | Description |
 | :--- | :--- |
 | `grnry-jdbc.streaming-mode-enabled` | If enabled each imported record is sent separately to Granary while iterating and mapping the result set. Hence no in-memory list containing the whole result set is needed \(if `maxRowsPerUpdate != 0`\). **\(Boolean, default: `false`\)** |
-| `grnry-jdbc.max-rows-per-update` | The `jdbc.update` parameter allows to provide an update logic of the source table to mark rows as read. The `max-rows-per-update` parameter is the max numbers of rows to be updated in a single update query during a poll in streaming mode. Hence, there could be multiple database updates per poll.  `0` means all rows per poll in a single update query.  `-1` means only the last row per poll will be updated.  **\(Integer, default:** `0`**\)** Additionally, this property quantifies the number of rows accessible to the`jdbc.update` sql query via `:{column-name}` as comma separated list per column, e.g. `UPDATE source set MARKED=now() where ID in (:ID)`. |
+| `grnry-jdbc.max-rows-per-update` | The `jdbc.update` parameter allows to provide an update logic of the source table to mark rows as read. The `max-rows-per-update` parameter is the max numbers of rows to be updated in a single update query during a poll in streaming mode. Hence, there could be multiple database updates per poll.  `0` means all rows per poll in a single update query.  `-1` means only the last row per poll will be updated.  **\(Integer, default:** `0`**\)** Additionally, this property quantifies the number of rows accessible to the`jdbc.update` SQL query via `:{column-name}` as comma separated list per column \(not available if set to `-1`\), e.g. `UPDATE source set MARKED=now() where ID in (:ID)`. |
 
 A sample of the configuration of a JDBC source could look like this:
 
@@ -244,14 +244,18 @@ A sample of the configuration of a JDBC source could look like this:
         "spring.datasource.password": "<password>",
         "spring.datasource.url": "jdbc:postgresql://<url>:<port>/postgres?currentSchema=public",
         "spring.datasource.username": "<user>",
-        "trigger.fixed-delay": 5,
-        "trigger.time-unit": "SECONDS"
+        "trigger.cron": "0 */5 * * * *"
     }
 }
 ```
 
 {% hint style="info" %}
 In case your database needs additional dependencies to work via JDBC \(e.g. Oracle\) you either need to fork the source and add the dependency, or add the dependency as a .jar in the Dockerfile.
+{% endhint %}
+
+{% hint style="info" %}
+To enable `DEBUG` logging for the `JdbcTemplate` class, add this property:  
+`"logging.level.org.springframework.jdbc.core.JdbcTemplate": "DEBUG"`
 {% endhint %}
 
 ### Topic Source
