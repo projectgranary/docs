@@ -303,7 +303,7 @@ Create an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Any authorized user is authorized to create event types. Be aware that you will not be able to update the entity afterwards if your account does not have the role set in `editor`.
+To create an event type your user needs to have the respective `event_type_{type}_edit` role \(E.g. to create a `data_in`-type event type you need the `event_type_data_in_edit` role. Be aware that you will not be able to update the entity afterwards if your account does not have the role set in `editor`.
 {% endapi-method-description %}
 
 {% api-method-spec %}

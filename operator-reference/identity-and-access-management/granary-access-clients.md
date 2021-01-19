@@ -39,7 +39,7 @@ Requests the user's access rights to operate on Spring Cloud Data Flow. This mai
 
 ### belt-api
 
-Requests the user's access rights to manage individual belts. These roles are defined by the belt author during belt definition and can be edited by anyone having the specified editor role. Each belt has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array of all roles necessary for editing it. These values need to be added as roles in Keycloak and assigned to all authorized users. To create a new belt the user needs at least the default `belt_edit` role.
+Requests the user's access rights to manage individual belts. These roles are defined by the belt author during belt definition and can be edited by anyone having the specified editor role. Each belt has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array of all roles necessary for editing it. These values need to be added as roles in Keycloak and assigned to all authorized users. To create a new belt, the user needs at least the default `belt_edit` role.
 
 Example roles: `belt_view`, `belt_edit`, `belt_view_privileged`, `belt_edit_privileged`
 
@@ -47,7 +47,9 @@ Example roles: `belt_view`, `belt_edit`, `belt_view_privileged`, `belt_edit_priv
 
 Requests the user's access rights to manage harvesters, i.e., creating event types or source types. Users need also access rights in scdf client.
 
-Event types have two attributes, `editor`and `consumer`specifiying which users are allowed to edit and read the event type. If no `consumer`has been specified all users are allowed to read the event type, else only the ones matching the `consumer` role \(or matching the event type's `editor` role\). Editing the event type is only possible for users matching the provided `editor` role. If no `editor`role is set when creating the event type, the default `event_type_{type}_edit` is used. As the default for `type` is `data_in`, the default editor role is `event_type_data_in_edit`.
+Event types have two attributes, `editor`and `consumer`specifiying which users are allowed to edit and read the event type. If no `consumer` has been specified all users are allowed to read the event type, else only the ones matching the `consumer` role \(or matching the event type's `editor` role\). 
+
+Editing the event type is only possible for users matching the provided `editor` role. If no `editor`role is set when creating the event type, the default `event_type_{type}_edit` is used. As the default for `type` is `data_in`, the default editor role is `event_type_data_in_edit`. To create a new event type, the user needs at least the matching `event_type_{type}_edit` role.
 
 | Role | Description |
 | :--- | :--- |
