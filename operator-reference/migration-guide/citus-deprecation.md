@@ -197,5 +197,12 @@ To configure your database in your Granary instance, you should have an eye on t
 | `postgres.secretKeyUsername` | `superuser-username` | `postgresql-username` |
 | `postgres.secretKeyPassword` | `superuser-password` | `postgresql-password` |
 
+### Event Feeder
 
+| Spec | Previous Default | Current default |
+| :--- | :--- | :--- |
+| `postgres.host` | `grnry-pg-citus` | `grnry-pg` |
+| `postgres.secretName` | `grnry-pg-citus-secret` | `grnry-pg-credentials` |
+| `postgres.secretKeyUsername` | `superuser-username` | `postgresql-username` |
+| `postgres.secretKeyPassword` | `superuser-password` | `postgresql-password` |
 
