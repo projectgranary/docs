@@ -28,36 +28,32 @@ Currently, three different segment generator types are available:
 
 ## Configure
 
-The creation job runs in a container and can be deployed via helm chart:
+The creation job runs in a container and can be deployed via [Segment Management API](../../api-reference/segment-management-api.md). The following table comprises a complete list of variables \(required if there is no default\):
 
-`helm install --name <your_name> grnry-stable/segment-table-creation -f <your-values>.yaml --namespace <your-namespace>`
-
-More detailed instructions can be found [here.](https://github.com/projectgranary/docs/tree/a8c6354c129141b3ae2bab73c2b17240bfedddc4/operator-reference/installation/segment-table-creation.md) In the _values.yaml_ file configures segment creation parameters. `TYPE` determines the generator type. The following table comprises a complete list of variables \(required if there is no default\).
-
-| Parameter | Description | Default |  |
-| :--- | :--- | :--- | :--- |
-| `TYPE` | type of generator, `pivot` , `generic` or `flexible` | `pivot` |  |
-| `DB_TYPE` | storage-layer type, `citus` or `postgres` | `postgres` |  |
-| `DB_USE_VIEWS` | flag indicating if generated segment should be a view | `false` |  |
-| `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg` |  |
-| `DB_PORT` | database port | `5432` |  |
-| `DB_USER` | database user name | Secret Reference needed |  |
-| `DB_PASSWORD` | database user password | Secret Reference needed |  |
-| `DB_NAME` | name of the database | Secret Reference needed |  |
-| `DB_USE_SSL` | whether to enforce SSL for DB connection | `true` |  |
-| `SOURCE_SCHEMA_NAME` | name of schema of source table | `public` |  |
-| `SOURCE_TABLE_NAME` | name of source table | `profilestore` |  |
-| `TARGET_SCHEMA_NAME` | name of schema for target segment | `segments` |  |
-| `TARGET_SEGMENT_NAME` | name for target segment, if already existing old segment will be overwritten | `profilestore_seg` |  |
-| `COLUMN_PLACEHOLDER` | placeholder for the path name to be used in the pivot transformation function | ? |  |
-| `TYPE_SEPARATOR` | separator between pivot transformation function and result type | :: |  |
-| `DEFINITION_SEPARATOR` | separator between name and transformation | = |  |
-| `TRANSFORMATION_SEPARATOR` | separator between multiple transformations, e.g., \`body\_txt=message-&gt;'body'::text | body\_json=replace\(message-&gt;'body'\#&gt;&gt;'{}', '\', ''\)::jsonb\` | \| |
-| `CITUS_DIST_COL` | name of the column the source table is and the target segment will be distributed by. currently, this has to be a single column | correlation\_id |  |
-| `DEBUG` | whether to print all database statement and responses | `true` |  |
-| `SOURCE_WHERE_CLAUSE` | where clause as SQL \(without "WHERE" itself\), must not be empty. | `"pit='_latest'"` |  |
-| `PROMETHEUS_PUSHGATEWAY` | address of gateway to push prometheus metrics, format `'<host>:<port>'` |  |  |
-| `PROMETHEUS_JOB` | job name for pushgateway, the metrics will be grouped by this name. | `segmentcreation` |  |
+| Parameter | Description | Default |
+| :--- | :--- | :--- |
+| `TYPE` | type of generator, `pivot` , `generic` or `flexible` | `pivot` |
+| `DB_TYPE` | storage-layer type, `citus` or `postgres` | `postgres` |
+| `DB_USE_VIEWS` | flag indicating if generated segment should be a view | `false` |
+| `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg` |
+| `DB_PORT` | database port | `5432` |
+| `DB_USER` | database user name | Secret Reference needed |
+| `DB_PASSWORD` | database user password | Secret Reference needed |
+| `DB_NAME` | name of the database | Secret Reference needed |
+| `DB_USE_SSL` | whether to enforce SSL for DB connection | `true` |
+| `SOURCE_SCHEMA_NAME` | name of schema of source table | `public` |
+| `SOURCE_TABLE_NAME` | name of source table | `profilestore` |
+| `TARGET_SCHEMA_NAME` | name of schema for target segment | `segments` |
+| `TARGET_SEGMENT_NAME` | name for target segment, if already existing old segment will be overwritten | `profilestore_seg` |
+| `COLUMN_PLACEHOLDER` | placeholder for the path name to be used in the pivot transformation function | `?` |
+| `TYPE_SEPARATOR` | separator between pivot transformation function and result type | `::` |
+| `DEFINITION_SEPARATOR` | separator between name and transformation | `=` |
+| `TRANSFORMATION_SEPARATOR` | separator between multiple transformations, e.g. `body_txt=message->'body'::text|body_json=replace(message->'body'#>>'{}', '\', '')::jsonb` | `|` |
+| `CITUS_DIST_COL` | Name of the column the source table is and the target segment will be distributed by. Currently, this has to be a single column and is only mandatory if `DB_TYPE=citus`. | correlation\_id |
+| `DEBUG` | whether to print all database statement and responses | `true` |
+| `SOURCE_WHERE_CLAUSE` | where clause as SQL \(without "WHERE" itself\), must not be empty. | `"pit='_latest'"` |
+| `PROMETHEUS_PUSHGATEWAY` | address of gateway to push prometheus metrics, format `'<host>:<port>'` |  |
+| `PROMETHEUS_JOB` | job name for pushgateway, the metrics will be grouped by this name. | `segmentcreation` |
 
 ### Segment Indexes
 
