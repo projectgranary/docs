@@ -8,6 +8,9 @@ This is what we call _Granary_.
 
 Start your journey by [harvesting your data](learning-grnry-1/data-in/) and [turning them into valuable grains](learning-grnry-1/using-data-in-granary/). Leverage their full potential through [Granary's various data out channels](learning-grnry-1/get-data-out-of-granary/).
 
+Want to get in touch, browse the knowledge base or report an issue?   
+Head over to our [support portal](https://syncier-analytics.freshservice.com).
+
 \#GRNRY  
 /ˈɡreɪnɚrɪ/
 
