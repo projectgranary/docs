@@ -102,6 +102,8 @@
     * [Event Explorer UI](operator-reference/installation/with-helm/event-explorer-ui.md)
     * [Granary UI](operator-reference/installation/with-helm/granary-ui.md)
     * [Event Feeder](operator-reference/installation/with-helm/event-feeder.md)
+    * [Grafana Dashboards](operator-reference/installation/with-helm/grafana-dashboards.md)
+    * [GrApp Importer](operator-reference/installation/with-helm/grapp-importer.md)
   * [Sizing guideline](operator-reference/installation/sizing-guideline.md)
 * [Identity and Access Management](operator-reference/identity-and-access-management/README.md)
   * [Granary Access Clients](operator-reference/identity-and-access-management/granary-access-clients.md)

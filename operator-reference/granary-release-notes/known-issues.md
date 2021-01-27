@@ -498,15 +498,15 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Profile Explorer does not show values for Counter Grains</td>
       <td style="text-align:left">0.4.0</td>
       <td style="text-align:left">0.8.0</td>
-      <td style="text-align:left">EXP-7</td>
+      <td style="text-align:left">EXP-7 (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">all APIs</td>
       <td style="text-align:left">GKI_2020_0016</td>
       <td style="text-align:left">Granary APIs should not trust &quot;forwarded&quot; headers</td>
       <td style="text-align:left">-</td>
-      <td style="text-align:left">-</td>
-      <td style="text-align:left">#739</td>
+      <td style="text-align:left">all API-component versions starting from Granary 1.0.0</td>
+      <td style="text-align:left">#739 (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">all APIs</td>
@@ -514,8 +514,8 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">No coherent IAM setup and multi-tenancy on Granary&apos;s API endpoints</td>
       <td
       style="text-align:left">-</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left">#732</td>
+        <td style="text-align:left">all API-component versions starting from Granary 1.0.0</td>
+        <td style="text-align:left">#732 (closed)</td>
     </tr>
   </tbody>
 </table>
