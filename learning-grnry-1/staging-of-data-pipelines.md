@@ -41,8 +41,6 @@ Find the complete [staging specification](https://github.com/syncier/grnry-sampl
 
 ### Naming
 
-All Granary management APIs provide an "export" flag for GET requests on specific resources. If "export" is set to "true", the API returns a response body containing only those properties that were set by the user. API-generated properties and such properties that are set to default values are omitted.
-
 In the above tree structure all nodes have a strict naming convention. Any node names not in curly braces are literals and must as such be equal in any GrApp structure. The names in the curly braces need to be replaced with the respective values \(e.g., the actual belt id of the defined belt\). The numbers referencing the event type versions must all be prefixed with "event-type-version-".
 
 Below we show sample API requests using curl to export Granary's pipeline resources. Also, there is a [Postman collection](../developer-reference/api-reference/#postman-collection) available for download providing sample requests to all Granary APIs.
@@ -148,7 +146,7 @@ curl -X GET -H "Content-Type: application/json" \
 
 ## 3. Running the Import Job
 
-After exporting all needed resources from your source Granary environment, you can use the GrApp Importer Helm chart to import the pipeline into your target Granary environment. Due to current restrictions of Helm 3, it is impossible to include a directory from outside the helm directory structure to a Helm deployment. That is why the whole "grapp" directory as described above needs to be located at the root of the Helm directory for now. There can only be one "grapp" directory in this structure. Hence, if you have multiple GrApp definitions, you would have to either merge them all together in one "grapp" directory or do the import process for each GrApp definition individually.
+After exporting all needed resources from your source Granary environment, you can use the [GrApp Importer Helm chart](../operator-reference/installation/with-helm/grapp-importer.md) to import the pipeline into your target Granary environment. Due to current restrictions of Helm 3, it is impossible to include a directory from outside the helm directory structure to a Helm deployment. That is why the whole "grapp" directory as described above needs to be located at the root of the Helm directory for now. There can only be one "grapp" directory in this structure. Hence, if you have multiple GrApp definitions, you would have to either merge them all together in one "grapp" directory or do the import process for each GrApp definition individually.
 
 ```bash
 helm
