@@ -8,11 +8,15 @@ description: Explanation of migration strategies between Granary platform versio
 
 ### Update Granary Components
 
-Update all remaining Granary components to their Granary 0.9 version as denoted in the [release notes](../granary-release-notes/). Bold versions indicate an update.
+Update all remaining Granary components to their Granary 1.0.0 version as denoted in the [release notes](../granary-release-notes/). Bold versions indicate an update. Please pay attention to below's breaking changes.
 
 ### Keycloak version update
 
-With Granary 1.0, Keycloak is updated to version 11. See the subpage [Keycloak 11 migration](keycloak-11-migration.md) for details on how to update.
+With Granary 1.0, Keycloak is updated to version 11. See the subpage [Keycloak 11 migration](keycloak-11-migration.md) for details on how to update. Note: Granary 1.0 does not rely on Keycloak 11 features. Any version starting from Keycloak 4.5 will also work. This can change in future releases and no regression tests are being made with version older than Keycloak 11.
+
+### Reaper breaking changes
+
+The reaper now requires you to set a client secret for talking to the Harvester API. Please see the [Helm README](https://github.com/syncier/grnry-reaper/blob/master/helm/README.md) for the updated parameters. 
 
 ### Harvester "Topic" Source Type breaking changes
 
@@ -20,7 +24,7 @@ See subpage [Harvesters with Topic Sources](harvesters-with-topic-source.md) for
 
 ### Belt Callback breaking changes
 
-See subpage [Belt Extractor 1.0](belt-extractor-1.0.md).
+The Python Belt implementation underwent a major refactoring. See subpage [Belt Extractor 1.0](belt-extractor-1.0.md) for breaking changes in your callback functions.
 
 ### Belt-API breaking changes
 
