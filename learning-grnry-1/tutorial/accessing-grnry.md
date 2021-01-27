@@ -6,8 +6,7 @@ description: 'In this chapter, we learn how to access Granary''s APIs.'
 
 ## 1. Getting Access
 
-Before we can get going, we need to gain access to the demo installation of Granary. For that please reach out to [tutorial@alvary.io](mailto:tutorial@alvary.io) with the following subject:  
-"Access to demo for Granary Tutorial"  
+Before we can get going, we need to gain access to the demo installation of Granary. For that please open a ticket in [Freshdesk](https://syncier-analytics.freshservice.com/support/home) with the following subject: "Access to demo for Granary Tutorial".  
 With the provided information you can play through the examples below.
 
 ## 2. Accessing Granary
