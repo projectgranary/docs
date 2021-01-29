@@ -27,7 +27,7 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
-## Granary 1.0.0 "Aretha" - 2021-01-27
+## Granary 1.0.0 "Aretha" - 2021-01-28
 
 In this new release we focused on 
 
@@ -172,8 +172,9 @@ In this new release we focused on
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Add a Retry possibility for HTTP calls</li>
-          <li>Refactore code base with PIP package &quot;grnry-belt&quot;</li>
+          <li>Add a Retry Exception for events that should be processed another time
+            in your callback function</li>
+          <li>Refactor code base with PIP package &quot;grnry-belt&quot;</li>
           <li>Add validation of callback method&apos;s signature on startup</li>
           <li>Add automated import of Update class in callback function</li>
           <li>Add configuration option for a Profile&apos;s fragements to <code>getProfile</code> method</li>
@@ -317,7 +318,7 @@ In this new release we focused on
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Add item pinning items to all list views</li>
+          <li>Add resource item pinning to all list views</li>
           <li>Add optional Kibana link to all detail views</li>
           <li>Add download option to all list views and export overlay to all detail
             views</li>
@@ -349,7 +350,7 @@ In this new release we focused on
         <td style="text-align:left">
           <p>Features:</p>
           <ul>
-            <li>Initial release of Granary application import job</li>
+            <li>Initial release of Granary App import job</li>
           </ul>
         </td>
     </tr>
