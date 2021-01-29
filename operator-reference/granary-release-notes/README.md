@@ -120,9 +120,9 @@ In this new release we focused on
       <td style="text-align:left">
         <p>Features:</p>
         <ul>
-          <li>Adde streaming mode to JDBC Source Type</li>
-          <li>Adde JMS Source Type for IBM MQ</li>
-          <li>Adde possibility to configure a custom script to batch Event Store Sink</li>
+          <li>Add streaming mode to JDBC Source Type</li>
+          <li>Add JMS Source Type for IBM MQ</li>
+          <li>Add possibility to configure a custom script to batch Event Store Sink</li>
         </ul>
         <p>Fixes:</p>
         <ul>
@@ -227,6 +227,7 @@ In this new release we focused on
           <li>Remove deprecated endpoints <code>GET /profiles</code> and <code>GET /profiles/{type}</code>; <code>GET /profiles/{type}/{correlationId}</code> remains
             unchanged</li>
           <li>Add possibility to configure a list of trusted hosts</li>
+          <li>Enable database connection pooling</li>
         </ul>
         <p>Fixes:</p>
         <ul>
