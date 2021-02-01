@@ -27,6 +27,8 @@ In an empty folder create a file called `callback.py` with your custom Belt Extr
 For this example let us assume the callback looks like this.
 
 ```python
+from grnry_belt.models.update import Update
+
 def execute(headers, payload, profile=None):
     # This should throw an exception
     correlation_id = payload['correlation_id']
