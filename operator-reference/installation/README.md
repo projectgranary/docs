@@ -30,9 +30,9 @@ In turn, the Incubator Helm Chart Repo always deploys the latest commit on the m
 
 ## Prerequisites
 
-* Kubernetes 1.14.0+ cluster up and running 
+* A Kubernetes cluster up and running. Granary 1.0.0 has been tested with Kubernetes 1.18.10. We expect it to be running with Kubernetes 1.14+ versions.
 * Kubernetes Namespace set in ~/.kube/config 
-* Helm 3.+ installed locally
+* Helm 3 installed locally. Granary 1.0.0 has been tested with Helm 3.2.
 * Granary Stable & Open Source Helm Repo added locally
 
 ## Before you start ...
