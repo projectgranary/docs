@@ -160,13 +160,19 @@ helm
 └── values.yaml
 ```
 
-At the moment there is no UI available to start the import job. Start the job via command line Helm 3:
+To download the GrApp Importer Helm chart, in Helm 3 use the `helm pull` command:
 
 ```bash
-helm install grnry-importer \
+helm pull grnry-stable/grnry-grapp-importer --untar
+```
+
+Start the job via `helm install` command:
+
+```bash
+helm install grnry-importer-my-grapp \
 path/to/grapp-importer/helm \
 -f path/to/grapp-importer-values.yaml \
---set fullnameOverride=grnry-importer \
+--set fullnameOverride=grnry-importer-my-grapp \
 ```
 
  
