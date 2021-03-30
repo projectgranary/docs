@@ -155,6 +155,7 @@ The profile store is a distributed table in a database. Each tuple in that table
       "_c": 0.4,
       "_in": 123,
       "_ttl": "P100Y",
+      "_ttn": "P100Y",
       "_origin": null,
       "_reader": "_all"
     }
@@ -165,6 +166,7 @@ The profile store is a distributed table in a database. Each tuple in that table
         "_v": "21",
         "_c": 0.1,
         "_ttl": "P100Y",
+        "_ttn": "P100Y",
         "_origin": null,
         "_reader": "_all"
       },
@@ -172,6 +174,7 @@ The profile store is a distributed table in a database. Each tuple in that table
         "_v": "22",
         "_c": 0.2,
         "_ttl": "P100Y",
+        "_ttn": "P100Y",
         "_origin": null,
         "_reader": "_all"
       },
@@ -180,6 +183,7 @@ The profile store is a distributed table in a database. Each tuple in that table
         "_in": "2018-09-23",
         "_c": 0.3,
         "_ttl": "P100Y",
+        "_ttn": "P100Y",
         "_origin": null,
         "_reader": "_all"
       }
@@ -190,6 +194,7 @@ The profile store is a distributed table in a database. Each tuple in that table
         "_c": 0.4,
         "_in": "2018-09-20",
         "_ttl": "P100Y",
+        "_ttn": "P100Y",
         "_origin": null,
         "_reader": "_all"
       }
@@ -205,6 +210,7 @@ The profile store is a distributed table in a database. Each tuple in that table
               "_c": 0.5,
               "_in": "2018-09-20",
               "_ttl": "P100Y",
+              "_ttn": "P100Y",
               "_origin": null,
               "_reader": "_all"
             }
@@ -232,7 +238,8 @@ Belts process input and create Profile Updates. The Profile Updater merges such 
 | _\_set\_with\_history\_distinct_ | same type as grain type | will do a _\_set\_with\_history_ only if the new value is distinct from the existing value. |
 | _\_set\_max/\_set\_min_ | text | inserts the current grain value at  _\_latest_ and, if the value already exists, the old value at _\_latest_ will be overwritten only if the new value is higher \(resp. lower\) than the old one. Numbers will be compared numerically whereas text including dates \(ISO8601\) will be compared lexicographically. _Note: Always provide full metadata set, since global default values will be set otherwise \(not existing ones\). If the pit=latest_ _value_ _does not change, no metadata update will be done either._ |
 | _\_set\_max\_with\_history/\_set\_min\_with\_history_ | text | will do a _\_set\_max_ \(resp. _\_set\_min_\) but will, in case of overwriting, additionally keep the old value at its insert point in time. |
-| _\_delete_ | _text_ or _array_ | if value is _`""` or `[""]` or `[]`_, then deletes the _\_latest_ grain value at the specified path. If value is _array_ of \_pit\_s, then deletes grain values at the specified path and with specified \_pit\_s. |
+| _\_delete_ | _text_ | if value is _`""` or `[""]` or `[]`_, then deletes the _\_latest_ grain value at the specified path. If value is _array_ of _pits_, then deletes grain values at the specified path and with specified \_pit\_s. |
+| _\_delete\_with\_history_ | _text_ | Must be `""`. Removes all \(_\_latest_ + historic\) pits of a grain with the specified path. |
 | _\_inc_ | _counter_ | creates or increments a counter. |
 | _\_array\_append_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics. |
 | _\_array\_append\_with\_history_ | _array_ | appends to the _\_latest_ array grain value considered as a bag semantics and stores the previous _\_latest_ grain value at pit of insertion. |
@@ -241,6 +248,8 @@ Belts process input and create Profile Updates. The Profile Updater merges such 
 | _\_array\_put\_with\_history\_distinct_ | _array_ | does an _\_array\_put\_with\_history_ only if the new value is distinct from the existing value. |
 | _\_array\_remove_ | _text_ | removes all elements matching the received string from the _\_latest_ array grain value. |
 | _\_array\_remove\_with\_history_ | _text_ | removes all elements matching the received string from the _\_latest_ array grain value and stores the previous _\_latest_ grain value at pit of insertion. |
+|  _\_set\_ttl_ | _array_ or _text_ | sets the ttl value. If value is `""`, it will update all \(_\_latest_ + history\) grains. If value is an array, it will update the contained pits. The grain value or other metadata is not affected. |
+|  _\_set\_ttn_ | _array_ or _text_ | sets the ttn value. If value is `""`, it will update all \(_\_latest_ + history\) grains. If value is an array, it will update the contained pits. The grain value or other metadata is not affected. |
 
 Each Profile Update carries the the grain value to be merged into the store. A grain value consists of the actual value, denoted as `_v`, and its meta information. \(Currently\) `_v` must be a JSON string or a JSON array of strings.
 
@@ -262,7 +271,7 @@ _**Example:**_ The value`"10|0.5|-1"` defines a single-step decrement of width `
 
 For arrays, Granary offers operations for the in-place modification of grain values. These operation either consider the array as a set of values with distinct entries or as bag of values where duplicates may occur. All array operations can be run with or without the creation of history.
 
-On an array modifications, existing grain value meta data \(`_reader, _ttl, _origin, _c`\) remain unchanged. The insertion time \(`_in`\) is updated.
+On an array modifications, existing grain value meta data \(`_reader, _ttl, _ttn _origin, _c`\) remain unchanged. The insertion time \(`_in`\) is updated.
 
 {% hint style="info" %}
 Be aware that all array operations have O\(n\) characteristics \(n = size of the existing array, not just the number of elements you want to add/to set\). If you create arrays with 1000++ elements, these updates will take significantly longer than other operations, which can slow down the processing of certain partitions \(resulting in lags on these partitions when a high volume of data ist processed\).
@@ -448,8 +457,8 @@ Profile Updater writes profile update messages to dead letter queue in case:
 * correlationId \(\_id\) is an empty string \(""\)
 * certainty \(`_c`\) is not between 0 and 1
 * creation timestamp \(`_in`\) is negative
-* time to live \(`_ttl`\) does not comply ISO 860 time period
-* time to live \(`_ttl`\) contains a negative number
+* time to live or time till notification \(`_ttl`, `_ttn`\) does not comply ISO 860 time period
+* time to live or time till notification \(`_ttl`,`_ttn`\) contains a negative number
 * an update is made and the grain type in the profile update contains a grain type that differs from existing grain type in Profile Store
 
 All failed updates sent to the DLQ will be annotated with two additional headers:

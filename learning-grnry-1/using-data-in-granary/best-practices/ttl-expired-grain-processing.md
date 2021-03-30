@@ -4,13 +4,13 @@ description: >-
   Store
 ---
 
-# TTL-expired Grain Processing
+# TTN/TTL-expired Grain Processing
 
-Time-to-live \(TTL\) expired Grains are picked up periodically by Granary's [Reaper](../../../developer-reference/dataflow/profile-store/reaper.md) from Profile Store and written to TTL topics retrieved from the Grain's corresponding TTL Event Type. These Grains are then available for further processing by the Belts.
+Time-till-notification \(TTN\) or time-to-live \(TTL\) expired Grains are picked up periodically by Granary's [Reaper](../../../developer-reference/dataflow/profile-store/reaper.md) from Profile Store and written to TTN/TTL topics retrieved from the Grain's corresponding TTN/TTL Event Type. These Grains are then available for further processing by the Belts.
 
-Please note that to comply with data protection law, grains written to the TTL topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the belt, i.e setting the `fetch_profile`parameter to true. See [Configuration](https://app.gitbook.com/@alvary/s/grnry-sd7f6g8sd68sdf7/~/diff/drafts/-M0quiYWAmR7whC99GOZ/developer-reference/dataflow/belt-extractor#configuration/@drafts). The Correlation ID should be found in both message header and body.
+Please note that to comply with data protection law, grains written to the TTN/TTL topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the belt, i.e., setting the `fetch_profile`parameter to true. See [Configuration](https://app.gitbook.com/@alvary/s/grnry-sd7f6g8sd68sdf7/~/diff/drafts/-M0quiYWAmR7whC99GOZ/developer-reference/dataflow/belt-extractor#configuration/@drafts). The Correlation ID should be found in both message header and body.
 
-## Use Case Example: Notification
+## Use Case Example: Expiry Notification
 
 It might be desired to receive notifications about the expiry of certain actions \(grains\). One way to facilitate this is to create a belt, - let's call it a notification belt -, which processes the TTL-expired grains from the topic\(s\) and sends notifications accordingly. 
 
@@ -18,7 +18,7 @@ It might be desired to receive notifications about the expiry of certain actions
 
 ### Step 1: Insert a Grain that will be reaped
 
-The [TTL](../../../developer-reference/dataflow/profile-store/#table-profilestore) in Granary profiles' grains has got the format [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). By default, a grain's TTL is `P100Y` which equals to a duration of 100 years. So, most likely, it will never be reaped. Therefore we need to have a [belt](../getting-started.md) that creates a grain with a shorter duration. 
+The TTN in Granary profiles' grains has got the format [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). By default, a grain's TTN is `P100Y` which equals to a duration of 100 years. So, most likely, it will never be reaped. Therefore we need to have a [belt](../getting-started.md) that creates a grain with a shorter duration. 
 
 For example given this event
 
@@ -30,7 +30,7 @@ For example given this event
         "value": "2020-05-04T10:15:42",
         "reader": "_auth",
         "type": "feedback",
-        "ttl": "PT5M"
+        "ttn": "PT5M"
     }
 }
 ```
@@ -74,11 +74,11 @@ def execute(event_headers, event, profile=None):
     return updates
 ```
 
-the Profile Updater inserts a grain with a TTL of only 5 minutes. For an easier calcuation of ISO 8601 duration expressions, we recommend to use the version 0.6.0 of PIP library [isodate](https://pypi.org/project/isodate/).
+the Profile Updater inserts a grain with a TTN of only 5 minutes. For an easier calcuation of ISO 8601 duration expressions, we recommend to use the version 0.6.0 of PIP library [isodate](https://pypi.org/project/isodate/).
 
 ### Step 2: Wait for Reaper to reap the Notification Grain
 
-The Reaper runs peridodically configured via a CRON job. Depending on the next Reaper run but earliest after the five minutes, the Reaper will emit our notification grain to the the topic `grnry_ttl_feedback` .
+The Reaper runs periodically configured via a CRON job. Depending on the next Reaper run but earliest after the five minutes, the Reaper will emit our notification grain to the the topic `grnry_ttn_feedback` .
 
 Reaper's log output looks like this if grains were reaped:
 
@@ -110,10 +110,10 @@ StepExecution:
 
 Search the parameter `writeCount` to see how many grains were reaped during the last Reaper run.
 
-Expired grains in the TTL topics carry the following header values:
+Expired grains in the TTN topics carry the following header values:
 
 ```java
-topic: "grnry_ttl_feedback"
+topic: "grnry_ttn_feedback"
 kafka_messageKey: "feedback"
 grnry-harvester-name: "grnry-reaper"
 grnry-correlation-id: "Feedback82542"
@@ -131,14 +131,15 @@ String path: "notification/thankyou"
 String pit: "_latest"
 String grain_type: "t"
 String inserted: "1569504323132"
-String ttl: "PT5M"
+String ttn: "PT5M"
+String ttn: "P100Y"
 String reader: "_auth"
 String origin: "/belt123"
 ```
 
 ### Step 3: Deploy Belt that consumes Reaper emitted Grains
 
-To act upon a notification, we need to deploy a belt that consumes from the topic `grnry_ttl_feedback`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "feedback". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api/#create-an-event-type) `ttl`. In the belt callback script, the values in the `execute` function will look like this:
+To act upon a notification, we need to deploy a belt that consumes from the topic `grnry_ttn_feedback`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "feedback". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api/#create-an-event-type) `ttn`. In the belt callback script, the values in the `execute` function will look like this:
 
 #### Event Headers
 
@@ -162,7 +163,8 @@ To act upon a notification, we need to deploy a belt that consumes from the topi
     "pit": "_latest",
     "grain_type": "t",
     "inserted": 1569504323132,
-    "ttl": "PT5M",
+    "ttl": "P100Y",
+    "ttn": "PT5M",
     "reader": "_auth",
     "origin": "/belt123"
 }
@@ -171,7 +173,7 @@ To act upon a notification, we need to deploy a belt that consumes from the topi
 Given the belt code below and the reaped event above, we can do the following:
 
 * Notify some external system \(lines 13ff\)
-* Update the grain's TTL or delete the grain in the Profile Store \(lines 21ff\)
+* Update the grain's TTN or even delete the grain in the Profile Store \(lines 21ff\)
 
 ```python
 from grnry_belt.models.update import DELETE_OPERATION
@@ -212,7 +214,7 @@ We therefore advise a notification belt to also trigger a delete operation on th
 
 ## Working with ISO8601 durations
 
-In order to ease development of belts that process TTL grains, the belt framework \([Belt Extractor](../../../developer-reference/dataflow/belt-extractor.md)\) provides access to the [isodate library](https://pypi.org/project/isodate/). Thus, in your belt code you can easily convert between different representations:
+In order to ease development of belts that process TTN grains, the belt framework \([Belt Extractor](../../../developer-reference/dataflow/belt-extractor.md)\) provides access to the [isodate library](https://pypi.org/project/isodate/). Thus, in your belt code you can easily convert between different representations:
 
 ```python
 import json

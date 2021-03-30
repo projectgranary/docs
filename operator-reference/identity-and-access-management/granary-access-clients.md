@@ -57,6 +57,7 @@ Editing the event type is only possible for users matching the provided `editor`
 | `my_custom_role` | user can read all event types that specify no `consumer` or specify `consumer`as `my_custom_role`, can edit all event types that specify `editor` as `my_custom_role` |
 | `event_type_data_in_edit` | Default role for a user to read and edit all `data_in` typed event types |
 | `event_type_ttl_edit` | Default role for a user to read and edit all `ttl` typed event types |
+| `event_type_ttn_edit` | Default role for a user to read and edit all `ttn` typed event types |
 | `source_type_read` | user can read all source types |
 | `source_type_edit` | user can edit all source types |
 | `harvester_read` | user can read all harvester instance |

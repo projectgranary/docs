@@ -234,6 +234,7 @@ certainty real NOT NULL DEFAULT 1.0,
 grain_type character NOT NULL,
 inserted bigint NOT NULL,
 ttl varchar NOT NULL DEFAULT 'P100Y',
+ttn varchar NOT NULL DEFAULT 'P100Y',
 reader varchar NOT NULL DEFAULT '_auth',
 origin varchar,
 PRIMARY KEY(id, profile_type, path, pit)
@@ -245,14 +246,128 @@ For each `<CITUS_DIST_COL>`_/_`path` combination there should be returned a sing
 
 Consider the following input table.
 
-| correlation\_id | profile\_type | path | pit | value | certainty | grain\_type | inserted | ttl | reader | origin |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | \_d | /path1 | \_latest | foo | 1 | t | 7 | p1d | \_auth | test |
-| 1 | \_d | /path2 | \_latest | bar | 1 | t | 8 | p1d | \_auth | test |
-| 1 | \_d | /path3 | \_latest | baz | 1 | t | 9 | p1d | \_auth | test |
-| 1 | pt | /path3 | \_latest | bazz | 1 | t | 9 | p1d | \_auth | test |
-| 1 | pt | /path4 | \_latest | 3 | 1 | t | 9 | p1d | \_auth | test |
-| 2 | pt | /path3 | \_latest | bazz | 1 | t | 9 | p1d | \_auth | test |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">correlation_id</th>
+      <th style="text-align:left">profile_type</th>
+      <th style="text-align:left">path</th>
+      <th style="text-align:left">pit</th>
+      <th style="text-align:left">value</th>
+      <th style="text-align:left">certainty</th>
+      <th style="text-align:left">grain_type</th>
+      <th style="text-align:left">inserted</th>
+      <th style="text-align:left">ttl</th>
+      <th style="text-align:left">ttn</th>
+      <th style="text-align:left">reader</th>
+      <th style="text-align:left">origin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">_d</td>
+      <td style="text-align:left">/path1</td>
+      <td style="text-align:left">_latest</td>
+      <td style="text-align:left">foo</td>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">t</td>
+      <td style="text-align:left">7</td>
+      <td style="text-align:left">
+        <p></p>
+        <p>p100y</p>
+      </td>
+      <td style="text-align:left">p1d</td>
+      <td style="text-align:left">_auth</td>
+      <td style="text-align:left">test</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">_d</td>
+      <td style="text-align:left">/path2</td>
+      <td style="text-align:left">_latest</td>
+      <td style="text-align:left">bar</td>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">t</td>
+      <td style="text-align:left">8</td>
+      <td style="text-align:left">
+        <p></p>
+        <p>p100y</p>
+      </td>
+      <td style="text-align:left">p1d</td>
+      <td style="text-align:left">_auth</td>
+      <td style="text-align:left">test</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">_d</td>
+      <td style="text-align:left">/path3</td>
+      <td style="text-align:left">_latest</td>
+      <td style="text-align:left">baz</td>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">t</td>
+      <td style="text-align:left">9</td>
+      <td style="text-align:left">
+        <p></p>
+        <p>p100y</p>
+      </td>
+      <td style="text-align:left">p1d</td>
+      <td style="text-align:left">_auth</td>
+      <td style="text-align:left">test</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">pt</td>
+      <td style="text-align:left">/path3</td>
+      <td style="text-align:left">_latest</td>
+      <td style="text-align:left">bazz</td>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">t</td>
+      <td style="text-align:left">9</td>
+      <td style="text-align:left">
+        <p></p>
+        <p>p100y</p>
+      </td>
+      <td style="text-align:left">p1d</td>
+      <td style="text-align:left">_auth</td>
+      <td style="text-align:left">test</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">pt</td>
+      <td style="text-align:left">/path4</td>
+      <td style="text-align:left">_latest</td>
+      <td style="text-align:left">3</td>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">t</td>
+      <td style="text-align:left">9</td>
+      <td style="text-align:left">
+        <p></p>
+        <p>p100y</p>
+      </td>
+      <td style="text-align:left">p1d</td>
+      <td style="text-align:left">_auth</td>
+      <td style="text-align:left">test</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">2</td>
+      <td style="text-align:left">pt</td>
+      <td style="text-align:left">/path3</td>
+      <td style="text-align:left">_latest</td>
+      <td style="text-align:left">bazz</td>
+      <td style="text-align:left">1</td>
+      <td style="text-align:left">t</td>
+      <td style="text-align:left">9</td>
+      <td style="text-align:left">
+        <p></p>
+        <p>p100y</p>
+      </td>
+      <td style="text-align:left">p1d</td>
+      <td style="text-align:left">_auth</td>
+      <td style="text-align:left">test</td>
+    </tr>
+  </tbody>
+</table>
 
 Consider the following configuration.
 

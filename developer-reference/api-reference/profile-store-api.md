@@ -70,6 +70,7 @@ https://hostname/profiles/\_interaction/Session56202
                     "_v": "2018-05-14T14:15:42",
                     "_in": 1587644709930,
                     "_ttl": "P100Y",
+                    "_ttn": "P100Y",
                     "_origin": "/belts/28",
                     "_reader": "_auth"
                 }
@@ -80,6 +81,7 @@ https://hostname/profiles/\_interaction/Session56202
                     "_v": "2018-05-14T14:05:56",
                     "_in": 1587644709898,
                     "_ttl": "P100Y",
+                    "_ttn": "P100Y",
                     "_origin": "/belts/28",
                     "_reader": "_auth"
                 }
@@ -93,6 +95,7 @@ https://hostname/profiles/\_interaction/Session56202
                 ],
                 "_in": 1587644709853,
                 "_ttl": "P100Y",
+                "_ttn": "P100Y",
                 "_origin": "/belts/28",
                 "_reader": "_pers"
             }
@@ -105,6 +108,7 @@ https://hostname/profiles/\_interaction/Session56202
                 ],
                 "_in": 1587644709827,
                 "_ttl": "P100Y",
+                "_ttn": "P100Y",
                 "_origin": "/belts/28",
                 "_reader": "_pers"
             }
@@ -115,7 +119,8 @@ https://hostname/profiles/\_interaction/Session56202
                     "_c": 1,
                     "_v": "size:56sq,value:60.000£",
                     "_in": 1587644709773,
-                    "_ttl": "P100Y",
+                    "_ttl": "P100Y",                    
+                    "_ttn": "P100Y",
                     "_origin": "/belts/28",
                     "_reader": "_pers"
                 }
@@ -130,6 +135,7 @@ https://hostname/profiles/\_interaction/Session56202
                     },
                     "_in": 1587644710593,
                     "_ttl": "P100Y",
+                    "_ttn": "P100Y",
                     "_origin": "/belts/28",
                     "_reader": "_auth"
                 }
@@ -140,6 +146,7 @@ https://hostname/profiles/\_interaction/Session56202
                     "_v": "contract",
                     "_in": 1587644711294,
                     "_ttl": "P100Y",
+                    "_ttn": "P100Y",
                     "_origin": "/belts/28",
                     "_reader": "_auth"
                 }
@@ -150,6 +157,7 @@ https://hostname/profiles/\_interaction/Session56202
                     "_v": "home contents insurance",
                     "_in": 1587644711071,
                     "_ttl": "P100Y",
+                    "_ttn": "P100Y",
                     "_origin": "/belts/28",
                     "_reader": "_auth"
                 }
@@ -160,6 +168,7 @@ https://hostname/profiles/\_interaction/Session56202
                     "_v": "calculate quote",
                     "_in": 1587644710573,
                     "_ttl": "P100Y",
+                    "_ttn": "P100Y",
                     "_origin": "/belts/28",
                     "_reader": "_auth"
                 }

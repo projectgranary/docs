@@ -57,6 +57,7 @@ $$ LANGUAGE SQL IMMUTABLE;
 #### Index
 
 ```text
-CREATE INDEX profilestore_time_to_act ON public.profilestore (profile_time_to_act(inserted, ttl));
+CREATE INDEX IF NOT EXISTS profilestore_time_to_act ON public.profilestore (profile_time_to_act(inserted, ttl));
+CREATE INDEX IF NOT EXISTS profilestore_time_to_notify ON public.profilestore (profile_time_to_act(inserted, ttn));
 ```
 

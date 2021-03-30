@@ -28,7 +28,7 @@
     * [Local Belt Testing](learning-grnry-1/using-data-in-granary/best-practices/local-testing.md)
     * [Belt Callback Signatures](learning-grnry-1/using-data-in-granary/best-practices/belt-callback-signatures.md)
     * [Data Modeling with Belts](learning-grnry-1/using-data-in-granary/best-practices/data-modeling-best-practices.md)
-    * [TTL-expired Grain Processing](learning-grnry-1/using-data-in-granary/best-practices/ttl-expired-grain-processing.md)
+    * [TTN/TTL-expired Grain Processing](learning-grnry-1/using-data-in-granary/best-practices/ttl-expired-grain-processing.md)
     * [Converting a script into a one-liner](learning-grnry-1/using-data-in-granary/best-practices/easing-development.md)
     * [Logging](learning-grnry-1/using-data-in-granary/best-practices/logging.md)
 * [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
