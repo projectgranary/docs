@@ -228,7 +228,7 @@ The profile store is a distributed table in a database. Each tuple in that table
 
 Belts process input and create Profile Updates. The Profile Updater merges such Profile Updates into the Profile Store. These Profile Updates must follow the [Profile specification](https://github.com/syncier/grnry-kafka-profile-update/blob/master/PROFILESPECS.md). Currently there are the following operations:
 
-#### Update Operations
+### Update Operations
 
 | Operation Name | Input Type | Output |
 | :--- | :--- | :--- |
@@ -251,7 +251,13 @@ Belts process input and create Profile Updates. The Profile Updater merges such 
 |  _\_set\_ttl_ | _array_ or _text_ | sets the ttl value. If value is `""`, it will update all \(_\_latest_ + history\) grains. If value is an array, it will update the contained pits. The grain value or other metadata is not affected. |
 |  _\_set\_ttn_ | _array_ or _text_ | sets the ttn value. If value is `""`, it will update all \(_\_latest_ + history\) grains. If value is an array, it will update the contained pits. The grain value or other metadata is not affected. |
 
+{% hint style="info" %}
 Each Profile Update carries the the grain value to be merged into the store. A grain value consists of the actual value, denoted as `_v`, and its meta information. \(Currently\) `_v` must be a JSON string or a JSON array of strings.
+{% endhint %}
+
+{% hint style="warning" %}
+On database conflict due to identical primary keys \(this might happen on highly frequent updates due to the resolution of the PIT\), all`with_history`operations will rollback the current transaction and drop the conflicting message.  
+{% endhint %}
 
 ### Counter
 
