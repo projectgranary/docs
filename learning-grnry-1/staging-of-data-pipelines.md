@@ -4,7 +4,7 @@ description: >-
   development stage to a higher stage, e.g. a test or production environment.
 ---
 
-# Stage a Granary Pipelines
+# Stage a Granary Pipeline
 
 ## 1. Storing Resources
 

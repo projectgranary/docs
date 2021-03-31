@@ -36,7 +36,7 @@
   * [How to access a Segment](learning-grnry-1/get-data-out-of-granary/segment-store-api.md)
   * [Best Practices](learning-grnry-1/get-data-out-of-granary/best-practices/README.md)
     * [Segments as BI Tool Input](learning-grnry-1/get-data-out-of-granary/best-practices/segments-as-bi-tool-input.md)
-* [Stage a Granary Pipelines](learning-grnry-1/staging-of-data-pipelines.md)
+* [Stage a Granary Pipeline](learning-grnry-1/staging-of-data-pipelines.md)
 * [Troubleshoot Granary Pipelines](learning-grnry-1/troubleshoot-granary-pipelines/README.md)
   * [Tracing Granary](learning-grnry-1/troubleshoot-granary-pipelines/tracing-granary.md)
   * [Browsing Kafka Topics](learning-grnry-1/troubleshoot-granary-pipelines/topic-browsing.md)
