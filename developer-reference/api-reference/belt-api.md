@@ -103,6 +103,8 @@ A list of all belts along with their attributes and total count of belts stored 
             "created": 1561974412801,
             "assumedRole": "",
             "requirementsPy": "",
+            "image": "grnry-belt",
+            "imagePullSecret": "grnry-pull-secret",
             "extractorVersion": "0.8.0",
             "extractorFn": "from time import time\r\nfrom grnry_belt.models.update import Update\r\n\r\ndef execute(event, profile=None):\r\n    print(profile)\r\n    update = Update(profile['correlationId'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n    update.set_type('TestProfileType')\r\n    return [update]\r\n",
             "eventTypes": [
@@ -206,6 +208,8 @@ A list of all belts along with their attributes and total count of belts stored 
             "created": 1561978858485,
             "assumedRole": "",
             "requirementsPy": "requirement==0.1.0",
+            "image": "grnry-belt",
+            "imagePullSecret": "grnry-pull-secret",            
             "extractorVersion": "latest",
             "extractorFn": "print('hallo welt')",
             "eventTypes": [
@@ -349,6 +353,8 @@ JSON with attributes of belt with the specified ID.
     "created": 1562744768164,
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
+    "image": "grnry-belt",
+    "imagePullSecret": "grnry-pull-secret",
     "extractorVersion": "0.8.0",
     "extractorFn": "from time import time\r\nfrom grnry_belt.models.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
     "eventTypes": [
@@ -460,6 +466,14 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="imagePullSecret" type="string" required=false %}
+Kubernetes Secret used to pull the `image` . Defaults to server env `BELT_PULL_SECRET` .
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="image" type="string" required=false %}
+Docker Image to be deployed. Defaults to server env `BELT_IMAGE_NAME` .
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="millicpuRequests" type="string" required=false %}
 CPU requests specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU_REQUESTS`.
 {% endapi-method-parameter %}
@@ -593,6 +607,8 @@ Returns a full dump of belt object created.
     "created": 1562744768164,
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
+    "image": "grnry-belt",
+    "imagePullSecret": "grnry-pull-secret",    
     "extractorVersion": "0.8.0",
     "extractorFn": "from time import time\r\nfrom grnry_belt.models.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
     "eventTypes": [
@@ -827,6 +843,8 @@ A full dump of belt object recently modified
      "created": 1562744768164,
      "assumedRole": "",
      "requirementsPy": "package1==0.0.0\r\npackage2",
+     "image": "custom-grnry-belt",
+     "imagePullSecret": "custom-pull-secret", 
      "extractorVersion": "0.8.0",
      "extractorFn": "from time import time\r\nfrom grnry_belt.models.update import Update\r\n\r\ndef execute(headers, event, profile=None):\r\n print(profile)\r\n update = Update(headers['grnry-correlation-id'],[\"dummy\"]).set_value(\"Hallo Belt!\",0.5,time(),'P1D','Dummy-Belt')\r\n update.set_type('TestProfileType')\r\n return [update]\r\n",
      "eventTypes": [

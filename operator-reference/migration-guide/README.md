@@ -12,7 +12,7 @@ Update all remaining Granary components to their Granary 1.0.0 version as denote
 
 ### Keycloak version update
 
-With Granary 1.0, Keycloak is updated to version 11. See the subpage [Keycloak 11 migration](keycloak-11-migration.md) for details on how to update. Note: Granary 1.0 does not rely on Keycloak 11 features. Any version starting from Keycloak 4.5 will also work. This can change in future releases and no regression tests are being made with version older than Keycloak 11.
+With Granary 1.0, Keycloak is updated to version 11. See the subpage [Keycloak 11 migration]() for details on how to update. Note: Granary 1.0 does not rely on Keycloak 11 features. Any version starting from Keycloak 4.5 will also work. This can change in future releases and no regression tests are being made with version older than Keycloak 11.
 
 ### Reaper breaking changes
 
@@ -20,11 +20,11 @@ The reaper now requires you to set a client secret for talking to the Harvester 
 
 ### Harvester "Topic" Source Type breaking changes
 
-See subpage [Harvesters with Topic Sources](harvesters-with-topic-source.md) for updated parameter names.
+See subpage [Harvesters with Topic Sources]() for updated parameter names.
 
 ### Belt Callback breaking changes
 
-The Python Belt implementation underwent a major refactoring. See subpage [Belt Extractor 1.0](belt-extractor-1.0.md) for breaking changes in your callback functions.
+The Python Belt implementation underwent a major refactoring. See subpage [Belt Extractor 1.0]() for breaking changes in your callback functions.
 
 ### Belt-API breaking changes
 
@@ -47,7 +47,7 @@ INSERT INTO belts_log (belt_id, name, description, labels, affected_paths,
 
 ### Citus breaking changes
 
-Since Citus is deprecated in Granary 1.0, a few default configurations of different Granary components changed. So if you want to continue to use Citus, see [Citus Deprecation](citus-deprecation.md) for more information. 
+Since Citus is deprecated in Granary 1.0, a few default configurations of different Granary components changed. So if you want to continue to use Citus, see [Citus Deprecation]() for more information. 
 
 **That's it.**
 
