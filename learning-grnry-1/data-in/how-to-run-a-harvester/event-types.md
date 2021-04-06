@@ -22,7 +22,7 @@ An event type entity defines rules to extract metadata from incoming data object
 
 | Attribute | Description |
 | :--- | :--- |
-| displayName | The display name of an event type. |
+| displayName | The display name of an event type. See [hints](../best-practices-1/hints-on-naming-of-harvesters-and-event-types.md) on naming. |
 | correlationIdExpression | A SpringEL rule to extract the correlation id from the event \(or create it using a function\). Granary-header: `grnry-correlation-id`. |
 | eventIdExpression | A SpringEL rule to extract the event id from the event \(or create it using a function\). Granary-header: `grnry-event-id`. |
 | timestampExpression | A SpringEL rule to extract the timestamp \(milliseconds since 1.1.1970 UTC\). _Optional_, if not set, the current time is used. Granary-header: `grnry-timestamp`. |

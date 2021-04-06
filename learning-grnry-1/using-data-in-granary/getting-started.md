@@ -13,6 +13,8 @@ In the following, we are going to describe the usage of Belt API through the Gra
 
 Now, we are going to give you a walk through the whole process of creating belts using the Belt API. The example used is of Opensky Network. You will see how easy it is to create a belt with some simple python based scripts. Afterwards, we are going to have a more detailed look at Granary's enhancements for Belts and describe ways to configure your deployments. It is assumed that you have a running Granary instance and all the data from the harvesters has been already published on the Kafka topic.
 
+Please, pay also attention to our [hints on naming Belts](best-practices/hints-on-naming-of-belts.md).
+
 ## BELT Operations through Postman Collection
 
 In order to use the Postman collection, its values and environment variables need to be set first. Postman collection values can be downloaded from [here](../../developer-reference/api-reference/#postman-collection). A Granary instance will be visible then in the Postman collection showing various endpoint APIs that are part of the Granary platform. Adjust them to your environment's URLs. The first step is to get a token which is valid for five mins to access various APIs.

@@ -30,7 +30,7 @@ To create a new harvester you have to set at least the following fields:
 
 | Attribute | Data Type | Description |
 | :--- | :--- | :--- |
-| `displayName` | string | This is what the the harvester instance will be called. This name needs to be unique. A unique technical name for the harvester instance will be derived from this field. |
+| `displayName` | string | This is what the the harvester instance will be called. This name needs to be unique. A unique technical name for the harvester instance will be derived from this field. See [hints](../best-practices-1/hints-on-naming-of-harvesters-and-event-types.md) on naming. |
 | `sourceType` | object | You need to provide at least the `name:string` and the `version:string` of the desired source type. |
 | `eventType` | object | You need to provide at least the `name:string` and the `version:string` of the event type, which you want the the harvester instance to process. |
 | `description` | string | _Optional:_ You can provide a description for the the harvester instance. |

@@ -63,7 +63,7 @@ Creating indexes can be especially beneficial for range-based queries like time 
 
 ## 7. Define your segment name
 
-Define a name for your segment by setting the `TARGET_SEGMENT_NAME` parameter.
+Define a name for your segment by setting the `TARGET_SEGMENT_NAME` parameter. See [hints on naming of Segments](best-practices/hints-on-naming-of-segments.md) for further information.
 
 We will set `TARGET_SEGMENT_NAME` to `adobe_events_info`.
 

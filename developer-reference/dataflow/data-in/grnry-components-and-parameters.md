@@ -6,28 +6,6 @@ description: >-
 
 # Shared parameters
 
-## Harvester Naming
-
-In this chapter, we are going to have a look at the details and different parameters of the components shipped with GRNRY.
-
-The following parameters are shared across all Granary SCDF extensions:
-
-```text
-grnry.harvesterName
-```
-
-In this parameter you define the name of the harvester. This functions as a grouping parameter to deploy the whole pipeline as one and enable common metrics.
-
-```text
-grnry.eventTypeName
-```
-
-This parameter stores the name of the event, the harvester is processing. Remember, each harvester processes exactly one event.
-
-{% hint style="info" %}
-Due to technical limitations in the [Event Store API](../../api-reference/event-store-api.md), the `eventTypeName` may not contain "`_`".
-{% endhint %}
-
 ## Kubernetes Deployment
 
 The parameters within `deploymentConfiguration` control the Kubernetes deployment of a Granary Harvester component:
