@@ -11,5 +11,5 @@ It has proven that naming Belts with this pattern yields a good readability and 
 
 ### Technical limitations
 
-Generally speaking, the Belt API features an `name` property which has a maxium lenght of 255 characters. It is used for displaying purposes only. The technical identifier is the property `id`. Value range for `id` is a positive `Long` value \(i.e. `1` to `9223372036854775807`\).
+Generally speaking, the Belt API features a `name` property which has a maxium lenght of 255 characters. It is used for displaying purposes only. The technical identifier is the property `id`. Value range for `id` is a positive `Long` value \(i.e. `1` to `9223372036854775807`\).
 
