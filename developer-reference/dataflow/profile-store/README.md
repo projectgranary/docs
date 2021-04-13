@@ -114,7 +114,7 @@ The profile store is a distributed table in a database. Each tuple in that table
     </tr>
     <tr>
       <td style="text-align:left">ttl</td>
-      <td style="text-align:left">Time to life. Allows to modify the grain after a defined duration. Format
+      <td style="text-align:left">Time to life. Allows to delete the grain after a defined duration. Format
         is <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">https://en.wikipedia.org/wiki/ISO_8601#Durations</a>.</td>
       <td
       style="text-align:left">varchar</td>
@@ -139,6 +139,17 @@ The profile store is a distributed table in a database. Each tuple in that table
       <td style="text-align:left">varchar</td>
       <td style="text-align:left">-</td>
       <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">ttn</td>
+      <td style="text-align:left">Time to life. Allows to get notified after a defined duration. Format
+        is <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">https://en.wikipedia.org/wiki/ISO_8601#Durations</a>.</td>
+      <td
+      style="text-align:left">varchar</td>
+        <td style="text-align:left"><code>P100Y</code>
+        </td>
+        <td style="text-align:left"><code>NOT NULL</code>
+        </td>
     </tr>
   </tbody>
 </table>
