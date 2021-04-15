@@ -27,6 +27,201 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
+## Granary 1.0.1 "Aretha" - 2021-04-15
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Granary Component</th>
+      <th style="text-align:left">Release Version</th>
+      <th style="text-align:left">Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/datawire/ambassador-chart">Ambassador</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/kubernetes/ingress-nginx">Nginx</a>
+      </td>
+      <td style="text-align:left">0.41.2</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
+      </td>
+      <td style="text-align:left">1.0.0 (based on Snowplow v0.15.0)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
+      </td>
+      <td style="text-align:left">1.0.0 (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
+      <td
+      style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/event-store-api.md">Event Store API</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/belt-extractor.md">Belt Extractor</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/belt-api.md">Belt API</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/profile-updater.md">Profile Updater</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/profile-store-api.md">Profile Store API</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/segment-creation-api.md">Segment Management API</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/segment-manager.md">Segment Manager</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
+      </td>
+      <td style="text-align:left">1.0.0 (based on Presto 0.339)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/graphql-api.md">GraphQL API</a>
+      </td>
+      <td style="text-align:left"><b>1.0.1</b>
+      </td>
+      <td style="text-align:left">
+        <p>Fixes:</p>
+        <ul>
+          <li>Fix memory leak in connections to Kafka broker for Event browser</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/granary-ui.md">Granary UI</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/reaper.md">Reaper</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/grapp-importer.md">Granary GrApp Importer</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/granary-base-deployment.md">Granary Base Deployment</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="https://github.com/bitnami/charts/tree/master/bitnami/postgresql">PostgreSQL</a>
+      </td>
+      <td style="text-align:left">11.10.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Kafka</a>
+      </td>
+      <td style="text-align:left">5.5.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Zookeeper</a>
+      </td>
+      <td style="text-align:left">5.5.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/kafka-manager.md">Kafka Manager</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
+      </td>
+      <td style="text-align:left">11.0.3</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
+      </td>
+      <td style="text-align:left">6.6.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/grafana-dashboards.md">Granary Grafana Dashboards</a>
+      </td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="../installation/with-helm/zipkin.md">Zipkin Server</a>
+      </td>
+      <td style="text-align:left">1.0.0 (based on Open Zipkin 2.12)</td>
+      <td style="text-align:left">-</td>
+    </tr>
+  </tbody>
+</table>
+
 ## Granary 1.0.0 "Aretha" - 2021-01-28
 
 In this new release we focused on 
