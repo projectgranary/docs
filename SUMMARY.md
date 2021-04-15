@@ -1,6 +1,6 @@
 # Table of contents
 
-* [About](README.md)
+* [About Granary](README.md)
 
 ## Learning Granary <a id="learning-grnry-1"></a>
 
