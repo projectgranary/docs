@@ -12,19 +12,24 @@ Updating the Profile Updater entails updating the [database table "profilestore"
 
 ```sql
 ALTER TABLE public.profilestore ADD COLUMN ttn VARCHAR NOT NULL DEFAULT 'P100Y';
-UPDATE public.profilestore SET ttn = ttl WHERE ttn <> ttl;
-UPDATE public.profilestore SET ttl = 'P100Y' WHERE ttl <> 'P100Y';
 
 CREATE INDEX IF NOT EXISTS profilestore_time_to_notify ON public.profilestore (profile_time_to_act(inserted, ttn));
 ```
 
-This means, the content of the `ttl`-column will be copied to the `ttn`-column \(line 2\) while the `ttl`-column will be reset to the default value `'P100Y'` \(line 3\). This is due to semantic changes of `ttl`-expiry \(from notification to actual deletion\). Before upgrading the Profile Updater, you should stop all belts that are setting `ttl`  to values other than `'P100Y'`. Otherwise, be aware of the semantic changes within the history of your data.
+For your use cases, you need to additionally run these `UPDATE` queries manually:
+
+```sql
+UPDATE public.profilestore SET ttn = ttl WHERE ttn <> ttl;
+UPDATE public.profilestore SET ttl = 'P100Y' WHERE ttl <> 'P100Y';
+```
+
+This means, the content of the `ttl`-column will be copied to the `ttn`-column \(line 1\) while the `ttl`-column will be reset to the default value `'P100Y'` \(line 2\). This is due to semantic changes of `ttl`-expiry \(from notification to actual deletion\). Before upgrading the Profile Updater, you should stop all belts that are setting `ttl`  to values other than `'P100Y'`. Otherwise, be aware of the semantic changes within the history of your data.
 
 #### After upgrading the Profile Updater, before restarting the belts
 
 **Option 1:** If your use case wants the new \(deleting\) `ttl` semantics to be applied to older grains written by an existing belt, a manual copying of the values needs to be done using the `origin`-column before restarting the belt.
 
-```text
+```sql
 UPDATE public.profilestore SET ttl = ttn WHERE origin = /belts/<belt-id>;
 ```
 
