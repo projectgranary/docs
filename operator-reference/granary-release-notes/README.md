@@ -126,8 +126,14 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
       </td>
-      <td style="text-align:left">1.0.0</td>
-      <td style="text-align:left">-</td>
+      <td style="text-align:left"><b>1.0.1</b>
+      </td>
+      <td style="text-align:left">
+        <p>Fixes:</p>
+        <ul>
+          <li>Added default configuration to CITUS_DIST_COL to make the property optional</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
