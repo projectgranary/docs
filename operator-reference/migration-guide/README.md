@@ -40,7 +40,7 @@ INSERT INTO belts_log (belt_id, name, description, labels, affected_paths,
         replicas, event_types, millicpu, millicpu_requests, memory, memory_requests, author, reader, editor, viewer,
         assumed_role,  requirements_py, extractor_version, extractor_fn, belt_type,
         runtime, parameter, debug, fetch_profile, secret, secret_username, secret_password, partition_offsets, kafka_destination_topic, 
-			  username, 'INSERT', VERSION, created, profile_type, volumes, volume_mounts, extra_envs
+			  'migration', 'INSERT', VERSION, created, profile_type, volumes, volume_mounts, extra_envs
     FROM belts
     ON CONFLICT DO NOTHING;
 ```

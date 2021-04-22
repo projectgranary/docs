@@ -59,8 +59,19 @@ description: Denotes release versions of Granary artifacts.
     <tr>
       <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
       </td>
-      <td style="text-align:left">1.0.0</td>
-      <td style="text-align:left">-</td>
+      <td style="text-align:left"><b>1.0.2</b>
+      </td>
+      <td style="text-align:left">Fixes:</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <ul>
+          <li>Event Types cannot be deleted if Belts are still present</li>
+          <li>Fix mutual TLS setup for connection to Belt API</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
@@ -131,7 +142,7 @@ description: Denotes release versions of Granary artifacts.
       <td style="text-align:left">
         <p>Fixes:</p>
         <ul>
-          <li>Added default configuration to CITUS_DIST_COL to make the property optional</li>
+          <li>Add default configuration to CITUS_DIST_COL to make the property optional</li>
         </ul>
       </td>
     </tr>
