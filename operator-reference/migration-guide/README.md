@@ -55,7 +55,7 @@ For additional details and examples, see [Belt Extractor 1.1](belt-extractor-1.1
 
 ### Update Granary Components
 
-Update all remaining Granary components to their Granary 1.0**1**0 version as denoted in the [release notes](../granary-release-notes/). Bold versions indicate an update. Please pay attention to below's breaking changes.
+Update all remaining Granary components to their Granary 1.1 version as denoted in the [release notes](../granary-release-notes/). Bold versions indicate an update.
 
 **That's it.**
 
