@@ -4,7 +4,7 @@ description: >-
   the event in the step Metadata Extractor.
 ---
 
-# Spring Expression Language
+# Spring Expression Language \(SpEL\)
 
 ## Simple JSON Path Evaluations
 

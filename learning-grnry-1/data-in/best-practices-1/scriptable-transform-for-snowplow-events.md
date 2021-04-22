@@ -4,9 +4,9 @@ description: >-
   corresponding grnry-data-in json-documents and filters them by content.
 ---
 
-# Scriptable Transform for Snowplow Events
+# Scriptable Transform:  Process Snowplow Events
 
-## Transform Thrift to Jso
+## Transform Thrift to Json
 
 In the preceding section Getting Started there is a listing containing a call to SCDF. This is where the properties are specified that SCDF will apply to apps in the pipeline. Among others, there is the `app.grnry-scriptable.scriptable-transformer.script` property. Its value is a `String` containing a groovy script that transforms incoming events. For Snowplow events, one important part is the message conversion from `thrift` format to `json` format. The classes needed for deserialization are already contained in the `grnry-scriptable` app. These are `io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe` and `io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload`.
 
@@ -214,7 +214,7 @@ if (event.body && event.body.data && event.body.data[0]
         result = eventString;
         }
 }
-(event.queryParameters && event.queryParameters.filterCriteria 
+if (event.queryParameters && event.queryParameters.filterCriteria 
         && event.queryParameters.filterCriteria[0]){
     //find filterCriteria in GET query params
     if (event.queryParameters.filterCriteria[0].equalsIgnoreCase("your-filter")) {
@@ -225,4 +225,6 @@ result;
 ```
 {% endtab %}
 {% endtabs %}
+
+## 
 
