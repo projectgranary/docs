@@ -6,7 +6,7 @@ description: >-
 
 # Scriptable Transform for Snowplow Events
 
-## Transform Thrift to Jso
+## Transform Thrift to Json
 
 In the preceding section Getting Started there is a listing containing a call to SCDF. This is where the properties are specified that SCDF will apply to apps in the pipeline. Among others, there is the `app.grnry-scriptable.scriptable-transformer.script` property. Its value is a `String` containing a groovy script that transforms incoming events. For Snowplow events, one important part is the message conversion from `thrift` format to `json` format. The classes needed for deserialization are already contained in the `grnry-scriptable` app. These are `io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe` and `io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload`.
 
