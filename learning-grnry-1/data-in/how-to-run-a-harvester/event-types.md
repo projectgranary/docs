@@ -26,6 +26,7 @@ An event type entity defines rules to extract metadata from incoming data object
 | correlationIdExpression | A SpringEL rule to extract the correlation id from the event \(or create it using a function\). Granary-header: `grnry-correlation-id`. |
 | eventIdExpression | A SpringEL rule to extract the event id from the event \(or create it using a function\). Granary-header: `grnry-event-id`. |
 | timestampExpression | A SpringEL rule to extract the timestamp \(milliseconds since 1.1.1970 UTC\). _Optional_, if not set, the current time is used. Granary-header: `grnry-timestamp`. |
+| deletionExpression | A SpringEL rule to extract the boolean flag if this is a delete event. _Optional_, if not set it will not be applied. Granary-header: `grnry-deletion-flag`. |
 | description | Description of this specific event type. _Optional_, default is `""`. |
 
 #### Example Call - create event type
@@ -43,7 +44,8 @@ curl -X POST -H "Content-Type: application/json" \
   "displayName" : "snowplow-web",
   "correlationIdExpression" : "#jsonPath(#jsonPath(payload, 'body'), 'data[0].correlationId')",
   "eventIdExpression" : "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].eventId')?:#randomUUID()",
-  "timestampExpression" : "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].timestamp')?:#nowMillis()"
+  "timestampExpression" : "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].timestamp')?:#nowMillis()",
+  "deletionExpression": ""#jsonPath(#jsonPath(payload, 'body'), 'data[0].isDeleteEvent')"
 }
 ```
 {% endcode %}
@@ -79,7 +81,8 @@ curl -X GET -H "Content-Type: application/json" \
             "topicName": "grnry_data_in_snowplow-web",
             "correlationIdExpression" : "#jsonPath(#jsonPath(payload, 'body'), 'data[0].correlationId')",
             "eventIdExpression" : "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].eventId')?:#randomUUID()",
-            "timestampExpression" : "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].timestamp')?:#nowMillis()"
+            "timestampExpression" : "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].timestamp')?:#nowMillis()",
+            "deletionExpression" : "",
             "retentionMs": 3456000000,
             "partitionCount": 32,
             "replication": 2,

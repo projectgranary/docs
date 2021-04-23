@@ -12,6 +12,7 @@ The Metadata Extractor is used to extract these header information from the mess
 * grnry-event-type-version
 * grnry-harvester-name
 * grnry-event-timestamp
+* grnry-deletion-flag \(optional\)
 
 The extraction definitions for these parameters are automatically pulled from the corresponding [Event Type](event-type.md) definition, they will not be set in your medata extractor definition.
 
