@@ -30,30 +30,193 @@ Currently, three different segment generator types are available:
 
 The creation job runs in a container and can be deployed via [Segment Management API](../../api-reference/segment-management-api.md). The following table comprises a complete list of variables \(required if there is no default\):
 
-| Parameter | Description | Default |
-| :--- | :--- | :--- |
-| `TYPE` | type of generator, `pivot` , `generic` or `flexible` | `pivot` |
-| `DB_TYPE` | storage-layer type, `citus` or `postgres` | `postgres` |
-| `DB_USE_VIEWS` | flag indicating if generated segment should be a view | `false` |
-| `DB_HOST` | database endpoint \(citus master host or aurora writer endpoint\) | `grnry-pg` |
-| `DB_PORT` | database port | `5432` |
-| `DB_USER` | database user name | Secret Reference needed |
-| `DB_PASSWORD` | database user password | Secret Reference needed |
-| `DB_NAME` | name of the database | Secret Reference needed |
-| `DB_USE_SSL` | whether to enforce SSL for DB connection | `true` |
-| `SOURCE_SCHEMA_NAME` | name of schema of source table | `public` |
-| `SOURCE_TABLE_NAME` | name of source table | `profilestore` |
-| `TARGET_SCHEMA_NAME` | name of schema for target segment | `segments` |
-| `TARGET_SEGMENT_NAME` | name for target segment, if already existing old segment will be overwritten | `profilestore_seg` |
-| `COLUMN_PLACEHOLDER` | placeholder for the path name to be used in the pivot transformation function | `?` |
-| `TYPE_SEPARATOR` | separator between pivot transformation function and result type | `::` |
-| `DEFINITION_SEPARATOR` | separator between name and transformation | `=` |
-| `TRANSFORMATION_SEPARATOR` | separator between multiple transformations, e.g. `body_txt=message->'body'::text|body_json=replace(message->'body'#>>'{}', '\', '')::jsonb` | `|` |
-| `CITUS_DIST_COL` | Name of the column the source table is and the target segment will be distributed by. Currently, this has to be a single column and is only mandatory if `DB_TYPE=citus`. | correlation\_id |
-| `DEBUG` | whether to print all database statement and responses | `true` |
-| `SOURCE_WHERE_CLAUSE` | where clause as SQL \(without "WHERE" itself\), must not be empty. | `"pit='_latest'"` |
-| `PROMETHEUS_PUSHGATEWAY` | address of gateway to push prometheus metrics, format `'<host>:<port>'` |  |
-| `PROMETHEUS_JOB` | job name for pushgateway, the metrics will be grouped by this name. | `segmentcreation` |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Parameter</th>
+      <th style="text-align:left">Description</th>
+      <th style="text-align:left">Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>TYPE</code>
+      </td>
+      <td style="text-align:left">type of generator, <code>pivot</code> , <code>generic</code> or <code>flexible</code>
+      </td>
+      <td style="text-align:left"><code>pivot</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_TYPE</code>
+      </td>
+      <td style="text-align:left">storage-layer type, <code>citus</code> or <code>postgres</code>
+      </td>
+      <td style="text-align:left"><code>postgres</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_USE_VIEWS</code>
+      </td>
+      <td style="text-align:left">flag indicating if generated segment should be a view</td>
+      <td style="text-align:left"><code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_PRESERVE_VIEWS</code>
+      </td>
+      <td style="text-align:left">
+        <p>Segments are recreated based on a CRON schedule. If a custom-made view
+          relies on a Segment, it is dropped and needs to be recreated after update.
+          With this flag set to <code>true</code>, manually created views on the Segment
+          are preserved.</p>
+        <p>WARNING: With this feature Segment columns can only be added and not be
+          changed. On breaking change of the segment, just run the segment job with
+          this flag disabled and enable it again afterwards.</p>
+      </td>
+      <td style="text-align:left"><code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_HOST</code>
+      </td>
+      <td style="text-align:left">database endpoint (citus master host or aurora writer endpoint)</td>
+      <td
+      style="text-align:left"><code>grnry-pg</code>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_PORT</code>
+      </td>
+      <td style="text-align:left">database port</td>
+      <td style="text-align:left"><code>5432</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_USER</code>
+      </td>
+      <td style="text-align:left">database user name</td>
+      <td style="text-align:left">Secret Reference needed</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_PASSWORD</code>
+      </td>
+      <td style="text-align:left">database user password</td>
+      <td style="text-align:left">Secret Reference needed</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_NAME</code>
+      </td>
+      <td style="text-align:left">name of the database</td>
+      <td style="text-align:left">Secret Reference needed</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DB_USE_SSL</code>
+      </td>
+      <td style="text-align:left">whether to enforce SSL for DB connection</td>
+      <td style="text-align:left"><code>true</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>SOURCE_SCHEMA_NAME</code>
+      </td>
+      <td style="text-align:left">name of schema of source table</td>
+      <td style="text-align:left"><code>public</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>SOURCE_TABLE_NAME</code>
+      </td>
+      <td style="text-align:left">name of source table</td>
+      <td style="text-align:left"><code>profilestore</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>TARGET_SCHEMA_NAME</code>
+      </td>
+      <td style="text-align:left">name of schema for target segment</td>
+      <td style="text-align:left"><code>segments</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>TARGET_SEGMENT_NAME</code>
+      </td>
+      <td style="text-align:left">name for target segment, if already existing old segment will be overwritten</td>
+      <td
+      style="text-align:left"><code>profilestore_seg</code>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>COLUMN_PLACEHOLDER</code>
+      </td>
+      <td style="text-align:left">placeholder for the path name to be used in the pivot transformation function</td>
+      <td
+      style="text-align:left"><code>?</code>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>TYPE_SEPARATOR</code>
+      </td>
+      <td style="text-align:left">separator between pivot transformation function and result type</td>
+      <td
+      style="text-align:left"><code>::</code>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DEFINITION_SEPARATOR</code>
+      </td>
+      <td style="text-align:left">separator between name and transformation</td>
+      <td style="text-align:left"><code>=</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>TRANSFORMATION_SEPARATOR</code>
+      </td>
+      <td style="text-align:left">separator between multiple transformations, e.g. <code>body_txt=message-&gt;&apos;body&apos;::text|body_json=replace(message-&gt;&apos;body&apos;#&gt;&gt;&apos;{}&apos;, &apos;\&apos;, &apos;&apos;)::jsonb</code>
+      </td>
+      <td style="text-align:left"><code>|</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>CITUS_DIST_COL</code>
+      </td>
+      <td style="text-align:left">Name of the column the source table is and the target segment will be
+        distributed by. Currently, this has to be a single column and is only mandatory
+        if <code>DB_TYPE=citus</code>.</td>
+      <td style="text-align:left">correlation_id</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DEBUG</code>
+      </td>
+      <td style="text-align:left">whether to print all database statement and responses</td>
+      <td style="text-align:left"><code>true</code>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>SOURCE_WHERE_CLAUSE</code>
+      </td>
+      <td style="text-align:left">where clause as SQL (without &quot;WHERE&quot; itself), must not be empty.</td>
+      <td
+      style="text-align:left"><code>&quot;pit=&apos;_latest&apos;&quot;</code>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>PROMETHEUS_PUSHGATEWAY</code>
+      </td>
+      <td style="text-align:left">address of gateway to push prometheus metrics, format <code>&apos;&lt;host&gt;:&lt;port&gt;&apos;</code>
+      </td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>PROMETHEUS_JOB</code>
+      </td>
+      <td style="text-align:left">job name for pushgateway, the metrics will be grouped by this name.</td>
+      <td
+      style="text-align:left"><code>segmentcreation</code>
+        </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Segment Indexes
 
