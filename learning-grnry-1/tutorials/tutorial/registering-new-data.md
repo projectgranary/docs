@@ -4,17 +4,13 @@ description: 'In this chapter, we create & deploy all resources to import tracki
 
 # Registering new Data Pipeline
 
-![](../../.gitbook/assets/grafik%20%2827%29.png)
+![](../../../.gitbook/assets/grafik%20%2827%29.png)
 
-## 1. Obtain Authentication Token
-
-First step of all API interactions via Postman is to obtain a valid Keycloak token. This token is only valid for 5 minutes. I.e. you need to rerun this API request from time to time.
-
-## 2. Create Event Type "Customer Session"
+## 1. Create Event Type "Customer Session"
 
 In Granary, an event type describe the metadata and schema of a particular category of raw data that you want to import. In our case, this is tracking data consisting of customer sessions. Create your first event type like so:
 
-![Harvester API Request: POST/event-types](../../.gitbook/assets/image%20%2819%29.png)
+![Harvester API Request: POST/event-types](../../../.gitbook/assets/image%20%2819%29.png)
 
 For the body \(look for the tab with the green dot\) use this JSON:
 
@@ -28,7 +24,7 @@ For the body \(look for the tab with the green dot\) use this JSON:
 }
 ```
 
-Find more detailed explanation on event type configuration [here](../data-in/how-to-run-a-harvester/event-types.md#creating-an-event-type-also-see-api-docs).
+Find more detailed explanation on event type configuration [here](../../data-in/how-to-run-a-harvester/event-types.md#creating-an-event-type-also-see-api-docs).
 
 With a Status `200 OK`, the return body looks like this:
 
@@ -59,19 +55,17 @@ With a Status `200 OK`, the return body looks like this:
 
 As you can see, Granary applied a lot of default configuration. That's it for now. We needed to create the event type first so that we can reference in the harvester instance creation below.
 
-## 3. Create Harvester "Snowplow Customer Sessions"
+## 2. Create Harvester "Snowplow Customer Sessions"
 
-In Granary, a harvester consists of three steps \(\*\) that we need to configure to prepare incoming data to match the event types definition:
+In Granary, a harvester consists of three steps that we need to configure to prepare incoming data to match the event types definition:
 
 1. Source Type
 2. Scriptable Transform
 3. Metadata Extractor
 
-\(\*\) there is an optional fourth step \(sessionizing\) which is irrelavant to this tutorial.
-
 Most of the harvester configuration is covered by defaults, so creating your first harvester goes like this:
 
-![Harvester API Request: POST /harvesters/instances](../../.gitbook/assets/image%20%285%29.png)
+![Harvester API Request: POST /harvesters/instances](../../../.gitbook/assets/image%20%285%29.png)
 
 For the body \(look for the tab with the green dot\) use this JSON:
 
@@ -106,7 +100,7 @@ The name of the Event Type in line 21 must match the Event Type's `name` you cre
 }
 ```
 
-Find more detailed explanation on harvester configuration [here](../data-in/how-to-run-a-harvester/harvesters.md).
+Find more detailed explanation on harvester configuration [here](../../data-in/how-to-run-a-harvester/harvesters.md).
 
 The script in line 18 of the JSON payload above will filter our events later on and looks actually like this:
 
@@ -138,7 +132,7 @@ if (event?.body?.data?.filterCriteria) {
 return null
 ```
 
-Check [this best practice](../data-in/best-practices-1/easing-development.md) how to transform it to a one-liner.
+Check [this best practice](../../data-in/best-practices-1/easing-development.md) how to transform it to a one-liner.
 
 With a Status `200 OK`, the return body looks like this:
 
@@ -247,11 +241,11 @@ With a Status `200 OK`, the return body looks like this:
 
 Again, Granary applied a whole bunch of default configuration. Next up, starting this harvester.
 
-## 4. Start Harvester "Snowplow Customer Sessions"
+## 3. Start Harvester "Snowplow Customer Sessions"
 
-Within step 3, we created a harvester. In order to be able to consume data, we need to start the harvester. This goes like so:
+Within step 2, we created a harvester. In order to be able to consume data, we need to start the harvester. This goes like so:
 
-![Harvester API: POST /harvesters/instances/snowplow-customer-se/state](../../.gitbook/assets/image%20%2813%29.png)
+![Harvester API: POST /harvesters/instances/snowplow-customer-se/state](../../../.gitbook/assets/image%20%2813%29.png)
 
 For the body \(look for the tab with the green dot\) use this JSON:
 
@@ -276,7 +270,7 @@ With a Status `200 OK`, the return body looks like this:
 
 The deployment can take up to three minutes. You can check the current state like so:
 
-![Harvester API: GET /harvesters/instances/snowplow-customer-se/state](../../.gitbook/assets/image%20%286%29.png)
+![Harvester API: GET /harvesters/instances/snowplow-customer-se/state](../../../.gitbook/assets/image%20%286%29.png)
 
 With a Status `200 OK`, the return body looks like this:
 
@@ -291,13 +285,13 @@ With a Status `200 OK`, the return body looks like this:
 }
 ```
 
-## 5. Start Persister of Event Type "Customer Session"
+## 4. Start Persister of Event Type "Customer Session"
 
 Within step 2, we created a harvester. In order to be able to persist data in the event store, we need to start the persister of our event type "Customer Session". This goes like so:
 
 For the body \(look for the tab with the green dot\) use this JSON:
 
-![Harvester API: POST /event-types/customer-session/eventstores/pg/persister/state](../../.gitbook/assets/image%20%2810%29.png)
+![Harvester API: POST /event-types/customer-session/eventstores/pg/persister/state](../../../.gitbook/assets/image%20%2810%29.png)
 
 ```javascript
 {
@@ -320,7 +314,7 @@ With a Status `200 OK`, the return body looks like this:
 
 The deployment can take up to two minutes. You can check the current state like so:
 
-![Harvester API: GET /event-types/customer-session/eventstores/pg/persister/state](../../.gitbook/assets/image%20%2825%29.png)
+![Harvester API: GET /event-types/customer-session/eventstores/pg/persister/state](../../../.gitbook/assets/image%20%2825%29.png)
 
 With a Status `200 OK`, the return body looks like this:
 

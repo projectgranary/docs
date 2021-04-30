@@ -4,12 +4,15 @@
 
 ## Learning Granary <a id="learning-grnry-1"></a>
 
-* [Developer Tutorial \[BETA\]](learning-grnry-1/tutorial/README.md)
-  * [Prerequisites: Before we get started](learning-grnry-1/tutorial/prerequisites-before-we-get-started.md)
-  * [Accessing GRNRY](learning-grnry-1/tutorial/accessing-grnry.md)
-  * [Registering new Data Pipeline](learning-grnry-1/tutorial/registering-new-data.md)
-  * [Ingesting the first Data](learning-grnry-1/tutorial/first-data-ingestion.md)
-  * [Transforming ingested Data](learning-grnry-1/tutorial/transforming-ingested-data.md)
+* [Tutorials & Solutions](learning-grnry-1/tutorials/README.md)
+  * [Prerequisites](learning-grnry-1/tutorials/prerequisites-before-we-get-started.md)
+  * [Tutorial 1: COVID-19 Quote Calculation](learning-grnry-1/tutorials/tutorial-covid-19-quote/README.md)
+    * [Pipeline 1: Create Profiles for new Leads](learning-grnry-1/tutorials/tutorial-covid-19-quote/create-profiles-for-new-leads.md)
+    * [Pipeline 2: Calculate Quotes](learning-grnry-1/tutorials/tutorial-covid-19-quote/calculate-quotes.md)
+  * [Tutorial 2: Onboard Tracking Data](learning-grnry-1/tutorials/tutorial/README.md)
+    * [Registering new Data Pipeline](learning-grnry-1/tutorials/tutorial/registering-new-data.md)
+    * [Ingesting the first Data](learning-grnry-1/tutorials/tutorial/first-data-ingestion.md)
+    * [Transforming ingested Data](learning-grnry-1/tutorials/tutorial/transforming-ingested-data.md)
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
   * [How to run a Harvester](learning-grnry-1/data-in/how-to-run-a-harvester/README.md)
     * [Event Types](learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md)
