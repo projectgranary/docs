@@ -1,0 +1,280 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;
+\red0\green0\blue0;\red144\green1\blue18;\red19\green120\blue72;\red11\green76\blue180;\red15\green112\blue1;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c100000;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c0;
+\cssrgb\c0\c0\c0\c84706;\cssrgb\c63922\c8235\c8235;\cssrgb\c3529\c53333\c35294;\cssrgb\c1961\c38824\c75686;\cssrgb\c0\c50196\c0;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\li960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 import\cf4 \strokec4 \'a0requests\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 import\cf4 \strokec4 \'a0json\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 from\cf4 \strokec4 \'a0grnry.beltextractor.update\'a0\cf2 \strokec2 import\cf4 \strokec4 \'a0Update\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 from\cf4 \strokec4 \'a0datetime\'a0\cf2 \strokec2 import\cf4 \strokec4 \'a0datetime\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li960\sl400\partightenfactor0
+
+\f0\fs28 \cf5 \cb3 \'a0\cb1 \uc0\u8232 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 def\cf4 \strokec4 \'a0lookup(dictionary, keys):\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li960\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0\cf2 \strokec2 type\cf4 \strokec4 (dictionary) ==\'a0\cf2 \strokec2 type\cf4 \strokec4 (\cf6 \strokec6 ''\cf4 \strokec4 ):\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 dictionary =\'a0json.loads(dictionary)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li960\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 try\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0\cf2 \strokec2 len\cf4 \strokec4 (keys) >\'a0\cf7 \strokec7 1\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 value = lookup(dictionary[keys[\cf7 \strokec7 0\cf4 \strokec4 ]],\'a0keys[\cf7 \strokec7 1\cf4 \strokec4 :])\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 else\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 value = dictionary[keys[\cf7 \strokec7 0\cf4 \strokec4 ]]\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 return\cf4 \strokec4 \'a0value\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li960\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 except\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 return\cf4 \strokec4 \'a0\cf2 \strokec2 None\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li960\sl400\partightenfactor0
+
+\f0\fs29\fsmilli14667 \cf5 \cb3 \'a0
+\f1\fs24 \cb1 \
+\pard\pardeftab720\li960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 def\cf4 \strokec4 \'a0execute(event_headers,\'a0event_payload, profile=\cf2 \strokec2 None\cf4 \strokec4 ):\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 profile_corr_id\'a0=\'a0event_headers[\cf6 \strokec6 'grnry-correlation-id'\cf4 \strokec4 ]\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 basepremium\'a0=\'a0\cf7 \strokec7 10\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li960\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 baseUrl\'a0=\'a0\cf6 \strokec6 '{\field{\*\fldinst{HYPERLINK "https://api.covid19api.com/"}}{\fldrslt \cf8 \ul \ulc8 \strokec8 https://api.covid19api.com/}}'\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf7 \cb3 \strokec7 try:\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0profile\'a0\cf2 \strokec2 is\cf4 \strokec4 \'a0\cf2 \strokec2 not\cf4 \strokec4 \'a0\cf2 \strokec2 None\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 payload =\'a0lookup(profile, [\cf6 \strokec6 'jsonPayload'\cf4 \strokec4 ])\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 age =\'a0lookup(payload, [\cf6 \strokec6 'Age [Y]'\cf4 \strokec4 ])\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 latest =\'a0lookup(age, [\cf6 \strokec6 '_latest'\cf4 \strokec4 ])\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 _v =\'a0\cf2 \strokec2 str\cf4 \strokec4 (lookup(latest, [\cf6 \strokec6 '_v'\cf4 \strokec4 ]))\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 age_jsonpayload\'a0=\'a0\cf2 \strokec2 int\cf4 \strokec4 (_v)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 country =\'a0lookup(payload, [\cf6 \strokec6 'Country'\cf4 \strokec4 ])\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 latest =\'a0lookup(country, [\cf6 \strokec6 '_latest'\cf4 \strokec4 ])\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 _v =\'a0\cf2 \strokec2 str\cf4 \strokec4 (lookup(latest, [\cf6 \strokec6 '_v'\cf4 \strokec4 ]))\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 country_jsonpayload\'a0=\'a0\cf2 \strokec2 str\cf4 \strokec4 (_v)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 country_url\'a0=\'a0baseUrl\'a0+\'a0\cf6 \strokec6 'countries'\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 cresponse\'a0=\'a0requests.request(\cf6 \strokec6 'GET'\cf4 \strokec4 ,\'a0country_url)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 country_response\'a0=\'a0json.loads(cresponse.text.encode(\cf6 \strokec6 'utf8'\cf4 \strokec4 ))\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 for\cf4 \strokec4 \'a0country\'a0\cf2 \strokec2 in\cf4 \strokec4 \'a0country_response:\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0country[\cf6 \strokec6 'ISO2'\cf4 \strokec4 ] ==\'a0country_jsonpayload:\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li4800\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 country = country[\cf6 \strokec6 'Country'\cf4 \strokec4 ]\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 url\'a0= (baseUrl\'a0+\'a0\cf6 \strokec6 'live/country'\cf4 \strokec4 \'a0+\'a0\cf6 \strokec6 '/'\cf4 \strokec4 \'a0+ country)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li5760\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 response =\'a0requests.request(\cf6 \strokec6 'GET'\cf4 \strokec4 ,\'a0url)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 response_json\'a0=\'a0json.loads(response.text.encode(\cf6 \strokec6 'utf8'\cf4 \strokec4 ))\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 operation =\'a0\cf6 \strokec6 '_set'\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 reader =\'a0\cf6 \strokec6 '_all'\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 profile_type\'a0=\'a0\cf6 \strokec6 'Covid19-CostByCountry'\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 current_datetime\'a0=\'a0\cf2 \strokec2 str\cf4 \strokec4 (datetime.now().date())\'a0\cf9 \strokec9 # current date\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li4800\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 for\cf4 \strokec4 \'a0livecase\'a0\cf2 \strokec2 in\cf4 \strokec4 \'a0response_json:\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li5760\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 latestdate\'a0=\'a0\cf2 \strokec2 str\cf4 \strokec4 ((livecase[\cf6 \strokec6 'Date'\cf4 \strokec4 ].split(\cf6 \strokec6 "T"\cf4 \strokec4 ))[\cf7 \strokec7 0\cf4 \strokec4 ])\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li5760\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0latestdate\'a0==\'a0current_datetime:\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li6720\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 confirmedcases\'a0=\'a0livecase[\cf6 \strokec6 'Confirmed'\cf4 \strokec4 ]\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li7680\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 deathscases\'a0=\'a0livecase[\cf6 \strokec6 'Deaths'\cf4 \strokec4 ]\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 mrate\'a0=\'a0deathscases\'a0*\'a0\cf7 \strokec7 100\cf4 \strokec4 \'a0/\'a0confirmedcases\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li6720\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 mortalityrate\'a0=\'a0\cf2 \strokec2 float\cf4 \strokec4 (\cf6 \strokec6 "\{:.3f\}"\cf4 \strokec4 .\cf2 \strokec2 format\cf4 \strokec4 (mrate))\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0\cf7 \strokec7 30\cf4 \strokec4 \'a0<=\'a0\cf2 \strokec2 int\cf4 \strokec4 (age_jsonpayload) <=\'a0\cf7 \strokec7 40\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 insurancepremium\'a0=\'a0basepremium\'a0*\'a0mortalityrate\'a0+\'a0\cf7 \strokec7 30\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0\cf7 \strokec7 40\cf4 \strokec4 \'a0<\'a0\cf2 \strokec2 int\cf4 \strokec4 (age_jsonpayload) <=\'a0\cf7 \strokec7 50\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 insurancepremium\'a0=\'a0basepremium\'a0*\'a0mortalityrate\'a0+\'a0\cf7 \strokec7 40\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0\cf7 \strokec7 50\cf4 \strokec4 \'a0<\'a0\cf2 \strokec2 int\cf4 \strokec4 (age_jsonpayload) <=\'a0\cf7 \strokec7 60\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 insurancepremium\'a0=\'a0basepremium\'a0*\'a0mortalityrate\'a0+\'a0\cf7 \strokec7 50\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0\cf7 \strokec7 60\cf4 \strokec4 \'a0<\'a0\cf2 \strokec2 int\cf4 \strokec4 (age_jsonpayload) <=\'a0\cf7 \strokec7 70\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 insurancepremium\'a0=\'a0basepremium\'a0*\'a0mortalityrate\'a0+\'a0\cf7 \strokec7 60\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 if\cf4 \strokec4 \'a0\cf2 \strokec2 int\cf4 \strokec4 (age_jsonpayload) >\'a0\cf7 \strokec7 70\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 insurancepremium\'a0=\'a0basepremium\'a0*\'a0mortalityrate\'a0+\'a0\cf7 \strokec7 70\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\fi960\sl400\partightenfactor0
+
+\f0\fs28 \cf7 \cb3 \strokec7 \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 update = Update(profile_corr_id, [\cf6 \strokec6 'Insurance Premium [\'80]'\cf4 \strokec4 ], operation=operation)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li3840\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 update.set_value(\cf2 \strokec2 str\cf4 \strokec4 (insurancepremium), reader=reader)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 update.set_type(profile_type)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 else\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 print\cf4 \strokec4 (\cf6 \strokec6 'No Profile with\'a0correlation_id\'a0'\cf4 \strokec4 ,\'a0profile_corr_id,\'a0\cf6 \strokec6 ' found!!!'\cf4 \strokec4 )\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li1920\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 except\cf4 \strokec4 :\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 print\cf4 \strokec4 (\cf6 \strokec6 "Exception\'a0Occured\'a0while processing the profile "\cf4 \strokec4 )\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf4 \cb3 \strokec4 tb =\'a0traceback.format_exc()\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li2880\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 print\cf4 \strokec4 (tb)\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\li960\fi960\sl400\partightenfactor0
+
+\f0\fs28 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \cb3 \strokec2 return\cf4 \strokec4 \'a0update\AppleTypeServices \'a0
+\f1\fs24 \cf5 \cb1 \strokec5 \
+}
