@@ -8,17 +8,18 @@ description: >-
 
 ### Configure DBVisualizer to use Segment Store API
 
-1. Open DBVisualizer.
-2. Go to "Database" -&gt; "Create Database Connection". 
+1. Download [DBVisualizer](https://www.dbvis.com/download).
+2. Open DBVisualizer.
+3. Go to "Database" -&gt; "Create Database Connection". 
 
    ![](../../.gitbook/assets/dbvis01%20%281%29.png) 
 
-3. Configure the database connection using the "Presto" database driver. If it is not listed, you can download it from [https://prestodb.github.io/docs/current/installation/jdbc.html](https://prestodb.github.io/docs/current/installation/jdbc.html) and add it by following the instructions on [http://confluence.dbvis.com/display/UG100/Installing+a+JDBC+Driver](http://confluence.dbvis.com/display/UG100/Installing+a+JDBC+Driver).
+4. Configure the database connection using the "Presto" database driver. If it is not listed, you can download it from [https://prestodb.github.io/docs/current/installation/jdbc.html](https://prestodb.github.io/docs/current/installation/jdbc.html) and add it by following the instructions on [http://confluence.dbvis.com/display/UG100/Installing+a+JDBC+Driver](http://confluence.dbvis.com/display/UG100/Installing+a+JDBC+Driver).
    1. ![](../../.gitbook/assets/dbvis01%20%281%29.png)
    2. ![](../../.gitbook/assets/dbvis02.png) 
    3. ![](../../.gitbook/assets/dbvis03.png) 
    4. For the URL, ask your friendly Granary Ops Engineer.
-4. Under "Properties" -&gt; "Driver Properties" provide SSL-related properties.
+5. Under "Properties" -&gt; "Driver Properties" provide SSL-related properties.
 
    1. SSL = true
    2. SSLTrustStorePath = &lt;your/truststore-path&gt;
@@ -26,7 +27,7 @@ description: >-
 
    ![](../../.gitbook/assets/dbvis05.png)
 
-5. Ask your friendly Granary Ops Engineer to add the following _roles needed to explore the database_ via DBVisualizer in Granary's Keycloak.
+6. Ask your friendly Granary Ops Engineer to add the following _roles needed to explore the database_ via DBVisualizer in Granary's Keycloak.
    1. Go to "clients" -&gt; "jdbc api" -&gt; "roles" -&gt; "add roles".
    2. Add the following roles:
       1. postgresql.information\_schema.tables
@@ -40,18 +41,18 @@ description: >-
    3. In Keycloak assign new roles to your user.
       1. Go to "users" -&gt; "&lt;your user&gt;" -&gt; "role mapping" -&gt; "client roles" -&gt; "jdbc api"
       2. Assign available roles
-6. Further ask your Granary Ops Engineer to add the following _roles to access your segement_ of choice via DBVisualizer in Granary's Keycloak.
+7. Further ask your Granary Ops Engineer to add the following _roles to access your segement_ of choice via DBVisualizer in Granary's Keycloak.
    1. Again go to "clients" -&gt; "jdbc api" -&gt; "roles" -&gt; "add roles".
    2. Add the following role\(s\):
       1. postgresql.segments.&lt;segment name&gt;
    3. In Keycloak assign new roles to your user.
       1. Again go to "users" -&gt; "&lt;your user&gt;" -&gt; "role mapping" -&gt; "client roles" -&gt; "jdbc api"
       2. Assign available segement roles
-7. In DBVisualizer enter Granary username and password
+8. In DBVisualizer enter Granary username and password
 
    ![](../../.gitbook/assets/dbvis04.png)
 
-8. Click "Connect".  
+9. Click "Connect".  
 
 ### Configure Tableau to use Segment Store API
 
