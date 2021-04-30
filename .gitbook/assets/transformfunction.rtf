@@ -1,0 +1,26 @@
+from grnry.beltextractor.update import Update 
+
+def execute(event_headers, event,profile=None): 
+    personprofile = event['personprofile'] 
+    print('personprofile : ',personprofile) 
+    if personprofile == "1":
+        profile_corr_id = event_headers['grnry-correlation-id'] 
+        person_name=event['FirstName']+' '+event['LastName'] 
+        person_age=event['Age']
+        country=event['Country'] 
+        update_value=event['value'] 
+        updates=[]
+        name_dictionary={'Age [Y]':person_age,'Name':person_name,'Country':country} 
+        updates.append(getUpdatedPersonalDetailsObj(profile_corr_id,'Name',name_dictionary)) 
+        updates.append(getUpdatedPersonalDetailsObj(profile_corr_id, 'Age [Y],name_dictionary)) 
+        updates.append(getUpdatedPersonalDetailsObj(profile_corr_id,'Country',name_dictionary)  
+    return updates
+def getUpdatedPersonalDetailsObj(correlationId,nameString,name_dictionary): 
+    reader='_all'
+    nameStringArray = [nameString]
+    operation = '_set'
+    profile_type='Covid19-CostByCountry'
+    updatedObject = Update(correlationId,nameStringArray,operation=operation)
+    updatedObject.set_value(name_dictionary[nameString],reader=reader)
+    updatedObject.set_type(profile_type)
+    return updatedObject
