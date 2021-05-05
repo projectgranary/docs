@@ -113,17 +113,19 @@ def hasJsonStructure(String body){
 }
 ```
 
-In the transform script, we are parsing the data which we are getting from the Snowplow event. Primary goal of the script is to transform the Snowplow events from Thrift to JSON. The filter function at line 16 getting called to compares the values of `appId`, `useCase` and `personProfile = 1`, if the event contains the flag as `1`, then it will processed within our pipeline. Otherwise, it will be dropped.
+In the transform script, we are parsing the data which we are getting from the Snowplow event. Primary goal of the script is to transform the Snowplow events from Thrift to JSON. The filter function at line 16 getting called to compares the values of `appId`, `useCase` and `personProfile = 1`, if the event contains the `personProfile` flag as `1`, then it will processed within our pipeline. Otherwise, it will be dropped.
 
 {% hint style="info" %}
 Check the Harvester's [best practice section](../../data-in/best-practices-1/) for more scriptable transform examples.
 {% endhint %}
 
-Once the Harvester is created, we can search the harvester by its name: 
+Once the Harvester is created, It is stopped in state initially, from the left side of the screen we can see the drop down using that we need to start the Harvester.
+
+![](../../../.gitbook/assets/screenshot-2021-05-05-at-09.33.42.png)
+
+After harvester started we can see the state is running and can search the harvester by its name: 
 
 ![](../../../.gitbook/assets/screenshot-2021-04-15-at-16.49.35.png)
-
-### 
 
 ### 3. Transform events with the Belt
 
@@ -173,7 +175,7 @@ def getUpdatedPersonalDetailsObj(correlationId,nameString,name_dictionary):
 
 ```
 
-The primary goal of the Belt's transformation function is to model a Profile based on incoming raw events by creating Profile Update objects. In line 10, we create a dictionary which contains `Age`, `Person Name`, and `Country`. These are the keys of the attributes of our Profile. In Granary we call them Grain paths. These details get appended to the Profile Update object using `getUpdatedPersonalDetailsObj()` in line 11ff. In line 21, the profile gets created using the values getting passed.
+The primary goal of the Belt's transformation function is to model a Profile based on incoming raw events by creating Profile Update objects. In line 10, we create a dictionary which contains `Age`, `Person Name`, and `Country`. These are the keys of the attributes of our Profile. In Granary we call them Grain paths. These details get appended to the Profile Update object using `getUpdatedPersonalDetailsObj()` in line 11ff. In line 21, the profile gets created using the values getting passed. At line no 18, profile\_type is defined with combination of `appid`:"Covid19",  "-" and `usecase`:"CostByCountry".
 
 {% hint style="info" %}
 Check the reference of available [Profile Update operations](../../../developer-reference/dataflow/profile-store/#component-profile-updater) as well as the Belt's [best practice section](../../using-data-in-granary/best-practices/) for more transformation function examples.
@@ -217,6 +219,12 @@ After the events are received at Belt, the transform function is executed and Pr
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.58.png)
 
 The paths "Age \[Y\]", "Country", "Name" \(first name + last name\) with the corresponding values passed get inserted into Profile Store. Select 'Explore Profile' section on the right hand side. There we can see that the profile will look like this:
+
+While searching the profile in Profile Explorer we need to specify : 
+
+> Profile Type : Covid19-CostByCountry
+>
+> Correlation id : cid value from the postman request
 
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.28.37.png)
 

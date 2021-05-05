@@ -81,7 +81,7 @@ def hasJsonStructure(String body){
 
 In the transform script we are parsing the data which we are getting from the snowplow event. The filter function at line number 16 getting called to compares the values of `appId`, `useCase` and `personProfile = 0`, if the event contains the flag as `0` then it will direct to the quote calculation path and return the result accordingly.
 
-Start the Harvester and check if it is in running state :
+Start the Harvester using the left side dropdown of the screen and check if it is in running state :
 
 ![](../../../.gitbook/assets/screenshot-2021-04-15-at-16.48.47.png)
 
@@ -108,6 +108,10 @@ And the other parameters Kubernetes Secret, Username Property, Password Property
 >     "secretUsername": "username", 
 >
 >     "secretPassword": "password"
+
+{% hint style="info" %}
+Secret grnry-belt-tutorial-secret is already created and applied.
+{% endhint %}
 
 If we need to use logging, then we should specify the configuration  
 
@@ -197,8 +201,8 @@ def execute(event_headers, event_payload, profile=None):
     return update
 ```
 
-The function describes the calculation of quote for COVID-19 and returns the insurance premium. At line 22 we define the external API's base url \([https://api.covid19api.com/](https://api.covid19api.com/')\). From the Profile payload lookup \(lines 27-35\), we get the latest profile values for `age` and `country code`. We fetch all countries from the external API \(/countries\) at line 37. We then match the resulting array of fetched country codes with the `country code` from the profile payload at line 39. If matches, then save the country name in the `country name` variable. Further, using the country name, we fetch the current COVID-19 figures for this country from the external API at line 43 \(/live/country/&lt;country&gt;\).  
-From the API response, we fetch the value of `Confirmed cases` and `Death cases` of current date and calculate the daily `mortality rate` from the above values at line 55. Finally, using the combination of `mortality rate` and `age` of the person calculate the insurance premium as a result. Once all calculations are done, update the profile back to the Profile Store at line 67.
+The function describes the calculation of quote for COVID-19 and returns the insurance premium.  At line 22 we define the external API's base url \([https://api.covid19api.com/](https://api.covid19api.com/')\). From the Profile payload lookup \(lines 27-35\), we get the latest profile values for `age` and `country code`. We fetch all countries from the external API \(/countries\) at line 37. We then match the resulting array of fetched country codes with the `country code` from the profile payload at line 39. If matches, then save the country name in the `country name` variable. Further, using the country name, we fetch the current COVID-19 figures for this country from the external API at line 43 \(/live/country/&lt;country&gt;\).  
+From the API response, we fetch the value of `Confirmed cases` and `Death cases` of current date and calculate the daily `mortality rate` from the above values at line 55. Finally, using the combination of `mortality rate` and `age` of the person calculate the insurance premium as a result. At line no 46, profile\_type is defined with combination of `appid`  `-`  `usecase` received the event at belt which looks like `Covid19-CostByCountry.`Once all calculations are done, update the profile back to the Profile Store at line 67.
 
 
 
@@ -217,7 +221,11 @@ To test the pipeline, send a HTTP `POST` request with the following JSON body to
 ```
 
 {% hint style="info" %}
-You can send this event using Granary's Postman collection. See Prerequisits.
+You can send this event using Granary's Postman collection. See Prerequisites.
+{% endhint %}
+
+{% hint style="info" %}
+The **`personprofile`** must be "0", Do not change the value of `personprofile.`
 {% endhint %}
 
 When the event is triggered, we can also check at the Harvester and Belt's 'Data Out' Event Viewer: 
@@ -227,6 +235,12 @@ When the event is triggered, we can also check at the Harvester and Belt's 'Data
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.58%20%281%29.png)
 
 The profile gets updated with the value of calculated insurance premium in the Profile Store:
+
+While searching the profile in Profile Explorer we need to specify : 
+
+> Profile Type : Covid19-CostByCountry
+>
+> Correlation id : cid value from the postman request
 
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.56.38.png)
 
