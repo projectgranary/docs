@@ -6,21 +6,17 @@ description: >-
 
 # Transforming ingested Data
 
-![](../../.gitbook/assets/grafik%20%2829%29.png)
+![](../../../.gitbook/assets/grafik%20%2829%29.png)
 
-## 1. Obtain Authentication Token
-
-First step of all API interactions via Postman is to obtain a valid Keycloak token. This token is only valid for 5 minutes. I.e. you need to rerun this API request from time to time.
-
-## 2. Create Belt "Session Counter"
+## 1. Create Belt "Session Counter"
 
 In Granary, a belt is the resource that transforms incoming events in real-time to updates in the Profile Store. Conceptionally, you can perceive belts as a Function as a Service framework.
 
-To run a belt, we need to provide a Python script that transforms the ingested event's metadata \(as defined in our [Event Type](registering-new-data.md#2-create-event-type-customer-session)\) and the event's payload \(as sent in the previous chapter\) to one or many [Profile Update objects](../../developer-reference/dataflow/belt-extractor.md#configuration). Those profile updates are written to the Profile Store. In the Profile Store, each update is a Grain. A Grain is a single piece of information in a profile and follow [this schema](../../developer-reference/dataflow/profile-store/#table-profilestore).
+To run a belt, we need to provide a Python script that transforms the ingested event's metadata \(as defined in our [Event Type](registering-new-data.md#2-create-event-type-customer-session)\) and the event's payload \(as sent in the previous chapter\) to one or many [Profile Update objects](../../../developer-reference/dataflow/belt-extractor.md#configuration). Those profile updates are written to the Profile Store. In the Profile Store, each update is a Grain. A Grain is a single piece of information in a profile and follow [this schema](../../../developer-reference/dataflow/profile-store/#table-profilestore).
 
 Most of the belt configuration is covered by defaults, so creating your first belt goes like this:
 
-![Belt API Request: POST /belts](../../.gitbook/assets/image%20%2842%29.png)
+![Belt API Request: POST /belts](../../../.gitbook/assets/image%20%2842%29.png)
 
 For the body \(look for the tab with the green dot\) use this JSON and add your name in line 7 before sending:
 
@@ -41,7 +37,7 @@ The name of the Event Type in line 17 must match the Event Type's `name` you cre
 }
 ```
 
-Find more detailed explanation on each belt parameter in the [Belt API reference](../../developer-reference/api-reference/belt-api.md#create-and-store-a-belt).
+Find more detailed explanation on each belt parameter in the [Belt API reference](../../../developer-reference/api-reference/belt-api.md#create-and-store-a-belt).
 
 The extractor function in line 6 of the belt's JSON payload is the Python script mentioned aboved that transforms ingested events to Profile Updates. It looks actually like this:
 
@@ -64,12 +60,12 @@ def execute(event_headers, event_payload, profile=None):
 
 This Python script simply counts the incoming events per session. Some explanation:
 
-* Line 1 imports the [Profile Update object](../../developer-reference/dataflow/belt-extractor.md#configuration) 
-* Line 3 defines the [callback method](../../developer-reference/dataflow/belt-extractor.md#callback-signature) `execute()` which is called by the belt framework for each incoming event and carries the event's header metadata and the payload
+* Line 1 imports the [Profile Update object](../../../developer-reference/dataflow/belt-extractor.md#configuration) 
+* Line 3 defines the [callback method](../../../developer-reference/dataflow/belt-extractor.md#callback-signature) `execute()` which is called by the belt framework for each incoming event and carries the event's header metadata and the payload
 * Line 6 creates an Profile Update object with the signature `correlationId` and `path[]`. We can perceive both elements of the signature as the Grain's `key`
-* Line 8 sets the Grain's `value`. In our case this is a special value for Granary's [counter operation](../../developer-reference/dataflow/profile-store/#counter). See line 12, where we set the update's operation name to `_inc` \(increment\).
+* Line 8 sets the Grain's `value`. In our case this is a special value for Granary's [counter operation](../../../developer-reference/dataflow/profile-store/#counter). See line 12, where we set the update's operation name to `_inc` \(increment\).
 
-More advanced examples to follow in later chapters. Check this [best practice](../using-data-in-granary/best-practices/easing-development.md) how to transform it to a one-liner.
+More advanced examples to follow in later chapters. Check this [best practice](../../using-data-in-granary/best-practices/easing-development.md) how to transform it to a one-liner.
 
 With a Status `200 OK`, the return body looks like this:
 
@@ -123,11 +119,11 @@ With a Status `200 OK`, the return body looks like this:
 
 Again, Granary applied a whole bunch of default configuration. Especially, we got an ID \(line 44\) for our belt that we need in the followin step. Next up, starting this belt.
 
-## 3. Start Belt "Session Counter"
+## 2. Start Belt "Session Counter"
 
-Within step 2, we created a belt. In order to be able to transform data, we need to start the belt. This goes like so:
+Within step 1, we created a belt. In order to be able to transform data, we need to start the belt. This goes like so:
 
-![Belt API: POST /belts/35/state](../../.gitbook/assets/image%20%2840%29.png)
+![Belt API: POST /belts/35/state](../../../.gitbook/assets/image%20%2840%29.png)
 
 For the body \(look for the tab with the green dot\) use this JSON:
 
@@ -147,7 +143,7 @@ With a Status `200 OK`, the return body looks like this:
 
 The deployment goes quite quickly. You can check the current state like so:
 
-![Belt API: GET /belts/35/state](../../.gitbook/assets/image%20%2841%29.png)
+![Belt API: GET /belts/35/state](../../../.gitbook/assets/image%20%2841%29.png)
 
 With a Status `200 OK`, the return body looks like this:
 
