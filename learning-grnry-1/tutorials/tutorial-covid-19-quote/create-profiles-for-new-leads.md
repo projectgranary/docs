@@ -6,21 +6,21 @@ description: >-
 
 # Pipeline 1: Create Profiles for new Leads
 
-### 1. Creating Lead Event Type
+## 1. Creating Lead Event Type
 
 {% hint style="info" %}
 In Granary, [Event Types](../../data-in/how-to-run-a-harvester/event-types.md) are the central entity to type incoming raw data.
 {% endhint %}
 
-Select 'Manage Event Types' on the left side pane which will open the following page: 
+Select 'Manage Event Types' on the left side pane which will open the following page:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-14-at-15.21.46.png)
 
-Click on 'New Event Type' button on the right side of the page. 
+Click on 'New Event Type' button on the right side of the page.
 
 ![](../../../.gitbook/assets/screenshot-2021-04-14-at-15.24.24.png)
 
-Here the configurations, you need to copy: 
+Here the configurations, you need to copy:
 
 > Name: `RealTimeET-<yourName>`
 >
@@ -36,9 +36,7 @@ And click on button ‘Create Event Type’.
 
 ![](../../../.gitbook/assets/screenshot-2021-04-14-at-15.56.54.png)
 
-### 
-
-### 2. Configure Harvester
+## 2. Configure Harvester
 
 {% hint style="info" %}
 In Granary, [Harvesters](../../data-in/how-to-run-a-harvester/harvesters.md) are the abstraction for data ingestion pipelines.
@@ -56,11 +54,11 @@ Configure the Source Type – select the default configuration as it is. I.e. we
 
 ![](../../../.gitbook/assets/screenshot-2021-04-14-at-16.07.24.png)
 
-Select the Event Type `RealTimeET-<yourName>` which we have created above with the `latest` version from the drop down.   
+Select the Event Type `RealTimeET-<yourName>` which we have created above with the `latest` version from the drop down.
 
 ![](../../../.gitbook/assets/screenshot-2021-04-14-at-16.10.31.png)
 
-Also, we need to add a transform script like: 
+Also, we need to add a transform script like:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-14-at-16.15.29.png)
 
@@ -123,25 +121,25 @@ Once the Harvester is created, It is stopped in state initially, from the left s
 
 ![](../../../.gitbook/assets/screenshot-2021-05-05-at-09.33.42.png)
 
-After harvester started we can see the state is running and can search the harvester by its name: 
+After harvester started we can see the state is running and can search the harvester by its name:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-15-at-16.49.35.png)
 
-### 3. Transform events with the Belt
+## 3. Transform events with the Belt
 
 {% hint style="info" %}
 In Granary, a Belt is a function runtime that transforms raw events to valuable information according to business requirements. Check the [Belt runtime reference](../../../developer-reference/dataflow/belt-extractor.md) for a documentation of all its features.
 {% endhint %}
 
-Select the 'Manage Belts' section from the left side of the page and click on button 'New Belt'. Specify the name of Belt `RealTime-Belt-<yourName>` and select the Event Type `RealTimeET-<yourName>` created above. 
+Select the 'Manage Belts' section from the left side of the page and click on button 'New Belt'. Specify the name of Belt `RealTime-Belt-<yourName>` and select the Event Type `RealTimeET-<yourName>` created above.
 
 ![](../../../.gitbook/assets/screenshot-2021-04-14-at-17.22.49.png)
 
-Once the Belt is created, it looks like this: 
+Once the Belt is created, it looks like this:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-14-at-17.23.44.png)
 
-We can use Belt configuration parameters: 
+We can use Belt configuration parameters:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.31.38.png)
 
@@ -172,10 +170,9 @@ def getUpdatedPersonalDetailsObj(correlationId,nameString,name_dictionary):
     updatedObject.set_value(name_dictionary[nameString],reader=reader)
     updatedObject.set_type(profile_type)
     return updatedObject
-
 ```
 
-The primary goal of the Belt's transformation function is to model a Profile based on incoming raw events by creating Profile Update objects. In line 10, we create a dictionary which contains `Age`, `Person Name`, and `Country`. These are the keys of the attributes of our Profile. In Granary we call them Grain paths. These details get appended to the Profile Update object using `getUpdatedPersonalDetailsObj()` in line 11ff. In line 21, the profile gets created using the values getting passed. At line no 18, profile\_type is defined with combination of `appid`:"Covid19",  "-" and `usecase`:"CostByCountry".
+The primary goal of the Belt's transformation function is to model a Profile based on incoming raw events by creating Profile Update objects. In line 10, we create a dictionary which contains `Age`, `Person Name`, and `Country`. These are the keys of the attributes of our Profile. In Granary we call them Grain paths. These details get appended to the Profile Update object using `getUpdatedPersonalDetailsObj()` in line 11ff. In line 21, the profile gets created using the values getting passed. At line no 18, profile\_type is defined with combination of `appid`:"Covid19", "-" and `usecase`:"CostByCountry".
 
 {% hint style="info" %}
 Check the reference of available [Profile Update operations](../../../developer-reference/dataflow/profile-store/#component-profile-updater) as well as the Belt's [best practice section](../../using-data-in-granary/best-practices/) for more transformation function examples.
@@ -185,7 +182,7 @@ Start the Belt and check if it is in running state:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-15-at-12.00.55.png)
 
-### 4. Validate with Profile Explorer
+## 4. Validate with Profile Explorer
 
 To test the pipeline, send a HTTP `POST` request with the following JSON body to the Snowplow API endpoint of demo environment \(`<host>/api/com.snowplowanalytics.snowplow/tp2`\):
 
@@ -220,15 +217,13 @@ After the events are received at Belt, the transform function is executed and Pr
 
 The paths "Age \[Y\]", "Country", "Name" \(first name + last name\) with the corresponding values passed get inserted into Profile Store. Select 'Explore Profile' section on the right hand side. There we can see that the profile will look like this:
 
-While searching the profile in Profile Explorer we need to specify : 
+While searching the profile in Profile Explorer we need to specify :
 
 > Profile Type : Covid19-CostByCountry
 >
 > Correlation id : cid value from the postman request
 
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.28.37.png)
-
-
 
 {% hint style="info" %}
 Naming of all components can be any valid string.

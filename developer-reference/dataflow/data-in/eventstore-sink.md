@@ -14,6 +14,7 @@ The EventStore expects that the event headers have been enriched with the follow
 * grnry-event-type-version
 * grnry-harvester-name
 * grnry-event-timestamp
+* grnry-deletion-flag \(optional\)
 
 The parameters for the EventStore Sink are passed into the Harvester API's helm chart.
 
@@ -25,13 +26,14 @@ The parameters for the EventStore Sink are passed into the Harvester API's helm 
 
 The parameters for the EventStore 
 
-In addition, you will need to fill following parameter.
+Additional configuration parameters:
 
-| Parameter | Description |
-| :--- | :--- |
-| eventstore.tableName | The table where the data will be inserted into. |
-| eventstore.batchSize | The batch size after which messages will be inserted into postgres. |
-| eventstore.batchTimeout | Inserts any messages in batch into postgres if timeout in ms is reached before batch reached `batchSize`. |
+| Parameter | Description | Default |
+| :--- | :--- | :--- |
+| eventstore.tableName | The table where the data will be inserted into. | `"eventstore"` |
+| eventstore.batchSize | The batch size after which messages will be inserted into postgres. | `"100"` |
+| eventstore.batchTimeout | Inserts any messages in batch into postgres if timeout in ms is reached before batch reached `batchSize`. | `"1000"` |
+| eventstore.ttlGracePeriod | Grace period until a deleted grain will be reaped eventually after receiving a tombstone event. Must be a valid ISO\_8601 Duration representation in basic format and thus may not contain hyphens. | `"P5D"` |
 
 **Source Parameters:**
 
@@ -79,6 +81,7 @@ eventstores:
         spring.cloud.stream.bindings.input.consumer.partitioned: "true"
         spring.cloud.stream.kafka.binder.minPartitionCount: "24"
         eventstore.tableName: public.eventstore
+        eventstore.ttlGracePeriod: "PT30S"
         eventstore.batchSize: "100"
         eventstore.batchTimeout: "1000"
 ```

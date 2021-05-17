@@ -20,27 +20,21 @@ Apart from the tutorials, you can also look into our [GrApp Solution Templates](
 
 To meet certain constraints \(e.g., GDPR compliance\), Data cannot be persisted just as it comes in. Fields must be chosen explicitly via whitelist before writing them to your database.
 
-{% embed url="https://github.com/syncier/grnry-samples/tree/master/grapp-solution-templates/json-node-whitelisting-grapp" %}
+{% embed url="https://github.com/syncier/grnry-samples/tree/master/grapp-solution-templates/json-node-whitelisting-grapp" caption="" %}
 
 ### Learn how to create personalised views on your Data
 
 Often one representation of your sales landing pages is not enough. Personalize it based on your customers behavior!
 
-{% embed url="https://github.com/syncier/grnry-samples/tree/master/grapp-solution-templates/personalization-grapp" %}
+{% embed url="https://github.com/syncier/grnry-samples/tree/master/grapp-solution-templates/personalization-grapp" caption="" %}
 
 ### Learn how to integrate external Systems
 
 To integrate with a CRM like Salesforce, data must be transformed and imported. Fields must be mapped to the corresponding fields defined in the CRM.
 
-{% embed url="https://github.com/syncier/grnry-samples/tree/master/grapp-solution-templates/salesforce-integration-grapp" %}
+{% embed url="https://github.com/syncier/grnry-samples/tree/master/grapp-solution-templates/salesforce-integration-grapp" caption="" %}
 
 ### Import Solutions into Granary
 
-Instead of deploying each Solution Template yourself, you can quickly onboard the finished GrApp with the [GrApp Importer](../staging-of-data-pipelines.md#3-running-the-import-job). 
-
-
-
-
-
-
+Instead of deploying each Solution Template yourself, you can quickly onboard the finished GrApp with the [GrApp Importer](../staging-of-data-pipelines.md#3-running-the-import-job).
 

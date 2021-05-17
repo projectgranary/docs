@@ -10,7 +10,7 @@ In the following we want to describe from start to finish how to model and creat
 
 ## 1. Decide which data to use
 
-First you need to decide which data to create the segment on. If you want to create your segment on the data saved in key-value profiles you will use the [Profile Store](../../developer-reference/dataflow/profile-store/). If you want to work with event data you will use the [Event Store](../../developer-reference/dataflow/event-store.md).
+First you need to decide which data to create the segment on. If you want to create your segment on the data saved in key-value profiles you will use the [Profile Store](../../developer-reference/dataflow/profile-store/). If you want to work with event data you will use the [Event Store](../../developer-reference/dataflow/event-store/).
 
 In our example, we want to create a segment on the Event Store so in the configuration of our segment`SOURCE_TABLE_NAME` will be set to `eventstore`.
 

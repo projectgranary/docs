@@ -19,8 +19,8 @@ For the body \(look for the tab with the green dot\) use this JSON:
 ```javascript
 {
   "data": [
-	{
-	  "correlationId": "Session4711",
+    {
+      "correlationId": "Session4711",
     "filterCriteria": "customer-sessions",
     "start": "2020-05-14T14:05:56",
     "end": "2020-05-14T14:15:42",
@@ -31,7 +31,7 @@ For the body \(look for the tab with the green dot\) use this JSON:
     "device": "Device42",
     "customer": "Customer911",
     "contract": "Contract5432"
-	}
+    }
  ]
 }
 ```

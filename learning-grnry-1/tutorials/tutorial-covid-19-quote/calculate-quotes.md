@@ -6,13 +6,13 @@ description: This is to explain how to calculate the quotation of an existing pr
 
 Once the Profile from [Pipeline 1](create-profiles-for-new-leads.md) is created, we can fetch the profile in the Belt and with its details calculate COVID-19 adjusted insurance premiums and update the value back to the respective profile.
 
-### 1. Creating Quote Request Event Type
+## 1. Creating Quote Request Event Type
 
-Select the 'Manage Event Types' on the left side pane and create Event Type `QuoteCalET-<yourName>` with the following details:  
+Select the 'Manage Event Types' on the left side pane and create Event Type `QuoteCalET-<yourName>` with the following details:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-15-at-13.45.04.png)
 
-Here the configurations, you need to copy: 
+Here the configurations, you need to copy:
 
 > Name: `QuoteCalET-<yourName>`
 >
@@ -20,15 +20,13 @@ Here the configurations, you need to copy:
 >
 > Correlation ID Expression: `#safeJsonPath(payload,'cid')?:'NO_CORRELATION_ID'`
 
-### 
+## 2. Configure Harvester
 
-### 2. Configure Harvester
-
-Select the 'Manage Harvesters' on the left side pane, and create `QuoteCal-Harvester-<yourName>` with the Source Type "Grnry Topic" in version 1.0.0 and select the Event Type `QuoteCalET-<yourName>` which we have created above with `latest` version. 
+Select the 'Manage Harvesters' on the left side pane, and create `QuoteCal-Harvester-<yourName>` with the Source Type "Grnry Topic" in version 1.0.0 and select the Event Type `QuoteCalET-<yourName>` which we have created above with `latest` version.
 
 ![](../../../.gitbook/assets/screenshot-2021-04-15-at-13.47.23.png)
 
-Also, we need to add a transform script like: 
+Also, we need to add a transform script like:
 
 ```groovy
 import groovy.json.JsonSlurper
@@ -85,35 +83,35 @@ Start the Harvester using the left side dropdown of the screen and check if it i
 
 ![](../../../.gitbook/assets/screenshot-2021-04-15-at-16.48.47.png)
 
-### 
-
-### 3. Calculate Quote in the Belt
+## 3. Calculate Quote in the Belt
 
 Select the 'Manage Belts' section from the left side of the page and lick on button 'New Belt'. Specify the name of Belt `QuoteCalculator-Belt-<yourName>` and select the Event Type `QuoteCalET-<yourName>` created above.
 
-The belt will look like: 
+The belt will look like:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-16-at-16.28.03.png)
 
-In the Belt Configuration we must select the Fetch Profile = “Yes”. Because we are processing on the profiles which are already created using RealTime-Belt. 
+In the Belt Configuration we must select the Fetch Profile = “Yes”. Because we are processing on the profiles which are already created using RealTime-Belt.
 
 And the other parameters Kubernetes Secret, Username Property, Password Property and Profile Type need specification:
 
-> "fetchProfile": "TRUE", 
+> "fetchProfile": "TRUE",
 >
->     "profileType": "Covid19-CostByCountry", 
+> ```text
+> "profileType": "Covid19-CostByCountry", 
 >
->     "secret": "grnry-belt-tutorial-secret", 
+> "secret": "grnry-belt-tutorial-secret", 
 >
->     "secretUsername": "username", 
+> "secretUsername": "username", 
 >
->     "secretPassword": "password"
+> "secretPassword": "password"
+> ```
 
 {% hint style="info" %}
 Secret grnry-belt-tutorial-secret is already created and applied.
 {% endhint %}
 
-If we need to use logging, then we should specify the configuration  
+If we need to use logging, then we should specify the configuration
 
 Here in the Belt function we are making an external API call to the COVID-19 API. Hence, in this pipeline we must specify PIP import requests in the belt function and need to specify the value in Belt configuration for the following parameter:
 
@@ -201,12 +199,10 @@ def execute(event_headers, event_payload, profile=None):
     return update
 ```
 
-The function describes the calculation of quote for COVID-19 and returns the insurance premium.  At line 22 we define the external API's base url \([https://api.covid19api.com/](https://api.covid19api.com/')\). From the Profile payload lookup \(lines 27-35\), we get the latest profile values for `age` and `country code`. We fetch all countries from the external API \(/countries\) at line 37. We then match the resulting array of fetched country codes with the `country code` from the profile payload at line 39. If matches, then save the country name in the `country name` variable. Further, using the country name, we fetch the current COVID-19 figures for this country from the external API at line 43 \(/live/country/&lt;country&gt;\).  
-From the API response, we fetch the value of `Confirmed cases` and `Death cases` of current date and calculate the daily `mortality rate` from the above values at line 55. Finally, using the combination of `mortality rate` and `age` of the person calculate the insurance premium as a result. At line no 46, profile\_type is defined with combination of `appid`  `-`  `usecase` received the event at belt which looks like `Covid19-CostByCountry.`Once all calculations are done, update the profile back to the Profile Store at line 67.
+The function describes the calculation of quote for COVID-19 and returns the insurance premium. At line 22 we define the external API's base url \(\[[https://api.covid19api.com/\]\(https://api.covid19api.com/'\)\](https://api.covid19api.com/]%28https://api.covid19api.com/'%29\)\). From the Profile payload lookup \(lines 27-35\), we get the latest profile values for `age` and `country code`. We fetch all countries from the external API \(/countries\) at line 37. We then match the resulting array of fetched country codes with the `country code` from the profile payload at line 39. If matches, then save the country name in the `country name` variable. Further, using the country name, we fetch the current COVID-19 figures for this country from the external API at line 43 \(/live/country/&lt;country&gt;\).  
+From the API response, we fetch the value of `Confirmed cases` and `Death cases` of current date and calculate the daily `mortality rate` from the above values at line 55. Finally, using the combination of `mortality rate` and `age` of the person calculate the insurance premium as a result. At line no 46, profile\_type is defined with combination of `appid` `-` `usecase` received the event at belt which looks like `Covid19-CostByCountry.`Once all calculations are done, update the profile back to the Profile Store at line 67.
 
-
-
-### 4. Validate Calculated Quote in the Profile Explorer
+## 4. Validate Calculated Quote in the Profile Explorer
 
 To test the pipeline, send a HTTP `POST` request with the following JSON body to the Snowplow API endpoint of demo environment \(`<host>/api/com.snowplowanalytics.snowplow/tp2`\):
 
@@ -228,7 +224,7 @@ You can send this event using Granary's Postman collection. See Prerequisites.
 The **`personprofile`** must be "0", Do not change the value of `personprofile.`
 {% endhint %}
 
-When the event is triggered, we can also check at the Harvester and Belt's 'Data Out' Event Viewer: 
+When the event is triggered, we can also check at the Harvester and Belt's 'Data Out' Event Viewer:
 
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.32%20%281%29.png)
 
@@ -236,13 +232,11 @@ When the event is triggered, we can also check at the Harvester and Belt's 'Data
 
 The profile gets updated with the value of calculated insurance premium in the Profile Store:
 
-While searching the profile in Profile Explorer we need to specify : 
+While searching the profile in Profile Explorer we need to specify :
 
 > Profile Type : Covid19-CostByCountry
 >
 > Correlation id : cid value from the postman request
 
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.56.38.png)
-
-
 

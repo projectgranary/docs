@@ -16,11 +16,11 @@ For the body \(look for the tab with the green dot\) use this JSON:
 
 ```javascript
 {
-	"displayName": "Customer Session",
-	"description": "Event Type for Customer Sessions",
-	"correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
-	"eventIdExpression": "#randomUUID()",
-	"timestampExpression": "#nowMillis()"
+    "displayName": "Customer Session",
+    "description": "Event Type for Customer Sessions",
+    "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
+    "eventIdExpression": "#randomUUID()",
+    "timestampExpression": "#nowMillis()"
 }
 ```
 
@@ -75,14 +75,14 @@ The name of the Event Type in line 21 must match the Event Type's `name` you cre
 
 ```javascript
 {
-	"displayName": "Snowplow Customer Sessions",
-	"sourceType": {
-		"name": "grnry-topic",
-		"version": "0.8.1",
+    "displayName": "Snowplow Customer Sessions",
+    "sourceType": {
+        "name": "grnry-topic",
+        "version": "0.8.1",
     "configuration": {
         "consumer.input-topic": "snowplow"
     }
-	},
+    },
   "metadataExtractor": {
     "app": "grnry-data-in-metadata",
     "version": "0.8.1"
@@ -93,10 +93,10 @@ The name of the Event Type in line 21 must match the Event Type's `name` you cre
     "language": "groovy",
     "script": "import io.grnry.scdfapps.scriptable.snowplow.SnowplowPayloadExtractor\\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe\\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload\\nimport com.fasterxml.jackson.databind.ObjectMapper\\nimport groovy.json.JsonSlurper\\n\\n// deserialize Snowplow payload\\nSnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)\\n\\n// get normalized JSON String representation of Snowplow event\\neventString = SnowplowPayloadExtractor.getActualSnowplowPayload(snowplowEvent)\\n\\nJsonSlurper slurper = new JsonSlurper()\\n// JSON Object representation of normalized payload\\n\\nevent = slurper.parseText(eventString)\\nif (event?.body?.data?.filterCriteria) {\\n    // find filterCriteria in POST body\\n    if (event.body.data[0].filterCriteria.equalsIgnoreCase(\\\"customer-sessions\\\")) {\\n        return eventString\\n    }\\n}\\n\\n// skip event\\nreturn null"
   },
-	"eventType": {
-		"name": "customer-session",
-		"version": "latest"
-	}
+    "eventType": {
+        "name": "customer-session",
+        "version": "latest"
+    }
 }
 ```
 
@@ -251,7 +251,7 @@ For the body \(look for the tab with the green dot\) use this JSON:
 
 ```javascript
 {
-	"action": "START"
+    "action": "START"
 }
 ```
 
@@ -295,7 +295,7 @@ For the body \(look for the tab with the green dot\) use this JSON:
 
 ```javascript
 {
-	"action": "START"
+    "action": "START"
 }
 ```
 
