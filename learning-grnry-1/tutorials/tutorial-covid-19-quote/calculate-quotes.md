@@ -230,9 +230,9 @@ The **`personprofile`** must be "0", Do not change the value of `personprofile.`
 
 When the event is triggered, we can also check at the Harvester and Belt's 'Data Out' Event Viewer: 
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.32%20%281%29.png)
+![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.32%20%281%29%20%281%29.png)
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.58%20%281%29.png)
+![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.58%20%282%29.png)
 
 The profile gets updated with the value of calculated insurance premium in the Profile Store:
 

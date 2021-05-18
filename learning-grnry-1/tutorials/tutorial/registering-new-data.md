@@ -4,13 +4,13 @@ description: 'In this chapter, we create & deploy all resources to import tracki
 
 # Registering new Data Pipeline
 
-![](../../../.gitbook/assets/grafik%20%2827%29.png)
+![](../../../.gitbook/assets/grafik%20%2820%29%20%281%29.png)
 
 ## 1. Create Event Type "Customer Session"
 
 In Granary, an event type describe the metadata and schema of a particular category of raw data that you want to import. In our case, this is tracking data consisting of customer sessions. Create your first event type like so:
 
-![Harvester API Request: POST/event-types](../../../.gitbook/assets/image%20%2819%29.png)
+![Harvester API Request: POST/event-types](../../../.gitbook/assets/image%20%2819%29%20%281%29.png)
 
 For the body \(look for the tab with the green dot\) use this JSON:
 

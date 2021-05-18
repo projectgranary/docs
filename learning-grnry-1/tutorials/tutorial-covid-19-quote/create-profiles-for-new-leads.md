@@ -212,7 +212,7 @@ Once the Snowplow event is triggered, our Harvester will ingest the events into 
 
 In Granary UI's Event Browser, we can interactively follow the journey of events through Granary. After the events received at Harvester, we can see them in the 'Data Out' Event Browser:
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.32.png)
+![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.32%20%281%29.png)
 
 After the events are received at Belt, the transform function is executed and Profile Updates are written to the destination topic 'profile-update' which we can see in the 'Data Output' Event Browser:
 

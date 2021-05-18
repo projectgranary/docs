@@ -19,7 +19,7 @@ In order to use the Postman collection, its values and environment variables nee
 
 After we have authorized our token, we can start with creating belts. A more detailed explanation for the Belt API can be found [here](../../developer-reference/api-reference/belt-api.md) which shows various operations which can be performed with the belts. The JSON based input required to create a belt can be seen here:
 
-![](../../.gitbook/assets/postmancollectioncreatebelt%20%281%29.png)
+![](../../.gitbook/assets/postmancollectioncreatebelt%20%282%29.png)
 
 The different arguments seen are the basic required for creating a Belt. In line 4, the extractor function takes a python code as a one-liner which performs the transformations on the input data from the Kafka topic. Line 5 points to the Kafka topics from where the belt needs to read data. The Belt can read from one or more than one Kafka topics, depending on the functionality to be implemented. The rest of the properties can be seen on the above mentioned link for the Belt API. The following is the output after the Belt is created:
 
@@ -77,7 +77,7 @@ The output of creating a Belt assigns an `id` number to the Belt. This `id` can 
 
 Similarly, the Belt's `id` is also used to stop a Belt which has already been deployed on the cluster. The following image illustrates how to stop a Belt with an indicator for where to put the `id` number of the Belt:
 
-![](../../.gitbook/assets/postmancollectionstopbelt%20%282%29.png)
+![](../../.gitbook/assets/postmancollectionstopbelt%20%282%29%20%281%29.png)
 
 ## BELT Operations through Granary UI
 
