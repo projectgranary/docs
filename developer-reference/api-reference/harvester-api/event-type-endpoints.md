@@ -303,7 +303,9 @@ Create an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-To create an event type your user needs to have the respective `event_type_{type}_edit` role \(E.g. to create a `data_in`-type event type you need the `event_type_data_in_edit` role. Be aware that you will not be able to update the entity afterwards if your account does not have the role set in `editor`.
+To create an event type your user needs to have the respective `event_type_{type}_edit` role \(E.g. to create a `data_in`-type event type you need the `event_type_data_in_edit` role. Be aware that you will not be able to update the entity afterwards if your account does not have the role set in `editor`.  
+  
+When you create a `data_in` event type \(default\), the system will automatically create a persister using the persister default configuration. On other types besides `data_in` \(like `ttl`/`ttn`\) it will just create the event type and all persister endpoints will return `404 - not found`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -848,7 +850,7 @@ Get Persister for a Specific Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get the persister of an event type.  
+Get the persister of an event type \(only available on "data\_in" event types\).  
 This request requires the role matching either `consumer` or `editor`. If `consumer` is null, any authenticated user is authorized. 
 {% endapi-method-description %}
 
@@ -960,7 +962,7 @@ Missing roles to access this resource.
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-Event store, event type not found.
+Event store, event type not found \(expected behaviour on event types other than of type "data\_in"\)
 {% endapi-method-response-example-description %}
 
 ```
@@ -1068,6 +1070,26 @@ The updated stream app version. This version has to be present in the backend sp
 ```
 {% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=302 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=304 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
 {% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
 Invalid parameters
@@ -1110,6 +1132,36 @@ Missing roles to access this resource.
     "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
 }
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=500 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=503 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}

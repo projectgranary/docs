@@ -18,7 +18,7 @@ The Segment Manager uses these [custom resources](https://kubernetes.io/docs/con
 
 ## Model SegmentSpec
 
-The `SegmentSpec` is an object with following attributes `cronjob`, `env`, `envFromSecrets` and `image` . Each attribute is an object itself described below. All optional attributes can be set via environment variables in the Segment Manager to overwrite the defaults.
+The `SegmentSpec` is an object with following attributes `cronjob`, `env`, `envFromSecrets` and `image` . Each attribute is an object itself described below. 
 
 {% hint style="info" %}
 An example SegmentSpec can be found [here](https://github.com/syncier/grnry-segment-manager/blob/master/deploy/crds/segment.grnry.io_v1alpha1_segment_cr.yaml).
@@ -134,6 +134,23 @@ For information regarding these attributes consult the [Kubernetes Docs](https:/
 | repository | hub.syncier.cloud/grnry/segment-table-creation | Optional |
 | restartPolicy | OnFailure | Optional |
 | tag | 0.7.0 | Optional |
+
+### Overwriting Default Attributes
+
+To overwrite the default values used for optional attributes deploy the Segment Manager with the respective environment variables found [here](https://github.com/syncier/grnry-segment-manager/blob/master/pkg/apis/segment/v1alpha1/envs.go). 
+
+In case of a Helm deployment adjust [extraEnv](https://github.com/syncier/grnry-segment-manager/blob/master/helm/values.yaml#L21-L22) like so:
+
+```text
+extra:
+    extraEnv:
+     - name: IMAGE_TAG
+       value: 1.0.0
+     - name: DB_SECRET
+       value: custom-secret
+     - name: DB_USER
+       value: custom-user-key
+```
 
 ### Further Information
 
