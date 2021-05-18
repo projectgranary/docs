@@ -4,7 +4,7 @@
 
 Cloud Functions is a service by Firebase that allows us to trigger nodejs code in response to certain triggers \(i.e. certain analytics events send by our app, crashlytics events, etc.\). For a full description of triggers please refer to [https://cloud.google.com/functions/docs/concepts/events-triggers](https://cloud.google.com/functions/docs/concepts/events-triggers). First you will need to create some events of the type you want to use as a trigger. Once they appear in the Firebase Analytics Events console you need to mark the respective events as "conversions". PLEASE take note that you can only mark a certain number of event types as conversions, please refer to the Firebase documentation for this number. 
 
-![](../../.gitbook/assets/eventconversiondeclaration.png)
+![](../../.gitbook/assets/eventconversiondeclaration%20%281%29.png)
 
 First you need to install the firebase-functions and the various dependencies using npm. Then you will set up your firebase project locally to accept your functions written in nodejs. For guidelines for the setup please refer to [Setting up Firebase Cloud functions](https://docs.grnry.io/~/drafts/-LIkJkVZOwUaX-xi7fBZ/primary/user-guide/firebase-integration-via-cloud-functions/setting-up-firebase-cloud-functions).
 
