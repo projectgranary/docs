@@ -81,7 +81,7 @@ the [Profile Update](../../../developer-reference/dataflow/profile-store/#compon
 
 ### Step 2: Wait for Reaper to reap the Deletion Grain
 
-The Reaper runs periodically configured via a CRON job. Depending on the next Reaper run but earliest after the five minute TTL value, the Reaper will emit our deleteion grain to two different topics. The first topic is the GRNRY internal central deletion topic which is connected to an internal belt that ensures that the grains are deleted from Profile Store. The second topic is a profile-type-specific topic `grnry_ttl_your-profile-type-ttl` where the same grain is written to allow users to act on their deletion.
+The Reaper runs periodically configured via a CRON job. Depending on the next Reaper run but earliest after the five minute TTL value, the Reaper will emit our deleteion grain to two different topics. The first topic is the GRNRY internal central deletion topic which is connected to an internal belt that ensures that the grains are deleted from Profile Store. The second topic is a profile-type-specific topic `grnry_ttl_ttl-your-profile-type` where the same grain is written to allow users to act on their deletion.
 
 Reaper's log output looks like this if grains were reaped:
 
@@ -116,13 +116,13 @@ Search the parameter `writeCount` to see how many grains were reaped during the 
 Expired grains in the TTL topics carry the following header values:
 
 ```java
-topic: "grnry_ttl_deletion-ttl"
+topic: "grnry_ttl_ttl-deletion"
 kafka_messageKey: "correlation_id"
 grnry-harvester-name: "grnry-reaper"
 grnry-correlation-id: "Deletion82542"
 grnry-event-timestamp: "1584708855528"
 grnry-event-id: "cfcea2b7-68e1-4489-9577-1616179e6235"
-grnry-event-type: "deletion-ttl"
+grnry-event-type: "ttl-deletion"
 ```
 
 and  payload:
@@ -142,14 +142,14 @@ String origin: "/belt123"
 
 ### Step 3: Deploy Belt that consumes Reaper emitted Grains
 
-To act upon a deletion, we need to deploy a belt that consumes from the topic `grnry_ttl_deletion-ttl`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "deletion-ttl". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api/#create-an-event-type) `ttl`. In the belt callback script, the values in the `execute` function will look like this:
+To act upon a deletion, we need to deploy a belt that consumes from the topic `grnry_ttl_ttl-deletion`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "ttl-deletion". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api/#create-an-event-type) `ttl`. In the belt callback script, the values in the `execute` function will look like this:
 
 #### Event Headers
 
 ```javascript
 {
     "grnry-harvester-name": "grnry-reaper",
-    "grnry-event-type": "your-profile-type-ttl",
+    "grnry-event-type": "ttl-your-profile-type",
     "grnry-event-id": "cfcea2b7-68e1-4489-9577-1616179e6235",
     "grnry-correlation-id": "Deletion82542",
     "grnry-event-timestamp": "1584708855528"

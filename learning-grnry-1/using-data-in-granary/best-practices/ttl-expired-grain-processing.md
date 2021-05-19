@@ -78,7 +78,7 @@ the Profile Updater inserts a grain with a TTN of only 5 minutes. For an easier 
 
 ### Step 2: Wait for Reaper to reap the Notification Grain
 
-The Reaper runs periodically configured via a CRON job. Depending on the next Reaper run but earliest after the five minutes, the Reaper will emit our notification grain to the the topic `grnry_ttn_feedback-ttn` .
+The Reaper runs periodically configured via a CRON job. Depending on the next Reaper run but earliest after the five minutes, the Reaper will emit our notification grain to the the topic `grnry_ttn_ttn-feedback` .
 
 Reaper's log output looks like this if grains were reaped:
 
@@ -113,13 +113,13 @@ Search the parameter `writeCount` to see how many grains were reaped during the 
 Expired grains in the TTN topics carry the following header values:
 
 ```java
-topic: "grnry_ttn_feedback-ttn"
+topic: "grnry_ttn_ttn-feedback"
 kafka_messageKey: "feedback"
 grnry-harvester-name: "grnry-reaper"
 grnry-correlation-id: "Feedback82542"
 grnry-event-timestamp: "1584708855528"
 grnry-event-id: "cfcea2b7-68e1-4489-9577-1616179e6235"
-grnry-event-type: "feedback-ttn"
+grnry-event-type: "ttn-feedback"
 ```
 
 and  payload:
@@ -139,14 +139,14 @@ String origin: "/belt123"
 
 ### Step 3: Deploy Belt that consumes Reaper emitted Grains
 
-To act upon a notification, we need to deploy a belt that consumes from the topic `grnry_ttn_feedback-ttn`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "feedback-ttn". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api/#create-an-event-type) `ttn`. In the belt callback script, the values in the `execute` function will look like this:
+To act upon a notification, we need to deploy a belt that consumes from the topic `grnry_ttn_ttn-feedback`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "feedback-ttn". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api/#create-an-event-type) `ttn`. In the belt callback script, the values in the `execute` function will look like this:
 
 #### Event Headers
 
 ```javascript
 {
     "grnry-harvester-name": "grnry-reaper",
-    "grnry-event-type": "feedback-ttn",
+    "grnry-event-type": "ttn-feedback",
     "grnry-event-id": "cfcea2b7-68e1-4489-9577-1616179e6235",
     "grnry-correlation-id": "Feedback82542",
     "grnry-event-timestamp": "1584708855528"
