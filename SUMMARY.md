@@ -21,6 +21,7 @@
 * [Transform Data In Granary](learning-grnry-1/using-data-in-granary/README.md)
   * [How to run a Belt](learning-grnry-1/using-data-in-granary/getting-started.md)
   * [Best Practices](learning-grnry-1/using-data-in-granary/best-practices/README.md)
+    * [Managing Database with Belt](learning-grnry-1/using-data-in-granary/best-practices/managing-database-with-belt.md)
     * [Hints on naming of Belts](learning-grnry-1/using-data-in-granary/best-practices/hints-on-naming-of-belts.md)
     * [Local Belt Testing](learning-grnry-1/using-data-in-granary/best-practices/local-testing.md)
     * [Belt Callback Signatures](learning-grnry-1/using-data-in-granary/best-practices/belt-callback-signatures.md)

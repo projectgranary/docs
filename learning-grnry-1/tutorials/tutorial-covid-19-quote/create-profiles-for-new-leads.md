@@ -117,7 +117,7 @@ In the transform script, we are parsing the data which we are getting from the S
 Check the Harvester's [best practice section](../../data-in/best-practices-1/) for more scriptable transform examples.
 {% endhint %}
 
-Once the Harvester is created, It is stopped in state initially, from the left side of the screen we can see the drop down using that we need to start the Harvester.
+Once the Harvester is created, It is stopped in state initially, from the right side of the screen we can see the drop down using that we need to start the Harvester.
 
 ![](../../../.gitbook/assets/screenshot-2021-05-05-at-09.33.42.png)
 
@@ -215,7 +215,7 @@ After the events are received at Belt, the transform function is executed and Pr
 
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.58.png)
 
-The paths "Age \[Y\]", "Country", "Name" \(first name + last name\) with the corresponding values passed get inserted into Profile Store. Select 'Explore Profile' section on the right hand side. There we can see that the profile will look like this:
+The paths "Age \[Y\]", "Country", "Name" \(first name + last name\) with the corresponding values passed get inserted into Profile Store. Select 'Explore Profile' section on the left hand side. There we can see that the profile will look like this:
 
 While searching the profile in Profile Explorer we need to specify :
 

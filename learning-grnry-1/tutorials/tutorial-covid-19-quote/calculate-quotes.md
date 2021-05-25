@@ -79,7 +79,7 @@ def hasJsonStructure(String body){
 
 In the transform script we are parsing the data which we are getting from the snowplow event. The filter function at line number 16 getting called to compares the values of `appId`, `useCase` and `personProfile = 0`, if the event contains the flag as `0` then it will direct to the quote calculation path and return the result accordingly.
 
-Start the Harvester using the left side dropdown of the screen and check if it is in running state :
+Start the Harvester using the right side dropdown of the screen and check if it is in running state :
 
 ![](../../../.gitbook/assets/screenshot-2021-04-15-at-16.48.47.png)
 
