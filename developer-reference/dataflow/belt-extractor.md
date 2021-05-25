@@ -207,20 +207,30 @@ Following rules are validated:
 * If `FETCH_PROFILE` is `true` 
   * The execute method needs to have exactly 3 parameters
 
-### **Profile Fetching**
+### Data **Fetching**
 
-In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the `profileClient` into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
+In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the `profileClient` class into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
 
 ```python
 profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])
 ```
 
-The profileClient uses the `PROFILE_TYPE` environment variable as default. To fetch another profile type it can be passed as a further optional parameter like this `getProfile(cid,profileType)`.
+The profile client uses the `PROFILE_TYPE` environment variable as default. To fetch another profile type it can be passed as a further optional parameter like this `getProfile(cid,profileType)`.
 
 Additionally only specific fragments of a profile can be fetched by adding another optional parameter to `getProfile` like this:
 
 ```python
 profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'], fragments=['/customer/name','/customer/adress','/invoiceDetails'])
+```
+
+Next to the `profileClient`, an `eventstoreClient` class is injected into the callback if using`FETCH_PROFILE=true` or `FETCH_PROFILE=lazy`. The eventstore client has two methods:
+
+1. `getEvents` to fetch all events for a `correlation_id` 
+2. `getEvent` to fetch a single Event with `correlation_id` and `event_id`.
+
+```yaml
+eventstoreClient.getEvents(event['metadata']['grnry-correlation-id'],offset=0,pagesize=20)
+eventstoreClient.getEvent(event['metadata']['grnry-correlation-id'],'0cc10a49-2a79-4fe9-92c8-56ea92e5c281')
 ```
 
 If not using the [Belt API](../api-reference/belt-api.md) as deployment path, you can configure the profile fetching using the following environment variables:
@@ -229,7 +239,10 @@ If not using the [Belt API](../api-reference/belt-api.md) as deployment path, yo
 | :--- | :--- | :--- |
 | `FETCH_PROFILE` | Enable profile fetching | `false` |
 | `PROFILE_URL` | Profilestore base url | - |
+| `EVENTSTORE_URL` | Eventstore base url | - |
 | `PROFILE_TYPE` | Default profile type to fetch | `_d` |
+| `PROFILE_PASS_ON_EXCEPTIONS` | Every API call that has a non `200` return code will throw an exception that needs to be fetched in the belt code, otherwise it is send to the DLQ | `false` |
+| `PROFILE_TIMEOUT` | Time to wait for an answer of Profile / Eventstore API in seconds | `3` |
 | `KEYCLOAK_URL` | Keycloak url \(with '/auth'\) | - |
 | `KEYCLOAK_REALM` | Realm of GRNRY installation | - |
 | `KEYCLOAK_CLIENT` | Client of profile api | - |
