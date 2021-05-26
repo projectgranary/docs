@@ -35,7 +35,7 @@ This means, the content of the `ttl`-column will be copied to the `ttn`-column \
 
 
 
-### Additional Reaper deployment
+### Additional Reaper deployment for Notification
 
 After upgrading the Profile Updater, please ensure to upgrade your existing Reaper deployment to the latest version. Additionally to that, add a second deployment of the Reaper's latest version. However, this instance needs to be deployed with the Helm property `app.reaperType: "ttn"` and an index needs to be created before deployment. For details, see [Reaper 1.1](reaper-1.1.md). 
 
@@ -55,6 +55,12 @@ For additional details and examples, see [Belt Extractor 1.1](belt-extractor-1.1
 
 
 
+### Deployment of Central Deletion Belt
+
+Next to the changes in the ttl / ttn handling in the belts, Granary 1.1 ships with a central deletion belt which automatically deletes all Grains from Profile Store that were reaped by Profile Store's ttl reaper. To deploy this deletion belt, use this helm chart: [Central Deletion Belt](../installation/with-helm/central-deletion-belt.md). To understand the Profile Store deletion mechanics, head over to [Reaping of Grains for Notification or Deletion](../../developer-reference/dataflow/profile-store/reaper.md).
+
+
+
 ### SCDF App "Eventstore Batch Sink" changes
 
 From Granary 1.1 on the "[eventstore](../../developer-reference/dataflow/event-store/#table-eventstore)" database table will be under Flyway version control within the Eventstore Batch Sink. Hence, updating the Eventstore Batch Sink \(which is included in the SCDF Apps\) entails updating the "eventstore" table. The following migrations will be carried out once a Granary 1.1 Eventstore Batch Sink \(Persister\) is started:
@@ -69,6 +75,8 @@ After this migration and before the first run of the [Event Store Reaper](../../
 ```sql
  CREATE INDEX IF NOT EXISTS eventstore_time_to_act ON public.eventstore (event_time_to_act(created, ttl));
 ```
+
+To understand the Event Store deletion mechanics, head over to [Deletion of Raw Events](../../developer-reference/dataflow/event-store/deletion-of-raw-events.md).
 
 ### 
 
