@@ -109,6 +109,8 @@
     * [Zipkin](operator-reference/installation/with-helm/zipkin.md)
     * [Segment Manager](operator-reference/installation/with-helm/segment-manager.md)
     * [Reaper](operator-reference/installation/with-helm/reaper.md)
+    * [Eventstore Reaper](operator-reference/installation/with-helm/eventstore-reaper.md)
+    * [Central Deletion Belt](operator-reference/installation/with-helm/central-deletion-belt.md)
     * [Profile Updater](operator-reference/installation/with-helm/profile-updater.md)
     * [Event Explorer UI](operator-reference/installation/with-helm/event-explorer-ui.md)
     * [Granary UI](operator-reference/installation/with-helm/granary-ui.md)

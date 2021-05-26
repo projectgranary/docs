@@ -404,8 +404,8 @@ description: This page lists known issues to the Granary platform.
       <td style="text-align:left">Reaper doesn&apos;t work in case of event-type == profile-type</td>
       <td
       style="text-align:left">0.7.2</td>
-        <td style="text-align:left">-</td>
-        <td style="text-align:left">#659</td>
+        <td style="text-align:left">1.1.0</td>
+        <td style="text-align:left">#659 (closed)</td>
     </tr>
     <tr>
       <td style="text-align:left">Harvester API</td>
