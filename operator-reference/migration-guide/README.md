@@ -37,7 +37,7 @@ This means, the content of the `ttl`-column will be copied to the `ttn`-column \
 
 ### Additional Reaper deployment
 
-After upgrading the Profile Updater, please ensure to upgrade your existing Reaper deployment to the latest version. Additionally to that, add a second deployment of the Reaper's latest version. However, this instance needs to be deployed with the Helm property `app.reaperType: "ttn"`. and an index needs to be created before deployment. For details, see [Reaper 1.1](reaper-1.1.md). 
+After upgrading the Profile Updater, please ensure to upgrade your existing Reaper deployment to the latest version. Additionally to that, add a second deployment of the Reaper's latest version. However, this instance needs to be deployed with the Helm property `app.reaperType: "ttn"` and an index needs to be created before deployment. For details, see [Reaper 1.1](reaper-1.1.md). 
 
 
 
@@ -52,6 +52,25 @@ The notification and deletion mechanics of the platform underwent a major refact
 **Belts using deletions:** Deletions are now handled by the platform itself. Thus **your belt callback** **does not need to send delete operations** to the profile updater. If you want to act on the deletion of a grain your belt now needs to read from `grnry_ttl_myprofiletype-ttl`. To change when a grain gets deleted you need to alter the grains `ttl` by using the profile updaters new `set_ttl` operation.
 
 For additional details and examples, see [Belt Extractor 1.1](belt-extractor-1.1.md).
+
+
+
+### SCDF App "Eventstore Batch Sink" changes
+
+From Granary 1.1 on the "[eventstore](../../developer-reference/dataflow/event-store/#table-eventstore)" database table will be under Flyway version control within the Eventstore Batch Sink. Hence, updating the Eventstore Batch Sink \(which is included in the SCDF Apps\) entails updating the "eventstore" table. The following migrations will be carried out once a Granary 1.1 Eventstore Batch Sink \(Persister\) is started:
+
+```sql
+ALTER TABLE public.eventstore ADD COLUMN ttl VARCHAR;
+CREATE OR REPLACE FUNCTION event_time_to_act(created bigint, ttl varchar) RETURNS bigint AS $value$ SELECT created/1000 + cast(extract(epoch from ttl::interval) as bigint); $value$ LANGUAGE SQL IMMUTABLE;
+```
+
+After this migration and before the first run of the [Event Store Reaper](../../developer-reference/dataflow/event-store/deletion-of-raw-events.md), you must add an index with the following statement to improve the Event Store Reaper performance:
+
+```sql
+ CREATE INDEX IF NOT EXISTS eventstore_time_to_act ON public.eventstore (event_time_to_act(created, ttl));
+```
+
+### 
 
 ### Update Granary Components
 
