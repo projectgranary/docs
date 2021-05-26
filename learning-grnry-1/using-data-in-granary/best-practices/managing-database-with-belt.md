@@ -6,7 +6,7 @@ description: >-
 
 # Managing Database with Belt
 
-## **Introduction**
+## Configuration steps to deal the database via belt
 
 Include the following package :
 
