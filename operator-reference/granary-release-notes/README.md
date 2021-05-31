@@ -30,7 +30,7 @@ description: Denotes release versions of Granary artifacts.
 
 
 
-## Granary 1.1.0 "Cliff" - 2021-05-25
+## Granary 1.1.0 "Cliff" - 2021-05-28
 
 In this new release we focused on deleting data points from Profile- and Event Store to achieve GDPR compliance. The Profile Store Reaper now features a time-to-notification mode where one can trigger a notification on profiles independent of deleting data. Furthermore, data pipeline elements can now be deleted in Granary UI and Kafka.
 
