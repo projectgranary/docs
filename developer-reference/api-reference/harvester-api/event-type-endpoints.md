@@ -323,6 +323,10 @@ Authentication token.
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="deletionExpression" type="string" required=false %}
+Optional \(boolean\) SpringEL to determine if a deletion should occur. Default: `''`
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="consumer" type="string" required=false %}
 The name of user group allowed to consume this event type. If not set, there's no restriction applied and any authenticated user can view event-type details and also consume the data with belts. Defaults to `null`
 {% endapi-method-parameter %}
@@ -506,6 +510,10 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="deletionExpression" type="string" required=false %}
+\(Optional\) SpringEL to determine if a deletion should occur.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="displayName" type="string" required=false %}
 The displayname used in the UI
 {% endapi-method-parameter %}
@@ -603,6 +611,134 @@ Missing roles to access this resource.
     "message": "Access forbidden due to missing roles.",
     "details":"uri=/event-types/test-event-type"
 }
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method-summary %}
+
+{% endapi-method-summary %}
+
+{% api-method-description %}
+
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-body-parameters %}
+{% api-method-parameter name="deletionExpression" type="string" required=false %}
+Optional \(boolean\) SpringEL to determine if a deletion should occur. Default: ''
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+Op
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method-summary %}
+
+{% endapi-method-summary %}
+
+{% api-method-description %}
+
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-body-parameters %}
+{% api-method-parameter name="deletionExpression" type="string" required=false %}
+Optional \(boolean\) SpringEL to determine if a deletion should occur. Default: ''
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method-summary %}
+
+{% endapi-method-summary %}
+
+{% api-method-description %}
+
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-body-parameters %}
+{% api-method-parameter name="deletionExpression" type="string" required=false %}
+Optional \(boolean\) SpringEL to determine if a deletion should occur.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method-summary %}
+
+{% endapi-method-summary %}
+
+{% api-method-description %}
+
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-body-parameters %}
+{% api-method-parameter name="deletionExpression" type="string" required=false %}
+Optional \(boolean\) SpringEL to determine if a deletion should occur.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -766,6 +902,7 @@ If "true" or "True", the event type response will only contain properties a POST
     "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
     "eventIdExpression": "#randomUUID()",
     "timestampExpression": "#nowMillis()",
+    "deletionExpression": "",
     "topicName" : "grnry_data_in_snowplow-webtracking",
     "retentionMs": 3456000000,
     "partitionCount": 32,
