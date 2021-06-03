@@ -34,3 +34,5 @@ An Event Type is referenced in a Harvester like this:
 }
 ```
 
+Data-in Event Types come with  a [Persister ](../../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md#eventstore-persisters)that is created on Event Type creation by the Harvester API. The default Persister is the [Eventstore Batch Sink](eventstore-sink.md#eventstore-batch-sink).
+

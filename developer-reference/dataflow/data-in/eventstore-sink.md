@@ -6,7 +6,7 @@ description: In this chapter we are introducing the EventStore Sink
 
 The EventStore Sink persists data from the outbound topic of the Metadata Extractor into the EventStore. Therefore, it needs to have some meta information about the data to persist.
 
-The EventStore expects that the event headers have been enriched with the following parameters by using the metadata extractor:
+The EventStore Sink expects that the event headers have been enriched with the following parameters by using the Metadata Extractor:
 
 * grnry-correlation-id 
 * grnry-event-id 
@@ -86,7 +86,13 @@ eventstores:
         eventstore.batchTimeout: "1000"
 ```
 
-In an error case the Sink will fail and restart. The Batch Sink will retry the failed batch as we do not know which message failed.
+#### Deletion Flag
+
+In case the `grnry-deletion-flag` is set to true, the Eventstore Batch Sink will add a value to the `ttl` column of the Eventstore table for all \(already existing\) events specified by `event_type` and `correlation_id` __\(and optional `event_id`\) . The `ttl` value will be calculated as the total time-to-live, adding the Event Type's `ttl` and the persister's `ttlGracePeriod` \(see above\) and subtracting time that has already passed since event creation.
+
+#### Error Handling
+
+In an error case the Sink will fail and restart. The Batch Sink will retry the failed batch as it does not know which message in the batch failed.
 
 ### EventStore Sink \(Deprecated\)
 
