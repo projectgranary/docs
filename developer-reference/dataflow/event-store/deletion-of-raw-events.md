@@ -14,14 +14,14 @@ An example how to apply this deletion wrapper to an event can be found in the [b
 
 ### Source Trigger Delete in Event Type \(Option 2\)
 
-Option 2 is to provide a deletion expression written in [SpEL](../../../learning-grnry-1/data-in/best-practices-1/best-practices.md) to the Harvester's Event Type. If the defined expression evaluates to true, the event is also extened with a Kafka header `grnry-deletion-flag=true`. See [Event Type documentation](../../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md) for details.
+Option 2 is to provide a deletion expression written in [SpEL](../../../learning-grnry-1/data-in/best-practices-1/best-practices.md) to the Harvester's Event Type. If the defined expression evaluates to true, the event is also extended with a Kafka header `grnry-deletion-flag=true`. See [Event Type documentation](../../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md) for details.
 
 ### Expired Time-to-Live triggers Deletion \(Option 3\)
 
 Additionally to the above mentioned source trigger options, Granary also offers to define a TTL on Event Type level that generally applies to all raw events of this type. The Event Reaper collects events where the event type's `eventstoreTTL` has expired since their creation. These events are emitted to the event types corresponding `data_in` topic. The events are also assigned a `grnry-deletion-flag=true` header which acts as a tombstone.
 
 {% hint style="info" %}
-In all three options, the deletion event is also consumable from within a use case's Belt. I.e. the Belt can react on this deletion notifications and act on them.
+In all three options, the deletion event is also consumable from within a use case's Belt. I.e. the Belt can process these deletion notifications and act on them.
 {% endhint %}
 
 ### How does the physical deletion happen?
