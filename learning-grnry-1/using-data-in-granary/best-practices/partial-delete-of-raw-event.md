@@ -56,6 +56,8 @@ We use this Event Type to store the then pseudonymized events from the Event Typ
 
 ![](../../../.gitbook/assets/image%20%2861%29.png)
 
+### 
+
 ### Step 5: Create a belt which subscribes to Event Type with short TTL
 
 Create a belt which subscribes the Event Type with TTL of 5 seconds. Direct the outgoing data to the Event Type which was created in Step 4. In the UI, ou can do this by setting the belt's Kafka destination topic to the long-TTL Event Type's topic name. To find this name, look for the property `topicName` in the long-TTL Event Type's export view.
@@ -129,6 +131,8 @@ def signature(key, msg):
 ```
 
 ![](../../../.gitbook/assets/image%20%2850%29.png)
+
+### 
 
 ### Step 6: Send the request to the Harvester
 
