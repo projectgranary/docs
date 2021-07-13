@@ -26,6 +26,10 @@ Currently, three different segment generator types are available:
 * **Generic**, which builds a filtered version of the input table
 * **Flexible**, which takes a user-given query to create its segment
 
+{% hint style="warning" %}
+Please note that due to technical limitations, `pivot`segments might fail if many grains \(~5.000.000\) are being selected and may even cause database restarts.
+{% endhint %}
+
 ## Configure
 
 The creation job runs in a container and can be deployed via [Segment Management API](../../api-reference/segment-management-api.md). The following table comprises a complete list of variables \(required if there is no default\):

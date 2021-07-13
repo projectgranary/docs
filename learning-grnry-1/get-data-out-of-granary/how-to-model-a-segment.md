@@ -23,6 +23,10 @@ The flexible segment takes an SQL user query as input and is therefore able to f
   
 In our example, we want to create a transformed projection of the data in the Event Store, so in our segment configuration  `TYPE`  will be set to `generic`.
 
+{% hint style="warning" %}
+Please note that due to technical limitations, `pivot`segments might fail if many grains \(~5.000.000\) are being selected and may even cause database restarts.
+{% endhint %}
+
 ## 3. Select your input data
 
 If you want to create your segment just on a subset of the source data, such as only events written by a certain [Harvester](../data-in/how-to-run-a-harvester/harvesters.md), you can do so by specifying a `SOURCE_WHERE_CLAUSE` in your segment config.   
