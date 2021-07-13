@@ -45,6 +45,8 @@ The Belt framework can consume messages from one or many Event Types. Technicall
 
 ## Output Data Format
 
+### Profile Update
+
 Profile update messages need to comply to the following output data format which is explained in detail in the following paragraphs. 
 
 {% tabs %}
@@ -85,7 +87,36 @@ see [Profile specification](https://github.com/syncier/grnry-kafka-profile-updat
 {% endtab %}
 {% endtabs %}
 
-## **Python callback function**
+### **Generic Update**
+
+Generic update message write custom messages to the Belt's Kafka output topic.
+
+{% tabs %}
+{% tab title="Spec" %}
+| Key | Description |
+| :--- | :--- |
+| id | The field id is the correlation id |
+| value | This field content the payload of the event in the json format |
+| headers | This field content the header of the event in the json format \(optional\) |
+{% endtab %}
+
+{% tab title="Example" %}
+```python
+import datetime
+
+from grnry_belt.models import generic_update
+
+eventHeader = { "grnry-harvester-name": "my-harvester", "grnry-event-type": "my-event-type", "grnry-correlation-id": "abc","grnry-event-timestamp": str(int(datetime.datetime.now().timestamp())),"grnry-event-id": "xyz", "grnry-event-type-version": "1"}
+eventPayload = { "data": "my-data" }
+generic_update.GenericUpdate(correlationId, eventPayload, event_headers)
+
+```
+{% endtab %}
+{% endtabs %}
+
+\*\*\*\*
+
+## **Python callback function**
 
 The user supplied Belt Python callback function needs to convert the input messages from above to one or many so called **profile updates** \(it is also valid to not return any update\). These updates materialize as **grains** in the Profile Store. Many grains shape a **fragment** whereas many fragments from a **profile,** hence **Profile Store**.
 
