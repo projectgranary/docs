@@ -4,7 +4,7 @@ description: >-
   Store
 ---
 
-# Masking or Partial Deletion of Raw Events
+# Masking of Raw Events
 
 Masking or partial deletion of a raw event in Event Store means to delete the original event and create a new event with pseudonymized original information. This process helps to protect the personal information of the user. The flow of the data is shown in the sketch below.
 
@@ -64,9 +64,9 @@ Create a belt which subscribes the Event Type with TTL of 5 seconds. Direct the 
 
 Deletion notification events from the Event Store are indicated by the `grnry_deletion_flag`. See [TTL-expired Raw Event Processing](../../data-in/best-practices-1/ttl-expired-raw-event-processing.md) article for details.
 
-So, in the belt script check for this `grnry_deletion_flag` header \(line 14\). If the value is `true` then process the data. Fetch the sensitive data from the Event Store API \(line 21\) and pseudonymize the information using appropriate algorithm. See `setPayload` in line 28.
+So, in the belt script check for this `grnry_deletion_flag` header \(line 13\). If the value is `true` then process the data. Fetch the sensitive data from the Event Store API \(line 18\) and pseudonymize the information using appropriate algorithm. See `setPayload` function invocation in line 24.
 
-Once done, use the Belt framework's Generic Update output format. You need to set all the raw events headers as defined in [Belt framework's input data format](../../../developer-reference/dataflow/belt-extractor.md#input-data-format). Most of the headers are part of the `grnry_deletion_flag = true` event as defined in the before-mentioned [TTL-expired Raw Event processing](../../data-in/best-practices-1/ttl-expired-raw-event-processing.md) guide. See `setHeaders` in line 27.
+Once done, use the Belt framework's [Generic Update](../../../developer-reference/dataflow/belt-extractor.md#generic-update) output format. You need to set all the raw events headers as defined in [Belt framework's input data format](../../../developer-reference/dataflow/belt-extractor.md#input-data-format). Most of the headers are part of the `grnry_deletion_flag = true` event as defined in the before-mentioned [TTL-expired Raw Event processing](../../data-in/best-practices-1/ttl-expired-raw-event-processing.md) guide. See `setHeaders` in line 23.
 
 ```python
 import hmac
@@ -130,7 +130,7 @@ def signature(key, msg):
     return update
 ```
 
-![](../../../.gitbook/assets/image%20%2850%29.png)
+![Start the belt after development](../../../.gitbook/assets/image%20%2850%29.png)
 
 ### 
 

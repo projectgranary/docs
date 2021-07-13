@@ -28,7 +28,7 @@
     * [Data Modeling with Belts](learning-grnry-1/using-data-in-granary/best-practices/data-modeling-best-practices.md)
     * [TTN-expired Grain Processing](learning-grnry-1/using-data-in-granary/best-practices/ttl-expired-grain-processing.md)
     * [TTL-expired Grain Processing](learning-grnry-1/using-data-in-granary/best-practices/ttl-expired-grain-processing-1.md)
-    * [Masking or Partial Deletion of Raw Events](learning-grnry-1/using-data-in-granary/best-practices/partial-delete-of-raw-event.md)
+    * [Masking of Raw Events](learning-grnry-1/using-data-in-granary/best-practices/partial-delete-of-raw-event.md)
     * [Converting a script into a one-liner](learning-grnry-1/using-data-in-granary/best-practices/easing-development.md)
     * [Logging](learning-grnry-1/using-data-in-granary/best-practices/logging.md)
 * [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
