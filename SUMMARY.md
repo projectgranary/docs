@@ -70,7 +70,6 @@
   * [Belt Framework](developer-reference/dataflow/belt-extractor.md)
   * [Profile Store and Reaper](developer-reference/dataflow/profile-store/README.md)
     * [Reaping of Grains for Notification or Deletion](developer-reference/dataflow/profile-store/reaper.md)
-    * [Profile Store API Hooks](developer-reference/dataflow/profile-store/profile-store-api-hooks.md)
   * [Segment Store](developer-reference/dataflow/segment-store/README.md)
     * [Segment Table Creation](developer-reference/dataflow/segment-store/segment-table-creation.md)
     * [Segment Manager](developer-reference/dataflow/segment-store/segment-manager.md)
