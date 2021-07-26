@@ -81,7 +81,7 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
             "editor": "event_type_data_in_edit",
             "consumer": null,
             "type": "data_in",
-            "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
+            "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload,'body.data.ue_pr'),'data.data.environment.cid')?:'NO_CORRELATION_ID'",
             "eventIdExpression": "#randomUUID()",
             "timestampExpression": "#nowMillis()",
             "topicName" : "grnry_data_in_snowplow-tracking",
@@ -212,7 +212,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
     "eventTypes": [
         {
             "name": "postman-event-type",
-            "displayName:" "postman-event-type",
+            "displayName": "postman-event-type",
             "version": "1",
             ....
             "_links": {
@@ -223,7 +223,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
         },
         {
             "name": "postman-event-type",
-            "displayName:" "postman-event-type",
+            "displayName": "postman-event-type",
             "version": "2",
             ...
             "_links": {
@@ -235,7 +235,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
         ....
         {
             "name": "postman-event-type",
-            "displayName:" "postman-event-type"
+            "displayName": "postman-event-type",
             "version": "12",
             ....
             "_links": {
@@ -759,7 +759,7 @@ If "true" or "True", the event type response will only contain properties a POST
 ```text
 {
     "name": "snowplow-webtracking",
-    "displayName: "snowplow-webtracking",
+    "displayName": "snowplow-webtracking",
     "version": 1,
     "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
     "eventIdExpression": "#randomUUID()",
