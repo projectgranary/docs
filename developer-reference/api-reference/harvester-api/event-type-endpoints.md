@@ -476,7 +476,7 @@ Persister already exists for the eventy type.
     "type": "unexpected_error",
     "message":"An unexpected error occurred.",
     "details":"uri=/event-types"
-}
+}S
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
