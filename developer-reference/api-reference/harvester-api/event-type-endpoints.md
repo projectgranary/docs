@@ -483,6 +483,19 @@ Persister already exists for the eventy type.
 {% endapi-method-spec %}
 {% endapi-method %}
 
+
+
+#### Allowed Parameters in "Create an Event Type" request by Event Type Types
+
+| Event Type Type | Physical Location | Source | Schema |
+| :--- | :---: | :---: | :---: |
+| Data In | - | - | - |
+| Profile | + | - | - |
+| Live Segment | - | - | + |
+| Segment | - | - | - |
+| TTL/TTN | - | - | - |
+| Custom | + | + | + |
+
 {% api-method method="put" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
 {% api-method-summary %}
 Update an Event Type
