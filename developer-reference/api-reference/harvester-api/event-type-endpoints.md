@@ -327,6 +327,18 @@ Authentication token.
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="source" type="array" required=false %}
+Source as in the server host of physical location references. Only for requests of type `custom`.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="schema" type="object" required=false %}
+JSON schema for event type data. kafka schema id or escaped string of schema needed. Only for requests of type `live_segment` and `custom`.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="physicalLocations" type="array" required=false %}
+Reference to data's physical location. Allowed location types are: `database`, `stream`. Only for requests of type `profile` and `custom`.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="deletionExpression" type="string" required=false %}
 Optional \(boolean\) SpringEL to determine if a deletion should occur. Default: `''`
 {% endapi-method-parameter %}
@@ -336,7 +348,7 @@ The name of user group allowed to consume this event type. If not set, there's n
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="type" type="string" required=false %}
-The type of this event type. Allowed values are: `data_in` , `ttl`. Defaults to `data_in`
+The type of this event type. Allowed values are: `data_in` , `ttl`, `ttn` , `profile`, `segment`,`live_segment`, `custom`. Defaults to `data_in`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="editor" type="string" required=false %}
@@ -527,6 +539,10 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="schema" type="object" required=false %}
+JSON schema for event type. Kafka schema id or escaped string of schema needed.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="deletionExpression" type="string" required=false %}
 \(Optional\) SpringEL to determine if a deletion should occur.
 {% endapi-method-parameter %}
