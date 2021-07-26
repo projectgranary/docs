@@ -78,10 +78,11 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
             "name": "snowplow-tracking",
             "displayName": "snowplow-tracking",
             "version": 1,
+            "projectName": "tracking",
             "editor": "event_type_data_in_edit",
             "consumer": null,
             "type": "data_in",
-            "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
+            "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload,'body.data.ue_pr'),'data.data.environment.cid')?:'NO_CORRELATION_ID'",
             "eventIdExpression": "#randomUUID()",
             "timestampExpression": "#nowMillis()",
             "topicName" : "grnry_data_in_snowplow-tracking",
@@ -90,6 +91,9 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
             "replication": 2,
             "eventstoreTTL": "P100Y",
             "description": "",
+            "physicalLocations": [...],
+            "source": [...],
+            "schema": null,
             "_links": {
                 "self": {
                     "href": "https://hostname/event-types/snowplow-tracking/1"
@@ -212,7 +216,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
     "eventTypes": [
         {
             "name": "postman-event-type",
-            "displayName:" "postman-event-type",
+            "displayName": "postman-event-type",
             "version": "1",
             ....
             "_links": {
@@ -223,7 +227,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
         },
         {
             "name": "postman-event-type",
-            "displayName:" "postman-event-type",
+            "displayName": "postman-event-type",
             "version": "2",
             ...
             "_links": {
@@ -235,7 +239,7 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
         ....
         {
             "name": "postman-event-type",
-            "displayName:" "postman-event-type"
+            "displayName": "postman-event-type",
             "version": "12",
             ....
             "_links": {
@@ -782,18 +786,51 @@ If "true" or "True", the event type response will only contain properties a POST
 ```text
 {
     "name": "snowplow-webtracking",
-    "displayName: "snowplow-webtracking",
+    "displayName": "snowplow-webtracking",
     "version": 1,
-    "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
+    "projectName": "webtracking",
+    "type": "data_in",
+    "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload,'body.data.ue_pr'),'data.data.environment.cid')?:'NO_CORRELATION_ID'",
     "eventIdExpression": "#randomUUID()",
     "timestampExpression": "#nowMillis()",
     "deletionExpression": "",
-    "topicName" : "grnry_data_in_snowplow-webtracking",
+    "topicName": "grnry_data_in_snowplow-webtracking",
     "retentionMs": 3456000000,
     "partitionCount": 32,
     "replication": 2,
     "eventstoreTTL": "P100Y",
     "description": "",
+    "schema": null,
+    "source": [
+         {
+             "postgres": {
+                 "type": "database",
+                 "connectionUrl": "jdbc:postgresql://hostname:5432/database",
+                 "connectionUser": "user",
+                 "connectionSecretRef":"webtracking-jdbc"
+             }
+         },
+         {
+             "kafka": {
+                 "type": "stream",
+                 "connectionUrl": "http://hostname:port",
+                 "connectionUser": "",
+                 "connectionSecretRef": "grnry-kafka"                 
+             }
+         }
+    ],
+    "physicalLocations": [
+        {
+            "locationName": "webtracking.eventstore_snowplow-webtracking",
+            "source": "postgresql",
+            "type": "database"
+        },
+        {
+            "locationName": "grnry_data_in_snowplow-webtracking",
+            "source": "kafka",
+            "type": "stream"
+        }
+    ],
     "_links": {
         "self": {
             "href": "https://hostname/event-types/snowplow-webtracking/1"
