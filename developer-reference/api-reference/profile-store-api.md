@@ -9,6 +9,7 @@ description: >-
 ## Paths
 
 * /profiles/{profileType}/{correlationId}
+* /profiles/{profileType}/{correlationId}/grain/{path}
 
 ## API Methods
 
@@ -24,9 +25,9 @@ Get a Specific Profile by ID, Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves a whole profile for a specific point in time.  
+Retrieves the latest status of a profile. Hence all grains for which the attribute pit is 'latest'.  
   
-In order to get results, you must have the required roles as defined in the field _reader_. Otherwise, you will not get back any results. The default value for the parameter pointInTime is "\_latest". Hence only the most current grain version will be retrieved by default.
+In order to get results, you must have the required roles as defined in the field _reader_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -48,13 +49,6 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
-{% api-method-parameter name="pointInTime" type="string" required=false %}
-Timestamp which specifies for which point in time the profile is supposed to be retrieved.The default value is "\_latest".  
-Example:  
-`_latest  
-_20210706T155637.11Z`
-{% endapi-method-parameter %}
-
 {% api-method-parameter name="fragments" type="string" required=false %}
 Filters the profile by grain/fragment path\(s\). You can define multiple path as a comma-separated list. Example: `/customer/name,/customer/adress,/invoiceDetails`
 {% endapi-method-parameter %}
@@ -224,7 +218,7 @@ https://hostname/profiles/\_interaction/Session56202
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="" path="/profiles/:profileType/:correlationId/grain/:path" %}
+{% api-method method="get" host="https://api.grnry.io" path="/profiles/:profileType/:correlationId/grain/:path" %}
 {% api-method-summary %}
 Get a Specific Grain by ID, Type and Path
 {% endapi-method-summary %}
@@ -277,140 +271,50 @@ Determines if for the grain only the latest version is returned or all version p
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-
+A call for multiple versions of a specific grain with given profile type "grainProfile" and correlationId "28072021" and the path "customer/contract".  
+  
+ https://hostname/profiles/grainProfile/28072021/grain/customer/contract?pageSize=2&offset=0&withHistory=True
 {% endapi-method-response-example-description %}
 
 ```
 {
-
-    "correlationId": "Session56202",
-    "type": "_interaction",
-    "totalGrainVersions":,
+    "correlationId": "28072021",
+    "type": "grainProfile",
     "jsonPayload": {
-        "date": {
-            "end": {
+        "customer": {
+            "contract": {
                 "_latest": {
-                    "_c": 1,
-                    "_v": "2018-05-14T14:15:42",
-                    "_in": 1587644709930,
+                    "_c": 0.5,
+                    "_v": "Customer changed insurance contract.",
+                    "_in": 1539358945000,
                     "_ttl": "P100Y",
                     "_ttn": "P100Y",
-                    "_origin": "/belts/28",
-                    "_reader": "_auth"
-                }
-            },
-            "start": {
-                "_latest": {
-                    "_c": 1,
-                    "_v": "2018-05-14T14:05:56",
-                    "_in": 1587644709898,
+                    "_origin": "myorigin",
+                    "_reader": "_all"
+                },
+                "_20210706T155637.111Z": {
+                    "_c": 0.5,
+                    "_v": "Customer made insurance contract with Company",
+                    "_in": 1539358945000,
                     "_ttl": "P100Y",
                     "_ttn": "P100Y",
-                    "_origin": "/belts/28",
-                    "_reader": "_auth"
+                    "_origin": "myorigin",
+                    "_reader": "_all"
                 }
             }
         },
-        "_id@_contract@profilestore": {
-            "_latest": {
-                "_c": 1,
-                "_v": [
-                    "Contract56242"
-                ],
-                "_in": 1587644709853,
-                "_ttl": "P100Y",
-                "_ttn": "P100Y",
-                "_origin": "/belts/28",
-                "_reader": "_pers"
-            }
+        "_id": "28072021"
+    },
+    "totalGrainVersions": 2,
+    "_links": {
+        "self": {
+            "href": "https://teststage.internal.analytics.cc.syncier.cloud/profiles/grainProfile/28072021/grain/customer/contract?pageSize=2&offset=0&withHistory=True"
         },
-        "_id@_customer@profilestore": {
-            "_latest": {
-                "_c": 1,
-                "_v": [
-                    "Customer65882"
-                ],
-                "_in": 1587644709827,
-                "_ttl": "P100Y",
-                "_ttn": "P100Y",
-                "_origin": "/belts/28",
-                "_reader": "_pers"
-            }
-        },
-        "process": {
-            "context": {
-                "_latest": {
-                    "_c": 1,
-                    "_v": "size:56sq,value:60.000£",
-                    "_in": 1587644709773,
-                    "_ttl": "P100Y",                    
-                    "_ttn": "P100Y",
-                    "_origin": "/belts/28",
-                    "_reader": "_pers"
-                }
-            },
-            "counter": {
-                "_latest": {
-                    "_c": 1,
-                    "_v": {
-                        "_step": 1.0,
-                        "_current": 5,
-                        "_initial": 0.0
-                    },
-                    "_in": 1587644710593,
-                    "_ttl": "P100Y",
-                    "_ttn": "P100Y",
-                    "_origin": "/belts/28",
-                    "_reader": "_auth"
-                }
-            },
-            "outcome": {
-                "_latest": {
-                    "_c": 1,
-                    "_v": "contract",
-                    "_in": 1587644711294,
-                    "_ttl": "P100Y",
-                    "_ttn": "P100Y",
-                    "_origin": "/belts/28",
-                    "_reader": "_auth"
-                }
-            },
-            "product": {
-                "_latest": {
-                    "_c": 1,
-                    "_v": "home contents insurance",
-                    "_in": 1587644711071,
-                    "_ttl": "P100Y",
-                    "_ttn": "P100Y",
-                    "_origin": "/belts/28",
-                    "_reader": "_auth"
-                }
-            },
-            "type": {
-                "_latest": {
-                    "_c": 1,
-                    "_v": "calculate quote",
-                    "_in": 1587644710573,
-                    "_ttl": "P100Y",
-                    "_ttn": "P100Y",
-                    "_origin": "/belts/28",
-                    "_reader": "_auth"
-                }
-            }
-        },
-        "_id": "Session56202"
+        "next": {
+            "href": "https://teststage.internal.analytics.cc.syncier.cloud/profiles/grainProfile/28072021/grain/customer/contract?pageSize=2&offset=2&withHistory=True"
+        }
     }
 }
-```
-{% endapi-method-response-example %}
-
-{% api-method-response-example httpCode=302 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```
-
 ```
 {% endapi-method-response-example %}
 
@@ -420,17 +324,50 @@ Determines if for the grain only the latest version is returned or all version p
 {% endapi-method-response-example-description %}
 
 ```
+{
+    "timestamp": "2021-07-28T15:58:11.143+0000",
+    "message": "Parameter 'path' You need to provide the full path of the grain.",
+    "type": "bad_parameter_value",
+    "traceId": "5184097694623809509",
+    "invalidParams": [
+        {
+            "name": "path",
+            "reason": "You need to provide the full path of the grain"
+        }
+    ],
+    "details": "uri=/profiles/grainProfile/28072021/grain/"
+}
+```
+{% endapi-method-response-example %}
 
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587302499600,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/profiles/grainProfile/28072021999/grain/customer/contract"
+}
 ```
 {% endapi-method-response-example %}
 
 {% api-method-response-example httpCode=404 %}
 {% api-method-response-example-description %}
-asd
+
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "timestamp": "2021-07-28T15:45:08.230+0000",
+    "message": "Grains with profileType 'grainProfile' and correlationId '28072021999' not found.",
+    "type": "entity_not_found",
+    "traceId": "-2256169692750680503",
+    "details": "uri=/profiles/grainProfile/28072021999/grain/customer/contract"
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
