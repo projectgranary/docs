@@ -9,6 +9,7 @@ description: >-
 ## Paths
 
 * /profiles/{profileType}/{correlationId}
+* /profiles/{profileType}/{correlationId}/grain/{path}
 
 ## API Methods
 
@@ -29,23 +30,24 @@ In order to get results, you must have the required roles as defined in the fiel
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="profileType" type="string" required=true %}
-The profile type
+The profile type.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="correlationId" type="string" required=true %}
-The correlation ID
+The correlation ID.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
 {% api-method-headers %}
 {% api-method-parameter name="Authentication" type="string" required=true %}
-Authentication token
+Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
 {% api-method-parameter name="withHistory" type="string" required=false %}
-
+If `withHistory` is `false` only the latest version of grains are returned. If `withHistory` is `true` all grain versions are returned. Defaults to `true`.   
+Only available starting from Profilestore API version 1.1.1.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="fragments" type="string" required=false %}
@@ -221,15 +223,17 @@ https://hostname/profiles/\_interaction/Session56202
 Profiles and their grains in JSON response body are unordered.
 {% endhint %}
 
-{% api-method method="get" host="" path="/profiles/:profileType/:correlationId/grain/:path" %}
+
+
+{% api-method method="get" host="https://api.grnry.io" path="/profiles/:profileType/:correlationId/grain/:path" %}
 {% api-method-summary %}
 Get a Specific Grain by ID, Type and Path
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Allows retrieval of grain for latest point in time or of all grain versions paginated depending on the query parameter "withHistory".  
+Allows retrieval of grain for latest point in time or of all grain versions paginated depending on the query parameter `withHistory`.  
   
-In order to get results, you must have the required roles as defined in the field reader. Otherwise, you will not get back any results.  
+In order to get results, you must have the required roles as defined in the field _reader_. Otherwise, you will not get back any results.  
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -237,8 +241,7 @@ In order to get results, you must have the required roles as defined in the fiel
 {% api-method-path-parameters %}
 {% api-method-parameter name="path" type="string" required=true %}
 The full path related to the grain.  
-Example:  
-customer/name
+Example: `customer/name`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="profileType" type="string" required=true %}
@@ -252,7 +255,7 @@ The correlation ID.
 
 {% api-method-headers %}
 {% api-method-parameter name="Authentication" type="string" required=true %}
-Authentication token
+Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
@@ -274,7 +277,9 @@ Determines if for the grain only the latest version is returned or all version p
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-A call for multiple versions of a specific grain with given profile type "grainProfile" and correlationId "28072021" and the path "customer/contract".
+A call for multiple versions of a specific grain with given profile type "grainProfile" and correlationId "28072021" and the path "customer/contract".  
+  
+https://hostname/profiles/grainProfile/28072021/grain/customer/contract?pageSize=2&offset=0&withHistory=True
 {% endapi-method-response-example-description %}
 
 ```
@@ -361,6 +366,7 @@ A call for multiple versions of a specific grain with given profile type "grainP
 {% endapi-method-response-example-description %}
 
 ```
+404
 
 {
   "timestamp": "2021-08-13T15:06:35.768+0000",
@@ -376,4 +382,8 @@ A call for multiple versions of a specific grain with given profile type "grainP
 {% endapi-method %}
 
 
+
+{% hint style="warning" %}
+Only available starting from Profilestore API version 1.1.1.
+{% endhint %}
 
