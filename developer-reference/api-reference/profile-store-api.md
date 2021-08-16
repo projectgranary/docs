@@ -234,8 +234,7 @@ In order to get results, you must have the required roles as defined in the fiel
 {% api-method-path-parameters %}
 {% api-method-parameter name="path" type="string" required=true %}
 The full path related to the grain.  
-Example:  
-customer/name
+Example: `customer/name`
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="profileType" type="string" required=true %}
