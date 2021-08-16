@@ -44,6 +44,10 @@ Authentication token
 {% endapi-method-headers %}
 
 {% api-method-query-parameters %}
+{% api-method-parameter name="withHistory" type="string" required=false %}
+
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="fragments" type="string" required=false %}
 Filters the profile by grain/fragment path\(s\). You can define multiple path as a comma-separated list. Example: `/customer/name,/customer/adress,/invoiceDetails`
 {% endapi-method-parameter %}
@@ -216,4 +220,160 @@ https://hostname/profiles/\_interaction/Session56202
 {% hint style="warning" %}
 Profiles and their grains in JSON response body are unordered.
 {% endhint %}
+
+{% api-method method="get" host="" path="/profiles/:profileType/:correlationId/grain/:path" %}
+{% api-method-summary %}
+Get a Specific Grain by ID, Type and Path
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Allows retrieval of grain for latest point in time or of all grain versions paginated depending on the query parameter "withHistory".  
+  
+In order to get results, you must have the required roles as defined in the field reader. Otherwise, you will not get back any results.  
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="path" type="string" required=true %}
+The full path related to the grain.  
+Example:  
+customer/name
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="profileType" type="string" required=true %}
+The profile type.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="correlationId" type="string" required=true %}
+The correlation ID.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Authentication" type="string" required=true %}
+Authentication token
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="pageSize" type="integer" required=false %}
+Determines the amount of grains returned per page. The maximum is 250.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="offset" type="integer" required=false %}
+Allows retrieval of historic grains not contained in the first page.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="withHistory" type="boolean" required=false %}
+Determines if for the grain only the latest version is returned or all version paginated.
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+A call for multiple versions of a specific grain with given profile type "grainProfile" and correlationId "28072021" and the path "customer/contract".
+{% endapi-method-response-example-description %}
+
+```
+{
+    "correlationId": "28072021",
+    "type": "grainProfile",
+    "jsonPayload": {
+        "customer": {
+            "contract": {
+                "_latest": {
+                    "_c": 0.5,
+                    "_v": "Customer changed insurance contract.",
+                    "_in": 1539358945000,
+                    "_ttl": "P100Y",
+                    "_ttn": "P100Y",
+                    "_origin": "myorigin",
+                    "_reader": "_all"
+                },
+                "_20210706T155637.111Z": {
+                    "_c": 0.5,
+                    "_v": "Customer made insurance contract with Company",
+                    "_in": 1539358945000,
+                    "_ttl": "P100Y",
+                    "_ttn": "P100Y",
+                    "_origin": "myorigin",
+                    "_reader": "_all"
+                }
+            }
+        },
+        "_id": "28072021"
+    },
+    "totalGrainVersions": 2,
+    "_links": {
+        "self": {
+            "href": "https://teststage.internal.analytics.cc.syncier.cloud/profiles/grainProfile/28072021/grain/customer/contract?pageSize=2&offset=0&withHistory=True"
+        },
+        "next": {
+            "href": "https://teststage.internal.analytics.cc.syncier.cloud/profiles/grainProfile/28072021/grain/customer/contract?pageSize=2&offset=2&withHistory=True"
+        }
+    }
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+  "timestamp": "2021-08-13T15:00:02.345+0000",
+  "message": "Parameter 'path' You need to provide the full path of the grain.",
+  "type": "bad_parameter_value",
+  "invalidParams": [
+    {
+      "name": "path",
+      "reason": "You need to provide the full path of the grain"
+    }
+  ],
+  "details": "uri=/profiles/grainProfile/28072021/grain"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{
+    "timestamp": 1587302499600,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/profiles/grainProfile/28072021/grain"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+{
+  "timestamp": "2021-08-13T15:06:35.768+0000",
+  "message": "Grains with profileType 'grainProfile' and correlationId 'IdoNotExist' not found.",
+  "type": "entity_not_found",
+  "details": "uri=/profiles/grainProfile/IdoNotExist/grain/irrelevantPath"
+}
+
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+
 
