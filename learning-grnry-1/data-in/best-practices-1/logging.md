@@ -16,7 +16,7 @@ import groovy.json.JsonSlurper
 import groovy.json.JsonOutput
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe
 import io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload
-import java.util.logging
+import java.util.logging.Logger
 
 
 Logger logger = Logger.getLogger('testLogger')
