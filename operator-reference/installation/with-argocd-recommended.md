@@ -13,7 +13,7 @@ We recommend using [ArgoCD ](https://argoproj.github.io/argo-cd/)to deploy the G
 
 ## Installation Steps
 
-* Copy the 1.0 installation sample from [https://github.com/syncier/grnry-samples/tree/master/installations/argocd-1.0](https://github.com/syncier/grnry-samples/tree/master/installations/argocd-1.0) to your gitops repository.
+* Copy the 1.0 installation sample from [https://github.com/syncier/grnry-samples/tree/master/installations/argocd-1.2](https://github.com/syncier/grnry-samples/tree/master/installations/argocd-1.2) to your gitops repository.
 * Add a "Application" to your ArgoCD that points to the `argo_project` subdirectory of the copied directory.
 * Add the docker registry and artifactory credentials as a secret to the secrets subdirectory or deploy it manually
   * default expected names are `grnry-dockerconfig` and `artifactory-release-credentials` ; this can be changed but values files of components have to be modified accordingly
