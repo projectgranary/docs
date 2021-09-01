@@ -10,11 +10,14 @@ We recommend using [ArgoCD ](https://argoproj.github.io/argo-cd/)to deploy the G
 * Credentials to access [https://hub.syncier.cloud/chartrepo/grnry](./#helm-chart-repositories) are registered in ArgoCD
 * A git repository for the gitops process is set up and ArgoCD has access rights.
 * Grnry Docker registry and Artifactory credentials have been provided to you 
+* A kubeseal controller is present in your cluster \([https://github.com/bitnami-labs/sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)\)
 
 ## Installation Steps
 
 * Copy the 1.1 installation sample from [https://github.com/syncier/grnry-samples/tree/master/installations/argocd-1.1](https://github.com/syncier/grnry-samples/tree/master/installations/argocd-1.1) to your gitops repository.
 * Add a "Application" to your ArgoCD that points to the `argo_project` subdirectory of the copied directory.
+  * Use `default`project
+  * Use `argocd`namespace
 * Add the docker registry and artifactory credentials as a secret to the secrets subdirectory or deploy it manually
   * default expected names are `grnry-dockerconfig` and `artifactory-release-credentials` ; this can be changed but values files of components have to be modified accordingly
 * Configure the [Granary base deployment](with-helm/granary-base-deployment.md) values \(`granary/grnryBaseValues.yaml`, see the Helm chart's README for detailed instructions\)
