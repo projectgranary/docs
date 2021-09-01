@@ -10,6 +10,7 @@ We recommend using [ArgoCD ](https://argoproj.github.io/argo-cd/)to deploy the G
 * Credentials to access [https://hub.syncier.cloud/chartrepo/grnry](./#helm-chart-repositories) are registered in ArgoCD
 * A git repository for the gitops process is set up and ArgoCD has access rights.
 * Grnry Docker registry and Artifactory credentials have been provided to you 
+* A kubeseal controller is present in your cluster \([https://github.com/bitnami-labs/sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)\)
 
 ## Installation Steps
 
