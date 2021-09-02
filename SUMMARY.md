@@ -123,6 +123,7 @@
   * [Adding Roles to Keycloak Clients](operator-reference/identity-and-access-management/adding-roles-to-keycloak-clients.md)
 * [Migration guide](operator-reference/migration-guide/README.md)
   * [EventStore Declared-partitioned migration](operator-reference/migration-guide/eventstore-declared-partitioned-migration.md)
+  * [ProfileStore Declared-partitioned migration](operator-reference/migration-guide/profilestore-declared-partitioned-migration.md)
   * [Untitled](operator-reference/migration-guide/untitled.md)
   * [Belt API 1.2](operator-reference/migration-guide/belt-api-1.2.md)
 * [Site Reliability](operator-reference/site-reliability/README.md)

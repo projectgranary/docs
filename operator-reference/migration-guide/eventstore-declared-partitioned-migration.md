@@ -68,6 +68,8 @@ insert into eventstore (correlation_id,event_id,created,event_type,event_type_ve
 Then we can select the records with -
 
 ```text
-
+SELECT * from eventstore where event_type = 'science';
+SELECT * from eventstore where event_type = 'biology';
+SELECT * from eventstore where event_type = 'robotics';
 ```
 
