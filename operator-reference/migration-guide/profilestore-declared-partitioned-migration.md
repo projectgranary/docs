@@ -48,7 +48,7 @@ CREATE INDEX profilestore_path_idx ON profilestore_dec_partition(path text_ops);
 CREATE INDEX profilestore_time_to_act ON profilestore_dec_partition((profile_time_to_act(inserted, ttl)) int8_ops);
 ```
 
-Once the tables are created we can try to insert record using -
+Once the tables are created we can try to insert records using -
 
 ```text
 INSERT INTO "public"."profilestore_dec_partition"("correlation_id","profile_type","path","pit","value","certainty","grain_type","inserted","ttl","reader","origin","ttn")
