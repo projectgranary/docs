@@ -1,3 +1,7 @@
+---
+description: This page is for the introduction of partitioned and its use.
+---
+
 # Partitioned table to Declared partitioned migration
 
 ## Introduction
