@@ -74,18 +74,16 @@
     * [Segment Table Creation](developer-reference/dataflow/segment-store/segment-table-creation.md)
     * [Segment Manager](developer-reference/dataflow/segment-store/segment-manager.md)
 * [API Reference](developer-reference/api-reference/README.md)
-  * [Project API](developer-reference/api-reference/project-api.md)
   * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
+  * [Project API](developer-reference/api-reference/project-api.md)
   * [Harvester API](developer-reference/api-reference/harvester-api/README.md)
     * [Event Type Endpoints](developer-reference/api-reference/harvester-api/event-type-endpoints.md)
     * [Source Type Endpoints](developer-reference/api-reference/harvester-api/source-type-endpoints.md)
     * [Harvester Instance Endpoints](developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md)
-  * [Event Store API](developer-reference/api-reference/event-store-api.md)
   * [Belt API](developer-reference/api-reference/belt-api.md)
+  * [Event Store API](developer-reference/api-reference/event-store-api.md)
   * [Profile Store API](developer-reference/api-reference/profile-store-api.md)
-  * [Segment Management API](developer-reference/api-reference/segment-management-api.md)
   * [API Error Codes](developer-reference/api-reference/api-error-codes.md)
-  * [Lineage Report](developer-reference/api-reference/lineage-report.md)
 
 ## Operator Reference
 

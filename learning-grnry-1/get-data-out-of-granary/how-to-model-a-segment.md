@@ -88,7 +88,7 @@ We will set our `displayName` to `Adobe Event Info Segment`, similar to its `TAR
 
 ## 10. Send your segment to the API
 
-The complete request we are going to send to the [Segment Management API](../../developer-reference/api-reference/segment-management-api.md) thus looks like this:
+The complete request we are going to send to the [Segment Management API]() thus looks like this:
 
 ```bash
  curl -X POST -H "Content-Type: application/json" \

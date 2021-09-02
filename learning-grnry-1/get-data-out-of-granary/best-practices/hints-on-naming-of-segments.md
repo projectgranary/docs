@@ -14,7 +14,7 @@ If you denote the segment name in the environment variable `TARGET_SEGMENT_NAME`
 
 ### Technical limitations
 
-Generally speaking, the Segment Managment API features an `id` and a `displayName`. The `id` is used as the technical identifier and is derived from the `displayName` parameter provided in the JSON payload when creating a [Segment](../../../developer-reference/api-reference/segment-management-api.md#create-segment-job) using a POST request. The only exception to this behaviour is if you provide an `id` in the POST request when creating a Harvester or an Event Type, e.g. `POST /segments/{id}`
+Generally speaking, the Segment Managment API features an `id` and a `displayName`. The `id` is used as the technical identifier and is derived from the `displayName` parameter provided in the JSON payload when creating a [Segment]() using a POST request. The only exception to this behaviour is if you provide an `id` in the POST request when creating a Harvester or an Event Type, e.g. `POST /segments/{id}`
 
 The `displayName` property does not have technical restrictions. 
 

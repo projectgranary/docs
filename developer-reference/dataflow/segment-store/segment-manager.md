@@ -12,7 +12,7 @@ It uses the [Segment Table Creation](segment-table-creation.md) script to start 
 
 A CRD model is provided to improve creation of Segments called `SegmentSpec`. This model holds all the configuration attributes from the Segment Table Creation script.
 
-This model allows to create Segment Custom Resources via the K8s API or use the [Segment Management API](../../api-reference/segment-management-api.md) .
+This model allows to create Segment Custom Resources via the K8s API or use the [Segment Management API]() .
 
 The Segment Manager uses these [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to create a Segment CronJob equal to using the Segment Table Creation script directly via helm.
 

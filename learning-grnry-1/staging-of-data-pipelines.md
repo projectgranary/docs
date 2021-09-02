@@ -131,7 +131,7 @@ curl -X GET -H "Content-Type: application/json" \
 
 ### Segment \(optional\)
 
-To export a [Segment](../developer-reference/dataflow/segment-store/segment-table-creation.md), use the Segment Management API's [endpoints](../developer-reference/api-reference/segment-management-api.md#get-segment-job-by-id).
+To export a [Segment](../developer-reference/dataflow/segment-store/segment-table-creation.md), use the Segment Management API's [endpoints]().
 
 #### Using the Command Line
 

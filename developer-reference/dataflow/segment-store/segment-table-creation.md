@@ -32,7 +32,7 @@ Please note that due to technical limitations, `pivot`segments might fail if man
 
 ## Configure
 
-The creation job runs in a container and can be deployed via [Segment Management API](../../api-reference/segment-management-api.md). The following table comprises a complete list of variables \(required if there is no default\):
+The creation job runs in a container and can be deployed via [Segment Management API](). The following table comprises a complete list of variables \(required if there is no default\):
 
 <table>
   <thead>
