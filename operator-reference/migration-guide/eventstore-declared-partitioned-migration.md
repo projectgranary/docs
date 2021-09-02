@@ -52,7 +52,7 @@ CREATE INDEX eventstore_created_idx ON profilestore(created int8_ops);
 CREATE INDEX eventstore_event_type_idx ON eventstore USING BRIN (event_type text_minmax_ops);
 ```
 
-Once the tables are created we can try to insert record using -
+Once the tables are created we can try to insert records using -
 
 ```text
 insert into eventstore (correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl) values
