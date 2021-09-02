@@ -6,33 +6,41 @@ description: Springboot-based microservice to manage belts registered in the Bel
 
 ## Paths
 
-* GET /belts
-* GET /belts/{id}
-* POST /belts
-* POST /belts/{id}
-* DELETE /belts/{id}
-* PUT /belts/{id}
-* GET/belts/{id}/state
-* POST/belts/{id}/state
-* GET /belts/{id}/logs
+* GET /projects/{project-name}/belts
+* GET /projects/{project-name}/belts/{id}
+* POST /projects/{project-name}/belts
+* POST /projects/{project-name}/belts/{id}
+* DELETE /projects/{project-name}/belts/{id}
+* PUT /projects/{project-name}/belts/{id}
+* GET/projects/{project-name}/{id}/state
+* POST/projects/{project-name}/belts/{id}/state
+* GET /projects/{project-name}/belts/{id}/logs
 
 ## API Methods
 
-Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#belt-api) for roles a user needs to interact with Belt API.
+Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#belt-api) for Keycloak roles a user needs to interact with Belt API.
 
-{% api-method method="get" host="https://api.grnry.io" path="/belts" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/belts" %}
 {% api-method-summary %}
 Get all Belts
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves full dump of **all** belts in the Belt Store as a list.  
+Retrieves full dump of **all** belts of a project in the Belt Store as a list.  
   
-In order to get results, you must have the required roles as defined in the fields _editor_ or _viewer_. Otherwise, you will not get back any results.
+In order to get results, you must have one of the project's roles _editor_ or _viewer_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project.   
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
 {% api-method-headers %}
 {% api-method-parameter name="Authentication" type="string" required=true %}
 Authentication token
@@ -69,16 +77,17 @@ A list of all belts along with their attributes and total count of belts stored 
     "totalCount": 502,
     "_links": {
         "next": {
-            "href": "https://hostname/belts?offset=2&pagesize=2&expand="
+            "href": "https://hostname/projects/global/belts?offset=2&pagesize=2&expand="
         },
         "self": {
-            "href": "https://hostname/belts?offset=0&pagesize=2&expand="
+            "href": "https://hostname/projects/global/belts?offset=0&pagesize=2&expand="
         }
     },
     "items": [
         {
             "version": "1",
             "name": "kube_test_4",
+            "projectName": "global",
             "kubernetesName": "grnry-belt-1011",
             "description": "",
             "labels": [
@@ -91,15 +100,6 @@ A list of all belts along with their attributes and total count of belts stored 
             "memory": 512,
             "memoryRequests": 256,
             "author": "",
-            "reader": [
-                "_auth"
-            ],
-            "editor": [
-                "belt_edit"
-            ],
-            "viewer": [
-                "belt_view"
-            ],
             "created": 1561974412801,
             "assumedRole": "",
             "requirementsPy": "",
@@ -179,7 +179,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "status": "RUNNING",
             "_links": {
                 "self": {
-                    "href": "https://hostname/belts/1011"
+                    "href": "https://hostname/projects/global/belts/1011"
                 }
             },
             "id": "1011"
@@ -187,6 +187,7 @@ A list of all belts along with their attributes and total count of belts stored 
         {
             "version": "1",
             "name": "kube_test_7",
+            "projectName": "global",
             "kubernetesName": "grnry-belt-1022",
             "description": "kube_description",
             "labels": [],
@@ -197,15 +198,6 @@ A list of all belts along with their attributes and total count of belts stored 
             "memory": 1023,
             "memoryRequests": 1023,
             "author": "author@grnry.com",
-            "reader": [
-                "_auth"
-            ],
-            "editor": [
-                "belt_edit"
-            ],
-            "viewer": [
-                "belt_view"
-            ],
             "created": 1561978858485,
             "assumedRole": "",
             "requirementsPy": "requirement==0.1.0",
@@ -233,7 +225,7 @@ A list of all belts along with their attributes and total count of belts stored 
             "status": "STOPPED",
             "_links": {
                 "self": {
-                    "href": "https://hostname/belts/1022"
+                    "href": "https://hostname/projects/global/belts/1022"
                 }
             },
             "id": "1022"
@@ -253,7 +245,7 @@ A list of all belts along with their attributes and total count of belts stored 
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'pagesize' must be a natural number but is '-1'.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -268,7 +260,7 @@ Token invalid or missing.
     "timestamp": 1586941626155,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -283,7 +275,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -291,7 +283,7 @@ Missing roles to access this resource.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/belts/:id" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id" %}
 {% api-method-summary %}
 Get a Specific Belt by ID
 {% endapi-method-summary %}
@@ -299,12 +291,18 @@ Get a Specific Belt by ID
 {% api-method-description %}
 Retrieves full dump of a specific belt with a specified ID.  
   
-In order to retrieve results here, it is necessary that you either have an _editor_ or _viewer_ role assigned to your profile in keycloak. The _editor_/_viewer_ role must match the roles defined for the belt.
+In order to retrieve results here, it is necessary that you either have the project's _editor_ or _viewer_ role assigned to your user in keycloak.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the belt belongs to.  
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="id" type="string" required=true %}
 The ID of belt
 {% endapi-method-parameter %}
@@ -333,6 +331,7 @@ JSON with attributes of belt with the specified ID.
 {
     "version": "1",
     "name": "hello-belt",
+    "projectName": "global",
     "kubernetesName": "grnry-belt-161",
     "description": "Hello Belt Belt",
     "labels": [],
@@ -343,15 +342,6 @@ JSON with attributes of belt with the specified ID.
     "memory": 512,
     "memoryRequests": 512,
     "author": "User",
-    "reader": [
-        "\"_auth\""
-    ],
-    "editor": [
-        "belt_edit"
-    ],
-    "viewer": [
-        "belt_view"
-    ],
     "created": 1562744768164,
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
@@ -382,7 +372,7 @@ JSON with attributes of belt with the specified ID.
     "id": "161",
     "_links": {
         "self": {
-            "href": "https://hostname/belts/161"
+            "href": "https://hostname/projects/global/belts/161"
         }
     }
 }
@@ -399,7 +389,7 @@ Token invalid or missing.
     "timestamp": 1586941626155,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/belts/161"
+    "details": "uri=/projects/global/belts/161"
 }
 ```
 {% endapi-method-response-example %}
@@ -414,7 +404,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/belts/425"
+    "details": "uri=/projects/global/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -429,7 +419,7 @@ When there is no belt found with the specified ID
     "timestamp": 1587302671116,
     "type": "entity_not_found",
     "message": "Belt with ID '425' not found.",
-    "details": "uri=/belts/425"
+    "details": "uri=/projects/global/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -437,7 +427,7 @@ When there is no belt found with the specified ID
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/belts/:id" %}
+{% api-method method="post" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id" %}
 {% api-method-summary %}
 Create and Store a Belt
 {% endapi-method-summary %}
@@ -445,7 +435,7 @@ Create and Store a Belt
 {% api-method-description %}
 Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned.   
   
-Requires the role `belt_edit`.  
+Requires the role `editor`.  
   
 **JSON Schema Definitions**  
   
@@ -457,6 +447,12 @@ Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kube
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project.  
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="id" type="number" required=false %}
 If provided, creates a belt with a given belt `id`. This `id` needs to be unique. Otherwise an `id` is automatically assigned. Value range for `id` is a positive `Long` value \(i.e. `1` to `9223372036854775807`\).
 {% endapi-method-parameter %}
@@ -545,17 +541,9 @@ Memory limit specification for this belt. Defaults either to `512` or server env
 Author of this belt.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="editor" type="array" required=false %}
-String array containing Keycloak roles given permission to edit this belt. Default to `["belt_edit"]`
-{% endapi-method-parameter %}
-
 {% api-method-parameter name="extractorFn" type="string" required=false %}
 Extractor function to be executed by this belt.  
 Defaults either to `Hello World` example function or server env variable `BELT_EXTRACTOR_FN`.
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="viewer" type="array" required=false %}
-String array containing keycloak roles. The role\(s\), which should have read access to the belt. Defaults to `["belt_view"]`. 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="debug" type="boolean" required=false %}
@@ -590,6 +578,7 @@ Returns a full dump of belt object created.
 {
     "version": "1",
     "name": "hello-belt",
+    "projectName": "global",
     "kubernetesName": "grnry-belt-161",
     "description": "Hello Belt Belt",
     "labels": [],
@@ -598,15 +587,6 @@ Returns a full dump of belt object created.
     "millicpu": 200,
     "memory": 512,
     "author": "User",
-    "reader": [
-        "\"_auth\""
-    ],
-    "editor": [
-        "belt_edit"
-    ],
-    "viewer": [
-        "belt_view"
-    ],
     "created": 1562744768164,
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
@@ -634,7 +614,12 @@ Returns a full dump of belt object created.
     "volumes": "{\"volumes\": [{\"name\": \"test\", \"configMap\": {\"name\": \"log-config\", \"items\": [{\"key\": \"log_level\", \"path\": \"log_level\"}]}}]}",
     "volumeMounts": "{\"volumeMounts\": [{\"name\": \"test\", \"subPath\": \"\", \"readOnly\": true, \"mountPath\": \"/etc/test\", \"secretName\": \"test-certs\"}]}",
     "extraEnv": "{\"extraEnv\": [{\"name\": \"FOO\", \"value\": \"bar\"}]}",
-    "id": "161"
+    "id": "161",
+    "_links": {
+        "self": {
+            "href": "https://hostname/projects/global/belts/161"
+        }
+    }
 }
 ```
 {% endapi-method-response-example %}
@@ -649,7 +634,7 @@ If a belt with a given name exists already in the Belt Store.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'extractorVersion' must not be empty.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -664,7 +649,7 @@ Token invalid or missing.
     "timestamp": 1586941626155,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -679,7 +664,7 @@ Missing role to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -694,7 +679,7 @@ Some internal server issue has occurred.
     "timestamp": "2020-10-14T13:06:25.951+0000",
     "message": "An unexpected error occurred.",
     "type": "unexpected_error",
-    "details": "uri=/belts/"
+    "details": "uri=/projects/global/belts/"
 }
 ```
 {% endapi-method-response-example %}
@@ -702,7 +687,7 @@ Some internal server issue has occurred.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="delete" host="https://api.grnry.io" path="/belts/:id" %}
+{% api-method method="delete" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id" %}
 {% api-method-summary %}
 Delete a Specific Belt
 {% endapi-method-summary %}
@@ -712,12 +697,18 @@ Deletes a specific belt given the ID.
   
 Deletes the belt definition in the database and all corresponding kubernetes resources if the belt is deployed.  
   
-The Keycloak user needs to have the _editor_ roles defined for the Belt.
+The Keycloak user needs to have the project's _editor_ role.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the belt belongs to.  
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="id" type="string" required=true %}
 Belt ID
 {% endapi-method-parameter %}
@@ -751,7 +742,7 @@ Token invalid or missing.
     "timestamp": 1586941626155,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -766,7 +757,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/belts/425"
+    "details": "uri=/projects/global/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -781,7 +772,7 @@ No belt found with given ID
     "timestamp": 1587302671116,
     "type": "entity_not_found",
     "message": "Belt with ID '425' not found.",
-    "details": "uri=/belts/425"
+    "details": "uri=/projects/global/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -789,7 +780,7 @@ No belt found with given ID
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="put" host="https://api.grnry.io" path="/belts/:id" %}
+{% api-method method="put" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id" %}
 {% api-method-summary %}
 Updates a Belt by ID
 {% endapi-method-summary %}
@@ -797,12 +788,18 @@ Updates a Belt by ID
 {% api-method-description %}
 Updates attributes of a belt, given its ID.   
   
-In order to update a belt, a complete JSON representation of the object needs to be provided. For a list of body parameters, see above POST /belts documentation. Empty fields will be set to default values as specified for POST /belts. The Keycloak user needs to have the _editor_ roles defined for the Belt.
+In order to update a belt, a complete JSON representation of the object needs to be provided. For a list of body parameters, see above POST /belts documentation. Empty fields will be set to default values as specified for POST /belts. The Keycloak user needs to have the project's _editor_ role.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the belt belongs to.  
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="id" type="string" required=true %}
 Belt ID
 {% endapi-method-parameter %}
@@ -825,6 +822,7 @@ A full dump of belt object recently modified
 {
      "version": "2",
      "name": "hello-belt",
+     "projectName": "global",
      "kubernetesName": "grnry-belt-161",
      "description": "Hello Belt Belt",
      "labels": [],
@@ -835,15 +833,6 @@ A full dump of belt object recently modified
      "memory": 512,
      "memoryRequests": 512,
      "author": "User",
-     "reader": [
-       "\"_auth\""
-     ],
-     "editor": [
-       "belt_edit"
-     ],
-     "viewer": [
-       "belt_view"
-     ],
      "created": 1562744768164,
      "assumedRole": "",
      "requirementsPy": "package1==0.0.0\r\npackage2",
@@ -871,7 +860,12 @@ A full dump of belt object recently modified
      "volumes": null,
      "volumeMounts": null,
      "extraEnv": null,
-     "id": "161"
+     "id": "161",
+    "_links": {
+        "self": {
+            "href": "https://hostname/projects/global/belts/161"
+        }
+    }
 }
 ```
 {% endapi-method-response-example %}
@@ -886,7 +880,7 @@ If the belt structure contains an invalid event type.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'beltId' must be a natural number but is 'abcd'.",
-    "details": "uri=/belts/abcd"
+    "details": "uri=/projects/global/belts/abcd"
 }
 ```
 {% endapi-method-response-example %}
@@ -901,7 +895,7 @@ Token invalid or missing.
     "timestamp": 1586941626155,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -916,7 +910,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/belts/425"
+    "details": "uri=/projects/global/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -931,7 +925,7 @@ Belt with the given ID not found
     "timestamp": 1587302671116,
     "type": "entity_not_found",
     "message": "Belt with ID '425' not found.",
-    "details": "uri=/belts/425"
+    "details": "uri=/projects/global/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -939,7 +933,7 @@ Belt with the given ID not found
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/belts/:id/state" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" %}
 {% api-method-summary %}
 Get a Belt's state
 {% endapi-method-summary %}
@@ -947,14 +941,20 @@ Get a Belt's state
 {% api-method-description %}
 Retrieve the status of the Belt's Kubernetes deployment.  
   
-In order to get results, you must have the required roles as defined in the fields _editor_ or _viewer_. Otherwise, you will not get back any results.
+In order to get results, you must have one of the project's roles _editor_ or _viewer_. Otherwise, you will not get back any results.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the belt belongs to.  
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="id" type="string" required=true %}
-Belt ID
+Belt IDn
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -1056,7 +1056,7 @@ Token invalid or missing.
     "timestamp": 1586941626155,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/belts"
+    "details": "uri=/projects/global/belts"
 }
 ```
 {% endapi-method-response-example %}
@@ -1072,7 +1072,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/belts/425"
+    "details": "uri=/projects/global/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -1087,7 +1087,7 @@ Belt with given ID not found.
     "timestamp":1586949273019,
     "type": "entity_not_found",
     "message": "Belt with ID '425' not found.",
-    "details": "uri=/belts/425"
+    "details": "uri=/projects/global/belts/425"
 }
 ```
 {% endapi-method-response-example %}
@@ -1105,7 +1105,7 @@ Possible values for the status attribute in the response body are:
 | DEPLOYING | Belt is being deployed |
 | STOPPED | Belt is not deployed |
 
-{% api-method method="post" host="https://api.grnry.io" path="/belts/:id/state" %}
+{% api-method method="post" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" %}
 {% api-method-summary %}
 Manipulate a Belt's state
 {% endapi-method-summary %}
@@ -1120,6 +1120,12 @@ Body example:
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=false %}
+Name of project the belt belongs to.  
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="id" type="string" required=true %}
 Belt ID
 {% endapi-method-parameter %}
@@ -1159,7 +1165,7 @@ Action is not allowed while belt is in current state or invalid.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'state' cannot be 'START' while Belt status is 'DEPLOYING'.",
-    "details": "uri=/belts/abcd/state"
+    "details": "uri=/projects/global/belts/abcd/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1174,7 +1180,7 @@ Token invalid or missing.
     "timestamp": 1586941626155,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/belts/425/state"
+    "details": "uri=/projects/global/belts/425/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1189,7 +1195,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/belts/425/state"
+    "details": "uri=/projects/global/belts/425/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1204,7 +1210,7 @@ Belt with given ID not found.
     "timestamp": 1587302671116,
     "type": "entity_not_found",
     "message": "Belt with ID '425' not found.",
-    "details": "uri=/belts/425/state"
+    "details": "uri=/projects/global/belts/425/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1212,7 +1218,7 @@ Belt with given ID not found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/belts/:id/logs" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id/logs" %}
 {% api-method-summary %}
 Get Belt's Pod Logs by Id
 {% endapi-method-summary %}
@@ -1220,12 +1226,18 @@ Get Belt's Pod Logs by Id
 {% api-method-description %}
 Get the last n log lines from all pods of the belt with the given `id` where n is specified by the `lines` query parameter.  
   
-This request requires the _editor_ roles defined for that belt.
+This request requires the project's _editor_ role.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=false %}
+Name of project the belt belongs to.  
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="id" type="string" required=true %}
 Belt ID
 {% endapi-method-parameter %}
@@ -1278,7 +1290,7 @@ number of lines to be retrieved per pod. Must be greater than `0` and less than 
     },
     "_links": {
         "self": {
-            "href": "https://api.grnry.io/belts/59/logs?lines=5"
+            "href": "https://api.grnry.io/projects/global/belts/59/logs?lines=5"
         }
     }
 }
@@ -1295,7 +1307,7 @@ number of lines to be retrieved per pod. Must be greater than `0` and less than 
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'lines' must be in between 1 and 500 but is '750'.",
-    "details": "uri=/belts/abcd/logs"
+    "details": "uri=/projects/global/belts/abcd/logs"
 }
 ```
 {% endapi-method-response-example %}
@@ -1310,7 +1322,7 @@ Token invalid or missing.
     "timestamp": 1586941626155,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/belts/425/logs"
+    "details": "uri=/projects/global/belts/425/logs"
 }
 ```
 {% endapi-method-response-example %}
@@ -1325,7 +1337,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/belts/425/logs"
+    "details": "uri=/projects/global/belts/425/logs"
 }
 ```
 {% endapi-method-response-example %}
@@ -1340,7 +1352,7 @@ Belt with given ID not found.
     "timestamp": 1587302671116,
     "type": "entity_not_found",
     "message": "Belt with ID '425' not found.",
-    "details": "uri=/belts/425/logs"
+    "details": "uri=/projects/global/belts/425/logs"
 }
 ```
 {% endapi-method-response-example %}

@@ -9,23 +9,28 @@ description: >-
 
 ## Clients
 
-Currently granary uses the following keycloak clients
+Currently granary uses the following keycloak clients:
+
+#### Administrative Clients
 
 * scdf
-* belt-api
-* harvester-api
+* Project-Clients = {_x_ \| _x_ is name of a project}
+
+#### Data Out clients
+
 * profile-api
 * event-api
 * jdbc-api
-* segment-management-api
+
+
 
 ## Administrative Clients
 
-These clients provide access to the administration of the data flow infrastructure.
+These clients provide access to the control plane of the data flow infrastructure.
 
 ### scdf
 
-Requests the user's access rights to operate on Spring Cloud Data Flow. This mainly includes creating and deploying harvesters.
+Requests the user's access rights to operate on Spring Cloud Data Flow \(SCDF\). This mainly includes creating and deploying harvesters. Usually it is sufficient to grant roles in the scdf client to the technical user that the Harvester API uses to interact with keycloak. This user needs all of the below mentioned roles.
 
 | Role | Description |
 | :--- | :--- |
@@ -37,37 +42,17 @@ Requests the user's access rights to operate on Spring Cloud Data Flow. This mai
 | `deploy` | for deploying streams or launching tasks |
 | `create` | for anything that involves creating, e.g. creating streams or tasks |
 
-### belt-api
+### Project-Clients
 
-Requests the user's access rights to manage individual belts. These roles are defined by the belt author during belt definition and can be edited by anyone having the specified editor role. Each belt has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array of all roles necessary for editing it. These values need to be added as roles in Keycloak and assigned to all authorized users. To create a new belt, the user needs at least the default `belt_edit` role.
+For each project there is a separate client that is automatically created by Project API. The client name is equal to the project name. The assignment of the client's roles to users defines their rights to manage Granary objects like Belts, Harvesters, Event Types, Persisters or Source Types in the scope of that project.
 
-Example roles: `belt_view`, `belt_edit`, `belt_view_privileged`, `belt_edit_privileged`
-
-### harvester-api
-
-Requests the user's access rights to manage harvesters, i.e., creating event types or source types. Users need also access rights in scdf client.
-
-Event types have two attributes, `editor`and `consumer`specifiying which users are allowed to edit and read the event type. If no `consumer` has been specified all users are allowed to read the event type, else only the ones matching the `consumer` role \(or matching the event type's `editor` role\). 
-
-Editing the event type is only possible for users matching the provided `editor` role. If no `editor`role is set when creating the event type, the default `event_type_{type}_edit` is used. As the default for `type` is `data_in`, the default editor role is `event_type_data_in_edit`. To create a new event type, the user needs at least the matching `event_type_{type}_edit` role.
+Each project client offers three roles `editor`, `viewer` and `data_owner`. Every user having one of these roles is considered a member of that project. Every new project member will be assigned the project client's `viewer` role.
 
 | Role | Description |
 | :--- | :--- |
-|  | user can read all event types that do not explicitly specify the `consumer` |
-| `my_custom_role` | user can read all event types that specify no `consumer` or specify `consumer`as `my_custom_role`, can edit all event types that specify `editor` as `my_custom_role` |
-| `event_type_data_in_edit` | Default role for a user to read and edit all `data_in` typed event types |
-| `event_type_ttl_edit` | Default role for a user to read and edit all `ttl` typed event types |
-| `event_type_ttn_edit` | Default role for a user to read and edit all `ttn` typed event types |
-| `source_type_read` | user can read all source types |
-| `source_type_edit` | user can edit all source types |
-| `harvester_read` | user can read all harvester instance |
-| `harvester_edit` | user can edit all harvester instances |
-
-### segment-management-api
-
-Requests the user's access rights to manage segment jobs. These roles are defines by the segment job author during creation and can be edited by anyone having the specified `editor` role. Each segment job has a `viewer` attribute containing an array of all roles necessary for viewing it and also an `editor` attribute containing an array fo all roles necessary for editing it. These roles need to be added as roles in Keycloak and assigned to all authorized users. To create a new segment job the user needs at least the default `segment_job_edit` role.
-
-Default roles: `segment_job_view`, `segment_job_edit`
+| `editor` | manage Granary objects: create, update, delete, change status |
+| `viewer` | view Granary objects and their status |
+| `data_owner` | add new members to the project, manage data access |
 
 ## Data Out Clients
 

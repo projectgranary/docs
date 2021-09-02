@@ -6,35 +6,41 @@ description: Harvester API's event type endpoints
 
 ## Paths
 
-* GET /event-types
-* GET /event-types/{event-type-name}
-* POST /event-types
-* POST /event-types/{event-type-name}
-* PUT/event-types/{event-type-name}
-* DELETE /event-types/{event-type-name} 
-* GET/event-types/{event-type-name}/{version}
-* GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister
-* PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister
-* GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
-* POST /event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
-* GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister/logs
+* GET /projects/{project-name}/event-types
+* GET /projects/{project-name}/event-types/{event-type-name}
+* POST /projects/{project-name}/event-types
+* POST /projects/{project-name}/event-types/{event-type-name}
+* PUT/projects/{project-name}/event-types/{event-type-name}
+* DELETE /projects/{project-name}/event-types/{event-type-name} 
+* GET/projects/{project-name}/event-types/{event-type-name}/{version}
+* GET /projects/{project-name}/event-types/{event-type-name}/eventstores/{event-store-name}/persister
+* PUT /projects/{project-name}/event-types/{event-type-name}/eventstores/{event-store-name}/persister
+* GET /projects/{project-name}/event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
+* POST /projects/{project-name}/event-types/{event-type-name}/eventstores/{event-store-name}/persister/state
+* GET /projects/{project-name}/event-types/{event-type-name}/eventstores/{event-store-name}/persister/logs
 
 ## API Methods
 
 Consult the [Granary Access Clients Reference](../../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/event-types" %}
 {% api-method-summary %}
 Get all Event Types
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Returns a list of all event types \(latest version of each event type\)  
-This request will return all event types, which `consumer` or `editor` matches the or one of the requester's role\(s\). if `consumer` is null, every authenticated user is authorized to see the entity.
+Returns a list of all event types \(latest version of each event type\) optionally filtered by project name. To get all event types from all projects, leave out `projects/{project-name}/` in the URL.  
+If `projects/{project-name}` is present, the project's `viewer` or `editor` role is necessary.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=false %}
+Name of project. Filters event types by project. If `projects/{projectName}/` is missing, all event types from all projects will be retrieved but with limited response bodies.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
 {% api-method-headers %}
 {% api-method-parameter name="Authentication" type="string" required=true %}
 Authentication token.
@@ -70,13 +76,14 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
 {
     "_links": {
         "self": {
-            "href": "https://hostname/event-types?search=&offset=0&pagesize=20&expand="
+            "href": "https://hostname/projects/global/event-types?search=&offset=0&pagesize=20&expand="
         }
     },
     "eventTypes": [
        {
             "name": "snowplow-tracking",
             "displayName": "snowplow-tracking",
+            "projectName": "global",
             "version": 1,
             "projectName": "tracking",
             "editor": "event_type_data_in_edit",
@@ -96,29 +103,31 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
             "schema": null,
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/snowplow-tracking/1"
+                    "href": "https://hostname/projects/global/event-types/snowplow-tracking/1"
                 }
             }
         },
         {
             "name": "call-records",
             "displayName": "call-records",
+            "projectName": "global",
             "version" : 10,
             ....
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/call-records/10"
+                    "href": "https://hostname/projects/global/event-types/call-records/10"
                 }
             }
         },
         {
             "name": "invoices",
             "displayName": "invoices",
+            "projectName": "global",
             "version" : 5,
             ....
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/invoices/5"
+                    "href": "https://hostname/projects/global/event-types/invoices/5"
                 }
             }
         }
@@ -137,7 +146,7 @@ Invalid query parameter value.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'pagesize' must be a natural number but is '-1'.",
-    "details": "uri=/event-types"
+    "details": "uri=/projects/global/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -152,7 +161,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types"
+    "details": "uri=/projects/global/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -167,7 +176,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types"
+    "details":"uri=/projects/global/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -175,19 +184,22 @@ Missing roles to access this resource.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name" %}
 {% api-method-summary %}
 Get all versions of an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get all versions of a given event type.   
-This request will return all versions, if  `consumer` or `editor` matches the requester's role. If `consumer` is null, every authenticated user is authorized.
+Get all versions of a given event type. For a full response model `/projects/{project-name}` is required and the `editor` or `viewer` role for that project is needed.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=false %}
+Name of project. Filters event types by project. If `projects/{projectName}/` is missing, event type is returned with limited response body.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-type-name" type="string" required=true %}
 Name of the event type.
 {% endapi-method-parameter %}
@@ -210,29 +222,31 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
 {
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/postman-event-type"
+            "href": "https://hostname/projects/global/event-types/postman-event-type"
         }
     },
     "eventTypes": [
         {
             "name": "postman-event-type",
             "displayName": "postman-event-type",
+            "projectName": "global",
             "version": "1",
             ....
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/postman-event-type/1"
+                    "href": "https://hostname/projects/global/event-types/postman-event-type/1"
                 }
             }
         },
         {
             "name": "postman-event-type",
             "displayName": "postman-event-type",
+            "projectName": "global",
             "version": "2",
             ...
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/postman-event-type/2"
+                    "href": "https://hostname/projects/global/event-types/postman-event-type/2"
                 }
             }
         },
@@ -240,11 +254,12 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
         {
             "name": "postman-event-type",
             "displayName": "postman-event-type",
+            "projectName": "global",
             "version": "12",
             ....
             "_links": {
                 "self": {
-                    "href": "https://hostname/event-types/postman-event-type/4"
+                    "href": "https://hostname/projects/global/event-types/postman-event-type/4"
                 }
             }
         }
@@ -263,7 +278,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types/adobe-s3"
+    "details": "uri=/projects/global/event-types/adobe-s3"
 }
 ```
 {% endapi-method-response-example %}
@@ -278,7 +293,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types/adobe-s3"
+    "details":"uri=/projects/global/event-types/adobe-s3"
 }
 ```
 {% endapi-method-response-example %}
@@ -293,7 +308,7 @@ No event-type found with that name \(case sensitive\).
     "timestamp": 1587302671116,
     "type": "entity_not_found",
     "message": "Event Type 'new-entity' not found.",
-    "details": "uri=/event-types/new-entity"
+    "details": "uri=/projects/global/event-types/new-entity"
 }
 ```
 {% endapi-method-response-example %}
@@ -301,13 +316,13 @@ No event-type found with that name \(case sensitive\).
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method method="post" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name" %}
 {% api-method-summary %}
 Create an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-To create an event type your user needs to have the respective `event_type_{type}_edit` role \(E.g. to create a `data_in`-type event type you need the `event_type_data_in_edit` role. Be aware that you will not be able to update the entity afterwards if your account does not have the role set in `editor`.  
+To create an event type your user needs to have the project's `editor` role.  
   
 When you create a `data_in` event type \(default\), the system will automatically create a persister using the persister default configuration. On other types besides `data_in` \(like `ttl`/`ttn`\) it will just create the event type and all persister endpoints will return `404 - not found`.
 {% endapi-method-description %}
@@ -315,6 +330,12 @@ When you create a `data_in` event type \(default\), the system will automaticall
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the event-type belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-type-name" type="string" required=false %}
 unique event type name
 {% endapi-method-parameter %}
@@ -343,16 +364,8 @@ Reference to data's physical location. Allowed location types are: `database`, `
 Optional \(boolean\) SpringEL to determine if a deletion should occur. Default: `''`
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="consumer" type="string" required=false %}
-The name of user group allowed to consume this event type. If not set, there's no restriction applied and any authenticated user can view event-type details and also consume the data with belts. Defaults to `null`
-{% endapi-method-parameter %}
-
 {% api-method-parameter name="type" type="string" required=false %}
 The type of this event type. Allowed values are: `data_in` , `ttl`, `ttn` , `profile`, `segment`,`live_segment`, `custom`. Defaults to `data_in`.
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="editor" type="string" required=false %}
-The name of user group allowed to edit this event type. Defaults to `event_type_<type>_edit`.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="eventstoreTTL" type="string" required=false %}
@@ -412,9 +425,12 @@ Displayname of the new event type
 {
     "name": "event-type-4",
     "version": "1",
+    
+    ...
+    
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/event-type-4/1"
+            "href": "https://hostname/projects/global/event-types/event-type-4/1"
         }
     }
 }
@@ -431,7 +447,7 @@ If required parameters are missing or parameters are invalid.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'displayName' must not be empty.",
-    "details":"uri=/event-types"
+    "details":"uri=/projects/global/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -446,7 +462,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types"
+    "details": "uri=/projects/global/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -461,7 +477,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types"
+    "details":"uri=/projects/global/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -476,7 +492,7 @@ If displayName not unique \(case insensitive\).
     "timestamp": 1587303130850,
     "type": "entity_already_exists"
     "message": "Event Type with displayName 'adobe-s3' already exists.",
-    "details": "uri=/event-types"
+    "details": "uri=/projects/global/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -491,7 +507,7 @@ Persister already exists for the eventy type.
     "timestamp":1586949269381,
     "type": "unexpected_error",
     "message":"An unexpected error occurred.",
-    "details":"uri=/event-types"
+    "details":"uri=/projects/global/event-types"
 }
 ```
 {% endapi-method-response-example %}
@@ -501,25 +517,25 @@ Persister already exists for the eventy type.
 
 
 
-#### Allowed Parameters in "Create an Event Type" request by Event Type Types
+#### Allowed Parameters in "Create an Event Type" request by Event Type
 
-| Event Type Type | Physical Location | Source | Schema |
+| Event Type | Physical Location | Source | Schema |
 | :--- | :---: | :---: | :---: |
 | Data In | - | - | - |
 | Profile | + | - | - |
 | Live Segment | - | - | + |
 | Segment | - | - | - |
 | TTL/TTN | - | - | - |
-| Custom | + | + | + |
 
-{% api-method method="put" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method method="put" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name" %}
 {% api-method-summary %}
 Update an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Fully or partially updates an event type.  
-This requires the requester to assume roles that match the `editor` field. If no delta was recognized, no update will be made and HTTP 304 will be returned.  
+Fully or partially updates an event type. If no delta was recognized, no update will be made and HTTP 304 will be returned.   
+  
+To create an event type your user needs to have the project's `editor` role.  
   
 Immutable fields \(like type, partitionCount,.. \) can be part of the request body, but their values need to match the current values, otherwise an error is raised.
 {% endapi-method-description %}
@@ -527,6 +543,12 @@ Immutable fields \(like type, partitionCount,.. \) can be part of the request bo
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the event-type belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-type-name" type="string" required=true %}
 Name of the event type
 {% endapi-method-parameter %}
@@ -582,7 +604,8 @@ The SpringEL expression to create the grnry-correlation-id.
 ```text
 {
         "name": "foo-test",
-        "displayName": "my-test-type"
+        "displayName": "my-test-type",
+        "projectName": "global",        
         "version": 2,
         "topicName" : "grnry_data_in_foo-test",
         "correlationIdExpression": "#safeJsonPath(#safeJsonPath(payload, 'body'), 'data[0].correlationId')?:'NO_CORRELATION_ID'",
@@ -595,7 +618,7 @@ The SpringEL expression to create the grnry-correlation-id.
         "description": "",
         "_links": {
             "self": {
-                "href": "https://hostname/event-types/foo-test/2"
+                "href": "https://hostname/projects/global/event-types/foo-test/2"
             }
         }
     },
@@ -612,7 +635,7 @@ Invalid parameter.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'type' must be empty or 'ttl' but is 'data_in'.",
-    "details":"uri=/event-types/test-event-type-2"
+    "details":"uri=/projects/global/event-types/test-event-type-2"
 }
 ```
 {% endapi-method-response-example %}
@@ -627,7 +650,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types/test-event-type"
+    "details": "uri=/projects/global/event-types/test-event-type"
 }
 ```
 {% endapi-method-response-example %}
@@ -642,7 +665,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types/test-event-type"
+    "details":"uri=/projects/global/event-types/test-event-type"
 }
 ```
 {% endapi-method-response-example %}
@@ -650,18 +673,24 @@ Missing roles to access this resource.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="delete" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
+{% api-method method="delete" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name" %}
 {% api-method-summary %}
 Delete an Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Deletes all versions of the given event type, if it is not used by registered belts. This request requires the role matching `editor` field.
+Deletes all versions of the given event type, if it is not used by registered belts. To delete an event type, a user must have the project's `editor` role.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the event-type belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-type-name" type="string" required=true %}
 name of the event type to be deleted
 {% endapi-method-parameter %}
@@ -695,7 +724,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types/13213"
+    "details": "uri=/projects/global/event-types/13213"
 }
 ```
 {% endapi-method-response-example %}
@@ -710,7 +739,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types/test-event-type-tp"
+    "details":"uri=/projects/global/event-types/test-event-type-tp"
 }
 ```
 {% endapi-method-response-example %}
@@ -725,7 +754,7 @@ No event type with given name \(case sensitive\) found.
     "timestamp":1586949280969,
     "type": "entity_not_found",
     "message": "Event Type 'test-delete' not found.",
-    "details":"uri=/event-types/test-delete"
+    "details":"uri=/projects/global/event-types/test-delete"
 }
 ```
 {% endapi-method-response-example %}
@@ -749,7 +778,7 @@ If there are still belts and/or harvesters referencing the event-type, the delet
      https://hostname/belts/17,
      https://hostname/belts/18,
      https://hostname/belts/19].",
-    "details": "uri=/event-types/test-event-type-delete"
+    "details": "uri=/projects/global/event-types/test-event-type-delete"
 }
 ```
 {% endapi-method-response-example %}
@@ -757,7 +786,7 @@ If there are still belts and/or harvesters referencing the event-type, the delet
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/:version" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name/:version" %}
 {% api-method-summary %}
 Get a Specific Version of an Event Type
 {% endapi-method-summary %}
@@ -765,12 +794,16 @@ Get a Specific Version of an Event Type
 {% api-method-description %}
 Get one version of an event type.  
 Version should be "latest" or a valid number greater than or equals to 1.  
-This request requires the role matching `consumer` or `editor` field of the event type. If `consumer` is not set, any authenticated user is authorized.
+To find this event-type in all projects leave out `projects/{project-name}/` in the URL. If `projects/{project-name}` is present, the respective project's `viewer` or `editor` role is necessary.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="projectName" type="string" required=false %}
+Name of project the event-type belongs to. If `projects/{projectName}/` is missing, the event type is returned with limited response body.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="version" type="string" required=true %}
 The version of the event type, or "latest" to get the latest version
 {% endapi-method-parameter %}
@@ -803,6 +836,7 @@ If "true" or "True", the event type response will only contain properties a POST
 {
     "name": "snowplow-webtracking",
     "displayName": "snowplow-webtracking",
+    "projectName": "global",
     "version": 1,
     "projectName": "webtracking",
     "type": "data_in",
@@ -849,7 +883,7 @@ If "true" or "True", the event type response will only contain properties a POST
     ],
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/snowplow-webtracking/1"
+            "href": "https://hostname/projects/global/event-types/snowplow-webtracking/1"
         }
     }
 }
@@ -866,7 +900,7 @@ If the version is not latest or a valid number greater or equals to 1.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'version' must be a natural number or 'latest' but is '-1'.",
-    "details":"uri=/event-types/test-event-type/invalidVersion"
+    "details":"uri=/projects/global/event-types/test-event-type/invalidVersion"
 }
 ```
 {% endapi-method-response-example %}
@@ -881,7 +915,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types/adobe-s3/latest"
+    "details": "uri=/projects/global/event-types/adobe-s3/latest"
 }
 ```
 {% endapi-method-response-example %}
@@ -896,7 +930,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types/test-event-type-partial/latest"
+    "details":"uri=/projects/global/event-types/test-event-type-partial/latest"
 }
 ```
 {% endapi-method-response-example %}
@@ -911,7 +945,7 @@ No event type with given name \(case sensitive\) found for given version.
     "timestamp": 1587302671116,
     "type": "entity_not_found",
     "message": "Event Type 'test-event-type' with version '4' not found.",
-    "details":"uri=/event-types/test-event-type/4"
+    "details":"uri=/projects/global/event-types/test-event-type/4"
 }
 ```
 {% endapi-method-response-example %}
@@ -919,19 +953,25 @@ No event type with given name \(case sensitive\) found for given version.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
 {% api-method-summary %}
 Get Persister for a Specific Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
 Get the persister of an event type \(only available on "data\_in" event types\).  
-This request requires the role matching either `consumer` or `editor`. If `consumer` is null, any authenticated user is authorized. 
+This request requires the role either `viewer`or `editor`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="projectName" type="string" required=true %}
+Name of project the event-type belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-store-name" type="string" required=true %}
 Name of the event store.
 {% endapi-method-parameter %}
@@ -967,6 +1007,7 @@ requested :event-type-name \(eventtype-1\) , :event-store-name \(pg\)
 ```text
 {
     "streamName": "grnry-p-pg-postman-eventtype-1",
+    "projectName": "global",
     "appName": "grnry-eventstore-pg",
     "appVersion": "latest",
     "appConfig": {
@@ -998,7 +1039,7 @@ requested :event-type-name \(eventtype-1\) , :event-store-name \(pg\)
     "lastUpdated": 1574417165615,
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/eventtype-1/eventstores/pg/persister"
+            "href": "https://hostname/projects/global/event-types/eventtype-1/eventstores/pg/persister"
         }
     }
 }
@@ -1015,7 +1056,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types/adobe-s3/eventstores/pg/persister"
+    "details": "uri=/projects/global/event-types/adobe-s3/eventstores/pg/persister"
 }
 ```
 {% endapi-method-response-example %}
@@ -1030,7 +1071,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
+    "details":"uri=/projects/global/event-types/test-event-type-partial/eventstores/pg/persister"
 }
 ```
 {% endapi-method-response-example %}
@@ -1045,7 +1086,7 @@ Event store, event type not found \(expected behaviour on event types other than
     "timestamp": 1587303625038,
     "type": "entity_not_found",
     "message": "Persister 'adobe-s3' not found.",
-    "details": "uri=/event-types/adobe-s3/eventstores/pgd/persister"
+    "details": "uri=/projects/global/event-types/adobe-s3/eventstores/pgd/persister"
 }
 ```
 {% endapi-method-response-example %}
@@ -1053,19 +1094,25 @@ Event store, event type not found \(expected behaviour on event types other than
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="put" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
+{% api-method method="put" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
 {% api-method-summary %}
 Update Persister Config for a Specific Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
 Updates the persister configuration of a specific event type.  
-This request requires the role matching `editor`.
+This request requires the`editor` role of the project.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the event-type belongs to.  
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-type-name" type="string" required=true %}
 Name of the event type.
 {% endapi-method-parameter %}
@@ -1111,6 +1158,7 @@ The updated stream app version. This version has to be present in the backend sp
 ```text
 {
     "streamName": "grnry-p-pg-postman-eventtype-1",
+    "projectName": "global",
     "appName": "grnry-eventstore-pg",
     "appVersion": "latest",
     "appConfig": {
@@ -1138,7 +1186,7 @@ The updated stream app version. This version has to be present in the backend sp
     "lastUpdated": 1574417943266,
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/eventtype-1/eventstores/pg/persister?expand="
+            "href": "https://hostname/projects/global/event-types/eventtype-1/eventstores/pg/persister?expand="
         }
     }
 }
@@ -1175,7 +1223,7 @@ Invalid parameters
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'event_type_name' cannot be null",
-    "details":"uri=/event-types/event-type-empty-update-persister-config/eventstores/pg/persister"
+    "details":"uri=/projects/global/event-types/event-type-empty-update-persister-config/eventstores/pg/persister"
 }
 ```
 {% endapi-method-response-example %}
@@ -1190,7 +1238,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types/adobe-s3/eventstores/pg/persister"
+    "details": "uri=/projects/global/event-types/adobe-s3/eventstores/pg/persister"
 }
 ```
 {% endapi-method-response-example %}
@@ -1205,7 +1253,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
+    "details":"uri=/projects/global/event-types/test-event-type-partial/eventstores/pg/persister"
 }
 ```
 {% endapi-method-response-example %}
@@ -1243,19 +1291,25 @@ Missing roles to access this resource.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
 {% api-method-summary %}
 Get State of a Persister for a Specific Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
 Get the current state of a persister for an event type.  
-This request requires a role matching `editor` or `consumer`. If `consumer` is null, any authenticated user is authorized.
+This request requires an `editor` or `viewer` role of the project.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the event-type belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-type-name" type="string" required=true %}
 Name of the event type.
 {% endapi-method-parameter %}
@@ -1283,7 +1337,7 @@ Authentication token.
     "status": "STOPPED",
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/eventtype-1/eventstores/pg/persister/state"
+            "href": "https://hostname/projects/global/event-types/eventtype-1/eventstores/pg/persister/state"
         }
     }
 }
@@ -1300,7 +1354,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types/adobe-s3/eventstores/pg/persister/state"
+    "details": "uri=/projects/global/event-types/adobe-s3/eventstores/pg/persister/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1315,7 +1369,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
+    "details":"uri=/projects/global/event-types/test-event-type-partial/eventstores/pg/persister/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1330,7 +1384,7 @@ Event store, event type not found.
     "timestamp": 1587303625038,
     "type": "entity_not_found",
     "message": "Persister 'adobe-s3' not found.",
-    "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/state"
+    "details": "uri=/projects/global/event-types/adobe-s3/eventstores/pdg/persister/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1350,19 +1404,25 @@ Possible values for the status attribute in the response body are:
 | RUNNING\_BUT\_OUTDATED | persister is running but there is a newer version of it in the database |
 | FAILED | persister is deployed but not running |
 
-{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
+{% api-method method="post" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
 {% api-method-summary %}
 Start/Stop Persister for a Specific Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
 Start or stop the state of a persister for an event type.  
-This request requires the role matching `editor`.
+This request requires the  `editor` role of the project.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the event-type belongs to.  
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-type-name" type="string" required=true %}
 Name of the event type.
 {% endapi-method-parameter %}
@@ -1396,7 +1456,7 @@ Updates the status of this persister. Possible values: `START` , `STOP`
     "status": "DEPLOYING",
     "_links": {
         "self": {
-            "href": "https://hostname/event-types/eventtype-1/eventstores/pg/persister/state"
+            "href": "https://hostname/projects/global/event-types/eventtype-1/eventstores/pg/persister/state"
         }
     }
 }
@@ -1413,7 +1473,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/event-types/adobe-s3/eventstores/pg/persister/state"
+    "details": "uri=/projects/global/event-types/adobe-s3/eventstores/pg/persister/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1428,7 +1488,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
+    "details":"uri=/projects/global/event-types/test-event-type-partial/eventstores/pg/persister/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1443,7 +1503,7 @@ Event store, event type not found.
      "timestamp": 1587303625038,
      "type": "entity_not_found",
      "message": "Persister 'adobe-s3' not found.",
-     "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/logs"
+     "details": "uri=/projects/global/event-types/adobe-s3/eventstores/pdg/persister/logs"
 }
 ```
 {% endapi-method-response-example %}
@@ -1451,19 +1511,25 @@ Event store, event type not found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/logs" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name/eventstores/:event-store-name/persister/logs" %}
 {% api-method-summary %}
 Get Persister Logs for a Specific Event Type
 {% endapi-method-summary %}
 
 {% api-method-description %}
 Get the logs from a persister of an event type.  
-This request requires the role matching `editor` or `consumer`. if `consumer` is null, any authenticated user is authorized.
+This request requires the `editor` or `viewer` role of the project.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the event-type belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="event-type-name" type="string" required=true %}
 Name of the event-type
 {% endapi-method-parameter %}
@@ -1494,7 +1560,12 @@ Valid value are : `1 .. 500`. Default: `500`.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "logs": [
+        "2021-08-16 12:30:22.156  INFO [g-p-pg-event-type-sink,,,] 1 --- [-write-health-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=healthindicator-kafka2d1310a3-f25f-420f-8e81-e2cb71ec8218, groupId=healthindicator-kafka-36959226-28ea-4571-b7f1-386d05e2a21d] (Re-)joining group",
+        "2021-08-16 12:31:22.156  INFO [g-p-pg-event-type-sink,,,] 1 --- [-write-health-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=healthindicator-kafka2d1310a3-f25f-420f-8e81-e2cb71ec8218, groupId=healthindicator-kafka-36959226-28ea-4571-b7f1-386d05e2a21d] (Re-)joining group"
+    ]
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}

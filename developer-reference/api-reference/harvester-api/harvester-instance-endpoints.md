@@ -6,30 +6,38 @@ description: Harvester API's instance endpoints.
 
 ## Paths
 
-* GET /harvesters/instances
-* GET /harvesters/instances/{harvester-name}
-* POST /harvesters/instances
-* POST /harvesters/instances/{harvester-name}
-* PUT /harvesters/instances/{harvester-name}
-* DELETE /harvesters/instances/{harvester-name}
-* GET /harvesters/instances/{harvester-name}/state
-* POST /harvesters/instances/{harvester-name}/state
+* GET /projects/{project-name}/harvesters/instances
+* GET /projects/{project-name}/harvesters/instances/{harvester-name}
+* POST /projects/{project-name}/harvesters/instances
+* POST /projects/{project-name}/harvesters/instances/{harvester-name}
+* PUT /projects/{project-name}/harvesters/instances/{harvester-name}
+* DELETE /projects/{project-name}/harvesters/instances/{harvester-name}
+* GET /projects/{project-name}/harvesters/instances/{harvester-name}/state
+* POST /projects/{project-name}/harvesters/instances/{harvester-name}/state
 
 ## API Methods
 
 Consult the [Granary Access Clients Reference](../../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
 
-{% api-method method="get" host="https://api.grnry.io" path="/harvesters/instances" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances" %}
 {% api-method-summary %}
 Get all Harvester Instances
 {% endapi-method-summary %}
 
 {% api-method-description %}
-returns a pageable list of all harvesters. Requires role `harvester_read`.
+returns a pageable list of all harvesters. Requires role `viewer`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project. Retrieve all harvesters from this project scope.  
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
 {% api-method-query-parameters %}
 {% api-method-parameter name="pagesize" type="integer" required=false %}
 Number of harvesters returned, default is 20. Maximum is 250.
@@ -60,17 +68,23 @@ Filter harvester list by name. Default: ""
    "harvesters":[
       {
          "name":"harvester-1",
+         
+         ...
+         
          "_links":{
             "self":{
-               "href":"https://hostname/harvesters/instances/harvester-1"
+               "href":"https://hostname/projects/global/harvesters/instances/harvester-1"
             }
          }
       },
       {
          "name":"demo-harvester",
+         
+         ...
+         
          "_links":{
             "self":{
-               "href":"https://hostname/harvesters/instances/demo-harvester"
+               "href":"https://hostname/projects/global/harvesters/instances/demo-harvester"
             }
          }
       }
@@ -78,7 +92,7 @@ Filter harvester list by name. Default: ""
    "totalCount":2,
    "_links":{
       "self":{
-         "href":"https://hostname/harvesters/instances?search=&offset=0&pagesize=20&expand=totalCount"
+         "href":"https://hostname/projects/global/harvesters/instances?search=&offset=0&pagesize=20&expand=totalCount"
       }
    }
 }
@@ -95,7 +109,7 @@ Invalid query parameter value.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'pagesize' must be a natural number but is '-1'.",
-    "details": "uri=/harvesters/instances"
+    "details": "uri=/projects/global/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -110,7 +124,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/harvesters/instances"
+    "details": "uri=/projects/global/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -125,7 +139,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/harvesters/instances"
+    "details":"uri=/projects/global/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -133,18 +147,24 @@ Missing roles to access this resource.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances/:harvester-name" %}
 {% api-method-summary %}
 Get Harvester details
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Returns all details of a given harvester. Requires role `harvester_read`.
+Returns all details of a given harvester. Requires role `viewer`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the harvester belongs to.   
+_Backwards compatibility:_  
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="harvester-name" type="string" required=true %}
 technical name of harvester
 {% endapi-method-parameter %}
@@ -171,6 +191,7 @@ Sample Response
 {
     "name": "harvester-demo",
     "displayName": "Harvester Demo",
+    "projectName": "global",
     "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-demo",
     "sourceType": {
@@ -191,7 +212,7 @@ Sample Response
         "appConfiguration": {},
         "_links": {
             "type": {
-                "href": "https://hostname/harvesters/source-types/grnry-jdbc/latest"
+                "href": "https://hostname/projects/global/harvesters/source-types/grnry-jdbc/latest"
             }
         }
     },
@@ -280,13 +301,13 @@ Sample Response
         "status": "RUNNING",
         "_links": {
             "self": {
-                "href": "https://hostname/harvesters/instances/harvester-demo/state"
+                "href": "https://hostname/projects/global/harvesters/instances/harvester-demo/state"
             }
         }
     },
     "_links": {
         "self": {
-            "href": "https://hostname/harvesters/instances/harvester-demo"
+            "href": "https://hostname/projects/global/harvesters/instances/harvester-demo"
         }
     }
 }
@@ -303,7 +324,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/harvesters/instances/adobe-s3-std"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -318,7 +339,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/harvesters/instances/adobe-s3-std"
+    "details":"uri=/projects/global/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -333,7 +354,7 @@ Harvester instance with given name \(case sensisitive\) does not exist.
     "timestamp": 1587303625038,
     "type": "entity_not_found",
     "message": "Harvester 'harvester-delete' not found.",
-    "details":"uri=/harvesters/instances/harvester-delete"
+    "details":"uri=/projects/global/harvesters/instances/harvester-delete"
 }
 ```
 {% endapi-method-response-example %}
@@ -341,7 +362,7 @@ Harvester instance with given name \(case sensisitive\) does not exist.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name" %}
+{% api-method method="post" host="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances/:harvester-name" %}
 {% api-method-summary %}
 Create Harvester
 {% endapi-method-summary %}
@@ -351,12 +372,18 @@ Creates a new harvester instance. A technical name for the harvester instance wi
   
 Source type and event type are referenced by `name` and `version` in event\_types and source\_types tables. If no configuration properties are set under `sourceType` \(resp. `eventType`\) configuration from these entities will be applied.  
   
-Requires the role `harvester_edit`.
+Requires the role `editor`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the harvester belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="harvester-name" type="string" required=false %}
 unique technical harvester name
 {% endapi-method-parameter %}
@@ -409,6 +436,7 @@ Human readable name. Needs to be unique. A technical name will be derived from i
 {
     "name": "harvester-post",
     "displayName": "Harvester Post",
+    "projectName": "global",
     "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-post",
     "sourceType": {
@@ -517,7 +545,7 @@ Human readable name. Needs to be unique. A technical name will be derived from i
     },
     "_links": {
         "self": {
-            "href": "https://hostname/harvesters/instances/harvester-post"
+            "href": "https://hostname/projects/global/harvesters/instances/harvester-post"
         }
     }
 }
@@ -534,7 +562,7 @@ Missing field or bad value
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'eventTyp.version' must not be null.",
-    "details": "uri=/harvesters/instances"
+    "details": "uri=/projects/global/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -549,7 +577,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/harvesters/instances"
+    "details": "uri=/projects/global/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -564,7 +592,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details":"uri=/harvesters/instances"
+    "details":"uri=/projects/global/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -579,7 +607,7 @@ harvester name \(case insesnsitive\) already exists
     "timestamp": 1579697613983,
     "type": "entity_already_exists",
     "message": "Harvester 'harvester-post' already exists.",
-    "details": "uri=/harvesters/instances"
+    "details": "uri=/projects/global/harvesters/instances"
 }
 ```
 {% endapi-method-response-example %}
@@ -587,7 +615,7 @@ harvester name \(case insesnsitive\) already exists
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="put" host="https://api.grnry.io/" path="harvesters/instances/:harvester-name" %}
+{% api-method method="put" host="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances/:harvester-name" %}
 {% api-method-summary %}
 Update Harvester Instance
 {% endapi-method-summary %}
@@ -595,12 +623,18 @@ Update Harvester Instance
 {% api-method-description %}
 Updates a harvester instance. All body parameters are optional. Harvester name field `name` is not changeable and will be ignored if provided. Empty fields will be set to `""`, missing fields will remain unchanged. It is not possible to replace apps \(`sourceType`, `metadataExtractor`, `transform`\), only their versions and configs are modifiable.  
   
-Requires the role `harvester_edit`.
+Requires the role `editor`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the harvester belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="harvester-name" type="string" required=true %}
 name of the harvester that should be updated
 {% endapi-method-parameter %}
@@ -657,6 +691,7 @@ human readable name. Needs to be unique. Technical name of the harvester will re
 {
     "name": "harvester-post",
     "displayName": "Harvester Post",
+    "projectName": "global",
     "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-post",
     "sourceType": {
@@ -767,13 +802,13 @@ human readable name. Needs to be unique. Technical name of the harvester will re
         "status": "RUNNING_BUT_OUTDATED",
         "_links": {
             "self": {
-                "href": "https://hostname/harvesters/instances/harvester-demo/state"
+                "href": "https://hostname/projects/global/harvesters/instances/harvester-demo/state"
             }
         }
     },
     "_links": {
         "self": {
-            "href": "https://hostname/harvesters/instances/harvester-post"
+            "href": "https://hostname/projects/global/harvesters/instances/harvester-post"
         }
     }
 }
@@ -790,7 +825,7 @@ Missing parameter or parameter is invalid.
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
     "message": "Parameter 'displayName' length must be between 3 and 60 characters but is 101 characters.",
-    "details": "uri=/harvesters/instances/demo-set-all"
+    "details": "uri=/projects/global/harvesters/instances/demo-set-all"
 }
 ```
 {% endapi-method-response-example %}
@@ -805,7 +840,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/harvesters/instances/adobe-s3-std"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -820,7 +855,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/harvesters/instances/demo-set-all"
+    "details": "uri=/projects/global/harvesters/instances/demo-set-all"
 }
 ```
 {% endapi-method-response-example %}
@@ -835,7 +870,7 @@ Harvester with provided name \(case sensitive\) not found
     "timestamp": 1587303625038,
     "type": "entity_not_found",
     "message": "Harvester 'demo-set-al' not found.",
-    "details": "uri=/harvesters/instances/demo-set-al"
+    "details": "uri=/projects/global/harvesters/instances/demo-set-al"
 }
 ```
 {% endapi-method-response-example %}
@@ -850,7 +885,7 @@ Another harvester with provided `displayName` is already present.
     "timestamp": 1580290695918,
     "type": "entity_already_exists",
     "message": "Harvester with displayName 'Harvester Post' already exists.",
-    "details": "uri=/harvesters/instances/demo-set-all"
+    "details": "uri=/projects/global/harvesters/instances/demo-set-all"
 }
 ```
 {% endapi-method-response-example %}
@@ -858,19 +893,25 @@ Another harvester with provided `displayName` is already present.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="delete" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name" %}
+{% api-method method="delete" host="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances/:harvester-name" %}
 {% api-method-summary %}
 Delete a Harvester Instance
 {% endapi-method-summary %}
 
 {% api-method-description %}
 Deletes the given Harvester. If it is still running, it will automatically stopped before deletion.  
-This request requires the role `harvester_edit`.
+This request requires the role `editor`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the harvester belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="harvester-name" type="string" required=true %}
 Technical name of the Harvester.
 {% endapi-method-parameter %}
@@ -904,7 +945,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/harvesters/instances/adobe-s3-std"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -919,7 +960,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/harvesters/instances/adobe-s3-std"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -927,19 +968,25 @@ Missing roles to access this resource.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name/state" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances/:harvester-name/state" %}
 {% api-method-summary %}
 Get Harvester Instance State
 {% endapi-method-summary %}
 
 {% api-method-description %}
 Get the current state of a harvester instance.  
-This request required the role `harvester_read`.
+This request required the role `viewer`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the harvester belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="harvester-name" type="string" required=true %}
 Technical name of the harvester.
 {% endapi-method-parameter %}
@@ -963,7 +1010,7 @@ Authentication token.
     "status": "RUNNING",
     "_links": {
         "self": {
-            "href": "https://hostname/harvesters/instances/harvester-1/state"
+            "href": "https://hostname/projects/global/harvesters/instances/harvester-1/state"
         }
     }
 }
@@ -980,7 +1027,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/harvesters/instances/adobe-s3-std/state"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-std/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1010,7 +1057,7 @@ Harvester with provided name \(case sensitive\) not found.
     "timestamp": 1587303625038,
     "type": "entity_not_found",
     "message": "Harvester 'adobe-s3-stdd' not found.",
-    "details": "uri=/harvesters/instances/adobe-s3-stdd/state"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-stdd/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1032,7 +1079,7 @@ Possible values for the status attribute in the response body are:
 | RUNNING\_BUT\_OUTDATED | harvester is running but there is a newer version of it in the database |
 | FAILED | harvester is deployed but not running |
 
-{% api-method method="post" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name/state" %}
+{% api-method method="post" host="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances/:harvester-name/state" %}
 {% api-method-summary %}
 Start/Stop Harvester Instance
 {% endapi-method-summary %}
@@ -1045,6 +1092,12 @@ This request requires the roles  `harvester_edit`.
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the harvester belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="harvester-name" type="string" required=true %}
 technical name of the Harvester.
 {% endapi-method-parameter %}
@@ -1074,7 +1127,7 @@ updates the status of this harvester. Possible values: `START`, `STOP`
     "status": "DEPLOYING",
     "_links": {
         "self": {
-            "href": "https://hostname/harvesters/instances/harvester-1/state"
+            "href": "https://hostname/projects/global/harvesters/instances/harvester-1/state"
         }
     }
 }
@@ -1091,7 +1144,7 @@ Token invalid or missing.
     "timestamp": 1587302709982,
     "type": "authentication_error",
     "message": "Authentication failed.",
-    "details": "uri=/harvesters/instances/adobe-s3-std"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-std"
 }
 ```
 {% endapi-method-response-example %}
@@ -1106,7 +1159,7 @@ Missing roles to access this resource.
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
     "message": "Access forbidden due to missing roles.",
-    "details": "uri=/harvesters/instances/adobe-s3-std/state"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-std/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1121,7 +1174,7 @@ Harvester not found.
     "timestamp": 1580291007569,
     "type": "entity_not_found",
     "message": "Harvester 'demo-set-all' not found.",
-    "details": "uri=/harvesters/instances/adobe-s3-stdd/state"
+    "details": "uri=/projects/global/harvesters/instances/adobe-s3-stdd/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1136,7 +1189,7 @@ Failed to start.
     "timestamp":1586952826375,
     "type": "unexpected_error",
     "message": "An unexpected error occurred.",
-    "details":"uri=/harvesters/instances/fail-on-start/state"
+    "details":"uri=/projects/global/harvesters/instances/fail-on-start/state"
 }
 ```
 {% endapi-method-response-example %}
@@ -1144,7 +1197,7 @@ Failed to start.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/harvesters/instances/:harvester-name/logs/:step-name" %}
+{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances/:harvester-name/logs/:step-name" %}
 {% api-method-summary %}
 Get Harvester Instance Logs
 {% endapi-method-summary %}
@@ -1157,6 +1210,12 @@ This request requires the role `harvester_read`.
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
+{% api-method-parameter name="project-name" type="string" required=true %}
+Name of project the harvester belongs to.   
+_Backwards compatibility:_   
+If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="line" type="string" required=false %}
 Number of maximum lines the log should contain. Default is `500`
 {% endapi-method-parameter %}
@@ -1191,7 +1250,12 @@ Value range: `1 .. 500`. Default: `500`.
 {% endapi-method-response-example-description %}
 
 ```
-
+{
+    "logs": [
+        "2021-08-16 10:00:25.807  INFO [g-h-harvester-src,,,] 1 --- [-write-health-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=healthindicator-kafka25ae8853-5ed6-4713-8437-36e8d3e71024, groupId=healthindicator-kafka-97538b4c-ccad-452a-a367-1f7354112ff2] (Re-)joining group",
+        "2021-08-16 10:01:25.807  INFO [g-h-harvester-src,,,] 1 --- [-write-health-1] o.a.k.c.c.internals.AbstractCoordinator  : [Consumer clientId=healthindicator-kafka25ae8853-5ed6-4713-8437-36e8d3e71024, groupId=healthindicator-kafka-97538b4c-ccad-452a-a367-1f7354112ff2] (Re-)joining group"
+    ]
+}
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
