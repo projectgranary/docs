@@ -9,20 +9,19 @@ description: >-
 
 ## Clients
 
-Currently granary uses the following keycloak clients:
+Currently Granary uses the following keycloak clients:
 
 #### Administrative Clients
 
 * scdf
-* Project-Clients = {_x_ \| _x_ is name of a project}
+* project-api
+* Projects' clients = {_x_ \| _x_ is name of a project}
 
 #### Data Out clients
 
 * profile-api
 * event-api
 * jdbc-api
-
-
 
 ## Administrative Clients
 
@@ -42,9 +41,16 @@ Requests the user's access rights to operate on Spring Cloud Data Flow \(SCDF\).
 | `deploy` | for deploying streams or launching tasks |
 | `create` | for anything that involves creating, e.g. creating streams or tasks |
 
-### Project-Clients
+### project-api
 
-For each project there is a separate client that is automatically created by Project API. The client name is equal to the project name. The assignment of the client's roles to users defines their rights to manage Granary objects like Belts, Harvesters, Event Types, Persisters or Source Types in the scope of that project.
+Defines the user's access rights to 
+
+* create new projects \(not to manage them afterwards\): `project_creator`
+* retrieve user list \(not to assign / remove user to projects afterwards\): `user_viewer`
+
+### Projects' clients
+
+For each project there is a separate client that is automatically created by [Project API](../../developer-reference/api-reference/project-api.md#create-project). The client name is equal to the project name. The assignment of the client's roles to users defines their rights to manage Granary objects like Belts, Harvesters, Event Types, Persisters or Source Types in the scope of that project.
 
 Each project client offers three roles `editor`, `viewer` and `data_owner`. Every user having one of these roles is considered a member of that project. Every new project member will be assigned the project client's `viewer` role.
 
