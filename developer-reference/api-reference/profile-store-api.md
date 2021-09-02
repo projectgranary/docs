@@ -8,8 +8,8 @@ description: >-
 
 ## Paths
 
-* /profiles/{profileType}/{correlationId}
-* /profiles/{profileType}/{correlationId}/grain/{path}
+* GET /profiles/{profileType}/{correlationId}
+* GET /profiles/{profileType}/{correlationId}/grain/{path}
 
 ## API Methods
 

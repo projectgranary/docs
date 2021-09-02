@@ -6,9 +6,9 @@ description: Springboot-based microservice to expose event data stored in the Ev
 
 ## Paths
 
-* /events/{correlationId}
-* /events/{correlationId}/{eventId}
-* /events
+* GET /events/{correlationId}
+* GET /events/{correlationId}/{eventId}
+* GET /events
 
 ## API Methods
 
