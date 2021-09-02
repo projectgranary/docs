@@ -4,7 +4,7 @@ description: >-
   Non-partitioned to Declared-partitioned.
 ---
 
-# ProfileStore Declared-partitioned migration
+# ProfileStore migration to Declared-partitioned
 
 ## Steps
 
