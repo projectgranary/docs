@@ -38,6 +38,7 @@ SELECT DISTINCT profile_type from profilestore_old;
 CREATE TABLE profilestore_device PARTITION OF profilestore FOR VALUES IN ('_device')
 CREATE TABLE profilestore_mathematics PARTITION OF profilestore FOR VALUES IN ('mathematics')
 CREATE TABLE profilestore_statistics PARTITION OF profilestore FOR VALUES IN ('statistics')
+...
 ```
 
 Create indexes on the parent table profilestore -
