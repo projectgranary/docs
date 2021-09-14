@@ -99,8 +99,16 @@ A list of all belts along with their attributes and total count of belts stored 
             "millicpuRequests": 100,
             "memory": 512,
             "memoryRequests": 256,
-            "author": "",
-            "created": 1561974412801,
+            "createdBy": {
+                "name": "Arthur Author",
+                "email": "arthur@author.com"
+            },
+            "createdAt": 1561974412801,
+            "modifiedBy": {
+                "name": "Arthur Author",
+                "email": "arthur@author.com"
+            },
+            "modifiedAt": 1561974412801,
             "assumedRole": "",
             "requirementsPy": "",
             "image": "grnry-belt",
@@ -197,8 +205,16 @@ A list of all belts along with their attributes and total count of belts stored 
             "millicpuRequests": 54,
             "memory": 1023,
             "memoryRequests": 1023,
-            "author": "author@grnry.com",
-            "created": 1561978858485,
+            "createdBy": {
+                "name": "Arthur Author",
+                "email": "arthur@author.com"
+            },
+            "createdAt": 1561974412801,
+            "modifiedBy": {
+                "name": "Arthur Author",
+                "email": "arthur@author.com"
+            },
+            "modifiedAt": 1561974412801,
             "assumedRole": "",
             "requirementsPy": "requirement==0.1.0",
             "image": "grnry-belt",
@@ -341,8 +357,16 @@ JSON with attributes of belt with the specified ID.
     "millicpuRequests": 200,
     "memory": 512,
     "memoryRequests": 512,
-    "author": "User",
-    "created": 1562744768164,
+    "createdBy": {
+        "name": "Arthur Author",
+        "email": "arthur@author.com"
+    },
+    "createdAt": 1561974412801,
+    "modifiedBy": {
+        "name": "Arthur Author",
+        "email": "arthur@author.com"
+    },
+    "modifiedAt": 1561974412801,
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
     "image": "grnry-belt",
@@ -586,8 +610,16 @@ Returns a full dump of belt object created.
     "replicas": 1,
     "millicpu": 200,
     "memory": 512,
-    "author": "User",
-    "created": 1562744768164,
+    "createdBy": {
+        "name": "Arthur Author",
+        "email": "arthur@author.com"
+    },
+    "createdAt": 1561974412801,
+    "modifiedBy": {
+        "name": "Arthur Author",
+        "email": "arthur@author.com"
+    },
+    "modifiedAt": 1561974412801,
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
     "image": "grnry-belt",
