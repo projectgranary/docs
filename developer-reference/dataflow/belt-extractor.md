@@ -240,19 +240,39 @@ Following rules are validated:
 
 ### Data **Fetching**
 
+#### **Profile Store**
+
 In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the `profileClient` class into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
 
 ```python
 profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])
 ```
 
-The profile client uses the `PROFILE_TYPE` environment variable as default. To fetch another profile type it can be passed as a further optional parameter like this `getProfile(cid,profileType)`.
+The profile client uses the `PROFILE_TYPE` environment variable as default. To fetch a profile from another profile type, the type can be passed as a further optional parameter like this `getProfile(cid,profileType)`.
 
 Additionally only specific fragments of a profile can be fetched by adding another optional parameter to `getProfile` like this:
 
 ```python
 profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'], fragments=['/customer/name','/customer/adress','/invoiceDetails'])
 ```
+
+Similar to profile retrieval, grains can also be fetched:
+
+```yaml
+profile = profileClient.getGrain(event['metadata']['grnry-correlation-id'])
+```
+
+The profile client uses the `PROFILE_TYPE` environment variable as default. To fetch grains of another profile type, the type can be passed as a further optional parameter like this `getGrain(cid,profileType).`
+
+Additionally, query parameters can be used in the method: `pageSize`, `offset` and `withHistory`. The latter allows the retrieval of grain for latest point in time or of all grain versions paginated.
+
+```yaml
+profile = profileClient.getGrain(event['metadata']['grnry-correlation-id'],pageSize=50,offset=0,withHistory=False)
+```
+
+Also, in order to get results, you must have the required roles as defined in the field reader. Otherwise, you will not get back any results.
+
+#### Event Store
 
 Next to the `profileClient`, an `eventstoreClient` class is injected into the callback if using`FETCH_PROFILE=true` or `FETCH_PROFILE=lazy`. The eventstore client has two methods:
 
