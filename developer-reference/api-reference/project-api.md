@@ -139,6 +139,14 @@ Project name.
 Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-query-parameters %}
+{% api-method-parameter name="expand" type="string" required=false %}
+Expand options. Response will be enhanced with extra data.  
+Example:   
+?expand=sqlpad 
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -164,6 +172,18 @@ Authentication token.
     "secretKeyPassword": "postgresql-password",
     "readReplicaHost": null,
     "readReplicaPort": null
+  },
+  "sqlpad": {
+    "_links": {
+      "self": {
+        "href": "https://development.internal.analytics.cc.syncier.cloud/sqlpad/demo_granary_project/"
+      }
+    }
+  },
+  "_links": {
+    "self": {
+      "href": "https://development.internal.analytics.cc.syncier.cloud/projects/demo_granary_project?expand=sqlpad"
+    }
   }
 }
 ```
@@ -351,12 +371,24 @@ Authentication token.
   {
     "name": "demo_0000",
     "displayName": "Demo",
-    "description": "Demo Granary Project description"
+    "description": "Demo Granary Project description",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://development.internal.analytics.cc.syncier.cloud/projects/demo_0000?expand="
+      }
+    ]
   },
   {
     "name": "data_project",
     "displayName": "Data Project",
-    "description": "Data Project description"
+    "description": "Data Project description",
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://development.internal.analytics.cc.syncier.cloud/projects/data_project?expand="
+      }
+    ]
   }
 ]
 ```
