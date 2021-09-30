@@ -39,6 +39,17 @@ Authentication token.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
+{% api-method-query-parameters %}
+{% api-method-parameter name="deploy" type="string" required=false %}
+Coma separated list of deploy options.   
+Supported options:   
+- sqlpad: SqlPad instance will be deployed and connected to corresponding project schema  
+  
+Example:   
+/projects?deploy=sqlpad  
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
+
 {% api-method-body-parameters %}
 {% api-method-parameter name="description" type="object" required=false %}
 Project description
