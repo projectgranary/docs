@@ -116,6 +116,8 @@
     * [Event Feeder](operator-reference/installation/with-helm/event-feeder.md)
     * [Grafana Dashboards](operator-reference/installation/with-helm/grafana-dashboards.md)
     * [GrApp Importer](operator-reference/installation/with-helm/grapp-importer.md)
+    * [SQLPad](operator-reference/installation/with-helm/sqlpad.md)
+    * [SQLPad Proxy](operator-reference/installation/with-helm/sqlpad-proxy.md)
   * [Sizing guideline](operator-reference/installation/sizing-guideline.md)
 * [Identity and Access Management](operator-reference/identity-and-access-management/README.md)
   * [Granary Access Clients](operator-reference/identity-and-access-management/granary-access-clients.md)
