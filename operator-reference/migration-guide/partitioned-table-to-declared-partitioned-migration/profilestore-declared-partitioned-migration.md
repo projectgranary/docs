@@ -8,7 +8,7 @@ description: >-
 
 ## Steps
 
-Rename the existing profilestore table and create new declared partitioned profilestore table -
+Rename the existing profilestore table and create new declared partitioned profilestore table:
 
 ```sql
 ALTER TABLE profilestore rename to profilestore_old;
@@ -30,7 +30,7 @@ CREATE TABLE profilestore (
 )PARTITION BY LIST (profile_type);
 ```
 
-Select all distinct `profile_type` from `profilestore_old` table and then Create partitioned table with the each partitioned value profile\_type from the Distinct value -
+Select all distinct `profile_type` from `profilestore_old` table and then create partitioned tables with each value of `profile_type` from the distinct values:
 
 ```sql
 SELECT DISTINCT profile_type from profilestore_old;
@@ -41,7 +41,7 @@ CREATE TABLE profilestore_statistics PARTITION OF profilestore FOR VALUES IN ('s
 ...
 ```
 
-Create indexes on the parent table profilestore -
+Create indexes on the parent table profilestore:
 
 ```sql
 CREATE UNIQUE INDEX profilestore_pkey ON profilestore(correlation_id text_ops,profile_type text_ops,path text_ops,pit text_ops);
@@ -51,14 +51,14 @@ CREATE INDEX profilestore_path_idx ON profilestore(path text_ops);
 CREATE INDEX profilestore_time_to_act ON profilestore((profile_time_to_act(inserted, ttl)) int8_ops);
 ```
 
-Once the tables are created we can try to insert records using -
+Once the tables are created, we can try to insert records using:
 
 ```sql
 INSERT INTO "public"."profilestore"(correlation_id,profile_type,path,pit,value,certainty,grain_type,inserted,ttl,reader,origin,ttn)
 SELECT correlation_id,profile_type,path,pit,value,certainty,grain_type,inserted,ttl,reader,origin,ttn FROM profilestore_old;
 ```
 
-Then we can select the records with -
+Finally, we can select the records from the partitioned table with:
 
 ```sql
 SELECT * from profilestore where profile_type = 'mathematics';

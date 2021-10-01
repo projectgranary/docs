@@ -12,6 +12,13 @@ In PostgreSQL, the partitioned table itself is a “virtual” table having no s
 
 We are going to use ["List" Partitioning](https://www.postgresql.org/docs/12/ddl-partitioning.html): the table is partitioned by explicitly listing which key value\(s\) appear in each partition.
 
+{% hint style="info" %}
+To avoid corrupt data or even data lost during the migration to declarative partitions, the safest method for Profile Store migration is to accept the downtime and to stop the profile updater. Also, need to check the Belt can be running or paused depends on the how it configured.
+
+For the migration of Event Store needs to stop the Persister, which writes to the database.  
+Also, the downtime depends on the size of the data in the database and the database resources.
+{% endhint %}
+
 ## Motivation
 
 In Granary, we promote the usage of declarative partitioning for the two main tables:

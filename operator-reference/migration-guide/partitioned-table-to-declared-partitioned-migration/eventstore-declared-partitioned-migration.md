@@ -8,7 +8,7 @@ description: >-
 
 ## Steps
 
-Rename the existing eventstore table and create new declared partitioned eventstore table -
+Rename the existing `eventstore` table and create new declared partitioned eventstore table:
 
 ```sql
 ALTER TABLE eventstore rename to eventstore_old;
@@ -28,7 +28,7 @@ CREATE TABLE eventstore (
 )PARTITION BY LIST (event_type);
 ```
 
-Select all distinct `event_type` from `eventstore_old` table and then Create partitioned table with the each partitioned value event\_type from the Distinct value -
+Select all distinct `event_type` from `eventstore_old` table and then create partitioned tables with each value of `event_type` from the distinct values:
 
 ```sql
 SELECT DISTINCT event_type FROM eventstore_old;
@@ -39,7 +39,7 @@ CREATE TABLE eventstore_robotics PARTITION OF eventstore FOR VALUES IN ('robotic
 ...
 ```
 
-Create indexes on the parent table eventstore -
+Create indexes on the parent table `eventstore`:
 
 ```sql
 CREATE UNIQUE INDEX eventstore_pkey ON eventstore(correlation_id text_ops,event_id text_ops,event_type text_ops);
@@ -47,14 +47,14 @@ CREATE INDEX eventstore_created_idx ON profilestore(created int8_ops);
 CREATE INDEX eventstore_event_type_idx ON eventstore USING BRIN (event_type text_minmax_ops);
 ```
 
-Once the tables are created we can try to insert records using -
+Once the tables are created, we can try to insert records using:
 
 ```sql
 INSERT INTO eventstore (correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl) SELECT
 correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl FROM eventstore_old;
 ```
 
-Then we can select the records with -
+Then we can select the records with:
 
 ```sql
 SELECT * from eventstore where event_type = 'science';
