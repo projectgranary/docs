@@ -83,6 +83,16 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
        {
             "name": "snowplow-tracking",
             "displayName": "snowplow-tracking",
+            "createdAt": "2021-09-24T08:38:50.848Z",
+            "createdBy": {
+                "name": "user",
+                "email": "user@grnry.io"
+            },
+            "modifiedAt": "2021-09-24T08:40:48.922Z",
+            "modifiedBy": {
+                "name": "other user",
+                "email": "other-user@grnry.io"
+            },
             "projectName": "global",
             "version": 1,
             "projectName": "tracking",
@@ -229,6 +239,16 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
         {
             "name": "postman-event-type",
             "displayName": "postman-event-type",
+            "createdAt": "2021-09-24T08:38:50.848Z",
+            "createdBy": {
+                "name": "user",
+                "email": "user@grnry.io"
+            },
+            "modifiedAt": "2021-09-24T08:40:48.922Z",
+            "modifiedBy": {
+                "name": "other user",
+                "email": "other-user@grnry.io"
+            },
             "projectName": "global",
             "version": "1",
             ....
@@ -605,6 +625,16 @@ The SpringEL expression to create the grnry-correlation-id.
 {
         "name": "foo-test",
         "displayName": "my-test-type",
+        "createdAt": "2021-09-24T08:38:50.848Z",
+        "createdBy": {
+            "name": "user",
+            "email": "user@grnry.io"
+        },
+        "modifiedAt": "2021-09-24T08:40:48.922Z",
+        "modifiedBy": {
+            "name": "other user",
+            "email": "other-user@grnry.io"
+        },
         "projectName": "global",        
         "version": 2,
         "topicName" : "grnry_data_in_foo-test",
@@ -836,6 +866,16 @@ If "true" or "True", the event type response will only contain properties a POST
 {
     "name": "snowplow-webtracking",
     "displayName": "snowplow-webtracking",
+    "createdAt": "2021-09-24T08:38:50.848Z",
+    "createdBy": {
+        "name": "user",
+        "email": "user@grnry.io"
+    },
+    "modifiedAt": "2021-09-24T08:40:48.922Z",
+    "modifiedBy": {
+        "name": "other user",
+        "email": "other-user@grnry.io"
+    },
     "projectName": "global",
     "version": 1,
     "projectName": "webtracking",

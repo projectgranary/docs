@@ -103,12 +103,12 @@ A list of all belts along with their attributes and total count of belts stored 
                 "name": "Arthur Author",
                 "email": "arthur@author.com"
             },
-            "createdAt": 1561974412801,
+            "createdAt": "2021-09-24T08:38:50.848Z",
             "modifiedBy": {
                 "name": "Arthur Author",
                 "email": "arthur@author.com"
             },
-            "modifiedAt": 1561974412801,
+            "modifiedAt": "2021-09-24T08:38:50.848Z",
             "assumedRole": "",
             "requirementsPy": "",
             "image": "grnry-belt",
@@ -209,12 +209,12 @@ A list of all belts along with their attributes and total count of belts stored 
                 "name": "Arthur Author",
                 "email": "arthur@author.com"
             },
-            "createdAt": 1561974412801,
+            "createdAt": "2021-09-24T08:38:50.848Z",
             "modifiedBy": {
                 "name": "Arthur Author",
                 "email": "arthur@author.com"
             },
-            "modifiedAt": 1561974412801,
+            "modifiedAt": "2021-09-24T08:38:50.848Z",
             "assumedRole": "",
             "requirementsPy": "requirement==0.1.0",
             "image": "grnry-belt",
@@ -361,12 +361,12 @@ JSON with attributes of belt with the specified ID.
         "name": "Arthur Author",
         "email": "arthur@author.com"
     },
-    "createdAt": 1561974412801,
+    "createdAt": "2021-09-24T08:38:50.848Z",
     "modifiedBy": {
         "name": "Arthur Author",
         "email": "arthur@author.com"
     },
-    "modifiedAt": 1561974412801,
+    "modifiedAt": "2021-09-24T08:38:50.848Z",
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
     "image": "grnry-belt",
@@ -614,12 +614,12 @@ Returns a full dump of belt object created.
         "name": "Arthur Author",
         "email": "arthur@author.com"
     },
-    "createdAt": 1561974412801,
+    "createdAt": "2021-09-24T08:38:50.848Z",
     "modifiedBy": {
         "name": "Arthur Author",
         "email": "arthur@author.com"
     },
-    "modifiedAt": 1561974412801,
+    "modifiedAt": "2021-09-24T08:38:50.848Z",
     "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
     "image": "grnry-belt",
@@ -864,8 +864,16 @@ A full dump of belt object recently modified
      "millicpuRequests": 200,
      "memory": 512,
      "memoryRequests": 512,
-     "author": "User",
-     "created": 1562744768164,
+     "createdBy": {
+         "name": "Arthur Author",
+         "email": "arthur@author.com"
+     },
+     "createdAt": "2021-09-24T08:38:50.848Z",
+     "modifiedBy": {
+         "name": "Other User",
+         "email": "other@user.com"
+     },
+     "modifiedAt": "2021-09-29T07:39:57.628Z",
      "assumedRole": "",
      "requirementsPy": "package1==0.0.0\r\npackage2",
      "image": "custom-grnry-belt",
@@ -878,7 +886,7 @@ A full dump of belt object recently modified
      ],
      "partitionOffsets": {},
      "kafkaDestinationTopic": "profile-update",
-    "kafkaConsumerGroupName": "grnry-belt-161-1562744768164",
+     "kafkaConsumerGroupName": "grnry-belt-161-1562744768164",
      "beltType": "",
      "runtime": "",
      "parameter": "",
@@ -893,11 +901,11 @@ A full dump of belt object recently modified
      "volumeMounts": null,
      "extraEnv": null,
      "id": "161",
-    "_links": {
-        "self": {
-            "href": "https://hostname/projects/global/belts/161"
-        }
-    }
+     "_links": {
+         "self": {
+             "href": "https://hostname/projects/global/belts/161"
+         }
+     }
 }
 ```
 {% endapi-method-response-example %}

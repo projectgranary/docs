@@ -190,7 +190,17 @@ Sample Response
 ```text
 {
     "name": "harvester-demo",
-    "displayName": "Harvester Demo",
+    "displayName": "Harvester Demo",    
+    "createdAt": "2021-09-23T10:09:44.711Z",
+    "createdBy": {
+        "name": "user",
+        "email": "user@grnry.io"
+    },
+    "modifiedAt": "2021-09-23T10:11:10.171Z",
+    "modifiedBy": {
+        "name": "other-user",
+        "email": "other-user@grnry.io"
+    },
     "projectName": "global",
     "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-demo",
@@ -436,6 +446,16 @@ Human readable name. Needs to be unique. A technical name will be derived from i
 {
     "name": "harvester-post",
     "displayName": "Harvester Post",
+    "createdAt": "2021-09-23T10:09:44.711Z",
+    "createdBy": {
+        "name": "user",
+        "email": "user@grnry.io"
+    },
+    "modifiedAt": "2021-09-23T10:09:44.711Z",
+    "modifiedBy": {
+        "name": "user",
+        "email": "user@grnry.io"
+    },
     "projectName": "global",
     "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-post",
@@ -690,7 +710,17 @@ human readable name. Needs to be unique. Technical name of the harvester will re
 ```
 {
     "name": "harvester-post",
-    "displayName": "Harvester Post",
+    "displayName": "Harvester Post",    
+    "createdAt": "2021-09-23T10:09:44.711Z",
+    "createdBy": {
+        "name": "user",
+        "email": "user@grnry.io"
+    },
+    "modifiedAt": "2021-09-23T10:11:10.171Z",
+    "modifiedBy": {
+        "name": "other-user",
+        "email": "other-user@grnry.io"
+    },
     "projectName": "global",
     "streamName": "g-h-harvester-demo",
     "dlqTopic": "grnry_harvester_dlq_harvester-post",
