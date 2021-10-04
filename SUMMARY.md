@@ -94,6 +94,7 @@
   * [With Helm](operator-reference/installation/with-helm/README.md)
     * [Granary Base Deployment](operator-reference/installation/with-helm/granary-base-deployment.md)
     * [Snowplow Scala Stream Collector](operator-reference/installation/with-helm/snowplow-scala-stream-collector.md)
+    * [Granary Kafka](operator-reference/installation/with-helm/granary-kafka.md)
     * [Kafka Manager](operator-reference/installation/with-helm/kafka-manager.md)
     * [Spring Cloud Data Flow](operator-reference/installation/with-helm/spring-cloud-data-flow.md)
     * [Harvester API](operator-reference/installation/with-helm/harvester-api/README.md)
