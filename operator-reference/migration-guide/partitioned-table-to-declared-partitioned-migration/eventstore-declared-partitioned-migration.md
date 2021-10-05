@@ -8,12 +8,10 @@ description: >-
 
 ## Steps
 
-Rename the existing `eventstore` table and create new declared partitioned eventstore table:
+1\) Create new EventStore table `eventstore_new`with declared partitioned by List `event_type` : 
 
 ```sql
-ALTER TABLE eventstore rename to eventstore_old;
-
-CREATE TABLE eventstore (
+CREATE TABLE eventstore_new (
     correlation_id character varying,
     event_id character varying,
     created bigint NOT NULL,
@@ -28,37 +26,49 @@ CREATE TABLE eventstore (
 )PARTITION BY LIST (event_type);
 ```
 
-Select all distinct `event_type` from `eventstore_old` table and then create partitioned tables with each value of `event_type` from the distinct values:
+2\) Select all distinct `event_type` from `eventstore_old` table and then create partitioned tables with each value of `event_type` from the distinct values:
 
 ```sql
-SELECT DISTINCT event_type FROM eventstore_old;
+SELECT DISTINCT event_type FROM eventstore;
 
-CREATE TABLE eventstore_science PARTITION OF eventstore FOR VALUES IN ('science')
-CREATE TABLE eventstore_biology PARTITION OF eventstore FOR VALUES IN ('biology')
-CREATE TABLE eventstore_robotics PARTITION OF eventstore FOR VALUES IN ('robotics')
+CREATE TABLE eventstore_science PARTITION OF eventstore_new FOR VALUES IN ('science')
+CREATE TABLE eventstore_biology PARTITION OF eventstore_new FOR VALUES IN ('biology')
+CREATE TABLE eventstore_robotics PARTITION OF eventstore_new FOR VALUES IN ('robotics')
 ...
 ```
 
-Create indexes on the parent table `eventstore`:
+3\) Create indexes on the parent table `eventstore`:
 
 ```sql
-CREATE UNIQUE INDEX eventstore_pkey ON eventstore(correlation_id text_ops,event_id text_ops,event_type text_ops);
-CREATE INDEX eventstore_created_idx ON profilestore(created int8_ops);
-CREATE INDEX eventstore_event_type_idx ON eventstore USING BRIN (event_type text_minmax_ops);
+CREATE UNIQUE INDEX eventstore_pkey ON eventstore_new(correlation_id text_ops,event_id text_ops,event_type text_ops);
+CREATE INDEX eventstore_created_idx ON eventstore_new(created int8_ops);
+CREATE INDEX eventstore_event_type_idx ON eventstore_new USING BRIN (event_type text_minmax_ops);
 ```
 
-Once the tables are created, we can try to insert records using:
+4\) Once the tables are created, we can try to insert records for one by one `event_type`. Be sure to stop the corresponding Event Store persister and then run the following command:
 
 ```sql
-INSERT INTO eventstore (correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl) SELECT
-correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl FROM eventstore_old;
+INSERT INTO eventstore_new (correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl) SELECT
+correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl FROM eventstore where event_type = 'science';
+
+INSERT INTO eventstore_new (correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl) SELECT
+correlation_id,event_id,created,event_type,event_type_version,event_harvester,message,partition_id,partition_offset,ttl FROM eventstore where event_type = 'biology';
+
+...
 ```
 
-Then we can select the records with:
+5\) Then we can select the records with:
 
 ```sql
-SELECT * from eventstore where event_type = 'science';
-SELECT * from eventstore where event_type = 'biology';
-SELECT * from eventstore where event_type = 'robotics';
+SELECT * from eventstore_new where event_type = 'science';
+SELECT * from eventstore_new where event_type = 'biology';
+SELECT * from eventstore_new where event_type = 'robotics';
+```
+
+6\) Rename the table `eventstore` to `eventstore_original` and then rename the `eventstore_new` to`eventstore` table. Before doing so, ensure that there are not open connections to the original table.
+
+```sql
+ALTER TABLE eventstore rename to eventstore_original;
+ALTER TABLE eventstore_new rename to eventstore;
 ```
 
