@@ -111,6 +111,14 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
             "physicalLocations": [...],
             "source": [...],
             "schema": null,
+            "inputs": {
+                "harvesters": [...],
+                "belts": [...]
+            },
+            "outputs": {
+                "persisters": [...],
+                "belts": [...]
+            },
             "_links": {
                 "self": {
                     "href": "https://hostname/projects/global/event-types/snowplow-tracking/1"
@@ -921,6 +929,55 @@ If "true" or "True", the event type response will only contain properties a POST
             "type": "stream"
         }
     ],
+    "inputs": {
+        "harvesters": [
+            {
+                "projectName": "global",
+                "_links": {
+                    "self": {
+                        "href": "https://grnry.io/projects/global/harvesters/instances/Harvester-1?expand=&export="
+                    }
+                },
+                "id": "Harvester-1"
+            }
+        ],
+        "belts": [
+            {
+                "projectName": "global",
+                "_links": {
+                    "self": {
+                        "href": "https://grnry.io/projects/global/belts/1?export="
+                    }
+                },
+                "id": "1"
+            }
+        ]
+    },
+    "outputs": {
+        "persisters": [
+            {
+                "eventTypeName": "snowplow-webtracking",
+                "eventStoreType": "pg",
+                "projectName": "global",
+                "_links": {
+                    "self": {
+                        "href": "https://grnry.io/projects/global/event-types/snowplow-webtracking/eventstores/pg/persister?expand=&export="
+                    }
+                }
+            }
+        ],
+        "belts": [
+            {
+                "projectName": "global",
+                "_links": {
+                    "self": {
+                        "href": "https://grnry.io/projects/global/belts/1?export="
+                    }
+                },
+                "id": "2"
+            }
+        ]
+    },
     "_links": {
         "self": {
             "href": "https://hostname/projects/global/event-types/snowplow-webtracking/1"
