@@ -24,22 +24,22 @@ The Belt framework can consume messages from one or many Event Types. Technicall
 
 {% tabs %}
 {% tab title="Spec" %}
-| Key | Description |
-| :--- | :--- |
-| **event\_headers** | Kafka fields for Event metadata |
-| $$-$$ grnry-event-type | event type as specified during harvester definition |
-| $$-$$ grnry-event-id | used to deduplicate events |
-| $$-$$ grnry-harvester-name | name of the harvester instance, extracted from event payload or a static value |
-| $$-$$ grnry-correlation-id | used to group events received from the same tracking entity |
-| $$-$$ grnry-event-timestamp | event processing time set by harvester \(metadata extractor\) |
-| $$-$$ grnry-event-type-version | version of event type registered with the harvester |
-| **event\_payload** | Forwarded from input attribute `value` |
-| $$-$$ schema | Snowplow Event Schema Reference |
-| $$-$$ ipAddress | ipAddress if Snowplow is configured to collect this |
-| $$-$$ timestamp | time of event creation or reception\(?\) |
-| $$-$$ collector | identifies the source platform of the event |
-| $$-$$ body | Snowplow Event Data \(according to `schema`\) |
-| $$-$$ headers | HTTP headers |
+| Key                            | Description                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------ |
+| **event_headers**              | Kafka fields for Event metadata                                                |
+| $$-$$ grnry-event-type         | event type as specified during harvester definition                            |
+| $$-$$ grnry-event-id           | used to deduplicate events                                                     |
+| $$-$$ grnry-harvester-name     | name of the harvester instance, extracted from event payload or a static value |
+| $$-$$ grnry-correlation-id     | used to group events received from the same tracking entity                    |
+| $$-$$ grnry-event-timestamp    | event processing time set by harvester (metadata extractor)                    |
+| $$-$$ grnry-event-type-version | version of event type registered with the harvester                            |
+| **event_payload**              | Forwarded from input attribute `value`                                         |
+| $$-$$ schema                   | Snowplow Event Schema Reference                                                |
+| $$-$$ ipAddress                | ipAddress if Snowplow is configured to collect this                            |
+| $$-$$ timestamp                | time of event creation or reception(?)                                         |
+| $$-$$ collector                | identifies the source platform of the event                                    |
+| $$-$$ body                     | Snowplow Event Data (according to `schema`)                                    |
+| $$-$$ headers                  | HTTP headers                                                                   |
 {% endtab %}
 {% endtabs %}
 
@@ -53,14 +53,14 @@ Profile update messages need to comply to the following output data format which
 {% tab title="Spec" %}
 see [Profile specification](https://github.com/syncier/grnry-kafka-profile-update/blob/master/PROFILESPECS.md)
 
-| Key | Description |
-| :--- | :--- |
-| `_schema` | _Optional._ Schema of update message \(optional\) |
-| `_operation` | update operation, default is `_set`, see [Profile Store](profile-store/#component-profile-updater) for more information |
-| `_id` | identifies the profile that should be updated with this message |
-| `_path` | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length &gt;= 1 |
-| `_value` | _Mandatory_. The grain value that should be set in the profile under the defined `_path` _._ Needs to be set by `set_value()`. For `_delete` operation `_v`is used to specify an array of pits to be deleted from that path. `""`, `[""]` or `[]` will delete `_latest`. |
-| `_profile_type` | Categorizes the profile to be updated. Default is `_d`. |
+| Key             | Description                                                                                                                                                                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `_schema`       | _Optional._ Schema of update message (optional)                                                                                                                                                                                                                          |
+| `_operation`    | update operation, default is `_set`, see [Profile Store](profile-store/#component-profile-updater) for more information                                                                                                                                                  |
+| `_id`           | identifies the profile that should be updated with this message                                                                                                                                                                                                          |
+| `_path`         | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length >= 1                                                                                                                 |
+| `_value`        | _Mandatory_. The grain value that should be set in the profile under the defined `_path` _._ Needs to be set by `set_value()`. For `_delete` operation `_v`is used to specify an array of pits to be deleted from that path. `""`, `[""]` or `[]` will delete `_latest`. |
+| `_profile_type` | Categorizes the profile to be updated. Default is `_d`.                                                                                                                                                                                                                  |
 {% endtab %}
 
 {% tab title="Example" %}
@@ -93,11 +93,11 @@ Generic update message write custom messages to the Belt's Kafka output topic.
 
 {% tabs %}
 {% tab title="Spec" %}
-| Key | Description |
-| :--- | :--- |
-| id | The field id is the correlation id |
-| value | This field content the payload of the event in the json format |
-| headers | This field content the header of the event in the json format \(optional\) |
+| Key     | Description                                                              |
+| ------- | ------------------------------------------------------------------------ |
+| id      | The field id is the correlation id                                       |
+| value   | This field content the payload of the event in the json format           |
+| headers | This field content the header of the event in the json format (optional) |
 {% endtab %}
 
 {% tab title="Example" %}
@@ -114,11 +114,11 @@ generic_update.GenericUpdate(correlationId, eventPayload, event_headers)
 {% endtab %}
 {% endtabs %}
 
-\*\*\*\*
+****
 
 ## **Python callback function**
 
-The user supplied Belt Python callback function needs to convert the input messages from above to one or many so called **profile updates** \(it is also valid to not return any update\). These updates materialize as **grains** in the Profile Store. Many grains shape a **fragment** whereas many fragments from a **profile,** hence **Profile Store**.
+The user supplied Belt Python callback function needs to convert the input messages from above to one or many so called **profile updates** (it is also valid to not return any update). These updates materialize as **grains** in the Profile Store. Many grains shape a **fragment** whereas many fragments from a **profile, **hence **Profile Store**.
 
 The Python code provided here has to be in the form of a function by the name **callback.py** that can be invoked using the signature `execute(event_headers, event_payload)` where the parameter `event_payload` and `event_headers` are both a Python dictionary containing one event/header from the input topic or a list of dictionaries containing multiple events/headers. See [Belt Callback Signatures](../../learning-grnry-1/using-data-in-granary/best-practices/belt-callback-signatures.md) for more complete examples.
 
@@ -169,56 +169,21 @@ GRAIN_VALUE :=
   }
 ```
 
-Based on the `Update` object generated by the callback, one ore more JSON update\(s\) will be written to the profile update topic. Every update object returned by this function must have **at least** the following attribute set:
+Based on the `Update` object generated by the callback, one ore more JSON update(s) will be written to the profile update topic. Every update object returned by this function must have **at least** the following attribute set:
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Key</th>
-      <th style="text-align:left">Method</th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>_id</code>
-      </td>
-      <td style="text-align:left"><code>Update(id, [path])</code>
-      </td>
-      <td style="text-align:left">Specifies the profile that should be updated. (part of constructor)</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>_path</code>
-      </td>
-      <td style="text-align:left"><code>Update(id, [path])</code>
-      </td>
-      <td style="text-align:left">The path within the nested structure of a profile that should be updated.
-        In case the path doesn&apos;t exist yet it will be created. (part of constructor)</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>_value</code>
-      </td>
-      <td style="text-align:left"><code>set_value(value, certainty, _in, _ttn, origin, reader, _ttl)</code>
-      </td>
-      <td style="text-align:left">
-        <p>Contains the value that should be set in the profile under the defined <code>_path</code>. <code>set_value()</code> expects
-          the actual value <code>_v</code> and optional <code>_c</code>, <code>_in</code>, <code>_ttl</code>, <code>_ttn,</code>  <code>_origin</code>, <code>_reader</code>.</p>
-        <p><b>Example</b> of a <b>default grain</b> value with only <code>_v</code> set:
-          <br
-          /><code>{ &quot;_v&quot;: &quot;foo-bar&quot;, &quot;_c&quot;: 1.0, &quot;_in&quot;: time(), &quot;_ttl&quot;: &quot;P100Y&quot;, &quot;_ttn&quot;: &quot;P100Y&quot;, &quot;_origin&quot;: &quot;/belts/{belt-id}&quot;, &quot;_reader&quot;: &quot;_auth&quot;}</code>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Key      | Method                                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| -------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `_id`    | `Update(id, [path])`                                           | Specifies the profile that should be updated. (part of constructor)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `_path`  | `Update(id, [path])`                                           | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. (part of constructor)                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `_value` | `set_value(value, certainty, _in, _ttn, origin, reader, _ttl)` | <p>Contains the value that should be set in the profile under the defined <code>_path</code>. <code>set_value()</code> expects the actual value <code>_v</code> and optional <code>_c</code>, <code>_in</code>, <code>_ttl</code>, <code>_ttn,</code> <code>_origin</code>, <code>_reader</code>. </p><p><strong>Example</strong> of a <strong>default grain</strong> value with only <code>_v</code> set:<br><code>{ "_v": "foo-bar", "_c": 1.0, "_in": time(), "_ttl": "P100Y", "_ttn": "P100Y", "_origin": "/belts/{belt-id}", "_reader": "_auth"}</code></p> |
 
 If unspecified in the `Update` object, default values will be used:
 
-| Attribute Name | Method | Default |
-| :--- | :--- | :--- |
-| `_schema` | `set_schema(schema)` | `null` |
-| `_operation` | `set_operation(operation)` | `"_set"` |
-| `_profile_type` | `set_type(profile_type)` | `"_d"` |
+| Attribute Name  | Method                     | Default  |
+| --------------- | -------------------------- | -------- |
+| `_schema`       | `set_schema(schema)`       | `null`   |
+| `_operation`    | `set_operation(operation)` | `"_set"` |
+| `_profile_type` | `set_type(profile_type)`   | `"_d"`   |
 
 {% hint style="info" %}
 The **Update** object is injected into the callback and does **not** require an additional import statement.
@@ -238,11 +203,11 @@ Following rules are validated:
 * If `FETCH_PROFILE` is `true` 
   * The execute method needs to have exactly 3 parameters
 
-### Data **Fetching**
+### Data** Fetching**
 
 #### **Profile Store**
 
-In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` \(`FETCH_PROFILE=true`\) or by injecting the `profileClient` class into the callback module \(`FETCH_PROFILE=lazy`\). In case of "lazy fetch" the belt can use the profile client like this:
+In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` (`FETCH_PROFILE=true`) or by injecting the `profileClient` class into the callback module (`FETCH_PROFILE=lazy`). In case of "lazy fetch" the belt can use the profile client like this:
 
 ```python
 profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])
@@ -286,40 +251,40 @@ eventstoreClient.getEvent(event['metadata']['grnry-correlation-id'],'0cc10a49-2a
 
 If not using the [Belt API](../api-reference/belt-api.md) as deployment path, you can configure the profile fetching using the following environment variables:
 
-| Environment Variable | Description | Default |
-| :--- | :--- | :--- |
-| `FETCH_PROFILE` | Enable profile fetching | `false` |
-| `PROFILE_URL` | Profilestore base url | - |
-| `EVENTSTORE_URL` | Eventstore base url | - |
-| `PROFILE_TYPE` | Default profile type to fetch | `_d` |
+| Environment Variable         | Description                                                                                                                                        | Default |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `FETCH_PROFILE`              | Enable profile fetching                                                                                                                            | `false` |
+| `PROFILE_URL`                | Profilestore base url                                                                                                                              | -       |
+| `EVENTSTORE_URL`             | Eventstore base url                                                                                                                                | -       |
+| `PROFILE_TYPE`               | Default profile type to fetch                                                                                                                      | `_d`    |
 | `PROFILE_PASS_ON_EXCEPTIONS` | Every API call that has a non `200` return code will throw an exception that needs to be fetched in the belt code, otherwise it is send to the DLQ | `false` |
-| `PROFILE_TIMEOUT` | Time to wait for an answer of Profile / Eventstore API in seconds | `3` |
-| `KEYCLOAK_URL` | Keycloak url \(with '/auth'\) | - |
-| `KEYCLOAK_REALM` | Realm of GRNRY installation | - |
-| `KEYCLOAK_CLIENT` | Client of profile api | - |
-| `KEYCLOAK_SECRET` | Kubernetes Secret name with Keycloak user credentials | - |
-| `KEYCLOAK_USER` | Attribute name in Kubernetes Secret for Keycloak user name | - |
-| `KEYCLOAK_PASS` | Attribute name in Kubernetes Secret for Keycloak user's password | - |
+| `PROFILE_TIMEOUT`            | Time to wait for an answer of Profile / Eventstore API in seconds                                                                                  | `3`     |
+| `KEYCLOAK_URL`               | Keycloak url (with '/auth')                                                                                                                        | -       |
+| `KEYCLOAK_REALM`             | Realm of GRNRY installation                                                                                                                        | -       |
+| `KEYCLOAK_CLIENT`            | Client of profile api                                                                                                                              | -       |
+| `KEYCLOAK_SECRET`            | Kubernetes Secret name with Keycloak user credentials                                                                                              | -       |
+| `KEYCLOAK_USER`              | Attribute name in Kubernetes Secret for Keycloak user name                                                                                         | -       |
+| `KEYCLOAK_PASS`              | Attribute name in Kubernetes Secret for Keycloak user's password                                                                                   | -       |
 
 ### **Callback Timeout**
 
 If a function is taking too much time to process a record, it will timeout to prevent errors like infinite loops. The Belt retries and does not recover if the processing time keeps exceeding the timeout. The maximum duration for the function's execution can be configured. Another time limit monitors how often long-running callbacks occur. The latter limit should be smaller than the function timeout. Both timeouts can be configured using environment variables in Belt via the [Belt API](../api-reference/belt-api.md)'s parameter `extraEnvs`:
 
-| Environment Variable | Default |
-| :--- | :--- |
-| `CALLBACK_TIMEOUT_SEC` | `300` |
-| `CALLBACK_LONGRUNNING_SEC` | `180` |
+| Environment Variable       | Default |
+| -------------------------- | ------- |
+| `CALLBACK_TIMEOUT_SEC`     | `300`   |
+| `CALLBACK_LONGRUNNING_SEC` | `180`   |
 
 ### Retry
 
 If the callback raises a `RetryException`, the processed message will be retried with exponential backoff until the maximum number of retries is reached. The retry behavior can be configured by setting environment variables within the belt container via [Belt API](../api-reference/belt-api.md)'s POST parameter `extraEnvs`:
 
-| Environment Variable | Description | Default |
-| :--- | :--- | :--- |
-| `RETRY_BACK_OFF_INITIAL_INTERVAL_SEC` | initial retry wait time in seconds | `1` |
-| `RETRY_BACK_OFF_INTERVAL_MAX_SEC` | maximum retry wait time in seconds, this parameter must be aligned with Kafka consumer timeouts | `60` |
-| `RETRY_BACK_OFF_MULTIPLIER` | base of multiplier for exponential backoff | `2.0` |
-| `RETRY_MAX_RETRIES` | maximum number of retries. Disable by setting it to `0`. A value of `-1` enables unlimited retrying | `-1` |
+| Environment Variable                  | Description                                                                                         | Default |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| `RETRY_BACK_OFF_INITIAL_INTERVAL_SEC` | initial retry wait time in seconds                                                                  | `1`     |
+| `RETRY_BACK_OFF_INTERVAL_MAX_SEC`     | maximum retry wait time in seconds, this parameter must be aligned with Kafka consumer timeouts     | `60`    |
+| `RETRY_BACK_OFF_MULTIPLIER`           | base of multiplier for exponential backoff                                                          | `2.0`   |
+| `RETRY_MAX_RETRIES`                   | maximum number of retries. Disable by setting it to `0`. A value of `-1` enables unlimited retrying | `-1`    |
 
 {% code title="callback.py" %}
 ```python
@@ -352,5 +317,4 @@ extraEnv:
 
 The Belt writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are written into dead letter queue, logged and the exception counter is increased. Moreover, if other exceptions other than RetryException are raised, the `RETRY_MAX_RETRIES` is set to `0`, i.e. the message is will not be retried any longer.
 
-## 
-
+##

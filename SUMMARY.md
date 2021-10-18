@@ -2,7 +2,7 @@
 
 * [About Granary](README.md)
 
-## Learning Granary <a id="learning-grnry-1"></a>
+## Learning Granary <a href="learning-grnry-1" id="learning-grnry-1"></a>
 
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
   * [How to run a Harvester](learning-grnry-1/data-in/how-to-run-a-harvester/README.md)
@@ -13,7 +13,7 @@
     * [Scriptable Transform: Logging & Deletion](learning-grnry-1/data-in/best-practices-1/logging.md)
     * [Scriptable Transform:  Process Snowplow Events](learning-grnry-1/data-in/best-practices-1/scriptable-transform-for-snowplow-events.md)
     * [Retry Mechanism for Snowplow Clients](learning-grnry-1/data-in/best-practices-1/retry-mechanism-for-snowplow-clients.md)
-    * [Spring Expression Language \(SpEL\)](learning-grnry-1/data-in/best-practices-1/best-practices.md)
+    * [Spring Expression Language (SpEL)](learning-grnry-1/data-in/best-practices-1/best-practices.md)
     * [Sessionize Data](learning-grnry-1/data-in/best-practices-1/sessionize-data.md)
     * [TTL-expired Raw Event Processing](learning-grnry-1/data-in/best-practices-1/ttl-expired-raw-event-processing.md)
     * [Converting a script into a one-liner](learning-grnry-1/data-in/best-practices-1/easing-development.md)
@@ -72,7 +72,6 @@
     * [Reaping of Grains for Notification or Deletion](developer-reference/dataflow/profile-store/reaper.md)
   * [Segment Store](developer-reference/dataflow/segment-store/README.md)
     * [Segment Table Creation](developer-reference/dataflow/segment-store/segment-table-creation.md)
-    * [Segment Manager](developer-reference/dataflow/segment-store/segment-manager.md)
 * [API Reference](developer-reference/api-reference/README.md)
   * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
   * [Project API](developer-reference/api-reference/project-api.md)
@@ -90,7 +89,7 @@
 * [Granary Release Notes](operator-reference/granary-release-notes/README.md)
   * [Granary Known Issues](operator-reference/granary-release-notes/known-issues.md)
 * [Installation](operator-reference/installation/README.md)
-  * [With ArgoCD \(Recommended\)](operator-reference/installation/with-argocd-recommended.md)
+  * [With ArgoCD (Recommended)](operator-reference/installation/with-argocd-recommended.md)
   * [With Helm](operator-reference/installation/with-helm/README.md)
     * [Granary Base Deployment](operator-reference/installation/with-helm/granary-base-deployment.md)
     * [Snowplow Scala Stream Collector](operator-reference/installation/with-helm/snowplow-scala-stream-collector.md)
@@ -136,4 +135,3 @@
   * [Kafka](operator-reference/site-reliability/kafka.md)
   * [Keycloak](operator-reference/site-reliability/keycloak.md)
   * [PostgreSQL](operator-reference/site-reliability/postgresql-citus.md)
-

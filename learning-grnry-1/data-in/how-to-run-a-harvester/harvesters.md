@@ -8,7 +8,7 @@ description: >-
 
 ## Prerequisites
 
-Before you can create a harvester, you need to define an [event type](event-types.md) that categorizes the data _structure_ you want to import and a source type that provides a source app matching your data _source_ \(s3 / jdbc / webservice\).
+Before you can create a harvester, you need to define an [event type](event-types.md) that categorizes the data _structure _you want to import and a source type that provides a source app matching your data _source _(s3 / jdbc / webservice).
 
 ## Harvester Definition
 
@@ -22,28 +22,28 @@ A harvester is event-type-bound and will only process data provided by a single 
 
 #### Harvester Output 
 
-The steps above will emit events into a \(event type-specific\) kafka topic. So multiple harvesters can pull data of the same type \(like call records\) from different sources and write the data to the same kafka topic. But each harvester has also a dedicated "dead letter queue" kafka topic where unprocessable events \(=errors during transform, missing metadata\) will be written to. The dlq topic is created automatically on harvester creation. The name is part of the harvester entity \(`dlqTopic`\) and can not be changed.
+The steps above will emit events into a (event type-specific) kafka topic. So multiple harvesters can pull data of the same type (like call records) from different sources and write the data to the same kafka topic. But each harvester has also a dedicated "dead letter queue" kafka topic where unprocessable events (=errors during transform, missing metadata) will be written to. The dlq topic is created automatically on harvester creation. The name is part of the harvester entity (`dlqTopic`) and can not be changed.
 
-## Creating a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#create-harvester)\)
+## Creating a Harvester Instance (also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#create-harvester))
 
 To create a new harvester you have to set at least the following fields:
 
-| Attribute | Data Type | Description |
-| :--- | :--- | :--- |
-| `displayName` | string | This is what the the harvester instance will be called. This name needs to be unique. A unique technical name for the harvester instance will be derived from this field. See [hints](../best-practices-1/hints-on-naming-of-harvesters-and-event-types.md) on naming. |
-| `sourceType` | object | You need to provide at least the `name:string` and the `version:string` of the desired source type. |
-| `eventType` | object | You need to provide at least the `name:string` and the `version:string` of the event type, which you want the the harvester instance to process. |
-| `description` | string | _Optional:_ You can provide a description for the the harvester instance. |
-| `transform` | object | _Optional:_ Defines a scriptable transform application which the harvester instance should use. A default transform app will be deployed in case no custom definition is provided. Default values for all transform fields can be specified during the deployment of the harvester api.  |
-| `metadataExtractor` | object | _Optional:_ Defines metadata extractor application that the harvester instance should use. A default metadata extractor app will be deployed in case no custom definition is provided. Default values for the metadataExtractor fields are specified during the deployment of the harvester api. |
+| Attribute           | Data Type | Description                                                                                                                                                                                                                                                                                      |
+| ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `displayName`       | string    | This is what the the harvester instance will be called. This name needs to be unique. A unique technical name for the harvester instance will be derived from this field. See [hints](../best-practices-1/hints-on-naming-of-harvesters-and-event-types.md) on naming.                           |
+| `sourceType`        | object    | You need to provide at least the `name:string `and the `version:string `of the desired source type.                                                                                                                                                                                              |
+| `eventType`         | object    | You need to provide at least the `name:string `and the `version:string `of the event type, which you want the the harvester instance to process.                                                                                                                                                 |
+| `description`       | string    | _Optional:_ You can provide a description for the the harvester instance.                                                                                                                                                                                                                        |
+| `transform`         | object    | _Optional: _Defines a scriptable transform application which the harvester instance should use. A default transform app will be deployed in case no custom definition is provided. Default values for all transform fields can be specified during the deployment of the harvester api.          |
+| `metadataExtractor` | object    | _Optional: _Defines metadata extractor application that the harvester instance should use. A default metadata extractor app will be deployed in case no custom definition is provided. Default values for the metadataExtractor fields are specified during the deployment of the harvester api. |
 
 {% hint style="warning" %}
 Optional fields will be filled with pre-defined default values if not provided.
 {% endhint %}
 
-#### Example Create Call \(minimal configuration\)
+#### Example Create Call (minimal configuration)
 
-```text
+```
 curl -X POST -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   -d @create-harvester.json \
@@ -64,9 +64,9 @@ create-harvester.json content:
 }
 ```
 
-This creates the following instance \(using default values for all non-provided configuration properties\)
+This creates the following instance (using default values for all non-provided configuration properties)
 
-```text
+```
 curl -X GET -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   https://grnry-host/harvesters/instances/harvester-1
@@ -119,9 +119,9 @@ curl -X GET -H "Content-Type: application/json" \
 }
 ```
 
-#### Example Create Call \(full configuration\)
+#### Example Create Call (full configuration)
 
-```text
+```
 curl -X POST -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   -d @create-harvester-full.json \
@@ -189,7 +189,7 @@ create-harvester-full.json contant:
 
 This creates the following instance:
 
-```text
+```
 curl -X GET -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   https://grnry-host/harvesters/instances/harvester-2
@@ -271,15 +271,15 @@ curl -X GET -H "Content-Type: application/json" \
 }
 ```
 
-## Updating a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#update-harvester-instance)\)
+## Updating a Harvester Instance (also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#update-harvester-instance))
 
-You can update individual fields of a harvester configuration. If your configuration properties are identical to the current configuration the PUT call will return an empty `304 - NOT MODIFIED` response. If your call did update fields, it will return a `200 - SUCCESS`. If the harvester is already running it's state will change from `RUNNING` to `RUNNING_BUT_OUTDATED`.
+You can update individual fields of a harvester configuration. If your configuration properties are identical to the current configuration the PUT call will return an empty `304 - NOT MODIFIED` response. If your call did update fields, it will return a `200 - SUCCESS`. If the harvester is already running it's state will change from `RUNNING `to `RUNNING_BUT_OUTDATED`.
 
-Harvester name field name is not changeable and will be ignored if provided. Empty fields will be set to `""`, missing fields will remain unchanged. It is not possible to replace apps \(sourceType, metadataExtractor, transform\), only their versions and configs are modifiable.
+Harvester name field name is not changeable and will be ignored if provided. Empty fields will be set to `""`, missing fields will remain unchanged. It is not possible to replace apps (sourceType, metadataExtractor, transform), only their versions and configs are modifiable.
 
 #### Example Update Call
 
-```text
+```
 curl -X PUT -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   -d @update-harvester.json \
@@ -294,11 +294,11 @@ update-harvester.json content:
 
 This call updates the `description` of the previously created harvester.
 
-## Starting And Stopping a Harvester \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#start-stop-harvester-instance)\)
+## Starting And Stopping a Harvester (also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#start-stop-harvester-instance))
 
 In order to see the current state of a harvester instance you can do:
 
-```text
+```
 curl -X GET -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   https://grnry-host/harvesters/instances/harvester-minimal/state
@@ -314,11 +314,11 @@ RESPONSE:
 }
 ```
 
-To start/stop the harvester instance you need to send a POST Api Call to `/harvesters/instances/:harvester-name/state`.
+To start/stop the harvester instance you need to send a POST Api Call to` /harvesters/instances/:harvester-name/state`.
 
 #### Example Call
 
-```text
+```
 curl -X POST -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   -d @harvester-state.json \ 
@@ -339,33 +339,33 @@ To stop a harvester instance the action field in `harvester-state.json` needs to
 
 A harvester instance can be in one of the following states:
 
-| State | Description |
-| :--- | :--- |
-| **RUNNING** | The instance is currently running and operational. |
-| **DEPLOYING** | The instance is currently deployed. |
-| **RUNNING\_BUT\_OUTDATED** | The instance is currently running but there were configuration changes \(updates\) made to the definition of this harvester. The harvester will also be considered outdated, if the event type version in the harvester definition is `latest` and a new version of the event type has been published. The running harvester has to be restarted to apply these changes. |
-| **FAILED** | The instance failed to deploy. |
-| **STOPPING** | The instance is currently being stopped. |
-| **STOPPED** | The instance has stopped. |
-| **UNKNOWN** | The state of the instance is unknown. |
+| State                    | Description                                                                                                                                                                                                                                                                                                                                                            |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **RUNNING**              | The instance is currently running and operational.                                                                                                                                                                                                                                                                                                                     |
+| **DEPLOYING**            | The instance is currently deployed.                                                                                                                                                                                                                                                                                                                                    |
+| **RUNNING_BUT_OUTDATED** | The instance is currently running but there were configuration changes (updates) made to the definition of this harvester. The harvester will also be considered outdated, if the event type version in the harvester definition is `latest` and a new version of the event type has been published. The running harvester has to be restarted to apply these changes. |
+| **FAILED**               | The instance failed to deploy.                                                                                                                                                                                                                                                                                                                                         |
+| **STOPPING**             | The instance is currently being stopped.                                                                                                                                                                                                                                                                                                                               |
+| **STOPPED**              | The instance has stopped.                                                                                                                                                                                                                                                                                                                                              |
+| **UNKNOWN**              | The state of the instance is unknown.                                                                                                                                                                                                                                                                                                                                  |
 
-## Delete a Harvester Instance \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#delete-a-harvester-instance)\)
+## Delete a Harvester Instance (also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#delete-a-harvester-instance))
 
 #### Example DELETE call:
 
-```text
+```
 curl -X DELETE -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   https://grnry-host/harvesters/instances/harvester-minimal
 ```
 
-## Harvester Instance Logs \(also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#get-harvester-instance-logs)\)
+## Harvester Instance Logs (also see [API Docs](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#get-harvester-instance-logs))
 
 It is possible to access the logs of underlying apps of a harvester instance via the API.
 
 #### Example Call
 
-```text
+```
 curl -X GET -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   https://grnry-host/harvesters/instances/harvester-minimal/logs/sourceType&line=100
@@ -412,7 +412,7 @@ The path parameter `line` is optional and specifies how many lines the log shoul
 ```
 
 {% code title="event-type.json" %}
-```text
+```
 {
   "name" : "test-event-type-post",
   "correlationIdExpression" : "#jsonPath(#jsonPath(payload, 'body'), 'data[0].correlationId')",
@@ -432,18 +432,18 @@ curl -X POST -H "Content-Type: application/json" \
 ```
 
 {% code title="persister-start.json" %}
-```text
+```
 {
   "action" : "START"
 }
 ```
 {% endcode %}
 
-#### Step 3: Create Source Type \(App already registered with SCDF\):
+#### Step 3: Create Source Type (App already registered with SCDF):
 
 If Source Type not already present in the database:
 
-```text
+```
 INSERT INTO source_types (
     name, 
     version, 
@@ -475,7 +475,7 @@ https://scdf-host/apps/source/jdbc/latest
 
 #### Step 4: Create Harvester Instance
 
-```text
+```
 curl -X POST -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   -d @create-harvester.json \
@@ -483,7 +483,7 @@ curl -X POST -H "Content-Type: application/json" \
 ```
 
 {% code title="create-harvester.json" %}
-```text
+```
 {
   "displayName": "harvester-1",
   "sourceType": {
@@ -500,7 +500,7 @@ curl -X POST -H "Content-Type: application/json" \
 
 #### Step 5: Start Harvester Stream
 
-```text
+```
 curl -X POST -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   -d @harvester-start.json \
@@ -508,18 +508,18 @@ curl -X POST -H "Content-Type: application/json" \
 ```
 
 {% code title="harvester-start.json" %}
-```text
+```
 {
   "action" : "START"
 }
 ```
 {% endcode %}
 
-#### Step 6: Cleanup \(optional\)
+#### Step 6: Cleanup (optional)
 
-If you want to remove the previously created definitions \(and deployed stream\) you need to delete the harvester first:
+If you want to remove the previously created definitions (and deployed stream) you need to delete the harvester first:
 
-```text
+```
 curl -X DELETE -H "Content-Type: application/json" \
   -H "Authorization: Bearer <Access-Token>" \
   https://grnry-host/harvesters/instances/harvester-1
@@ -532,4 +532,3 @@ curl -X DELETE -H "Content-Type: application/json" \
  -H "Authorization: Bearer <Access-Token>" \
  https://grnry-host/event-types/test
 ```
-

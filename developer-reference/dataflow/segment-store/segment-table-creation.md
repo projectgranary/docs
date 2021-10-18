@@ -8,15 +8,15 @@ description: This page specifies the configuration of segments in Granary.
 
 This component generates so-called segments, which can be understood as relational view on Profile Store or Event Store data. 
 
-Depending on the segment's access pattern, segments can be **views** or **tables:**
+Depending on the segment's access pattern, segments can be **views **or **tables:**
 
 * **View segments** are always up-to-date as queries are run at access time against Profile Store / Event Store.
 * **Table segments** are updated based on a cron schedule, are pre-computed, and can be equipped with additional indexes. During the scheduled pre-computation, the old segment is still fully accessible.
 
 The available storage layers are:
 
-* **PostgreSQL** \(compatible with Amazon Aurora - allowing to leverage read replicas for view segments\)
-* **Citus** Data PostgreSQL
+* **PostgreSQL **(compatible with Amazon Aurora - allowing to leverage read replicas for view segments)
+* **Citus **Data PostgreSQL
 
 Using standard **PostgreSQL**, table segments are normal database tables. Using **Citus**, table segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. 
 
@@ -27,209 +27,47 @@ Currently, three different segment generator types are available:
 * **Flexible**, which takes a user-given query to create its segment
 
 {% hint style="warning" %}
-Please note that due to technical limitations, `pivot`segments might fail if many grains \(~5.000.000\) are being selected and may even cause database restarts.
+Please note that due to technical limitations, `pivot`segments might fail if many grains (\~5.000.000) are being selected and may even cause database restarts.
 {% endhint %}
 
 ## Configure
 
-The creation job runs in a container and can be deployed via [Segment Management API](). The following table comprises a complete list of variables \(required if there is no default\):
+The creation job runs in a container and can be deployed via [Segment Management API](broken-reference). The following table comprises a complete list of variables (required if there is no default):
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Parameter</th>
-      <th style="text-align:left">Description</th>
-      <th style="text-align:left">Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>TYPE</code>
-      </td>
-      <td style="text-align:left">type of generator, <code>pivot</code> , <code>generic</code> or <code>flexible</code>
-      </td>
-      <td style="text-align:left"><code>pivot</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_TYPE</code>
-      </td>
-      <td style="text-align:left">storage-layer type, <code>citus</code> or <code>postgres</code>
-      </td>
-      <td style="text-align:left"><code>postgres</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_USE_VIEWS</code>
-      </td>
-      <td style="text-align:left">flag indicating if generated segment should be a view</td>
-      <td style="text-align:left"><code>false</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_PRESERVE_VIEWS</code>
-      </td>
-      <td style="text-align:left">
-        <p>Segments are recreated based on a CRON schedule. If a custom-made view
-          relies on a Segment, it is dropped and needs to be recreated after update.
-          With this flag set to <code>true</code>, manually created views on the Segment
-          are preserved.</p>
-        <p>WARNING: With this feature Segment columns can only be added and not be
-          changed. On breaking change of the segment, just run the segment job with
-          this flag disabled and enable it again afterwards.</p>
-      </td>
-      <td style="text-align:left"><code>false</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_HOST</code>
-      </td>
-      <td style="text-align:left">database endpoint (citus master host or aurora writer endpoint)</td>
-      <td
-      style="text-align:left"><code>grnry-pg</code>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_PORT</code>
-      </td>
-      <td style="text-align:left">database port</td>
-      <td style="text-align:left"><code>5432</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_USER</code>
-      </td>
-      <td style="text-align:left">database user name</td>
-      <td style="text-align:left">Secret Reference needed</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_PASSWORD</code>
-      </td>
-      <td style="text-align:left">database user password</td>
-      <td style="text-align:left">Secret Reference needed</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_NAME</code>
-      </td>
-      <td style="text-align:left">name of the database</td>
-      <td style="text-align:left">Secret Reference needed</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DB_USE_SSL</code>
-      </td>
-      <td style="text-align:left">whether to enforce SSL for DB connection</td>
-      <td style="text-align:left"><code>true</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>SOURCE_SCHEMA_NAME</code>
-      </td>
-      <td style="text-align:left">name of schema of source table</td>
-      <td style="text-align:left"><code>public</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>SOURCE_TABLE_NAME</code>
-      </td>
-      <td style="text-align:left">name of source table</td>
-      <td style="text-align:left"><code>profilestore</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>TARGET_SCHEMA_NAME</code>
-      </td>
-      <td style="text-align:left">name of schema for target segment</td>
-      <td style="text-align:left"><code>segments</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>TARGET_SEGMENT_NAME</code>
-      </td>
-      <td style="text-align:left">name for target segment, if already existing old segment will be overwritten</td>
-      <td
-      style="text-align:left"><code>profilestore_seg</code>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>COLUMN_PLACEHOLDER</code>
-      </td>
-      <td style="text-align:left">placeholder for the path name to be used in the pivot transformation function</td>
-      <td
-      style="text-align:left"><code>?</code>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>TYPE_SEPARATOR</code>
-      </td>
-      <td style="text-align:left">separator between pivot transformation function and result type</td>
-      <td
-      style="text-align:left"><code>::</code>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DEFINITION_SEPARATOR</code>
-      </td>
-      <td style="text-align:left">separator between name and transformation</td>
-      <td style="text-align:left"><code>=</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>TRANSFORMATION_SEPARATOR</code>
-      </td>
-      <td style="text-align:left">separator between multiple transformations, e.g. <code>body_txt=message-&gt;&apos;body&apos;::text|body_json=replace(message-&gt;&apos;body&apos;#&gt;&gt;&apos;{}&apos;, &apos;\&apos;, &apos;&apos;)::jsonb</code>
-      </td>
-      <td style="text-align:left"><code>|</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>CITUS_DIST_COL</code>
-      </td>
-      <td style="text-align:left">Name of the column the source table is and the target segment will be
-        distributed by. Currently, this has to be a single column and is only mandatory
-        if <code>DB_TYPE=citus</code>.</td>
-      <td style="text-align:left">correlation_id</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>DEBUG</code>
-      </td>
-      <td style="text-align:left">whether to print all database statement and responses</td>
-      <td style="text-align:left"><code>true</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>SOURCE_WHERE_CLAUSE</code>
-      </td>
-      <td style="text-align:left">where clause as SQL (without &quot;WHERE&quot; itself), must not be empty.</td>
-      <td
-      style="text-align:left"><code>&quot;pit=&apos;_latest&apos;&quot;</code>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>PROMETHEUS_PUSHGATEWAY</code>
-      </td>
-      <td style="text-align:left">address of gateway to push prometheus metrics, format <code>&apos;&lt;host&gt;:&lt;port&gt;&apos;</code>
-      </td>
-      <td style="text-align:left"></td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>PROMETHEUS_JOB</code>
-      </td>
-      <td style="text-align:left">job name for pushgateway, the metrics will be grouped by this name.</td>
-      <td
-      style="text-align:left"><code>segmentcreation</code>
-        </td>
-    </tr>
-  </tbody>
-</table>
+| Parameter                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Default                 |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `TYPE`                     | type of generator, `pivot` , `generic` or `flexible`                                                                                                                                                                                                                                                                                                                                                                                                              | `pivot`                 |
+| `DB_TYPE`                  | storage-layer type, `citus` or `postgres`                                                                                                                                                                                                                                                                                                                                                                                                                         | `postgres`              |
+| `DB_USE_VIEWS`             | flag indicating if generated segment should be a view                                                                                                                                                                                                                                                                                                                                                                                                             | `false`                 |
+| `DB_PRESERVE_VIEWS`        | <p>Segments are recreated based on a CRON schedule. If a custom-made view relies on a Segment, it is dropped and needs to be recreated after update. With this flag set to <code>true</code>, manually created views on the Segment are preserved.</p><p>WARNING: With this feature Segment columns can only be added and not be changed. On breaking change of the segment, just run the segment job with this flag disabled and enable it again afterwards.</p> | `false`                 |
+| `DB_HOST`                  | database endpoint (citus master host or aurora writer endpoint)                                                                                                                                                                                                                                                                                                                                                                                                   | `grnry-pg`              |
+| `DB_PORT`                  | database port                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `5432`                  |
+| `DB_USER`                  | database user name                                                                                                                                                                                                                                                                                                                                                                                                                                                | Secret Reference needed |
+| `DB_PASSWORD`              | database user password                                                                                                                                                                                                                                                                                                                                                                                                                                            | Secret Reference needed |
+| `DB_NAME`                  | name of the database                                                                                                                                                                                                                                                                                                                                                                                                                                              | Secret Reference needed |
+| `DB_USE_SSL`               | whether to enforce SSL for DB connection                                                                                                                                                                                                                                                                                                                                                                                                                          | `true`                  |
+| `SOURCE_SCHEMA_NAME`       | name of schema of source table                                                                                                                                                                                                                                                                                                                                                                                                                                    | `public`                |
+| `SOURCE_TABLE_NAME`        | name of source table                                                                                                                                                                                                                                                                                                                                                                                                                                              | `profilestore`          |
+| `TARGET_SCHEMA_NAME`       | name of schema for target segment                                                                                                                                                                                                                                                                                                                                                                                                                                 | `segments`              |
+| `TARGET_SEGMENT_NAME`      | name for target segment, if already existing old segment will be overwritten                                                                                                                                                                                                                                                                                                                                                                                      | `profilestore_seg`      |
+| `COLUMN_PLACEHOLDER`       | placeholder for the path name to be used in the pivot transformation function                                                                                                                                                                                                                                                                                                                                                                                     | `?`                     |
+| `TYPE_SEPARATOR`           | separator between pivot transformation function and result type                                                                                                                                                                                                                                                                                                                                                                                                   | `::`                    |
+| `DEFINITION_SEPARATOR`     | separator between name and transformation                                                                                                                                                                                                                                                                                                                                                                                                                         | `=`                     |
+| `TRANSFORMATION_SEPARATOR` | separator between multiple transformations, e.g. `body_txt=message->'body'::text\|body_json=replace(message->'body'#>>'{}', '\', '')::jsonb`                                                                                                                                                                                                                                                                                                                      | `\|`                    |
+| `CITUS_DIST_COL`           | Name of the column the source table is and the target segment will be distributed by. Currently, this has to be a single column and is only mandatory if `DB_TYPE=citus`.                                                                                                                                                                                                                                                                                         | correlation_id          |
+| `DEBUG`                    | whether to print all database statement and responses                                                                                                                                                                                                                                                                                                                                                                                                             | `true`                  |
+| `SOURCE_WHERE_CLAUSE`      | where clause as SQL (without "WHERE" itself), must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                  | `"pit='_latest'"`       |
+| `PROMETHEUS_PUSHGATEWAY`   | address of gateway to push prometheus metrics, format `'<host>:<port>'`                                                                                                                                                                                                                                                                                                                                                                                           |                         |
+| `PROMETHEUS_JOB`           | job name for pushgateway, the metrics will be grouped by this name.                                                                                                                                                                                                                                                                                                                                                                                               | `segmentcreation`       |
 
 ### Segment Indexes
 
 There are parameters to define **indexes** on the resulting segment. Note that creating indexes is not possible on segments that are generated as views.
 
-| Parameter | Description | Default |
-| :--- | :--- | :--- |
-| `TARGET_SEGMENT_INDEX_SEPARATOR` | Separator between index definitions | \| |
-| `TARGET_SEGMENT_INDEXES` | Defines index name and expression. Must be in format `<name>=<index expression>`.  For example: `segidx1=(event_id)` or `segidx2= USING gin (body_json, headers)` |  |
+| Parameter                        | Description                                                                                                                                                                                                               | Default |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `TARGET_SEGMENT_INDEX_SEPARATOR` | Separator between index definitions                                                                                                                                                                                       | \|      |
+| `TARGET_SEGMENT_INDEXES`         | <p>Defines index name and expression. Must be in format <code>&#x3C;name>=&#x3C;index expression></code>. <br>For example:<br><code>segidx1=(event_id)</code> or <code>segidx2= USING gin (body_json, headers)</code></p> |         |
 
 ### Segment Views
 
@@ -237,48 +75,17 @@ There are parameters to define **views** on the resulting segment. These views c
 
 For this example, the respective configuration could look as follows:
 
-`PIVOT_PATHS: "/pathA,/pathB,/pathC,/isLocked"    
-PIVOT_TRANSFORMATIONS: "/isLocked= ?#>>'{}'::text"    
-TARGET_SEGMENT_VIEWS: "locked:\"/isLocked\" = 'true',unlocked:\"/isLocked\" = 'false'"`
+`PIVOT_PATHS: "/pathA,/pathB,/pathC,/isLocked"  `\
+`PIVOT_TRANSFORMATIONS: "/isLocked= ?#>>'{}'::text"  `\
+`TARGET_SEGMENT_VIEWS: "locked:\"/isLocked\" = 'true',unlocked:\"/isLocked\" = 'false'"`
 
 Detailed configuration
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Parameter</th>
-      <th style="text-align:left">Description</th>
-      <th style="text-align:left">Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>TARGET_SEGMENT_VIEW_SEPARATOR</code>
-      </td>
-      <td style="text-align:left">Separator between view definitions</td>
-      <td style="text-align:left"><code>,</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>TARGET_SEGMENT_VIEW_DEFINITION_SEPARATOR</code>
-      </td>
-      <td style="text-align:left">Separator between view <em>name</em> and view <em>condition</em>
-      </td>
-      <td style="text-align:left"><code>:</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>TARGET_SEGMENT_VIEWS</code>
-      </td>
-      <td style="text-align:left">
-        <p><code>TARGET_SEGMENT_VIEW_SEPARATOR</code> separated list auf views.</p>
-        <p>Definition of a view: <em>name definition-separator condition</em>
-        </p>
-      </td>
-      <td style="text-align:left">-</td>
-    </tr>
-  </tbody>
-</table>
+| Parameter                                  | Description                                                                                                                                          | Default |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `TARGET_SEGMENT_VIEW_SEPARATOR`            | Separator between view definitions                                                                                                                   | `,`     |
+| `TARGET_SEGMENT_VIEW_DEFINITION_SEPARATOR` | Separator between view _name_ and view _condition_                                                                                                   | `:`     |
+| `TARGET_SEGMENT_VIEWS`                     | <p><code>TARGET_SEGMENT_VIEW_SEPARATOR</code> separated list auf views.</p><p>Definition of a view: <em>name definition-separator condition</em></p> | -       |
 
 One can now set access to the resulting views, containing either unlocked or locked profiles, via Granary's [IAM control](../../../operator-reference/identity-and-access-management/).
 
@@ -288,110 +95,34 @@ The generic generator creates a filtered projection from the source table. Data 
 
 Also, there are **generic generator** specific variables as specified below.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Parameter</th>
-      <th style="text-align:left">Description</th>
-      <th style="text-align:left">Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>GENERIC_COLUMNS</code>
-      </td>
-      <td style="text-align:left">source columns to be used without transformation</td>
-      <td style="text-align:left">event_id</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>GENERIC_TRANSFORMATIONS</code>
-      </td>
-      <td style="text-align:left">columns to be created from transformation. must be in format <code>&lt;name&gt;&lt;definition_separator&gt;&lt;sql expression&gt;&lt;type separator&gt;&lt;type&gt;</code>
-      </td>
-      <td style="text-align:left">
-        <p><code>body_txt=</code>
-        </p>
-        <p><code>message-&gt;&apos;body&apos;::text|</code>
-        </p>
-        <p><code>body_json=</code>
-        </p>
-        <p><code>replace(message-&gt;&apos;body&apos;#&gt;&gt;&apos;{}&apos;, &apos;\&apos;, &apos;&apos;)::jsonb|</code>
-        </p>
-        <p><code>headers=</code>
-        </p>
-        <p><code>message-&gt;&apos;headers&apos;::jsonb</code>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Parameter                 | Description                                                                                                                       | Default                                                                                                                                                                                                                                            |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GENERIC_COLUMNS`         | source columns to be used without transformation                                                                                  | event_id                                                                                                                                                                                                                                           |
+| `GENERIC_TRANSFORMATIONS` | columns to be created from transformation. must be in format `<name><definition_separator><sql expression><type separator><type>` | <p><code>body_txt=</code></p><p><code>message->'body'::text|</code></p><p><code>body_json=</code></p><p><code>replace(message->'body'#>>'{}', '\', '')::jsonb|</code></p><p><code>headers=</code></p><p><code>message->'headers'::jsonb</code></p> |
 
 ### Pivot Generator
 
 Additionally, there are **pivot generator** specific variables as specified below.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Parameter</th>
-      <th style="text-align:left">Description</th>
-      <th style="text-align:left">Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>PIVOT_PATHS</code>
-      </td>
-      <td style="text-align:left">list of paths to be turned into columns, comma-separated, no explicit
-        spec means all paths</td>
-      <td style="text-align:left"></td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>PIVOT_ALIASES</code>
-      </td>
-      <td style="text-align:left">list of aliases for the paths to be turned into columns, comma-separated</td>
-      <td
-      style="text-align:left"></td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>PIVOT_TRANSFORMATIONS</code>
-      </td>
-      <td style="text-align:left">
-        <p>list of transformations to apply on paths;</p>
-        <p>must be in the format <code>&lt;path&gt;&lt;definition_separator&gt;&lt;sql expression with placeholder&gt;&lt;type separator&gt;&lt;result type&gt;</code>
-        </p>
-      </td>
-      <td style="text-align:left"></td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>PIVOT_ALLOW_EMPTY</code>
-      </td>
-      <td style="text-align:left">whether to remove empty rows from the segment output</td>
-      <td style="text-align:left"><code>true</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>PIVOT_SEGMENT_WHERE_CLAUSE</code>
-      </td>
-      <td style="text-align:left">where clause as SQL (without <code>WHERE</code> itself) to filter segments
-        after segmentation, e.g., <code>a::text = &apos;\&quot;foo\&quot;&apos;</code> (note
-        that column values are of type <code>jsonb</code>)</td>
-      <td style="text-align:left"></td>
-    </tr>
-  </tbody>
-</table>
+| Parameter                    | Description                                                                                                                                                                                                    | Default |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `PIVOT_PATHS`                | list of paths to be turned into columns, comma-separated, no explicit spec means all paths                                                                                                                     |         |
+| `PIVOT_ALIASES`              | list of aliases for the paths to be turned into columns, comma-separated                                                                                                                                       |         |
+| `PIVOT_TRANSFORMATIONS`      | <p>list of transformations to apply on paths;</p><p>must be in the format <code>&#x3C;path>&#x3C;definition_separator>&#x3C;sql expression with placeholder>&#x3C;type separator>&#x3C;result type></code></p> |         |
+| `PIVOT_ALLOW_EMPTY`          | whether to remove empty rows from the segment output                                                                                                                                                           | `true`  |
+| `PIVOT_SEGMENT_WHERE_CLAUSE` | where clause as SQL (without `WHERE` itself) to filter segments after segmentation, e.g., `a::text = '\"foo\"'` (note that column values are of type `jsonb`)                                                  |         |
 
 The pivot generator presupposes that the following input columns are present in the source table.
 
-`<CITUS_DIST_COL>` \(varchar, only necessary if `DB_TYPE=citus`\)
+`<CITUS_DIST_COL>` (varchar, only necessary if `DB_TYPE=citus`)
 
-`path` \(text/varchar\)
+`path` (text/varchar)
 
-`value` \(jsonb\)
+`value` (jsonb)
 
 As an example see the ProfileStore:
 
-```text
+```
 correlation_id varchar NOT NULL,
 profile_type varchar NOT NULL DEFAULT '_d',
 path varchar NOT NULL,
@@ -413,132 +144,18 @@ For each `<CITUS_DIST_COL>`_/_`path` combination there should be returned a sing
 
 Consider the following input table.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">correlation_id</th>
-      <th style="text-align:left">profile_type</th>
-      <th style="text-align:left">path</th>
-      <th style="text-align:left">pit</th>
-      <th style="text-align:left">value</th>
-      <th style="text-align:left">certainty</th>
-      <th style="text-align:left">grain_type</th>
-      <th style="text-align:left">inserted</th>
-      <th style="text-align:left">ttl</th>
-      <th style="text-align:left">ttn</th>
-      <th style="text-align:left">reader</th>
-      <th style="text-align:left">origin</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">_d</td>
-      <td style="text-align:left">/path1</td>
-      <td style="text-align:left">_latest</td>
-      <td style="text-align:left">foo</td>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">t</td>
-      <td style="text-align:left">7</td>
-      <td style="text-align:left">
-        <p></p>
-        <p>p100y</p>
-      </td>
-      <td style="text-align:left">p1d</td>
-      <td style="text-align:left">_auth</td>
-      <td style="text-align:left">test</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">_d</td>
-      <td style="text-align:left">/path2</td>
-      <td style="text-align:left">_latest</td>
-      <td style="text-align:left">bar</td>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">t</td>
-      <td style="text-align:left">8</td>
-      <td style="text-align:left">
-        <p></p>
-        <p>p100y</p>
-      </td>
-      <td style="text-align:left">p1d</td>
-      <td style="text-align:left">_auth</td>
-      <td style="text-align:left">test</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">_d</td>
-      <td style="text-align:left">/path3</td>
-      <td style="text-align:left">_latest</td>
-      <td style="text-align:left">baz</td>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">t</td>
-      <td style="text-align:left">9</td>
-      <td style="text-align:left">
-        <p></p>
-        <p>p100y</p>
-      </td>
-      <td style="text-align:left">p1d</td>
-      <td style="text-align:left">_auth</td>
-      <td style="text-align:left">test</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">pt</td>
-      <td style="text-align:left">/path3</td>
-      <td style="text-align:left">_latest</td>
-      <td style="text-align:left">bazz</td>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">t</td>
-      <td style="text-align:left">9</td>
-      <td style="text-align:left">
-        <p></p>
-        <p>p100y</p>
-      </td>
-      <td style="text-align:left">p1d</td>
-      <td style="text-align:left">_auth</td>
-      <td style="text-align:left">test</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">pt</td>
-      <td style="text-align:left">/path4</td>
-      <td style="text-align:left">_latest</td>
-      <td style="text-align:left">3</td>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">t</td>
-      <td style="text-align:left">9</td>
-      <td style="text-align:left">
-        <p></p>
-        <p>p100y</p>
-      </td>
-      <td style="text-align:left">p1d</td>
-      <td style="text-align:left">_auth</td>
-      <td style="text-align:left">test</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">2</td>
-      <td style="text-align:left">pt</td>
-      <td style="text-align:left">/path3</td>
-      <td style="text-align:left">_latest</td>
-      <td style="text-align:left">bazz</td>
-      <td style="text-align:left">1</td>
-      <td style="text-align:left">t</td>
-      <td style="text-align:left">9</td>
-      <td style="text-align:left">
-        <p></p>
-        <p>p100y</p>
-      </td>
-      <td style="text-align:left">p1d</td>
-      <td style="text-align:left">_auth</td>
-      <td style="text-align:left">test</td>
-    </tr>
-  </tbody>
-</table>
+| correlation_id | profile_type | path   | pit      | value | certainty | grain_type | inserted | ttl                 | ttn | reader | origin |
+| -------------- | ------------ | ------ | -------- | ----- | --------- | ---------- | -------- | ------------------- | --- | ------ | ------ |
+| 1              | \_d          | /path1 | \_latest | foo   | 1         | t          | 7        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 1              | \_d          | /path2 | \_latest | bar   | 1         | t          | 8        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 1              | \_d          | /path3 | \_latest | baz   | 1         | t          | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 1              | pt           | /path3 | \_latest | bazz  | 1         | t          | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 1              | pt           | /path4 | \_latest | 3     | 1         | t          | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 2              | pt           | /path3 | \_latest | bazz  | 1         | t          | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
 
 Consider the following configuration.
 
-```text
+```
 - name: TYPE
   value: "pivot"
 - name: CITUS_DIST_COL
@@ -549,23 +166,23 @@ Consider the following configuration.
   value: "/path1,/path2,/path3"
 ```
 
-This results in the following output containing _\_latest_ values for path _a_, _b_ and _c_ per _correlation\_id_.
+This results in the following output containing _\_latest_ values for path _a_, _b_ and _c_ per _correlation_id_.
 
-| correlation\_id | /path1 | /path2 | /path3 |
-| :--- | :--- | :--- | :--- |
-| 1 | foo | bar | baz |
-| 2 | null | null | bazz |
+| correlation_id | /path1 | /path2 | /path3 |
+| -------------- | ------ | ------ | ------ |
+| 1              | foo    | bar    | baz    |
+| 2              | null   | null   | bazz   |
 
-Note that if _PIVOT\_PATHS_ is empty, then it uses all available paths. Determining all path is a potentially long-running operation.
+Note that if _PIVOT_PATHS_ is empty, then it uses all available paths. Determining all path is a potentially long-running operation.
 
-If filtering by paths \(e.g. /path1 in the example above\) the result might contain empty rows:
+If filtering by paths (e.g. /path1 in the example above) the result might contain empty rows:
 
-| correlation\_id | /path1 |
-| :--- | :--- |
-| 1 | foo |
-| 2 | null |
+| correlation_id | /path1 |
+| -------------- | ------ |
+| 1              | foo    |
+| 2              | null   |
 
-These can be suppressed by setting _ALLOW\_EMPTY_ to _False_. By defining a where clause in _SEGMENT\_FILTER\_CLAUSE_ the output can be further filtered.
+These can be suppressed by setting _ALLOW_EMPTY_ to _False_. By defining a where clause in _SEGMENT_FILTER_CLAUSE_ the output can be further filtered.
 
 #### Transformations of path content
 
@@ -573,21 +190,21 @@ When creating the pivot table you have the option to specify arbitrary transform
 
 E.g. `/path1=? #>> a::text` will select the element `a` in the jsonb object of `/path1` as a text column.
 
-The placeholders and separators \(`=`, `?` and `::`\) can be customized if they would otherwise conflict with special characters in the sql expression. Note that all values are initially of type `jsonb`!
+The placeholders and separators (`=`, `?` and `::`) can be customized if they would otherwise conflict with special characters in the sql expression. Note that all values are initially of type `jsonb`!
 
 Below you can see a full example:
 
 Source table:
 
-| correlation\_id | profile\_type | path | pit | value | ... |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | \_d | /path1 | \_latest | 20 | ... |
-| 2 | pt | /path1 | \_latest | 30 | ... |
-| 3 | pt | /path1 | \_latest | 60 | ... |
+| correlation_id | profile_type | path   | pit      | value | ... |
+| -------------- | ------------ | ------ | -------- | ----- | --- |
+| 1              | \_d          | /path1 | \_latest | 20    | ... |
+| 2              | pt           | /path1 | \_latest | 30    | ... |
+| 3              | pt           | /path1 | \_latest | 60    | ... |
 
 Configuration:
 
-```text
+```
 env:
 - name: PIVOT_TRANSFORMATIONS
   value: /path1=(CAST((? #> '{}') AS integer) > 50)::boolean
@@ -595,11 +212,11 @@ env:
 
 Result:
 
-| correlation\_id | /path1 |
-| :--- | :--- |
-| 1 | false |
-| 2 | false |
-| 3 | true |
+| correlation_id | /path1 |
+| -------------- | ------ |
+| 1              | false  |
+| 2              | false  |
+| 3              | true   |
 
 Common transformations could be:
 
@@ -617,7 +234,7 @@ An example using aliases could look like this:
 
 Configuration:
 
-```text
+```
 env:
 - name: PIVOT_PATHS
   value: /customer/info/meta/address, /xyz, /customer/info/meta/contact/phonenumber
@@ -629,11 +246,11 @@ env:
 
 Result:
 
-| correlation\_id | street | xyz | phone |
-| :--- | :--- | :--- | :--- |
-| 1 | ... | ... | ... |
-| 2 | ... | ... | ... |
-| 3 | ... | ... | ... |
+| correlation_id | street | xyz | phone |
+| -------------- | ------ | --- | ----- |
+| 1              | ...    | ... | ...   |
+| 2              | ...    | ... | ...   |
+| 3              | ...    | ... | ...   |
 
 ### Flexible Generator
 
@@ -643,9 +260,9 @@ Flexible Generator is available starting from Granary platform version 0.9.1.
 
 The flexible generator creates a segment based on a query given by the user. There are **flexible generator** specific variables as specified below.
 
-| Parameter | Description | Default |
-| :--- | :--- | :--- |
-| `SOURCE_QUERY` | The source query to create the flexible segment from |  |
+| Parameter      | Description                                          | Default |
+| -------------- | ---------------------------------------------------- | ------- |
+| `SOURCE_QUERY` | The source query to create the flexible segment from |         |
 
 The flexible source query is internally used to create a table or view with. The SQL issued by the Segment Table Creation looks like `CREATE TABLE AS {SOURCE_QUERY}` or `CREATE VIEW AS {SOURCE_QUERY}`, respectively.
 
@@ -655,16 +272,16 @@ With the flexible generator you are free to create any segment you want. Below y
 
 Source table:
 
-| correlation\_id | profile\_type | path | pit | value | ... |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | \_d | /path1 | \_latest | 20 | ... |
-| 2 | pt | /path1 | \_latest | 30 | ... |
-| 3 | pt | /path1 | \_latest | 40 | ... |
-| 4 | pt | /path2 | \_latest | 80 | ... |
+| correlation_id | profile_type | path   | pit      | value | ... |
+| -------------- | ------------ | ------ | -------- | ----- | --- |
+| 1              | \_d          | /path1 | \_latest | 20    | ... |
+| 2              | pt           | /path1 | \_latest | 30    | ... |
+| 3              | pt           | /path1 | \_latest | 40    | ... |
+| 4              | pt           | /path2 | \_latest | 80    | ... |
 
 Configuration:
 
-```text
+```
 env:
 - name: SOURCE_QUERY
   value: select count(profile_type), profile_type from profilestore where value < 50 group by profile_type
@@ -672,22 +289,21 @@ env:
 
 Result:
 
-| count | profile\_type |
-| :--- | :--- |
-| 1 | \_d |
-| 2 | pt |
+| count | profile_type |
+| ----- | ------------ |
+| 1     | \_d          |
+| 2     | pt           |
 
 {% hint style="warning" %}
-Please note that if you are using `%` signs in your source query \(e.g. `LIKE '%something'`\), they will need to be prefixed with three more `%` signs to work correctly. The example would therefore look like this: `LIKE '%%%%something'`.
+Please note that if you are using `%` signs in your source query (e.g. `LIKE '%something'`), they will need to be prefixed with three more `%` signs to work correctly. The example would therefore look like this: `LIKE '%%%%something'`.
 {% endhint %}
 
 ## Errors
 
-In case of errors, these are directly thrown and can be detected by the environment running the Docker container \(e.g., Kubernetes\). In case no connection can be established or the database returns an SQL error result, this is the default behaviour of psycopg2. 
+In case of errors, these are directly thrown and can be detected by the environment running the Docker container (e.g., Kubernetes). In case no connection can be established or the database returns an SQL error result, this is the default behaviour of psycopg2. 
 
 The metrics are grouped by the job name set in `PROMETHEUS_JOB`. If the `PROMETHEUS_PUSHGATEWAY` variable is set, the following values are pushed:
 
 * Gauge: `segmentcreation_last_success_unixtime`/`segmentcreation_last_fail_unixtime` for the last success/fail [as recommended via mailing list, can be used to trigger alerts](https://groups.google.com/forum/#!topic/prometheus-developers/rFHMb4vN6cc)
 * Summary: `segmentcreation_duration_seconds`, time needed for segmentcreation
 * Counter: `segmentcreation_inserts`, total number of inserted rows
-

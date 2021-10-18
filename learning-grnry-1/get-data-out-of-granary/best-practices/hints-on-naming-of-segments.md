@@ -14,13 +14,13 @@ If you denote the segment name in the environment variable `TARGET_SEGMENT_NAME`
 
 ### Technical limitations
 
-Generally speaking, the Segment Managment API features an `id` and a `displayName`. The `id` is used as the technical identifier and is derived from the `displayName` parameter provided in the JSON payload when creating a [Segment]() using a POST request. The only exception to this behaviour is if you provide an `id` in the POST request when creating a Harvester or an Event Type, e.g. `POST /segments/{id}`
+Generally speaking, the Segment Managment API features an `id` and a `displayName`. The `id` is used as the technical identifier and is derived from the `displayName` parameter provided in the JSON payload when creating a [Segment](broken-reference) using a POST request. The only exception to this behaviour is if you provide an `id` in the POST request when creating a Harvester or an Event Type, e.g. `POST /segments/{id}`
 
 The `displayName` property does not have technical restrictions. 
 
 The following limitations apply to the `id` property of a segment:
 
 * `id` may carry four to 134 characters
-* this function is invoked if `id` is derived from `displayName`: `displayName.toLowerCase().replaceAll("[^a-zA-Z0-9\\-\\s]", "").trim().replaceAll("[\s]+"), ”-”) + "-" + 5 random characters`
+* this function is invoked if `id` is derived from `displayName`:\
+  `displayName.toLowerCase().replaceAll("[^a-zA-Z0-9\\-\\s]", "").trim().replaceAll("[\s]+"), ”-”) + "-" + 5 random characters`
 * if created via API call `POST /segments/{id}` the ID must adhere to the DNS-1123 subdomain standard
-

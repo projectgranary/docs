@@ -19,50 +19,46 @@ Consult the [Granary Access Clients Reference](../../operator-reference/identity
 Profiles and their grains in JSON response body are unordered.
 {% endhint %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/profiles/:profileType/:correlationId" %}
-{% api-method-summary %}
-Get a Specific Profile by ID, Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/profiles/:profileType/:correlationId" method="get" summary="Get a Specific Profile by ID, Type" %}
+{% swagger-description %}
+Retrieves the latest status of a profile. Hence all grains for which the attribute pit is 'latest'.
 
-{% api-method-description %}
-Retrieves the latest status of a profile. Hence all grains for which the attribute pit is 'latest'.  
-  
-In order to get results, you must have the required roles as defined in the field _reader_. Otherwise, you will not get back any results.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="profileType" type="string" required=true %}
+
+
+
+\
+
+
+In order to get results, you must have the required roles as defined in the field 
+
+_reader_
+
+. Otherwise, you will not get back any results.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="profileType" type="string" %}
 The profile type
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="correlationId" type="string" required=true %}
+{% swagger-parameter in="path" name="correlationId" type="string" %}
 The correlation ID
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="fragments" type="string" required=false %}
-Filters the profile by grain/fragment path\(s\). You can define multiple path as a comma-separated list. Example: `/customer/name,/customer/adress,/invoiceDetails`
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+{% swagger-parameter in="query" name="fragments" type="string" %}
+Filters the profile by grain/fragment path(s). You can define multiple path as a comma-separated list. Example: 
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-A call for a specific profile, given profile type "\_interaction" and correlationId "Session56202":  
-  
-https://hostname/profiles/\_interaction/Session56202
-{% endapi-method-response-example-description %}
+`/customer/name,/customer/adress,/invoiceDetails`
+{% endswagger-parameter %}
 
+{% swagger-response status="200" description="A call for a specific profile, given profile type "_interaction" and correlationId "Session56202":
+
+https://hostname/profiles/_interaction/Session56202" %}
 ```javascript
 {
     "correlationId": "Session56202",
@@ -183,13 +179,9 @@ https://hostname/profiles/\_interaction/Session56202
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -198,13 +190,9 @@ https://hostname/profiles/\_interaction/Session56202
     "details": "uri=/profiles"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -213,68 +201,67 @@ https://hostname/profiles/\_interaction/Session56202
     "details": "uri=/profiles"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/profiles/:profileType/:correlationId/grain/:path" %}
-{% api-method-summary %}
-Get a Specific Grain by ID, Type and Path
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/profiles/:profileType/:correlationId/grain/:path" method="get" summary="Get a Specific Grain by ID, Type and Path" %}
+{% swagger-description %}
+Allows retrieval of grain for latest point in time or of all grain versions paginated depending on the query parameter "withHistory".
 
-{% api-method-description %}
-Allows retrieval of grain for latest point in time or of all grain versions paginated depending on the query parameter "withHistory".  
-  
-In order to get results, you must have the required roles as defined in the field reader. Otherwise, you will not get back any results.  
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="path" type="string" required=true %}
-The full path related to the grain.  
-Example: `customer/name`
-{% endapi-method-parameter %}
 
-{% api-method-parameter name="profileType" type="string" required=true %}
+
+
+\
+
+
+In order to get results, you must have the required roles as defined in the field reader. Otherwise, you will not get back any results.
+
+\
+
+
+
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="path" type="string" %}
+The full path related to the grain.
+
+\
+
+
+Example: 
+
+`customer/name`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="profileType" type="string" %}
 The profile type.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="correlationId" type="string" required=true %}
+{% swagger-parameter in="path" name="correlationId" type="string" %}
 The correlation ID.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="pageSize" type="integer" required=false %}
+{% swagger-parameter in="query" name="pageSize" type="integer" %}
 Determines the amount of grains returned per page. The maximum is 250.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="offset" type="integer" required=false %}
+{% swagger-parameter in="query" name="offset" type="integer" %}
 Allows retrieval of historic grains not contained in the first page.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="withHistory" type="boolean" required=false %}
+{% swagger-parameter in="query" name="withHistory" type="boolean" %}
 Determines if for the grain only the latest version is returned or all version paginated.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-A call for multiple versions of a specific grain with given profile type "grainProfile" and correlationId "28072021" and the path "customer/contract".  
-  
- https://hostname/profiles/grainProfile/28072021/grain/customer/contract?pageSize=2&offset=0&withHistory=True
-{% endapi-method-response-example-description %}
+{% swagger-response status="200" description="A call for multiple versions of a specific grain with given profile type "grainProfile" and correlationId "28072021" and the path "customer/contract".
 
+ https://hostname/profiles/grainProfile/28072021/grain/customer/contract?pageSize=2&offset=0&withHistory=True" %}
 ```
 {
     "correlationId": "28072021",
@@ -315,13 +302,9 @@ A call for multiple versions of a specific grain with given profile type "grainP
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="" %}
 ```
 {
     "timestamp": "2021-07-28T15:58:11.143+0000",
@@ -337,13 +320,9 @@ A call for multiple versions of a specific grain with given profile type "grainP
     "details": "uri=/profiles/grainProfile/28072021/grain/"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -352,13 +331,9 @@ A call for multiple versions of a specific grain with given profile type "grainP
     "details": "uri=/profiles/grainProfile/28072021999/grain/customer/contract"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="" %}
 ```
 {
     "timestamp": "2021-07-28T15:45:08.230+0000",
@@ -368,12 +343,8 @@ A call for multiple versions of a specific grain with given profile type "grainP
     "details": "uri=/profiles/grainProfile/28072021999/grain/customer/contract"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
-
+{% endswagger-response %}
+{% endswagger %}
 
 
 

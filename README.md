@@ -1,5 +1,5 @@
 ---
-description: 'Connect data, orchestrate systems, act in real-time.'
+description: Connect data, orchestrate systems, act in real-time.
 ---
 
 # About Granary
@@ -10,10 +10,10 @@ The Realtime Data Platform Granary is a software platform for insurers with a fr
 
 ### Your benefits 
 
-* **Exchange data** between cloud applications and legacy systems without complex migrations 
+* **Exchange data **between cloud applications and legacy systems without complex migrations 
 * **Save time** and money developing data pipelines for data-driven applications 
-* **Personalise** your applications and customer interactions through a 360° customer view 
-* **Scale** your applications with our microservices architecture 
+* **Personalise **your applications and customer interactions through a 360° customer view 
+* **Scale **your applications with our microservices architecture 
 * **Comply with BaFin** regulations through our privacy-by- design principle and end-to-end encryption 
 * **Stay independent** with your own on-premises Kubernetes setup or a cloud provider of your choice 
 * **Be future-proof** through the use of widespread open source technologies
@@ -28,6 +28,5 @@ Start your journey by [harvesting your data](learning-grnry-1/data-in/) and [tur
 
 Want to get in touch or report an issue? Head over to our [support portal](https://syncier-analytics.freshservice.com).
 
-\#GRNRY  
+\#GRNRY\
 /ˈɡreɪnɚrɪ/
-

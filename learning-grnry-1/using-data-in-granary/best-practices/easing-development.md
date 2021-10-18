@@ -55,7 +55,7 @@ Start `PowerShell` and navigate to the specific resource. Afterwards, you execut
 get-content <file_name> -Raw | %{$_ -replace "`r`n","\n"} | %{$_ -replace "`"","\\`""}
 ```
 
-Make sure to replace `<file_name>` with the name of the file you want to convert to string representation. The part ```r`n`` looks for newlines. It might be the case, that this is not working. In such cases, you need either ```r`` or ```n`` separately.
+Make sure to replace `<file_name>` with the name of the file you want to convert to string representation. The part `` `r`n `` looks for newlines. It might be the case, that this is not working. In such cases, you need either `` `r `` or `` `n `` separately.
 
 After executing this command, you may copy and paste the value from command line.
 
@@ -79,4 +79,3 @@ Mac behaves same as Linux in case we install the package `gnu-sed` and it's comm
 brew install gnu-sed
 cat <file_name> | gsed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' | gsed -E 's/"/\\\\"/g'
 ```
-

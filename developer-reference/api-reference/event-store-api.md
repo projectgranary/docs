@@ -14,70 +14,100 @@ description: Springboot-based microservice to expose event data stored in the Ev
 
 Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#event-api-a-k-a-event-store-api) for roles a user needs to interact with Event Store API.
 
-{% api-method method="get" host="https://api.grnry.io" path="/events/:correlationId" %}
-{% api-method-summary %}
-Get Events by Correlation ID
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/events/:correlationId" method="get" summary="Get Events by Correlation ID" %}
+{% swagger-description %}
+Retrieves events containing the specified Correlation ID. In order to get results, you must have the required roles as defined in the fields 
 
-{% api-method-description %}
-Retrieves events containing the specified Correlation ID. In order to get results, you must have the required roles as defined in the fields _event\_type_ and _event\_harvester_. Otherwise, you will not get back any results.  
-  
-Example:  
-  
-`https://api.grnry.io/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&offset=0&pagesize=20`  
-{% endapi-method-description %}
+_event_type _
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="correlationId" type="string" required=true %}
+and 
+
+_event_harvester_
+
+. Otherwise, you will not get back any results.
+
+\
+
+
+
+
+\
+
+
+Example:
+
+\
+
+
+
+
+\
+
+
+
+
+`https://api.grnry.io/events/cookie123?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&offset=0&pagesize=20`
+
+\
+
+
+
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="correlationId" type="string" %}
 The correlation ID
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="type" type="string" required=false %}
+{% swagger-parameter in="query" name="type" type="string" %}
 event type associated with this correlation ID. 
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="expand" type="string" required=false %}
-Expand elements \(detailed information\). Comma-separated list of fields to include in response. Fields are null otherwise.  Valid values are "**message**" and "**totalCount**".
-{% endapi-method-parameter %}
+{% swagger-parameter in="query" name="expand" type="string" %}
+Expand elements (detailed information). Comma-separated list of fields to include in response. Fields are null otherwise.  Valid values are "
 
-{% api-method-parameter name="from \(included\)" type="string" required=false %}
-Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to **1970-01-01T00:00:00Z**
-{% endapi-method-parameter %}
+**message**
 
-{% api-method-parameter name="to \(excluded\)" type="string" required=false %}
-Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to **now\(\)**
-{% endapi-method-parameter %}
+" and "
 
-{% api-method-parameter name="offset" type="string" required=false %}
-Number of elements to be skipped. Defaults to **0**
-{% endapi-method-parameter %}
+**totalCount**
 
-{% api-method-parameter name="pagesize" type="string" required=false %}
-Number of elements to be shown. Defaults to **20**
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+".
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Retrieves the first 20 events \(sorted by ascending timestamps\) of a given correlation ID. Include the total count and the actual event message payload directly in the response by leveraging "expand".  
-  
-Example:   
-  
-/events/cookie123?from=2017-01-01T00:00:00Z&to=2018-01-01T00:00:00Z&expand=totalCount,message  
-{% endapi-method-response-example-description %}
+{% swagger-parameter in="query" name="from (included)" type="string" %}
+Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to 
 
+**1970-01-01T00:00:00Z**
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="to (excluded)" type="string" %}
+Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to 
+
+**now()**
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="offset" type="string" %}
+Number of elements to be skipped. Defaults to 
+
+**0**
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="pagesize" type="string" %}
+Number of elements to be shown. Defaults to 
+
+**20**
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="Retrieves the first 20 events (sorted by ascending timestamps) of a given correlation ID. Include the total count and the actual event message payload directly in the response by leveraging "expand".
+
+Example: 
+
+/events/cookie123?from=2017-01-01T00:00:00Z&to=2018-01-01T00:00:00Z&expand=totalCount,message
+" %}
 ```javascript
 {  
    "totalCount": 245,
@@ -129,13 +159,10 @@ Example:
    }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Returned in case of invalid parameter\(s\).  
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="Returned in case of invalid parameter(s).
+" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -144,13 +171,9 @@ Returned in case of invalid parameter\(s\).
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Access denied. Invalid or no token submitted.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Access denied. Invalid or no token submitted." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -159,13 +182,9 @@ Access denied. Invalid or no token submitted.
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Returned when a user is not authorized to retrieve these events.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Returned when a user is not authorized to retrieve these events." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -174,13 +193,10 @@ Returned when a user is not authorized to retrieve these events.
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Returned when no event was found, along with empty result set.   
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Returned when no event was found, along with empty result set. 
+" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -189,47 +205,38 @@ Returned when no event was found, along with empty result set.
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/events/:correlationId/:eventId" %}
-{% api-method-summary %}
-Get a Specific Event by ID and Correlation ID
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/events/:correlationId/:eventId" method="get" summary="Get a Specific Event by ID and Correlation ID" %}
+{% swagger-description %}
+Retrieves a single event (including its message payload). In order to get results, you must have the required roles as defined in the fields 
 
-{% api-method-description %}
-Retrieves a single event \(including its message payload\). In order to get results, you must have the required roles as defined in the fields _event\_type_ and _event\_harvester_. Otherwise, you will not get back any results.
-{% endapi-method-description %}
+_event_type _
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="correlationId" type="string" required=true %}
+and 
+
+_event_harvester_
+
+. Otherwise, you will not get back any results.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="correlationId" type="string" %}
 The correlation ID
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="eventId" type="string" required=true %}
+{% swagger-parameter in="path" name="eventId" type="string" %}
 The event ID
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Retrieves an event in the scope of correlation ID "cookie123" and id "event0815".  
-  
-Example: /events/cookie123/event0815  
-{% endapi-method-response-example-description %}
+{% swagger-response status="200" description="Retrieves an event in the scope of correlation ID "cookie123" and id "event0815".
 
+Example: /events/cookie123/event0815
+" %}
 ```
 {
 	"eventId":"event0815",
@@ -245,13 +252,10 @@ Example: /events/cookie123/event0815
 		}
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Returned in case of invalid parameter\(s\).  
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="Returned in case of invalid parameter(s).
+" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -260,13 +264,9 @@ Returned in case of invalid parameter\(s\).
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Access denied. Invalid or no token submitted.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Access denied. Invalid or no token submitted." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -275,13 +275,9 @@ Access denied. Invalid or no token submitted.
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Returned when the request to retrieve the events is unauthorized.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Returned when the request to retrieve the events is unauthorized." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -290,13 +286,10 @@ Returned when the request to retrieve the events is unauthorized.
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Returned when the requested object cannot be found.  
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Returned when the requested object cannot be found.
+" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -305,55 +298,53 @@ Returned when the requested object cannot be found.
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/events?type={event-type}" %}
-{% api-method-summary %}
-Get all events by type 
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/events?type={event-type}" method="get" summary="Get all events by type " %}
+{% swagger-description %}
+Retrieves events by type. In order to get results, suitable roles as defined by the fields event_type and event_harvester are required. 
+{% endswagger-description %}
 
-{% api-method-description %}
-Retrieves events by type. In order to get results, suitable roles as defined by the fields event\_type and event\_harvester are required. 
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-query-parameters %}
-{% api-method-parameter name="type" type="string" required=true %}
+{% swagger-parameter in="query" name="type" type="string" %}
 REQUIRED: the event-type
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="expand" type="string" required=false %}
-Expand information \(detailed information\). Comma-separated list of fields to include in the response. Fields are null otherwise. Valid values are **message** and **totalCount.**
-{% endapi-method-parameter %}
+{% swagger-parameter in="query" name="expand" type="string" %}
+Expand information (detailed information). Comma-separated list of fields to include in the response. Fields are null otherwise. Valid values are 
 
-{% api-method-parameter name="from \(included\)" type="string" required=false %}
-Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to **1970-01-01T00:00:00Z**.
-{% endapi-method-parameter %}
+**message**
 
-{% api-method-parameter name="to \(excluded\)" type="string" required=false %}
-Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to **now\(\)**.
-{% endapi-method-parameter %}
+ and 
 
-{% api-method-parameter name="offset" type="string" required=false %}
+**totalCount.**
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="from (included)" type="string" %}
+Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to 
+
+**1970-01-01T00:00:00Z**
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="to (excluded)" type="string" %}
+Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to 
+
+**now()**
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="offset" type="string" %}
 Number of elements to be skipped. Defaults to 0.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="pagesize" type="string" required=false %}
+{% swagger-parameter in="query" name="pagesize" type="string" %}
 Number of elements to be shown. Defaults to 20.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="200" description="" %}
 ```
 {
    "totalCount":11,
@@ -439,13 +430,9 @@ Number of elements to be shown. Defaults to 20.
    }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -454,13 +441,9 @@ Number of elements to be shown. Defaults to 20.
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-If there were no events with given event type found. 
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="If there were no events with given event type found. " %}
 ```
 {
     "timestamp": 1587302499600,
@@ -469,12 +452,9 @@ If there were no events with given event type found.
     "details": "uri=/events"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
 {% hint style="warning" %}
 Deprecated in Granary 0.7
 {% endhint %}
-

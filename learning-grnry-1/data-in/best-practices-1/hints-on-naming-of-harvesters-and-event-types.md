@@ -20,7 +20,7 @@ It has proven that naming Harvesters with this pattern yields a good readability
 Some examples:
 
 * hvs--jdbc--abs-contracts
-* hvs--sp--tracking-data \(sp == snowplow\)
+* hvs--sp--tracking-data (sp == snowplow)
 * hvs--s3-document-data
 
 ### Technical limitations
@@ -36,8 +36,9 @@ The following limitations apply to the `name` property of Event Types:
 * `name` may carry max. 20 characters
 * this function is invoked if `name` is derived from `displayName`:
   * `displayName.replaceAll("[^a-zA-Z0-9\\-\\s]", "").trim().replaceAll("[\s]+", "-")`
-* if created via API call `POST /event-types/{name}`, this regular expression applies: __`[a-zA-Z0-9\-]*$`
-  * if provided `name` is &gt;20 characters, the API call returns `400 Bad Request`
+* if created via API call `POST /event-types/{name}`, this regular expression applies:\
+  __`[a-zA-Z0-9\-]*$`
+  * if provided `name` is >20 characters, the API call returns `400 Bad Request`
 * if cleaned `name` already exist, four random charaters are appended
 * `name` is stored case-insensitive
 
@@ -48,8 +49,8 @@ The following limitations apply to the `name` property of Harvesters:
 * `name` may carry max. 20 characters
 * this function is invoked if `name` is derived from `displayName`:
   * `displayName.replaceAll("[^a-zA-Z0-9\\-\\s]", "").trim().replaceAll("[\s]+", "-")`
-* if created via API call `POST /harvesters/instances/{name}` this regular expression applies: __`[a-zA-Z0-9\-]*$`
-  * if provided `name` is &gt;20 characters, the API call returns `400 Bad Request`
+* if created via API call `POST /harvesters/instances/{name}` this regular expression applies:\
+  __`[a-zA-Z0-9\-]*$`
+  * if provided `name` is >20 characters, the API call returns `400 Bad Request`
 * if cleaned `name` already exist, four random charaters are appended
 * `name` is stored case-insensitive
-

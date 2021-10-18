@@ -24,15 +24,17 @@ All Source Types only work with **one** replica. Only exception is the Topic Sou
 
 The Amazon S3 Source is based on the Amazon S3 source provided by Spring Cloud Dataflow:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/aws-s3/tree/master/spring-cloud-starter-stream-source-s3" caption="Reference to the SCDF documentation for S3" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/aws-s3/tree/master/spring-cloud-starter-stream-source-s3" %}
+Reference to the SCDF documentation for S3
+{% endembed %}
 
 Additionally, there are these source specific parameters:
 
-| **Parameter** | Name |
-| :--- | :--- |
-| grnry-aws-s3.proxyHost | Host name when using a proxy. **\(String, default: `null`\)** |
-| grnry-aws-s3.proxyPort | Service port when using a proxy. **\(Integer, default: `-1`\)** |
-| grnry-aws-s3.nonProxyHosts | List of host names where a direct connection is possible. **\(String, default: `null`\)** |
+| **Parameter**              | Name                                                                                    |
+| -------------------------- | --------------------------------------------------------------------------------------- |
+| grnry-aws-s3.proxyHost     | Host name when using a proxy. **(String, default: `null`)**                             |
+| grnry-aws-s3.proxyPort     | Service port when using a proxy. **(Integer, default: `-1`)**                           |
+| grnry-aws-s3.nonProxyHosts | List of host names where a direct connection is possible. **(String, default: `null`)** |
 
 A sample of the configuration of an Amazon S3 source could look like this:
 
@@ -54,7 +56,7 @@ A sample of the configuration of an Amazon S3 source could look like this:
 }
 ```
 
-### 
+###
 
 ### SFTP Source
 
@@ -70,7 +72,9 @@ Currently, there are no GRNRY-specific parameters for SFTP. The benefit of this 
 
 The parameters for the SFTP source can be found here:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/sftp/tree/master/spring-cloud-starter-stream-source-sftp" caption="Reference to the SCDF documentation for SFTP" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/sftp/tree/master/spring-cloud-starter-stream-source-sftp" %}
+Reference to the SCDF documentation for SFTP
+{% endembed %}
 
 A sample for the configuration of a SFTP source could look like this:
 
@@ -91,7 +95,7 @@ A sample for the configuration of a SFTP source could look like this:
  }
 ```
 
-### 
+###
 
 ### HTTP Source
 
@@ -107,11 +111,13 @@ Currently, there are no GRNRY-specific parameters for HTTP. The benefit of this 
 
 The parameters for the HTTP source can be found here:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/http/blob/master/spring-cloud-starter-stream-source-http/README.adoc" caption="Reference to the SCDF documentation for HTTP endpoint" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/http/blob/master/spring-cloud-starter-stream-source-http/README.adoc" %}
+Reference to the SCDF documentation for HTTP endpoint
+{% endembed %}
 
 
 
-### Adobe Analytics Source \(S3\)
+### Adobe Analytics Source (S3)
 
 **Name**: grnry-adobe-s3
 
@@ -119,17 +125,17 @@ The parameters for the HTTP source can be found here:
 
 **Source parameters:**
 
-The Adobe S3 Source is based on the AWS S3 source provided by Spring Cloud Dataflow. ****For AWS S3 parameters see above. Additionally, there are these source specific parameters:
+The Adobe S3 Source is based on the AWS S3 source provided by Spring Cloud Dataflow.** **For AWS S3 parameters see above. Additionally, there are these source specific parameters:
 
-| **Parameter** | Name |
-| :--- | :--- |
-| grnry-adobe-lookup.lookupTemplateString |  This is the path for the lookup files on the remote repository. The path must contain a placeholder for ${timestamp}. ${timestamp} evaluates to YYYYmmdd-HHiiss and is also taken from the path of the currently inspected file to retrieve the appropriate lookups from remote. **\(String, default: `null`\)** |
-| grnry-adobe-lookup.localLookupDirectory |  This variable specifies where to store the files locally. It incorporates the timestamp \(${timestamp}\) again, as it is used to create folders for the different hours. The timestamp is written as YYYYmmdd-HHiiss **\(String, default: `tmp/lookup/`\)** |
-| grnry-adobe-lookup.localLookupFileTemplate |  The template String for the local storage of the files. Ensure that you have at least one folder in the hierarchy here. **\(String, default:  `${timestamp}-lookup`\)** |
-| grnry-adobe-lookup.lookupsKeptInMemory |  Specifies how many past lookup files should be kept in memory. It might be the case that there are late arrivals of data which need to be reprocessed. However, the higher this value, the higher the memory consumption of the pod. If you provided a negative value or 0, there will be at max 10 lookups stored. **\(int, default: `1`\)** |
-| grnry-adobe-lookup.listConfiguration | Defines the lists that should be resolved in the source type. It resolves lists within a column. The entries are splitted using \`--\`. Hence, if you want to define a list for column \`event\_list\`, which is separated by \`;\` you write \`event\_list--,\`. If you wanted to split more entries just add \`--\` and the next entry. **\(String, default: `event_list--,--post_event_list--,--mvvar2--|--post_mvvar2--|--product_list--;--post_product_list--;--mvvar3--|--post_mvvar3--|`\)** |
-| grnry-adobe-lookup.lookupConfiguration |  Write the configuration for Lookups. Each entry consists of three parts: 1. The file name of the file to be looked up, 2. The source column, 3. The target column, The entries are separated by "," in itself. Several entries are separated by ";" **\(String, default: `browser.tsv,browser,browser_name;browser_type.tsv,browser,browser_type;color_depth.tsv,color,color_depth;connection_type.tsv,connection_type,connection_type_name;country.tsv,country,country_name;event.tsv,post_event_list,post_event_list_name;javascript_version.tsv,javascript,javascript_version;languages.tsv,language,language_name;operating_systems.tsv,os,os_name;referrer_type.tsv,ref_type,ref_type_name;resolution.tsv,resolution,resolution_name;search_engines.tsv,search_engine,search_engine_name;event.tsv,event_list,event_list_name`\)** |
-| grnry-adobe-lookup.lookupS3Bucket |  S3 bucket where to find lookup files. **\(String, default: `null`\)** |
+| **Parameter**                              | Name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| grnry-adobe-lookup.lookupTemplateString    |  This is the path for the lookup files on the remote repository. The path must contain a placeholder for ${timestamp}. ${timestamp} evaluates to YYYYmmdd-HHiiss and is also taken from the path of the currently inspected file to retrieve the appropriate lookups from remote. **(String, default: `null`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| grnry-adobe-lookup.localLookupDirectory    |  This variable specifies where to store the files locally. It incorporates the timestamp (${timestamp}) again, as it is used to create folders for the different hours. The timestamp is written as YYYYmmdd-HHiiss **(String, default: `tmp/lookup/`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| grnry-adobe-lookup.localLookupFileTemplate |  The template String for the local storage of the files. Ensure that you have at least one folder in the hierarchy here. **(String, default:  `${timestamp}-lookup`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| grnry-adobe-lookup.lookupsKeptInMemory     |  Specifies how many past lookup files should be kept in memory. It might be the case that there are late arrivals of data which need to be reprocessed. However, the higher this value, the higher the memory consumption of the pod. If you provided a negative value or 0, there will be at max 10 lookups stored. **(int, default: `1`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| grnry-adobe-lookup.listConfiguration       | Defines the lists that should be resolved in the source type. It resolves lists within a column. The entries are splitted using \`--\`. Hence, if you want to define a list for column \`event_list\`, which is separated by \`;\` you write \`event_list--,\`. If you wanted to split more entries just add \`--\` and the next entry. **(String, default: `event_list--,--post_event_list--,--mvvar2--\|--post_mvvar2--\|--product_list--;--post_product_list--;--mvvar3--\|--post_mvvar3--\|`)**                                                                                                                                                                                                                                                                                                                                    |
+| grnry-adobe-lookup.lookupConfiguration     |  Write the configuration for Lookups. Each entry consists of three parts: 1. The file name of the file to be looked up, 2. The source column, 3. The target column, The entries are separated by "," in itself. Several entries are separated by ";" **(String, default: `browser.tsv,browser,browser_name;browser_type.tsv,browser,browser_type;color_depth.tsv,color,color_depth;connection_type.tsv,connection_type,connection_type_name;country.tsv,country,country_name;event.tsv,post_event_list,post_event_list_name;javascript_version.tsv,javascript,javascript_version;languages.tsv,language,language_name;operating_systems.tsv,os,os_name;referrer_type.tsv,ref_type,ref_type_name;resolution.tsv,resolution,resolution_name;search_engines.tsv,search_engine,search_engine_name;event.tsv,event_list,event_list_name`)** |
+| grnry-adobe-lookup.lookupS3Bucket          |  S3 bucket where to find lookup files.** (String, default: `null`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 A sample of the configuration of a Adobe Analytics source could look like this:
 
@@ -159,9 +165,9 @@ A sample of the configuration of a Adobe Analytics source could look like this:
 }
 ```
 
-### 
+###
 
-### Adobe Analytics Source \(SFTP\)
+### Adobe Analytics Source (SFTP)
 
 **Name**: grnry-adobe-sftp
 
@@ -169,20 +175,19 @@ A sample of the configuration of a Adobe Analytics source could look like this:
 
 **Source parameters:**
 
-The Adobe SFTP Source is based on the SFTP source provided by Spring Cloud Dataflow. ****For SFTP server parameters see above. Additionally, there are these source specific parameters:
+The Adobe SFTP Source is based on the SFTP source provided by Spring Cloud Dataflow.** **For SFTP server parameters see above. Additionally, there are these source specific parameters:
 
-| \*\*\*\* |
-| :--- |
+| **** |
+| ---- |
 
-
-| **Parameter** | Name |
-| :--- | :--- |
-| grnry-adobe-lookup.lookupTemplateString |  This is the path for the lookup files on the remote repository. The path must contain a placeholder for ${timestamp}. ${timestamp} evaluates to YYYYmmdd-HHiiss and is also taken from the path of the currently inspected file to retrieve the appropriate lookups from remote. **\(String, default: `null`\)** |
-| grnry-adobe-lookup.localLookupDirectory |  This variable specifies where to store the files locally. It incorporates the timestamp \(${timestamp}\) again, as it is used to create folders for the different hours. The timestamp is written as YYYYmmdd-HHiiss **\(String, default: `tmp/lookup/`\)** |
-| grnry-adobe-lookup.localLookupFileTemplate |  The template String for the local storage of the files. Ensure that you have at least one folder in the hierarchy here. **\(String, default:  `${timestamp}-lookup`\)** |
-| grnry-adobe-lookup.lookupsKeptInMemory |  Specifies how many past lookup files should be kept in memory. It might be the case that there are late arrivals of data which need to be reprocessed. However, the higher this value, the higher the memory consumption of the pod. If you provided a negative value or 0, there will be at max 10 lookups stored. **\(int, default: `1`\)** |
-| grnry-adobe-lookup.listConfiguration | Defines the lists that should be resolved in the source type. It resolves lists within a column. The entries are splitted using \`--\`. Hence, if you want to define a list for column \`event\_list\`, which is separated by \`;\` you write \`event\_list--,\`. If you wanted to split more entries just add \`--\` and the next entry. **\(String, default: `event_list--,--post_event_list--,--mvvar2--|--post_mvvar2--|--product_list--;--post_product_list--;--mvvar3--|--post_mvvar3--|`\)** |
-| grnry-adobe-lookup.lookupConfiguration |  Write the configuration for Lookups. Each entry consists of three parts: 1. The file name of the file to be looked up, 2. The source column, 3. The target column, The entries are separated by "," in itself. Several entries are separated by ";" **\(String, default: `browser.tsv,browser,browser_name;browser_type.tsv,browser,browser_type;color_depth.tsv,color,color_depth;connection_type.tsv,connection_type,connection_type_name;country.tsv,country,country_name;event.tsv,post_event_list,post_event_list_name;javascript_version.tsv,javascript,javascript_version;languages.tsv,language,language_name;operating_systems.tsv,os,os_name;referrer_type.tsv,ref_type,ref_type_name;resolution.tsv,resolution,resolution_name;search_engines.tsv,search_engine,search_engine_name;event.tsv,event_list,event_list_name`\)** |
+| **Parameter**                              | Name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| grnry-adobe-lookup.lookupTemplateString    |  This is the path for the lookup files on the remote repository. The path must contain a placeholder for ${timestamp}. ${timestamp} evaluates to YYYYmmdd-HHiiss and is also taken from the path of the currently inspected file to retrieve the appropriate lookups from remote. **(String, default: `null`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| grnry-adobe-lookup.localLookupDirectory    |  This variable specifies where to store the files locally. It incorporates the timestamp (${timestamp}) again, as it is used to create folders for the different hours. The timestamp is written as YYYYmmdd-HHiiss **(String, default: `tmp/lookup/`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| grnry-adobe-lookup.localLookupFileTemplate |  The template String for the local storage of the files. Ensure that you have at least one folder in the hierarchy here. **(String, default:  `${timestamp}-lookup`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| grnry-adobe-lookup.lookupsKeptInMemory     |  Specifies how many past lookup files should be kept in memory. It might be the case that there are late arrivals of data which need to be reprocessed. However, the higher this value, the higher the memory consumption of the pod. If you provided a negative value or 0, there will be at max 10 lookups stored. **(int, default: `1`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| grnry-adobe-lookup.listConfiguration       | Defines the lists that should be resolved in the source type. It resolves lists within a column. The entries are splitted using \`--\`. Hence, if you want to define a list for column \`event_list\`, which is separated by \`;\` you write \`event_list--,\`. If you wanted to split more entries just add \`--\` and the next entry. **(String, default: `event_list--,--post_event_list--,--mvvar2--\|--post_mvvar2--\|--product_list--;--post_product_list--;--mvvar3--\|--post_mvvar3--\|`)**                                                                                                                                                                                                                                                                                                                                    |
+| grnry-adobe-lookup.lookupConfiguration     |  Write the configuration for Lookups. Each entry consists of three parts: 1. The file name of the file to be looked up, 2. The source column, 3. The target column, The entries are separated by "," in itself. Several entries are separated by ";" **(String, default: `browser.tsv,browser,browser_name;browser_type.tsv,browser,browser_type;color_depth.tsv,color,color_depth;connection_type.tsv,connection_type,connection_type_name;country.tsv,country,country_name;event.tsv,post_event_list,post_event_list_name;javascript_version.tsv,javascript,javascript_version;languages.tsv,language,language_name;operating_systems.tsv,os,os_name;referrer_type.tsv,ref_type,ref_type_name;resolution.tsv,resolution,resolution_name;search_engines.tsv,search_engine,search_engine_name;event.tsv,event_list,event_list_name`)** |
 
 A sample of the configuration of a Adobe Analytics source could look like this:
 
@@ -210,7 +215,7 @@ A sample of the configuration of a Adobe Analytics source could look like this:
 }
 ```
 
-### 
+###
 
 ### JDBC Source
 
@@ -222,14 +227,16 @@ A sample of the configuration of a Adobe Analytics source could look like this:
 
 The parameters for the underlying JDBC source can be found here:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/jdbc/blob/master/spring-cloud-starter-stream-source-jdbc/README.adoc" caption="Reference to the SCDF documentation for JDBC" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/jdbc/blob/master/spring-cloud-starter-stream-source-jdbc/README.adoc" %}
+Reference to the SCDF documentation for JDBC
+{% endembed %}
 
 To cater large source tables, Granary adds a **streaming mode** to the JDBC Source Type. This streaming mode reads all rows from the `jdbc.query` in one poll but emits them to Granary row by row. The advantage of this behavior is that Granary can import data from source tables independent of the amount of memory allocated to Granary's source type. The additional parameters for streaming mode are:
 
-| Parameter | Description |
-| :--- | :--- |
-| `grnry-jdbc.streaming-mode-enabled` | If enabled each imported record is sent separately to Granary while iterating and mapping the result set. Hence no in-memory list containing the whole result set is needed \(if `maxRowsPerUpdate != 0`\). **\(Boolean, default: `false`\)** |
-| `grnry-jdbc.max-rows-per-update` | The `jdbc.update` parameter allows to provide an update logic of the source table to mark rows as read. The `max-rows-per-update` parameter is the max numbers of rows to be updated in a single update query during a poll in streaming mode. Hence, there could be multiple database updates per poll.  `0` means all rows per poll in a single update query.  `-1` means only the last row per poll will be updated.  **\(Integer, default:** `0`**\)** Additionally, this property quantifies the number of rows accessible to the`jdbc.update` SQL query via `:{column-name}` as comma separated list per column \(not available if set to `-1`\), e.g. `UPDATE source set MARKED=now() where ID in (:ID)`. |
+| Parameter                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `grnry-jdbc.streaming-mode-enabled` | If enabled each imported record is sent separately to Granary while iterating and mapping the result set. Hence no in-memory list containing the whole result set is needed (if `maxRowsPerUpdate != 0`). **(Boolean, default: `false`)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `grnry-jdbc.max-rows-per-update`    | <p>The <code>jdbc.update</code> parameter allows to provide an update logic of the source table to mark rows as read. The <code>max-rows-per-update</code> parameter is the max numbers of rows to be updated in a single update query during a poll in streaming mode. Hence, there could be multiple database updates per poll.<br> <code>0</code> means all rows per poll in a single update query.<br> <code>-1</code> means only the last row per poll will be updated. <br><strong>(Integer, default: </strong><code>0</code><strong>)</strong><br>Additionally, this property quantifies the number of rows accessible to the<code>jdbc.update</code> SQL query via <code>:{column-name}</code> as comma separated list per column (not available if set to <code>-1</code>), e.g. <code>UPDATE source set MARKED=now() where ID in (:ID)</code>.</p> |
 
 A sample of the configuration of a JDBC source could look like this:
 
@@ -250,26 +257,26 @@ A sample of the configuration of a JDBC source could look like this:
 ```
 
 {% hint style="info" %}
-In case your database needs additional dependencies to work via JDBC \(e.g. Oracle\) you either need to fork the source and add the dependency, or add the dependency as a .jar in the Dockerfile.
+In case your database needs additional dependencies to work via JDBC (e.g. Oracle) you either need to fork the source and add the dependency, or add the dependency as a .jar in the Dockerfile.
 {% endhint %}
 
 {% hint style="info" %}
-To enable `DEBUG` logging for the `JdbcTemplate` class, add this property:  
+To enable `DEBUG` logging for the `JdbcTemplate` class, add this property:\
 `"logging.level.org.springframework.jdbc.core.JdbcTemplate": "DEBUG"`
 {% endhint %}
 
 ### Topic Source
 
-**Name:** grnry-topic
+**Name: **grnry-topic
 
 **Source parameters:**
 
-| **Parameter** | Description |
-| :--- | :--- |
-| grnry-topic.inputTopic | The input Topic to read from. Default value: `snowplow`. |
-| grnry-topic.concurrency | The concurrency of the inbound consumer. Default value: `6`. |
+| **Parameter**            | Description                                                                                           |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| grnry-topic.inputTopic   | The input Topic to read from. Default value: `snowplow`.                                              |
+| grnry-topic.concurrency  | The concurrency of the inbound consumer. Default value: `6`.                                          |
 | grnry-topic.resetOffsets | Wether to reset offsets on the consumer to the value provided by startOffset. Default value: `false`. |
-| grnry-topic.startOffset | The starting offset for new groups. Allowed values: `earliest` and `latest`. Default value: `latest`. |
+| grnry-topic.startOffset  | The starting offset for new groups. Allowed values: `earliest` and `latest`. Default value: `latest`. |
 
 A sample of the configuration of a Topic source could look like this:
 
@@ -298,7 +305,9 @@ Currently, there are no GRNRY-specific parameters for JMS. The benefit of this s
 
 The parameters for the JMS source can be found here:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/jms/blob/master/spring-cloud-starter-stream-source-jms/README.adoc" caption="Reference to the SCDF documentation for JMS" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/jms/blob/master/spring-cloud-starter-stream-source-jms/README.adoc" %}
+Reference to the SCDF documentation for JMS
+{% endembed %}
 
 The JMS source also bundles IBM MQ JMS Spring Components to allow easy connection to IBM MQ endpoints. The IBM MQ related parameters can be found here:
 
@@ -317,4 +326,3 @@ A sample of the configuration of a JMS source could look like this:
     }
 }
 ```
-

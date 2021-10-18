@@ -1,5 +1,5 @@
 ---
-description: 'On this page, you get the technical details about our scriptable transform.'
+description: On this page, you get the technical details about our scriptable transform.
 ---
 
 # Scriptable Transform
@@ -8,7 +8,7 @@ description: 'On this page, you get the technical details about our scriptable t
 Refer to the [Granary Data-In Best Practices](../../../learning-grnry-1/data-in/best-practices-1/) to learn how to transform a source type's input to JSON format that is required by an Event Type.
 {% endhint %}
 
-The scriptable transform is a microservice, which should transform incoming data to your desired structure in JSON. You may do any kind of preprocessing here. This microservice receives coding in order to execute the transformation of your choice. It is based on the Scriptable Transform Processor of Spring and can take Groovy, JavaScript, Ruby or Python \(for Java\) as languages.
+The scriptable transform is a microservice, which should transform incoming data to your desired structure in JSON. You may do any kind of preprocessing here. This microservice receives coding in order to execute the transformation of your choice. It is based on the Scriptable Transform Processor of Spring and can take Groovy, JavaScript, Ruby or Python (for Java) as languages.
 
 The scriptable transform typically is the place where you need to write the most information and do mappings etc. This is the main enhancement point for you during the data-in pipeline. You are going to write a script in one of the defined languages for this. In this chapter: [How to test your developments](../../../learning-grnry-1/data-in/best-practices-1/how-to-unit-test-your-developments.md) we are showing you, how to write unit tests, which help you in writing your applications without having to deploy them to a cluster the whole time. 
 
@@ -30,7 +30,9 @@ Currently, there are no GRNRY-specific parameters for JDBC. The benefit of this 
 
 The appropriate parameters for configuration can be found here:
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/scriptable-transform/blob/master/spring-cloud-starter-stream-processor-scriptable-transform/README.adoc" caption="Scriptable Transform Parameters" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/scriptable-transform/blob/master/spring-cloud-starter-stream-processor-scriptable-transform/README.adoc" %}
+Scriptable Transform Parameters
+{% endembed %}
 
 A sample for a scriptable processor might look like this: 
 
@@ -66,4 +68,3 @@ A sample for a scriptable processor might look like this:
 ```
 
 You should note, that the script with your code is given in the `script` parameter. The data which is sent to the script, is available in the script via the parameter `payload`, which you can access in your development.
-

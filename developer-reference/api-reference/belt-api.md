@@ -20,58 +20,92 @@ description: Springboot-based microservice to manage belts registered in the Bel
 
 Consult the [Granary Access Clients Reference](../../operator-reference/identity-and-access-management/granary-access-clients.md#belt-api) for Keycloak roles a user needs to interact with Belt API.
 
-{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/belts" %}
-{% api-method-summary %}
-Get all Belts
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts" method="get" summary="Get all Belts" %}
+{% swagger-description %}
+Retrieves full dump of 
 
-{% api-method-description %}
-Retrieves full dump of **all** belts of a project in the Belt Store as a list.  
-  
-In order to get results, you must have one of the project's roles _editor_ or _viewer_. Otherwise, you will not get back any results.
-{% endapi-method-description %}
+**all**
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="project-name" type="string" required=true %}
-Name of project.   
-_Backwards compatibility:_  
-If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+ belts of a project in the Belt Store as a list.
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+\
+
+
+
+
+\
+
+
+In order to get results, you must have one of the project's roles 
+
+_editor _
+
+or 
+
+_viewer_
+
+. Otherwise, you will not get back any results.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project. 
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+__
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="search" type="string" required=false %}
+{% swagger-parameter in="query" name="search" type="string" %}
 Filter belts by name. Belt names need to be url encoded. Default "".
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="expand" type="array" required=false %}
+{% swagger-parameter in="query" name="expand" type="array" %}
 Array of belt states. For possible values, see table at GET belt state definition below.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="pagesize" type="string" required=false %}
-Number of belts to be returned. Default is `20`. Maximum is `250`.
-{% endapi-method-parameter %}
+{% swagger-parameter in="query" name="pagesize" type="string" %}
+Number of belts to be returned. Default is 
 
-{% api-method-parameter name="offset" type="string" required=false %}
-Start offset. Default is `0`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+`20`
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-A list of all belts along with their attributes and total count of belts stored in the Belt Store.
-{% endapi-method-response-example-description %}
+. Maximum is 
 
+`250`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="offset" type="string" %}
+Start offset. Default is 
+
+`0`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="A list of all belts along with their attributes and total count of belts stored in the Belt Store." %}
 ```
 {
     "totalCount": 502,
@@ -249,13 +283,9 @@ A list of all belts along with their attributes and total count of belts stored 
     ]
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -264,13 +294,9 @@ A list of all belts along with their attributes and total count of belts stored 
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -279,13 +305,9 @@ Token invalid or missing.
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -294,55 +316,81 @@ Missing roles to access this resource.
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id" %}
-{% api-method-summary %}
-Get a Specific Belt by ID
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="get" summary="Get a Specific Belt by ID" %}
+{% swagger-description %}
+Retrieves full dump of a specific belt with a specified ID.
 
-{% api-method-description %}
-Retrieves full dump of a specific belt with a specified ID.  
-  
-In order to retrieve results here, it is necessary that you either have the project's _editor_ or _viewer_ role assigned to your user in keycloak.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="project-name" type="string" required=true %}
-Name of project the belt belongs to.  
-_Backwards compatibility:_  
-If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
-{% endapi-method-parameter %}
 
-{% api-method-parameter name="id" type="string" required=true %}
+
+
+\
+
+
+In order to retrieve results here, it is necessary that you either have the project's 
+
+_editor _
+
+or 
+
+_viewer _
+
+role assigned to your user in keycloak.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project the belt belongs to.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="string" %}
 The ID of belt
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication Token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="export" type="string" required=false %}
-if set to `"true"` \(not case sensitive\), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. \(Only the api-generated `id` field will be provided\). Default is `""`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+{% swagger-parameter in="query" name="export" type="string" %}
+if set to 
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-JSON with attributes of belt with the specified ID.
-{% endapi-method-response-example-description %}
+`"true"`
 
+ (not case sensitive), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. (Only the api-generated 
+
+`id`
+
+ field will be provided). Default is 
+
+`""`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="JSON with attributes of belt with the specified ID." %}
 ```
 {
     "version": "1",
@@ -401,13 +449,9 @@ JSON with attributes of belt with the specified ID.
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -416,13 +460,9 @@ Token invalid or missing.
     "details": "uri=/projects/global/belts/161"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -431,13 +471,9 @@ Missing roles to access this resource.
     "details": "uri=/projects/global/belts/425"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-When there is no belt found with the specified ID
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="When there is no belt found with the specified ID" %}
 ```
 {
     "timestamp": 1587302671116,
@@ -446,158 +482,359 @@ When there is no belt found with the specified ID
     "details": "uri=/projects/global/belts/425"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id" %}
-{% api-method-summary %}
-Create and Store a Belt
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="post" summary="Create and Store a Belt" %}
+{% swagger-description %}
+Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned. 
 
-{% api-method-description %}
-Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned.   
-  
-Requires the role `editor`.  
-  
-**JSON Schema Definitions**  
-  
-Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html  
-  
-Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/Volume.html  
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="project-name" type="string" required=true %}
-Name of project.  
-_Backwards compatibility:_  
-If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
-{% endapi-method-parameter %}
 
-{% api-method-parameter name="id" type="number" required=false %}
-If provided, creates a belt with a given belt `id`. This `id` needs to be unique. Otherwise an `id` is automatically assigned. Value range for `id` is a positive `Long` value \(i.e. `1` to `9223372036854775807`\).
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+
+\
+
+
+Requires the role 
+
+`editor`
+
+.
+
+\
+
+
+
+
+\
+
+
+
+
+**JSON Schema Definitions**
+
+\
+
+
+
+
+\
+
+
+Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html
+
+\
+
+
+
+
+\
+
+
+Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/Volume.html
+
+\
+
+
+
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="number" %}
+If provided, creates a belt with a given belt 
+
+`id`
+
+. This 
+
+`id`
+
+ needs to be unique. Otherwise an 
+
+`id`
+
+ is automatically assigned. Value range for 
+
+`id`
+
+ is a positive 
+
+`Long`
+
+ value (i.e. 
+
+`1`
+
+ to 
+
+`9223372036854775807`
+
+).
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-body-parameters %}
-{% api-method-parameter name="imagePullSecret" type="string" required=false %}
-Kubernetes Secret used to pull the `image` . Defaults to server env `BELT_PULL_SECRET` .
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="imagePullSecret" type="string" %}
+Kubernetes Secret used to pull the 
 
-{% api-method-parameter name="image" type="string" required=false %}
-Docker Image to be deployed. Defaults to server env `BELT_IMAGE_NAME` .
-{% endapi-method-parameter %}
+`image`
 
-{% api-method-parameter name="millicpuRequests" type="string" required=false %}
-CPU requests specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU_REQUESTS`.
-{% endapi-method-parameter %}
+ . Defaults to server env 
 
-{% api-method-parameter name="memoryRequests" type="string" required=false %}
-Memory specification for this belt. Defaults to either `512` or server env variable `BELT_MEMORY_REQUESTS`.
-{% endapi-method-parameter %}
+`BELT_PULL_SECRET`
 
-{% api-method-parameter name="kafkaDestinationTopic" type="string" required=false %}
-Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either `profile-update` or server env variable `BELT_DESTINATION_TOPIC`.
-{% endapi-method-parameter %}
+ .
+{% endswagger-parameter %}
 
-{% api-method-parameter name="extraEnv" type="object" required=false %}
-Additional environment variables for Kubernetes belt deployment. Defaults to either `null` or server env variable `BELT_EXTRA_ENV`.
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="image" type="string" %}
+Docker Image to be deployed. Defaults to server env 
 
-{% api-method-parameter name="volumeMounts" type="object" required=false %}
-JSON Kubernetes volume mount definition for belt deployment. Defaults to either `null` or server env variable `BELT_VOLUME_MOUNTS`.
-{% endapi-method-parameter %}
+`BELT_IMAGE_NAME`
 
-{% api-method-parameter name="volumes" type="object" required=false %}
-JSON Kubernetes volume definition for belt deployment. Defaults to either `null` or server env variable `BELT_VOLUMES`.
-{% endapi-method-parameter %}
+ .
+{% endswagger-parameter %}
 
-{% api-method-parameter name="requirementsPy" type="string" required=false %}
-PIP package requirements for belt. E.g. `package1==0.1.0\r\npackage2`
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="millicpuRequests" type="string" %}
+CPU requests specification for this belt. Defaults to either 
 
-{% api-method-parameter name="profileType" type="string" required=false %}
-Profile type to fetch. Defaults to `_d`. **Required when fetchProfile is `TRUE`.**
-{% endapi-method-parameter %}
+`200`
 
-{% api-method-parameter name="partitionOffsets" type="object" required=false %}
-Mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. The offset settings only have an effect on the first start of a Belt. All subsequent \(re-\)starts of configuration update will read the event type topics from consumer group's current offset.
-{% endapi-method-parameter %}
+ or server env variable 
 
-{% api-method-parameter name="extractorVersion" type="string" required=false %}
-Image tag of the belt runtime docker image to be used. Defaults to either `latest` or server env variable `BELT_EXTRACTOR_VERSION`.
-{% endapi-method-parameter %}
+`BELT_MILLI_CPU_REQUESTS`
 
-{% api-method-parameter name="name" type="string" required=true %}
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="memoryRequests" type="string" %}
+Memory specification for this belt. Defaults to either 
+
+`512`
+
+ or server env variable 
+
+`BELT_MEMORY_REQUESTS`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="kafkaDestinationTopic" type="string" %}
+Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either 
+
+`profile-update`
+
+ or server env variable 
+
+`BELT_DESTINATION_TOPIC`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="extraEnv" type="object" %}
+Additional environment variables for Kubernetes belt deployment. Defaults to either 
+
+`null`
+
+ or server env variable 
+
+`BELT_EXTRA_ENV`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="volumeMounts" type="object" %}
+JSON Kubernetes volume mount definition for belt deployment. Defaults to either 
+
+`null`
+
+ or server env variable 
+
+`BELT_VOLUME_MOUNTS`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="volumes" type="object" %}
+JSON Kubernetes volume definition for belt deployment. Defaults to either 
+
+`null`
+
+ or server env variable 
+
+`BELT_VOLUMES`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="requirementsPy" type="string" %}
+PIP package requirements for belt. E.g. 
+
+`package1==0.1.0\r\npackage2`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="profileType" type="string" %}
+Profile type to fetch. Defaults to 
+
+`_d`
+
+. 
+
+**Required when fetchProfile is `TRUE`.**
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="partitionOffsets" type="object" %}
+Mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. The offset settings only have an effect on the first start of a Belt. All subsequent (re-)starts of configuration update will read the event type topics from consumer group's current offset.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="extractorVersion" type="string" %}
+Image tag of the belt runtime docker image to be used. Defaults to either 
+
+`latest`
+
+ or server env variable 
+
+`BELT_EXTRACTOR_VERSION`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" type="string" %}
 Unique name of the belt.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="description" type="string" required=false %}
+{% swagger-parameter in="body" name="description" type="string" %}
 Belt description.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="replicas" type="integer" required=false %}
-Number of replicas. Defaults to `1`
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="replicas" type="integer" %}
+Number of replicas. Defaults to 
 
-{% api-method-parameter name="eventTypes" type="array" required=true %}
-String array of event types to be processed. Only event types registered with Harvester API's event type endpoint are valid values. You must have the event type's _consumer_ or _editor_ role assigned in Keycloak to consume an event type in a belt.
-{% endapi-method-parameter %}
+`1`
+{% endswagger-parameter %}
 
-{% api-method-parameter name="millicpu" type="string" required=false %}
-CPU limit specification for this belt. Defaults to either `200` or server env variable `BELT_MILLI_CPU`.
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="eventTypes" type="array" %}
+String array of event types to be processed. Only event types registered with Harvester API's event type endpoint are valid values. You must have the event type's 
 
-{% api-method-parameter name="memory" type="string" required=false %}
-Memory limit specification for this belt. Defaults either to `512` or server env variable `BELT_MEMORY`.
-{% endapi-method-parameter %}
+_consumer_
 
-{% api-method-parameter name="author" type="string" required=false %}
+ or 
+
+_editor_
+
+ role assigned in Keycloak to consume an event type in a belt.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="millicpu" type="string" %}
+CPU limit specification for this belt. Defaults to either 
+
+`200`
+
+ or server env variable 
+
+`BELT_MILLI_CPU`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="memory" type="string" %}
+Memory limit specification for this belt. Defaults either to 
+
+`512`
+
+ or server env variable 
+
+`BELT_MEMORY`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="author" type="string" %}
 Author of this belt.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="extractorFn" type="string" required=false %}
-Extractor function to be executed by this belt.  
-Defaults either to `Hello World` example function or server env variable `BELT_EXTRACTOR_FN`.
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="extractorFn" type="string" %}
+Extractor function to be executed by this belt.
 
-{% api-method-parameter name="debug" type="boolean" required=false %}
-Determines if belt should be run in debug mode. Defaults to `false`.
-{% endapi-method-parameter %}
+\
 
-{% api-method-parameter name="fetchProfile" type="string" required=false %}
-Determines if belt should fetch profiles from the Profile Store. Defaults to `FALSE`. Possible values: `["FALSE", "TRUE", "LAZY"]`
-{% endapi-method-parameter %}
 
-{% api-method-parameter name="secret" type="string" required=false %}
-Kubernetes Secret name used by belt to read values from Profile Store. **Required when fetchProfile is `TRUE`or `LAZY`**_**.**_
-{% endapi-method-parameter %}
+Defaults either to 
 
-{% api-method-parameter name="secretUsername" type="string" required=false %}
-Username property in secret used by belt to read values from Profile Store.  **Required when fetchProfile is `TRUE` or `LAZY`.**
-{% endapi-method-parameter %}
+`Hello World`
 
-{% api-method-parameter name="secretPassword" type="string" required=false %}
-Password property in secret used by the belt to read values from Profile Store. **Required when fetchProfile is `TRUE` or `LAZY`.**
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
-{% endapi-method-request %}
+ example function or server env variable 
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Returns a full dump of belt object created.
-{% endapi-method-response-example-description %}
+`BELT_EXTRACTOR_FN`
 
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="debug" type="boolean" %}
+Determines if belt should be run in debug mode. Defaults to 
+
+`false`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="fetchProfile" type="string" %}
+Determines if belt should fetch profiles from the Profile Store. Defaults to 
+
+`FALSE`
+
+. Possible values: 
+
+`["FALSE", "TRUE", "LAZY"]`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="secret" type="string" %}
+Kubernetes Secret name used by belt to read values from Profile Store. 
+
+**Required when fetchProfile is `TRUE`or `LAZY`**
+
+_**.**_
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="secretUsername" type="string" %}
+Username property in secret used by belt to read values from Profile Store.  
+
+**Required when fetchProfile is `TRUE` or `LAZY`.**
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="secretPassword" type="string" %}
+Password property in secret used by the belt to read values from Profile Store. 
+
+**Required when fetchProfile is `TRUE` or `LAZY`.**
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="Returns a full dump of belt object created." %}
 ```
 {
     "version": "1",
@@ -654,13 +891,9 @@ Returns a full dump of belt object created.
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-If a belt with a given name exists already in the Belt Store.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="If a belt with a given name exists already in the Belt Store." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -669,13 +902,9 @@ If a belt with a given name exists already in the Belt Store.
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -684,13 +913,9 @@ Token invalid or missing.
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing role to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing role to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -699,13 +924,9 @@ Missing role to access this resource.
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=500 %}
-{% api-method-response-example-description %}
-Some internal server issue has occurred.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="500" description="Some internal server issue has occurred." %}
 ```
 {
     "timestamp": "2020-10-14T13:06:25.951+0000",
@@ -714,61 +935,77 @@ Some internal server issue has occurred.
     "details": "uri=/projects/global/belts/"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="delete" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id" %}
-{% api-method-summary %}
-Delete a Specific Belt
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="delete" summary="Delete a Specific Belt" %}
+{% swagger-description %}
+Deletes a specific belt given the ID.
 
-{% api-method-description %}
-Deletes a specific belt given the ID.  
-  
-Deletes the belt definition in the database and all corresponding kubernetes resources if the belt is deployed.  
-  
-The Keycloak user needs to have the project's _editor_ role.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="project-name" type="string" required=true %}
-Name of project the belt belongs to.  
-_Backwards compatibility:_  
-If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
-{% endapi-method-parameter %}
 
-{% api-method-parameter name="id" type="string" required=true %}
+
+
+\
+
+
+Deletes the belt definition in the database and all corresponding kubernetes resources if the belt is deployed.
+
+\
+
+
+
+
+\
+
+
+The Keycloak user needs to have the project's 
+
+_editor_
+
+ role.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project the belt belongs to.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="string" %}
 Belt ID
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication Token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-If delete is successful, content=true. content=false when unsuccessful
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="200" description="If delete is successful, content=true. content=false when unsuccessful" %}
 ```
 { "content": true } or { "content": false }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -777,13 +1014,9 @@ Token invalid or missing.
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -792,13 +1025,9 @@ Missing roles to access this resource.
     "details": "uri=/projects/global/belts/425"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-No belt found with given ID
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="No belt found with given ID" %}
 ```
 {
     "timestamp": 1587302671116,
@@ -807,49 +1036,61 @@ No belt found with given ID
     "details": "uri=/projects/global/belts/425"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="put" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id" %}
-{% api-method-summary %}
-Updates a Belt by ID
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="put" summary="Updates a Belt by ID" %}
+{% swagger-description %}
+Updates attributes of a belt, given its ID. 
 
-{% api-method-description %}
-Updates attributes of a belt, given its ID.   
-  
-In order to update a belt, a complete JSON representation of the object needs to be provided. For a list of body parameters, see above POST /belts documentation. Empty fields will be set to default values as specified for POST /belts. The Keycloak user needs to have the project's _editor_ role.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="project-name" type="string" required=true %}
-Name of project the belt belongs to.  
-_Backwards compatibility:_  
-If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
-{% endapi-method-parameter %}
 
-{% api-method-parameter name="id" type="string" required=true %}
+
+
+\
+
+
+In order to update a belt, a complete JSON representation of the object needs to be provided. For a list of body parameters, see above POST /belts documentation. Empty fields will be set to default values as specified for POST /belts. The Keycloak user needs to have the project's 
+
+_editor_
+
+ role.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project the belt belongs to.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="string" %}
 Belt ID
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication Token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-A full dump of belt object recently modified
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="200" description="A full dump of belt object recently modified" %}
 ```
 {
      "version": "2",
@@ -908,13 +1149,9 @@ A full dump of belt object recently modified
      }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-If the belt structure contains an invalid event type. 
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="If the belt structure contains an invalid event type. " %}
 ```
 {
     "timestamp": 1587302499600,
@@ -923,13 +1160,9 @@ If the belt structure contains an invalid event type.
     "details": "uri=/projects/global/belts/abcd"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -938,13 +1171,9 @@ Token invalid or missing.
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -953,13 +1182,9 @@ Missing roles to access this resource.
     "details": "uri=/projects/global/belts/425"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Belt with the given ID not found
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Belt with the given ID not found" %}
 ```
 {
     "timestamp": 1587302671116,
@@ -968,49 +1193,65 @@ Belt with the given ID not found
     "details": "uri=/projects/global/belts/425"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" %}
-{% api-method-summary %}
-Get a Belt's state
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="get" summary="Get a Belt's state" %}
+{% swagger-description %}
+Retrieve the status of the Belt's Kubernetes deployment.
 
-{% api-method-description %}
-Retrieve the status of the Belt's Kubernetes deployment.  
-  
-In order to get results, you must have one of the project's roles _editor_ or _viewer_. Otherwise, you will not get back any results.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="project-name" type="string" required=true %}
-Name of project the belt belongs to.  
-_Backwards compatibility:_  
-If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
-{% endapi-method-parameter %}
 
-{% api-method-parameter name="id" type="string" required=true %}
+
+
+\
+
+
+In order to get results, you must have one of the project's roles 
+
+_editor _
+
+or 
+
+_viewer_
+
+. Otherwise, you will not get back any results.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project the belt belongs to.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="string" %}
 Belt IDn
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="200" description="" %}
 ```javascript
 { "status": "RUNNING" } or
 
@@ -1084,13 +1325,9 @@ Authentication token
     ]
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -1099,13 +1336,9 @@ Token invalid or missing.
     "details": "uri=/projects/global/belts"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
 {
@@ -1115,13 +1348,9 @@ Missing roles to access this resource.
     "details": "uri=/projects/global/belts/425"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Belt with given ID not found.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Belt with given ID not found." %}
 ```
 {
     "timestamp":1586949273019,
@@ -1130,76 +1359,93 @@ Belt with given ID not found.
     "details": "uri=/projects/global/belts/425"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
 Possible values for the status attribute in the response body are:
 
-| Status | Description |
-| :--- | :--- |
-| RUNNING | Belt is running |
-| FAILED | Belt is deployed but not running |
-| RUNNING\_BUT\_OUTDATED | Belt is running but there is a newer version of it in the database |
-| DEPLOYING | Belt is being deployed |
-| STOPPED | Belt is not deployed |
+| Status               | Description                                                        |
+| -------------------- | ------------------------------------------------------------------ |
+| RUNNING              | Belt is running                                                    |
+| FAILED               | Belt is deployed but not running                                   |
+| RUNNING_BUT_OUTDATED | Belt is running but there is a newer version of it in the database |
+| DEPLOYING            | Belt is being deployed                                             |
+| STOPPED              | Belt is not deployed                                               |
 
-{% api-method method="post" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" %}
-{% api-method-summary %}
-Manipulate a Belt's state
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="post" summary="Manipulate a Belt's state" %}
+{% swagger-description %}
+Update the status of the Belt's Kubernetes deployment. The Keycloak user needs to have the 
 
-{% api-method-description %}
-Update the status of the Belt's Kubernetes deployment. The Keycloak user needs to have the _editor_ roles defined for the Belt.  
-  
-Body example:  
-`{"action": "START"}`  
-{% endapi-method-description %}
+_editor_
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="project-name" type="string" required=false %}
-Name of project the belt belongs to.  
-_Backwards compatibility:_  
-If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
-{% endapi-method-parameter %}
+ roles defined for the Belt.
 
-{% api-method-parameter name="id" type="string" required=true %}
+\
+
+
+
+
+\
+
+
+Body example:
+
+\
+
+
+
+
+`{"action": "START"}`
+
+\
+
+
+
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project the belt belongs to.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="string" %}
 Belt ID
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-body-parameters %}
-{% api-method-parameter name="action" type="string" required=true %}
+{% swagger-parameter in="body" name="action" type="string" %}
 The action to be performed "START" or "STOP"
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="200" description="" %}
 ```javascript
 {    "status": "DEPLOYING"}
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Action is not allowed while belt is in current state or invalid.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="Action is not allowed while belt is in current state or invalid." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -1208,13 +1454,9 @@ Action is not allowed while belt is in current state or invalid.
     "details": "uri=/projects/global/belts/abcd/state"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -1223,13 +1465,9 @@ Token invalid or missing.
     "details": "uri=/projects/global/belts/425/state"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -1238,13 +1476,9 @@ Missing roles to access this resource.
     "details": "uri=/projects/global/belts/425/state"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Belt with given ID not found.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Belt with given ID not found." %}
 ```
 {
     "timestamp": 1587302671116,
@@ -1253,55 +1487,85 @@ Belt with given ID not found.
     "details": "uri=/projects/global/belts/425/state"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/projects/{project-name}/belts/:id/logs" %}
-{% api-method-summary %}
-Get Belt's Pod Logs by Id
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/logs" method="get" summary="Get Belt's Pod Logs by Id" %}
+{% swagger-description %}
+Get the last n log lines from all pods of the belt with the given 
 
-{% api-method-description %}
-Get the last n log lines from all pods of the belt with the given `id` where n is specified by the `lines` query parameter.  
-  
-This request requires the project's _editor_ role.
-{% endapi-method-description %}
+`id`
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="project-name" type="string" required=false %}
-Name of project the belt belongs to.  
-_Backwards compatibility:_  
-If `projects/{project-name}/` is missing, URL will be treated like `projects/global/...` scoping the request to the 'global' project.
-{% endapi-method-parameter %}
+ where n is specified by the 
 
-{% api-method-parameter name="id" type="string" required=true %}
+`lines`
+
+ query parameter.
+
+\
+
+
+
+
+\
+
+
+This request requires the project's 
+
+_editor _
+
+role.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project the belt belongs to.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="string" %}
 Belt ID
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="lines" type="string" required=false %}
-number of lines to be retrieved per pod. Must be greater than `0` and less than or equal to `500`. Default is `500`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+{% swagger-parameter in="query" name="lines" type="string" %}
+number of lines to be retrieved per pod. Must be greater than 
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
+`0`
 
-{% endapi-method-response-example-description %}
+ and less than or equal to 
 
+`500`
+
+. Default is 
+
+`500`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="" %}
 ```
 {
     "totalCount": 3,
@@ -1335,13 +1599,9 @@ number of lines to be retrieved per pod. Must be greater than `0` and less than 
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -1350,13 +1610,9 @@ number of lines to be retrieved per pod. Must be greater than `0` and less than 
     "details": "uri=/projects/global/belts/abcd/logs"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -1365,13 +1621,9 @@ Token invalid or missing.
     "details": "uri=/projects/global/belts/425/logs"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -1380,13 +1632,9 @@ Missing roles to access this resource.
     "details": "uri=/projects/global/belts/425/logs"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Belt with given ID not found.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Belt with given ID not found." %}
 ```
 {
     "timestamp": 1587302671116,
@@ -1395,8 +1643,5 @@ Belt with given ID not found.
     "details": "uri=/projects/global/belts/425/logs"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
+{% endswagger-response %}
+{% endswagger %}

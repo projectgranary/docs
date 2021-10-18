@@ -10,7 +10,7 @@ description: >-
 
 ### GrApp Directory Structure
 
-For importing resources to a Granary environment using the Granary App \(GrApp\) importer job, the resources need to be stored as `.json` definition files in a directory structure like this:
+For importing resources to a Granary environment using the Granary App (GrApp) importer job, the resources need to be stored as `.json` definition files in a directory structure like this:
 
 ```bash
 grapp
@@ -41,7 +41,7 @@ Find the complete [staging specification](https://github.com/syncier/grnry-sampl
 
 ### Naming
 
-In the above tree structure all nodes have a strict naming convention. Any node names not in curly braces are literals and must as such be equal in any GrApp structure. The names in the curly braces need to be replaced with the respective values \(e.g., the actual belt id of the defined belt\). The numbers referencing the event type versions must all be prefixed with "event-type-version-".
+In the above tree structure all nodes have a strict naming convention. Any node names not in curly braces are literals and must as such be equal in any GrApp structure. The names in the curly braces need to be replaced with the respective values (e.g., the actual belt id of the defined belt). The numbers referencing the event type versions must all be prefixed with "event-type-version-".
 
 Below we show sample API requests using curl to export Granary's pipeline resources. Also, there is a [Postman collection](../developer-reference/api-reference/#postman-collection) available for download providing sample requests to all Granary APIs.
 
@@ -51,7 +51,7 @@ All Granary management APIs provide an "export" flag for GET requests on specifi
 
 In each list view, Granary's UI provides a download button to obtain the needed `.json` definitions, too.
 
-### 
+###
 
 ### Event type
 
@@ -70,11 +70,11 @@ curl -X GET -H "Content-Type: application/json" \
 
 Choose the version in the drop down menu left to the "Export" button before you click on the latter. Repeat this for all versions.
 
-![](../.gitbook/assets/image%20%2848%29.png)
+![](<../.gitbook/assets/image (48).png>)
 
-### 
+###
 
-### Persister \(optional\)
+### Persister (optional)
 
 The default persister will be created implicitly on Event Type creation. Yet, it is possible to export it, e.g., if there are any updates to the persister after creation in the source system. To get the definition, use the Harvester API's [persister endpoint](../developer-reference/api-reference/harvester-api/event-type-endpoints.md#get-persister-for-a-specific-event-type).
 
@@ -89,7 +89,7 @@ curl -X GET -H "Content-Type: application/json" \
  https://grnry-host/event-types/{event-type-name}/eventstores/{event-store-name}/persister?export=true
 ```
 
-### 
+###
 
 ### Harvesters
 
@@ -106,9 +106,9 @@ curl -X GET -H "Content-Type: application/json" \
 
 #### Using the UI
 
-![](../.gitbook/assets/image%20%2851%29.png)
+![](<../.gitbook/assets/image (51).png>)
 
-### 
+###
 
 ### Belts
 
@@ -125,13 +125,13 @@ curl -X GET -H "Content-Type: application/json" \
 
 #### Using the UI
 
-![](../.gitbook/assets/image%20%2852%29.png)
+![](<../.gitbook/assets/image (52).png>)
 
-### 
+###
 
-### Segment \(optional\)
+### Segment (optional)
 
-To export a [Segment](../developer-reference/dataflow/segment-store/segment-table-creation.md), use the Segment Management API's [endpoints]().
+To export a [Segment](../developer-reference/dataflow/segment-store/segment-table-creation.md), use the Segment Management API's [endpoints](broken-reference).
 
 #### Using the Command Line
 
@@ -176,4 +176,3 @@ path/to/grapp-importer/helm \
 ```
 
  
-

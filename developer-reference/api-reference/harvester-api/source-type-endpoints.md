@@ -14,46 +14,54 @@ description: Harvester API's source type endpoints.
 
 Consult the [Granary Access Clients Reference](../../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
 
-{% api-method method="get" host="https://api.grnry.io" path="/harvesters/source-types" %}
-{% api-method-summary %}
-Get all Source Types
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/harvesters/source-types" method="get" summary="Get all Source Types" %}
+{% swagger-description %}
+Get latest version of all source-types.
 
-{% api-method-description %}
-Get latest version of all source-types.  
-This request requires the role `source_type_read`.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+
+This request requires the role 
+
+`source_type_read`
+
+.
+{% endswagger-description %}
+
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="search" type="string" required=false %}
-Filter source types by names containing this search term Default is `""`.
-{% endapi-method-parameter %}
+{% swagger-parameter in="query" name="search" type="string" %}
+Filter source types by names containing this search term Default is 
 
-{% api-method-parameter name="pagesize" type="number" required=false %}
-Number of source types returned per page. Default is `20`.
-{% endapi-method-parameter %}
+`""`
 
-{% api-method-parameter name="offset" type="number" required=false %}
-Offset of the requested page. Default is `0`. Must be a whole multiple of `pagesize`. 
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+.
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
+{% swagger-parameter in="query" name="pagesize" type="number" %}
+Number of source types returned per page. Default is 
 
-{% endapi-method-response-example-description %}
+`20`
 
-```text
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="offset" type="number" %}
+Offset of the requested page. Default is 
+
+`0`
+
+. Must be a whole multiple of 
+
+`pagesize`
+
+. 
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="" %}
+```
 {
     "sourceTypes": [
         {
@@ -97,13 +105,9 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Invalid query parameter value.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="Invalid query parameter value." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -112,13 +116,9 @@ Invalid query parameter value.
     "details": "uri=/harvesters/source-types"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -127,13 +127,9 @@ Token invalid or missing.
     "details": "uri=/harvesters/source-types"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -142,54 +138,58 @@ Missing roles to access this resource.
     "details": "uri=/harvesters/source-types"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/harvesters/source-types/:source-type-name" %}
-{% api-method-summary %}
-Get all versions of an Source Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/harvesters/source-types/:source-type-name" method="get" summary="Get all versions of an Source Type" %}
+{% swagger-description %}
+Get all versions of a given source type.
 
-{% api-method-description %}
-Get all versions of a given source type.  
-This request requires the role `source_type_read`.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="source-type-name" type="string" required=true %}
+
+This request requires the role 
+
+`source_type_read`
+
+.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="source-type-name" type="string" %}
 Name of the source type.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="pagesize" type="number" required=false %}
-Number of source types returned per page. Default is  
-`20` .
-{% endapi-method-parameter %}
+{% swagger-parameter in="query" name="pagesize" type="number" %}
+Number of source types returned per page. Default is
 
-{% api-method-parameter name="offset" type="number" required=false %}
-Offset of the requested page. Default is `0` . Must be a whole multiple of `pagesize`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+\
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
 
-{% endapi-method-response-example-description %}
 
-```text
+
+`20`
+
+ .
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="offset" type="number" %}
+Offset of the requested page. Default is 
+
+`0`
+
+ . Must be a whole multiple of 
+
+`pagesize`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="" %}
+```
 {
     "sourceTypes": [
         {
@@ -223,13 +223,9 @@ Offset of the requested page. Default is `0` . Must be a whole multiple of `page
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Invalid query parameter value.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="Invalid query parameter value." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -238,13 +234,9 @@ Invalid query parameter value.
     "details": "uri=/harvesters/source-types/grnry-adobe-sftp"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1586941626155,
@@ -253,13 +245,9 @@ Token invalid or missing.
     "details": "uri=/harvesters/source-types/grnry-jdbc"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -268,57 +256,53 @@ Missing roles to access this resource.
     "details":"uri=/harvesters/source-types/grnry-jdbc"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/harvesters/source-types/:source-type-name/:version" %}
-{% api-method-summary %}
-Get a Specific Version of Source Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/harvesters/source-types/:source-type-name/:version" method="get" summary="Get a Specific Version of Source Type" %}
+{% swagger-description %}
+Get one version of a source type.
 
-{% api-method-description %}
-Get one version of a source type.  
-This request requires the role `source_type_read`.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="version" type="string" required=true %}
+
+This request requires the role 
+
+`source_type_read`
+
+.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="version" type="string" %}
 Version of the source type.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="source-type-name" type="string" required=true %}
+{% swagger-parameter in="path" name="source-type-name" type="string" %}
 Name of the source type.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="export" type="string" required=false %}
-if set to `"true"` \(not case sensitive\), the event type response will only contain properties that a POST body must necessarily contain to create this exact event type. All properties set to default values and all api generated values will be omitted. \(Only the api-generated `name` field will be provided\). Default is `""`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+{% swagger-parameter in="query" name="export" type="string" %}
+if set to 
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
+`"true"`
 
-{% endapi-method-response-example-description %}
+ (not case sensitive), the event type response will only contain properties that a POST body must necessarily contain to create this exact event type. All properties set to default values and all api generated values will be omitted. (Only the api-generated 
 
+`name`
+
+ field will be provided). Default is 
+
+`""`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="" %}
 ```
-
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
+{% endswagger-response %}
+{% endswagger %}

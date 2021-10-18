@@ -97,7 +97,7 @@ And the other parameters Kubernetes Secret, Username Property, Password Property
 
 > "fetchProfile": "TRUE",
 >
-> ```text
+> ```
 > "profileType": "Covid19-CostByCountry", 
 >
 > "secret": "grnry-belt-tutorial-secret", 
@@ -199,12 +199,12 @@ def execute(event_headers, event_payload, profile=None):
     return update
 ```
 
-The function describes the calculation of quote for COVID-19 and returns the insurance premium. At line 22 we define the external API's base url \(\[[https://api.covid19api.com/\]\(https://api.covid19api.com/'\)\](https://api.covid19api.com/]%28https://api.covid19api.com/'%29\)\). From the Profile payload lookup \(lines 27-35\), we get the latest profile values for `age` and `country code`. We fetch all countries from the external API \(/countries\) at line 37. We then match the resulting array of fetched country codes with the `country code` from the profile payload at line 39. If matches, then save the country name in the `country name` variable. Further, using the country name, we fetch the current COVID-19 figures for this country from the external API at line 43 \(/live/country/&lt;country&gt;\).  
-From the API response, we fetch the value of `Confirmed cases` and `Death cases` of current date and calculate the daily `mortality rate` from the above values at line 55. Finally, using the combination of `mortality rate` and `age` of the person calculate the insurance premium as a result. At line no 46, profile\_type is defined with combination of `appid` `-` `usecase` received the event at belt which looks like `Covid19-CostByCountry.`Once all calculations are done, update the profile back to the Profile Store at line 67.
+The function describes the calculation of quote for COVID-19 and returns the insurance premium. At line 22 we define the external API's base url (\[[https://api.covid19api.com/\]\(https://api.covid19api.com/')\\](https://api.covid19api.com/]\(https://api.covid19api.com/'\)/)). From the Profile payload lookup (lines 27-35), we get the latest profile values for `age` and `country code`. We fetch all countries from the external API (/countries) at line 37. We then match the resulting array of fetched country codes with the `country code` from the profile payload at line 39. If matches, then save the country name in the `country name` variable. Further, using the country name, we fetch the current COVID-19 figures for this country from the external API at line 43 (/live/country/\<country>).\
+From the API response, we fetch the value of `Confirmed cases` and `Death cases` of current date and calculate the daily `mortality rate` from the above values at line 55. Finally, using the combination of `mortality rate` and `age` of the person calculate the insurance premium as a result. At line no 46, profile_type is defined with combination of `appid` `-` `usecase` received the event at belt which looks like `Covid19-CostByCountry.`Once all calculations are done, update the profile back to the Profile Store at line 67.
 
 ## 4. Validate Calculated Quote in the Profile Explorer
 
-To test the pipeline, send a HTTP `POST` request with the following JSON body to the Snowplow API endpoint of demo environment \(`<host>/api/com.snowplowanalytics.snowplow/tp2`\):
+To test the pipeline, send a HTTP `POST` request with the following JSON body to the Snowplow API endpoint of demo environment (`<host>/api/com.snowplowanalytics.snowplow/tp2`):
 
 ```javascript
 { 
@@ -226,9 +226,9 @@ The **`personprofile`** must be "0", Do not change the value of `personprofile.`
 
 When the event is triggered, we can also check at the Harvester and Belt's 'Data Out' Event Viewer:
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.32%20%281%29.png)
+![](<../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.32 (1).png>)
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.58%20%281%29.png)
+![](<../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.58 (1).png>)
 
 The profile gets updated with the value of calculated insurance premium in the Profile Store:
 
@@ -239,4 +239,3 @@ While searching the profile in Profile Explorer we need to specify :
 > Correlation id : cid value from the postman request
 
 ![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.56.38.png)
-

@@ -1,5 +1,5 @@
 ---
-description: 'On this page, we are going to discuss best practices for the usage of BELTS.'
+description: On this page, we are going to discuss best practices for the usage of BELTS.
 ---
 
 # Data Modeling with Belts
@@ -8,11 +8,11 @@ description: 'On this page, we are going to discuss best practices for the usage
 
 To model data within GRNRY, there are some guiding principles you should keep in mind:
 
-* If you have one physical entity \(e.g. a customer\) and different IDs which are used to identify this customer, decide which ID is the leading one and resolve dependencies between IDs to put everything into the leading ID. This leading ID is called `correlation_id`.
+* If you have one physical entity (e.g. a customer) and different IDs which are used to identify this customer, decide which ID is the leading one and resolve dependencies between IDs to put everything into the leading ID. This leading ID is called `correlation_id`.
 * Use the `profile_type` to model different real world entities, such as customer, contract, campaign. They might share the same leading ID, though.
 * Consider the combination of `correlation_id` and `profile_type` to be an _entity_ in the sense of [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design#Building_blocks).
 * Try to avoid having multiple belts writing the same grains.
-* Distinguish different semantic areas such as mobile web data from master data by using different fragments, e.g. _/masterdata/name_, _/masterdata/dateOfBirth_, _/mobile\_settings/no\_ads_
+* Distinguish different semantic areas such as mobile web data from master data by using different fragments, e.g. _/masterdata/name_, _/masterdata/dateOfBirth_, _/mobile_settings/no_ads_
 
 ### How to get started
 
@@ -37,13 +37,13 @@ In addition, the correlation id is used, e.g. in the [Event Store](../../../deve
 
 #### A sample model
 
-After answering these questions from above, you should have a good overview on what your data is like. Now, you can start modeling the data. We recommend a structure similar to the ER diagram. However, we put _grains_ into the center of it. A _grain_ represents a certain piece of information about a profile, i.e. a real world entity. A sample diagram looks like this:
+After answering these questions from above, you should have a good overview on what your data is like. Now, you can start modeling the data. We recommend a structure similar to the ER diagram. However, we put _grains_ into the center of it. A _grain _represents a certain piece of information about a profile, i.e. a real world entity. A sample diagram looks like this:
 
-![Sample how you could model the profile store](../../../.gitbook/assets/grafik%20%286%29.png)
+![Sample how you could model the profile store](<../../../.gitbook/assets/grafik (6).png>)
 
 As you can see the large boxes are profiles. These profiles have _fragments_ which store specific information related to a certain use case or target entity. We also store the Correlation ID here to easily see whether we have the required information to store information in this profile as well. The arrows between different profiles show that there are relationships between the different entities.
 
-For simplicity, at the top of the image, there is also the table structure of the Profile Store. This should help you keeping in mind which kind of data is stored within the database. The `correlation_id` is the unique identifier of a profile. The `profile_type` is what distinguishes several ids of different real world entities from each other. The profile types in this sample are _customer_ and _contract_. The `path` is where the data is stored. For example the name of a customer is stored in the path _/customer/name_. And `pit` just gives the information whether this piece of information is still valid.
+For simplicity, at the top of the image, there is also the table structure of the Profile Store. This should help you keeping in mind which kind of data is stored within the database. The `correlation_id` is the unique identifier of a profile. The `profile_type` is what distinguishes several ids of different real world entities from each other. The profile types in this sample are _customer _and _contract_. The `path` is where the data is stored. For example the name of a customer is stored in the path _/customer/name_. And `pit` just gives the information whether this piece of information is still valid.
 
 Knowing all this, you should be able to start creating your Profile Store.
 
@@ -53,12 +53,10 @@ Finally, here are some tips and tricks on how to model the profile store. We pro
 
 * Link different entities together using the semantic  _\_id@profiletype@profilestore_
 * Make use of arrays and counters
-  * [Arrays ](../../../developer-reference/dataflow/profile-store/#arrays)help you storing multiple values within one grain, such as a number of favourite colours or certain preferences. Be aware that the time it takes to update an array will increase with the array size. Very big arrays \(&gt; 1 mb\) may slow down the overall performance of the profile update component. If your data would result is such arrays, please consider splitting it into individual grains and do NOT use the array data type.
+  * [Arrays ](../../../developer-reference/dataflow/profile-store/#arrays)help you storing multiple values within one grain, such as a number of favourite colours or certain preferences. Be aware that the time it takes to update an array will increase with the array size. Very big arrays (> 1 mb) may slow down the overall performance of the profile update component. If your data would result is such arrays, please consider splitting it into individual grains and do NOT use the array data type.
   * [Counters](../../../developer-reference/dataflow/profile-store/#counter) help you in keeping track of countable events, such as how many times a certain website has been visited. You should be aware that counters do not necessarily have to be integers.
 
 {% hint style="danger" %}
-Large number of values in arrays \(&gt; 1 mb\) cause the profile updater to drastically slow down. Such long running operations are logged and also metrics are available.
+Large number of values in arrays (> 1 mb) cause the profile updater to drastically slow down. Such long running operations are logged and also metrics are available.
 {% endhint %}
-
-
 

@@ -14,7 +14,7 @@ The EventStore Sink expects that the event headers have been enriched with the f
 * grnry-event-type-version
 * grnry-harvester-name
 * grnry-event-timestamp
-* grnry-deletion-flag \(optional\)
+* grnry-deletion-flag (optional)
 
 The parameters for the EventStore Sink are passed into the Harvester API's helm chart.
 
@@ -22,18 +22,18 @@ The parameters for the EventStore Sink are passed into the Harvester API's helm 
 
 **Name**: grnry-eventstore-batch-sink
 
-**Parameters:**  See ****[shared parameters](grnry-components-and-parameters.md)**.**
+**Parameters:  **See** **[shared parameters](grnry-components-and-parameters.md)**.**
 
 The parameters for the EventStore 
 
 Additional configuration parameters:
 
-| Parameter | Description | Default |
-| :--- | :--- | :--- |
-| eventstore.tableName | The table where the data will be inserted into. | `"eventstore"` |
-| eventstore.batchSize | The batch size after which messages will be inserted into postgres. | `"100"` |
-| eventstore.batchTimeout | Inserts any messages in batch into postgres if timeout in ms is reached before batch reached `batchSize`. | `"1000"` |
-| eventstore.ttlGracePeriod | Grace period until a deleted grain will be reaped eventually after receiving a tombstone event. Must be a valid ISO\_8601 Duration representation in basic format and thus may not contain hyphens. | `"P5D"` |
+| Parameter                 | Description                                                                                                                                                                                         | Default        |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| eventstore.tableName      | The table where the data will be inserted into.                                                                                                                                                     | `"eventstore"` |
+| eventstore.batchSize      | The batch size after which messages will be inserted into postgres.                                                                                                                                 | `"100"`        |
+| eventstore.batchTimeout   | Inserts any messages in batch into postgres if timeout in ms is reached before batch reached `batchSize`.                                                                                           | `"1000"`       |
+| eventstore.ttlGracePeriod | Grace period until a deleted grain will be reaped eventually after receiving a tombstone event. Must be a valid ISO\_8601 Duration representation in basic format and thus may not contain hyphens. | `"P5D"`        |
 
 **Source Parameters:**
 
@@ -41,7 +41,9 @@ For the EventStore Sink, the standard jdbc sink is used. For applicable paramete
 
 
 
-{% embed url="https://github.com/spring-cloud-stream-app-starters/jdbc/blob/master/spring-cloud-starter-stream-sink-jdbc/README.adoc" caption="Parameters for the EventStore Sink" %}
+{% embed url="https://github.com/spring-cloud-stream-app-starters/jdbc/blob/master/spring-cloud-starter-stream-sink-jdbc/README.adoc" %}
+Parameters for the EventStore Sink
+{% endembed %}
 
 A sample of an EventStore Batch Sink might look like this:
 
@@ -88,13 +90,13 @@ eventstores:
 
 #### Deletion Flag
 
-In case the `grnry-deletion-flag` is set to true, the Eventstore Batch Sink will add a value to the `ttl` column of the Eventstore table for all \(already existing\) events specified by `event_type` and `correlation_id` __\(and optional `event_id`\) . The `ttl` value will be calculated as the total time-to-live, adding the Event Type's `ttl` and the persister's `ttlGracePeriod` \(see above\) and subtracting time that has already passed since event creation.
+In case the `grnry-deletion-flag` is set to true, the Eventstore Batch Sink will add a value to the `ttl` column of the Eventstore table for all (already existing) events specified by `event_type` and `correlation_id`_ _(and optional `event_id`) . The `ttl` value will be calculated as the total time-to-live, adding the Event Type's `ttl` and the persister's `ttlGracePeriod` (see above) and subtracting time that has already passed since event creation.
 
 #### Error Handling
 
 In an error case the Sink will fail and restart. The Batch Sink will retry the failed batch as it does not know which message in the batch failed.
 
-### EventStore Sink \(Deprecated\)
+### EventStore Sink (Deprecated)
 
 In case of missing Headers, the EventStore Sink will fail and produce the respective entries into the dead letter queue.
 
@@ -104,7 +106,7 @@ In case of missing Headers, the EventStore Sink will fail and produce the respec
 
 In addition, you will need to fill the following parameter.
 
-```text
+```
 "app.grnry-eventstore-pg.eventstore.tableName=yourSchema.yourEventStoreTable"
 ```
 
@@ -150,5 +152,4 @@ eventstores:
         eventstore.tableName: public.eventstore
 ```
 
-\*\*\*\*
-
+****
