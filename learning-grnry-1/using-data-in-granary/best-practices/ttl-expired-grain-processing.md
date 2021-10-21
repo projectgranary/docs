@@ -6,19 +6,19 @@ description: >-
 
 # TTN-expired Grain Processing
 
-Time-till-notification \(TTN\) expired Grains are picked up periodically by Granary's [Reaper](../../../developer-reference/dataflow/profile-store/reaper.md) from Profile Store and written to TTN topics retrieved from the Grain's corresponding TTN Event Type. These Grains are then available for further processing by the Belts.
+Time-till-notification (TTN) expired Grains are picked up periodically by Granary's [Reaper](../../../developer-reference/dataflow/profile-store/reaper.md) from Profile Store and written to TTN topics retrieved from the Grain's corresponding TTN Event Type. These Grains are then available for further processing by the Belts.
 
 Please note that in compliance with data protection laws, Grains written to the TTN topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the belt, i.e., setting the `fetch_profile`parameter to `TRUE` or `LAZY`. The Correlation ID should be found in both message header and body.
 
 ## Use Case Example: Expiry Notification
 
-It might be desired to receive notifications about the expiry of certain actions \(grains\). One way to facilitate this is to create a belt, - let's call it a notification belt -, which processes the TTN-expired grains from the topic\(s\) and sends notifications accordingly. 
+It might be desired to receive notifications about the expiry of certain actions (grains). One way to facilitate this is to create a belt, - let's call it a notification belt -, which processes the TTN-expired grains from the topic(s) and sends notifications accordingly.&#x20;
 
 ![](../../../.gitbook/assets/reaper-notification.png)
 
 ### Step 1: Insert a Grain that will be reaped
 
-The TTN in Granary profiles' grains has got the format [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). By default, a grain's TTN is `P100Y` which equals a duration of 100 years. Therefore we need to ensure that a [belt](../getting-started.md) creates a grain with a shorter duration for this use case. 
+The TTN in Granary profiles' grains has got the format [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO\_8601#Durations). By default, a grain's TTN is `P100Y` which equals a duration of 100 years. Therefore we need to ensure that a [belt](../getting-started.md) creates a grain with a shorter duration for this use case.&#x20;
 
 For example given this event
 
@@ -35,7 +35,7 @@ For example given this event
 }
 ```
 
-and given this belt function \(see especially end of line 28\)
+and given this belt function (see especially end of line 28)
 
 ```python
 import json
@@ -139,7 +139,7 @@ String origin: "/belt123"
 
 ### Step 3: Deploy Belt that consumes Reaper emitted Grains
 
-To act upon a notification, we need to deploy a belt that consumes from the topic `grnry_ttn_ttn-feedback`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "feedback-ttn". These Reaper-generated Event Types are of [type](../../../developer-reference/api-reference/harvester-api/#create-an-event-type) `ttn`. In the belt callback script, the values in the `execute` function will look like this:
+To act upon a notification, we need to deploy a belt that consumes from the topic `grnry_ttn_ttn-feedback`. This is possible by selecting the Reaper-generated [Event Type](../../data-in/how-to-run-a-harvester/event-types.md) "ttn-feedback". These Reaper-generated Event Types are of type `ttn`. In the belt callback script, the values in the `execute` function will look like this:
 
 #### Event Headers
 
@@ -172,9 +172,9 @@ To act upon a notification, we need to deploy a belt that consumes from the topi
 
 Given the belt code below and the reaped event above, we can do the following:
 
-* Notify some external system \(lines 12ff\)
+* Notify some external system (lines 12ff)
 * Update the grain's TTN with `SET_TTN_OPERATION`
-* or delete the grain in the Profile Store with `DELETE_OPERATION` \(lines 21ff\).
+* or delete the grain in the Profile Store with `DELETE_OPERATION` (lines 21ff).
 
 ```python
 import json
@@ -215,7 +215,7 @@ def execute(event_headers, event, profile=None):
 
 ### Step 4: Ensure idempotency
 
-It is, however, worth mentioning that since those expired grains are read from the [Profile Store](../../../developer-reference/dataflow/profile-store/) and written periodically into the topics, they will appear multiple times if they weren't previously deleted or had their TTN changed, resulting in multiple notifications being dispatched. 
+It is, however, worth mentioning that since those expired grains are read from the [Profile Store](../../../developer-reference/dataflow/profile-store/) and written periodically into the topics, they will appear multiple times if they weren't previously deleted or had their TTN changed, resulting in multiple notifications being dispatched.&#x20;
 
 {% hint style="warning" %}
 We therefore advise a notification belt to also trigger a delete operation on the expired grains being processed, to ensure that they will not be read twice.
@@ -223,7 +223,7 @@ We therefore advise a notification belt to also trigger a delete operation on th
 
 ## Working with ISO8601 durations
 
-In order to ease development of belts that process TTN grains, the belt framework \([Belt Extractor](../../../developer-reference/dataflow/belt-extractor.md)\) provides access to the [isodate library](https://pypi.org/project/isodate/). Thus, in your belt code you can easily convert between different representations:
+In order to ease development of belts that process TTN grains, the belt framework ([Belt Extractor](../../../developer-reference/dataflow/belt-extractor.md)) provides access to the [isodate library](https://pypi.org/project/isodate/). Thus, in your belt code you can easily convert between different representations:
 
 ```python
 import json
@@ -260,7 +260,6 @@ def execute(event_headers, event, profile=None):
 
 Please note that according to the documentation of the isodate library the `parse_duration` method will return either a Duration or Timedelta object, depending on the input:
 
-> If the ISO date string does not contain years or months, a timedelta instance is returned, else a Duration instance is returned. \[[Link](https://github.com/gweis/isodate/blob/ce635a7a483effb3fc246721cfb5a8a7b5174ab5/src/isodate/isoduration.py#L61)\]
+> If the ISO date string does not contain years or months, a timedelta instance is returned, else a Duration instance is returned. \[[Link](https://github.com/gweis/isodate/blob/ce635a7a483effb3fc246721cfb5a8a7b5174ab5/src/isodate/isoduration.py#L61)]
 
 For any further information please refer to the [isodate documentation](https://pypi.org/project/isodate/).
-
