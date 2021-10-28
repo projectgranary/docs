@@ -60,7 +60,7 @@ To create the input Event Type, we use the Harvester API with the following requ
 
 [POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
 
-where `:project-name` need to be provided as input to the request (we can refer it from Step 1).
+where `:project-name` need to be provided as input to the request (we can refer it from step 1).
 
 ```
 {
@@ -92,7 +92,7 @@ DBT Belts require exactly one output Event Type. Therefore, we need to create a 
 
 [POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
 
-&#x20;where `:project-name` need to be provided as input to the request (we can refer it from Step 1).
+&#x20;where `:project-name` need to be provided as input to the request (we can refer it from step 1).
 
 ```
 {
@@ -109,11 +109,11 @@ The Segment Event Type looks like this in Granary UI:&#x20;
 
 ### Step 4 - Create Harvester&#x20;
 
-To be able to model a segment in SQLPad, we need to ensure that there is a Harvester serving our input event type(s) with data. Follow the [Harvester creation guide](../data-in/how-to-run-a-harvester/harvesters.md) and reference the input Event Type created in Step 2. Do not forget to start the Harvester after creation:
+To be able to model a segment in SQLPad, we need to ensure that there is a Harvester serving our input event type(s) with data. Follow the [Harvester creation guide](../data-in/how-to-run-a-harvester/harvesters.md) and reference the input Event Type created in step 2. Do not forget to start the Harvester after creation:
 
 ![](<../../.gitbook/assets/Screenshot 2021-10-21 at 18.01.33.png>)
 
-After that, check the Event Type from Step 2 in Granary UI again and see the Harvester depicted as input node:
+After that, check the Event Type from step 2 in Granary UI again and see the Harvester depicted as input node:
 
 ![](<../../.gitbook/assets/image (75).png>)
 
