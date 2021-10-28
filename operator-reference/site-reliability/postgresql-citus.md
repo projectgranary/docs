@@ -20,7 +20,7 @@ Barman streams physical backups from the postgres node, which can be seen as sna
 
 Barman has two main backup strategies: streaming and bulk backup.
 
-Barman uses _pg_basebackup_ to stream backup data. Thus, incremental backup, parallel backup, deduplication, and network compression are not available. Use bulk backup (ssh/rsync) if the network is a bottleneck. _Pg_basebackup_ is easier to setup and facilitates point-in-time recovery with zero data loss.
+Barman uses _pg\_basebackup_ to stream backup data. Thus, incremental backup, parallel backup, deduplication, and network compression are not available. Use bulk backup (ssh/rsync) if the network is a bottleneck. _Pg\_basebackup_ is easier to setup and facilitates point-in-time recovery with zero data loss.
 
 This quick-start sets up streaming replication following [http://docs.pgbarman.org/release/2.8](http://docs.pgbarman.org/release/2.8).
 
@@ -46,10 +46,10 @@ Recovery requirements:
 
 ### How to _backup_ your Postgres node
 
-####  On your postgres node
+#### &#x20;On your postgres node
 
 * Accept streaming replication connections from the Barman server. Authorize barman in `pg_hba.conf` file: `host replication all <IP> trust`
-* Set `wal_level=’replica’` ('hot_standby' for PostgreSQL < 9.6) in `postgresql.conf`, restart postgres instance afterwards!
+* Set `wal_level=’replica’` ('hot\_standby' for PostgreSQL < 9.6) in `postgresql.conf`, restart postgres instance afterwards!
 * Recommended: Have seperate PostgreSQL user for streaming replication for barman (defined in `streaming_conninfo` in server config file, we use the same user here for simplicity)
 
 #### On your barman node
@@ -108,30 +108,30 @@ Illustrated using a postgres node called `pg` and a backup node called `barman`.
 
 Barman will recreate the data directory on your postgres node by connecting to it via SSH. If using a target data directory where a PostgreSQL instance is running, stop it before issuing the recovery. Alternatively, choose a different directory and start a new instance from that folder after recovery.
 
-####  On your postgres node
+#### &#x20;On your postgres node
 
 * SSH Server must be running
 * Stop postgres instance (or choose a new data directory)
 * Wait for barman (see below)
 * Restart postgres from restored directory
 
-####  On your barman node
+#### &#x20;On your barman node
 
 * Be able to SSH passwordless to the postgres node: Have ssh key for the barman user in the `<barman_user_home>/.ssh/authorized_keys` file on your postgres node
 * Choose a base backup **before** (but close to) the point in time which you want to recover:
-  *  `barman list-backup pg` and select <_backup_id_> (highlighted in bold here) **0190628T125307** - Fri Jun 28 12:53:08 2019 - Size: 23.5 MiB - WAL Size: 133.5 KiB
-  * Or use `first` as <_backup_id_> (the closer the physical backup is to the chosen PIT, the faster the recovery process will be)
-*  `postgres@barman$ barman recover <SERVER_NAME> <BACKUP_ID> <PG_DATA_DIR> --target-time "2019-06-28 13:00:00.0" --remote-ssh-command="ssh <PG_HOST>"`
-  * \<SERVER_NAME>: internal server name used by barman (here: pg)
-  * \<BACKUP_ID> as described above
-  * \<PG_DATA_DIR>: Path to postgres directory you want to restore (can be empty)
-  * \<PG_HOST>: Hostname of your postgres node
+  * &#x20;`barman list-backup pg` and select <_backup\_id_> (highlighted in bold here) **0190628T125307** - Fri Jun 28 12:53:08 2019 - Size: 23.5 MiB - WAL Size: 133.5 KiB
+  * Or use `first` as <_backup\_id_> (the closer the physical backup is to the chosen PIT, the faster the recovery process will be)
+* &#x20;`postgres@barman$ barman recover <SERVER_NAME> <BACKUP_ID> <PG_DATA_DIR> --target-time "2019-06-28 13:00:00.0" --remote-ssh-command="ssh <PG_HOST>"`
+  * \<SERVER\_NAME>: internal server name used by barman (here: pg)
+  * \<BACKUP\_ID> as described above
+  * \<PG\_DATA\_DIR>: Path to postgres directory you want to restore (can be empty)
+  * \<PG\_HOST>: Hostname of your postgres node
 
 ## Storage
 
-When inserting/updating many grains, one can expect substantial profilestore growths (not only proportional to the number of grain inserts). This is because, Postgres does not immediately delete updated rows. Instead, it marks such rows as dead and adds the new version to the table.  
+When inserting/updating many grains, one can expect substantial profilestore growths (not only proportional to the number of grain inserts). This is because, Postgres does not immediately delete updated rows. Instead, it marks such rows as dead and adds the new version to the table. &#x20;
 
-Therefore, we suggest to configure the profilestore table with the autovacuum settings depicted below. [https://www.postgresql.org/docs/11/routine-vacuuming.html](https://www.postgresql.org/docs/11/routine-vacuuming.html) 
+Therefore, we suggest to configure the profilestore table with the autovacuum settings depicted below. [https://www.postgresql.org/docs/11/routine-vacuuming.html](https://www.postgresql.org/docs/11/routine-vacuuming.html)&#x20;
 
 ```sql
 ALTER TABLE profilestore

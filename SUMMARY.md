@@ -32,7 +32,7 @@
     * [Converting a script into a one-liner](learning-grnry-1/using-data-in-granary/best-practices/easing-development.md)
     * [Logging](learning-grnry-1/using-data-in-granary/best-practices/logging.md)
 * [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
-  * [How to model a Segment](learning-grnry-1/get-data-out-of-granary/how-to-model-a-segment.md)
+  * [How to model a Segment with a DBT Belt](learning-grnry-1/get-data-out-of-granary/how-to-model-a-segment-with-a-dbt-belt.md)
   * [How to access a Segment](learning-grnry-1/get-data-out-of-granary/segment-store-api.md)
   * [Best Practices](learning-grnry-1/get-data-out-of-granary/best-practices/README.md)
     * [Hints on naming of Segments](learning-grnry-1/get-data-out-of-granary/best-practices/hints-on-naming-of-segments.md)
