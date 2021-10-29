@@ -1,20 +1,20 @@
 ---
-description: 'On this page, you get the details about the Metadata Extractor'
+description: On this page, you get the details about the Metadata Extractor
 ---
 
 # Metadata Extractor
 
 The Metadata Extractor is used to extract these header information from the message:
 
-* grnry-correlation-id 
-* grnry-event-id 
-* grnry-event-type 
+* grnry-correlation-id&#x20;
+* grnry-event-id&#x20;
+* grnry-event-type&#x20;
 * grnry-event-type-version
 * grnry-harvester-name
 * grnry-event-timestamp
-* grnry-deletion-flag \(optional\)
+* grnry-deletion-flag (optional)
 
-The extraction definitions for these parameters are automatically pulled from the corresponding [Event Type](event-type.md) definition, they will not be set in your medata extractor definition.
+The extraction definitions for these parameters are automatically pulled from the corresponding [Event Type](../event-type.md) definition, they will not be set in your medata extractor definition.
 
 **Name**: grnry-data-in-metadata
 
@@ -48,5 +48,4 @@ One sample of a metadata extractor is:
 }
 ```
 
-### 
-
+###

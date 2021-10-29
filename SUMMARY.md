@@ -56,8 +56,8 @@
 ## Developer Reference
 
 * [Data Flow](developer-reference/dataflow/README.md)
+  * [Event Types](developer-reference/dataflow/event-type.md)
   * [Data-In](developer-reference/dataflow/data-in/README.md)
-    * [Event Type](developer-reference/dataflow/data-in/event-type.md)
     * [Shared parameters](developer-reference/dataflow/data-in/grnry-components-and-parameters.md)
     * [Available Source Types](developer-reference/dataflow/data-in/source-types.md)
     * [Scriptable Transform](developer-reference/dataflow/data-in/scriptable-transform.md)
@@ -76,7 +76,7 @@
   * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)
   * [Project API](developer-reference/api-reference/project-api.md)
   * [Harvester API](developer-reference/api-reference/harvester-api/README.md)
-    * [Event Type Endpoints](developer-reference/api-reference/harvester-api/event-type-endpoints/README.md)
+    * [Event Type Endpoints](developer-reference/api-reference/harvester-api/event-type-endpoints.md)
       * [Data-In Persisters](developer-reference/api-reference/harvester-api/event-type-endpoints/data-in-persisters.md)
       * [Live-Segment Persisters](developer-reference/api-reference/harvester-api/event-type-endpoints/live-segment-persisters.md)
     * [Source Type Endpoints](developer-reference/api-reference/harvester-api/source-type-endpoints.md)

@@ -10,7 +10,7 @@ description: >-
 
 Event Types categorize incoming data objects (events) by certain properties that are crucial for further processing. An Event Type entity has a unique name and provides rules on how to extract important metadata (`correlationId`/`eventId`) from events of that type.
 
-## Creating an Event Type (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type))
+## Creating an Event Type (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type))
 
 Creating an event type is the initial step to import data into Granary.
 
@@ -50,7 +50,7 @@ curl -X POST -H "Content-Type: application/json" \
 ```
 {% endcode %}
 
-## Read Event Type configuration (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#get-all-versions-of-an-event-type))
+## Read Event Type configuration (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#get-all-versions-of-an-event-type))
 
 {% hint style="info" %}
 If you did not specify all parameters on your initial POST (event type creation) you will still get a complete definition with all fields set (with default values) on event type retrieval.
@@ -99,7 +99,7 @@ curl -X GET -H "Content-Type: application/json" \
 ```
 {% endcode %}
 
-## Updating an Event Type (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#update-an-event-type))
+## Updating an Event Type (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#update-an-event-type))
 
 Existing event types can be updated. Changes of the incoming data's structure may require adjustment of SpringEL expressions to determine the `correlationId`/`eventId `etc. Each update will be stored as a new version (auto incremented number starting at 1).&#x20;
 
@@ -127,7 +127,7 @@ curl -X PUT -H "Content-Type: application/json" \
 ```
 {% endcode %}
 
-## Deleting an Event Type (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#delete-an-event-type))
+## Deleting an Event Type (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#delete-an-event-type))
 
 Deleting an event type via API call will remove the event type entity and all persister streams (see [below](event-types.md#eventstore-persister)) consuming this event type, but only if there are no consuming belts or importing harvesters for this event type known to the system (deployment state of belts and harvesters is irrelevant). Otherwise the server will return a 412 status and give information about these belts/harvesters.
 
@@ -159,7 +159,7 @@ A persister entity has the following attributes:
 | `appConfig`      | A map containing app specific configuration.                                            |
 | `deployerConfig` | A map containing deployer (e.g. kubernetes) specific configuration.                     |
 
-### Read persister configuration (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#get-persister-for-a-specific-event-type))
+### Read persister configuration (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#get-persister-for-a-specific-event-type))
 
 #### Example Call - GET - read persister configuration
 
@@ -215,7 +215,7 @@ curl -X GET -H "Content-Type: application/json" \
 ```
 {% endcode %}
 
-### Updating a persister configuration (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#update-persister-config-for-a-specific-event-type))
+### Updating a persister configuration (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#update-persister-config-for-a-specific-event-type))
 
 #### Example Call - PUT - Updating a Persister
 
@@ -257,7 +257,7 @@ curl -X PUT -H "Content-Type: application/json" \
 ```
 {% endcode %}
 
-### Starting / Stopping an persister (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#start-stop-persister-for-a-specific-event-type))
+### Starting / Stopping an persister (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#start-stop-persister-for-a-specific-event-type))
 
 #### Example Call Start/Stop
 
@@ -285,7 +285,7 @@ curl -X POST -H "Content-Type: application/json" \
 ```
 {% endcode %}
 
-### Logs Endpoint (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#get-persister-logs-for-a-specific-event-type))
+### Logs Endpoint (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#get-persister-logs-for-a-specific-event-type))
 
 There is a logs endpoint for running persister streams available. It can be accessed via [API-Call](../../../developer-reference/api-reference/harvester-api/#get-persister-logs-for-a-specific-event-type). The `lines` request parameter limits the output to the given number of lines.
 

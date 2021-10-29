@@ -25,7 +25,7 @@ Some examples:
 
 ### Technical limitations
 
-Generally speaking, the Harvester API features a `name` and a `displayName`. The `name` is used as the technical identifier and is derived from the `displayName` parameter provided in the JSON payload when creating a [Harvester](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#create-harvester) / [Event Type](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type) using POST request. The only exception to this behaviour is if you provide a `name` in the POST request when creating a Harvester or an Event Type, e.g. `POST /harvesters/instances/{name}`
+Generally speaking, the Harvester API features a `name` and a `displayName`. The `name` is used as the technical identifier and is derived from the `displayName` parameter provided in the JSON payload when creating a [Harvester](../../../developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md#create-harvester) / [Event Type](../../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type) using POST request. The only exception to this behaviour is if you provide a `name` in the POST request when creating a Harvester or an Event Type, e.g. `POST /harvesters/instances/{name}`
 
 The `displayName` property has a maximum of 256 characters.&#x20;
 

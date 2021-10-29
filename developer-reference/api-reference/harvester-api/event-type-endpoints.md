@@ -16,7 +16,7 @@ description: Harvester API's event type endpoints
 
 ## API Methods
 
-Consult the [Granary Access Clients Reference](../../../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
+Consult the [Granary Access Clients Reference](../../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/event-types" method="get" summary="Get all Event Types" %}
 {% swagger-description %}
