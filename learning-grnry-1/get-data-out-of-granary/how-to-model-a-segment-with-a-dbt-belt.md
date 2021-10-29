@@ -58,7 +58,7 @@ DBT Belts require input Event Types that reference a database location. Currentl
 
 To create the input Event Type, we use the Harvester API with the following request:
 
-[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
+[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type)
 
 where `:project-name` need to be provided as input to the request (we can refer it from step 1).
 
@@ -90,7 +90,7 @@ In case of Data-In and Live-Segment, please ensure that their persisters (right 
 
 DBT Belts require exactly one output Event Type. Therefore, we need to create a Segment Event Type whose name determines the datbase table's name:
 
-[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
+[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type)
 
 &#x20;where `:project-name` need to be provided as input to the request (we can refer it from step 1).
 

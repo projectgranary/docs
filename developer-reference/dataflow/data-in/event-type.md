@@ -16,9 +16,9 @@ A minimal sample for an event type looks like this:
 }
 ```
 
-Most of the event type's parameters are assigned default values, you are only required to set the parameters seen above. To get more insight into all of the configuration parameters and their defaults, please refer to the [Event Type Endpoints](../../api-reference/harvester-api/event-type-endpoints.md) page.
+Most of the event type's parameters are assigned default values, you are only required to set the parameters seen above. To get more insight into all of the configuration parameters and their defaults, please refer to the [Event Type Endpoints](../../api-reference/harvester-api/event-type-endpoints/) page.
 
-Based on the event types configuration parameters the [Metadata Extractor](metadata-extractor.md) will enrich the incoming events with headers. 
+Based on the event types configuration parameters the [Metadata Extractor](metadata-extractor.md) will enrich the incoming events with headers.&#x20;
 
 An Event Type is referenced in a Harvester like this:
 
@@ -35,4 +35,3 @@ An Event Type is referenced in a Harvester like this:
 ```
 
 Data-in Event Types come with a [Persister ](../../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md#eventstore-persisters)that is created on Event Type creation by the Harvester API. The default Persister is the [Eventstore Batch Sink](eventstore-sink.md#eventstore-batch-sink).
-

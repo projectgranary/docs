@@ -32,7 +32,7 @@ In all three options, the deletion event is also consumable from within a use ca
 
 ### How does the physical deletion happen?
 
-When the Event Type's [persister](../data-in/eventstore-sink.md#eventstore-batch-sink) encounters an event with the `grnry-deletion-flag` header set to `true`, it will change the event's TTL in the [database table Event Store](./#table-eventstore) so that the event expires after a short period of time (default: `5 days`). This time is configurable via Harvester API's [update event type persister endpoint](../../api-reference/harvester-api/event-type-endpoints.md#update-persister-config-for-a-specific-event-type).
+When the Event Type's [persister](../data-in/eventstore-sink.md#eventstore-batch-sink) encounters an event with the `grnry-deletion-flag` header set to `true`, it will change the event's TTL in the [database table Event Store](./#table-eventstore) so that the event expires after a short period of time (default: `5 days`). This time is configurable via Harvester API's [update event type persister endpoint](../../api-reference/harvester-api/event-type-endpoints/#update-persister-config-for-a-specific-event-type).
 
 Finally, when the Event Reaper encounters an event whose TTL configured in the database table's column has expired, it is directly deleted from the Event Store without emission of any further messages.
 
