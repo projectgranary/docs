@@ -38,11 +38,11 @@ _reader_
 . Otherwise, you will not get back any results.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="profileType" type="string" %}
+{% swagger-parameter in="path" name="profileType" type="string" required="true" %}
 The profile type
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="correlationId" type="string" %}
+{% swagger-parameter in="path" name="correlationId" type="string" required="true" %}
 The correlation ID
 {% endswagger-parameter %}
 
@@ -224,7 +224,7 @@ In order to get results, you must have the required roles as defined in the fiel
 
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="path" type="string" %}
+{% swagger-parameter in="path" name="path" type="string" required="true" %}
 The full path related to the grain.
 
 \
@@ -235,15 +235,15 @@ Example:
 `customer/name`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="profileType" type="string" %}
+{% swagger-parameter in="path" name="profileType" type="string" required="true" %}
 The profile type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="correlationId" type="string" %}
+{% swagger-parameter in="path" name="correlationId" type="string" required="true" %}
 The correlation ID.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="false" %}
 Authentication token
 {% endswagger-parameter %}
 

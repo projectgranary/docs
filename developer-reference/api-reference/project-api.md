@@ -75,7 +75,7 @@ _forbidden_
  error code will be returned
 {% endswagger-description %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -117,7 +117,7 @@ Example:
 Project description
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="displayName" type="object" %}
+{% swagger-parameter in="body" name="displayName" type="object" required="true" %}
 Human readable name. A technical name will be derived from it.
 {% endswagger-parameter %}
 
@@ -185,11 +185,11 @@ Requires the role: any of
 `editor`
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="true" %}
 Project name.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -273,11 +273,11 @@ Requires the role
 .
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="true" %}
 Project name.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -321,11 +321,11 @@ Returns an array of users assigned to the specified project.
 User details contains: 
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="true" %}
 Project name.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication
 {% endswagger-parameter %}
 
@@ -364,7 +364,7 @@ Authentication
 Returns an array of projects available for currently authenticated user.
 {% endswagger-description %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -416,11 +416,11 @@ Requires role
  client.
 {% endswagger-description %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search" type="string" %}
+{% swagger-parameter in="query" name="search" type="string" required="false" %}
 Search string for users.
 {% endswagger-parameter %}
 
@@ -467,20 +467,20 @@ Requires the role
 `data_owner`
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="user-id" type="string" %}
+{% swagger-parameter in="path" name="user-id" type="string" required="true" %}
 UUID like keycloak user identifier.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="true" %}
 Project name.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="roles" type="array" %}
-An array of roles to be assigned for specified user-id
+{% swagger-parameter in="body" name="roles" type="array" required="true" %}
+An array of roles to be assigned for specified user-id.
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}
@@ -529,11 +529,11 @@ Requires the role
 `data_owner`
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="true" %}
 Project name.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="user-id" type="string" %}
+{% swagger-parameter in="path" name="user-id" type="string" required="true" %}
 UUID like keycloak user identifier.
 
 \
@@ -546,8 +546,8 @@ UUID like keycloak user identifier.
 Authentication token.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="roles" type="array" %}
-An array of roles to be set for the specified user-id within the specified project. 
+{% swagger-parameter in="body" name="roles" type="array" required="false" %}
+An array of roles to be set for the specified user-id within the specified project.  If array provided is empty, all roles assigned to the user in the specified project are removed.
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}

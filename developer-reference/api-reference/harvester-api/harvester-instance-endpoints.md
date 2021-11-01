@@ -78,6 +78,10 @@ Start offset. Default: 0. Must be a whole multiple of
 Filter harvester list by name. Default: ""
 {% endswagger-parameter %}
 
+{% swagger-parameter in="header" name="Authentication" required="true" %}
+
+{% endswagger-parameter %}
+
 {% swagger-response status="200" description="" %}
 ```
 {
@@ -184,7 +188,7 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="harvester-name" type="string" %}
+{% swagger-parameter in="path" name="harvester-name" type="string" required="true" %}
 technical name of harvester
 {% endswagger-parameter %}
 
@@ -206,6 +210,10 @@ if set to
 
 {% swagger-parameter in="query" name="expand" type="string" %}
 Show Harvester state with expand=state.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="Authentication" required="true" %}
+
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="Sample Response" %}
@@ -459,12 +467,98 @@ If
 unique technical harvester name
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="displayName" type="string" %}
+Human readable name. Needs to be unique. A technical name will be derived from it.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="query" name="imported" type="string" %}
 if set to 
 
 `"true"`
 
  (not case sensitive), the harvester default values will be merged into the provided POST body while keeping the custom values if provided.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="description" type="string" %}
+Harvester description
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="eventType" type="object" %}
+Existing eventType that this harvester should process. 
+
+_Required _
+
+fields are 
+
+`name:string`
+
+ and 
+
+`version:string`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="sourceType" type="object" %}
+Existing sourceType that this harvester receives data from. 
+
+_Required _
+
+fields are 
+
+`name:string `
+
+and 
+
+`version:string`
+
+. 
+
+_Optional _
+
+fields are 
+
+`configuration:map`
+
+, 
+
+`deployerConfiguration:map`
+
+, 
+
+`appConfiguration:map`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="transform" type="object" %}
+Scriptable transform application used by this harvester. If not specified, a default transform app will be deployed. Default values for all fields can be specified during harvester api deployment. 
+
+_Optional _
+
+fileds are 
+
+`app:string`
+
+ (registered app in scdf), 
+
+`version:string`
+
+ (app version registered in scdf), 
+
+`deploymentConfiguration:map`
+
+, 
+
+`appConfiguration:map`
+
+, 
+
+`language:string`
+
+ (script language), 
+
+`script:string`
+
+ (script that transforms the data).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="sessionizing" type="object" %}
@@ -535,90 +629,8 @@ fields are
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="transform" type="object" %}
-Scriptable transform application used by this harvester. If not specified, a default transform app will be deployed. Default values for all fields can be specified during harvester api deployment. 
+{% swagger-parameter in="header" name="Authentication" required="true" %}
 
-_Optional _
-
-fileds are 
-
-`app:string`
-
- (registered app in scdf), 
-
-`version:string`
-
- (app version registered in scdf), 
-
-`deploymentConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-
-, 
-
-`language:string`
-
- (script language), 
-
-`script:string`
-
- (script that transforms the data).
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="sourceType" type="object" %}
-Existing sourceType that this harvester receives data from. 
-
-_Required _
-
-fields are 
-
-`name:string `
-
-and 
-
-`version:string`
-
-. 
-
-_Optional _
-
-fields are 
-
-`configuration:map`
-
-, 
-
-`deployerConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="eventType" type="object" %}
-Existing eventType that this harvester should process. 
-
-_Required _
-
-fields are 
-
-`name:string`
-
- and 
-
-`version:string`
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="description" type="string" %}
-Harvester description
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="displayName" type="string" %}
-Human readable name. Needs to be unique. A technical name will be derived from it.
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}
@@ -862,7 +874,7 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="harvester-name" type="string" %}
+{% swagger-parameter in="path" name="harvester-name" type="string" required="true" %}
 Name of the Harvester that should be updated
 {% endswagger-parameter %}
 
@@ -948,26 +960,6 @@ fields are
  (script that transforms the data).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="metadataExtractor" type="object" %}
-Metadata extractor application used by this Harvester. Default values for all fields can be specified during harvester api deployment. 
-
-_Optional _
-
-fields are 
-
-`version:string`
-
- (registered app version in SCDF), 
-
-`deploymentConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-
-.
-{% endswagger-parameter %}
-
 {% swagger-parameter in="body" name="sessionizing" type="object" %}
 Sessionizing application used by this Harvester. 
 
@@ -1004,6 +996,30 @@ fields (can only be set if
 , 
 
 `gracePeriodSec:long`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="metadataExtractor" type="object" %}
+Metadata extractor application used by this Harvester. Default values for all fields can be specified during harvester api deployment. 
+
+_Optional _
+
+fields are 
+
+`version:string`
+
+ (registered app version in SCDF), 
+
+`deploymentConfiguration:map`
+
+, 
+
+`appConfiguration:map`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="Authentication" required="true" %}
+
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}
@@ -1241,11 +1257,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="harvester-name" type="string" %}
+{% swagger-parameter in="path" name="harvester-name" type="string" required="true" %}
 Technical name of the Harvester.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -1317,11 +1333,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="harvester-name" type="string" %}
+{% swagger-parameter in="path" name="harvester-name" type="string" required="true" %}
 Technical name of the harvester.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -1426,15 +1442,15 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="harvester-name" type="string" %}
+{% swagger-parameter in="path" name="harvester-name" type="string" required="true" %}
 technical name of the Harvester.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="action" type="string" %}
+{% swagger-parameter in="body" name="action" type="string" required="true" %}
 updates the status of this harvester. Possible values: 
 
 `START`
@@ -1542,13 +1558,7 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="line" type="string" %}
-Number of maximum lines the log should contain. Default is 
-
-`500`
-{% endswagger-parameter %}
-
-{% swagger-parameter in="path" name="step-name" type="string" %}
+{% swagger-parameter in="path" name="step-name" type="string" required="true" %}
 Name of the Harvester Step.  The name must be 
 
 `sourceType`
@@ -1564,11 +1574,11 @@ Name of the Harvester Step.  The name must be
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="harvester-name" type="string" %}
+{% swagger-parameter in="path" name="harvester-name" type="string" required="true" %}
 Technical name of the Harvester.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 

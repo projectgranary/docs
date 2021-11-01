@@ -52,7 +52,7 @@ Name of project. Filters event types by project. If
  is missing, all event types from all projects will be retrieved but with limited response bodies.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -242,11 +242,11 @@ Name of project. Filters event types by project. If
  is missing, event type is returned with limited response body.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="event-type-name" type="string" %}
+{% swagger-parameter in="path" name="event-type-name" type="string" required="true" %}
 Name of the event type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
@@ -384,15 +384,15 @@ Name of project the event-type belongs to. If
  is missing, the event type is returned with limited response body.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="version" type="string" %}
+{% swagger-parameter in="path" name="version" type="string" required="true" %}
 The version of the event type, or "latest" to get the latest version
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="event-type-name" type="string" %}
+{% swagger-parameter in="path" name="event-type-name" type="string" required="true" %}
 Name of the event type
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -636,7 +636,7 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="event-type-name" type="string" %}
+{% swagger-parameter in="path" name="event-type-name" type="string" required="true" %}
 Unique event type name.  If not provided, it is derived from body parameter 
 
 `displayName`
@@ -644,7 +644,7 @@ Unique event type name.  If not provided, it is derived from body parameter
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -700,7 +700,7 @@ Source as in the server host of physical location references. Only for requests 
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="schema" type="object" %}
+{% swagger-parameter in="body" name="schema" type="object" required="true" %}
 JSON schema for event type data. Escaped string of schema needed. Only for requests of type 
 
 `live_segment`
@@ -788,16 +788,16 @@ Default:
 Note: This setting is only available on event type creation and can not be updated afterwards.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="eventIdExpression" type="string" %}
-The SpringEL expression to create the grnry-event-id. Only valid for type 
+{% swagger-parameter in="body" name="correlationIdExpression" type="string" required="true" %}
+The SpringEL expression to create the grnry-correlation-id. Only valid for type 
 
 `data_in`
 
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="correlationIdExpression" type="string" %}
-The SpringEL expression to create the grnry-correlation-id. Only valid for type 
+{% swagger-parameter in="body" name="eventIdExpression" type="string" required="true" %}
+The SpringEL expression to create the grnry-event-id. Only valid for type 
 
 `data_in`
 
@@ -957,11 +957,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="event-type-name" type="string" %}
+{% swagger-parameter in="path" name="event-type-name" type="string" required="true" %}
 Name of the event type
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
@@ -1125,11 +1125,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="event-type-name" type="string" %}
+{% swagger-parameter in="path" name="event-type-name" type="string" required="true" %}
 name of the event type to be deleted
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 

@@ -54,11 +54,11 @@ Example:
 
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="correlationId" type="string" %}
+{% swagger-parameter in="path" name="correlationId" type="string" required="true" %}
 The correlation ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
@@ -221,15 +221,15 @@ _event_harvester_
 . Otherwise, you will not get back any results.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="correlationId" type="string" %}
+{% swagger-parameter in="path" name="correlationId" type="string" required="true" %}
 The correlation ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="eventId" type="string" %}
+{% swagger-parameter in="path" name="eventId" type="string" required="true" %}
 The event ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
@@ -300,161 +300,3 @@ Example: /events/cookie123/event0815
 ```
 {% endswagger-response %}
 {% endswagger %}
-
-{% swagger baseUrl="https://api.grnry.io" path="/events?type={event-type}" method="get" summary="Get all events by type " %}
-{% swagger-description %}
-Retrieves events by type. In order to get results, suitable roles as defined by the fields event_type and event_harvester are required. 
-{% endswagger-description %}
-
-{% swagger-parameter in="query" name="type" type="string" %}
-REQUIRED: the event-type
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="expand" type="string" %}
-Expand information (detailed information). Comma-separated list of fields to include in the response. Fields are null otherwise. Valid values are 
-
-**message**
-
- and 
-
-**totalCount.**
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="from (included)" type="string" %}
-Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to 
-
-**1970-01-01T00:00:00Z**
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="to (excluded)" type="string" %}
-Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to 
-
-**now()**
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="offset" type="string" %}
-Number of elements to be skipped. Defaults to 0.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="pagesize" type="string" %}
-Number of elements to be shown. Defaults to 20.
-{% endswagger-parameter %}
-
-{% swagger-response status="200" description="" %}
-```
-{
-   "totalCount":11,
-   "events":[
-      {
-         "eventId":"e30",
-         "correlationId":"c2",
-         "message":null,
-         "created":"2018-11-01T11:48:08.000Z",
-         "eventType":"web",
-         "eventTypeVersion": 1,
-         "eventHarvester":"testsource",
-         "_links":{
-            "self":{
-               "href":"http://hostname/events/c2/e30"
-            }
-         }
-      },
-      {
-         "eventId":"e29",
-         "correlationId":"c2",
-         "message":null,
-         "created":"2018-11-01T11:48:07.000Z",
-         "eventType":"web",
-         "eventTypeVersion": 1,
-         "eventHarvester":"testsource",
-         "_links":{
-            "self":{
-               "href":"http://hostname/events/c2/e29"
-            }
-         }
-      },
-      {
-         "eventId":"e28",
-         "correlationId":"c2",
-         "message":null,
-         "created":"2018-11-01T11:48:06.000Z",
-         "eventType":"web",
-         "eventTypeVersion": 1,
-         "eventHarvester":"testsource",
-         "_links":{
-            "self":{
-               "href":"http://hostname/events/c2/e28"
-            }
-         }
-      },
-      {
-         "eventId":"e18",
-         "correlationId":"c2",
-         "message":null,
-         "created":"2018-11-01T11:47:56.000Z",
-         "eventType":"web",
-         "eventTypeVersion": 1,
-         "eventHarvester":"testsource",
-         "_links":{
-            "self":{
-               "href":"http://hostname/events/c2/e18"
-            }
-         }
-      },
-      {
-         "eventId":"e17",
-         "correlationId":"c2",
-         "message":null,
-         "created":"2018-11-01T11:47:55.000Z",
-         "eventType":"web",
-         "eventTypeVersion": 1,
-         "eventHarvester":"testsource",
-         "_links":{
-            "self":{
-               "href":"http://hostname/events/c2/e17"
-            }
-         }
-      }
-   ],
-   "_links":{
-      "self":{
-         "href":"http://hostname/events?type=web&from=1974-11-19T15:34:48Z&to=2019-12-13T09:12:15Z&expand=totalCount&offset=0&pagesize=20"
-      },
-      "next":{
-         "href":"http://hostname/events?type=web&from=1974-11-19T15:34:48Z&to=2019-12-13T09:12:15Z&expand=%5BtotalCount%5D&offset=20&pagesize=20"
-      }
-   }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="403" description="" %}
-```
-{
-    "timestamp": 1587302499600,
-    "type": "entity_not_accessible",
-    "message": "Access forbidden due to missing roles.",
-    "details": "uri=/events"
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="404" description="If there were no events with given event type found. " %}
-```
-{
-    "timestamp": 1587302499600,
-    "type": "entity_not_found",
-    "message": "Events with Event Type 'web' not found.",
-    "details": "uri=/events"
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% hint style="warning" %}
-Deprecated in Granary 0.7
-{% endhint %}

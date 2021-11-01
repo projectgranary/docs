@@ -73,7 +73,7 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
@@ -366,11 +366,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="id" type="string" %}
+{% swagger-parameter in="path" name="id" type="string" required="true" %}
 The ID of belt
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication Token
 {% endswagger-parameter %}
 
@@ -569,7 +569,7 @@ If
 Unique name of the belt.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="id" type="number" %}
+{% swagger-parameter in="path" name="id" type="number" required="false" %}
 If provided, creates a belt with a given belt 
 
 `id`
@@ -601,7 +601,7 @@ If provided, creates a belt with a given belt
 ).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
@@ -1009,11 +1009,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="id" type="string" %}
+{% swagger-parameter in="path" name="id" type="string" required="true" %}
 Belt ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication Token
 {% endswagger-parameter %}
 
@@ -1100,11 +1100,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="id" type="string" %}
+{% swagger-parameter in="path" name="id" type="string" required="true" %}
 Belt ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication Token
 {% endswagger-parameter %}
 
@@ -1261,11 +1261,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="id" type="string" %}
+{% swagger-parameter in="path" name="id" type="string" required="true" %}
 Belt IDn
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
@@ -1445,15 +1445,15 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="id" type="string" %}
+{% swagger-parameter in="path" name="id" type="string" required="true" %}
 Belt ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="action" type="string" %}
+{% swagger-parameter in="body" name="action" type="string" required="true" %}
 The action to be performed "START" or "STOP"
 {% endswagger-parameter %}
 
@@ -1559,11 +1559,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="id" type="string" %}
+{% swagger-parameter in="path" name="id" type="string" required="true" %}
 Belt ID
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 

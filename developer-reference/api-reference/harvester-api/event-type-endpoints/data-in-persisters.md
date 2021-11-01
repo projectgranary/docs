@@ -66,7 +66,7 @@ If
 Name of the event type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -215,11 +215,11 @@ If
 Name of the event type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="imported" type="string" %}
+{% swagger-parameter in="query" name="imported" type="string" required="false" %}
 If set to 
 
 `"true"`
@@ -367,11 +367,11 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="event-type-name" type="string" %}
+{% swagger-parameter in="path" name="event-type-name" type="string" required="true" %}
 Name of the event type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -466,11 +466,11 @@ If
 Name of the event type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="action" type="string" %}
+{% swagger-parameter in="body" name="action" type="string" required="true" %}
 Updates the status of this persister. Possible values: 
 
 `START`
@@ -489,6 +489,25 @@ Updates the status of this persister. Possible values:
             "href": "https://hostname/projects/global/event-types/eventtype-1/eventstores/pg/persister/state"
         }
     }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="400: Bad Request" description="" %}
+```javascript
+{
+    "timestamp": 1635778655364,
+    "message": "Parameter 'action' was assigned an invalid value, provided value: ''.",
+    "type": "bad_parameter_value",
+    "traceId": "4995123058748313916",
+    "invalidParams": [
+        {
+            "type": "Parameter",
+            "name": "action",
+            "reason": "was assigned an invalid value, provided value: ''"
+        }
+    ],
+    "details": "uri=/projects/testfordocu/event-types/dbt-belt-input-ET/eventstores/pg/persister/state"
 }
 ```
 {% endswagger-response %}
@@ -575,7 +594,7 @@ If
 Name of the event-type
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 

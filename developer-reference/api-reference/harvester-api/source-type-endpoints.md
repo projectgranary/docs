@@ -21,14 +21,18 @@ Get latest version of all source-types.
 \
 
 
-This request requires the role 
+This request requires the 
 
-`source_type_read`
+`viewer`
 
-.
+ or 
+
+`editor`
+
+ role in at least one project.
 {% endswagger-description %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -148,18 +152,22 @@ Get all versions of a given source type.
 \
 
 
-This request requires the role 
+This request requires the 
 
-`source_type_read`
+`viewer`
 
-.
+ or 
+
+`editor`
+
+ role in at least one project.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="source-type-name" type="string" %}
+{% swagger-parameter in="path" name="source-type-name" type="string" required="true" %}
 Name of the source type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -266,22 +274,26 @@ Get one version of a source type.
 \
 
 
-This request requires the role 
+This request requires the 
 
-`source_type_read`
+`viewer`
 
-.
+ or 
+
+`editor`
+
+ role in at least one project.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="version" type="string" %}
+{% swagger-parameter in="path" name="version" type="string" required="true" %}
 Version of the source type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="source-type-name" type="string" %}
+{% swagger-parameter in="path" name="source-type-name" type="string" required="true" %}
 Name of the source type.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 

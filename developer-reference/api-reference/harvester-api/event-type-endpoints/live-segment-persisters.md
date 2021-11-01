@@ -56,7 +56,7 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="header" name="Authentication" type="string" %}
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token.
 {% endswagger-parameter %}
 
@@ -170,6 +170,10 @@ If
 Event type name.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="header" name="Authentication" required="true" %}
+Authentication token.
+{% endswagger-parameter %}
+
 {% swagger-response status="200" description="" %}
 ```json
 {
@@ -268,6 +272,10 @@ If
 Event type name.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="header" name="Authentication" required="true" %}
+
+{% endswagger-parameter %}
+
 {% swagger-response status="200" description="" %}
 ```json
 {
@@ -364,6 +372,10 @@ Describes the desired state. Possible values: START, STOP, RESTART
 
 {% swagger-parameter in="path" name="event-type-name" type="string" required="true" %}
 Event type name.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="Authentication" required="true" %}
+Authentication token.
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}
