@@ -565,6 +565,10 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="name" type="string" required="true" %}
+Unique name of the belt.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="path" name="id" type="number" %}
 If provided, creates a belt with a given belt 
 
@@ -601,6 +605,73 @@ If provided, creates a belt with a given belt
 Authentication token
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="description" type="string" %}
+Belt description.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="eventTypes" type="array" required="true" %}
+String array of event types to be processed. Only event types registered with Harvester API's event type endpoint are valid values. You must have the event type's 
+
+_consumer_
+
+ or 
+
+_editor_
+
+ role assigned in Keycloak to consume an event type in a belt.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="outputTypes" type="array" %}
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="kafkaDestinationTopic" type="string" %}
+\[DEPRECATED] Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either 
+
+`profile-update`
+
+ or server env variable 
+
+`BELT_DESTINATION_TOPIC`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="extractorVersion" type="string" %}
+Image tag of the belt runtime docker image to be used. Defaults to either 
+
+`latest`
+
+ or server env variable 
+
+`BELT_EXTRACTOR_VERSION`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="extractorFn" type="string" %}
+Extractor function to be executed by this belt.
+
+\
+
+
+Defaults either to 
+
+`Hello World`
+
+ example function or server env variable 
+
+`BELT_EXTRACTOR_FN`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="requirementsPy" type="string" %}
+PIP package requirements for belt. E.g. 
+
+`package1==0.1.0\r\npackage2`
+{% endswagger-parameter %}
+
 {% swagger-parameter in="body" name="imagePullSecret" type="string" %}
 Kubernetes Secret used to pull the 
 
@@ -621,6 +692,18 @@ Docker Image to be deployed. Defaults to server env
  .
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="millicpu" type="string" %}
+CPU limit specification for this belt. Defaults to either 
+
+`200`
+
+ or server env variable 
+
+`BELT_MILLI_CPU`
+
+.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="body" name="millicpuRequests" type="string" %}
 CPU requests specification for this belt. Defaults to either 
 
@@ -629,6 +712,18 @@ CPU requests specification for this belt. Defaults to either
  or server env variable 
 
 `BELT_MILLI_CPU_REQUESTS`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="memory" type="string" %}
+Memory limit specification for this belt. Defaults either to 
+
+`512`
+
+ or server env variable 
+
+`BELT_MEMORY`
 
 .
 {% endswagger-parameter %}
@@ -645,16 +740,10 @@ Memory specification for this belt. Defaults to either
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="kafkaDestinationTopic" type="string" %}
-Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either 
+{% swagger-parameter in="body" name="replicas" type="integer" %}
+Number of replicas. Defaults to 
 
-`profile-update`
-
- or server env variable 
-
-`BELT_DESTINATION_TOPIC`
-
-.
+`1`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="extraEnv" type="object" %}
@@ -693,107 +782,8 @@ JSON Kubernetes volume definition for belt deployment. Defaults to either
 .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="requirementsPy" type="string" %}
-PIP package requirements for belt. E.g. 
-
-`package1==0.1.0\r\npackage2`
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="profileType" type="string" %}
-Profile type to fetch. Defaults to 
-
-`_d`
-
-. 
-
-**Required when fetchProfile is `TRUE`.**
-{% endswagger-parameter %}
-
 {% swagger-parameter in="body" name="partitionOffsets" type="object" %}
 Mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. The offset settings only have an effect on the first start of a Belt. All subsequent (re-)starts of configuration update will read the event type topics from consumer group's current offset.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="extractorVersion" type="string" %}
-Image tag of the belt runtime docker image to be used. Defaults to either 
-
-`latest`
-
- or server env variable 
-
-`BELT_EXTRACTOR_VERSION`
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="name" type="string" %}
-Unique name of the belt.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="description" type="string" %}
-Belt description.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="replicas" type="integer" %}
-Number of replicas. Defaults to 
-
-`1`
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="eventTypes" type="array" %}
-String array of event types to be processed. Only event types registered with Harvester API's event type endpoint are valid values. You must have the event type's 
-
-_consumer_
-
- or 
-
-_editor_
-
- role assigned in Keycloak to consume an event type in a belt.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="millicpu" type="string" %}
-CPU limit specification for this belt. Defaults to either 
-
-`200`
-
- or server env variable 
-
-`BELT_MILLI_CPU`
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="memory" type="string" %}
-Memory limit specification for this belt. Defaults either to 
-
-`512`
-
- or server env variable 
-
-`BELT_MEMORY`
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="author" type="string" %}
-Author of this belt.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="extractorFn" type="string" %}
-Extractor function to be executed by this belt.
-
-\
-
-
-Defaults either to 
-
-`Hello World`
-
- example function or server env variable 
-
-`BELT_EXTRACTOR_FN`
-
-.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="debug" type="boolean" %}
@@ -812,6 +802,16 @@ Determines if belt should fetch profiles from the Profile Store. Defaults to
 . Possible values: 
 
 `["FALSE", "TRUE", "LAZY"]`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="profileType" type="string" %}
+Profile type to fetch. Defaults to 
+
+`_d`
+
+. 
+
+**Required when fetchProfile is `TRUE`.**
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="secret" type="string" %}
@@ -1364,13 +1364,13 @@ Authentication token
 
 Possible values for the status attribute in the response body are:
 
-| Status               | Description                                                        |
-| -------------------- | ------------------------------------------------------------------ |
-| RUNNING              | Belt is running                                                    |
-| FAILED               | Belt is deployed but not running                                   |
-| RUNNING_BUT_OUTDATED | Belt is running but there is a newer version of it in the database |
-| DEPLOYING            | Belt is being deployed                                             |
-| STOPPED              | Belt is not deployed                                               |
+| Status                 | Description                                                        |
+| ---------------------- | ------------------------------------------------------------------ |
+| RUNNING                | Belt is running                                                    |
+| FAILED                 | Belt is deployed but not running                                   |
+| RUNNING\_BUT\_OUTDATED | Belt is running but there is a newer version of it in the database |
+| DEPLOYING              | Belt is being deployed                                             |
+| STOPPED                | Belt is not deployed                                               |
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="post" summary="Manipulate a Belt's state" %}
 {% swagger-description %}
