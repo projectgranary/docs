@@ -11,7 +11,7 @@ description: Harvester API's event type endpoints
 * POST /event-types
 * POST /event-types/{event-type-name}
 * PUT/event-types/{event-type-name}
-* DELETE /event-types/{event-type-name} 
+* DELETE /event-types/{event-type-name}&#x20;
 * GET/event-types/{event-type-name}/{version}
 * GET /event-types/{event-type-name}/eventstores/{event-store-name}/persister
 * PUT /event-types/{event-type-name}/eventstores/{event-store-name}/persister
@@ -23,50 +23,78 @@ description: Harvester API's event type endpoints
 
 Consult the [Granary Access Clients Reference](../../../operator-reference/identity-and-access-management/granary-access-clients.md#harvester-api) for roles a user needs to interact with Harvester API.
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types" %}
-{% api-method-summary %}
-Get all Event Types
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types" method="get" summary="Get all Event Types" %}
+{% swagger-description %}
+Returns a list of all event types (latest version of each event type)
 
-{% api-method-description %}
-Returns a list of all event types \(latest version of each event type\)  
-This request will return all event types, which `consumer` or `editor` matches the or one of the requester's role\(s\). if `consumer` is null, every authenticated user is authorized to see the entity.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+
+This request will return all event types, which 
+
+`consumer`
+
+ or 
+
+`editor `
+
+matches the or one of the requester's role(s). if 
+
+`consumer `
+
+is null, every authenticated user is authorized to see the entity.
+{% endswagger-description %}
+
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="expand" type="string" required=false %}
-Expand the response with `totalCount`, or `persisters` to show either the count or the peristers of different event-type-names. Default is `""`.
-{% endapi-method-parameter %}
+{% swagger-parameter in="query" name="expand" type="string" %}
+Expand the response with 
 
-{% api-method-parameter name="search" type="string" required=false %}
-Filter event types by displaynames containing this search term Default is `""`.
-{% endapi-method-parameter %}
+`totalCount`
 
-{% api-method-parameter name="pagesize" type="number" required=false %}
-Number of event types returned per page. Default is `20`.
-{% endapi-method-parameter %}
+, or 
 
-{% api-method-parameter name="offset" type="number" required=false %}
-Offset of the requested page. Default is `0`. Must be a whole multiple of `pagesize`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+`persisters`
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
+ to show either the count or the peristers of different event-type-names. Default is 
 
-{% endapi-method-response-example-description %}
+`""`
 
-```text
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search" type="string" %}
+Filter event types by displaynames containing this search term Default is 
+
+`""`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="pagesize" type="number" %}
+Number of event types returned per page. Default is 
+
+`20`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="offset" type="number" %}
+Offset of the requested page. Default is 
+
+`0`
+
+. Must be a whole multiple of 
+
+`pagesize`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="" %}
+```
 {
     "_links": {
         "self": {
@@ -121,13 +149,9 @@ Offset of the requested page. Default is `0`. Must be a whole multiple of `pages
     ]
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Invalid query parameter value.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="Invalid query parameter value." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -136,13 +160,9 @@ Invalid query parameter value.
     "details": "uri=/event-types"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -151,13 +171,9 @@ Token invalid or missing.
     "details": "uri=/event-types"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -166,43 +182,41 @@ Missing roles to access this resource.
     "details":"uri=/event-types"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
-{% api-method-summary %}
-Get all versions of an Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name" method="get" summary="Get all versions of an Event Type" %}
+{% swagger-description %}
+Get all versions of a given event type. 
 
-{% api-method-description %}
-Get all versions of a given event type.   
-This request will return all versions, if  `consumer` or `editor` matches the requester's role. If `consumer` is null, every authenticated user is authorized.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+
+This request will return all versions, if  
+
+`consumer`
+
+ or 
+
+`editor`
+
+ matches the requester's role. If 
+
+`consumer`
+
+ is null, every authenticated user is authorized.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 Name of the event type.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-All versions of the requested `:event-type-name` \(`postman-event-type`\).
-{% endapi-method-response-example-description %}
-
-```text
+{% swagger-response status="200" description="All versions of the requested :event-type-name (postman-event-type)." %}
+```
 {
     "_links": {
         "self": {
@@ -247,13 +261,9 @@ All versions of the requested `:event-type-name` \(`postman-event-type`\).
     ]
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -262,13 +272,9 @@ Token invalid or missing.
     "details": "uri=/event-types/adobe-s3"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -277,13 +283,9 @@ Missing roles to access this resource.
     "details":"uri=/event-types/adobe-s3"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-No event-type found with that name \(case sensitive\).
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="No event-type found with that name (case sensitive)." %}
 ```
 {
     "timestamp": 1587302671116,
@@ -292,101 +294,149 @@ No event-type found with that name \(case sensitive\).
     "details": "uri=/event-types/new-entity"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
-{% api-method-summary %}
-Create an Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name" method="post" summary="Create an Event Type" %}
+{% swagger-description %}
+To create an event type your user needs to have the respective 
 
-{% api-method-description %}
-To create an event type your user needs to have the respective `event_type_{type}_edit` role \(E.g. to create a `data_in`-type event type you need the `event_type_data_in_edit` role. Be aware that you will not be able to update the entity afterwards if your account does not have the role set in `editor`.
-{% endapi-method-description %}
+`event_type_{type}_edit`
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=false %}
+ role (E.g. to create a 
+
+`data_in`
+
+\-type event type you need the 
+
+`event_type_data_in_edit`
+
+ role. Be aware that you will not be able to update the entity afterwards if your account does not have the role set in 
+
+`editor`
+
+.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 unique event type name
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-body-parameters %}
-{% api-method-parameter name="consumer" type="string" required=false %}
-The name of user group allowed to consume this event type. If not set, there's no restriction applied and any authenticated user can view event-type details and also consume the data with belts. Defaults to `null`
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="consumer" type="string" %}
+The name of user group allowed to consume this event type. If not set, there's no restriction applied and any authenticated user can view event-type details and also consume the data with belts. Defaults to 
 
-{% api-method-parameter name="type" type="string" required=false %}
-The type of this event type. Allowed values are: `data_in` , `ttl`. Defaults to `data_in`
-{% endapi-method-parameter %}
+`null`
+{% endswagger-parameter %}
 
-{% api-method-parameter name="editor" type="string" required=false %}
-The name of user group allowed to edit this event type. Defaults to `event_type_<type>_edit`.
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="type" type="string" %}
+The type of this event type. Allowed values are: 
 
-{% api-method-parameter name="eventstoreTTL" type="string" required=false %}
-time-to-live configuration for all eventstores in ISO 8601 Duration format.  
-Default P100Y \(100 years\)
-{% endapi-method-parameter %}
+`data_in`
 
-{% api-method-parameter name="replication" type="integer" required=false %}
-Kafka topic replication factor.   
-Default: 3  
+ , 
+
+`ttl`
+
+. Defaults to 
+
+`data_in`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="editor" type="string" %}
+The name of user group allowed to edit this event type. Defaults to 
+
+`event_type_<type>_edit`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="eventstoreTTL" type="string" %}
+time-to-live configuration for all eventstores in ISO 8601 Duration format.
+
+\
+
+
+Default P100Y (100 years)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="replication" type="integer" %}
+Kafka topic replication factor. 
+
+\
+
+
+Default: 3
+
+\
+
+
 Note: this setting is only available on event type creation and can not be updated afterwards.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="partitionCount" type="integer" required=false %}
-Kafka topic partition count.   
-Default: 32  
+{% swagger-parameter in="body" name="partitionCount" type="integer" %}
+Kafka topic partition count. 
+
+\
+
+
+Default: 32
+
+\
+
+
 Note: This settting is only available on event type creation and can not be updated afterwards.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="retentionMs" type="number" required=false %}
-kafka topic retention in milliseconds.   
-Used for kafka topic config of segment.ms and retention.ms.  
-Default: 345600000 \( 4 days\)  
+{% swagger-parameter in="body" name="retentionMs" type="number" %}
+kafka topic retention in milliseconds. 
+
+\
+
+
+Used for kafka topic config of segment.ms and retention.ms.
+
+\
+
+
+Default: 345600000 ( 4 days)
+
+\
+
+
 Note: This setting is only available on event type creation and can not be updated afterwards.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="description" type="string" required=false %}
+{% swagger-parameter in="body" name="description" type="string" %}
 description of the eventType.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="eventIdExpression" type="string" required=true %}
+{% swagger-parameter in="body" name="eventIdExpression" type="string" %}
 The SpringEL expression to create the grnry-event-id.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="correlationIdExpression" type="string" required=true %}
+{% swagger-parameter in="body" name="correlationIdExpression" type="string" %}
 The SpringEL expression to create the grnry-correlation-id.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="timestampExpression" type="string" required=false %}
-The SpringEL Expression to create the grnry-event-timestamp. Expression has to return milliseconds since 1.1.1970 UTC.  
-Default: \#nowMillis\(\)
-{% endapi-method-parameter %}
+{% swagger-parameter in="body" name="timestampExpression" type="string" %}
+The SpringEL Expression to create the grnry-event-timestamp. Expression has to return milliseconds since 1.1.1970 UTC.
 
-{% api-method-parameter name="displayName" type="string" required=true %}
+\
+
+
+Default: #nowMillis()
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="displayName" type="string" %}
 Displayname of the new event type
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```text
+{% swagger-response status="200" description="" %}
+```
 {
     "name": "event-type-4",
     "version": "1",
@@ -397,13 +447,9 @@ Displayname of the new event type
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-If required parameters are missing or parameters are invalid.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="If required parameters are missing or parameters are invalid." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -412,13 +458,9 @@ If required parameters are missing or parameters are invalid.
     "details":"uri=/event-types"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -427,13 +469,9 @@ Token invalid or missing.
     "details": "uri=/event-types"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -442,13 +480,9 @@ Missing roles to access this resource.
     "details":"uri=/event-types"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=409 %}
-{% api-method-response-example-description %}
-If displayName not unique \(case insensitive\).
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="409" description="If displayName not unique (case insensitive)." %}
 ```
 {
     "timestamp": 1587303130850,
@@ -457,13 +491,9 @@ If displayName not unique \(case insensitive\).
     "details": "uri=/event-types"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=500 %}
-{% api-method-response-example-description %}
-Persister already exists for the eventy type.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="500" description="Persister already exists for the eventy type." %}
 ```
 {
     "timestamp":1586949269381,
@@ -472,71 +502,67 @@ Persister already exists for the eventy type.
     "details":"uri=/event-types"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="put" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
-{% api-method-summary %}
-Update an Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name" method="put" summary="Update an Event Type" %}
+{% swagger-description %}
+Fully or partially updates an event type.
 
-{% api-method-description %}
-Fully or partially updates an event type.  
-This requires the requester to assume roles that match the `editor` field. If no delta was recognized, no update will be made and HTTP 304 will be returned.  
-  
-Immutable fields \(like type, partitionCount,.. \) can be part of the request body, but their values need to match the current values, otherwise an error is raised.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+
+This requires the requester to assume roles that match the 
+
+`editor `
+
+field. If no delta was recognized, no update will be made and HTTP 304 will be returned.
+
+\
+
+
+
+
+\
+
+
+Immutable fields (like type, partitionCount,.. ) can be part of the request body, but their values need to match the current values, otherwise an error is raised.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 Name of the event type
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-body-parameters %}
-{% api-method-parameter name="displayName" type="string" required=false %}
+{% swagger-parameter in="body" name="displayName" type="string" %}
 The displayname used in the UI
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="timestampExpression" type="string" required=false %}
+{% swagger-parameter in="body" name="timestampExpression" type="string" %}
 The SpringEL expression to create the grnry-event-timestamp. It has to return milliseconds since 1.1.1970 UTC.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="description" type="string" required=false %}
+{% swagger-parameter in="body" name="description" type="string" %}
 The description of the event type
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="eventstoreTTL" type="string" required=false %}
+{% swagger-parameter in="body" name="eventstoreTTL" type="string" %}
 time-to-live configuration for all eventstores in ISO 8601 duration format.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="eventIdExpression" type="string" required=false %}
+{% swagger-parameter in="body" name="eventIdExpression" type="string" %}
 The SpringEL expression to create the grnry-event-id
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="correlationIdExpression" type="string" required=false %}
+{% swagger-parameter in="body" name="correlationIdExpression" type="string" %}
 The SpringEL expression to create the grnry-correlation-id.
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```text
+{% swagger-response status="200" description="" %}
+```
 {
         "name": "foo-test",
         "displayName": "my-test-type"
@@ -557,13 +583,9 @@ The SpringEL expression to create the grnry-correlation-id.
         }
     },
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Invalid parameter.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="Invalid parameter." %}
 ```
 {
     "timestamp": 1587302499600,
@@ -572,13 +594,9 @@ Invalid parameter.
     "details":"uri=/event-types/test-event-type-2"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -587,14 +605,10 @@ Token invalid or missing.
     "details": "uri=/event-types/test-event-type"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
-```text
+{% swagger-response status="403" description="Missing roles to access this resource." %}
+```
 {
     "timestamp":1586949273019,
     "type": "entity_not_accessible",
@@ -602,51 +616,32 @@ Missing roles to access this resource.
     "details":"uri=/event-types/test-event-type"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="delete" host="https://api.grnry.io" path="/event-types/:event-type-name" %}
-{% api-method-summary %}
-Delete an Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name" method="delete" summary="Delete an Event Type" %}
+{% swagger-description %}
+Deletes all versions of the given event type, if it is not used by registered belts. This request requires the role matching 
 
-{% api-method-description %}
-Deletes all versions of the given event type, if it is not used by registered belts. This request requires the role matching `editor` field.
-{% endapi-method-description %}
+`editor `
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+field.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 name of the event type to be deleted
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=204 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```text
-
+{% swagger-response status="204" description="" %}
 ```
-{% endapi-method-response-example %}
+```
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -655,13 +650,9 @@ Token invalid or missing.
     "details": "uri=/event-types/13213"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -670,13 +661,9 @@ Missing roles to access this resource.
     "details":"uri=/event-types/test-event-type-tp"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-No event type with given name \(case sensitive\) found.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="No event type with given name (case sensitive) found." %}
 ```
 {
     "timestamp":1586949280969,
@@ -685,14 +672,10 @@ No event type with given name \(case sensitive\) found.
     "details":"uri=/event-types/test-delete"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=412 %}
-{% api-method-response-example-description %}
-If there are still belts and/or harvesters referencing the event-type, the deletion will fail.
-{% endapi-method-response-example-description %}
-
-```text
+{% swagger-response status="412" description="If there are still belts and/or harvesters referencing the event-type, the deletion will fail." %}
+```
 {
     "timestamp": 1574854606738,
     "type": "entity_in_use"
@@ -709,54 +692,58 @@ If there are still belts and/or harvesters referencing the event-type, the delet
     "details": "uri=/event-types/test-event-type-delete"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/:version" %}
-{% api-method-summary %}
-Get a Specific Version of an Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name/:version" method="get" summary="Get a Specific Version of an Event Type" %}
+{% swagger-description %}
+Get one version of an event type.
 
-{% api-method-description %}
-Get one version of an event type.  
-Version should be "latest" or a valid number greater than or equals to 1.  
-This request requires the role matching `consumer` or `editor` field of the event type. If `consumer` is not set, any authenticated user is authorized.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="version" type="string" required=true %}
+
+Version should be "latest" or a valid number greater than or equals to 1.
+
+\
+
+
+This request requires the role matching 
+
+`consumer `
+
+or 
+
+`editor `
+
+field of the event type. If 
+
+`consumer `
+
+is not set, any authenticated user is authorized.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="version" type="string" %}
 The version of the event type, or "latest" to get the latest version
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 Name of the event type
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="export" type="string" required=false %}
-If "true" or "True", the event type response will only contain properties a POST body must contain to create this exact event type. All properties set to default values and all api-generated properties will be omitted. Default is `""`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+{% swagger-parameter in="query" name="export" type="string" %}
+If "true" or "True", the event type response will only contain properties a POST body must contain to create this exact event type. All properties set to default values and all api-generated properties will be omitted. Default is 
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
+`""`
 
-{% endapi-method-response-example-description %}
+.
+{% endswagger-parameter %}
 
-```text
+{% swagger-response status="200" description="" %}
+```
 {
     "name": "snowplow-webtracking",
     "displayName": "snowplow-webtracking",
@@ -777,14 +764,10 @@ If "true" or "True", the event type response will only contain properties a POST
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-If the version is not latest or a valid number greater or equals to 1.
-{% endapi-method-response-example-description %}
-
-```text
+{% swagger-response status="400" description="If the version is not latest or a valid number greater or equals to 1." %}
+```
 {
     "timestamp": 1587302499600,
     "type": "bad_parameter_value",
@@ -792,13 +775,9 @@ If the version is not latest or a valid number greater or equals to 1.
     "details":"uri=/event-types/test-event-type/invalidVersion"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -807,13 +786,9 @@ Token invalid or missing.
     "details": "uri=/event-types/adobe-s3/latest"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -822,13 +797,9 @@ Missing roles to access this resource.
     "details":"uri=/event-types/test-event-type-partial/latest"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-No event type with given name \(case sensitive\) found for given version.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="No event type with given name (case sensitive) found for given version." %}
 ```
 {
     "timestamp": 1587302671116,
@@ -837,57 +808,69 @@ No event type with given name \(case sensitive\) found for given version.
     "details":"uri=/event-types/test-event-type/4"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
-{% api-method-summary %}
-Get Persister for a Specific Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" method="get" summary="Get Persister for a Specific Event Type" %}
+{% swagger-description %}
+Get the persister of an event type.
 
-{% api-method-description %}
-Get the persister of an event type.  
-This request requires the role matching either `consumer` or `editor`. If `consumer` is null, any authenticated user is authorized. 
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-store-name" type="string" required=true %}
+
+This request requires the role matching either 
+
+`consumer `
+
+or 
+
+`editor`
+
+. If 
+
+`consumer `
+
+is null, any authenticated user is authorized. 
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-store-name" type="string" %}
 Name of the event store.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 Name of the event type.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="export" type="string" required=false %}
-if set to `"true"` \(not case sensitive\), the persister response will only contain properties that are not set to default values or generated by the api. Default is `""`.
-{% endapi-method-parameter %}
+{% swagger-parameter in="query" name="export" type="string" %}
+if set to 
 
-{% api-method-parameter name="expand" type="string" required=false %}
-Expand the response with `state` to show the persister state. Default is `""`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+`"true"`
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-requested :event-type-name \(eventtype-1\) , :event-store-name \(pg\)
-{% endapi-method-response-example-description %}
+ (not case sensitive), the persister response will only contain properties that are not set to default values or generated by the api. Default is 
 
-```text
+`""`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="expand" type="string" %}
+Expand the response with 
+
+`state`
+
+ to show the persister state. Default is 
+
+`""`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="requested :event-type-name (eventtype-1) , :event-store-name (pg)" %}
+```
 {
     "streamName": "grnry-p-pg-postman-eventtype-1",
     "appName": "grnry-eventstore-pg",
@@ -926,13 +909,9 @@ requested :event-type-name \(eventtype-1\) , :event-store-name \(pg\)
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -941,13 +920,9 @@ Token invalid or missing.
     "details": "uri=/event-types/adobe-s3/eventstores/pg/persister"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -956,13 +931,9 @@ Missing roles to access this resource.
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Event store, event type not found.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Event store, event type not found." %}
 ```
 {
     "timestamp": 1587303625038,
@@ -971,67 +942,57 @@ Event store, event type not found.
     "details": "uri=/event-types/adobe-s3/eventstores/pgd/persister"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="put" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" %}
-{% api-method-summary %}
-Update Persister Config for a Specific Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister" method="put" summary="Update Persister Config for a Specific Event Type" %}
+{% swagger-description %}
+Updates the persister configuration of a specific event type.
 
-{% api-method-description %}
-Updates the persister configuration of a specific event type.  
-This request requires the role matching `editor`.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+
+This request requires the role matching 
+
+`editor`
+
+.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 Name of the event type.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="event-store-name" type="string" required=true %}
+{% swagger-parameter in="path" name="event-store-name" type="string" %}
 Name of the event store.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="imported" type="string" required=false %}
-If set to `"true"` \(not case sensitive\), the persister default values will be merged into the provided PUT body while keeping the custom values if provided.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
+{% swagger-parameter in="query" name="imported" type="string" %}
+If set to 
 
-{% api-method-body-parameters %}
-{% api-method-parameter name="deployerConfig" type="object" required=false %}
+`"true"`
+
+ (not case sensitive), the persister default values will be merged into the provided PUT body while keeping the custom values if provided.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="deployerConfig" type="object" required="true" %}
 A map containing all deployer configuration options.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="appConfig" type="object" required=false %}
+{% swagger-parameter in="body" name="appConfig" type="object" required="true" %}
 A Map containing all application configuration parameters
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="appVersion" type="string" required=false %}
+{% swagger-parameter in="body" name="appVersion" type="string" %}
 The updated stream app version. This version has to be present in the backend spring cloud data flow server, otherwise the update will fail.
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```text
+{% swagger-response status="200" description="" %}
+```
 {
     "streamName": "grnry-p-pg-postman-eventtype-1",
     "appName": "grnry-eventstore-pg",
@@ -1066,13 +1027,9 @@ The updated stream app version. This version has to be present in the backend sp
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Invalid parameters
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="400" description="Invalid parameters" %}
 ```
 {
     "timestamp": 1587302499600,
@@ -1081,13 +1038,9 @@ Invalid parameters
     "details":"uri=/event-types/event-type-empty-update-persister-config/eventstores/pg/persister"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -1096,13 +1049,9 @@ Token invalid or missing.
     "details": "uri=/event-types/adobe-s3/eventstores/pg/persister"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -1111,47 +1060,45 @@ Missing roles to access this resource.
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
-{% api-method-summary %}
-Get State of a Persister for a Specific Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" method="get" summary="Get State of a Persister for a Specific Event Type" %}
+{% swagger-description %}
+Get the current state of a persister for an event type.
 
-{% api-method-description %}
-Get the current state of a persister for an event type.  
-This request requires a role matching `editor` or `consumer`. If `consumer` is null, any authenticated user is authorized.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+
+This request requires a role matching 
+
+`editor `
+
+or 
+
+`consumer`
+
+. If 
+
+`consumer `
+
+is null, any authenticated user is authorized.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 Name of the event type.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="event-store-name" type="string" required=true %}
+{% swagger-parameter in="path" name="event-store-name" type="string" %}
 Name of the event store.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
+{% endswagger-parameter %}
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```text
+{% swagger-response status="200" description="" %}
+```
 {
     "status": "STOPPED",
     "_links": {
@@ -1161,13 +1108,9 @@ Authentication token.
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -1176,13 +1119,9 @@ Token invalid or missing.
     "details": "uri=/event-types/adobe-s3/eventstores/pg/persister/state"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -1191,13 +1130,9 @@ Missing roles to access this resource.
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Event store, event type not found.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Event store, event type not found." %}
 ```
 {
     "timestamp": 1587303625038,
@@ -1206,65 +1141,59 @@ Event store, event type not found.
     "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/state"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
 Possible values for the status attribute in the response body are:
 
-| Status | Description |
-| :--- | :--- |
-| UNKNOWN | status could not be determined |
-| STOPPED | persister is not deployed |
-| DEPLOYING | persister is being deployed |
-| STOPPING | persister is being stopped |
-| RUNNING | persister is running |
+| Status                 | Description                                                             |
+| ---------------------- | ----------------------------------------------------------------------- |
+| UNKNOWN                | status could not be determined                                          |
+| STOPPED                | persister is not deployed                                               |
+| DEPLOYING              | persister is being deployed                                             |
+| STOPPING               | persister is being stopped                                              |
+| RUNNING                | persister is running                                                    |
 | RUNNING\_BUT\_OUTDATED | persister is running but there is a newer version of it in the database |
-| FAILED | persister is deployed but not running |
+| FAILED                 | persister is deployed but not running                                   |
 
-{% api-method method="post" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" %}
-{% api-method-summary %}
-Start/Stop Persister for a Specific Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/state" method="post" summary="Start/Stop Persister for a Specific Event Type" %}
+{% swagger-description %}
+Start or stop the state of a persister for an event type.
 
-{% api-method-description %}
-Start or stop the state of a persister for an event type.  
-This request requires the role matching `editor`.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+
+This request requires the role matching 
+
+`editor`
+
+.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 Name of the event type.
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="event-store-name" type="string" required=true %}
+{% swagger-parameter in="path" name="event-store-name" type="string" %}
 Name of the event store.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-body-parameters %}
-{% api-method-parameter name="action" type="string" required=false %}
-Updates the status of this persister. Possible values: `START` , `STOP`
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
-{% endapi-method-request %}
+{% swagger-parameter in="body" name="action" type="string" %}
+Updates the status of this persister. Possible values: 
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
+`START`
 
-{% endapi-method-response-example-description %}
+ , 
 
-```text
+`STOP`
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="" %}
+```
 {
     "status": "DEPLOYING",
     "_links": {
@@ -1274,13 +1203,9 @@ Updates the status of this persister. Possible values: `START` , `STOP`
     }
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-Token invalid or missing.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="401" description="Token invalid or missing." %}
 ```
 {
     "timestamp": 1587302709982,
@@ -1289,13 +1214,9 @@ Token invalid or missing.
     "details": "uri=/event-types/adobe-s3/eventstores/pg/persister/state"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=403 %}
-{% api-method-response-example-description %}
-Missing roles to access this resource.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="403" description="Missing roles to access this resource." %}
 ```
 {
     "timestamp":1586949273019,
@@ -1304,13 +1225,9 @@ Missing roles to access this resource.
     "details":"uri=/event-types/test-event-type-partial/eventstores/pg/persister/state"
 }
 ```
-{% endapi-method-response-example %}
+{% endswagger-response %}
 
-{% api-method-response-example httpCode=404 %}
-{% api-method-response-example-description %}
-Event store, event type not found.
-{% endapi-method-response-example-description %}
-
+{% swagger-response status="404" description="Event store, event type not found." %}
 ```
 {
      "timestamp": 1587303625038,
@@ -1319,58 +1236,62 @@ Event store, event type not found.
      "details": "uri=/event-types/adobe-s3/eventstores/pdg/persister/logs"
 }
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endswagger-response %}
+{% endswagger %}
 
-{% api-method method="get" host="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/logs" %}
-{% api-method-summary %}
-Get Persister Logs for a Specific Event Type
-{% endapi-method-summary %}
+{% swagger baseUrl="https://api.grnry.io" path="/event-types/:event-type-name/eventstores/:event-store-name/persister/logs" method="get" summary="Get Persister Logs for a Specific Event Type" %}
+{% swagger-description %}
+Get the logs from a persister of an event type.
 
-{% api-method-description %}
-Get the logs from a persister of an event type.  
-This request requires the role matching `editor` or `consumer`. if `consumer` is null, any authenticated user is authorized.
-{% endapi-method-description %}
+\
 
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="event-type-name" type="string" required=true %}
+
+This request requires the role matching 
+
+`editor `
+
+or 
+
+`consumer`
+
+. if 
+
+`consumer `
+
+is null, any authenticated user is authorized.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="event-type-name" type="string" %}
 Name of the event-type
-{% endapi-method-parameter %}
+{% endswagger-parameter %}
 
-{% api-method-parameter name="event-store-name" type="string" required=true %}
+{% swagger-parameter in="path" name="event-store-name" type="string" %}
 Name of the event store.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
+{% endswagger-parameter %}
 
-{% api-method-headers %}
-{% api-method-parameter name="Authentication" type="string" required=true %}
+{% swagger-parameter in="header" name="Authentication" type="string" %}
 Authentication token.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
+{% endswagger-parameter %}
 
-{% api-method-query-parameters %}
-{% api-method-parameter name="lines" type="integer" required=false %}
-The last x lines of the log \(if available\).  
-Valid value are : `1 .. 500`. Default: `500`.
-{% endapi-method-parameter %}
-{% endapi-method-query-parameters %}
-{% endapi-method-request %}
+{% swagger-parameter in="query" name="lines" type="integer" %}
+The last x lines of the log (if available).
 
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
+\
 
-{% endapi-method-response-example-description %}
 
+Valid value are : 
+
+`1 .. 500`
+
+. Default: 
+
+`500`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="" %}
 ```
-
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
+{% endswagger-response %}
+{% endswagger %}
