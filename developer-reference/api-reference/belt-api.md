@@ -622,11 +622,29 @@ _editor_
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="outputTypes" type="array" %}
+Array of event type objects with keys 
 
+`name`
+
+ and 
+
+`version`
+
+. Mutually exclusive with 
+
+`kafkaDestinationTopic`
+
+. If not set, default of 
+
+`kafkaDestinationTopic`
+
+ is taken.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="kafkaDestinationTopic" type="string" %}
-\[DEPRECATED] Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either 
+**[DEPRECATED]**
+
+ Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either 
 
 `profile-update`
 
