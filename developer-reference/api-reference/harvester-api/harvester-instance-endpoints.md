@@ -837,7 +837,7 @@ Requires the role
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="project-name" type="string" %}
-Name of project the harvester belongs to. 
+Name of project the Harvester belongs to. 
 
 \
 
@@ -863,23 +863,113 @@ If
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="harvester-name" type="string" %}
-name of the harvester that should be updated
+Name of the Harvester that should be updated
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="imported" type="string" %}
 If set to 
 
-`"true"`
+`true`
 
- (not case sensitive), the harvester default values will be merged into the provided PUT body while keeping the custom values if provided.
+ (not case sensitive), the Harvester default values will be merged into the provided PUT body while keeping the custom values if provided.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="expand" type="string" %}
 Show Harvester state with expand=state.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="displayName" type="string" %}
+Human readable name for UI. Needs to be unique. Technical name of the harvester will remain unchanged.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="description" type="string" %}
+Harvester description.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="eventType" type="object" %}
+Existing 
+
+`data_in`
+
+ event type that this Harvester should process. Changeable field 
+
+`version:string`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="sourceType" type="object" %}
+Existing source type that this harvester receives data from. 
+
+_Optional _
+
+fields are 
+
+`version:string`
+
+, 
+
+`configuration:map`
+
+, 
+
+`deployerConfiguration:map`
+
+, 
+
+`appConfiguration:map`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="transform" type="object" %}
+Scriptable transform application used by this Harvester. Default values for all fields can be specified during harvester api deployment. 
+
+_Optional _
+
+fields are  
+
+`version:string`
+
+ (app version registered in scdf), 
+
+`deploymentConfiguration:map`
+
+, 
+
+`appConfiguration:map`
+
+, 
+
+`language:string`
+
+ (script language), 
+
+`script:string`
+
+ (script that transforms the data).
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="metadataExtractor" type="object" %}
+Metadata extractor application used by this Harvester. Default values for all fields can be specified during harvester api deployment. 
+
+_Optional _
+
+fields are 
+
+`version:string`
+
+ (registered app version in SCDF), 
+
+`deploymentConfiguration:map`
+
+, 
+
+`appConfiguration:map`
+
+.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="body" name="sessionizing" type="object" %}
-sessionizing application used by this harvester. 
+Sessionizing application used by this Harvester. 
 
 _Optional _
 
@@ -914,92 +1004,6 @@ fields (can only be set if
 , 
 
 `gracePeriodSec:long`
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="metadataExtractor" type="object" %}
-metadata extractor application used by this harvester. Default values for all fields can be specified during harvester api deployment. 
-
-_Optional _
-
-fields are 
-
-`version:string `
-
-(registered app version in scdf), 
-
-`deploymentConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="transform" type="object" %}
-scriptable transform application used by this harvester. Default values for all fields can be specified during harvester api deployment. 
-
-_Optional _
-
-fields are  
-
-`version:string`
-
- (app version registered in scdf), 
-
-`deploymentConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-
-, 
-
-`language:string`
-
- (script language), 
-
-`script:string`
-
- (script that transforms the data).
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="sourceType" type="object" %}
-existing sourceType that this harvester receives data from. 
-
-_Optional _
-
-fields are 
-
-`version:string`
-
-, 
-
-`configuration:map`
-
-, 
-
-`deployerConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="eventType" type="object" %}
-existing eventType that this harvester should process. Changeable field 
-
-`version:string`
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="description" type="string" %}
-harvester description
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="displayName" type="string" %}
-human readable name. Needs to be unique. Technical name of the harvester will remain unchanged.
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}
@@ -1372,15 +1376,15 @@ Authentication token.
 
 Possible values for the status attribute in the response body are:
 
-| Status               | Description                                                             |
-| -------------------- | ----------------------------------------------------------------------- |
-| UNKNOWN              | status could not be determined                                          |
-| STOPPED              | harvester is not deployed                                               |
-| DEPLOYING            | harvester is being deployed                                             |
-| STOPPING             | harvester is being stopped                                              |
-| RUNNING              | harvester is running                                                    |
-| RUNNING_BUT_OUTDATED | harvester is running but there is a newer version of it in the database |
-| FAILED               | harvester is deployed but not running                                   |
+| Status                 | Description                                                             |
+| ---------------------- | ----------------------------------------------------------------------- |
+| UNKNOWN                | status could not be determined                                          |
+| STOPPED                | harvester is not deployed                                               |
+| DEPLOYING              | harvester is being deployed                                             |
+| STOPPING               | harvester is being stopped                                              |
+| RUNNING                | harvester is running                                                    |
+| RUNNING\_BUT\_OUTDATED | harvester is running but there is a newer version of it in the database |
+| FAILED                 | harvester is deployed but not running                                   |
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/harvesters/instances/:harvester-name/state" method="post" summary="Start/Stop Harvester Instance" %}
 {% swagger-description %}

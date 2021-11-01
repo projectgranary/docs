@@ -227,12 +227,12 @@ If set to
  (not case sensitive), the persister default values will be merged into the provided PUT body while keeping the custom values if provided.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="deployerConfig" type="object" %}
-A map containing all deployer configuration options.
+{% swagger-parameter in="body" name="deployerConfig" type="object" required="true" %}
+A map containing all deployment configuration options.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="appConfig" type="object" %}
-A Map containing all application configuration parameters
+{% swagger-parameter in="body" name="appConfig" type="object" required="true" %}
+A map containing all application configuration parameters.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="appVersion" type="string" %}

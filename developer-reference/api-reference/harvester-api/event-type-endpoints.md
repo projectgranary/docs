@@ -701,13 +701,9 @@ Source as in the server host of physical location references. Only for requests 
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="schema" type="object" %}
-JSON schema for event type data. kafka schema id or escaped string of schema needed. Only for requests of type 
+JSON schema for event type data. Escaped string of schema needed. Only for requests of type 
 
 `live_segment`
-
- and 
-
-`custom`
 
 .
 {% endswagger-parameter %}
@@ -780,7 +776,11 @@ Used for kafka topic config of segment.ms and retention.ms.
 \
 
 
-Default: 345600000 ( 4 days)
+Default: 
+
+`345600000`
+
+ (4 days)
 
 \
 
@@ -908,11 +908,7 @@ Optional (boolean) SpringEL to determine if a deletion should occur. Default:
 
 
 
-
-
 The following table lists parameters in "Create an Event Type" request which mutability depends on the Event Type chosen:
-
-&#x20;
 
 | Event Type   | Physical Location | Source | Schema | <ul><li>Expressions</li></ul> |
 | ------------ | :---------------: | :----: | :----: | ----------------------------- |
@@ -922,33 +918,17 @@ The following table lists parameters in "Create an Event Type" request which mut
 | Segment      |         -         |    -   |    -   | -                             |
 | TTL/TTN      |         -         |    -   |    -   | -                             |
 
+
+
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/event-types/:event-type-name" method="put" summary="Update an Event Type" %}
 {% swagger-description %}
-Fully or partially updates an event type. If no delta was recognized, no update will be made and HTTP 304 will be returned. 
-
+Fully or partially updates an event type. If no delta was recognized, no update will be made and HTTP 304 will be returned. \
 \
-
-
-
-
+To create an event type your user needs to have the project's `editor` role.\
 \
-
-
-To create an event type your user needs to have the project's 
-
-`editor`
-
- role.
-
-\
-
-
-
-
-\
-
-
 Immutable fields (like type, partitionCount,.. ) can be part of the request body, but their values need to match the current values, otherwise an error is raised.
+
+If field other than `displayName` or `description` is changed, a new version of the Event Type is created.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="project-name" type="string" %}
@@ -985,36 +965,60 @@ Name of the event type
 Authentication token
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="schema" type="object" %}
-JSON schema for event type. Kafka schema id or escaped string of schema needed.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="deletionExpression" type="string" %}
-(Optional) SpringEL to determine if a deletion should occur.
-{% endswagger-parameter %}
-
 {% swagger-parameter in="body" name="displayName" type="string" %}
 The displayname used in the UI
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="timestampExpression" type="string" %}
-The SpringEL expression to create the grnry-event-timestamp. It has to return milliseconds since 1.1.1970 UTC.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="description" type="string" %}
 The description of the event type
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="eventstoreTTL" type="string" %}
-time-to-live configuration for all eventstores in ISO 8601 duration format.
-{% endswagger-parameter %}
+{% swagger-parameter in="body" name="schema" type="object" %}
+JSON schema for event type. Escaped string of schema needed. Only valid for type 
 
-{% swagger-parameter in="body" name="eventIdExpression" type="string" %}
-The SpringEL expression to create the grnry-event-id
+`live_segment`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="correlationIdExpression" type="string" %}
-The SpringEL expression to create the grnry-correlation-id.
+The SpringEL expression to create the 
+
+`grnry-correlation-id`
+
+. Only valid for type 
+
+`data_in`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="eventIdExpression" type="string" %}
+The SpringEL expression to create the grnry-event-id. Only valid for type 
+
+`data_in`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="deletionExpression" type="string" %}
+(Optional) SpringEL to determine if a deletion should occur. Only valid for type 
+
+`data_in`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="timestampExpression" type="string" %}
+The SpringEL expression to create the grnry-event-timestamp. It has to return milliseconds since 1.1.1970 UTC. Only valid for type 
+
+`data_in`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="eventstoreTTL" type="string" %}
+time-to-live configuration for all eventstores in ISO 8601 duration format.
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}
