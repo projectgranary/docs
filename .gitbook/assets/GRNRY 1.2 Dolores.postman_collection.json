@@ -1,0 +1,2632 @@
+{
+	"info": {
+		"_postman_id": "c85ee0b5-a334-4ee1-845e-70554c5e4e1f",
+		"name": "GRNRY 1.2 Dolores",
+		"description": "Granary 1.2 Dolores Postman Collection.\nSee [docs](https://docs.grnry.io/) for more information about the APIs and the Platform in general.\n\nTo update the variables in this collection use the preferred way of overwritting them with your own postman environment.\nCheck out the Collections Variables to see what is there to overwrite.\n\n\nError Code documentation can be found [here](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/api-error-codes).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Snowplow API",
+			"item": [
+				{
+					"name": "Tracker endpoint GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{snowplow_url}}/api/com.snowplowanalytics.snowplow/tp2",
+							"host": [
+								"{{snowplow_url}}"
+							],
+							"path": [
+								"api",
+								"com.snowplowanalytics.snowplow",
+								"tp2"
+							],
+							"query": [
+								{
+									"key": "param1",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "param2",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "param3",
+									"value": "test",
+									"disabled": true
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/snowplow-api-endpoints#tracker-endpoint-get)"
+					},
+					"response": []
+				},
+				{
+					"name": "Tracker endpoint POST",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": [\n\t{\n\t  \"correlationId\": \"a\",\n\t  \"filterCriteria\": \"harvester_criteria\"    \n\t}\n ]\n}\n"
+						},
+						"url": {
+							"raw": "{{snowplow_url}}/api/com.snowplowanalytics.snowplow/tp2",
+							"host": [
+								"{{snowplow_url}}"
+							],
+							"path": [
+								"api",
+								"com.snowplowanalytics.snowplow",
+								"tp2"
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/snowplow-api-endpoints#tracker-endpoint-post)"
+					},
+					"response": []
+				}
+			],
+			"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/snowplow-api-endpoints)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Projects API",
+			"item": [
+				{
+					"name": "List all Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{projects_url}}/projects",
+							"host": [
+								"{{projects_url}}"
+							],
+							"path": [
+								"projects"
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/project-api#get-a-users-projects)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{projects_url}}/projects/:project-name",
+							"host": [
+								"{{projects_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "sqlpad",
+									"description": "Set to \"sqlpad\" to retrieve link to SQLPad instance of this project.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/project-api#get-project-details)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Project",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"displayName\": \"test\",\n    \"description\": \"Some description about the project.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{projects_url}}/projects",
+							"host": [
+								"{{projects_url}}"
+							],
+							"path": [
+								"projects"
+							],
+							"query": [
+								{
+									"key": "deploy",
+									"value": "sqlpad",
+									"description": "Set to \"sqlpad\" to deploy SQLPad instance for this project.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/project-api#create-project)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users in Keycloak",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{projects_url}}/users?search=",
+							"host": [
+								"{{projects_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "",
+									"description": "REQUIRED. Search for users in Keycloak whose username or email matches the value provided."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/project-api#get-users-to-add-them-to-project)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users of Project by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{projects_url}}/projects/:project-name/users",
+							"host": [
+								"{{projects_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"users"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/project-api#get-members-of-the-project)"
+					},
+					"response": []
+				},
+				{
+					"name": "Add User to Project by Name and ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"roles\": [\n    \"viewer\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{projects_url}}/projects/:project-name/users/:user-id",
+							"host": [
+								"{{projects_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"users",
+								":user-id"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project."
+								},
+								{
+									"key": "user-id",
+									"value": null,
+									"description": "Keycloak User ID."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/project-api#add-user-to-project)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User's Roles in Project by Name and ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"roles\": [\n    \"viewer\", \"editor\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{projects_url}}/projects/:project-name/users/:user-id",
+							"host": [
+								"{{projects_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"users",
+								":user-id"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project."
+								},
+								{
+									"key": "user-id",
+									"value": null,
+									"description": "Keycloak User ID."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/project-api#update-user-roles-in-the-project)"
+					},
+					"response": []
+				}
+			],
+			"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/project-api)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Harvester API",
+			"item": [
+				{
+					"name": "/event-types",
+					"item": [
+						{
+							"name": "/persisters",
+							"item": [
+								{
+									"name": "Get Persister for a Specific Event Type",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name/eventstores/:eventstore-type/persister",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"event-types",
+												":event-type-name",
+												"eventstores",
+												":eventstore-type",
+												"persister"
+											],
+											"query": [
+												{
+													"key": "export",
+													"value": "",
+													"description": "if set to \"true\" (not case sensitive), the persister response will only contain properties that are not set to default values or generated by the api. Default is \"\".",
+													"disabled": true
+												},
+												{
+													"key": "expand",
+													"value": "",
+													"description": "Expand the response with state to show the persister state. Default is \"\".",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "event-type-name",
+													"value": "",
+													"description": "Name of the event type."
+												},
+												{
+													"key": "eventstore-type",
+													"value": "pg",
+													"description": "Name of the event store. Possible values: \"pg\" or \"live-segment\". Default \"pg\"."
+												}
+											]
+										},
+										"description": "[Data-in (pg) Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/event-type-endpoints#get-persister-for-a-specific-event-type)\n\n[Live-Segments Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/live-segment-persisters#get-persister-configuration)"
+									},
+									"response": []
+								},
+								{
+									"name": "Update persister config",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"appVersion\": \"1.1.0\",\n    \"appConfig\": {\n        \"eventstore.tableName\": \"public.eventstore\",\n        \"spring.datasource.url\": \"jdbc:postgresql://grnry-pg-citus:5432/postgres?currentSchema=public\",\n        \"spring.datasource.password\": \"${superuser-password}\",\n        \"spring.datasource.username\": \"${superuser-username}\",\n        \"spring.cloud.kubernetes.secrets.paths\": \"/usr/src/app/db-secret\",\n        \"spring.cloud.stream.bindings.input.consumer.concurrency\": \"6\",\n        \"spring.cloud.stream.bindings.input.consumer.partitioned\": \"true\"\n    },\n    \"deployerConfig\": {\n        \"kubernetes.volumes\": \"[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}, {name: 'db-secret', secret: { secretName : 'grnry-pg-citus-secret' , defaultMode : '256' }}]\",\n        \"kubernetes.limits.cpu\": \"700m\",\n        \"kubernetes.requests.cpu\": \"700m\",\n        \"kubernetes.volumeMounts\": \"[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }, {name: 'db-secret', mountPath: '/usr/src/app/db-secret' , readOnly : 'true' }]\",\n        \"kubernetes.limits.memory\": \"512Mi\",\n        \"kubernetes.imagePullPolicy\": \"Always\",\n        \"kubernetes.requests.memory\": \"512Mi\",\n        \"kubernetes.livenessProbeDelay\": \"120\",\n        \"kubernetes.readinessProbeDelay\": \"120\"\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name/eventstores/:eventstore-type/persister",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"event-types",
+												":event-type-name",
+												"eventstores",
+												":eventstore-type",
+												"persister"
+											],
+											"query": [
+												{
+													"key": "imported",
+													"value": "",
+													"description": "if set to \"true\" (not case sensitive), the persister default values will be merged into the provided PUT body while keeping the custom values if provided.",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "event-type-name",
+													"value": "",
+													"description": "Name of the event type."
+												},
+												{
+													"key": "eventstore-type",
+													"value": "pg",
+													"description": "Name of the event store. Possible values: \"pg\" or \"live-segment\". Default \"pg\"."
+												}
+											]
+										},
+										"description": "[Data-in (pg) Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/event-type-endpoints#update-persister-config-for-a-specific-event-type)\n\n[Live-Segments Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/live-segment-persisters#set-persister)"
+									},
+									"response": []
+								},
+								{
+									"name": "Get State of a Persister for a Specific Event Type",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name/eventstores/:eventstore-type/persister/state",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"event-types",
+												":event-type-name",
+												"eventstores",
+												":eventstore-type",
+												"persister",
+												"state"
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "event-type-name",
+													"value": "",
+													"description": "Name of the event type."
+												},
+												{
+													"key": "eventstore-type",
+													"value": "pg",
+													"description": "Name of the event store. Possible values: \"pg\" or \"live-segment\". Default \"pg\"."
+												}
+											]
+										},
+										"description": "[Data-in (pg) Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/event-type-endpoints#get-state-of-a-persister-for-a-specific-event-type)\n\n[Live-Segments Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/live-segment-persisters#get-state-of-persister)"
+									},
+									"response": []
+								},
+								{
+									"name": "Start/Stop Persister for a Specific Event Type",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"action\": \"START\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name/eventstores/:eventstore-type/persister/state",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"event-types",
+												":event-type-name",
+												"eventstores",
+												":eventstore-type",
+												"persister",
+												"state"
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "event-type-name",
+													"value": "",
+													"description": "Name of the event type."
+												},
+												{
+													"key": "eventstore-type",
+													"value": "pg",
+													"description": "Name of the event store. Possible values: \"pg\" or \"live-segment\". Default \"pg\"."
+												}
+											]
+										},
+										"description": "[Data-in (pg) Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/event-type-endpoints#start-stop-persister-for-a-specific-event-type)\n\n[Live-Segments Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/live-segment-persisters#set-state-of-persister)"
+									},
+									"response": []
+								},
+								{
+									"name": "Get Persister Logs for a Specific Event Type",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{harvester_url}}/projetcs/:project-name/event-types/:event-type-name/eventstores/:eventstore-type/persister/logs",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projetcs",
+												":project-name",
+												"event-types",
+												":event-type-name",
+												"eventstores",
+												":eventstore-type",
+												"persister",
+												"logs"
+											],
+											"query": [
+												{
+													"key": "lines",
+													"value": "500",
+													"description": "The last x lines of the log (if available).\nValid value are : 1 .. 500. Default: 500.",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "event-type-name",
+													"value": "",
+													"description": "Name of the event-type."
+												},
+												{
+													"key": "eventstore-type",
+													"value": "pg",
+													"description": "Name of the event store. Default \"pg\"."
+												}
+											]
+										},
+										"description": "[Data-in (pg) Persister Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-types/event-type-endpoints#get-persister-logs-for-a-specific-event-type)\n\nGet the logs from a persister of an event type.\nThis request requires the role matching `editor` or `consumer`. If `consumer` is null, any authenticated user is authorized."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "List all Event Types",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{harvester_url}}/projects/:project-name/event-types?expand=totalCount",
+									"host": [
+										"{{harvester_url}}"
+									],
+									"path": [
+										"projects",
+										":project-name",
+										"event-types"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "example-event",
+											"description": "Filter event types by displaynames containing this search term Default is \"\".",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "",
+											"description": "Offset of the requested page. Default is 0. Must be a whole multiple of pagesize.",
+											"disabled": true
+										},
+										{
+											"key": "pagesize",
+											"value": "1",
+											"description": "Number of event types returned per page. Default is 20.",
+											"disabled": true
+										},
+										{
+											"key": "expand",
+											"value": "totalCount",
+											"description": "Expand the response with totalCount, or persisters to show either the count or the peristers of different event-type-names. Default is \"\"."
+										}
+									],
+									"variable": [
+										{
+											"key": "project-name",
+											"value": "{{project_name}}",
+											"description": "Name of the project scope for this request."
+										}
+									]
+								},
+								"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-type-endpoints#get-all-event-types)"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all Versions of Event Type by Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name",
+									"host": [
+										"{{harvester_url}}"
+									],
+									"path": [
+										"projects",
+										":project-name",
+										"event-types",
+										":event-type-name"
+									],
+									"variable": [
+										{
+											"key": "project-name",
+											"value": "{{project_name}}",
+											"description": "Name of the project scope for this request."
+										},
+										{
+											"key": "event-type-name",
+											"value": "",
+											"description": "Name of the event type."
+										}
+									]
+								},
+								"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-type-endpoints#get-all-versions-of-an-event-type)"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Specific Version of Event Type by Name",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name/:version",
+									"host": [
+										"{{harvester_url}}"
+									],
+									"path": [
+										"projects",
+										":project-name",
+										"event-types",
+										":event-type-name",
+										":version"
+									],
+									"query": [
+										{
+											"key": "export",
+											"value": "true",
+											"description": "If set to \"true\" or \"True\", the event type response will only contain properties a POST body must contain to create this exact event type. All properties set to default values and all api-generated properties will be omitted. Default is \"\".",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "project-name",
+											"value": "{{project_name}}",
+											"description": "Name of the project scope for this request."
+										},
+										{
+											"key": "event-type-name",
+											"value": "",
+											"description": "Name of the event type."
+										},
+										{
+											"key": "version",
+											"value": "",
+											"description": "The version of the event type, or \"latest\" to get the latest version."
+										}
+									]
+								},
+								"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-type-endpoints#get-a-specific-version-of-an-event-type)"
+							},
+							"response": []
+						},
+						{
+							"name": "Create an Event Type",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"displayName\": \"customers\",\n\t\"description\": \"Customers Event Type\",\n    \"type\": \"data_in\",\n\t\"eventIdExpression\": \"#randomUUID()\",\n\t\"timestampExpression\": \"#nowMillis()\",\n\t\"correlationIdExpression\": \"#randomUUID()\",\n\t\"eventstoreTTL\": \"P100Y\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{harvester_url}}/projects/:project-name/event-types",
+									"host": [
+										"{{harvester_url}}"
+									],
+									"path": [
+										"projects",
+										":project-name",
+										"event-types"
+									],
+									"variable": [
+										{
+											"key": "project-name",
+											"value": "{{project_name}}",
+											"description": "Name of the project scope for this request."
+										}
+									]
+								},
+								"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-type-endpoints#create-an-event-type)"
+							},
+							"response": []
+						},
+						{
+							"name": "Create an Event Type with Name",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"displayName\": \"customers\",\n\t\"description\": \"Customers Event Type\",\n    \"type\": \"data_in\",\n\t\"eventIdExpression\": \"#randomUUID()\",\n\t\"timestampExpression\": \"#nowMillis()\",\n\t\"correlationIdExpression\": \"#randomUUID()\",\n\t\"eventstoreTTL\": \"P100Y\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name",
+									"host": [
+										"{{harvester_url}}"
+									],
+									"path": [
+										"projects",
+										":project-name",
+										"event-types",
+										":event-type-name"
+									],
+									"variable": [
+										{
+											"key": "project-name",
+											"value": "{{project_name}}",
+											"description": "Name of the project scope for this request."
+										},
+										{
+											"key": "event-type-name",
+											"value": null,
+											"description": "OPTIONAL: unique technical Event Type name."
+										}
+									]
+								},
+								"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-type-endpoints#create-an-event-type)"
+							},
+							"response": []
+						},
+						{
+							"name": "Update existing event-type",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"displayName\": \"customers\",\n    \"description\": \"Customers Event Type\",\n    \"eventIdExpression\": \"#randomUUID()\",\n    \"timestampExpression\": \"#nowMillis()\",\n    \"correlationIdExpression\": \"#randomUUID()\",\n    \"eventstoreTTL\": \"P10Y\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name",
+									"host": [
+										"{{harvester_url}}"
+									],
+									"path": [
+										"projects",
+										":project-name",
+										"event-types",
+										":event-type-name"
+									],
+									"variable": [
+										{
+											"key": "project-name",
+											"value": "{{project_name}}",
+											"description": "Name of the project scope for this request."
+										},
+										{
+											"key": "event-type-name",
+											"value": "all-contracts",
+											"description": "Name of the event type."
+										}
+									]
+								},
+								"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-type-endpoints#update-an-event-type)"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete event-type",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{harvester_url}}/projects/:project-name/event-types/:event-type-name",
+									"host": [
+										"{{harvester_url}}"
+									],
+									"path": [
+										"projects",
+										":project-name",
+										"event-types",
+										":event-type-name"
+									],
+									"variable": [
+										{
+											"key": "project-name",
+											"value": "{{project_name}}",
+											"description": "Name of the project scope for this request."
+										},
+										{
+											"key": "event-type-name",
+											"value": "",
+											"description": "Name of the event type to be deleted"
+										}
+									]
+								},
+								"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/event-type-endpoints#delete-an-event-type)"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/harvesters",
+					"item": [
+						{
+							"name": "/source-types",
+							"item": [
+								{
+									"name": "Get all source types",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{harvester_url}}/harvesters/source-types",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"harvesters",
+												"source-types"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "test",
+													"description": "Filter source types by names containing this search term Default is \"\".\n",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "0",
+													"description": "Offset of the requested page. Default is 0. Must be a whole multiple of pagesize. \n",
+													"disabled": true
+												},
+												{
+													"key": "pagesize",
+													"value": "20",
+													"description": "Number of source types returned per page. Default is 20.\n",
+													"disabled": true
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/source-type-endpoints#get-all-source-types)"
+									},
+									"response": []
+								},
+								{
+									"name": "Get all versions of an source type",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{harvester_url}}/harvesters/source-types/:source_type_name",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"harvesters",
+												"source-types",
+												":source_type_name"
+											],
+											"query": [
+												{
+													"key": "pagesize",
+													"value": "20",
+													"description": "Number of source types returned per page. Default is\n20 .\n",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "0",
+													"description": "Offset of the requested page. Default is 0 . Must be a whole multiple of pagesize.\n",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "source_type_name",
+													"value": "",
+													"description": "Name of the source type.\n"
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/source-type-endpoints#get-all-versions-of-an-source-type)"
+									},
+									"response": []
+								},
+								{
+									"name": "Get a specific version of an source type",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{harvester_url}}/harvesters/source-types/:source-type-name/:version",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"harvesters",
+												"source-types",
+												":source-type-name",
+												":version"
+											],
+											"query": [
+												{
+													"key": "export",
+													"value": "false",
+													"description": "if set to \"true\" (not case sensitive), the event type response will only contain properties that a POST body must necessarily contain to create this exact event type. All properties set to default values and all api generated values will be omitted. (Only the api-generated name field will be provided). Default is \"\".\n",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "source-type-name",
+													"value": "",
+													"description": "Name of the source type.\n"
+												},
+												{
+													"key": "version",
+													"value": "",
+													"description": "Version of the source type.\n"
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/source-type-endpoints#get-a-specific-version-of-source-type)"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "/instances",
+							"item": [
+								{
+									"name": "List all  Harvester Instances",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances?expand=totalCount&pagesize=1",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "",
+													"description": "Filter harvester list by name. Default: \"\"\n",
+													"disabled": true
+												},
+												{
+													"key": "expand",
+													"value": "totalCount",
+													"description": "Include all harvesters' states with expand=state in response body.\n"
+												},
+												{
+													"key": "offset",
+													"value": "0",
+													"description": "Start offset. Default: 0. Must be a whole multiple of pagesize.\n",
+													"disabled": true
+												},
+												{
+													"key": "pagesize",
+													"value": "1",
+													"description": "Number of harvesters returned, default is 20. Maximum is 250."
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#get-all-harvester-instances)"
+									},
+									"response": []
+								},
+								{
+									"name": "Get Harvester Instance by Name",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances/:harvester-name",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances",
+												":harvester-name"
+											],
+											"query": [
+												{
+													"key": "export",
+													"value": "false",
+													"description": "if set to \"true\" (not case sensitive), the harvester response will only contain properties that a POST body must necessarily contain to create this exact harvester. All properties set to default values and all api-generated properties will be omitted. (Only the api-generated name field will be provided). Default is \"\"",
+													"disabled": true
+												},
+												{
+													"key": "expand",
+													"value": "state",
+													"description": "Show Harvester state with expand=state.\n",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "harvester-name",
+													"value": "",
+													"description": "Technical name of the Harvester."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#get-harvester-details)"
+									},
+									"response": []
+								},
+								{
+									"name": "Create Harvester Instance",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"harvester-post\",\n    \"displayName\": \"Harvester Post\",\n    \"streamName\": \"g-h-harvester-demo\",\n    \"dlqTopic\": \"grnry_harvester_dlq_harvester-post\",\n    \"sourceType\": {\n        \"name\": \"grnry-jdbc\",\n        \"version\": \"latest\",\n        \"configuration\": {\n            \"password\": \"secret\",\n            \"username\": \"su\",\n            \"hostname\": \"beefy-db-host\"\n        },\n        \"deploymentConfiguration\": {\n            \"kubernetes.volumes\": \"[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]\",\n            \"kubernetes.limits.cpu\": \"400m\",\n            \"kubernetes.requests.cpu\": \"400m\",\n            \"kubernetes.volumeMounts\": \"[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }]\",\n            \"kubernetes.limits.memory\": \"512Mi\",\n            \"kubernetes.imagePullPolicy\": \"Always\",\n            \"kubernetes.requests.memory\": \"512Mi\",\n            \"kubernetes.livenessProbeDelay\": \"120\",\n            \"kubernetes.readinessProbeDelay\": \"120\"\n        }\n    },\n    \"metadataExtractor\": {\n        \"app\": \"grnry-data-in-metadata\",\n        \"version\": \"1\"\n    },\n    \"transform\": {\n        \"app\": \"grnry-scriptable\",\n        \"version\": \"2\",\n        \"language\": \"groovy\",\n        \"script\": \"return new String(payload , 'UTF-8');\"\n    },\n    \"sessionizing\": {\n        \"app\": \"grnry-sessionizing\",\n        \"version\": \"latest\",\n        \"correlationIdExpression\": \"headers['grnry-correlation-id']\",\n        \"sessionizingAttributeExpression\": \"\",\n        \"inactivityGapSec\": 1800,\n        \"gracePeriodSec\": 120,\n        \"enabled\": true\n    },\n    \"eventType\": {\n        \"name\": \"snowplow-a\",\n        \"version\": \"latest\"\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances"
+											],
+											"query": [
+												{
+													"key": "imported",
+													"value": "false",
+													"description": "if set to \"true\" (not case sensitive), the harvester default values will be merged into the provided POST body while keeping the custom values if provided.",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#create-harvester)"
+									},
+									"response": []
+								},
+								{
+									"name": "Create Harvester Instance with Name",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"harvester-post\",\n    \"displayName\": \"Harvester Post\",\n    \"streamName\": \"g-h-harvester-demo\",\n    \"dlqTopic\": \"grnry_harvester_dlq_harvester-post\",\n    \"sourceType\": {\n        \"name\": \"grnry-jdbc\",\n        \"version\": \"latest\",\n        \"configuration\": {\n            \"password\": \"secret\",\n            \"username\": \"su\",\n            \"hostname\": \"beefy-db-host\"\n        },\n        \"deploymentConfiguration\": {\n            \"kubernetes.volumes\": \"[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]\",\n            \"kubernetes.limits.cpu\": \"400m\",\n            \"kubernetes.requests.cpu\": \"400m\",\n            \"kubernetes.volumeMounts\": \"[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }]\",\n            \"kubernetes.limits.memory\": \"512Mi\",\n            \"kubernetes.imagePullPolicy\": \"Always\",\n            \"kubernetes.requests.memory\": \"512Mi\",\n            \"kubernetes.livenessProbeDelay\": \"120\",\n            \"kubernetes.readinessProbeDelay\": \"120\"\n        }\n    },\n    \"metadataExtractor\": {\n        \"app\": \"grnry-data-in-metadata\",\n        \"version\": \"1\"\n    },\n    \"transform\": {\n        \"app\": \"grnry-scriptable\",\n        \"version\": \"2\",\n        \"language\": \"groovy\",\n        \"script\": \"return new String(payload , 'UTF-8');\"\n    },\n    \"sessionizing\": {\n        \"app\": \"grnry-sessionizing\",\n        \"version\": \"latest\",\n        \"correlationIdExpression\": \"headers['grnry-correlation-id']\",\n        \"sessionizingAttributeExpression\": \"\",\n        \"inactivityGapSec\": 1800,\n        \"gracePeriodSec\": 120,\n        \"enabled\": true\n    },\n    \"eventType\": {\n        \"name\": \"snowplow-a\",\n        \"version\": \"latest\"\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances/:harvester-name",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances",
+												":harvester-name"
+											],
+											"query": [
+												{
+													"key": "imported",
+													"value": "false",
+													"description": "if set to \"true\" (not case sensitive), the harvester default values will be merged into the provided POST body while keeping the custom values if provided.",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "harvester-name",
+													"value": "",
+													"description": "OPTIONAL: unique technical name of the Harvester."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#create-harvester)"
+									},
+									"response": []
+								},
+								{
+									"name": "Update Harvester Instance by Name",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"harvester-post\",\n    \"displayName\": \"Harvester Post Update\",\n    \"streamName\": \"g-h-harvester-demo\",\n    \"dlqTopic\": \"grnry_harvester_dlq_harvester-post\",\n    \"sourceType\": {\n        \"name\": \"grnry-jdbc\",\n        \"version\": \"latest\",\n        \"configuration\": {\n            \"password\": \"secret\",\n            \"username\": \"su\",\n            \"hostname\": \"beefy-db-host\"\n        },\n        \"deploymentConfiguration\": {\n            \"kubernetes.volumes\": \"[{name: 'secret', secret: { secretName : 'grnry-base-encryption-token' , defaultMode : '256' }}]\",\n            \"kubernetes.limits.cpu\": \"400m\",\n            \"kubernetes.requests.cpu\": \"400m\",\n            \"kubernetes.volumeMounts\": \"[{name: 'secret', mountPath: '/usr/src/app/rsa_privatekey.key' , subPath: 'rsa_privatekey.key' , readOnly : 'true' },{name: 'secret', mountPath: '/usr/src/app/rsa_publickey.key' , subPath: 'rsa_publickey.key' , readOnly : 'true' }]\",\n            \"kubernetes.limits.memory\": \"512Mi\",\n            \"kubernetes.imagePullPolicy\": \"Always\",\n            \"kubernetes.requests.memory\": \"512Mi\",\n            \"kubernetes.livenessProbeDelay\": \"120\",\n            \"kubernetes.readinessProbeDelay\": \"120\"\n        }\n    },\n    \"metadataExtractor\": {\n        \"app\": \"grnry-data-in-metadata\",\n        \"version\": \"1\"\n    },\n    \"transform\": {\n        \"app\": \"grnry-scriptable\",\n        \"version\": \"2\",\n        \"language\": \"groovy\",\n        \"script\": \"return new String(payload , 'UTF-8');\"\n    },\n    \"sessionizing\": {\n        \"app\": \"grnry-sessionizing\",\n        \"version\": \"latest\",\n        \"correlationIdExpression\": \"headers['grnry-correlation-id']\",\n        \"sessionizingAttributeExpression\": \"\",\n        \"inactivityGapSec\": 1800,\n        \"gracePeriodSec\": 120,\n        \"enabled\": true\n    },\n    \"eventType\": {\n        \"name\": \"snowplow-a\",\n        \"version\": \"latest\"\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances/:havester-name",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances",
+												":havester-name"
+											],
+											"query": [
+												{
+													"key": "expand",
+													"value": "state",
+													"description": "Show Harvester state with expand=state.\n",
+													"disabled": true
+												},
+												{
+													"key": "imported",
+													"value": "true",
+													"description": "if set to \"true\" (not case sensitive), the harvester default values will be merged into the provided PUT body while keeping the custom values if provided.",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "havester-name",
+													"value": "",
+													"description": "Technical name of the Harvester."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#update-harvester-instance)"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Harvester Instance by Name",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances/:harvester-name",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances",
+												":harvester-name"
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "harvester-name",
+													"value": "",
+													"description": "Technical name of the Harvester."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#delete-a-harvester-instance)"
+									},
+									"response": []
+								},
+								{
+									"name": "Get Harvester Instance State by Name",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances/:havester-name/state",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances",
+												":havester-name",
+												"state"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "test",
+													"disabled": true
+												},
+												{
+													"key": "offset",
+													"value": "",
+													"disabled": true
+												},
+												{
+													"key": "pagesize",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "havester-name",
+													"value": "",
+													"description": "Technical name of the harvester."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#get-harvester-instance-state)"
+									},
+									"response": []
+								},
+								{
+									"name": "Start/Stop Harvester Instance",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"action\": \"START\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances/:havester-name/state",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances",
+												":havester-name",
+												"state"
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "havester-name",
+													"value": "",
+													"description": "Technical name of harvester."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#start-stop-harvester-instance)"
+									},
+									"response": []
+								},
+								{
+									"name": "Get Harvester Logs by Name and Step Name",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{harvester_url}}/projects/:project-name/harvesters/instances/:harvester-name/logs/:step-name",
+											"host": [
+												"{{harvester_url}}"
+											],
+											"path": [
+												"projects",
+												":project-name",
+												"harvesters",
+												"instances",
+												":harvester-name",
+												"logs",
+												":step-name"
+											],
+											"query": [
+												{
+													"key": "lines",
+													"value": "500",
+													"description": "Maximum number of lines the log should contain. Default 500",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "project-name",
+													"value": "{{project_name}}",
+													"description": "Name of the project scope for this request."
+												},
+												{
+													"key": "harvester-name",
+													"value": "",
+													"description": "Technical name of harvester."
+												},
+												{
+													"key": "step-name",
+													"value": "sourceType",
+													"description": "Name of the Harvester Step. The name must be \"sourceType\", \"transform\" or \"metadataExtractor\"."
+												}
+											]
+										},
+										"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api/harvester-instance-endpoints#get-harvester-instance-logs)"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			],
+			"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/harvester-api)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Event Store API",
+			"item": [
+				{
+					"name": "Get Events by Correlation ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{event_store_url}}/events/:correlationId",
+							"host": [
+								"{{event_store_url}}"
+							],
+							"path": [
+								"events",
+								":correlationId"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "",
+									"description": "Valid values are \"message\" and \"totalCount\".",
+									"disabled": true
+								},
+								{
+									"key": "from",
+									"value": "1970-01-01T00:00:00Z",
+									"description": "Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to 1970-01-01T00:00:00Z",
+									"disabled": true
+								},
+								{
+									"key": "to",
+									"value": "2038-01-01T00:00:00Z",
+									"description": "Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to now()",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"description": "Number of elements to be skipped. Defaults to 0",
+									"disabled": true
+								},
+								{
+									"key": "pagesize",
+									"value": "20",
+									"description": "Number of elements to be shown. Defaults to 20",
+									"disabled": true
+								},
+								{
+									"key": "expand",
+									"value": "totalCount",
+									"description": "Expand elements (detailed information). Comma-separated list of fields to include in response. Fields are null otherwise.  Valid values are \"message\" and \"totalCount\".",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "",
+									"description": "event type associated with this correlation ID.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "correlationId",
+									"value": "",
+									"description": "The correlation ID of the Events"
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/event-store-api#get-events-by-correlation-id)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Specific Event by ID and Correlation ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{event_store_url}}/events/:correlationId/:eventId",
+							"host": [
+								"{{event_store_url}}"
+							],
+							"path": [
+								"events",
+								":correlationId",
+								":eventId"
+							],
+							"variable": [
+								{
+									"key": "correlationId",
+									"value": "",
+									"description": "The correlation ID of the Event."
+								},
+								{
+									"key": "eventId",
+									"value": "",
+									"description": "The ID of the Event."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/event-store-api#get-a-specific-event-by-id-and-correlation-id)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Events by type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{event_store_url}}/events?type=",
+							"host": [
+								"{{event_store_url}}"
+							],
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "",
+									"description": "REQUIRED: the event-type"
+								},
+								{
+									"key": "expand",
+									"value": "",
+									"description": "Expand information (detailed information). Comma-separated list of fields to include in the response. Fields are null otherwise. Valid values are message and totalCount.",
+									"disabled": true
+								},
+								{
+									"key": "from",
+									"value": "1970-01-01T00:00:00Z",
+									"description": "Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to 1970-01-01T00:00:00Z.",
+									"disabled": true
+								},
+								{
+									"key": "to",
+									"value": "2038-01-01T00:00:00Z",
+									"description": "Timestamp encoded in ISO notation yyyy-MM-dd'T'hh:MM:ss'Z'. Defaults to now().",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"description": "Number of elements to be skipped. Defaults to 0.",
+									"disabled": true
+								},
+								{
+									"key": "pagesize",
+									"value": "20",
+									"description": "Number of elements to be shown. Defaults to 20.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/event-store-api#get-all-events-by-type)"
+					},
+					"response": []
+				}
+			],
+			"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/event-store-api)"
+		},
+		{
+			"name": "Belt API",
+			"item": [
+				{
+					"name": "Get all Belts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts?expand=totalCount&pagesize=1",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "",
+									"description": "Filter belts by name. Belt names need to be url encoded. Default \"\".",
+									"disabled": true
+								},
+								{
+									"key": "expand",
+									"value": "totalCount",
+									"description": "Array of belt states. For possible values, see table at GET belt state definition below."
+								},
+								{
+									"key": "pagesize",
+									"value": "1",
+									"description": "Number of belts to be returned. Default is 20. Maximum is 250."
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"description": "Start offset. Default is 0.",
+									"disabled": true
+								},
+								{
+									"key": "exclude",
+									"value": "status",
+									"description": "Exclude status retrieval in Belt listing.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project scope for this request."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#get-all-belts)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Belt by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts/:id",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts",
+								":id"
+							],
+							"query": [
+								{
+									"key": "export",
+									"value": "",
+									"description": "If set to \"true\" (not case sensitive), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. (Only the api-generated id field will be provided). Default is \"\".",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project scope for this request."
+								},
+								{
+									"key": "id",
+									"value": "98",
+									"description": "The ID of Belt."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#get-a-specific-belt-by-id)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create and Store a Belt",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomInt}}-test-belt\",\n    \"description\": \"Test belt - created via postman\",\n    \"extractorFn\": \"from time import time\\r\\nfrom grnry.beltextractor.update import Update\\r\\n\\r\\ndef execute(event, profile=None):\\r\\n    print(profile)\\r\\n    update = Update(profile['correlationId'],[\\\"dummy\\\"]).set_value(\\\"Hallo Belt!\\\",0.5,time(),'P1D','Dummy-Belt')\\r\\n    update.set_type('TestProfileType')\\r\\n    return [update]\\r\\n\",\n    \"labels\": [],\n    \"replicas\": 1,\n    \"millicpu\": 200,\n    \"memory\": 512,\n    \"requirementsPy\": \"\",\n    \"extractorVersion\": \"\",\n    \"eventTypes\": [\n        \"test-a\",\n        \"test-b\"\n    ],\n    \"partitionOffsets\": {},\n    \"beltType\": \"python-callback\",\n    \"debug\": false,\n    \"fetchProfile\": \"FALSE\",\n    \"profileType\": \"test-type\",\n    \"secret\": \"\",\n    \"secretUsername\": \"\",\n    \"secretPassword\": \"\",\n    \"volumes\": \"\",\n    \"volumeMounts\": \"\",\n    \"extraEnv\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project scope for this request."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#create-and-store-a-belt)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create and Store a Belt with specific ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 123123,\n    \"name\": \"{{$randomInt}}-test-belt\",\n    \"description\": \"Test belt - created via postman\",\n    \"extractorFn\": \"from time import time\\r\\nfrom grnry.beltextractor.update import Update\\r\\n\\r\\ndef execute(event, profile=None):\\r\\n    print(profile)\\r\\n    update = Update(profile['correlationId'],[\\\"dummy\\\"]).set_value(\\\"Hallo Belt!\\\",0.5,time(),'P1D','Dummy-Belt')\\r\\n    update.set_type('TestProfileType')\\r\\n    return [update]\\r\\n\",\n    \"labels\": [],\n    \"affectedPaths\": [],\n    \"replicas\": 1,\n    \"millicpu\": 200,\n    \"memory\": 512,\n    \"author\": \"User\",\n    \"reader\": [\n        \"_auth\"\n    ],\n    \"editor\": [\n        \"belt_edit\"\n    ],\n    \"viewer\": [\n        \"belt_view\"\n    ],\n    \"assumedRole\": \"\",\n    \"requirementsPy\": \"\",\n    \"extractorVersion\": \"\",\n    \"eventTypes\": [\n        \"test-a\",\n        \"test-b\"\n    ],\n    \"partitionOffsets\": {},\n    \"beltType\": \"\",\n    \"runtime\": \"\",\n    \"parameter\": \"\",\n    \"debug\": false,\n    \"fetchProfile\": \"FALSE\",\n    \"profileType\": \"test-type\",\n    \"secret\": \"\",\n    \"secretUsername\": \"\",\n    \"secretPassword\": \"\",\n    \"volumes\": \"\",\n    \"volumeMounts\": \"\",\n    \"extraEnv\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts/:id",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": null,
+									"description": "Name of the project scope for this request."
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "If provided, creates a belt with a given belt id. This id needs to be unique. Otherwise an id is automatically assigned. Value range for id is a positive Long value (i.e. 1 to 9223372036854775807).\n"
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#create-and-store-a-belt)"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates a Belt by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"{{$randomInt}}-test-belt\",\n\t\"description\":\"Test belt - created via postman\",\n    \"extractorFn\": \"from time import time\\r\\nfrom grnry.beltextractor.update import Update\\r\\n\\r\\ndef execute(event, profile=None):\\r\\n    print(profile)\\r\\n    update = Update(profile['correlationId'],[\\\"dummy\\\"]).set_value(\\\"Hallo Belt!\\\",0.5,time(),'P1D','Dummy-Belt')\\r\\n    update.set_type('TestProfileType')\\r\\n    return [update]\\r\\n\",\n     \"labels\": [],\n     \"affectedPaths\": [],\n     \"replicas\": 5,\n     \"millicpu\": 200,\n     \"memory\": 512,\n     \"author\": \"User\",\n     \"reader\": [\n       \"_auth\"\n     ],\n     \"editor\": [\n       \"belt_edit\"\n     ],\n     \"viewer\": [\n       \"belt_view\"\n     ],\n     \"assumedRole\": \"\",\n     \"requirementsPy\": \"\",\n     \"extractorVersion\": \"\",\n     \"eventTypes\": [\n       \"test-a\"\n     ],\n     \"partitionOffsets\": {},\n     \"beltType\": \"\",\n     \"runtime\": \"\",\n     \"parameter\": \"\",\n     \"debug\": true,\n     \"fetchProfile\": \"FALSE\",\n     \"profileType\": \"test-type\",\n     \"secret\": \"\",\n     \"secretUsername\": \"\",\n     \"secretPassword\": \"\",\n     \"volumes\": [],\n     \"volumeMounts\": [],\n     \"extraEnv\":  []\n}"
+						},
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts/:id",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project scope for this request."
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "Belt ID."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#updates-a-belt-by-id)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Belt by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts/:id",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project scope for this request."
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "Belt ID."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#delete-a-specific-belt)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Belt's state",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/javascript"
+							}
+						],
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts/:id/state",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts",
+								":id",
+								"state"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project scope for this request."
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "Belt ID."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#get-a-belts-state)"
+					},
+					"response": []
+				},
+				{
+					"name": "Manipulate a Belt's state by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"START\"\n}"
+						},
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts/:id/state",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts",
+								":id",
+								"state"
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project scope for this request."
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "Belt ID."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#manipulate-a-belts-state)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Belt's Pod Logs by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{belt_url}}/projects/:project-name/belts/:id/logs",
+							"host": [
+								"{{belt_url}}"
+							],
+							"path": [
+								"projects",
+								":project-name",
+								"belts",
+								":id",
+								"logs"
+							],
+							"query": [
+								{
+									"key": "lines",
+									"value": "500",
+									"description": "number of lines to be retrieved per pod. Must be greater than 0 and less than or equal to 500. Default is 500.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "project-name",
+									"value": "{{project_name}}",
+									"description": "Name of the project scope for this request."
+								},
+								{
+									"key": "id",
+									"value": "",
+									"description": "Belt ID."
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api#get-belts-pod-logs-by-id)"
+					},
+					"response": []
+				}
+			],
+			"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/belt-api)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Profile Store API",
+			"item": [
+				{
+					"name": "Get a Profile by Type and ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{profile_url}}/profiles/:profile-type/:correlation-id",
+							"host": [
+								"{{profile_url}}"
+							],
+							"path": [
+								"profiles",
+								":profile-type",
+								":correlation-id"
+							],
+							"query": [
+								{
+									"key": "fragments",
+									"value": "",
+									"description": "Filters the profile by grain/fragment path(s). You can define multiple path as a comma-separated list. Example: /customer/name,/customer/adress,/invoiceDetails",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "profile-type",
+									"value": ""
+								},
+								{
+									"key": "correlation-id",
+									"value": null
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/profile-store-api#get-a-specific-profile-by-id-and-type)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Grain by Type, ID and Path",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{profile_url}}/profiles/:profile-type/:correlation-id/grain/:path",
+							"host": [
+								"{{profile_url}}"
+							],
+							"path": [
+								"profiles",
+								":profile-type",
+								":correlation-id",
+								"grain",
+								":path"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "20",
+									"description": "Determines the amount of grains returned per page. The maximum is 250.",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "",
+									"description": "Allows retrieval of historic grains not contained in the first page.",
+									"disabled": true
+								},
+								{
+									"key": "withHistory",
+									"value": "false",
+									"description": "Determines if for the grain only the latest version is returned or all version paginated. Default = false.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "profile-type",
+									"value": null
+								},
+								{
+									"key": "correlation-id",
+									"value": null
+								},
+								{
+									"key": "path",
+									"value": null
+								}
+							]
+						},
+						"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/profile-store-api#get-a-specific-grain-by-id-type-and-path)"
+					},
+					"response": []
+				}
+			],
+			"description": "[Docs](https://docs.grnry.io/v/1.2-dolores/developer-reference/api-reference/profile-store-api)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var token_time = pm.environment.get(\"token_time\")",
+					"if(!token_time || token_time <= Date.now()) {",
+					"    var body = 'grant_type=password'",
+					"            + '&client_id=' + pm.variables.get(\"client_id\")",
+					"            + '&username=' + pm.variables.get(\"username\")",
+					"            + '&password=' + pm.variables.get(\"password\");",
+					"    console.log(body);",
+					"",
+					"    var url = pm.variables.get(\"auth_url\") +\"/auth/realms/\" + pm.variables.get(\"realm\") +\"/protocol/openid-connect/token\"",
+					"    pm.sendRequest({",
+					"        url: url,",
+					"        method: 'POST',",
+					"        header: {",
+					"            'Content-Type': 'application/x-www-form-urlencoded',",
+					"            'Accept': 'application/json'",
+					"        },",
+					"        body: {",
+					"            mode: 'raw',",
+					"            raw: body",
+					"        }",
+					"    }, function (err, res) {",
+					"        pm.environment.set(\"access_token\", res.json().access_token);",
+					"        pm.environment.set(\"token_time\", Date.now() + 5*60*1000); //5 min in milliseconds",
+					"    });",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "client_id",
+			"value": "profile-api"
+		},
+		{
+			"key": "realm",
+			"value": "grnry"
+		},
+		{
+			"key": "username",
+			"value": "username"
+		},
+		{
+			"key": "password",
+			"value": "password"
+		},
+		{
+			"key": "auth_url",
+			"value": "https://demo.grnry.io"
+		},
+		{
+			"key": "snowplow_url",
+			"value": "https://demo.grnry.io"
+		},
+		{
+			"key": "harvester_url",
+			"value": "https://demo.grnry.io"
+		},
+		{
+			"key": "event_store_url",
+			"value": "https://demo.grnry.io"
+		},
+		{
+			"key": "belt_url",
+			"value": "https://demo.grnry.io"
+		},
+		{
+			"key": "profile_store_url",
+			"value": "https://demo.grnry.io"
+		},
+		{
+			"key": "projects_url",
+			"value": "https://demo.grnry.io"
+		},
+		{
+			"key": "project_name",
+			"value": "global"
+		}
+	]
+}
