@@ -51,7 +51,7 @@ In their JSON response models, all kinds of event types contain information on t
 }
 ```
 
-###
+
 
 ### Data-In
 
@@ -124,7 +124,7 @@ This table describes where the Profile event type can be used and which location
 | ------------------------------------ | -------------------------------------- |
 | DBT Segment Belt (database location) | Python Callback Belt (stream location) |
 
-###
+
 
 ### Live-Segment
 
@@ -155,7 +155,7 @@ This table describes where the Live-Segment event type can be used and which loc
 | ------------------------------------ | -------------------------------------- |
 | DBT Segment Belt (database location) | Python Callback Belt (stream location) |
 
-###
+
 
 ### Segment
 

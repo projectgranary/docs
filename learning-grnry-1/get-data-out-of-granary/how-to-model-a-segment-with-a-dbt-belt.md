@@ -45,7 +45,7 @@ The project gets created and we can see it in Granary UI.
 In case if we forget to create a project without `?deploy=sqlpad` parameter, one can also deploy [SQLPad via Helm](../../operator-reference/installation/with-helm/sqlpad.md) using the project's database and Keycloak credentials. We can confirm SQLPad UI is running for the schema project by running the [GET project request](../../developer-reference/api-reference/project-api.md#get-project-details) with `?expand=sqlpad`.
 {% endhint %}
 
-###
+
 
 ### Step 2 - Create Input Event Type
 
@@ -105,7 +105,7 @@ The Segment Event Type looks like this in Granary UI:&#x20;
 
 ![](<../../.gitbook/assets/Screenshot 2021-10-21 at 17.47.02.png>)
 
-###
+
 
 ### Step 4 - Create Harvester&#x20;
 
@@ -117,7 +117,7 @@ After that, check the Event Type from step 2 in Granary UI again and see the Har
 
 ![](<../../.gitbook/assets/image (75).png>)
 
-###
+
 
 ### Step 5 - Send & access Data&#x20;
 
@@ -147,7 +147,7 @@ To give you a jumpstart, SQLPad offers four template queries explaining how to m
 Of course it is possible to join various views or tables residing in your schema. To do so, just create multiple input event types and add them to your DBT belt as explained in step 6 below.
 {% endhint %}
 
-###
+
 
 ### Step 6 - Create DBT Belt
 
