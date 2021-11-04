@@ -517,6 +517,46 @@ description: This page lists known issues to the Granary platform.
         <td style="text-align:left">all API-component versions starting from Granary 1.0.0</td>
         <td style="text-align:left">#732 (closed)</td>
     </tr>
+    <tr>
+      <td style="text-align:left">DBT Segment Belt</td>
+      <td style="text-align:left">GKI_2021_001</td>
+      <td style="text-align:left">No Prometheus metrics available</td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">GS-1810</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">DBT Segment Belt</td>
+      <td style="text-align:left">GKI_2021_002</td>
+      <td style="text-align:left">DBT Segment Belt in incremental mode does not support TTL-based deletion</td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">GS-1838</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Live Segments</td>
+      <td style="text-align:left">GKI_2021_003</td>
+      <td style="text-align:left">Live Segments do not support TTL-based deletion</td>
+      <td style="text-align:left">1.0.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">GS-1809</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Belt API</td>
+      <td style="text-align:left">GKI_2021_004</td>
+      <td style="text-align:left">With the new output types it is possible to model a cyclic graph. This is not prohibited by Belt API.</td>
+      <td style="text-align:left">1.2.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">GS-1879</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Harvester API</td>
+      <td style="text-align:left">GKI_2021_005</td>
+      <td style="text-align:left">It is possible to reuse an event type name after deletion. If this happens in a different project scope, the new project might obtain access to events/profiles that were written by the project owning the event type name previously.</td>
+      <td style="text-align:left">1.2.0</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">GS-1857</td>
+    </tr>        
   </tbody>
 </table>
 
