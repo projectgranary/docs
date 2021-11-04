@@ -20,6 +20,8 @@ description: Denotes release versions of Granary artifacts.
 
 ## Previous Granary Versions
 
+
+* [Granary 1.1 Cliff](https://docs.grnry.io/v/1.1-cliff/operator-reference/granary-release-notes)
 * [Granary 1.0 Aretha](https://docs.grnry.io/v/1.0-aretha/operator-reference/granary-release-notes)
 * [Granary 0.9 Marie](https://docs.grnry.io/v/0.9-marie/operator-reference/granary-release-notes)
 * [Granary 0.8 Lemmy](https://docs.grnry.io/v/0.8-lemmy/operator-reference/granary-release-notes)
@@ -30,9 +32,9 @@ description: Denotes release versions of Granary artifacts.
 
 
 
-## Granary 1.1.0 "Cliff" - 2021-05-28
+## Granary 1.2.0 "Dolores" - 2021-11-15
 
-In this new release we focused on deleting data points from Profile- and Event Store to achieve GDPR compliance. The Profile Store Reaper now features a time-to-notification mode where one can trigger a notification on profiles independent of deleting data. Furthermore, data pipeline elements can now be deleted in Granary UI and Kafka.
+In this new release we focused on introducing projects to Granary that enforce a multi-tenancy view on Granary objects (Event Types, Harvesters and Belts) as well as the data. Moreover, we changed the segment creation quite a bit. On the one hand, we deprecated the component Segment Table Creation in favor of a Belt based implementation of [DBT Models](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/). On the other hand, we introduced Live Segments (based on Kafka Connect) that allow to write direct database updates given a JSONSchema in a Belt's Python callback.
 
 
 
