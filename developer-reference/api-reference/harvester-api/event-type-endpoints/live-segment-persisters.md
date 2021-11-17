@@ -174,6 +174,14 @@ Event type name.
 Authentication token.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="errorsTolerance" type="string" %}
+Enables functionality to route messages to a dead letter queue when "all" is specified. By default errorsTolerance is set to "none" which means messages won't be routed to a DLQ
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="errorsDeadletterqueueContextHeadersEnable" type="boolean" %}
+Writes information about the reason for a message’s rejection into the header of the message which will be passed to a DLQ 
+{% endswagger-parameter %}
+
 {% swagger-response status="200" description="" %}
 ```json
 {
