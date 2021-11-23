@@ -1,10 +1,10 @@
-# \[Projects\] Use Case Migration Concept
+# \[Projects] Use Case Migration Concept
 
 ## Create your project
 
 Each use case needs to create a project with the Projects API.
 
-If a project is created ALL objects beloging to this project \(Event Types, Harvesters, and Belts\) need to be moved to this project \(via database `update` statements\) as well. Otherwise Granary APIs cannot deploy a project's data pipelines any longer.
+If a project is created ALL objects beloging to this project (Event Types, Harvesters, and Belts) need to be moved to this project (via database `update` statements) as well. Otherwise Granary APIs cannot deploy a project's data pipelines any longer.
 
 {% hint style="warning" %}
 If a project decides to move its objects to its own project scope, it is currently not possible to access event types from other projects anylonger. This means if projects rely on reading data from event types owned by different projects, all of the objects must reside in the `global` project scope for now. This will change with future Granary versions by shipping an event type sharing capability.
@@ -12,7 +12,7 @@ If a project decides to move its objects to its own project scope, it is current
 
 ## Event Types
 
-When starting Granary 1.2's version of Harvester API \(which includes the Event Type API endpoints\), this SQL script is automatically executed:
+When starting Granary 1.2's version of Harvester API (which includes the Event Type API endpoints), this SQL script is automatically executed:
 
 ```sql
 UPDATE public.event_types
@@ -22,13 +22,13 @@ WHERE
 ALTER TABLE public.event_types ALTER COLUMN project_name SET NOT NULL;
 ```
 
-This means that all existing event types \(possible types are "data\_in", "ttl", or "ttn"\) are assigned to the `global` project by default. To enable the full feature set of Granary 1.2, the following migrations need to be carried out:
+This means that all existing event types (possible types are "data\_in", "ttl", or "ttn") are assigned to the `global` project by default. To enable the full feature set of Granary 1.2, the following migrations need to be carried out:
 
 ### Existing type "data\_in"
 
 The Project API generates a database schema per project. This schema is supposed to be the only place where project members have read access to on the database. To enable data acess for them, an admin user needs to carry out two steps:
 
-####  1. Move to project scope \(if other than `global` desired\)
+#### &#x20;1. Move to project scope (if other than `global` desired)
 
 ```sql
 UPDATE public.event_types
@@ -64,7 +64,7 @@ WHERE name = '<your technical event type name>';
 ```
 
 {% hint style="warning" %}
-If you decide to move your existing "ttl" or "ttn" event types to your project scope \(or create new ones in your project scope\), please make sure to invite the Reaper's technical user in Keycloak to your project as "viewer" as well.
+If you decide to move your existing "ttl" or "ttn" event types to your project scope (or create new ones in your project scope), please make sure to invite the Reaper's technical user in Keycloak to your project as "viewer" as well.
 {% endhint %}
 
 ### New type "profile"
@@ -111,7 +111,7 @@ LOCALTIMESTAMP),
 '<your project name>');
 ```
 
-#### 2. Create view on Profile Store in project's database 
+#### 2. Create view on Profile Store in project's database&#x20;
 
 ```sql
 CREATE VIEW <your project name>.<your profile type name> AS 
@@ -145,5 +145,4 @@ WHERE id = '<your belt id>';
 
 ## Segments
 
-See dedicated page for Segments 2.0.
-
+See dedicated page for DBT Segments.
