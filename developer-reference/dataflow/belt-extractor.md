@@ -4,7 +4,7 @@ description: A function-as-a-service like Python callback runtime
 
 # Belt Framework
 
-![Data flow within harmonized data zone of Granary](../../.gitbook/assets/dataflow_profile.PNG)
+![Data flow within harmonized data zone of Granary](../../.gitbook/assets/dataflow\_profile.PNG)
 
 Belts are used to compute updates for profile entities stored in the [Profile Store](profile-store/). These updates can represent things like:
 
@@ -26,14 +26,14 @@ The Belt framework can consume messages from one or many Event Types. Technicall
 {% tab title="Spec" %}
 | Key                            | Description                                                                    |
 | ------------------------------ | ------------------------------------------------------------------------------ |
-| **event_headers**              | Kafka fields for Event metadata                                                |
+| **event\_headers**             | Kafka fields for Event metadata                                                |
 | $$-$$ grnry-event-type         | event type as specified during harvester definition                            |
 | $$-$$ grnry-event-id           | used to deduplicate events                                                     |
 | $$-$$ grnry-harvester-name     | name of the harvester instance, extracted from event payload or a static value |
 | $$-$$ grnry-correlation-id     | used to group events received from the same tracking entity                    |
 | $$-$$ grnry-event-timestamp    | event processing time set by harvester (metadata extractor)                    |
 | $$-$$ grnry-event-type-version | version of event type registered with the harvester                            |
-| **event_payload**              | Forwarded from input attribute `value`                                         |
+| **event\_payload**             | Forwarded from input attribute `value`                                         |
 | $$-$$ schema                   | Snowplow Event Schema Reference                                                |
 | $$-$$ ipAddress                | ipAddress if Snowplow is configured to collect this                            |
 | $$-$$ timestamp                | time of event creation or reception(?)                                         |
@@ -47,7 +47,7 @@ The Belt framework can consume messages from one or many Event Types. Technicall
 
 ### Profile Update
 
-Profile update messages need to comply to the following output data format which is explained in detail in the following paragraphs. 
+Profile update messages need to comply to the following output data format which is explained in detail in the following paragraphs.&#x20;
 
 {% tabs %}
 {% tab title="Spec" %}
@@ -161,11 +161,11 @@ GRAIN_VALUE :=
   {
     "_v": string,                               # Json object string, Json array string, or string of counter value. Value type must fit _operation
     "_c": double,                               # default is 1
-    "_in": long,                                # default is now()
+    "_in": long,                                # default is time()
     "_ttl": string,                             # period of time, https://en.wikipedia.org/wiki/ISO_8601#Durations, default is "P100Y"
     "_ttn": string,                             # period of time, https://en.wikipedia.org/wiki/ISO_8601#Durations, default is "P100Y"
     "_origin": string,                          # default is "/belts/{belt-id}"
-    "_reader": string                           # default is "_all"
+    "_reader": string                           # default is "_auth"
   }
 ```
 
@@ -197,10 +197,10 @@ Following rules are validated:
 
 * A method called `execute` needs to be present in callback
 * The execute method can only have 2 or 3 parameters
-* If `FETCH_PROFILE` is `lazy` or `false` 
+* If `FETCH_PROFILE` is `lazy` or `false`&#x20;
   * The execute method can have only 2 parameters
-  * In case of a 3rd parameter a default needs to be provided e.g. `profile=None` 
-* If `FETCH_PROFILE` is `true` 
+  * In case of a 3rd parameter a default needs to be provided e.g. `profile=None`&#x20;
+* If `FETCH_PROFILE` is `true`&#x20;
   * The execute method needs to have exactly 3 parameters
 
 ### Data** Fetching**
@@ -241,7 +241,7 @@ Also, in order to get results, you must have the required roles as defined in th
 
 Next to the `profileClient`, an `eventstoreClient` class is injected into the callback if using`FETCH_PROFILE=true` or `FETCH_PROFILE=lazy`. The eventstore client has two methods:
 
-1. `getEvents` to fetch all events for a `correlation_id` 
+1. `getEvents` to fetch all events for a `correlation_id`&#x20;
 2. `getEvent` to fetch a single Event with `correlation_id` and `event_id`.
 
 ```yaml
