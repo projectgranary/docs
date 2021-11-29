@@ -12,9 +12,9 @@ Event feeder will create a batch job to read events based on configurable event 
 
 | Parameter (env variable name)                | Description                                                                  | Example Value       |
 | -------------------------------------------- | ---------------------------------------------------------------------------- | ------------------- |
-| EVENTSTORE_HOSTNAME                          | hostname of the postgres instance                                            | `grnry-pg`          |
-| EVENTSTORE_PORT                              | port of the postgres instance                                                | `5432`              |
-| EVENTSTORE_DB_NAME                           | database name on postgres instance                                           | `postgres`          |
+| EVENTSTORE\_HOSTNAME                         | hostname of the postgres instance                                            | `grnry-pg`          |
+| EVENTSTORE\_PORT                             | port of the postgres instance                                                | `5432`              |
+| EVENTSTORE\_DB\_NAME                         | database name on postgres instance                                           | `postgres`          |
 | IO.GRNRY.EVENTFEEDER.DATASOURCE-TABLE-NAME   | table name on postgres instance                                              | `public.eventstore` |
 | IO.GRNRY.EVENTFEEDER.DATASOURCE-USER         | username on postgres instance                                                | `postgres`          |
 | IO.GRNRY.EVENTFEEDER.DATASOURCE-PASSWORD     | password on postgres instance                                                | `xxx`               |
@@ -23,7 +23,7 @@ Event feeder will create a batch job to read events based on configurable event 
 | SPRING.KAFKA.BOOTSTRAP-SERVERS               | Name of kafka service to connect to                                          | `grnry-kafka`       |
 | IO.GRNRY.EVENTFEEDER.OUTPUT-TOPIC            | Name of temporary output topic                                               | `snowplow-temp`     |
 | IO.GRNRY.EVENTFEEDER.EVENT-TYPE              | Batch size for DB read                                                       | `100`               |
-| ENCRYPTION_MODE                              | Whether raw events should be encrypted in temporary output  topic            | `false`             |
+| ENCRYPTION\_MODE                             | Whether raw events should be encrypted in temporary output  topic            | `false`             |
 
 
 
@@ -35,7 +35,7 @@ Event feeder will create a batch job to read events based on configurable event 
 ### Replay Scenario 2 - Deploy new belts, start on past event data
 
 * Event Feeder reads raw events from Event Store and emits them to a temporary topic, settings see above.
-* Event Feeder also determines a **Hand-over offset **to switch from temporary to live topic.
+* Event Feeder also determines a **Hand-over offset** to switch from temporary to live topic.
 * _1st Deployment:_ Belts consume temporary topic from `earlist`. To achieve this, use [Belt API ](../../api-reference/belt-api.md)parameter `offset` with zeros for all partitions.
 
 {% hint style="info" %}

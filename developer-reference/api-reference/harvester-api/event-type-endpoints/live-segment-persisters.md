@@ -333,8 +333,9 @@ Event type name.
 
 Possible values for the status attribute in the response body are:
 
-| STOPPED   | persister is not deployed             |
+| STOPPING  | persister is being stopped            |
 | --------- | ------------------------------------- |
+| STOPPED   | persister is not deployed             |
 | DEPLOYING | persister is being deployed           |
 | RUNNING   | persister is running                  |
 | FAILED    | persister is deployed but not running |

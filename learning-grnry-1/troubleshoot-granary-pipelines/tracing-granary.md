@@ -12,7 +12,7 @@ To gather timing data needed to troubleshoot latency problems in Granary data pi
 
 ## Enabling/disabling tracing
 
-By default, **self-tracing is** **enabled** throughout Granary pipeline with a sample rate of 0.1. The sample rate in Zipkin indicates the sampling rate of a signal. For example, a sample rate of 0.1 indicates that 10 events of 100 will be sampled and send their timing data to Zipkin. A sample rate should be a value between 0.0 and 1.0. 
+By default, **self-tracing is** **enabled** throughout Granary pipeline with a sample rate of 0.1. The sample rate in Zipkin indicates the sampling rate of a signal. For example, a sample rate of 0.1 indicates that 10 events of 100 will be sampled and send their timing data to Zipkin. A sample rate should be a value between 0.0 and 1.0.&#x20;
 
 The following describes how Granary users can disable (enable) tracing in each of the Granary components.
 
@@ -38,7 +38,7 @@ To disable self-tracing and also tracing in the belts deployed through Belt API,
 BELT_TRACING=false
 ```
 
-The sample rate configuration is 
+The sample rate configuration is&#x20;
 
 ```
 BELT_TRACING_PROBABILITY=0.1 
@@ -119,7 +119,7 @@ X-B3-TraceId=<CUSTOM_64_OR_128_BIT_ID>
 X-B3-SpanId=<CUSTOM_64_OR-128_BIT_ID> 
 ```
 
-in the **HTTP header **while sending** **a request to the Snowplow API. Note that despite the industry standard, **header names here are case sensitive **and while X-B3-SpanId is mandatory, it will be ignored because the API will start a new span with a different Span ID. 
+in the **HTTP header** while sending **** a request to the Snowplow API. Note that despite the industry standard, **header names here are case sensitive** and while X-B3-SpanId is mandatory, it will be ignored because the API will start a new span with a different Span ID.&#x20;
 
 Alternatively, one could send equipped with a single-liner `b3`field in the header which contains  the trace and span IDs in the following format:
 
@@ -127,7 +127,7 @@ Alternatively, one could send equipped with a single-liner `b3`field in the head
 b3=<{x-b3-traceid}-{x-b3-spanid}-{if x-b3-flags 'd' else x-b3-sampled}-{x-b3-parentspanid}
 ```
 
-##  How to analyse spans
+## &#x20;How to analyse spans
 
 Using Zipkin Dashboard, it is easy to analyse and keep overview of the timing and latency data of Granary components. With tracing with 100% sampling rate enabled in the whole pipeline, let's now try sending an event to the API with trace ID `5f910d8e975adae2` . When we log on to the Zipkin dashboard and filter traces reported in the last 5 minutes, we will see few traces spanning all components with one at the very top being ours with identified by the trace ID `5f910d8e975adae2.`
 
@@ -139,7 +139,7 @@ Now back to our trace. Selecting the trace in the overview page will give detail
 
 ![](../../.gitbook/assets/screenshot-2019-09-30-at-08.01.33.png)
 
-Selecting a node will then display further information about the trace and a component, if available. 
+Selecting a node will then display further information about the trace and a component, if available.&#x20;
 
 ![](../../.gitbook/assets/screenshot-2019-09-30-at-08.09.34.png)
 

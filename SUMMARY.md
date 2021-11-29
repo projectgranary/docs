@@ -2,8 +2,9 @@
 
 * [About Granary](README.md)
 
-## Learning Granary <a href="learning-grnry-1" id="learning-grnry-1"></a>
+## Learning Granary <a href="#learning-grnry-1" id="learning-grnry-1"></a>
 
+* [Create Project in Granary](learning-grnry-1/create-project-in-granary.md)
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
   * [How to run a Harvester](learning-grnry-1/data-in/how-to-run-a-harvester/README.md)
     * [Event Types](learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md)
@@ -32,6 +33,7 @@
     * [Converting a script into a one-liner](learning-grnry-1/using-data-in-granary/best-practices/easing-development.md)
     * [Logging](learning-grnry-1/using-data-in-granary/best-practices/logging.md)
 * [Get Data Out of Granary](learning-grnry-1/get-data-out-of-granary/README.md)
+  * [How to model a Live Segment with a Belt](learning-grnry-1/get-data-out-of-granary/how-to-model-a-live-segment-with-a-belt.md)
   * [How to model a Segment with a DBT Belt](learning-grnry-1/get-data-out-of-granary/how-to-model-a-segment-with-a-dbt-belt.md)
   * [How to access a Segment](learning-grnry-1/get-data-out-of-granary/segment-store-api.md)
   * [Best Practices](learning-grnry-1/get-data-out-of-granary/best-practices/README.md)
@@ -55,6 +57,7 @@
 
 ## Developer Reference
 
+* [Projects](developer-reference/projects.md)
 * [Data Flow](developer-reference/dataflow/README.md)
   * [Event Types](developer-reference/dataflow/event-type.md)
   * [Data-In](developer-reference/dataflow/data-in/README.md)
@@ -71,6 +74,7 @@
   * [Profile Store and Reaper](developer-reference/dataflow/profile-store/README.md)
     * [Reaping of Grains for Notification or Deletion](developer-reference/dataflow/profile-store/reaper.md)
   * [Segment Store](developer-reference/dataflow/segment-store/README.md)
+    * [Live-Segments](developer-reference/dataflow/segment-store/live-segments.md)
     * [Segment Table Creation](developer-reference/dataflow/segment-store/segment-table-creation.md)
 * [API Reference](developer-reference/api-reference/README.md)
   * [Snowplow API endpoints](developer-reference/api-reference/snowplow-api-endpoints.md)

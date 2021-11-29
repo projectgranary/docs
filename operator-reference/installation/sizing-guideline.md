@@ -7,10 +7,10 @@ description: This is a recommendation for the configuration of resources and the
 ## Minimal setup
 
 {% hint style="warning" %}
- This is a recommendation to process > 500 events per second and up to 1,000 profile updates per second. Depending on workload requirements may differ.
+&#x20;This is a recommendation to process > 500 events per second and up to 1,000 profile updates per second. Depending on workload requirements may differ.
 {% endhint %}
 
-In Kubernetes, the sum of all _requires _cannot exceed the amount of physically present hardware whereas the _limits _can be used to over-provision the Kubernetes worker nodes to make better use of idle resources.
+In Kubernetes, the sum of all _requires_ cannot exceed the amount of physically present hardware whereas the _limits_ can be used to over-provision the Kubernetes worker nodes to make better use of idle resources.
 
 Units RAM:
 

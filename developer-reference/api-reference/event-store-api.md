@@ -18,9 +18,9 @@ Consult the [Granary Access Clients Reference](../../operator-reference/identity
 {% swagger-description %}
 Retrieves events containing the specified Correlation ID. In order to get results, you must have the required roles as defined in the fields 
 
-_event_type _
+_event_type_
 
-and 
+ and 
 
 _event_harvester_
 
@@ -212,9 +212,9 @@ Example:
 {% swagger-description %}
 Retrieves a single event (including its message payload). In order to get results, you must have the required roles as defined in the fields 
 
-_event_type _
+_event_type_
 
-and 
+ and 
 
 _event_harvester_
 

@@ -38,9 +38,9 @@ Retrieves full dump of
 
 In order to get results, you must have one of the project's roles 
 
-_editor _
+_editor_
 
-or 
+ or 
 
 _viewer_
 
@@ -333,13 +333,13 @@ Retrieves full dump of a specific belt with a specified ID.
 
 In order to retrieve results here, it is necessary that you either have the project's 
 
-_editor _
+_editor_
 
-or 
+ or 
 
-_viewer _
+_viewer_
 
-role assigned to your user in keycloak.
+ role assigned to your user in keycloak.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="project-name" type="string" %}
@@ -1228,9 +1228,9 @@ Retrieve the status of the Belt's Kubernetes deployment.
 
 In order to get results, you must have one of the project's roles 
 
-_editor _
+_editor_
 
-or 
+ or 
 
 _viewer_
 
@@ -1530,9 +1530,9 @@ Get the last n log lines from all pods of the belt with the given
 
 This request requires the project's 
 
-_editor _
+_editor_
 
-role.
+ role.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="project-name" type="string" %}

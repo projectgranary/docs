@@ -422,6 +422,15 @@ Authentication token.
 {% endswagger-response %}
 {% endswagger %}
 
+Possible values for the status attribute in the response body are:
+
+| STOPPING  | persister is being stopped            |
+| --------- | ------------------------------------- |
+| STOPPED   | persister is not deployed             |
+| DEPLOYING | persister is being deployed           |
+| RUNNING   | persister is running                  |
+| FAILED    | persister is deployed but not running |
+
 {% swagger baseUrl="https://api.grnry.io" path="/projects/:project-name/event-types/:event-type-name/eventstores/pg/persister/state" method="post" summary="Start/Stop Persister for a Specific Event Type" conflict="[object Object]" %}
 {% swagger-description %}
 Start or stop the state of a persister for an event type.

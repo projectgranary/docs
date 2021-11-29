@@ -10,9 +10,9 @@ To model data within GRNRY, there are some guiding principles you should keep in
 
 * If you have one physical entity (e.g. a customer) and different IDs which are used to identify this customer, decide which ID is the leading one and resolve dependencies between IDs to put everything into the leading ID. This leading ID is called `correlation_id`.
 * Use the `profile_type` to model different real world entities, such as customer, contract, campaign. They might share the same leading ID, though.
-* Consider the combination of `correlation_id` and `profile_type` to be an _entity_ in the sense of [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design#Building_blocks).
+* Consider the combination of `correlation_id` and `profile_type` to be an _entity_ in the sense of [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven\_design#Building\_blocks).
 * Try to avoid having multiple belts writing the same grains.
-* Distinguish different semantic areas such as mobile web data from master data by using different fragments, e.g. _/masterdata/name_, _/masterdata/dateOfBirth_, _/mobile_settings/no_ads_
+* Distinguish different semantic areas such as mobile web data from master data by using different fragments, e.g. _/masterdata/name_, _/masterdata/dateOfBirth_, _/mobile\_settings/no\_ads_
 
 ### How to get started
 
@@ -37,13 +37,13 @@ In addition, the correlation id is used, e.g. in the [Event Store](../../../deve
 
 #### A sample model
 
-After answering these questions from above, you should have a good overview on what your data is like. Now, you can start modeling the data. We recommend a structure similar to the ER diagram. However, we put _grains_ into the center of it. A _grain _represents a certain piece of information about a profile, i.e. a real world entity. A sample diagram looks like this:
+After answering these questions from above, you should have a good overview on what your data is like. Now, you can start modeling the data. We recommend a structure similar to the ER diagram. However, we put _grains_ into the center of it. A _grain_ represents a certain piece of information about a profile, i.e. a real world entity. A sample diagram looks like this:
 
 ![Sample how you could model the profile store](<../../../.gitbook/assets/grafik (6).png>)
 
 As you can see the large boxes are profiles. These profiles have _fragments_ which store specific information related to a certain use case or target entity. We also store the Correlation ID here to easily see whether we have the required information to store information in this profile as well. The arrows between different profiles show that there are relationships between the different entities.
 
-For simplicity, at the top of the image, there is also the table structure of the Profile Store. This should help you keeping in mind which kind of data is stored within the database. The `correlation_id` is the unique identifier of a profile. The `profile_type` is what distinguishes several ids of different real world entities from each other. The profile types in this sample are _customer _and _contract_. The `path` is where the data is stored. For example the name of a customer is stored in the path _/customer/name_. And `pit` just gives the information whether this piece of information is still valid.
+For simplicity, at the top of the image, there is also the table structure of the Profile Store. This should help you keeping in mind which kind of data is stored within the database. The `correlation_id` is the unique identifier of a profile. The `profile_type` is what distinguishes several ids of different real world entities from each other. The profile types in this sample are _customer_ and _contract_. The `path` is where the data is stored. For example the name of a customer is stored in the path _/customer/name_. And `pit` just gives the information whether this piece of information is still valid.
 
 Knowing all this, you should be able to start creating your Profile Store.
 

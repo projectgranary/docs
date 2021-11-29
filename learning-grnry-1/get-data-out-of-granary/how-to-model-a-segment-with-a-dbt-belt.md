@@ -8,42 +8,7 @@ description: >-
 
 ### Step 1 - Create Project (optional)
 
-_\[only carry out this step if you do not have a Granary project yet] _
-
-First step in Project API, using [Postman](../../developer-reference/api-reference/#postman-collection) requests, we create the project with the [SQLPad](https://getsqlpad.com/#/) deploy option so that we can model our segments directly with SQL. Using this option, SQLPad instance will be deployed and connected to corresponding project schema.
-
-[POST /projects?deploy=sqlpad](../../developer-reference/api-reference/project-api.md#create-project)
-
-```
-{
-  "name": "Projectfortest",
-  "displayName": "Projectfortest",
-  "description": "Test Granary Project description"
-}
-```
-
-Response will be:
-
-```
-{
-    "name": "projectfortest",
-    "displayName": "Projectfortest",
-    "description": "Test Granary Project description",
-    "_links": {
-        "self": {
-            "href": "https://development.internal.analytics.cc.syncier.cloud/projects/projectfortest?expand=sqlpad"
-        }
-    }
-}
-```
-
-The project gets created and we can see it in Granary UI.
-
-![](<../../.gitbook/assets/Screenshot 2021-10-21 at 17.36.06.png>)
-
-{% hint style="info" %}
-In case if we forget to create a project without `?deploy=sqlpad` parameter, one can also deploy [SQLPad via Helm](../../operator-reference/installation/with-helm/sqlpad.md) using the project's database and Keycloak credentials. We can confirm SQLPad UI is running for the schema project by running the [GET project request](../../developer-reference/api-reference/project-api.md#get-project-details) with `?expand=sqlpad`.
-{% endhint %}
+_Only carry out this step if you do not have a Granary project yet. For details refer to the_ [_Create Project in Granary_](../create-project-in-granary.md) _guide._
 
 
 
@@ -56,13 +21,13 @@ DBT Belts require input Event Types that reference a database location. Currentl
 * Live-Segment --> database location is the reference Live-Segment table
 * Segment --> database location is the output table of another DBT Belt
 
-To create the input Event Type, we use the Harvester API with the following request:
+To create the input Event Type, we either use Granary UI or the Harvester API with the following request:
 
 [POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
 
-where `:project-name` need to be provided as input to the request (we can refer it from step 1).
+where `:project-name` needs to be provided as input to the request (we can refer it from step 1).
 
-```
+```json
 {
     "displayName": "dbt-belt-inputET-projectfortest",
     "description": "dbt belt for projectfortest",
@@ -88,13 +53,13 @@ In case of Data-In and Live-Segment, please ensure that their persisters (right 
 
 ### Step 3 - Create Output EventType
 
-DBT Belts require exactly one output Event Type. Therefore, we need to create a Segment Event Type whose name determines the datbase table's name:
+DBT Belts require exactly one output Event Type. Therefore, we need to create a Segment Event Type whose name determines the datbase table's name using Granary UI or by calling:
 
 [POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
 
-&#x20;where `:project-name` need to be provided as input to the request (we can refer it from step 1).
+&#x20;where `:project-name` needs to be provided as input to the request (we can refer it from step 1).
 
-```
+```json
 {
     "displayName": "dbt-belt-outputET-projectfortest",
     "type": "segment"
@@ -141,7 +106,7 @@ Now we can model and build the segment query from the Event Store view using sta
 
 To give you a jumpstart, SQLPad offers four template queries explaining how to model segments on Profile- and Event Store:
 
-![](<../../.gitbook/assets/image (76).png>)
+![](<../../.gitbook/assets/image (76) (1).png>)
 
 {% hint style="info" %}
 Of course it is possible to join various views or tables residing in your schema. To do so, just create multiple input event types and add them to your DBT belt as explained in step 6 below.

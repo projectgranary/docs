@@ -53,7 +53,7 @@ To deactivate the encryption, do not pass in the mounted secrets as shown above 
 
 ## Dead letter queues
 
-In GRNRY, so called _dead letter queues _are automatically created for each Harvester. These dead letter queues are used to receive all the data that could not be processed correctly by the [transform](scriptable-transform.md) or [metadata extractor](metadata-extractor.md) steps. They are the output channels for errors.
+In GRNRY, so called _dead letter queues_ are automatically created for each Harvester. These dead letter queues are used to receive all the data that could not be processed correctly by the [transform](scriptable-transform.md) or [metadata extractor](metadata-extractor.md) steps. They are the output channels for errors.
 
 ### When is something written to the Dead Letter Queue?
 

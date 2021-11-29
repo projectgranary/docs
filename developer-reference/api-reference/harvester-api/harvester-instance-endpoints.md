@@ -414,9 +414,9 @@ Source type and event type are referenced by
 
  in event_types and source_types tables. If no configuration properties are set under 
 
-`sourceType `
+`sourceType`
 
-(resp. 
+ (resp. 
 
 `eventType`
 
@@ -486,9 +486,9 @@ Harvester description
 {% swagger-parameter in="body" name="eventType" type="object" %}
 Existing eventType that this harvester should process. 
 
-_Required _
+_Required_
 
-fields are 
+ fields are 
 
 `name:string`
 
@@ -502,21 +502,21 @@ fields are
 {% swagger-parameter in="body" name="sourceType" type="object" %}
 Existing sourceType that this harvester receives data from. 
 
-_Required _
+_Required_
 
-fields are 
+ fields are 
 
-`name:string `
+`name:string`
 
-and 
+ and 
 
 `version:string`
 
 . 
 
-_Optional _
+_Optional_
 
-fields are 
+ fields are 
 
 `configuration:map`
 
@@ -532,9 +532,9 @@ fields are
 {% swagger-parameter in="body" name="transform" type="object" %}
 Scriptable transform application used by this harvester. If not specified, a default transform app will be deployed. Default values for all fields can be specified during harvester api deployment. 
 
-_Optional _
+_Optional_
 
-fileds are 
+ fileds are 
 
 `app:string`
 
@@ -568,9 +568,9 @@ Sessionizing application used by this harvster. Contains flag
 
  (if set to false, no other fields should be set). Default values for all other fields can be specified during harvester api deployment. These 
 
-_optional _
+_optional_
 
-fields are 
+ fields are 
 
 `app:string`
 
@@ -608,17 +608,17 @@ fields are
 {% swagger-parameter in="body" name="metadataExtractor" type="object" %}
 Metadata extractor application used by this harvester. If not specified, a default metadata extractor app will be deployed. Default values for all fields can be specified during harvester api deployment. 
 
-_Optional _
+_Optional_
 
-fields are 
+ fields are 
 
 `app:string`
 
  (registered app in scdf), 
 
-`version:string `
+`version:string`
 
-(registered app version in scdf), 
+ (registered app version in scdf), 
 
 `deploymentConfiguration:map`
 
@@ -913,9 +913,9 @@ Existing
 {% swagger-parameter in="body" name="sourceType" type="object" %}
 Existing source type that this harvester receives data from. 
 
-_Optional _
+_Optional_
 
-fields are 
+ fields are 
 
 `version:string`
 
@@ -935,9 +935,9 @@ fields are
 {% swagger-parameter in="body" name="transform" type="object" %}
 Scriptable transform application used by this Harvester. Default values for all fields can be specified during harvester api deployment. 
 
-_Optional _
+_Optional_
 
-fields are  
+ fields are  
 
 `version:string`
 
@@ -963,9 +963,9 @@ fields are
 {% swagger-parameter in="body" name="sessionizing" type="object" %}
 Sessionizing application used by this Harvester. 
 
-_Optional _
+_Optional_
 
-fields (can only be set if 
+ fields (can only be set if 
 
 `sessionizing.enabled=true`
 
@@ -1001,9 +1001,9 @@ fields (can only be set if
 {% swagger-parameter in="body" name="metadataExtractor" type="object" %}
 Metadata extractor application used by this Harvester. Default values for all fields can be specified during harvester api deployment. 
 
-_Optional _
+_Optional_
 
-fields are 
+ fields are 
 
 `version:string`
 

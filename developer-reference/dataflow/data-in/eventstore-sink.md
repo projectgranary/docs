@@ -8,9 +8,9 @@ The EventStore Sink persists data from the outbound topic of the Metadata Extrac
 
 The EventStore Sink expects that the event headers have been enriched with the following parameters by using the Metadata Extractor:
 
-* grnry-correlation-id 
-* grnry-event-id 
-* grnry-event-type 
+* grnry-correlation-id&#x20;
+* grnry-event-id&#x20;
+* grnry-event-type&#x20;
 * grnry-event-type-version
 * grnry-harvester-name
 * grnry-event-timestamp
@@ -22,9 +22,9 @@ The parameters for the EventStore Sink are passed into the Harvester API's helm 
 
 **Name**: grnry-eventstore-batch-sink
 
-**Parameters:  **See** **[shared parameters](grnry-components-and-parameters.md)**.**
+**Parameters:**  See **** [shared parameters](grnry-components-and-parameters.md)**.**
 
-The parameters for the EventStore 
+The parameters for the EventStore&#x20;
 
 Additional configuration parameters:
 
@@ -90,7 +90,7 @@ eventstores:
 
 #### Deletion Flag
 
-In case the `grnry-deletion-flag` is set to true, the Eventstore Batch Sink will add a value to the `ttl` column of the Eventstore table for all (already existing) events specified by `event_type` and `correlation_id`_ _(and optional `event_id`) . The `ttl` value will be calculated as the total time-to-live, adding the Event Type's `ttl` and the persister's `ttlGracePeriod` (see above) and subtracting time that has already passed since event creation.
+In case the `grnry-deletion-flag` is set to true, the Eventstore Batch Sink will add a value to the `ttl` column of the Eventstore table for all (already existing) events specified by `event_type` and `correlation_id` __ (and optional `event_id`) . The `ttl` value will be calculated as the total time-to-live, adding the Event Type's `ttl` and the persister's `ttlGracePeriod` (see above) and subtracting time that has already passed since event creation.
 
 #### Error Handling
 

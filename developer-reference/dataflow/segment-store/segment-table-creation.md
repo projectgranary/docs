@@ -6,19 +6,19 @@ description: This page specifies the configuration of segments in Granary.
 
 ## Segment Creation Job
 
-This component generates so-called segments, which can be understood as relational view on Profile Store or Event Store data. 
+This component generates so-called segments, which can be understood as relational view on Profile Store or Event Store data.&#x20;
 
-Depending on the segment's access pattern, segments can be **views **or **tables:**
+Depending on the segment's access pattern, segments can be **views** or **tables:**
 
 * **View segments** are always up-to-date as queries are run at access time against Profile Store / Event Store.
 * **Table segments** are updated based on a cron schedule, are pre-computed, and can be equipped with additional indexes. During the scheduled pre-computation, the old segment is still fully accessible.
 
 The available storage layers are:
 
-* **PostgreSQL **(compatible with Amazon Aurora - allowing to leverage read replicas for view segments)
-* **Citus **Data PostgreSQL
+* **PostgreSQL** (compatible with Amazon Aurora - allowing to leverage read replicas for view segments)
+* **Citus** Data PostgreSQL
 
-Using standard **PostgreSQL**, table segments are normal database tables. Using **Citus**, table segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel. 
+Using standard **PostgreSQL**, table segments are normal database tables. Using **Citus**, table segments are distributed tables, co-located with distributed Citus source tables. Targets are populated per shard. Thus, network load is very low and generation takes place in parallel.&#x20;
 
 Currently, three different segment generator types are available:
 
@@ -54,7 +54,7 @@ The creation job runs in a container and can be deployed via [Segment Management
 | `TYPE_SEPARATOR`           | separator between pivot transformation function and result type                                                                                                                                                                                                                                                                                                                                                                                                   | `::`                    |
 | `DEFINITION_SEPARATOR`     | separator between name and transformation                                                                                                                                                                                                                                                                                                                                                                                                                         | `=`                     |
 | `TRANSFORMATION_SEPARATOR` | separator between multiple transformations, e.g. `body_txt=message->'body'::text\|body_json=replace(message->'body'#>>'{}', '\', '')::jsonb`                                                                                                                                                                                                                                                                                                                      | `\|`                    |
-| `CITUS_DIST_COL`           | Name of the column the source table is and the target segment will be distributed by. Currently, this has to be a single column and is only mandatory if `DB_TYPE=citus`.                                                                                                                                                                                                                                                                                         | correlation_id          |
+| `CITUS_DIST_COL`           | Name of the column the source table is and the target segment will be distributed by. Currently, this has to be a single column and is only mandatory if `DB_TYPE=citus`.                                                                                                                                                                                                                                                                                         | correlation\_id         |
 | `DEBUG`                    | whether to print all database statement and responses                                                                                                                                                                                                                                                                                                                                                                                                             | `true`                  |
 | `SOURCE_WHERE_CLAUSE`      | where clause as SQL (without "WHERE" itself), must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                  | `"pit='_latest'"`       |
 | `PROMETHEUS_PUSHGATEWAY`   | address of gateway to push prometheus metrics, format `'<host>:<port>'`                                                                                                                                                                                                                                                                                                                                                                                           |                         |
@@ -75,8 +75,8 @@ There are parameters to define **views** on the resulting segment. These views c
 
 For this example, the respective configuration could look as follows:
 
-`PIVOT_PATHS: "/pathA,/pathB,/pathC,/isLocked"  `\
-`PIVOT_TRANSFORMATIONS: "/isLocked= ?#>>'{}'::text"  `\
+`PIVOT_PATHS: "/pathA,/pathB,/pathC,/isLocked"`  \
+`PIVOT_TRANSFORMATIONS: "/isLocked= ?#>>'{}'::text"`  \
 `TARGET_SEGMENT_VIEWS: "locked:\"/isLocked\" = 'true',unlocked:\"/isLocked\" = 'false'"`
 
 Detailed configuration
@@ -97,7 +97,7 @@ Also, there are **generic generator** specific variables as specified below.
 
 | Parameter                 | Description                                                                                                                       | Default                                                                                                                                                                                                                                            |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `GENERIC_COLUMNS`         | source columns to be used without transformation                                                                                  | event_id                                                                                                                                                                                                                                           |
+| `GENERIC_COLUMNS`         | source columns to be used without transformation                                                                                  | event\_id                                                                                                                                                                                                                                          |
 | `GENERIC_TRANSFORMATIONS` | columns to be created from transformation. must be in format `<name><definition_separator><sql expression><type separator><type>` | <p><code>body_txt=</code></p><p><code>message->'body'::text|</code></p><p><code>body_json=</code></p><p><code>replace(message->'body'#>>'{}', '\', '')::jsonb|</code></p><p><code>headers=</code></p><p><code>message->'headers'::jsonb</code></p> |
 
 ### Pivot Generator
@@ -144,14 +144,14 @@ For each `<CITUS_DIST_COL>`_/_`path` combination there should be returned a sing
 
 Consider the following input table.
 
-| correlation_id | profile_type | path   | pit      | value | certainty | grain_type | inserted | ttl                 | ttn | reader | origin |
-| -------------- | ------------ | ------ | -------- | ----- | --------- | ---------- | -------- | ------------------- | --- | ------ | ------ |
-| 1              | \_d          | /path1 | \_latest | foo   | 1         | t          | 7        | <p></p><p>p100y</p> | p1d | \_auth | test   |
-| 1              | \_d          | /path2 | \_latest | bar   | 1         | t          | 8        | <p></p><p>p100y</p> | p1d | \_auth | test   |
-| 1              | \_d          | /path3 | \_latest | baz   | 1         | t          | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
-| 1              | pt           | /path3 | \_latest | bazz  | 1         | t          | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
-| 1              | pt           | /path4 | \_latest | 3     | 1         | t          | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
-| 2              | pt           | /path3 | \_latest | bazz  | 1         | t          | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| correlation\_id | profile\_type | path   | pit      | value | certainty | grain\_type | inserted | ttl                 | ttn | reader | origin |
+| --------------- | ------------- | ------ | -------- | ----- | --------- | ----------- | -------- | ------------------- | --- | ------ | ------ |
+| 1               | \_d           | /path1 | \_latest | foo   | 1         | t           | 7        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 1               | \_d           | /path2 | \_latest | bar   | 1         | t           | 8        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 1               | \_d           | /path3 | \_latest | baz   | 1         | t           | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 1               | pt            | /path3 | \_latest | bazz  | 1         | t           | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 1               | pt            | /path4 | \_latest | 3     | 1         | t           | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
+| 2               | pt            | /path3 | \_latest | bazz  | 1         | t           | 9        | <p></p><p>p100y</p> | p1d | \_auth | test   |
 
 Consider the following configuration.
 
@@ -166,23 +166,23 @@ Consider the following configuration.
   value: "/path1,/path2,/path3"
 ```
 
-This results in the following output containing _\_latest_ values for path _a_, _b_ and _c_ per _correlation_id_.
+This results in the following output containing _\_latest_ values for path _a_, _b_ and _c_ per _correlation\_id_.
 
-| correlation_id | /path1 | /path2 | /path3 |
-| -------------- | ------ | ------ | ------ |
-| 1              | foo    | bar    | baz    |
-| 2              | null   | null   | bazz   |
+| correlation\_id | /path1 | /path2 | /path3 |
+| --------------- | ------ | ------ | ------ |
+| 1               | foo    | bar    | baz    |
+| 2               | null   | null   | bazz   |
 
-Note that if _PIVOT_PATHS_ is empty, then it uses all available paths. Determining all path is a potentially long-running operation.
+Note that if _PIVOT\_PATHS_ is empty, then it uses all available paths. Determining all path is a potentially long-running operation.
 
 If filtering by paths (e.g. /path1 in the example above) the result might contain empty rows:
 
-| correlation_id | /path1 |
-| -------------- | ------ |
-| 1              | foo    |
-| 2              | null   |
+| correlation\_id | /path1 |
+| --------------- | ------ |
+| 1               | foo    |
+| 2               | null   |
 
-These can be suppressed by setting _ALLOW_EMPTY_ to _False_. By defining a where clause in _SEGMENT_FILTER_CLAUSE_ the output can be further filtered.
+These can be suppressed by setting _ALLOW\_EMPTY_ to _False_. By defining a where clause in _SEGMENT\_FILTER\_CLAUSE_ the output can be further filtered.
 
 #### Transformations of path content
 
@@ -196,11 +196,11 @@ Below you can see a full example:
 
 Source table:
 
-| correlation_id | profile_type | path   | pit      | value | ... |
-| -------------- | ------------ | ------ | -------- | ----- | --- |
-| 1              | \_d          | /path1 | \_latest | 20    | ... |
-| 2              | pt           | /path1 | \_latest | 30    | ... |
-| 3              | pt           | /path1 | \_latest | 60    | ... |
+| correlation\_id | profile\_type | path   | pit      | value | ... |
+| --------------- | ------------- | ------ | -------- | ----- | --- |
+| 1               | \_d           | /path1 | \_latest | 20    | ... |
+| 2               | pt            | /path1 | \_latest | 30    | ... |
+| 3               | pt            | /path1 | \_latest | 60    | ... |
 
 Configuration:
 
@@ -212,11 +212,11 @@ env:
 
 Result:
 
-| correlation_id | /path1 |
-| -------------- | ------ |
-| 1              | false  |
-| 2              | false  |
-| 3              | true   |
+| correlation\_id | /path1 |
+| --------------- | ------ |
+| 1               | false  |
+| 2               | false  |
+| 3               | true   |
 
 Common transformations could be:
 
@@ -246,11 +246,11 @@ env:
 
 Result:
 
-| correlation_id | street | xyz | phone |
-| -------------- | ------ | --- | ----- |
-| 1              | ...    | ... | ...   |
-| 2              | ...    | ... | ...   |
-| 3              | ...    | ... | ...   |
+| correlation\_id | street | xyz | phone |
+| --------------- | ------ | --- | ----- |
+| 1               | ...    | ... | ...   |
+| 2               | ...    | ... | ...   |
+| 3               | ...    | ... | ...   |
 
 ### Flexible Generator
 
@@ -272,12 +272,12 @@ With the flexible generator you are free to create any segment you want. Below y
 
 Source table:
 
-| correlation_id | profile_type | path   | pit      | value | ... |
-| -------------- | ------------ | ------ | -------- | ----- | --- |
-| 1              | \_d          | /path1 | \_latest | 20    | ... |
-| 2              | pt           | /path1 | \_latest | 30    | ... |
-| 3              | pt           | /path1 | \_latest | 40    | ... |
-| 4              | pt           | /path2 | \_latest | 80    | ... |
+| correlation\_id | profile\_type | path   | pit      | value | ... |
+| --------------- | ------------- | ------ | -------- | ----- | --- |
+| 1               | \_d           | /path1 | \_latest | 20    | ... |
+| 2               | pt            | /path1 | \_latest | 30    | ... |
+| 3               | pt            | /path1 | \_latest | 40    | ... |
+| 4               | pt            | /path2 | \_latest | 80    | ... |
 
 Configuration:
 
@@ -289,10 +289,10 @@ env:
 
 Result:
 
-| count | profile_type |
-| ----- | ------------ |
-| 1     | \_d          |
-| 2     | pt           |
+| count | profile\_type |
+| ----- | ------------- |
+| 1     | \_d           |
+| 2     | pt            |
 
 {% hint style="warning" %}
 Please note that if you are using `%` signs in your source query (e.g. `LIKE '%something'`), they will need to be prefixed with three more `%` signs to work correctly. The example would therefore look like this: `LIKE '%%%%something'`.
@@ -300,7 +300,7 @@ Please note that if you are using `%` signs in your source query (e.g. `LIKE '%s
 
 ## Errors
 
-In case of errors, these are directly thrown and can be detected by the environment running the Docker container (e.g., Kubernetes). In case no connection can be established or the database returns an SQL error result, this is the default behaviour of psycopg2. 
+In case of errors, these are directly thrown and can be detected by the environment running the Docker container (e.g., Kubernetes). In case no connection can be established or the database returns an SQL error result, this is the default behaviour of psycopg2.&#x20;
 
 The metrics are grouped by the job name set in `PROMETHEUS_JOB`. If the `PROMETHEUS_PUSHGATEWAY` variable is set, the following values are pushed:
 

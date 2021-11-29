@@ -4,18 +4,18 @@ description: Connect data, orchestrate systems, act in real-time.
 
 # About Granary
 
-### What is Granary 
+### What is Granary&#x20;
 
 The Realtime Data Platform Granary is a software platform for insurers with a fragmented system and data landscape It enables the cost-efficient and agile development of data driven applications in a regulated environment. Unlike data lakes and business intelligence tools, Granary makes your data not only analysable, but also usable for controlling your systems and processes - automated and in real-time.
 
-### Your benefits 
+### Your benefits&#x20;
 
-* **Exchange data **between cloud applications and legacy systems without complex migrations 
-* **Save time** and money developing data pipelines for data-driven applications 
-* **Personalise **your applications and customer interactions through a 360° customer view 
-* **Scale **your applications with our microservices architecture 
-* **Comply with BaFin** regulations through our privacy-by- design principle and end-to-end encryption 
-* **Stay independent** with your own on-premises Kubernetes setup or a cloud provider of your choice 
+* **Exchange data** between cloud applications and legacy systems without complex migrations&#x20;
+* **Save time** and money developing data pipelines for data-driven applications&#x20;
+* **Personalise** your applications and customer interactions through a 360° customer view&#x20;
+* **Scale** your applications with our microservices architecture&#x20;
+* **Comply with BaFin** regulations through our privacy-by- design principle and end-to-end encryption&#x20;
+* **Stay independent** with your own on-premises Kubernetes setup or a cloud provider of your choice&#x20;
 * **Be future-proof** through the use of widespread open source technologies
 
 ### Who uses Granary

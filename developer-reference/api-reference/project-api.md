@@ -28,9 +28,9 @@ Creates a project. A technical name for the project entity will be derived from 
 
 Granary projects are represented as Keycloak client with specific attributes. On 
 
-_Create Project API call  _
+_Create Project API call_
 
-the following will be created:
+  the following will be created:
 
 \
 

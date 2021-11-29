@@ -118,7 +118,7 @@ generic_update.GenericUpdate(correlationId, eventPayload, event_headers)
 
 ## **Python callback function**
 
-The user supplied Belt Python callback function needs to convert the input messages from above to one or many so called **profile updates** (it is also valid to not return any update). These updates materialize as **grains** in the Profile Store. Many grains shape a **fragment** whereas many fragments from a **profile, **hence **Profile Store**.
+The user supplied Belt Python callback function needs to convert the input messages from above to one or many so called **profile updates** (it is also valid to not return any update). These updates materialize as **grains** in the Profile Store. Many grains shape a **fragment** whereas many fragments from a **profile,** hence **Profile Store**.
 
 The Python code provided here has to be in the form of a function by the name **callback.py** that can be invoked using the signature `execute(event_headers, event_payload)` where the parameter `event_payload` and `event_headers` are both a Python dictionary containing one event/header from the input topic or a list of dictionaries containing multiple events/headers. See [Belt Callback Signatures](../../learning-grnry-1/using-data-in-granary/best-practices/belt-callback-signatures.md) for more complete examples.
 
@@ -203,7 +203,7 @@ Following rules are validated:
 * If `FETCH_PROFILE` is `true`&#x20;
   * The execute method needs to have exactly 3 parameters
 
-### Data** Fetching**
+### Data **Fetching**
 
 #### **Profile Store**
 
