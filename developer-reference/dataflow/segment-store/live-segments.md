@@ -133,9 +133,12 @@ Updates are also possible, by providing the `id` property in the JSON schema, th
 JDBC sink is documented in more detail here:
 
 {% embed url="https://docs.confluent.io/kafka-connect-jdbc/current/sink-connector/index.html#jdbc-sink-data-mapping" %}
-\
 
-{% endembed %}
+#### Configure Kafka Connect task
+
+Granary allows to modify the configuration of the Live-Segment's Kafka Connect JDBC sink to a certain extend. To do so, please refer to the [Event Type Live-Segment Persister API](../../api-reference/harvester-api/event-type-endpoints/live-segment-persisters.md#set-persister) documentation.
+
+
 
 ### Live-Segment Belt
 
