@@ -12,7 +12,7 @@ Granary 1.2 ships with Projects as multi-tenancy concept. To be able to create s
 
 If you do not want to use the Keycloak super-admin user "keycloak", you can create a new user in realm "master" and assign all roles in client `grnry-realm`:
 
-![](<../../.gitbook/assets/image (76).png>)
+![](<../../.gitbook/assets/image (77).png>)
 
 ### 2) Add `project-api` Keycloak client
 

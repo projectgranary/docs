@@ -14,11 +14,11 @@ In Granary, [Event Types](../../data-in/how-to-run-a-harvester/event-types.md) a
 
 Select 'Manage Event Types' on the left side pane which will open the following page:
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-15.21.46.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 15.21.46.png>)
 
 Click on 'New Event Type' button on the right side of the page.
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-15.24.24.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 15.24.24.png>)
 
 Here the configurations, you need to copy:
 
@@ -34,7 +34,7 @@ Here, `‘cid’` is a part of the Snowplow event, we will be passing to Granary
 
 And click on button ‘Create Event Type’.
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-15.56.54.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 15.56.54.png>)
 
 ## 2. Configure Harvester
 
@@ -44,23 +44,23 @@ In Granary, [Harvesters](../../data-in/how-to-run-a-harvester/harvesters.md) are
 
 Select 'Manage Harvesters' on the left side pane which will open the following page:
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-16.02.02.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 16.02.02.png>)
 
 Click on the 'New Harvester' button on the right side of the pane. Provide the name of Harvester including a suffix with your name. Choose the Source Type '[Granary Topic](../../../developer-reference/dataflow/data-in/source-types.md#topic-source)' with the latest version `1.0.0`.
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-16.06.55.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 16.06.55.png>)
 
 Configure the Source Type – select the default configuration as it is. I.e. we are reading data from the Snowplow API endpoint.
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-16.07.24.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 16.07.24.png>)
 
 Select the Event Type `RealTimeET-<yourName>` which we have created above with the `latest` version from the drop down.
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-16.10.31.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 16.10.31.png>)
 
 Also, we need to add a transform script like:
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-16.15.29.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 16.15.29.png>)
 
 ```groovy
 import groovy.json.JsonSlurper
@@ -119,11 +119,11 @@ Check the Harvester's [best practice section](../../data-in/best-practices-1/) f
 
 Once the Harvester is created, It is stopped in state initially, from the right side of the screen we can see the drop down using that we need to start the Harvester.
 
-![](../../../.gitbook/assets/screenshot-2021-05-05-at-09.33.42.png)
+![](<../../../.gitbook/assets/Screenshot 2021-05-05 at 09.33.42.png>)
 
 After harvester started we can see the state is running and can search the harvester by its name:
 
-![](../../../.gitbook/assets/screenshot-2021-04-15-at-16.49.35.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-15 at 16.49.35.png>)
 
 ## 3. Transform events with the Belt
 
@@ -133,19 +133,19 @@ In Granary, a Belt is a function runtime that transforms raw events to valuable 
 
 Select the 'Manage Belts' section from the left side of the page and click on button 'New Belt'. Specify the name of Belt `RealTime-Belt-<yourName>` and select the Event Type `RealTimeET-<yourName>` created above.
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-17.22.49.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 17.22.49.png>)
 
 Once the Belt is created, it looks like this:
 
-![](../../../.gitbook/assets/screenshot-2021-04-14-at-17.23.44.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-14 at 17.23.44.png>)
 
 We can use Belt configuration parameters:
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.31.38.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-29 at 17.31.38.png>)
 
 Also, we need to add a transformation function in Belt:
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.32.33.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-29 at 17.32.33.png>)
 
 ```python
 def execute(event_headers, event,profile=None):   
@@ -180,11 +180,11 @@ Check the reference of available [Profile Update operations](../../../developer-
 
 Start the Belt and check if it is in running state:
 
-![](../../../.gitbook/assets/screenshot-2021-04-15-at-12.00.55.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-15 at 12.00.55.png>)
 
 ## 4. Validate with Profile Explorer
 
-To test the pipeline, send a HTTP `POST` request with the following JSON body to the Snowplow API endpoint of demo environment \(`<host>/api/com.snowplowanalytics.snowplow/tp2`\):
+To test the pipeline, send a HTTP `POST` request with the following JSON body to the Snowplow API endpoint of demo environment (`<host>/api/com.snowplowanalytics.snowplow/tp2`):
 
 ```javascript
 {
@@ -205,7 +205,7 @@ To test the pipeline, send a HTTP `POST` request with the following JSON body to
 You can send this event using Granary's Postman collection. See Prerequisits.
 {% endhint %}
 
-Once the Snowplow event is triggered, our Harvester will ingest the events into Granary. Then the events will be transformed via our Belt in Granary. When the Belt transforms the events, the grains \(using Profile Updates\) will get inserted into the Profile Store. Finally, we can retrieve the grains using Profile Explorer.
+Once the Snowplow event is triggered, our Harvester will ingest the events into Granary. Then the events will be transformed via our Belt in Granary. When the Belt transforms the events, the grains (using Profile Updates) will get inserted into the Profile Store. Finally, we can retrieve the grains using Profile Explorer.
 
 In Granary UI's Event Browser, we can interactively follow the journey of events through Granary. After the events received at Harvester, we can see them in the 'Data Out' Event Browser:
 
@@ -213,9 +213,9 @@ In Granary UI's Event Browser, we can interactively follow the journey of events
 
 After the events are received at Belt, the transform function is executed and Profile Updates are written to the destination topic 'profile-update' which we can see in the 'Data Output' Event Browser:
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.27.58.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-29 at 17.27.58.png>)
 
-The paths "Age \[Y\]", "Country", "Name" \(first name + last name\) with the corresponding values passed get inserted into Profile Store. Select 'Explore Profile' section on the left hand side. There we can see that the profile will look like this:
+The paths "Age \[Y]", "Country", "Name" (first name + last name) with the corresponding values passed get inserted into Profile Store. Select 'Explore Profile' section on the left hand side. There we can see that the profile will look like this:
 
 While searching the profile in Profile Explorer we need to specify :
 
@@ -223,9 +223,8 @@ While searching the profile in Profile Explorer we need to specify :
 >
 > Correlation id : cid value from the postman request
 
-![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.28.37.png)
+![](<../../../.gitbook/assets/Screenshot 2021-04-29 at 17.28.37.png>)
 
 {% hint style="info" %}
 Naming of all components can be any valid string.
 {% endhint %}
-

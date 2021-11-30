@@ -131,15 +131,15 @@ b3=<{x-b3-traceid}-{x-b3-spanid}-{if x-b3-flags 'd' else x-b3-sampled}-{x-b3-par
 
 Using Zipkin Dashboard, it is easy to analyse and keep overview of the timing and latency data of Granary components. With tracing with 100% sampling rate enabled in the whole pipeline, let's now try sending an event to the API with trace ID `5f910d8e975adae2` . When we log on to the Zipkin dashboard and filter traces reported in the last 5 minutes, we will see few traces spanning all components with one at the very top being ours with identified by the trace ID `5f910d8e975adae2.`
 
-![](../../.gitbook/assets/screenshot-2019-09-30-at-07.42.18.png)
+![](<../../.gitbook/assets/Screenshot 2019-09-30 at 07.42.18.png>)
 
 Notice the "Trace ID" field on the top right. Given a trace ID, one could also filter traces by its ID, speeding up the discovery process.
 
 Now back to our trace. Selecting the trace in the overview page will give details on the total duration of all components, as well as each component:
 
-![](../../.gitbook/assets/screenshot-2019-09-30-at-08.01.33.png)
+![](<../../.gitbook/assets/Screenshot 2019-09-30 at 08.01.33.png>)
 
 Selecting a node will then display further information about the trace and a component, if available.&#x20;
 
-![](../../.gitbook/assets/screenshot-2019-09-30-at-08.09.34.png)
+![](<../../.gitbook/assets/Screenshot 2019-09-30 at 08.09.34.png>)
 

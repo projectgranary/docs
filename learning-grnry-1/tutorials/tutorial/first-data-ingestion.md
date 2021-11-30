@@ -6,15 +6,15 @@ description: >-
 
 # Ingesting the first Data
 
-![](../../../.gitbook/assets/grafik%20%285%29.png)
+![](<../../../.gitbook/assets/grafik (18).png>)
 
 ## 1. Send event to Granary's HTTP tracking endpoint
 
 With the harvester in place and deployed, we can now send out first event to Granary's [Snowplow](../../../developer-reference/api-reference/snowplow-api-endpoints.md) HTTP endpoint. For this is a public endpoint, no special authorization is needed. Simply send this event:
 
-![Snowplow API: POST /api/com.snowplowanalytics.snowplow/tp2](../../../.gitbook/assets/image%20%2837%29.png)
+![Snowplow API: POST /api/com.snowplowanalytics.snowplow/tp2](<../../../.gitbook/assets/image (34).png>)
 
-For the body \(look for the tab with the green dot\) use this JSON:
+For the body (look for the tab with the green dot) use this JSON:
 
 ```javascript
 {
@@ -50,7 +50,7 @@ For retrieving raw events, Granary ships an API called [Event Store API](../../.
 
 To verify that our event above made it to the event store, run this API call:
 
-![Event Store API: GET /events/Session4711](../../../.gitbook/assets/image%20%2817%29.png)
+![Event Store API: GET /events/Session4711](<../../../.gitbook/assets/image (37).png>)
 
 With a Status `200 OK`, the return body looks like this:
 
@@ -92,11 +92,10 @@ If you prefer a more UI guided option, head over to `<hostname>/metabase/` and p
 
 To check if our event made it to the raw event store, go this path:
 
-> Postgres -&gt; public -&gt; Events Tore
+> Postgres -> public -> Events Tore
 
 and filter the event type column for our event type `customer-session`:
 
-![](../../../.gitbook/assets/image%20%2830%29.png)
+![](<../../../.gitbook/assets/image (35).png>)
 
 That's it. You learned how to ingest simple events via Granary's Snowplow HTTP endpoint. Next up is the tutorial how to apply business logic on each of these raw events and create inter-linked profiles.
-

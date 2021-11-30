@@ -78,7 +78,7 @@ Most of the event type's parameters are assigned default values, you are only re
 | `deletionExpression`      | A SpringEL rule to extract the boolean flag if this is a delete event. _Optional_, if not set it will not be applied. Granary-header: `grnry-deletion-flag`.     |
 | `description`             | Description of this specific event type. _Optional_, default is `""`.                                                                                            |
 
-To get more insight into all of the configuration parameters and their defaults, please refer to the [Event Type Endpoints](../api-reference/harvester-api/event-type-endpoints.md) page.
+To get more insight into all of the configuration parameters and their defaults, please refer to the [Event Type Endpoints](../api-reference/harvester-api/event-type-endpoints/) page.
 
 Data-In event types come with a [Persister ](../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md#eventstore-persisters)that is created during event type creation by the Harvester API. The default Persister is the [Eventstore Batch Sink](data-in/eventstore-sink.md#eventstore-batch-sink). Also during creation, a view on the [Eventstore table](event-store/#table-eventstore) for the particular Data-In event type is created.
 

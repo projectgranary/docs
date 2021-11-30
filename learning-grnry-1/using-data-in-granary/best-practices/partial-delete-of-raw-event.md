@@ -8,55 +8,55 @@ description: >-
 
 Masking or partial deletion of a raw event in Event Store means to delete the original event and create a new event with pseudonymized original information. This process helps to protect the personal information of the user. The flow of the data is shown in the sketch below.
 
-![](../../../.gitbook/assets/image%20%288%29.png)
+![](<../../../.gitbook/assets/image (73).png>)
 
 ### Step 1: Create the Snowplow Harvester.
 
-Any existing Snowplow Harvester will do. If you don't have one, create a new one as shown in image below. 
+Any existing Snowplow Harvester will do. If you don't have one, create a new one as shown in image below.&#x20;
 
-![](../../../.gitbook/assets/image%20%2864%29.png)
+![](<../../../.gitbook/assets/image (58).png>)
 
 {% hint style="info" %}
 The process is valid for every type of Harvester supported by Granary. Not only Snowplow ones.
 {% endhint %}
 
-### 
+###
 
 ### Step 2: Start the Harvester as shown in the image.
 
 Start the harvester by using the drop down at right most corner shown in image.
 
-![](../../../.gitbook/assets/image%20%2863%29.png)
+![](<../../../.gitbook/assets/image (59).png>)
 
-### 
+###
 
 ### Step 3: Create an Event Type with short time-to-live.
 
-The Event Type must be of type `data_in` \(default\) and set the TTL to 5 seconds \(`PT5S`\). Start the persister.
+The Event Type must be of type `data_in` (default) and set the TTL to 5 seconds (`PT5S`). Start the persister.
 
 We use this Event Type to quickly generate events that become TTL outdated so the [Event Store's deletion](../../../developer-reference/dataflow/event-store/deletion-of-raw-events.md) mechanisms start to work.
 
-![](../../../.gitbook/assets/image%20%2866%29.png)
+![](<../../../.gitbook/assets/image (63).png>)
 
-![](../../../.gitbook/assets/image%20%2867%29.png)
+![](<../../../.gitbook/assets/image (62).png>)
 
-![](../../../.gitbook/assets/image%20%2868%29.png)
+![](<../../../.gitbook/assets/image (61).png>)
 
 
 
 ### Step 4: Create an Event Type with long time-to-live
 
-The Event Type must be of type `data_in` \(default\) and set the TTL to 1 year  \(`P1Y`\). Start the persister.
+The Event Type must be of type `data_in` (default) and set the TTL to 1 year  (`P1Y`). Start the persister.
 
 We use this Event Type to store the then pseudonymized events from the Event Type created in Step 3.
 
-![](../../../.gitbook/assets/image%20%2869%29.png)
+![](<../../../.gitbook/assets/image (64).png>)
 
-![](../../../.gitbook/assets/image%20%2859%29.png)
+![](<../../../.gitbook/assets/image (55).png>)
 
-![](../../../.gitbook/assets/image%20%2861%29.png)
+![](<../../../.gitbook/assets/image (65).png>)
 
-### 
+###
 
 ### Step 5: Create a belt which subscribes to Event Type with short TTL
 
@@ -64,7 +64,7 @@ Create a belt which subscribes the Event Type with TTL of 5 seconds. Direct the 
 
 Deletion notification events from the Event Store are indicated by the `grnry_deletion_flag`. See [TTL-expired Raw Event Processing](../../data-in/best-practices-1/ttl-expired-raw-event-processing.md) article for details.
 
-So, in the belt script check for this `grnry_deletion_flag` header \(line 13\). If the value is `true` then process the data. Fetch the sensitive data from the Event Store API \(line 18\) and pseudonymize the information using appropriate algorithm. See `setPayload` function invocation in line 24.
+So, in the belt script check for this `grnry_deletion_flag` header (line 13). If the value is `true` then process the data. Fetch the sensitive data from the Event Store API (line 18) and pseudonymize the information using appropriate algorithm. See `setPayload` function invocation in line 24.
 
 Once done, use the Belt framework's [Generic Update](../../../developer-reference/dataflow/belt-extractor.md#generic-update) output format. You need to set all the raw events headers as defined in [Belt framework's input data format](../../../developer-reference/dataflow/belt-extractor.md#input-data-format). Most of the headers are part of the `grnry_deletion_flag = true` event as defined in the before-mentioned [TTL-expired Raw Event processing](../../data-in/best-practices-1/ttl-expired-raw-event-processing.md) guide. See `setHeaders` in line 23.
 
@@ -130,9 +130,9 @@ def signature(key, msg):
     return update
 ```
 
-![Start the belt after development](../../../.gitbook/assets/image%20%2850%29.png)
+![Start the belt after development](<../../../.gitbook/assets/image (67).png>)
 
-### 
+###
 
 ### Step 6: Send the request to the Harvester
 
@@ -154,5 +154,4 @@ def signature(key, msg):
 
 ### Step 7: Check the eventstore database to see all the message stored with the topic
 
-![](../../../.gitbook/assets/image%20%2856%29.png)
-
+![](<../../../.gitbook/assets/image (70).png>)

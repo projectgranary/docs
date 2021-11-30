@@ -23,60 +23,21 @@ Currently not covered by the Common Log Format are GraphQL API logs.
 
 ### Sample log output
 
-```text
+```
 2020-06-12 10:58:53.004  INFO [harvester-api,,,] 6644 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/harvesters/instances/{harvester-name}],methods=[PUT]}" onto public org.springframework.hateoas.Resource<io.grnry.harvester_api.harvesters.response.HarvesterResponse> io.grnry.harvester_api.harvesters.HarvesterController.updateHarvester(io.grnry.harvester_api.harvesters.requests.HarvesterRequest,java.lang.String)
 ```
 
 ### Description of Log line fragments
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Example Fragment</th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>2020-06-12 10:58:53.004</code>
-      </td>
-      <td style="text-align:left">Date and Time</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>INFO</code>
-      </td>
-      <td style="text-align:left">Log Level</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>[harvester-api,,,]</code>
-      </td>
-      <td style="text-align:left">
-        <p>Zipkin tracing information</p>
-        <p>[app-name, X-B3-TraceId, X-B3-SpanId, X-Span-Export]</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>6644</code>
-      </td>
-      <td style="text-align:left">Process ID</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>[ main]</code>
-      </td>
-      <td style="text-align:left">Thread name</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>s.w.s.m.m.a.RequestMappingHandlerMapping</code>
-      </td>
-      <td style="text-align:left">Logger name, here short for: org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>Mapped &quot;{[/harvesters/instances/{harvester-name}],methods=[PUT]}&quot; onto public org.sprin...</code>
-      </td>
-      <td style="text-align:left">actual log message</td>
-    </tr>
-  </tbody>
-</table>
+| Example Fragment                                                                             | Description                                                                                                     |
+| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `2020-06-12 10:58:53.004`                                                                    | Date and Time                                                                                                   |
+| `INFO`                                                                                       | Log Level                                                                                                       |
+| `[harvester-api,,,]`                                                                         | <p>Zipkin tracing information</p><p>[app-name, X-B3-TraceId, X-B3-SpanId, X-Span-Export]</p>                    |
+| `6644`                                                                                       | Process ID                                                                                                      |
+| `[ main]`                                                                                    | Thread name                                                                                                     |
+| `s.w.s.m.m.a.RequestMappingHandlerMapping`                                                   | Logger name, here short for: org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping |
+| `Mapped "{[/harvesters/instances/{harvester-name}],methods=[PUT]}" onto public org.sprin...` | actual log message                                                                                              |
 
 ## Recommended Logging Architecture
 
@@ -86,14 +47,14 @@ Using a node-level logging agent is the most common and encouraged approach for 
 
 For example you could use Filebeat as a logging agent reading from your log files on each node and pushing these logs to Logstash where you can filter the logs and extract certain fields from log lines before sending them to Elasticsearch.
 
-![](../../.gitbook/assets/image%20%2844%29.png)
+![](<../../.gitbook/assets/image (43).png>)
 
 ### Sample Filebeat configuration
 
 This is a sample configuration that makes filebeat read from the node's log files, concatenate multiline logs and push to Logstash.
 
 {% code title="filebeat-values.yaml" %}
-```text
+```
 # Allows you to add any config files in /usr/share/filebeat
 # such as filebeat.yml
 filebeatConfig:
@@ -128,7 +89,7 @@ filebeatConfig:
 This is a sample configuration allowing Logstash extract the log fragments specified in the common log format [above](common-log-format.md#description-of-log-line-fragments) and push the output to Elasticsearch:
 
 {% code title="logstash-values.yaml" %}
-```text
+```
 persistence:
   enabled: true
 
@@ -173,9 +134,9 @@ service:
 
 ### Sample ELK stack deployment
 
-Deploy these configurations via helm by running the following commands. Make sure you added the "[elastic](https://github.com/elastic/helm-charts)" repo to your helm repos. 
+Deploy these configurations via helm by running the following commands. Make sure you added the "[elastic](https://github.com/elastic/helm-charts)" repo to your helm repos.&#x20;
 
-```text
+```
 helm repo add elastic https://helm.elastic.co
 
 helm install --name elasticsearch elastic/elasticsearch \
@@ -209,4 +170,3 @@ helm install --name kibana elastic/kibana \
 --set resources.limits.cpu=1000m \
 --namespace infra-logging
 ```
-

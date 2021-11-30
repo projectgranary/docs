@@ -12,70 +12,70 @@ description: >-
 
 * Go to "Clients" in your Keycloak side bar under "Configure".
 
-![](<../../.gitbook/assets/image (22).png>)
+![](<../../.gitbook/assets/image (7).png>)
 
 * Choose the client that needs the new role and click "Edit" under "Actions".
 
-![](<../../.gitbook/assets/image (16).png>)
+![](<../../.gitbook/assets/image (8).png>)
 
 * Select "Roles" tab and choose "Add Role".
 
-![](<../../.gitbook/assets/image (12).png>)
+![](<../../.gitbook/assets/image (23).png>)
 
 * Enter the role name, e.g., `my_new_role`, and save it.
 
-![](<../../.gitbook/assets/image (28).png>)
+![](<../../.gitbook/assets/image (24).png>)
 
 ### Assigning a Role to a User
 
 * Go to "Users" in your  Keycloak side bar under "Manage".
 
-![](<../../.gitbook/assets/image (29).png>)
+![](<../../.gitbook/assets/image (13).png>)
 
 * Select "View all users".
 
-![](<../../.gitbook/assets/image (33).png>)
+![](<../../.gitbook/assets/image (14).png>)
 
 * choose the user you want to assign the role to and click "Edit" under "Actions".
 
-![](<../../.gitbook/assets/image (23).png>)
+![](<../../.gitbook/assets/image (15).png>)
 
 * Select "Role Mappings" Tab and click on the empty box under "Client Roles" to view all available clients and choose `profile-api`.
 
-![](<../../.gitbook/assets/image (36).png>)
+![](<../../.gitbook/assets/image (16).png>)
 
 * Select `my_new_role` and click "Add selected".
 
-![](<../../.gitbook/assets/image (9).png>)
+![](<../../.gitbook/assets/image (25).png>)
 
 ### Creating a User Group
 
 * Go to "Groups" in your side bar.
 
-![](<../../.gitbook/assets/image (31).png>)
+![](<../../.gitbook/assets/image (18).png>)
 
 * Select "New".
 
-![](<../../.gitbook/assets/image (27).png>)
+![](<../../.gitbook/assets/image (19).png>)
 
 * Enter a name for your group and save.
 
-![](<../../.gitbook/assets/image (4).png>)
+![](<../../.gitbook/assets/image (20).png>)
 
 ### Adding a User to a Group
 
-* Go to "Users" and choose "View all users" as described [above](broken-reference). 
+* Go to "Users" and choose "View all users" as described [above](broken-reference).&#x20;
 * Search for the user you want to add and click "Edit".
 * Go to the "Groups" tab.
 * Select the group you want to add the user to from "Available Groups" and click "Join".
 
-![](<../../.gitbook/assets/image (38).png>)
+![](<../../.gitbook/assets/image (26).png>)
 
 ### Assigning a Role to a User Group
 
 * Go to "Groups" in your side bar.
 
-![](<../../.gitbook/assets/image (31).png>)
+![](<../../.gitbook/assets/image (18).png>)
 
 * Choose an existing user group and click "Edit".
 * Go to "Role Mappings" tab.

@@ -57,7 +57,7 @@ Belts writing a Live-Segment require one or many input Event Types that referenc
 
 To create the input Event Type, we either use Granary UI or the Harvester API with the following request:
 
-[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
+[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type)
 
 where `:project-name` needs to be provided as input to the request (we can refer it from step 1).
 
@@ -95,7 +95,7 @@ Your are not limited to a single `live_segment` event type per belt, it's also p
 
 Therefore, we need to create an output Event Type using Granary UI or&#x20;
 
-[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
+[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type)
 
 where `:project-name` needs to be provided as input to the request (we can refer it from step 1). For the `schema` parameter, provide your string-escaped JSONSchema.&#x20;
 

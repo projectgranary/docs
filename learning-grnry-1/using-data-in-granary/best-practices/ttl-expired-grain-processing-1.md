@@ -6,22 +6,22 @@ description: >-
 
 # TTL-expired Grain Processing
 
-Time-to-live \(TTL\) expired Grains are picked up periodically by Granary's [Reaper](../../../developer-reference/dataflow/profile-store/reaper.md) from the Profile Store and written to TTL topics retrieved from the Grain's corresponding TTL Event Type. These Grains are then available for further processing by the Belts.
+Time-to-live (TTL) expired Grains are picked up periodically by Granary's [Reaper](../../../developer-reference/dataflow/profile-store/reaper.md) from the Profile Store and written to TTL topics retrieved from the Grain's corresponding TTL Event Type. These Grains are then available for further processing by the Belts.
 
-Please note that 
+Please note that&#x20;
 
 * Grains written to TTL Event Types are already deleted by Granary.
-* in compliance with data protection laws, grains written to the TTL topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the belt, i.e., setting the `fetch_profile`parameter to true. See [Configuration](https://app.gitbook.com/@alvary/s/grnry-sd7f6g8sd68sdf7/~/diff/drafts/-M0quiYWAmR7whC99GOZ/developer-reference/dataflow/belt-extractor#configuration/@drafts). The Correlation ID should be found in both message header and body.
+* in compliance with data protection laws, grains written to the TTL topics do not carry a value. If the value is needed, one has to query them from the Profile Store from within the belt, i.e., setting the `fetch_profile`parameter to true. See [Configuration](https://app.gitbook.com/@alvary/s/grnry-sd7f6g8sd68sdf7/\~/diff/drafts/-M0quiYWAmR7whC99GOZ/developer-reference/dataflow/belt-extractor#configuration/@drafts). The Correlation ID should be found in both message header and body.
 
 ## Use Case Example: Deletion Trigger
 
-It might be desired to receive notifications about the deletion of grains in Granary to trigger actions in other systems. One way to facilitate this is to create a belt, - let's call it a deletion trigger belt -, which processes the TTL-expired grains from the topic\(s\) and sends triggers so that a third-party-system can delete corresponding data as well. 
+It might be desired to receive notifications about the deletion of grains in Granary to trigger actions in other systems. One way to facilitate this is to create a belt, - let's call it a deletion trigger belt -, which processes the TTL-expired grains from the topic(s) and sends triggers so that a third-party-system can delete corresponding data as well.&#x20;
 
-![](../../../.gitbook/assets/reaper-deletion.png)
+![](../../../.gitbook/assets/reaper-deletion.PNG)
 
 ### Step 1: Insert a Grain that will be reaped
 
-The TTL in Granary profiles' grains has got the format [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). By default, a grain's TTL is `P100Y` which equals a duration of 100 years. Therefore we need to ensure that a [belt](../getting-started.md) creates a grain with a shorter duration for this use case. 
+The TTL in Granary profiles' grains has got the format [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO\_8601#Durations). By default, a grain's TTL is `P100Y` which equals a duration of 100 years. Therefore we need to ensure that a [belt](../getting-started.md) creates a grain with a shorter duration for this use case.&#x20;
 
 For example given this event
 
@@ -38,7 +38,7 @@ For example given this event
 }
 ```
 
-and given this belt function \(see especially end of line 28\)
+and given this belt function (see especially end of line 28)
 
 ```python
 import json
@@ -173,7 +173,7 @@ To act upon a deletion, we need to deploy a belt that consumes from the topic `g
 }
 ```
 
-Given the belt code below and the reaped event above, we can do the following now trigger a deletion in an external system \(lines 11ff\):
+Given the belt code below and the reaped event above, we can do the following now trigger a deletion in an external system (lines 11ff):
 
 ```python
 import json
@@ -199,7 +199,7 @@ def execute(event_headers, event, profile=None):
 
 ## Working with ISO8601 durations
 
-In order to ease development of belts that process TTN grains, the belt framework \([Belt Extractor](../../../developer-reference/dataflow/belt-extractor.md)\) provides access to the [isodate library](https://pypi.org/project/isodate/). Thus, in your belt code you can easily convert between different representations:
+In order to ease development of belts that process TTN grains, the belt framework ([Belt Extractor](../../../developer-reference/dataflow/belt-extractor.md)) provides access to the [isodate library](https://pypi.org/project/isodate/). Thus, in your belt code you can easily convert between different representations:
 
 ```python
 import json
@@ -236,7 +236,6 @@ def execute(event_headers, event, profile=None):
 
 Please note that according to the documentation of the isodate library the `parse_duration` method will return either a Duration or Timedelta object, depending on the input:
 
-> If the ISO date string does not contain years or months, a timedelta instance is returned, else a Duration instance is returned. \[[Link](https://github.com/gweis/isodate/blob/ce635a7a483effb3fc246721cfb5a8a7b5174ab5/src/isodate/isoduration.py#L61)\]
+> If the ISO date string does not contain years or months, a timedelta instance is returned, else a Duration instance is returned. \[[Link](https://github.com/gweis/isodate/blob/ce635a7a483effb3fc246721cfb5a8a7b5174ab5/src/isodate/isoduration.py#L61)]
 
 For any further information please refer to the [isodate documentation](https://pypi.org/project/isodate/).
-

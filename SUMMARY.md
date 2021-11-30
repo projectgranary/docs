@@ -81,7 +81,7 @@
   * [Project API](developer-reference/api-reference/project-api.md)
   * [Harvester API](developer-reference/api-reference/harvester-api/README.md)
     * [Source Type Endpoints](developer-reference/api-reference/harvester-api/source-type-endpoints.md)
-    * [Event Type Endpoints](developer-reference/api-reference/harvester-api/event-type-endpoints.md)
+    * [Event Type Endpoints](developer-reference/api-reference/harvester-api/event-type-endpoints/README.md)
       * [Data-In Persisters](developer-reference/api-reference/harvester-api/event-type-endpoints/data-in-persisters.md)
       * [Live-Segment Persisters](developer-reference/api-reference/harvester-api/event-type-endpoints/live-segment-persisters.md)
     * [Harvester Instance Endpoints](developer-reference/api-reference/harvester-api/harvester-instance-endpoints.md)

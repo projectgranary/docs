@@ -55,7 +55,7 @@ In each list view, Granary's UI provides a download button to obtain the needed 
 
 ### Event type
 
-Since an [Event Type](data-in/how-to-run-a-harvester/event-types.md) might be available in multiple versions, you need to export all versions of the Event Type up to the version used in your Harvester. If version is `latest`, you need to include all of them. Get the definition by executing the following command for each version. Use Harvester API's [event-types endpoint](../developer-reference/api-reference/harvester-api/event-type-endpoints.md#get-a-specific-version-of-an-event-type).
+Since an [Event Type](data-in/how-to-run-a-harvester/event-types.md) might be available in multiple versions, you need to export all versions of the Event Type up to the version used in your Harvester. If version is `latest`, you need to include all of them. Get the definition by executing the following command for each version. Use Harvester API's [event-types endpoint](../developer-reference/api-reference/harvester-api/event-type-endpoints/#get-a-specific-version-of-an-event-type).
 
 #### Using the Command Line
 
@@ -76,7 +76,7 @@ Choose the version in the drop down menu left to the "Export" button before you 
 
 ### Persister (optional)
 
-The default persister will be created implicitly on Event Type creation. Yet, it is possible to export it, e.g., if there are any updates to the persister after creation in the source system. To get the definition, use the Harvester API's [persister endpoint](../developer-reference/api-reference/harvester-api/event-type-endpoints.md#get-persister-for-a-specific-event-type).
+The default persister will be created implicitly on Event Type creation. Yet, it is possible to export it, e.g., if there are any updates to the persister after creation in the source system. To get the definition, use the Harvester API's [persister endpoint](../developer-reference/api-reference/harvester-api/event-type-endpoints/#get-persister-for-a-specific-event-type).
 
 #### Using the Command Line
 
@@ -125,7 +125,7 @@ curl -X GET -H "Content-Type: application/json" \
 
 #### Using the UI
 
-![](<../.gitbook/assets/image (52).png>)
+![](<../.gitbook/assets/image (47).png>)
 
 ###
 

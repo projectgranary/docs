@@ -23,7 +23,7 @@ DBT Belts require input Event Types that reference a database location. Currentl
 
 To create the input Event Type, we either use Granary UI or the Harvester API with the following request:
 
-[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
+[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type)
 
 where `:project-name` needs to be provided as input to the request (we can refer it from step 1).
 
@@ -55,7 +55,7 @@ In case of Data-In and Live-Segment, please ensure that their persisters (right 
 
 DBT Belts require exactly one output Event Type. Therefore, we need to create a Segment Event Type whose name determines the datbase table's name using Granary UI or by calling:
 
-[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints.md#create-an-event-type)
+[POST /projects/:project-name/event-types](../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type)
 
 &#x20;where `:project-name` needs to be provided as input to the request (we can refer it from step 1).
 
@@ -80,7 +80,7 @@ To be able to model a segment in SQLPad, we need to ensure that there is a Harve
 
 After that, check the Event Type from step 2 in Granary UI again and see the Harvester depicted as input node:
 
-![](<../../.gitbook/assets/image (75).png>)
+![](<../../.gitbook/assets/image (76).png>)
 
 
 
@@ -106,7 +106,7 @@ Now we can model and build the segment query from the Event Store view using sta
 
 To give you a jumpstart, SQLPad offers four template queries explaining how to model segments on Profile- and Event Store:
 
-![](<../../.gitbook/assets/image (76) (1).png>)
+![](<../../.gitbook/assets/image (78).png>)
 
 {% hint style="info" %}
 Of course it is possible to join various views or tables residing in your schema. To do so, just create multiple input event types and add them to your DBT belt as explained in step 6 below.
@@ -155,7 +155,7 @@ where `:project-name` need to be provided as input to the request (we can refer 
 
 The DBT Belt looks like this in Granary UI:
 
-![](<../../.gitbook/assets/image (73).png>)
+![](<../../.gitbook/assets/image (74).png>)
 
 Once the CRON schedule starts, the following DBT logs confirm a successful execution:
 
