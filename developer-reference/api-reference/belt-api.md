@@ -122,7 +122,6 @@ Start offset. Default is
             "version": "1",
             "name": "kube_test_4",
             "projectName": "global",
-            "beltType": "python-callback",
             "kubernetesName": "grnry-belt-1011",
             "description": "",
             "labels": [
@@ -397,7 +396,6 @@ if set to
     "version": "1",
     "name": "hello-belt",
     "projectName": "global",
-    "beltType": "python-callback",
     "kubernetesName": "grnry-belt-161",
     "description": "Hello Belt Belt",
     "labels": [],
@@ -1123,7 +1121,6 @@ Authentication Token
      "version": "2",
      "name": "hello-belt",
      "projectName": "global",
-     "beltType": "python-callback",
      "kubernetesName": "grnry-belt-161",
      "description": "Hello Belt Belt",
      "labels": [],

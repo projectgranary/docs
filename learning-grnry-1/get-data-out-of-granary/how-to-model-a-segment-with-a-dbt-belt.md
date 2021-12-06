@@ -106,7 +106,7 @@ Now we can model and build the segment query from the Event Store view using sta
 
 To give you a jumpstart, SQLPad offers four template queries explaining how to model segments on Profile- and Event Store:
 
-![](<../../.gitbook/assets/image (76).png>)
+![](<../../.gitbook/assets/image (76) (1).png>)
 
 {% hint style="info" %}
 Of course it is possible to join various views or tables residing in your schema. To do so, just create multiple input event types and add them to your DBT belt as explained in step 6 below.

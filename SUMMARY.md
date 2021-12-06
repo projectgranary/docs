@@ -74,6 +74,7 @@
   * [Profile Store and Reaper](developer-reference/dataflow/profile-store/README.md)
     * [Reaping of Grains for Notification or Deletion](developer-reference/dataflow/profile-store/reaper.md)
   * [Segment Store](developer-reference/dataflow/segment-store/README.md)
+    * [DBT Segment](developer-reference/dataflow/segment-store/dbt-segment.md)
     * [Live-Segments](developer-reference/dataflow/segment-store/live-segments.md)
     * [Segment Table Creation](developer-reference/dataflow/segment-store/segment-table-creation.md)
 * [API Reference](developer-reference/api-reference/README.md)
