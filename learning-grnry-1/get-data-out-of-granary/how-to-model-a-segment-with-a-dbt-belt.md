@@ -80,7 +80,7 @@ To be able to model a segment in SQLPad, we need to ensure that there is a Harve
 
 After that, check the Event Type from step 2 in Granary UI again and see the Harvester depicted as input node:
 
-![](<../../.gitbook/assets/image (76).png>)
+![](<../../.gitbook/assets/image (75).png>)
 
 
 
@@ -106,7 +106,7 @@ Now we can model and build the segment query from the Event Store view using sta
 
 To give you a jumpstart, SQLPad offers four template queries explaining how to model segments on Profile- and Event Store:
 
-![](<../../.gitbook/assets/image (78).png>)
+![](<../../.gitbook/assets/image (76).png>)
 
 {% hint style="info" %}
 Of course it is possible to join various views or tables residing in your schema. To do so, just create multiple input event types and add them to your DBT belt as explained in step 6 below.
@@ -155,7 +155,7 @@ where `:project-name` need to be provided as input to the request (we can refer 
 
 The DBT Belt looks like this in Granary UI:
 
-![](<../../.gitbook/assets/image (74).png>)
+![](<../../.gitbook/assets/image (73).png>)
 
 Once the CRON schedule starts, the following DBT logs confirm a successful execution:
 

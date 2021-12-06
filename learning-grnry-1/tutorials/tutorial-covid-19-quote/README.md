@@ -14,7 +14,7 @@ We will access [https://covid19api.com/](https://covid19api.com) to get the late
 
 #### Pipeline Architecture Diagramm
 
-![](<../../../.gitbook/assets/Covid-19 Quote Design.png>)
+![](../../../.gitbook/assets/covid-19-quote-design.png)
 
 ### Create Profiles for new Leads
 

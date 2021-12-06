@@ -10,7 +10,7 @@ Once the Profile from [Pipeline 1](create-profiles-for-new-leads.md) is created,
 
 Select the 'Manage Event Types' on the left side pane and create Event Type `QuoteCalET-<yourName>` with the following details:
 
-![](<../../../.gitbook/assets/Screenshot 2021-04-15 at 13.45.04.png>)
+![](../../../.gitbook/assets/screenshot-2021-04-15-at-13.45.04.png)
 
 Here the configurations, you need to copy:
 
@@ -24,7 +24,7 @@ Here the configurations, you need to copy:
 
 Select the 'Manage Harvesters' on the left side pane, and create `QuoteCal-Harvester-<yourName>` with the Source Type "Grnry Topic" in version 1.0.0 and select the Event Type `QuoteCalET-<yourName>` which we have created above with `latest` version.
 
-![](<../../../.gitbook/assets/Screenshot 2021-04-15 at 13.47.23.png>)
+![](../../../.gitbook/assets/screenshot-2021-04-15-at-13.47.23.png)
 
 Also, we need to add a transform script like:
 
@@ -81,7 +81,7 @@ In the transform script we are parsing the data which we are getting from the sn
 
 Start the Harvester using the right side dropdown of the screen and check if it is in running state :
 
-![](<../../../.gitbook/assets/Screenshot 2021-04-15 at 16.48.47.png>)
+![](../../../.gitbook/assets/screenshot-2021-04-15-at-16.48.47.png)
 
 ## 3. Calculate Quote in the Belt
 
@@ -89,7 +89,7 @@ Select the 'Manage Belts' section from the left side of the page and lick on but
 
 The belt will look like:
 
-![](<../../../.gitbook/assets/Screenshot 2021-04-16 at 16.28.03.png>)
+![](../../../.gitbook/assets/screenshot-2021-04-16-at-16.28.03.png)
 
 In the Belt Configuration we must select the Fetch Profile = “Yes”. Because we are processing on the profiles which are already created using RealTime-Belt.
 
@@ -117,7 +117,7 @@ Here in the Belt function we are making an external API call to the COVID-19 API
 
 > "requirementsPy": "requests==2.24.0"
 
-![](<../../../.gitbook/assets/Screenshot 2021-04-29 at 17.01.35.png>)
+![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.01.35.png)
 
 Again, we need to add a transformation function in Belt:
 
@@ -238,4 +238,4 @@ While searching the profile in Profile Explorer we need to specify :
 >
 > Correlation id : cid value from the postman request
 
-![](<../../../.gitbook/assets/Screenshot 2021-04-29 at 17.56.38.png>)
+![](../../../.gitbook/assets/screenshot-2021-04-29-at-17.56.38.png)

@@ -6,7 +6,7 @@ description: >-
 
 # Transforming ingested Data
 
-![](<../../../.gitbook/assets/grafik (24).png>)
+![](<../../../.gitbook/assets/grafik (29).png>)
 
 ## 1. Create Belt "Session Counter"
 
@@ -16,7 +16,7 @@ To run a belt, we need to provide a Python script that transforms the ingested e
 
 Most of the belt configuration is covered by defaults, so creating your first belt goes like this:
 
-![Belt API Request: POST /belts](<../../../.gitbook/assets/image (38).png>)
+![Belt API Request: POST /belts](<../../../.gitbook/assets/image (42).png>)
 
 For the body (look for the tab with the green dot) use this JSON and add your name in line 7 before sending:
 

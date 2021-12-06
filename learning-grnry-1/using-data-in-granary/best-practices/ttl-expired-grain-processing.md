@@ -14,7 +14,7 @@ Please note that in compliance with data protection laws, Grains written to the 
 
 It might be desired to receive notifications about the expiry of certain actions (grains). One way to facilitate this is to create a belt, - let's call it a notification belt -, which processes the TTN-expired grains from the topic(s) and sends notifications accordingly.&#x20;
 
-![](../../../.gitbook/assets/reaper-notification.PNG)
+![](../../../.gitbook/assets/reaper-notification.png)
 
 ### Step 1: Insert a Grain that will be reaped
 

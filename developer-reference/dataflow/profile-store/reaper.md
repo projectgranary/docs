@@ -8,7 +8,7 @@ description: >-
 
 ## Reaper Concept
 
-![](<../../../.gitbook/assets/reaper (2).PNG>)
+![](../../../.gitbook/assets/reaper.png)
 
 The Granary Reaper is responsible for collecting expired grains by querying them from the [Profile Store](./) according to a CRON schedule and writing them back into the data pipeline through a Time-To-Notify (TTN) or Time-To-Live (TTL) Kafka topic. [TTN events](../../../learning-grnry-1/using-data-in-granary/best-practices/ttl-expired-grain-processing.md) can be used for notification purposes whereas [TTL events](../../../learning-grnry-1/using-data-in-granary/best-practices/ttl-expired-grain-processing-1.md) will be deleted.&#x20;
 

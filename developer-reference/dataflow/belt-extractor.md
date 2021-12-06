@@ -2,11 +2,15 @@
 description: A function-as-a-service like Python callback runtime
 ---
 
-# Belt Framework
+# Python Belt Framework
+
+{% hint style="info" %}
+Since Granary 1.2 there is a second Belt type called dbt-segment available. This page only deals with the Python Belt.
+{% endhint %}
 
 ![Data flow within harmonized data zone of Granary](../../.gitbook/assets/dataflow\_profile.PNG)
 
-Belts are used to compute updates for profile entities stored in the [Profile Store](profile-store/). These updates can represent things like:
+Belts are most commonly used to compute updates for profile entities stored in the [Profile Store](profile-store/). These updates can represent things like:
 
 * whether a certain user has reached a goal in a conversion funnel
 * what device type or operating system was used for the most recent visit
@@ -16,7 +20,7 @@ Belts are used to compute updates for profile entities stored in the [Profile St
 * the addition of a contract the user has and what the value of that contract is
 * etc.
 
-They are defined by a stateless Python function that gets invoked for every event received from the respective [Event Type](../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md) input. The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store.
+They are either defined by a stateless Python function that gets invoked for every event received from the respective [Event Type](../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md) input.The function typically extracts data from the payload in order to compile one or more update statements for the Profile Store. This page describes the Python framework.
 
 ## Input Data Format
 
@@ -55,39 +59,126 @@ see [Profile specification](https://github.com/syncier/grnry-kafka-profile-updat
 
 | Key             | Description                                                                                                                                                                                                                                                              |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `_schema`       | _Optional._ Schema of update message (optional)                                                                                                                                                                                                                          |
 | `_operation`    | update operation, default is `_set`, see [Profile Store](profile-store/#component-profile-updater) for more information                                                                                                                                                  |
 | `_id`           | identifies the profile that should be updated with this message                                                                                                                                                                                                          |
 | `_path`         | The path within the nested structure of a profile that should be updated. In case the path doesn't exist yet it will be created. An array of length >= 1                                                                                                                 |
 | `_value`        | _Mandatory_. The grain value that should be set in the profile under the defined `_path` _._ Needs to be set by `set_value()`. For `_delete` operation `_v`is used to specify an array of pits to be deleted from that path. `""`, `[""]` or `[]` will delete `_latest`. |
 | `_profile_type` | Categorizes the profile to be updated. Default is `_d`.                                                                                                                                                                                                                  |
 {% endtab %}
+{% endtabs %}
+
+See exented example in below's [Python callback function](belt-extractor.md#python-callback-function) section. Apart from the profile update, there are three other update classes available.&#x20;
+
+
+
+### GenericEventUpdate
+
+To write to the stream of a "**data\_in**" event type user can use `GenericEventUpdate`. It require few fields which are defined below.
+
+| Key           | Description                                                                                                                                                                |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| eventTypeName | <p>The technical name of the event type which you are going to write to.</p><p>(MANDATORY)</p>                                                                             |
+| correlationId | <p>The Correlation Id for the event. Normally extracted / derived from the source message that the belt currently processes</p><p>(MANDATORY)</p>                          |
+| headers       | <p>Additional headers that will be merged with the grnry-internal headers for the event written to the stream of the <code>data_in</code> event type.</p><p>(OPTIONAL)</p> |
+
+Below example defines how user can use GrnryEventUpdate class to update `data_in` type event. User has to define eventTypeName and CorrelationId as a mandatory parameters in the definition of the class. After that set the message payload using the 'set\_value' method and add the update to the `upgrades` array that will be returned by the belt at the end of the event processing.
+
+```python
+import json
+from grnry_belt.models.grnry_event_update import GrnryEventUpdate
+
+....
+....
+
+
+msgPayload = {
+         'contract' : lookup(data[0], ['payload']),
+         'from_original_message': lookup(data[0], ['payload'])
+    }
+ updateClassRef= GrnryEventUpdate(eventTypeName, correlationId)
+    updateClassRef.set_value(msgPayload)
+    updates.append(dataInUpdate)
+```
+
+The `GrnryEventUpdate` class can be used to send messages to a [data\_in ](event-type.md#data-in)event type. This can be useful while chaining multiple belts. The constructor's signature contains the parameters as defined in the [Input Data Format ](belt-extractor.md#input-data-format)above.&#x20;
+
+{% tabs %}
+{% tab title="Spec" %}
+| Key              | Description                                                                                                                                                     |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| output type name | The field is the event type name. There needs to be a matching output `data_in` event type defined in the Belt model. If not, messages go to dead letter queue. |
+| id               | The field is the correlation id                                                                                                                                 |
+| event id         | This field contains the event id. Defaults to event id of the incoming message. (optional)                                                                      |
+| timestamp        | This field contains the event's timestamp. Defaults to the timestamp of the incoming message. (optional)                                                        |
+| headers          | This field contains the Kafka message headers of the event in the json format. Defaults to the headers of the incoming message. (optional)                      |
+
+
+{% endtab %}
 
 {% tab title="Example" %}
-```javascript
-{
-  "_schema": null,
-  "_operation": "_set_with_history",
-  "_id": "007",
-  "_profile_type": "_d",
-  "_path": [
-    "a2",
-    "b1"
-  ],
-  "_value": {
-    "_v": "22",
-    "_in": "2018-09-24",
-    "_c": 0.4,
-    "_ttn": "P3M",
-    "_ttl": "P100Y",
-    "_origin": "/belts/123",
-  }
-}
+```python
+from grnry_belt.models.grnry_event_update import GrnryEventUpdate
+
+def execute(event_headers, event, profile=None):
+    correlation_id = event_headers['grnry-correlation-id']
+    updates = []
+    msgPayload = {
+        'contract' : 'foobar'
+    }
+
+    dataInUpdate = GrnryEventUpdate('dataInOutput', correlation_id)
+    dataInUpdate.set_value(msgPayload)
+    updates.append(dataInUpdate)
+    return updates
+```
+
+
+{% endtab %}
+{% endtabs %}
+
+&#x20;
+
+### DirectUpdate
+
+The `DirectUpdate` class can be used to send messages to a [live\_segment ](event-type.md#live-segment)event type.
+
+{% tabs %}
+{% tab title="Spec" %}
+| Key              | Description                                                                                                                                                          |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| output type name | The field is the event type name. There needs to be a matching output `live_segment` event type defined in the Belt model. If not, messages go to dead letter queue. |
+| value            | This field is the value as a Python dict matching the JSON Schema of the mentioned `live_segment` event type. Needs to contain an id property.                       |
+
+
+{% endtab %}
+
+{% tab title="Example" %}
+```python
+from grnry_belt.models.direct_update import DirectUpdate
+
+def execute(event_headers, event, profile=None):
+    updates = []
+
+    value={
+        'id' : '2',
+        'test': 'Output_sample'
+    }
+    liveSegmentUpdate = DirectUpdate('liveSegmentOutput', value)
+    updates.append(liveSegmentUpdate)
+
+    return updates
+
 ```
 {% endtab %}
 {% endtabs %}
 
+
+
 ### **Generic Update**
+
+{% hint style="warning" %}
+From Granary 1.2 onwards, this update is deprecated. It does not work with the `outputTypes` parameter, only when using the `kafkaDestinationTopic` parameter.
+{% endhint %}
 
 Generic update message write custom messages to the Belt's Kafka output topic.
 
@@ -140,6 +231,10 @@ def execute(event_headers, event_payload, profile=None):
     return [update]
 ```
 
+{% hint style="info" %}
+The **Update** object is injected into the callback and does **not** require an additional import statement.
+{% endhint %}
+
 The function can return either `None`, `[]` or a list of `Update` objects representing an update to a profile in the profile store. If the return is not an Update object the belt will continue with the next message. In case it is, the object needs to be following below schema:
 
 ```yaml
@@ -184,10 +279,6 @@ If unspecified in the `Update` object, default values will be used:
 | `_schema`       | `set_schema(schema)`       | `null`   |
 | `_operation`    | `set_operation(operation)` | `"_set"` |
 | `_profile_type` | `set_type(profile_type)`   | `"_d"`   |
-
-{% hint style="info" %}
-The **Update** object is injected into the callback and does **not** require an additional import statement.
-{% endhint %}
 
 ### **Callback Validation**
 

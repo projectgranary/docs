@@ -146,9 +146,9 @@ autovacuum_analyze_threshold = 10
 
 The following figures show the difference with/out modified autovacuum settings. The second figure clearly shows lower space consumption and more stable behavior.
 
-![Without adjusted autovacuum settings (the drops are manual vacuums)](<../../.gitbook/assets/Bildschirmfoto 2019-08-06 um 16.28.11.png>)
+![Without adjusted autovacuum settings (the drops are manual vacuums)](../../.gitbook/assets/bildschirmfoto-2019-08-06-um-16.28.11.png)
 
-![With adjusted autovacuum settings](<../../.gitbook/assets/Bildschirmfoto 2019-08-06 um 16.27.41.png>)
+![With adjusted autovacuum settings](../../.gitbook/assets/bildschirmfoto-2019-08-06-um-16.27.41.png)
 
 In any case, we recommend to closely monitore the database.
 

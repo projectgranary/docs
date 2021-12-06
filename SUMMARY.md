@@ -70,7 +70,7 @@
   * [Event Store](developer-reference/dataflow/event-store/README.md)
     * [Deletion of Raw Events](developer-reference/dataflow/event-store/deletion-of-raw-events.md)
     * [Replay of Raw Events](developer-reference/dataflow/event-store/replay-of-raw-events.md)
-  * [Belt Framework](developer-reference/dataflow/belt-extractor.md)
+  * [Python Belt Framework](developer-reference/dataflow/belt-extractor.md)
   * [Profile Store and Reaper](developer-reference/dataflow/profile-store/README.md)
     * [Reaping of Grains for Notification or Deletion](developer-reference/dataflow/profile-store/reaper.md)
   * [Segment Store](developer-reference/dataflow/segment-store/README.md)

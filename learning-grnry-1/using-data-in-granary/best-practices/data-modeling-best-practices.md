@@ -39,7 +39,7 @@ In addition, the correlation id is used, e.g. in the [Event Store](../../../deve
 
 After answering these questions from above, you should have a good overview on what your data is like. Now, you can start modeling the data. We recommend a structure similar to the ER diagram. However, we put _grains_ into the center of it. A _grain_ represents a certain piece of information about a profile, i.e. a real world entity. A sample diagram looks like this:
 
-![Sample how you could model the profile store](<../../../.gitbook/assets/grafik (11).png>)
+![Sample how you could model the profile store](<../../../.gitbook/assets/grafik (6).png>)
 
 As you can see the large boxes are profiles. These profiles have _fragments_ which store specific information related to a certain use case or target entity. We also store the Correlation ID here to easily see whether we have the required information to store information in this profile as well. The arrows between different profiles show that there are relationships between the different entities.
 

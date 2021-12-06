@@ -122,6 +122,7 @@ Start offset. Default is
             "version": "1",
             "name": "kube_test_4",
             "projectName": "global",
+            "beltType": "python-callback",
             "kubernetesName": "grnry-belt-1011",
             "description": "",
             "labels": [
@@ -396,6 +397,7 @@ if set to
     "version": "1",
     "name": "hello-belt",
     "projectName": "global",
+    "beltType": "python-callback",
     "kubernetesName": "grnry-belt-161",
     "description": "Hello Belt Belt",
     "labels": [],
@@ -607,6 +609,12 @@ Authentication token
 
 {% swagger-parameter in="body" name="description" type="string" %}
 Belt description.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="beltType" required="false" %}
+Type of the belt runtime. Valid values are "python-callback" or "dbt-segment".
+
+default : "python-callback"
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="eventTypes" type="array" required="true" %}
@@ -858,6 +866,7 @@ Password property in secret used by the belt to read values from Profile Store.
     "version": "1",
     "name": "hello-belt",
     "projectName": "global",
+    "beltType": "python-callback",
     "kubernetesName": "grnry-belt-161",
     "description": "Hello Belt Belt",
     "labels": [],
@@ -1114,6 +1123,7 @@ Authentication Token
      "version": "2",
      "name": "hello-belt",
      "projectName": "global",
+     "beltType": "python-callback",
      "kubernetesName": "grnry-belt-161",
      "description": "Hello Belt Belt",
      "labels": [],
@@ -1380,7 +1390,7 @@ Authentication token
 {% endswagger-response %}
 {% endswagger %}
 
-Possible values for the status attribute in the response body are:
+Possible values for the status attribute in the response body for "python-framework" belts:
 
 | Status                 | Description                                                        |
 | ---------------------- | ------------------------------------------------------------------ |
@@ -1389,6 +1399,21 @@ Possible values for the status attribute in the response body are:
 | RUNNING\_BUT\_OUTDATED | Belt is running but there is a newer version of it in the database |
 | DEPLOYING              | Belt is being deployed                                             |
 | STOPPED                | Belt is not deployed                                               |
+
+Possible values for the status attribute in the response body for "dbt-segment" belts:
+
+|                          | Description                                                                                                                                                                                              |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RUNNING                  | Job is currently executing                                                                                                                                                                               |
+| READY                    | Job is present on cluster, but not currently execution. It will execute on next schedule.                                                                                                                |
+| FAILED\_AND\_READY       | Last execution was unsuccessful, but job ist still deployed and will execute on next schedule.                                                                                                           |
+| READY\_BUT\_OUTDATED     | Job as been deployed to the cluster and the belt was changed afterwards. The Job has not yet executed but will on the next schedule (based on the old belt configuration).                               |
+| COMPLETED\_AND\_READY    | Last job execution was successful and job will reexecute on next schedule.                                                                                                                               |
+| COMPLETED\_BUT\_OUTDATED | Last job execution was successful and job will reexecute on next schedule, but based on old belt configuration, because the belt was changed in the meantime and was not redeployed (stopped + started). |
+| FAILED\_BUT\_OUTDATED    | Last job execution was not successful and belt configuration was updated. The Job will execute again on next schedule based on the old belt configuration.                                               |
+| STOPPED                  | Job is not deployed on the cluster                                                                                                                                                                       |
+
+
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="post" summary="Manipulate a Belt's state" %}
 {% swagger-description %}

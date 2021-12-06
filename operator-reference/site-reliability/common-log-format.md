@@ -47,7 +47,7 @@ Using a node-level logging agent is the most common and encouraged approach for 
 
 For example you could use Filebeat as a logging agent reading from your log files on each node and pushing these logs to Logstash where you can filter the logs and extract certain fields from log lines before sending them to Elasticsearch.
 
-![](<../../.gitbook/assets/image (43).png>)
+![](<../../.gitbook/assets/image (44).png>)
 
 ### Sample Filebeat configuration
 

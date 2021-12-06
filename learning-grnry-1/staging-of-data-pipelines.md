@@ -125,7 +125,7 @@ curl -X GET -H "Content-Type: application/json" \
 
 #### Using the UI
 
-![](<../.gitbook/assets/image (47).png>)
+![](<../.gitbook/assets/image (52).png>)
 
 ###
 

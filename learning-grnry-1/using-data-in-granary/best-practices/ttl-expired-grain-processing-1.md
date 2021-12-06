@@ -17,7 +17,7 @@ Please note that&#x20;
 
 It might be desired to receive notifications about the deletion of grains in Granary to trigger actions in other systems. One way to facilitate this is to create a belt, - let's call it a deletion trigger belt -, which processes the TTL-expired grains from the topic(s) and sends triggers so that a third-party-system can delete corresponding data as well.&#x20;
 
-![](../../../.gitbook/assets/reaper-deletion.PNG)
+![](../../../.gitbook/assets/reaper-deletion.png)
 
 ### Step 1: Insert a Grain that will be reaped
 

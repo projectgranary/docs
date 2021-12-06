@@ -10,7 +10,7 @@ In Granary all raw events whose Time-to-Live (TTL) has expired will be deleted f
 
 There are three options how an event can become TTL-expired:
 
-![](<../../../.gitbook/assets/image (72).png>)
+![](<../../../.gitbook/assets/image (1).png>)
 
 ### Source Trigger Delete in Harvester (Option 1)
 

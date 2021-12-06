@@ -12,11 +12,11 @@ description: >-
 2. Open DBVisualizer.
 3.  Go to "Database" -> "Create Database Connection".&#x20;
 
-    ![](<../../.gitbook/assets/DBVis01 (1).png>)&#x20;
+    ![](<../../.gitbook/assets/dbvis01 (1).png>)&#x20;
 4. Configure the database connection using the "Presto" database driver. If it is not listed, you can download it from [https://prestodb.github.io/docs/current/installation/jdbc.html](https://prestodb.github.io/docs/current/installation/jdbc.html) and add it by following the instructions on [http://confluence.dbvis.com/display/UG100/Installing+a+JDBC+Driver](http://confluence.dbvis.com/display/UG100/Installing+a+JDBC+Driver).
-   1. ![](<../../.gitbook/assets/DBVis01 (1).png>)
-   2. ![](<../../.gitbook/assets/DBVis02 (1).png>)&#x20;
-   3. ![](../../.gitbook/assets/DBVis03.png)&#x20;
+   1. ![](<../../.gitbook/assets/dbvis01 (1).png>)
+   2. ![](../../.gitbook/assets/dbvis02.png)&#x20;
+   3. ![](../../.gitbook/assets/dbvis03.png)&#x20;
    4. For the URL, ask your friendly Granary Ops Engineer.
 5.  Under "Properties" -> "Driver Properties" provide SSL-related properties.
 
@@ -24,7 +24,7 @@ description: >-
     2. SSLTrustStorePath = \<your/truststore-path>
     3. SSLTrustStorePassword = changeit
 
-    ![](../../.gitbook/assets/DBVis05.png)
+    ![](../../.gitbook/assets/dbvis05.png)
 6. Ask your friendly Granary Ops Engineer to add the following _roles needed to explore the database_ via DBVisualizer in Granary's Keycloak.
    1. Go to "clients" -> "jdbc api" -> "roles" -> "add roles".
    2. Add the following roles:
@@ -48,7 +48,7 @@ description: >-
       2. Assign available segement roles
 8.  In DBVisualizer enter Granary username and password
 
-    ![](../../.gitbook/assets/DBVis04.png)
+    ![](../../.gitbook/assets/dbvis04.png)
 9. Click "Connect". &#x20;
 
 ### Configure Tableau to use Segment Store API

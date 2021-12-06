@@ -8,13 +8,13 @@ description: >-
 
 Masking or partial deletion of a raw event in Event Store means to delete the original event and create a new event with pseudonymized original information. This process helps to protect the personal information of the user. The flow of the data is shown in the sketch below.
 
-![](<../../../.gitbook/assets/image (73).png>)
+![](<../../../.gitbook/assets/image (8).png>)
 
 ### Step 1: Create the Snowplow Harvester.
 
 Any existing Snowplow Harvester will do. If you don't have one, create a new one as shown in image below.&#x20;
 
-![](<../../../.gitbook/assets/image (58).png>)
+![](<../../../.gitbook/assets/image (64).png>)
 
 {% hint style="info" %}
 The process is valid for every type of Harvester supported by Granary. Not only Snowplow ones.
@@ -26,7 +26,7 @@ The process is valid for every type of Harvester supported by Granary. Not only 
 
 Start the harvester by using the drop down at right most corner shown in image.
 
-![](<../../../.gitbook/assets/image (59).png>)
+![](<../../../.gitbook/assets/image (63).png>)
 
 ###
 
@@ -36,11 +36,11 @@ The Event Type must be of type `data_in` (default) and set the TTL to 5 seconds 
 
 We use this Event Type to quickly generate events that become TTL outdated so the [Event Store's deletion](../../../developer-reference/dataflow/event-store/deletion-of-raw-events.md) mechanisms start to work.
 
-![](<../../../.gitbook/assets/image (63).png>)
+![](<../../../.gitbook/assets/image (66).png>)
 
-![](<../../../.gitbook/assets/image (62).png>)
+![](<../../../.gitbook/assets/image (67).png>)
 
-![](<../../../.gitbook/assets/image (61).png>)
+![](<../../../.gitbook/assets/image (68).png>)
 
 
 
@@ -50,11 +50,11 @@ The Event Type must be of type `data_in` (default) and set the TTL to 1 year  (`
 
 We use this Event Type to store the then pseudonymized events from the Event Type created in Step 3.
 
-![](<../../../.gitbook/assets/image (64).png>)
+![](<../../../.gitbook/assets/image (69).png>)
 
-![](<../../../.gitbook/assets/image (55).png>)
+![](<../../../.gitbook/assets/image (59).png>)
 
-![](<../../../.gitbook/assets/image (65).png>)
+![](<../../../.gitbook/assets/image (61).png>)
 
 ###
 
@@ -130,7 +130,7 @@ def signature(key, msg):
     return update
 ```
 
-![Start the belt after development](<../../../.gitbook/assets/image (67).png>)
+![Start the belt after development](<../../../.gitbook/assets/image (50).png>)
 
 ###
 
@@ -154,4 +154,4 @@ def signature(key, msg):
 
 ### Step 7: Check the eventstore database to see all the message stored with the topic
 
-![](<../../../.gitbook/assets/image (70).png>)
+![](<../../../.gitbook/assets/image (56).png>)
