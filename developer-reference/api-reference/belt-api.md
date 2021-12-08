@@ -123,6 +123,7 @@ Start offset. Default is
             "name": "kube_test_4",
             "projectName": "global",
             "kubernetesName": "grnry-belt-1011",
+            "beltType": "python-callback",
             "description": "",
             "labels": [
                 "a"
@@ -228,57 +229,75 @@ Start offset. Default is
         },
         {
             "version": "1",
-            "name": "kube_test_7",
-            "projectName": "global",
-            "kubernetesName": "grnry-belt-1022",
-            "description": "kube_description",
+            "name": "dbt-belt-a",
+            "description": "a dbt belt",
             "labels": [],
-            "affectedPaths": [],
             "replicas": 1,
-            "millicpu": 54,
-            "millicpuRequests": 54,
-            "memory": 1023,
-            "memoryRequests": 1023,
+            "millicpu": 200,
+            "millicpuRequests": 50,
+            "memory": 512,
+            "memoryRequests": 256,
+            "createdAt": "2021-12-03T18:00:45.965Z",
             "createdBy": {
-                "name": "Arthur Author",
+               "name": "Arthur Author",
                 "email": "arthur@author.com"
             },
-            "createdAt": "2021-09-24T08:38:50.848Z",
+            "modifiedAt": "2021-12-03T18:00:45.965Z",
             "modifiedBy": {
                 "name": "Arthur Author",
                 "email": "arthur@author.com"
             },
-            "modifiedAt": "2021-09-24T08:38:50.848Z",
-            "assumedRole": "",
-            "requirementsPy": "requirement==0.1.0",
-            "image": "grnry-belt",
-            "imagePullSecret": "grnry-pull-secret",            
-            "extractorVersion": "latest",
-            "extractorFn": "print('hallo welt')",
             "eventTypes": [
-                "eventType1",
-                "eventType2",
-                "eventType3"
+                "airports"
             ],
-            "partitionOffsets": {},
-            "kafkaDestinationTopic": "profile-update",
-            "kafkaConsumerGroupName": "grnry-belt-1022-1561978858485",
-            "beltType": "customScript",
-            "runtime": "Python",
-            "parameter": "{mapper:[{\"beltId\",\"ida\"}]}",
-            "debug": true,
-            "fetchProfile": true,
-            "profileType": "_d",
-            "secret": "secret",
-            "secretUsername": "secretUsername",
-            "secretPassword": "secretPassword",
-            "status": "STOPPED",
-            "_links": {
-                "self": {
-                    "href": "https://hostname/projects/global/belts/1022"
+            "outputTypes": [
+                {
+                    "name": "contracts",
+                    "version": "latest"
+                },
+                {
+                    "name": "user-visits",
+                    "version": "latest"
+                }
+            ],
+            "projectName": "global",
+            "beltType": "dbt-segment",
+            "debug": false,
+            "status": "COMPLETED_AND_READY",
+            "beltState": {
+                "status": "COMPLETED_AND_READY",
+                "lastScheduleTime": "2021-12-07T14:00:00Z",
+                "jobStatus": {
+                    "completionTime": "2021-12-07T14:01:21Z",
+                    "conditions": [
+                        {
+                            "lastProbeTime": "2021-12-07T14:01:21Z",
+                            "lastTransitionTime": "2021-12-07T14:01:21Z",
+                            "status": "True",
+                            "type": "Complete"
+                        }
+                    ],
+                    "startTime": "2021-12-07T14:00:05Z",
+                    "succeeded": 1
                 }
             },
-            "id": "1022"
+            "volumes": null,
+            "volumeMounts": null,
+            "extraEnv": null,
+            "kubernetesName": "grnry-belt-23",
+            "image": "hub.syncier.cloud/grnry-snapshot/dbt-belt-image",
+            "imageTag": "latest",
+            "imagePullSecret": "grnry-snapshot-dockerconfig",
+            "cronExpression": "0 * * * *",
+            "segmentDefinition": "SELECT 1",
+            "restartPolicy": "Never",
+            "activeDeadlineSeconds": 180,
+            "_links": {
+                "self": {
+                    "href": "https://hostname/projects/global/belts/23?export="
+                }
+            },
+            "id": "23"
         }
     ]
 }
@@ -319,9 +338,9 @@ Start offset. Default is
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="get" summary="Get a Specific Belt by ID" %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="get" summary="Get a Specific Belt by ID (python-callback)" %}
 {% swagger-description %}
-Retrieves full dump of a specific belt with a specified ID.
+Retrieves full dump of a specific belt with a specified ID. This section describes the response of a "python-callback" belt. See the next section for a "dbt-segment" belt.
 
 \
 
@@ -485,9 +504,175 @@ if set to
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="post" summary="Create and Store a Belt" %}
+
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="get" summary="Get a Specific Belt by ID (dbt-segment)" %}
 {% swagger-description %}
-Creates and stores a belt into the Belt Store. As a response the whole belt configuration is returned. 
+Retrieves full dump of a specific belt with a specified ID. This section describes the response of a "dbt-segment" belt.
+
+\
+
+
+
+
+\
+
+
+In order to retrieve results here, it is necessary that you either have the project's 
+
+_editor_
+
+ or 
+
+_viewer_
+
+ role assigned to your user in keycloak.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project the belt belongs to.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="string" required="true" %}
+The ID of belt
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
+Authentication Token
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="export" type="string" %}
+if set to 
+
+`"true"`
+
+ (not case sensitive), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. (Only the api-generated 
+
+`id`
+
+ field will be provided). Default is 
+
+`""`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200" description="JSON with attributes of belt with the specified ID." %}
+```
+{
+    "version": "1",
+    "name": "dbt-belt-a",
+    "description": "A dbt-belt example",
+    "labels": [],
+    "replicas": 1,
+    "millicpu": 200,
+    "millicpuRequests": 50,
+    "memory": 512,
+    "memoryRequests": 256,
+    "createdAt": "2021-12-03T18:00:45.965Z",
+    "createdBy": {
+        "name": "Arthur Author",
+        "email": "arthur@author.com"
+    },
+    "modifiedAt": "2021-12-03T18:00:45.965Z",
+    "modifiedBy": {
+        "name": "Arthur Author",
+        "email": "arthur@author.com"
+    },
+    "eventTypes": [
+        "webtracking-data"
+    ],
+    "outputTypes": [
+        {
+            "name": "contracts",
+            "version": "latest"
+        }
+    ],
+    "projectName": "global",
+    "beltType": "dbt-segment",
+    "debug": false,
+    "status": "COMPLETED_AND_READY",
+    "volumes": null,
+    "volumeMounts": null,
+    "extraEnv": null,
+    "kubernetesName": "grnry-belt-23",
+    "image": "hub.syncier.cloud/grnry-snapshot/dbt-belt-image",
+    "imageTag": "1.0.0",
+    "imagePullSecret": "grnry-dockerconfig",
+    "cronExpression": "0 * * * *",
+    "segmentDefinition": "SELECT * from 'eventstore_webtracking-data'",
+    "restartPolicy": "Never",
+    "activeDeadlineSeconds": 180,
+    "_links": {
+        "self": {
+            "href": "https://hostname/projects/global/belts/23"
+        }
+    },
+    "id": "23"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="401" description="Token invalid or missing." %}
+```
+{
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/projects/global/belts/161"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403" description="Missing roles to access this resource." %}
+```
+{
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/projects/global/belts/425"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404" description="When there is no belt found with the specified ID" %}
+```
+{
+    "timestamp": 1587302671116,
+    "type": "entity_not_found",
+    "message": "Belt with ID '425' not found.",
+    "details": "uri=/projects/global/belts/425"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+
+
+
+
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="post" summary="Create and Store a Belt (python-callback)" %}
+{% swagger-description %}
+Creates and stores a python-callback belt into the Belt Store. As a response the whole belt configuration is returned. 
 
 \
 
@@ -654,9 +839,7 @@ Array of event type objects with keys
 
 `profile-update`
 
- or server env variable 
-
-`BELT_DESTINATION_TOPIC`
+ or default set by belt-api helm chart deployment.
 
 .
 {% endswagger-parameter %}
@@ -666,9 +849,7 @@ Image tag of the belt runtime docker image to be used. Defaults to either
 
 `latest`
 
- or server env variable 
-
-`BELT_EXTRACTOR_VERSION`
+ or set by belt-api helm chart deployment.
 
 .
 {% endswagger-parameter %}
@@ -683,9 +864,7 @@ Defaults either to
 
 `Hello World`
 
- example function or server env variable 
-
-`BELT_EXTRACTOR_FN`
+ example function or default set by belt-api helm chart deployment.
 
 .
 {% endswagger-parameter %}
@@ -701,17 +880,13 @@ Kubernetes Secret used to pull the
 
 `image`
 
- . Defaults to server env 
-
-`BELT_PULL_SECRET`
+ . Default set by belt-api helm chart deployment.
 
  .
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="image" type="string" %}
-Docker Image to be deployed. Defaults to server env 
-
-`BELT_IMAGE_NAME`
+Docker Image to be deployed. Default set by belt-api helm chart deployment.
 
  .
 {% endswagger-parameter %}
@@ -719,11 +894,7 @@ Docker Image to be deployed. Defaults to server env
 {% swagger-parameter in="body" name="millicpu" type="string" %}
 CPU limit specification for this belt. Defaults to either 
 
-`200`
-
- or server env variable 
-
-`BELT_MILLI_CPU`
+`200` (default set by belt-api helm chart deployment).
 
 .
 {% endswagger-parameter %}
@@ -731,11 +902,7 @@ CPU limit specification for this belt. Defaults to either
 {% swagger-parameter in="body" name="millicpuRequests" type="string" %}
 CPU requests specification for this belt. Defaults to either 
 
-`200`
-
- or server env variable 
-
-`BELT_MILLI_CPU_REQUESTS`
+`200` (default set by belt-api helm chart deployment).
 
 .
 {% endswagger-parameter %}
@@ -743,11 +910,7 @@ CPU requests specification for this belt. Defaults to either
 {% swagger-parameter in="body" name="memory" type="string" %}
 Memory limit specification for this belt. Defaults either to 
 
-`512`
-
- or server env variable 
-
-`BELT_MEMORY`
+`512` (default set by belt-api helm chart deployment).
 
 .
 {% endswagger-parameter %}
@@ -755,11 +918,7 @@ Memory limit specification for this belt. Defaults either to
 {% swagger-parameter in="body" name="memoryRequests" type="string" %}
 Memory specification for this belt. Defaults to either 
 
-`512`
-
- or server env variable 
-
-`BELT_MEMORY_REQUESTS`
+`512` (default set by belt-api helm chart deployment).
 
 .
 {% endswagger-parameter %}
@@ -767,17 +926,14 @@ Memory specification for this belt. Defaults to either
 {% swagger-parameter in="body" name="replicas" type="integer" %}
 Number of replicas. Defaults to 
 
-`1`
+`1` (default set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="extraEnv" type="object" %}
 Additional environment variables for Kubernetes belt deployment. Defaults to either 
 
-`null`
+`null` (default set by belt-api helm chart deployment).
 
- or server env variable 
-
-`BELT_EXTRA_ENV`
 
 .
 {% endswagger-parameter %}
@@ -785,23 +941,14 @@ Additional environment variables for Kubernetes belt deployment. Defaults to eit
 {% swagger-parameter in="body" name="volumeMounts" type="object" %}
 JSON Kubernetes volume mount definition for belt deployment. Defaults to either 
 
-`null`
-
- or server env variable 
-
-`BELT_VOLUME_MOUNTS`
-
+`null` (default set by belt-api helm chart deployment).
 .
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="volumes" type="object" %}
 JSON Kubernetes volume definition for belt deployment. Defaults to either 
 
-`null`
-
- or server env variable 
-
-`BELT_VOLUMES`
+`null` (default set by belt-api helm chart deployment).
 
 .
 {% endswagger-parameter %}
@@ -962,6 +1109,410 @@ Password property in secret used by the belt to read values from Profile Store.
 ```
 {% endswagger-response %}
 {% endswagger %}
+
+
+
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="post" summary="Create and Store a Belt (dbt-segment)" %}
+{% swagger-description %}
+Creates and stores a python-callback belt into the Belt Store. As a response the whole belt configuration is returned. This sections applies for entities with beltType = "dbt-segment".
+
+\
+
+
+
+
+\
+
+
+Requires the role 
+
+`editor`
+
+.
+
+\
+
+
+
+
+\
+
+
+
+
+**JSON Schema Definitions**
+
+\
+
+
+
+
+\
+
+
+Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html
+
+\
+
+
+
+
+\
+
+
+Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/Volume.html
+
+\
+
+
+
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="project-name" type="string" %}
+Name of project.
+
+\
+
+
+
+
+_Backwards compatibility:_
+
+\
+
+
+If 
+
+`projects/{project-name}/`
+
+ is missing, URL will be treated like 
+
+`projects/global/...`
+
+ scoping the request to the 'global' project.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="name" type="string" required="true" %}
+Unique name of the belt.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="number" required="false" %}
+If provided, creates a belt with a given belt 
+
+`id`
+
+. This 
+
+`id`
+
+ needs to be unique. Otherwise an 
+
+`id`
+
+ is automatically assigned. Value range for 
+
+`id`
+
+ is a positive 
+
+`Long`
+
+ value (i.e. 
+
+`1`
+
+ to 
+
+`9223372036854775807`
+
+).
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
+Authentication token
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="description" type="string" %}
+Belt description.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="beltType" required="false" %}
+Type of the belt runtime. Valid values are "python-callback" or "dbt-segment". This section handles "dbt-segment". See the api definition above for "python-callback".
+
+default : "python-callback"
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="eventTypes" type="array" required="true" %}
+String array of event types to be processed. Only event types registered with Harvester API's event type endpoint are valid values. You must have the event type's 
+
+_consumer_
+
+ or 
+
+_editor_
+
+ role assigned in Keycloak to consume an event type in a belt. For dbt-segments the "consume" means that this data (data_in / profiles / live_segments / segments) is available via database views in the project's database schema.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="outputTypes" type="array" %}
+Array of event type objects with keys 
+
+`name`
+
+ and 
+
+`version`
+
+. For dbt-segment belts you have to provide exactly one output type of type 
+
+`segment`
+
+.
+{% endswagger-parameter %}
+
+
+{% swagger-parameter in="body" name="imagePullSecret" type="string" %}
+Kubernetes Secret used to pull the 
+
+`image`
+
+ . Default set in belt-api helm deployment.
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="image" type="string" %}
+Docker Image to be deployed. Default set in belt-api helm deployment.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="imageTag" type="string" %}
+Docker Image tag to be deployed. Default set in belt-api helm deployment.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="millicpu" type="string" %}
+CPU limit specification for this belt. Defaults to either 
+
+`200` 
+
+(default set by belt-api helm chart deployment)
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="millicpuRequests" type="string" %}
+CPU requests specification for this belt. Defaults to either 
+
+`200`
+
+ (default set by belt-api helm chart deployment)
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="memory" type="string" %}
+Memory limit specification for this belt. Defaults either to 
+
+`512`
+
+ (default set by belt-api helm chart deployment)
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="memoryRequests" type="string" %}
+Memory specification for this belt. Defaults to either 
+
+`512`
+
+ (default set by belt-api helm chart deployment).
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="replicas" type="integer" %}
+Number of replicas. Defaults to 
+
+`1` and has to be `1` for dbt-segment belts.
+
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="extraEnv" type="object" %}
+Additional environment variables for Kubernetes belt deployment. Defaults to either 
+
+`null`
+
+(default set by belt-api helm chart deployment).
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="volumeMounts" type="object" %}
+JSON Kubernetes volume mount definition for belt deployment. Defaults to either 
+
+`null`
+
+(default set by belt-api helm chart deployment).
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="volumes" type="object" %}
+JSON Kubernetes volume definition for belt deployment. Defaults to either 
+
+`null`
+
+ (default set by belt-api helm chart deployment).
+
+.
+{% endswagger-parameter %}
+
+
+{% swagger-parameter in="body" name="debug" type="boolean" %}
+Determines if belt should be run in debug mode. Defaults to 
+
+`false`
+
+.
+{% endswagger-parameter %}
+
+
+
+{% swagger-parameter in="body" name="cronExpression" type="string" %}
+The cronexpression which will be used to execute the materialisation of the segment. Defaults to
+
+
+`0 * * * *` 
+
+(every full hour - default set by belt-api helm chart deployment).
+
+.
+{% endswagger-parameter %}
+
+
+{% swagger-parameter in="body" name="segmentDefinition" type="string" %}
+the sql select statement that defines you segment.
+
+
+`SELECT 1` 
+
+(default set by belt-api helm chart deployment).
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="activeDeadlineSeconds" type="string" %}
+
+Maximum time (in seconds) a segment creation / update can take until the job is getting terminated.
+
+`1800` 
+
+(default set by belt-api helm chart deployment).
+{% endswagger-parameter %}
+
+
+{% swagger-response status="200" description="Returns a full dump of belt object created." %}
+```
+        {
+            "version": "1",
+            "name": "dbt-belt-a",
+            "description": "a dbt belt",
+            "labels": [],
+            "replicas": 1,
+            "millicpu": 200,
+            "millicpuRequests": 50,
+            "memory": 512,
+            "memoryRequests": 256,
+            "createdAt": "2021-12-03T18:00:45.965Z",
+            "createdBy": {
+               "name": "Arthur Author",
+                "email": "arthur@author.com"
+            },
+            "modifiedAt": "2021-12-03T18:00:45.965Z",
+            "modifiedBy": {
+                "name": "Arthur Author",
+                "email": "arthur@author.com"
+            },
+            "eventTypes": [
+                "airports"
+            ],
+            "outputTypes": [
+                {
+                    "name": "contracts",
+                    "version": "latest"
+                },
+                {
+                    "name": "user-visits",
+                    "version": "latest"
+                }
+            ],
+            "projectName": "global",
+            "beltType": "dbt-segment",
+            "debug": false,
+            "volumes": null,
+            "volumeMounts": null,
+            "extraEnv": null,
+            "kubernetesName": "grnry-belt-23",
+            "image": "hub.syncier.cloud/grnry-snapshot/dbt-belt-image",
+            "imageTag": "latest",
+            "imagePullSecret": "grnry-snapshot-dockerconfig",
+            "cronExpression": "0 * * * *",
+            "segmentDefinition": "SELECT 1",
+            "restartPolicy": "Never",
+            "activeDeadlineSeconds": 180,
+            "_links": {
+                "self": {
+                    "href": "https://hostname/projects/global/belts/23?export="
+                }
+            },
+            "id": "23"
+        }
+```
+{% endswagger-response %}
+
+{% swagger-response status="400" description="If a belt with a given name exists already in the Belt Store." %}
+```
+{
+    "timestamp": 1587302499600,
+    "type": "bad_parameter_value",
+    "message": "Parameter 'extractorVersion' must not be empty.",
+    "details": "uri=/projects/global/belts"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="401" description="Token invalid or missing." %}
+```
+{
+    "timestamp": 1586941626155,
+    "type": "authentication_error",
+    "message": "Authentication failed.",
+    "details": "uri=/projects/global/belts"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403" description="Missing role to access this resource." %}
+```
+{
+    "timestamp":1586949273019,
+    "type": "entity_not_accessible",
+    "message": "Access forbidden due to missing roles.",
+    "details": "uri=/projects/global/belts"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="500" description="Some internal server issue has occurred." %}
+```
+{
+    "timestamp": "2020-10-14T13:06:25.951+0000",
+    "message": "An unexpected error occurred.",
+    "type": "unexpected_error",
+    "details": "uri=/projects/global/belts/"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="delete" summary="Delete a Specific Belt" %}
 {% swagger-description %}
@@ -1387,7 +1938,7 @@ Authentication token
 {% endswagger-response %}
 {% endswagger %}
 
-Possible values for the status attribute in the response body for "python-framework" belts:
+Possible values for the status attribute in the response body for "python-callback" belts:
 
 | Status                 | Description                                                        |
 | ---------------------- | ------------------------------------------------------------------ |
