@@ -294,7 +294,7 @@ Start offset. Default is
             "activeDeadlineSeconds": 180,
             "_links": {
                 "self": {
-                    "href": "https://development.internal.analytics.cc.syncier.cloud/projects/global/belts/23?export="
+                    "href": "https://hostname/projects/global/belts/23?export="
                 }
             },
             "id": "23"
@@ -1460,7 +1460,7 @@ Maximum time (in seconds) a segment creation / update can take until the job is 
             "activeDeadlineSeconds": 180,
             "_links": {
                 "self": {
-                    "href": "https://development.internal.analytics.cc.syncier.cloud/projects/global/belts/23?export="
+                    "href": "https://hostname/projects/global/belts/23?export="
                 }
             },
             "id": "23"
