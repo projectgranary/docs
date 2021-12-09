@@ -4,6 +4,8 @@ description: This page introduces the concept of event types.
 
 # Event Types
 
+### Overview
+
 To identify data in the platform, Granary uses so-called event types. An event type describes the metadata or schema of a data asset before and after a transformation. Event Types are defined by a globally unique name and are created via the [Event Type endpoints](broken-reference).
 
 In a Granary data pipeline, the input and the output of each transform step is denoted as one or many event types. Tranform steps can either be a [Python Callback Belt](belt-extractor.md) or a [DBT Segment Belt](segment-store/segment-table-creation.md). An exception to this rule is Harvesters which import raw data and, thus, only define an event type as their output.
@@ -51,11 +53,18 @@ In their JSON response models, all kinds of event types contain information on t
 }
 ```
 
+As shown above, an event type can have mulitple physical locations. Currently, most event types in Granary have two of them (Segment only one):
 
+1. `Kafka Stream` --> It describes the topic name where the event type's streaming data is stored at. The streaming storage is transient, so after a certain retention time, data is deleted.
+2. `Postgres Database` --> it describes the relation (table or view) where the event type's persistent data is stored.
+
+For a general overview, this diagram below visualizes all existing event types and their physical locations.
+
+![](../../.gitbook/assets/grnry\_event\_types.png)
 
 ### Data-In
 
-A Data-In Event Types is a group of rules specifying how a Harvester annotates incoming data with metadata. handled in Granary's components. These rules are denoted in the [Spring Expression language](../../learning-grnry-1/data-in/best-practices-1/best-practices.md).
+A Data-In event type is a group of rules specifying how a Harvester annotates incoming streaming data with metadata. handled in Granary's components. These rules are denoted in the [Spring Expression language](../../learning-grnry-1/data-in/best-practices-1/best-practices.md).
 
 The minimal sample for a Data-In event type looks like this:
 
@@ -80,9 +89,9 @@ Most of the event type's parameters are assigned default values, you are only re
 
 To get more insight into all of the configuration parameters and their defaults, please refer to the [Event Type Endpoints](../api-reference/harvester-api/event-type-endpoints/) page.
 
-Data-In event types come with a [Persister ](../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md#eventstore-persisters)that is created during event type creation by the Harvester API. The default Persister is the [Eventstore Batch Sink](data-in/eventstore-sink.md#eventstore-batch-sink). Also during creation, a view on the [Eventstore table](event-store/#table-eventstore) for the particular Data-In event type is created.
+Data-In event types come with a [Persister ](../../learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md#eventstore-persisters)that is created during event type creation by the Harvester API. As the name says, it persists the incoming streaming data to the PostrgeSQL database. The default Persister is the [Eventstore Batch Sink](data-in/eventstore-sink.md#eventstore-batch-sink). Also during creation, a view on the [Eventstore table](event-store/#table-eventstore) for the particular Data-In event type is created.&#x20;
 
-Most importantly, Data-In event types can be consumed by Python Callback Belts and also written by them to enable Belt chaining.
+Most importantly, Data-In event type's streaming data can be consumed by Python Callback Belts and also written by them to enable Belt chaining.
 
 #### Input/Output Overview
 
@@ -97,7 +106,9 @@ This table describes where the Data-in event type can be used and which location
 
 ### Profile
 
-Profile event types represent the profile types in the Profile Store on Granary's API layer. Hence, they are used by Python Callback Belts to write [Profile Updates](profile-store/#update-operations) to the Profile Store. A Belt can define multiple Profile outputs at a time. To perform such an update, instantiate an object of the `Update` class and set the profile type via `set_type()` function.&#x20;
+Profile event types represent the profile types in the Profile Store on Granary's API layer. Their streaming data are [Profile Updates](belt-extractor.md#profile-update) emitted by Python Callback Belts. To perform such an update, instantiate an object of the `Update` class and set the profile type via `set_type()` function. A Belt can define multiple Profile outputs at a time.
+
+[Kafka Profile Updater component](profile-store/#component-profile-updater) reads these Profile Update operations and updates the Profile Store - the PostgreSQL database location of Profile event types.&#x20;
 
 The minimal sample of a Profile event type looks like this:
 
@@ -128,9 +139,9 @@ This table describes where the Profile event type can be used and which location
 
 ### Live-Segment
 
-Live-Segment event types can be used to write data directly to a database table given a specified schema using Kafka Connect's JDBC sink. To do so, an object of the `DirectUpdate` class in the Python Callback Belt needs to be instantiated.
+Live-Segment event types can be used to write streaming data directly to a PostgreSQL database table given a specified schema using Kafka Connect's JDBC sink. To do so, an object of the `DirectUpdate` class in the Python Callback Belt needs to be instantiated.
 
-The event type's creation triggers the initialization of the Kafka connector. After creation, the connector it is automatically started. By default the connector has one task. This can be changed over the [Persister endpoint](broken-reference).&#x20;
+The event type's creation triggers the initialization of the Kafka connector. After creation, the connector it is automatically started. By default the connector has three task. This can be changed over the [Persister endpoint](broken-reference).&#x20;
 
 The minimal sample for a Live-Segment event type looks like this:
 
@@ -159,7 +170,7 @@ This table describes where the Live-Segment event type can be used and which loc
 
 ### Segment
 
-The Segment event type is used for meta information on DBT Segment belts. Its name is used as table name in the database.&#x20;
+The Segment event type is used for meta information on DBT Segment belts. Its name is used as table name in the PostgeSQL database.&#x20;
 
 The minimal sample for a Segment event type looks like this:
 
