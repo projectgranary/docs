@@ -186,6 +186,15 @@ beltSpec: # k8s config to pass to belts deployed by the API
     beltImageTag: "2.1.0"
     beltClusterProxy:
     beltPackageRepository:
+    memory: "512"
+    memoryRequests: "256"
+    milliCpu: "200"
+    milliCpuRequests: "50"
+    volumes:
+    volumeMounts:
+    extraEnv:
+    extractorFn: "def execute(event_headers, event_payload, profile=None):\r\n print('Hello World')\r\n update = []\r\n return update\r\n"
+    destinationTopic: "profile-update"
 
     livenessProbe:
       httpGet:
@@ -220,13 +229,17 @@ beltSpec: # k8s config to pass to belts deployed by the API
 
 ```
 
-{% hint style="info" %}
-Parameter `beltSpec.pythonCallback.beltImageTag` was introduced in Granary 1.2. To keep backward compatability, the extra environment variable `BELT_EXTRACTOR_VERSION` in the `extra.extraEnv` parameter takes precedences over the new parameter.
+{% hint style="danger" %}
+Parameters set in `extra.extraEnv` are not taken into account any longer, e.g. `BELT_EXTRACTOR_VERSION`. Please, use the above mentioned parameters below `beltSpec` instead.
 {% endhint %}
 
 ### DBT Segments
 
 As seen in the previous step, the Belt API is now capable to deploy `dbt-segments`. Technically, these are Kubernetes CronJobs executing a DBT Docker image. The old [segment table creation templating language](https://docs.grnry.io/developer-reference/dataflow/segment-store/segment-table-creation) has been deprecated in Granary 1.2. The new DBT Docker image allows to deploy an arbitrary SQL `SELECT` statement as segment. Please refer to the new technical reference for details how to express the former `pivot` and `generic` segments as SQL `SELECT` statements.
+
+### Profile Store API
+
+The method `GET /profiles/:profileType/:correlationId` does not have the parameter `withHistory` anymore. For historic grain retrevial, use `GET /profiles/:profileType/:correlationId/grain/:path`.
 
 ## Update Granary Components
 

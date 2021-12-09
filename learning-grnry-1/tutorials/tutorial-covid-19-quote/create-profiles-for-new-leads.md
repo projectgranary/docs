@@ -175,7 +175,7 @@ def getUpdatedPersonalDetailsObj(correlationId,nameString,name_dictionary):
 The primary goal of the Belt's transformation function is to model a Profile based on incoming raw events by creating Profile Update objects. In line 10, we create a dictionary which contains `Age`, `Person Name`, and `Country`. These are the keys of the attributes of our Profile. In Granary we call them Grain paths. These details get appended to the Profile Update object using `getUpdatedPersonalDetailsObj()` in line 11ff. In line 21, the profile gets created using the values getting passed. At line no 18, profile\_type is defined with combination of `appid`:"Covid19", "-" and `usecase`:"CostByCountry".
 
 {% hint style="info" %}
-Check the reference of available [Profile Update operations](../../../developer-reference/dataflow/profile-store/#component-profile-updater) as well as the Belt's [best practice section](../../get-data-out-of-granary/best-practices/) for more transformation function examples.
+Check the reference of available [Profile Update operations](../../../developer-reference/dataflow/profile-store/#component-profile-updater) as well as the Belt's [best practice section](../../using-data-in-granary/best-practices/) for more transformation function examples.
 {% endhint %}
 
 Start the Belt and check if it is in running state:
