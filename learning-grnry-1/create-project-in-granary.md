@@ -14,7 +14,7 @@ By default, users have read access to the `global` project. See [migration guide
 Learn more about the technical realization of Projects in the [developer reference](../developer-reference/projects.md).
 {% endhint %}
 
-## Create a Project in Granay
+## Create a Project in Granary
 
 In this chapter we are going to learn the steps to create a project in Granary and which permissions need to be applied to the user.
 
