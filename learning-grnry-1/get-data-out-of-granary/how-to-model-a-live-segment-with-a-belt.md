@@ -12,39 +12,6 @@ Goal of this guide is to explain Granary's feature to write events directly to a
 
 _Only carry out this step if you do not have a Granary project yet. For details refer to the_ [_Create Project in Granary_](../create-project-in-granary.md) _guide._
 
-First step in Project API, using [Postman](../../developer-reference/api-reference/#postman-collection) requests, we create the project with the [SQLPad](https://getsqlpad.com/#/) deploy option so that we can model our segments directly with SQL. Using this option, SQLPad instance will be deployed and connected to corresponding project schema.
-
-```json
-{
-  "name": "projecttotestlivesegment",
-  "displayName": "projecttotestlivesegment",
-  "description": "Test Granary Project for live segement description"
-}
-```
-
-Response will be:
-
-```json
-{
-    "name": "projecttotestliveseg",
-    "displayName": "ProjecttotestLivesegment",
-    "description": "Test Granary Project for live segement description",
-    "_links": {
-        "self": {
-            "href": "https://development.internal.analytics.cc.syncier.cloud/projects/projecttotestliveseg?expand=sqlpad"
-        }
-    }
-}
-```
-
-The project gets created and we can see it in Granary UI.
-
-![](<../../.gitbook/assets/Screenshot 2021-11-09 at 14.24.19.png>)
-
-{% hint style="info" %}
-In case if we forget to create a project without `?deploy=sqlpad` parameter, one can also deploy [SQLPad via Helm](../../operator-reference/installation/with-helm/sqlpad.md) using the project's database and Keycloak credentials. We can confirm SQLPad UI is running for the schema project by running the [GET project request](../../developer-reference/api-reference/project-api.md#get-project-details) with `?expand=sqlpad`.
-{% endhint %}
-
 
 
 ### Step 2 - Create Input Event Type
