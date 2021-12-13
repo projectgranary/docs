@@ -18,7 +18,7 @@ Harvesters for _S3_, _SFTP_, and _JDBC_ Source Types follow the same schema as _
 
 | Name                         | Description                                                                                                                                                                                       |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Event Type                   | A named data entity type. Determines schema and metadata extraction rules. Each event type is backed by a kafka topic.                                                                            |
+| Data-In Event Type           | A named data entity type. Determines schema and metadata extraction rules. Each event type is backed by a kafka topic.                                                                            |
 | Harvester                    | <p>Set of components and configuration.</p><p>Harvester has states is "defined", "started", "paused" or "stopped". It will read from a source and will produce events for a given event type.</p> |
 | Source                       | Physical source of the data. Also might lie outside of Granary network.                                                                                                                           |
 | Source Type                  | Accepts and imports data from the source.                                                                                                                                                         |

@@ -4,11 +4,13 @@ description: >-
   to make them available to harvesters.
 ---
 
-# Event Types
+# Data-In Event Types
 
-## Event Type Definition
+## Data-In Event Type Definition
 
-Event Types categorize incoming data objects (events) by certain properties that are crucial for further processing. An Event Type entity has a unique name and provides rules on how to extract important metadata (`correlationId`/`eventId`) from events of that type.
+Data-in Event Types categorize incoming data objects (events) by certain properties that are crucial for further processing. An Event Type entity has a unique name and provides rules on how to extract important metadata (`correlationId`/`eventId`) from events of that type.
+
+See full details on Data-In event type in the [developer reference](../../../developer-reference/dataflow/event-type.md#data-in).
 
 ## Creating an Event Type (also see [API Docs](../../../developer-reference/api-reference/harvester-api/event-type-endpoints/#create-an-event-type))
 

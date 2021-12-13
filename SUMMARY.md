@@ -7,7 +7,7 @@
 * [Create Project in Granary](learning-grnry-1/create-project-in-granary.md)
 * [Get Data Into Granary](learning-grnry-1/data-in/README.md)
   * [How to run a Harvester](learning-grnry-1/data-in/how-to-run-a-harvester/README.md)
-    * [Event Types](learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md)
+    * [Data-In Event Types](learning-grnry-1/data-in/how-to-run-a-harvester/event-types.md)
     * [Harvesters](learning-grnry-1/data-in/how-to-run-a-harvester/harvesters.md)
   * [Best Practices](learning-grnry-1/data-in/best-practices-1/README.md)
     * [Hints on naming of Harvesters & Event Types](learning-grnry-1/data-in/best-practices-1/hints-on-naming-of-harvesters-and-event-types.md)
