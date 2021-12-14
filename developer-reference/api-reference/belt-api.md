@@ -22,92 +22,53 @@ Consult the [Granary Access Clients Reference](../../operator-reference/identity
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts" method="get" summary="Get all Belts" %}
 {% swagger-description %}
-Retrieves full dump of 
+Retrieves full dump of **all** belts of a project in the Belt Store as a list.
 
-**all**
-
- belts of a project in the Belt Store as a list.
-
-\
-
-
-
-
-\
-
-
-In order to get results, you must have one of the project's roles 
-
-_editor_
-
- or 
-
-_viewer_
-
-. Otherwise, you will not get back any results.
+In order to get results, you must have one of the project's roles _editor_ or _viewer_. Otherwise, you will not get back any results.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
-Name of project. 
-
-\
-
-
-
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
+Name of project.
 
 _Backwards compatibility:_
 
-\
-
-
-__
-
-If 
+If
 
 `projects/{project-name}/`
 
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="header" name="Authentication" type="string" required="true" %}
 Authentication token
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search" type="string" %}
+{% swagger-parameter in="query" name="search" type="string" required="false" %}
 Filter belts by name. Belt names need to be url encoded. Default "".
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="expand" type="array" %}
+{% swagger-parameter in="query" name="expand" type="array" required="false" %}
 Array of belt states. For possible values, see table at GET belt state definition below.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="pagesize" type="string" %}
-Number of belts to be returned. Default is 
+{% swagger-parameter in="query" name="pagesize" type="string" required="false" %}
+Number of belts to be returned. Default is
 
-`20`
-
-. Maximum is 
-
-`250`
-
-.
+`20` . Maximum is`250`.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="offset" type="string" %}
-Start offset. Default is 
+{% swagger-parameter in="query" name="offset" type="string" required="false" %}
+Start offset. Default is
 
-`0`
-
-.
+`0`.
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="A list of all belts along with their attributes and total count of belts stored in the Belt Store." %}
 ```
-{
     "totalCount": 502,
     "_links": {
         "next": {
@@ -342,47 +303,25 @@ Start offset. Default is
 {% swagger-description %}
 Retrieves full dump of a specific belt with a specified ID. This section describes the response of a "python-callback" belt. See the next section for a "dbt-segment" belt.
 
-\
-
-
-
-
-\
-
-
-In order to retrieve results here, it is necessary that you either have the project's 
-
-_editor_
-
- or 
-
-_viewer_
-
- role assigned to your user in keycloak.
+In order to retrieve results here, it is necessary that you either have the project's _editor_ or _viewer_ role assigned to your user in keycloak.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project the belt belongs to.
-
-\
-
 
 
 
 _Backwards compatibility:_
 
-\
 
 
-If 
+If `projects/{project-name}/`
 
-`projects/{project-name}/`
-
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="string" required="true" %}
@@ -393,18 +332,8 @@ The ID of belt
 Authentication Token
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="export" type="string" %}
-if set to 
-
-`"true"`
-
- (not case sensitive), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. (Only the api-generated 
-
-`id`
-
- field will be provided). Default is 
-
-`""`
+{% swagger-parameter in="query" name="export" type="string" required="false" %}
+if set to `"true"` (not case sensitive), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. (Only the api-generated `id` field will be provided). Default is `""`
 
 .
 {% endswagger-parameter %}
@@ -445,7 +374,13 @@ if set to
         "test-b"
     ],
     "partitionOffsets": {},
-    "kafkaDestinationTopic": "profile-update",
+    "outputTypes": [
+        {
+            "name": "contracts",
+            "version": "latest"
+        }
+    ],    
+    "kafkaDestinationTopic": "",
     "kafkaConsumerGroupName": "grnry-belt-161-1562744768164",
     "beltType": "",
     "runtime": "",
@@ -504,52 +439,27 @@ if set to
 {% endswagger-response %}
 {% endswagger %}
 
-
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="get" summary="Get a Specific Belt by ID (dbt-segment)" %}
 {% swagger-description %}
 Retrieves full dump of a specific belt with a specified ID. This section describes the response of a "dbt-segment" belt.
 
-\
-
-
-
-
-\
-
-
-In order to retrieve results here, it is necessary that you either have the project's 
-
-_editor_
-
- or 
-
-_viewer_
-
- role assigned to your user in keycloak.
+In order to retrieve results here, it is necessary that you either have the project's _editor_ or _viewer_ role assigned to your user in keycloak.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project the belt belongs to.
-
-\
-
 
 
 
 _Backwards compatibility:_
 
-\
+If `projects/{project-name}/`
 
-
-If 
-
-`projects/{project-name}/`
-
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="string" required="true" %}
@@ -560,18 +470,8 @@ The ID of belt
 Authentication Token
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="export" type="string" %}
-if set to 
-
-`"true"`
-
- (not case sensitive), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. (Only the api-generated 
-
-`id`
-
- field will be provided). Default is 
-
-`""`
+{% swagger-parameter in="query" name="export" type="string" required="false" %}
+if set to `"true"`(not case sensitive), the belt response will only contain properties a POST body must necessarily contain to create this exact belt. All properties set to default values and all api-generated properties will be omitted. (Only the api-generated `id` ield will be provided). Default is `""`
 
 .
 {% endswagger-parameter %}
@@ -666,88 +566,33 @@ if set to
 {% endswagger-response %}
 {% endswagger %}
 
-
-
-
-
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="post" summary="Create and Store a Belt (python-callback)" %}
 {% swagger-description %}
-Creates and stores a python-callback belt into the Belt Store. As a response the whole belt configuration is returned. 
+Creates and stores a python-callback belt into the Belt Store. As a response the whole belt configuration is returned.
 
-\
+Requires the role `editor` .
 
-
-
-
-\
-
-
-Requires the role 
-
-`editor`
-
-.
-
-\
-
-
-
-
-\
-
-
-
-
-**JSON Schema Definitions**
-
-\
-
-
-
-
-\
-
+**JSON Schema Definition**
 
 Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html
 
-\
-
-
-
-
-\
-
-
-Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/Volume.html
-
-\
-
-
-
+Volume: https://javadoc.io/doc/io.fabric8/kubernetes-odel/3.0.1/io/fabric8/kubernetes/api/model/Volume.html
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project.
-
-\
-
 
 
 
 _Backwards compatibility:_
 
-\
+If`projects/{project-name}/`
 
-
-If 
-
-`projects/{project-name}/`
-
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="name" type="string" required="true" %}
@@ -755,31 +600,31 @@ Unique name of the belt.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="number" required="false" %}
-If provided, creates a belt with a given belt 
+If provided, creates a belt with a given belt
 
 `id`
 
-. This 
+. This
 
 `id`
 
- needs to be unique. Otherwise an 
+needs to be unique. Otherwise an
 
 `id`
 
- is automatically assigned. Value range for 
+is automatically assigned. Value range for 
 
 `id`
 
- is a positive 
+is a positive
 
 `Long`
 
- value (i.e. 
+value (i.e. 
 
 `1`
 
- to 
+to
 
 `9223372036854775807`
 
@@ -790,217 +635,166 @@ If provided, creates a belt with a given belt
 Authentication token
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="description" type="string" %}
+{% swagger-parameter in="body" name="description" type="string" required="false" %}
 Belt description.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="beltType" required="false" %}
 Type of the belt runtime. Valid values are "python-callback" or "dbt-segment".
 
-default : "python-callback"
+Default: "python-callback"
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="eventTypes" type="array" required="true" %}
-String array of event types to be processed. Only event types registered with Harvester API's event type endpoint are valid values. You must have the event type's 
+String array of event types to be processed. Only event types registered with Harvester API's event type endpoint are valid values. You must have the event type's c
 
-_consumer_
-
- or 
-
-_editor_
+_onsumer or editor_
 
  role assigned in Keycloak to consume an event type in a belt.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="outputTypes" type="array" %}
-Array of event type objects with keys 
+{% swagger-parameter in="body" name="outputTypes" type="array" required="false" %}
+Array of event type objects with keys `name` and`version`. Mutually exclusive with`kafkaDestinationTopic`. If not set, default of`kafkaDestinationTopic`
 
-`name`
-
- and 
-
-`version`
-
-. Mutually exclusive with 
-
-`kafkaDestinationTopic`
-
-. If not set, default of 
-
-`kafkaDestinationTopic`
-
- is taken.
+is taken.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="kafkaDestinationTopic" type="string" %}
-**[DEPRECATED]**
+{% swagger-parameter in="body" name="kafkaDestinationTopic" type="string" required="false" %}
+**\[DEPRECATED]**
 
- Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either 
+Provide a different destination topic for this belt as the default. Defaults to Belt API Server setting for destination topic. Defaults to either`profile-update`
 
-`profile-update`
-
- or default set by belt-api helm chart deployment.
-
-.
+or default set by belt-api helm chart deployment.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="extractorVersion" type="string" %}
-Image tag of the belt runtime docker image to be used. Defaults to either 
+{% swagger-parameter in="body" name="extractorVersion" type="string" required="false" %}
+Image tag of the belt runtime docker image to be used. Defaults to either
 
 `latest`
 
- or set by belt-api helm chart deployment.
-
-.
+or set by belt-api helm chart deployment.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="extractorFn" type="string" %}
+{% swagger-parameter in="body" name="extractorFn" type="string" required="false" %}
 Extractor function to be executed by this belt.
 
-\
-
-
-Defaults either to 
-
-`Hello World`
-
- example function or default set by belt-api helm chart deployment.
-
-.
+Defaults either to`Hello World`example function or default set by belt-api helm chart deployment.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="requirementsPy" type="string" %}
-PIP package requirements for belt. E.g. 
+{% swagger-parameter in="body" name="requirementsPy" type="string" required="false" %}
+PIP package requirements for belt. E.g.
 
 `package1==0.1.0\r\npackage2`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="imagePullSecret" type="string" %}
-Kubernetes Secret used to pull the 
+{% swagger-parameter in="body" name="imagePullSecret" type="string" required="false" %}
+Kubernetes Secret used to pull the
 
 `image`
 
- . Default set by belt-api helm chart deployment.
-
- .
+. Default set by belt-api helm chart deployment.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="image" type="string" %}
+{% swagger-parameter in="body" name="image" type="string" required="false" %}
 Docker Image to be deployed. Default set by belt-api helm chart deployment.
-
- .
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="millicpu" type="string" %}
-CPU limit specification for this belt. Defaults to either 
+{% swagger-parameter in="body" name="millicpu" type="string" required="false" %}
+CPU limit specification for this belt. Defaults to `200` (set by belt-api helm chart deployment).
 
-`200` (default set by belt-api helm chart deployment).
 
-.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="millicpuRequests" type="string" %}
-CPU requests specification for this belt. Defaults to either 
+{% swagger-parameter in="body" name="millicpuRequests" type="string" required="false" %}
+CPU requests specification for this belt. Defaults to 
 
-`200` (default set by belt-api helm chart deployment).
+`200`
 
-.
+ (set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="memory" type="string" %}
-Memory limit specification for this belt. Defaults either to 
+{% swagger-parameter in="body" name="memory" type="string" required="false" %}
+Memory limit specification for this belt. Defaults to
 
-`512` (default set by belt-api helm chart deployment).
+`512`
 
-.
+ (set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="memoryRequests" type="string" %}
-Memory specification for this belt. Defaults to either 
+{% swagger-parameter in="body" name="memoryRequests" type="string" required="false" %}
+Memory specification for this belt. Defaults to 
 
-`512` (default set by belt-api helm chart deployment).
+`512`
 
-.
+ (default set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="replicas" type="integer" %}
-Number of replicas. Defaults to 
+{% swagger-parameter in="body" name="replicas" type="integer" required="false" %}
+Number of replicas. Defaults to
 
-`1` (default set by belt-api helm chart deployment).
+`1` (set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="extraEnv" type="object" %}
-Additional environment variables for Kubernetes belt deployment. Defaults to either 
+{% swagger-parameter in="body" name="extraEnv" type="object" required="false" %}
+Additional environment variables for Kubernetes belt deployment. Defaults to 
 
-`null` (default set by belt-api helm chart deployment).
+`null`
 
-
-.
+ (set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="volumeMounts" type="object" %}
-JSON Kubernetes volume mount definition for belt deployment. Defaults to either 
+{% swagger-parameter in="body" name="volumeMounts" type="object" required="false" %}
+JSON Kubernetes volume mount definition for belt deployment. Defaults to 
 
-`null` (default set by belt-api helm chart deployment).
-.
+`null`
+
+ (set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="volumes" type="object" %}
-JSON Kubernetes volume definition for belt deployment. Defaults to either 
+{% swagger-parameter in="body" name="volumes" type="object" required="false" %}
+JSON Kubernetes volume definition for belt deployment. Defaults to 
 
-`null` (default set by belt-api helm chart deployment).
+`null`
 
-.
+ (set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="partitionOffsets" type="object" %}
+{% swagger-parameter in="body" name="partitionOffsets" type="object" required="false" %}
 Mapping from input topics to respective start offsets which are provided as an array with the indices corresponding to the partition numbers. The offset settings only have an effect on the first start of a Belt. All subsequent (re-)starts of configuration update will read the event type topics from consumer group's current offset.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="debug" type="boolean" %}
-Determines if belt should be run in debug mode. Defaults to 
+{% swagger-parameter in="body" name="debug" type="boolean" required="false" %}
+Determines if belt should be run in debug mode. Defaults to
 
 `false`
-
-.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="fetchProfile" type="string" %}
-Determines if belt should fetch profiles from the Profile Store. Defaults to 
+{% swagger-parameter in="body" name="fetchProfile" type="string" required="false" %}
+Determines if belt should fetch profiles from the Profile Store. Defaults to
 
-`FALSE`
-
-. Possible values: 
-
-`["FALSE", "TRUE", "LAZY"]`
+`FALSE`. Possible values:`["FALSE", "TRUE", "LAZY"]`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="profileType" type="string" %}
-Profile type to fetch. Defaults to 
-
-`_d`
-
-. 
+{% swagger-parameter in="body" name="profileType" type="string" required="false" %}
+Profile type to fetch. Defaults to`_d`.
 
 **Required when fetchProfile is `TRUE`.**
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="secret" type="string" %}
-Kubernetes Secret name used by belt to read values from Profile Store. 
+{% swagger-parameter in="body" name="secret" type="string" required="false" %}
+Kubernetes Secret name used by belt to read values from Profile Store.
 
-**Required when fetchProfile is `TRUE`or `LAZY`**
-
-_**.**_
+**Required when fetchProfile is `TRUE`or `LAZY`**_**.**_
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="secretUsername" type="string" %}
-Username property in secret used by belt to read values from Profile Store.  
+{% swagger-parameter in="body" name="secretUsername" type="string" required="false" %}
+Username property in secret used by belt to read values from Profile Store.
 
 **Required when fetchProfile is `TRUE` or `LAZY`.**
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="secretPassword" type="string" %}
-Password property in secret used by the belt to read values from Profile Store. 
+{% swagger-parameter in="body" name="secretPassword" type="string" required="false" %}
+Password property in secret used by the belt to read values from Profile Store.
 
 **Required when fetchProfile is `TRUE` or `LAZY`.**
 {% endswagger-parameter %}
@@ -1040,7 +834,13 @@ Password property in secret used by the belt to read values from Profile Store.
         "test-b"
     ],
     "partitionOffsets": {},
-    "kafkaDestinationTopic": "profile-update",
+    "outputTypes": [
+        {
+            "name": "contracts",
+            "version": "latest"
+        }
+    ],    
+    "kafkaDestinationTopic": "",
     "kafkaConsumerGroupName": "grnry-belt-161-1562744768164",
     "beltType": "",
     "runtime": "",
@@ -1110,86 +910,35 @@ Password property in secret used by the belt to read values from Profile Store.
 {% endswagger-response %}
 {% endswagger %}
 
-
-
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="post" summary="Create and Store a Belt (dbt-segment)" %}
 {% swagger-description %}
 Creates and stores a python-callback belt into the Belt Store. As a response the whole belt configuration is returned. This sections applies for entities with beltType = "dbt-segment".
 
-\
-
-
-
-
-\
-
-
-Requires the role 
-
-`editor`
-
-.
-
-\
-
-
-
-
-\
-
+Requires the role`editor`.
 
 
 
 **JSON Schema Definitions**
 
-\
-
-
-
-
-\
-
-
 Volume Mount: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/VolumeMount.html
 
-\
-
-
-
-
-\
-
-
 Volume: https://javadoc.io/doc/io.fabric8/kubernetes-model/3.0.1/io/fabric8/kubernetes/api/model/Volume.html
-
-\
-
-
-
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project.
 
-\
 
 
-
-
-_Backwards compatibility:_
-
-\
-
-
-If 
+_Backwards compatibility:_ If
 
 `projects/{project-name}/`
 
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="name" type="string" required="true" %}
@@ -1197,33 +946,9 @@ Unique name of the belt.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="number" required="false" %}
-If provided, creates a belt with a given belt 
+If provided, creates a belt with a given belt`id`. This`id`needs to be unique. Otherwise an`id`is automatically assigned. Value range for`id`is a positive`Long`
 
-`id`
-
-. This 
-
-`id`
-
- needs to be unique. Otherwise an 
-
-`id`
-
- is automatically assigned. Value range for 
-
-`id`
-
- is a positive 
-
-`Long`
-
- value (i.e. 
-
-`1`
-
- to 
-
-`9223372036854775807`
+value (i.e.`1`to`9223372036854775807`
 
 ).
 {% endswagger-parameter %}
@@ -1232,7 +957,7 @@ If provided, creates a belt with a given belt
 Authentication token
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="description" type="string" %}
+{% swagger-parameter in="body" name="description" type="string" required="false" %}
 Belt description.
 {% endswagger-parameter %}
 
@@ -1254,119 +979,95 @@ _editor_
  role assigned in Keycloak to consume an event type in a belt. For dbt-segments the "consume" means that this data (data_in / profiles / live_segments / segments) is available via database views in the project's database schema.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="outputTypes" type="array" %}
+{% swagger-parameter in="body" name="outputTypes" type="array" required="false" %}
 Array of event type objects with keys 
 
 `name`
 
- and 
+ and
 
 `version`
 
-. For dbt-segment belts you have to provide exactly one output type of type 
+. For dbt-segment belts you have to provide exactly one output type of type
 
 `segment`
 
 .
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="imagePullSecret" type="string" required="false" %}
+Kubernetes Secret used to pull the
 
-{% swagger-parameter in="body" name="imagePullSecret" type="string" %}
-Kubernetes Secret used to pull the 
-
-`image`
-
- . Default set in belt-api helm deployment.
-
+`image`. Default set in belt-api helm deployment.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="image" type="string" %}
+{% swagger-parameter in="body" name="image" type="string" required="false" %}
 Docker Image to be deployed. Default set in belt-api helm deployment.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="imageTag" type="string" %}
+{% swagger-parameter in="body" name="imageTag" type="string" required="false" %}
 Docker Image tag to be deployed. Default set in belt-api helm deployment.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="millicpu" type="string" %}
-CPU limit specification for this belt. Defaults to either 
-
-`200` 
-
-(default set by belt-api helm chart deployment)
-
-.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="millicpuRequests" type="string" %}
-CPU requests specification for this belt. Defaults to either 
+{% swagger-parameter in="body" name="millicpu" type="string" required="false" %}
+CPU limit specification for this belt. Defaults to 
 
 `200`
 
- (default set by belt-api helm chart deployment)
-
-.
+(set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="memory" type="string" %}
-Memory limit specification for this belt. Defaults either to 
+{% swagger-parameter in="body" name="millicpuRequests" type="string" required="false" %}
+CPU requests specification for this belt. Defaults to 
+
+`200`
+
+( set by belt-api helm chart deployment).
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="memory" type="string" required="false" %}
+Memory limit specification for this belt. Defaults to
 
 `512`
 
- (default set by belt-api helm chart deployment)
-
-.
+(default set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="memoryRequests" type="string" %}
-Memory specification for this belt. Defaults to either 
+{% swagger-parameter in="body" name="memoryRequests" type="string" required="false" %}
+Memory specification for this belt. Defaults to 
 
 `512`
 
- (default set by belt-api helm chart deployment).
-
-.
+ (set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="replicas" type="integer" %}
-Number of replicas. Defaults to 
+{% swagger-parameter in="body" name="replicas" type="integer" required="false" %}
+Number of replicas. Defaults to
 
 `1` and has to be `1` for dbt-segment belts.
-
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="extraEnv" type="object" %}
-Additional environment variables for Kubernetes belt deployment. Defaults to either 
+{% swagger-parameter in="body" name="extraEnv" type="object" required="false" %}
+Additional environment variables for Kubernetes belt deployment. Defaults to 
 
 `null`
 
 (default set by belt-api helm chart deployment).
-
-.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="volumeMounts" type="object" %}
-JSON Kubernetes volume mount definition for belt deployment. Defaults to either 
-
-`null`
+{% swagger-parameter in="body" name="volumeMounts" type="object" required="false" %}
+JSON Kubernetes volume mount definition for belt deployment. Defaults to `null`
 
 (default set by belt-api helm chart deployment).
-
-.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="volumes" type="object" %}
-JSON Kubernetes volume definition for belt deployment. Defaults to either 
+{% swagger-parameter in="body" name="volumes" type="object" required="false" %}
+JSON Kubernetes volume definition for belt deployment. Defaults to `null`
 
-`null`
-
- (default set by belt-api helm chart deployment).
-
-.
+(default set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-
-{% swagger-parameter in="body" name="debug" type="boolean" %}
+{% swagger-parameter in="body" name="debug" type="boolean" required="false" %}
 Determines if belt should be run in debug mode. Defaults to 
 
 `false`
@@ -1374,40 +1075,25 @@ Determines if belt should be run in debug mode. Defaults to
 .
 {% endswagger-parameter %}
 
-
-
-{% swagger-parameter in="body" name="cronExpression" type="string" %}
+{% swagger-parameter in="body" name="cronExpression" type="string" required="false" %}
 The cronexpression which will be used to execute the materialisation of the segment. Defaults to
 
-
-`0 * * * *` 
+`0 * * * *`
 
 (every full hour - default set by belt-api helm chart deployment).
-
-.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="segmentDefinition" type="string" required="false" %}
+The sql select statement that defines you segment. Defaults to `SELECT 1`
 
-{% swagger-parameter in="body" name="segmentDefinition" type="string" %}
-the sql select statement that defines you segment.
-
-
-`SELECT 1` 
-
-(default set by belt-api helm chart deployment).
-
-.
+(set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="activeDeadlineSeconds" type="string" %}
+{% swagger-parameter in="body" name="activeDeadlineSeconds" type="string" required="false" %}
+Maximum time (in seconds) a segment creation / update can take until the job is getting terminated. Defaults to`1800`
 
-Maximum time (in seconds) a segment creation / update can take until the job is getting terminated.
-
-`1800` 
-
-(default set by belt-api helm chart deployment).
+(set by belt-api helm chart deployment).
 {% endswagger-parameter %}
-
 
 {% swagger-response status="200" description="Returns a full dump of belt object created." %}
 ```
@@ -1513,58 +1199,29 @@ Maximum time (in seconds) a segment creation / update can take until the job is 
 {% endswagger-response %}
 {% endswagger %}
 
-
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="delete" summary="Delete a Specific Belt" %}
 {% swagger-description %}
 Deletes a specific belt given the ID.
 
-\
-
-
-
-
-\
-
-
 Deletes the belt definition in the database and all corresponding kubernetes resources if the belt is deployed.
 
-\
-
-
-
-
-\
-
-
-The Keycloak user needs to have the project's 
-
-_editor_
-
- role.
+The Keycloak user needs to have the project's _editor_ role.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project the belt belongs to.
-
-\
-
 
 
 
 _Backwards compatibility:_
 
-\
+If`projects/{project-name}/`
 
-
-If 
-
-`projects/{project-name}/`
-
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="string" required="true" %}
@@ -1617,45 +1274,31 @@ Authentication Token
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id" method="put" summary="Updates a Belt by ID" %}
 {% swagger-description %}
-Updates attributes of a belt, given its ID. 
+Updates attributes of a belt, given its ID.
 
-\
-
-
-
-
-\
-
-
-In order to update a belt, a complete JSON representation of the object needs to be provided. For a list of body parameters, see above POST /belts documentation. Empty fields will be set to default values as specified for POST /belts. The Keycloak user needs to have the project's 
+In order to update a belt, a complete JSON representation of the object needs to be provided. For a list of body parameters, see above POST /belts documentation. Empty fields will be set to default values as specified for POST /belts. The Keycloak user needs to have the project's
 
 _editor_
 
- role.
+role.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project the belt belongs to.
-
-\
-
 
 
 
 _Backwards compatibility:_
 
-\
 
 
-If 
+If`projects/{project-name}/`
 
-`projects/{project-name}/`
-
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="string" required="true" %}
@@ -1772,51 +1415,31 @@ Authentication Token
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="get" summary="Get a Belt's state" %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="get" summary="Get a Belt" %}
 {% swagger-description %}
 Retrieve the status of the Belt's Kubernetes deployment.
 
-\
+In order to get results, you must have one of the project's roles e_ditor_
 
-
-
-
-\
-
-
-In order to get results, you must have one of the project's roles 
-
-_editor_
-
- or 
-
-_viewer_
-
-. Otherwise, you will not get back any results.
+or _viewer_. Otherwise, you will not get back any results.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project the belt belongs to.
-
-\
-
 
 
 
 _Backwards compatibility:_
 
-\
 
 
-If 
+If`projects/{project-name}/`
 
-`projects/{project-name}/`
-
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="string" required="true" %}
@@ -1938,7 +1561,7 @@ Authentication token
 {% endswagger-response %}
 {% endswagger %}
 
-Possible values for the status attribute in the response body for "python-callback" belts:
+Possible values for the status attribute in the response body for **"python-callback"** belts:
 
 | Status                 | Description                                                        |
 | ---------------------- | ------------------------------------------------------------------ |
@@ -1948,7 +1571,7 @@ Possible values for the status attribute in the response body for "python-callba
 | DEPLOYING              | Belt is being deployed                                             |
 | STOPPED                | Belt is not deployed                                               |
 
-Possible values for the status attribute in the response body for "dbt-segment" belts:
+Possible values for the status attribute in the response body for **"dbt-segment"** belts:
 
 |                          | Description                                                                                                                                                                                              |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1961,61 +1584,27 @@ Possible values for the status attribute in the response body for "dbt-segment" 
 | FAILED\_BUT\_OUTDATED    | Last job execution was not successful and belt configuration was updated. The Job will execute again on next schedule based on the old belt configuration.                                               |
 | STOPPED                  | Job is not deployed on the cluster                                                                                                                                                                       |
 
-
-
-{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="post" summary="Manipulate a Belt's state" %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="post" summary="Manipulate a Belt" %}
 {% swagger-description %}
-Update the status of the Belt's Kubernetes deployment. The Keycloak user needs to have the 
-
-_editor_
-
- roles defined for the Belt.
-
-\
-
-
-
-
-\
-
+Update the status of the Belt's Kubernetes deployment. The Keycloak user needs to have the e_ditor_ roles defined for the Belt.
 
 Body example:
 
-\
-
-
-
-
 `{"action": "START"}`
-
-\
-
-
-
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project the belt belongs to.
-
-\
-
-
-
 
 _Backwards compatibility:_
 
-\
+If `projects/{project-name}/`
 
-
-If 
-
-`projects/{project-name}/`
-
- is missing, URL will be treated like 
+is missing, URL will be treated like
 
 `projects/global/...`
 
- scoping the request to the 'global' project.
+scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="string" required="true" %}
@@ -2081,55 +1670,23 @@ The action to be performed "START" or "STOP"
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/logs" method="get" summary="Get Belt's Pod Logs by Id" %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/logs" method="get" summary="Get Belt" %}
 {% swagger-description %}
-Get the last n log lines from all pods of the belt with the given 
+Get the last n log lines from all pods of the belt with the given `id` where n is specified by the `lines` query parameter.
 
-`id`
-
- where n is specified by the 
-
-`lines`
-
- query parameter.
-
-\
-
-
-
-
-\
-
-
-This request requires the project's 
-
-_editor_
-
- role.
+This request requires the project's _editor_ role.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="project-name" type="string" %}
+{% swagger-parameter in="path" name="project-name" type="string" required="false" %}
 Name of project the belt belongs to.
 
-\
+_Backwards compatibility_
 
+If `projects/{project-name}/`
 
+is missing, URL will be treated like
 
-
-_Backwards compatibility:_
-
-\
-
-
-If 
-
-`projects/{project-name}/`
-
- is missing, URL will be treated like 
-
-`projects/global/...`
-
- scoping the request to the 'global' project.
+`projects/global/...` scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="string" required="true" %}
@@ -2140,18 +1697,8 @@ Belt ID
 Authentication token
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="lines" type="string" %}
-number of lines to be retrieved per pod. Must be greater than 
-
-`0`
-
- and less than or equal to 
-
-`500`
-
-. Default is 
-
-`500`
+{% swagger-parameter in="query" name="lines" type="string" required="false" %}
+number of lines to be retrieved per pod. Must be greater than `0` nd less than or equal to`500`. Default is`500`
 
 .
 {% endswagger-parameter %}
