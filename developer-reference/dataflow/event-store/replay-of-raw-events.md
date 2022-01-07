@@ -29,10 +29,21 @@ Event feeder will create a batch job to read events based on configurable event 
 
 ### Replay Scenario 1 - Deploy new Belt, start few days back, no event feeding
 
-* _1st Deployment:_ Belts consume their Kafka source topic not from offset `latest` but from a given offset, see [Belt API ](../../api-reference/belt-api.md)parameter `offset`.
+*   _1st Deployment:_ Belts consume their Kafka source topic not from offset `latest` but from a given offset, see [Belt API ](../../api-reference/belt-api.md)parameter `offset`.
+
+    **Caution:** This only works for the first deployment of a belt. If data should be replayed from an existing belt, a duplicated belt with a new name needs to be created to manipulate the `offset`.
 * No previous grains must be invalidated.
 
 ### Replay Scenario 2 - Deploy new belts, start on past event data
+
+{% hint style="warning" %}
+Replay Scenario 2 builds on the assumption that these two constraints matter to you:
+
+1. The raw events should be replayed in the exact same order as they occurred originally.
+2. The replayed raw events should be processed exactly once.
+
+If these two constraints do **not** matter to you, simply replay the raw events to the `grnry_data_in_*` topic of your original data-in event type and let your running belt consume the replayed raw events. Hand-over offsets and deployments detailed below can be ignored in this case.
+{% endhint %}
 
 * Event Feeder reads raw events from Event Store and emits them to a temporary topic, settings see above.
 * Event Feeder also determines a **Hand-over offset** to switch from temporary to live topic.

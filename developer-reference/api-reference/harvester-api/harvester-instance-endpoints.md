@@ -467,7 +467,7 @@ If
 unique technical harvester name
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="displayName" type="string" %}
+{% swagger-parameter in="body" name="displayName" type="string" required="true" %}
 Human readable name. Needs to be unique. A technical name will be derived from it.
 {% endswagger-parameter %}
 
@@ -483,150 +483,34 @@ if set to
 Harvester description
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="eventType" type="object" %}
-Existing eventType that this harvester should process. 
+{% swagger-parameter in="body" name="eventType" type="object" required="true" %}
+Existing eventType that this harvester should process. _Required_ fields are `name:string` and `version:string`.
 
-_Required_
-
- fields are 
-
-`name:string`
-
- and 
-
-`version:string`
-
-.
+For examples and all details, see [event type reference configuration](../../dataflow/data-in/metadata-extractor.md#reference-event-type-in-harvester).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="sourceType" type="object" %}
-Existing sourceType that this harvester receives data from. 
+{% swagger-parameter in="body" name="sourceType" type="object" required="true" %}
+Existing sourceType that this harvester receives data from. _Required_ fields are `name:string` and `version:string`. _Optional_ fields are `configuration:map`, `deployerConfiguration:map`, `appConfiguration:map`
 
-_Required_
-
- fields are 
-
-`name:string`
-
- and 
-
-`version:string`
-
-. 
-
-_Optional_
-
- fields are 
-
-`configuration:map`
-
-, 
-
-`deployerConfiguration:map`
-
-, 
-
-`appConfiguration:map`
+For examples and all details, see [source type configuration](../../dataflow/data-in/source-types.md).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="transform" type="object" %}
-Scriptable transform application used by this harvester. If not specified, a default transform app will be deployed. Default values for all fields can be specified during harvester api deployment. 
+Scriptable transform application used by this harvester. If not specified, a default transform app will be deployed. Default values for all fields can be specified during harvester api deployment. _Optional_ fileds are `app:string` (registered app in scdf), `version:string` (app version registered in scdf), `deploymentConfiguration:map`, `appConfiguration:map`, `language:string` (script language), `script:string` (script that transforms the data)
 
-_Optional_
-
- fileds are 
-
-`app:string`
-
- (registered app in scdf), 
-
-`version:string`
-
- (app version registered in scdf), 
-
-`deploymentConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-
-, 
-
-`language:string`
-
- (script language), 
-
-`script:string`
-
- (script that transforms the data).
+For examples and all details, see [scriptable transform configuration](../../dataflow/data-in/scriptable-transform.md).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="sessionizing" type="object" %}
-Sessionizing application used by this harvster. Contains flag 
+Sessionizing application used by this harvster. Contains flag `enabled:boolean` (if set to false, no other fields should be set). Default values for all other fields can be specified during harvester api deployment. These _optional_ fields are `app:string` (registered app in scdf), `version:string` (app version registered in scdf), `deploymentConfiguration:map`, `appConfiguration:map`, `correlationIdExpression:string`, `sessionIdExpression:string`, `inactivityGapSec:long`, `gracePeriodSec:long`.
 
-`enabled:boolean`
-
- (if set to false, no other fields should be set). Default values for all other fields can be specified during harvester api deployment. These 
-
-_optional_
-
- fields are 
-
-`app:string`
-
- (registered app in scdf), 
-
-`version:string`
-
- (app version registered in scdf), 
-
-`deploymentConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-
-, 
-
-`correlationIdExpression:string`
-
-, 
-
-`sessionIdExpression:string`
-
-, 
-
-`inactivityGapSec:long`
-
-, 
-
-`gracePeriodSec:long`
-
-.
+For examples and all details, see [sessionizing configuration](../../dataflow/data-in/sessionizing-processor.md).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="metadataExtractor" type="object" %}
-Metadata extractor application used by this harvester. If not specified, a default metadata extractor app will be deployed. Default values for all fields can be specified during harvester api deployment. 
+Metadata extractor application used by this harvester. If not specified, a default metadata extractor app will be deployed. Default values for all fields can be specified during harvester api deployment. _Optional_ fields are `app:string` (registered app in scdf), `version:string` (registered app version in scdf), `deploymentConfiguration:map`, `appConfiguration:map`.
 
-_Optional_
-
- fields are 
-
-`app:string`
-
- (registered app in scdf), 
-
-`version:string`
-
- (registered app version in scdf), 
-
-`deploymentConfiguration:map`
-
-, 
-
-`appConfiguration:map`
-
-.
+For examples and all details, see [metadata extractor configuration](../../dataflow/data-in/metadata-extractor.md).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="header" name="Authentication" required="true" %}
