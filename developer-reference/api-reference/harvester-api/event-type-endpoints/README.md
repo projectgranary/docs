@@ -59,13 +59,29 @@ Authentication token.
 {% swagger-parameter in="query" name="expand" type="string" %}
 Expand the response with 
 
-`totalCount`
+`inputs`
+
+, 
+
+`outputs`
 
 , or 
 
+`persisters.`
+
+  The
+
+`inputs`
+
+ value will add a list of Granary components producing this event type while 
+
+`outputs`
+
+ will add a list of Granary components consuming this event type. The 
+
 `persisters`
 
- to show either the count or the peristers of different event-type-names. Default is 
+ parameter will give more information about the corresponding persisters including their state. Default is 
 
 `""`
 
@@ -105,7 +121,7 @@ Offset of the requested page. Default is
 {
     "_links": {
         "self": {
-            "href": "https://hostname/projects/global/event-types?search=&offset=0&pagesize=20&expand="
+            "href": "https://hostname/projects/global/event-types?search=&offset=0&pagesize=20&expand=inputs,outputs"
         }
     },
     "eventTypes": [
