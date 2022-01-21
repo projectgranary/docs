@@ -16,6 +16,7 @@ In their JSON response models, all kinds of event types contain information on t
 
 ```json
 {
+    "displayName": "User-Visits-5",
     "name": "User-Visits-5",
     ...
     "sources": [
@@ -62,6 +63,15 @@ For a general overview, this diagram below visualizes all existing event types a
 
 ![](../../.gitbook/assets/grnry\_event\_types.png)
 
+#### Difference between `name` and `displayName`
+
+All event types come with two name fields where
+
+* `displayName` is the mutable, user provided name of the event type that is displayed in Granary UI&#x20;
+* `name` is the immutable, technical name derived from the provided display name following these [rules](../../learning-grnry-1/data-in/best-practices-1/hints-on-naming-of-harvesters-and-event-types.md#event-types). It is used as the unique identifier for an event type.
+
+
+
 ### Data-In
 
 A Data-In event type is a group of rules specifying how a Harvester annotates incoming streaming data with metadata. handled in Granary's components. These rules are denoted in the [Spring Expression language](../../learning-grnry-1/data-in/best-practices-1/best-practices.md).
@@ -80,7 +90,6 @@ Most of the event type's parameters are assigned default values, you are only re
 
 | Attribute                 | Description                                                                                                                                                      |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `displayName`             | The display name of an event type. See [hints](../../learning-grnry-1/data-in/best-practices-1/hints-on-naming-of-harvesters-and-event-types.md) on naming.      |
 | `correlationIdExpression` | A SpringEL rule to extract the correlation id from the event (or create it using a function). Granary-header: `grnry-correlation-id`.                            |
 | `eventIdExpression`       | A SpringEL rule to extract the event id from the event (or create it using a function). Granary-header: `grnry-event-id`.                                        |
 | `timestampExpression`     | A SpringEL rule to extract the timestamp (milliseconds since 1.1.1970 UTC). _Optional_, if not set, the current time is used. Granary-header: `grnry-timestamp`. |

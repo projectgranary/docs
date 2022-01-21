@@ -39,7 +39,7 @@ The following limitations apply to the `name` property of Event Types:
 * if created via API call `POST /event-types/{name}`, this regular expression applies:\
   __`[a-zA-Z0-9\-]*$`
   * if provided `name` is >20 characters, the API call returns `400 Bad Request`
-* if cleaned `name` already exist, four random charaters are appended
+* if cleaned `name` already exist, four random charaters are appended, e.g. 'et-customer-sess-0000'
 * `name` is stored case-insensitive
 
 #### Harvesters
@@ -52,5 +52,9 @@ The following limitations apply to the `name` property of Harvesters:
 * if created via API call `POST /harvesters/instances/{name}` this regular expression applies:\
   __`[a-zA-Z0-9\-]*$`
   * if provided `name` is >20 characters, the API call returns `400 Bad Request`
-* if cleaned `name` already exist, four random charaters are appended
+*   if cleaned `name` already exist, four random charaters are appended, e.g. 'hvs-customer-ses-0000'
+
+    ```json
+    customer-sessi-0000
+    ```
 * `name` is stored case-insensitive
