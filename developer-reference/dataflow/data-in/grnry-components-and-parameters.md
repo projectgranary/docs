@@ -8,7 +8,7 @@ description: >-
 
 ## Kubernetes Deployment
 
-The parameters within `deploymentConfiguration` control the Kubernetes deployment of a Granary Harvester component:
+The parameters within `deploymentConfiguration` control the Kubernetes deployment of a Granary Harvester component. A list of available configuration parameters can be found on the official [Spring Cloud Dataflow Reference](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#configuration-kubernetes-deployer) page.
 
 ```javascript
 "sourceType" : {
@@ -51,7 +51,25 @@ To deactivate the encryption, do not pass in the mounted secrets as shown above 
  }
 ```
 
+### Service Account
+
+By default the service account for scdf apps is derived from the Data Flow server's configuration. To override it and set a custom service account name, add the `deploymentServiceAccountName` property to the `deploymentConfiguration`.
+
+In the following example we assign a service account with the name 'my-service-account' to the source type app :
+
+```json
+"sourceType" : {
+    "deploymentConfiguration": {
+        "deploymentServiceAccountName": "my-service-account",
+        ...
+    },
+    ...
+}
+```
+
 ## Dead letter queues
+
+
 
 In GRNRY, so called _dead letter queues_ are automatically created for each Harvester. These dead letter queues are used to receive all the data that could not be processed correctly by the [transform](scriptable-transform.md) or [metadata extractor](metadata-extractor.md) steps. They are the output channels for errors.
 
