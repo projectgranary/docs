@@ -71,36 +71,9 @@ See exented example in below's [Python callback function](belt-extractor.md#pyth
 
 
 
-### GenericEventUpdate
+### Granary Event Update
 
-To write to the stream of a "**data\_in**" event type user can use `GenericEventUpdate`. It require few fields which are defined below.
-
-| Key           | Description                                                                                                                                                                |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| eventTypeName | <p>The technical name of the event type which you are going to write to.</p><p>(MANDATORY)</p>                                                                             |
-| correlationId | <p>The Correlation Id for the event. Normally extracted / derived from the source message that the belt currently processes</p><p>(MANDATORY)</p>                          |
-| headers       | <p>Additional headers that will be merged with the grnry-internal headers for the event written to the stream of the <code>data_in</code> event type.</p><p>(OPTIONAL)</p> |
-
-Below example defines how user can use GrnryEventUpdate class to update `data_in` type event. User has to define eventTypeName and CorrelationId as a mandatory parameters in the definition of the class. After that set the message payload using the 'set\_value' method and add the update to the `upgrades` array that will be returned by the belt at the end of the event processing.
-
-```python
-import json
-from grnry_belt.models.grnry_event_update import GrnryEventUpdate
-
-....
-....
-
-
-msgPayload = {
-         'contract' : lookup(data[0], ['payload']),
-         'from_original_message': lookup(data[0], ['payload'])
-    }
- updateClassRef= GrnryEventUpdate(eventTypeName, correlationId)
-    updateClassRef.set_value(msgPayload)
-    updates.append(dataInUpdate)
-```
-
-The `GrnryEventUpdate` class can be used to send messages to a [data\_in ](event-type.md#data-in)event type. This can be useful while chaining multiple belts. The constructor's signature contains the parameters as defined in the [Input Data Format ](belt-extractor.md#input-data-format)above.&#x20;
+The `GrnryEventUpdate` class can be used to send messages to a [data\_in ](event-type.md#data-in)event type. This can be useful while chaining multiple belts. The constructor's signature contains the parameters as defined in the [Input Data Format ](belt-extractor.md#input-data-format)above. After that, set the message payload using the 'set\_value' method and add the update to the `updates` array that will be returned by the belt at the end of the event processing.
 
 {% tabs %}
 {% tab title="Spec" %}
