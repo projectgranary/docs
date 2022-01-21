@@ -743,6 +743,14 @@ Additional environment variables for Kubernetes belt deployment. Defaults to
  (set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="serviceAccountName" type="string" %}
+Name of Kubernetes service account to be used by the belt pod. If not set, the 
+
+`'default'`
+
+ service account will be added by Kubernetes. Differing default can be set by belt-api helm chart deployment.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="body" name="volumeMounts" type="object" required="false" %}
 JSON Kubernetes volume mount definition for belt deployment. Defaults to 
 
@@ -807,12 +815,14 @@ Password property in secret used by the belt to read values from Profile Store.
     "projectName": "global",
     "beltType": "python-callback",
     "kubernetesName": "grnry-belt-161",
+    "serviceAccountName": "default",    
     "description": "Hello Belt Belt",
     "labels": [],
     "affectedPaths": [],
     "replicas": 1,
-    "millicpu": 200,
+    "millicpuRequests": 50,
     "memory": 512,
+    "memoryRequests": 256,
     "createdBy": {
         "name": "Arthur Author",
         "email": "arthur@author.com"
@@ -823,7 +833,6 @@ Password property in secret used by the belt to read values from Profile Store.
         "email": "arthur@author.com"
     },
     "modifiedAt": "2021-09-24T08:38:50.848Z",
-    "assumedRole": "",
     "requirementsPy": "package1==0.0.0\r\npackage2",
     "image": "grnry-belt",
     "imagePullSecret": "grnry-pull-secret",    
@@ -842,9 +851,7 @@ Password property in secret used by the belt to read values from Profile Store.
     ],    
     "kafkaDestinationTopic": "",
     "kafkaConsumerGroupName": "grnry-belt-161-1562744768164",
-    "beltType": "",
-    "runtime": "",
-    "parameter": "",
+    "dlqTopic": "grnry_belt_dlq_161",    
     "debug": false,
     "fetchProfile": "FALSE",
     "profileType": "test-type",
@@ -1055,6 +1062,14 @@ Additional environment variables for Kubernetes belt deployment. Defaults to
 (default set by belt-api helm chart deployment).
 {% endswagger-parameter %}
 
+{% swagger-parameter in="body" name="serviceAccountName" type="string" %}
+Name of Kubernetes service account to be used by the belt pod. If not set, the 
+
+`'default'`
+
+ service account will be added by Kubernetes. Differing default can be set by belt-api helm chart deployment.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="body" name="volumeMounts" type="object" required="false" %}
 JSON Kubernetes volume mount definition for belt deployment. Defaults to `null`
 
@@ -1100,7 +1115,9 @@ Maximum time (in seconds) a segment creation / update can take until the job is 
         {
             "version": "1",
             "name": "dbt-belt-a",
-            "description": "a dbt belt",
+            "description": "a dbt belt",            
+            "projectName": "global",            
+            "beltType": "dbt-segment",
             "labels": [],
             "replicas": 1,
             "millicpu": 200,
@@ -1130,13 +1147,13 @@ Maximum time (in seconds) a segment creation / update can take until the job is 
                     "version": "latest"
                 }
             ],
-            "projectName": "global",
-            "beltType": "dbt-segment",
+
             "debug": false,
             "volumes": null,
             "volumeMounts": null,
             "extraEnv": null,
             "kubernetesName": "grnry-belt-23",
+            "serviceAccountName": "default",
             "image": "hub.syncier.cloud/grnry-snapshot/dbt-belt-image",
             "imageTag": "latest",
             "imagePullSecret": "grnry-snapshot-dockerconfig",
@@ -1415,7 +1432,7 @@ Authentication Token
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="get" summary="Get a Belt" %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="get" summary="Get a Belt's State" %}
 {% swagger-description %}
 Retrieve the status of the Belt's Kubernetes deployment.
 
@@ -1670,7 +1687,7 @@ The action to be performed "START" or "STOP"
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/logs" method="get" summary="Get Belt" %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/logs" method="get" summary="Get a Belt's Logs" %}
 {% swagger-description %}
 Get the last n log lines from all pods of the belt with the given `id` where n is specified by the `lines` query parameter.
 
