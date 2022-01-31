@@ -233,13 +233,17 @@ beltSpec: # k8s config to pass to belts deployed by the API
 Parameters set in `extra.extraEnv` are not taken into account any longer, e.g. `BELT_EXTRACTOR_VERSION`. Please, use the above mentioned parameters below `beltSpec` instead.
 {% endhint %}
 
-### DBT Segments
+### dbt Segments
 
-As seen in the previous step, the Belt API is now capable to deploy `dbt-segments`. Technically, these are Kubernetes CronJobs executing a DBT Docker image. The old [segment table creation templating language](https://docs.grnry.io/developer-reference/dataflow/segment-store/segment-table-creation) has been deprecated in Granary 1.2. The new DBT Docker image allows to deploy an arbitrary SQL `SELECT` statement as segment. Please refer to the new technical reference for details how to express the former `pivot` and `generic` segments as SQL `SELECT` statements.
+As seen in the previous step, the Belt API is now capable to deploy `dbt-segments`. Technically, these are Kubernetes CronJobs executing a dbt Docker image. The old [segment table creation templating language](https://docs.grnry.io/developer-reference/dataflow/segment-store/segment-table-creation) has been deprecated in Granary 1.2. The new dbt Docker image allows to deploy an arbitrary SQL `SELECT` statement as segment. Please refer to the new technical reference for details how to express the former `pivot` and `generic` segments as SQL `SELECT` statements.
 
 ### Profile Store API
 
 The method `GET /profiles/:profileType/:correlationId` does not have the parameter `withHistory` anymore. For historic grain retrevial, use `GET /profiles/:profileType/:correlationId/grain/:path`.
+
+## ArgoCD Setup Related Upgrade Steps
+
+A template in the Granary ArgoCD Setup has been updated. The new template comes with a more reliable way of passing the `granary/<component>Values.yaml` to the deployment. If you are using the Granary ArgoCD Setup, please make sure to replace the old [component template](https://github.com/syncier/grnry-samples/blob/master/installations/argocd-1.1/granary/templates/components.yaml) with the [new one](https://github.com/syncier/grnry-samples/blob/master/installations/argocd-1.2/granary/templates/components.yaml). Also please note that Granary 1.2 requires ArgoCD 1.8.0+.
 
 ## Update Granary Components
 
