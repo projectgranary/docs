@@ -652,7 +652,7 @@ If
  scoping the request to the 'global' project.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="path" name="event-type-name" type="string" required="true" %}
+{% swagger-parameter in="path" name="event-type-name" type="string" required="false" %}
 Unique event type name.  If not provided, it is derived from body parameter 
 
 `displayName`
