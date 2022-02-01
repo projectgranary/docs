@@ -6,7 +6,7 @@ description: Learn to develop Granary Data Apps with an interactive example
 
 ## Feeding Grains into Grnry
 
-In this tutorial you will learn how to ingest data and retrieve the data in different use case scenarios.
+In this tutorial you will learn how to ingest data and retrieve the data using Granary's RESTful APIs.
 
 ![](<../../../.gitbook/assets/grafik (11).png>)
 

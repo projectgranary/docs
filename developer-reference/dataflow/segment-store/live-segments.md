@@ -138,7 +138,21 @@ JDBC sink is documented in more detail here:
 
 Granary allows to modify the configuration of the Live-Segment's Kafka Connect JDBC sink to a certain extend. To do so, please refer to the [Event Type Live-Segment Persister API](../../api-reference/harvester-api/event-type-endpoints/live-segment-persisters.md#set-persister) documentation.
 
+#### Error Handling
 
+By default, on bad messages the Live-Segment persister will fail, hence its state will be reported as `FAILED` and it needs to be restarted (see[#set-state-of-persister](../../api-reference/harvester-api/event-type-endpoints/live-segment-persisters.md#set-state-of-persister "mention")). After restarting, the kafka connect task will process the same failed message again and either succeeds or fails again. If the failure is persistent, e.g. due to invalid message content, it will fail forever.
+
+To change this behavior it is possible to set a property to the persister config (see [#set-persister](../../api-reference/harvester-api/event-type-endpoints/live-segment-persisters.md#set-persister "mention")).
+
+`errorsTolerance='all'`
+
+After another manual restart (see[#set-state-of-persister](../../api-reference/harvester-api/event-type-endpoints/live-segment-persisters.md#set-state-of-persister "mention")), this property will effect bad incoming messages to be added to the Dead Letter Queue (DLQ) topic while preventing the persister from failing. The DLQ topic name will be derived from the persister's input topic name by adding the `'_dlq'` suffix. The persister will now skip the unreadable message and continue by consuming the next message.
+
+{% hint style="danger" %}
+This error handling does not prevent failures due to downstream errors, such as SQL errors or connection issues. These will still block the persister!
+{% endhint %}
+
+An example for a non-transient, hence infinitely blocking, downstream error would be an SQL exception caused by a record that does not match the table schema.
 
 ### Live-Segment Belt
 

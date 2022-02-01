@@ -6,11 +6,21 @@ description: In this chapter, we create & deploy all resources to import trackin
 
 ![](<../../../.gitbook/assets/grafik (27).png>)
 
+{% hint style="info" %}
+This tutorial assumes that you have the `editor` role in `global` project. If you want to create the objects in a different project scope, you need to add /projects/{projectName} in front of all your API calls. Exception: Profilestore and Eventstore API calls.
+{% endhint %}
+
 ## 1. Create Event Type "Customer Session"
 
 In Granary, an event type describe the metadata and schema of a particular category of raw data that you want to import. In our case, this is tracking data consisting of customer sessions. Create your first event type like so:
 
-![Harvester API Request: POST/event-types](<../../../.gitbook/assets/image (19).png>)
+![](<../../../.gitbook/assets/image (19).png>)
+
+Harvester API Request:
+
+> **POST /event-types/cust-sess-\<yourName>**
+
+`cust-sess-<yourName>` is the immutable name of the event type and the name needs to comply with these [restrictions](../../data-in/best-practices-1/hints-on-naming-of-harvesters-and-event-types.md#event-types).
 
 For the body (look for the tab with the green dot) use this JSON:
 
@@ -24,13 +34,13 @@ For the body (look for the tab with the green dot) use this JSON:
 }
 ```
 
-Find more detailed explanation on event type configuration [here](../../data-in/how-to-run-a-harvester/event-types.md#creating-an-event-type-also-see-api-docs).
+Find more detailed explanation on event type configuration [here](../../data-in/how-to-run-a-harvester/event-types.md#creating-an-event-type-also-see-api-docs). Check out the difference between `name` and `displayName` [here](../../../developer-reference/dataflow/event-type.md#difference-between-name-and-displayname).
 
 With a Status `200 OK`, the return body looks like this:
 
 ```javascript
 {
-    "name": "customer-session",
+    "name": "cust-sess-<yourName>",
     "displayName": "Customer Session",
     "version": 1,
     "type": "data_in",
@@ -47,7 +57,7 @@ With a Status `200 OK`, the return body looks like this:
     "description": "Event Type for Customer Sessions",
     "_links": {
         "self": {
-            "href": "https://<hostname>/event-types/customersession/1"
+            "href": "https://<hostname>/event-types/cust-sess-<yourName>/1"
         }
     }
 }
@@ -65,7 +75,13 @@ In Granary, a harvester consists of three steps that we need to configure to pre
 
 Most of the harvester configuration is covered by defaults, so creating your first harvester goes like this:
 
-![Harvester API Request: POST /harvesters/instances](<../../../.gitbook/assets/image (5).png>)
+![](<../../../.gitbook/assets/image (5).png>)
+
+Harvester API Request:
+
+> **POST /harvesters/instances/snow-cust-sess-\<yourName>**
+
+`snow-cust-sess-<yourName>` is the immutable name of the harvester and the name needs to comply with these [restrictions](../../data-in/best-practices-1/hints-on-naming-of-harvesters-and-event-types.md#harvesters-1).
 
 For the body (look for the tab with the green dot) use this JSON:
 
@@ -78,23 +94,23 @@ The name of the Event Type in line 21 must match the Event Type's `name` you cre
     "displayName": "Snowplow Customer Sessions",
     "sourceType": {
         "name": "grnry-topic",
-        "version": "0.8.1",
+        "version": "1.2.0",
     "configuration": {
         "consumer.input-topic": "snowplow"
     }
     },
   "metadataExtractor": {
     "app": "grnry-data-in-metadata",
-    "version": "0.8.1"
+    "version": "1.2.0"
   },
   "transform": {
     "app": "grnry-scriptable",
-    "version": "0.8.1",
+    "version": "1.2.0",
     "language": "groovy",
     "script": "import io.grnry.scdfapps.scriptable.snowplow.SnowplowPayloadExtractor\\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowSerDe\\nimport io.grnry.scdfapps.scriptable.snowplow.SnowplowCollectorPayload\\nimport com.fasterxml.jackson.databind.ObjectMapper\\nimport groovy.json.JsonSlurper\\n\\n// deserialize Snowplow payload\\nSnowplowCollectorPayload snowplowEvent = SnowplowSerDe.deserialize(payload)\\n\\n// get normalized JSON String representation of Snowplow event\\neventString = SnowplowPayloadExtractor.getActualSnowplowPayload(snowplowEvent)\\n\\nJsonSlurper slurper = new JsonSlurper()\\n// JSON Object representation of normalized payload\\n\\nevent = slurper.parseText(eventString)\\nif (event?.body?.data?.filterCriteria) {\\n    // find filterCriteria in POST body\\n    if (event.body.data[0].filterCriteria.equalsIgnoreCase(\\\"customer-sessions\\\")) {\\n        return eventString\\n    }\\n}\\n\\n// skip event\\nreturn null"
   },
     "eventType": {
-        "name": "customer-session",
+        "name": "cust-sess-<yourName>",
         "version": "latest"
     }
 }
@@ -138,13 +154,13 @@ With a Status `200 OK`, the return body looks like this:
 
 ```javascript
 {
-    "name": "snowplow-customer-se",
+    "name": "snow-cust-sess-<yourName>",
     "displayName": "Snowplow Customer Sessions",
-    "streamName": "g-h-snowplow-customer-se",
+    "streamName": "g-h-snow-cust-sess-<yourName>",
     "dlqTopic": "grnry_harvester_dlq_snowplow-customer-se",
     "sourceType": {
         "name": "grnry-topic",
-        "version": "0.8.1",
+        "version": "1.2.0",
         "configuration": {
             "consumer.input-topic": "snowplow"
         },
@@ -165,13 +181,13 @@ With a Status `200 OK`, the return body looks like this:
         },
         "_links": {
             "type": {
-                "href": "https://<hostname>/harvesters/source-types/grnry-topic/0.8.0"
+                "href": "https://<hostname>/harvesters/source-types/grnry-topic/1.2.0"
             }
         }
     },
     "metadataExtractor": {
         "app": "grnry-data-in-metadata",
-        "version": "0.8.1",
+        "version": "1.2.0",
         "deploymentConfiguration": {
             "kubernetes.imagepullpolicy": "Always",
             "kubernetes.limits.cpu": "500m",
@@ -195,7 +211,7 @@ With a Status `200 OK`, the return body looks like this:
     },
     "transform": {
         "app": "grnry-scriptable",
-        "version": "0.8.1",
+        "version": "1.2.0",
         "deploymentConfiguration": {
             "kubernetes.imagepullpolicy": "Always",
             "kubernetes.limits.cpu": "500m",
@@ -223,17 +239,17 @@ With a Status `200 OK`, the return body looks like this:
         "enabled": false
     },
     "eventType": {
-        "name": "customer-session",
+        "name": "cust-sess-<yourName>",
         "version": "latest",
         "_links": {
             "self": {
-                "href": "https://<hostname>/event-types/customersession/latest"
+                "href": "https://<hostname>/event-types/cust-sess-<yourName>/latest"
             }
         }
     },
     "_links": {
         "self": {
-            "href": "https://<hostname>/harvesters/instances/snowplow-customer-se?expand="
+            "href": "https://<hostname>/harvesters/instances/snow-cust-sess-<yourName>?expand="
         }
     }
 }
@@ -245,7 +261,11 @@ Again, Granary applied a whole bunch of default configuration. Next up, starting
 
 Within step 2, we created a harvester. In order to be able to consume data, we need to start the harvester. This goes like so:
 
-![Harvester API: POST /harvesters/instances/snowplow-customer-se/state](<../../../.gitbook/assets/image (13).png>)
+![](<../../../.gitbook/assets/image (13).png>)
+
+Harvester API request:
+
+> &#x20;**POST /harvesters/instances/snow-cust-sess-\<yourName>/state**
 
 For the body (look for the tab with the green dot) use this JSON:
 
@@ -262,7 +282,7 @@ With a Status `200 OK`, the return body looks like this:
     "status": "DEPLOYING",
     "_links": {
         "self": {
-            "href": "https://<hostname>/harvesters/instances/snowplow-customer-se/state"
+            "href": "https://<hostname>/harvesters/instances/snow-cust-sess-<yourName>/state"
         }
     }
 }
@@ -270,7 +290,11 @@ With a Status `200 OK`, the return body looks like this:
 
 The deployment can take up to three minutes. You can check the current state like so:
 
-![Harvester API: GET /harvesters/instances/snowplow-customer-se/state](<../../../.gitbook/assets/image (6).png>)
+![](<../../../.gitbook/assets/image (6).png>)
+
+Harvester API request:
+
+> &#x20;**GET /harvesters/instances/snow-cust-sess-\<yourName>/state**
 
 With a Status `200 OK`, the return body looks like this:
 
@@ -279,7 +303,7 @@ With a Status `200 OK`, the return body looks like this:
     "status": "RUNNING",
     "_links": {
         "self": {
-            "href": "https://<hostname>/harvesters/instances/snowplow-customer-se/state"
+            "href": "https://<hostname>/harvesters/instances/snow-cust-sess-<yourName>/state"
         }
     }
 }
@@ -291,7 +315,11 @@ Within step 2, we created a harvester. In order to be able to persist data in th
 
 For the body (look for the tab with the green dot) use this JSON:
 
-![Harvester API: POST /event-types/customer-session/eventstores/pg/persister/state](<../../../.gitbook/assets/image (10).png>)
+![](<../../../.gitbook/assets/image (10).png>)
+
+Harvester API request:
+
+> POST /event-types/cust-sess-\<yourName>/eventstores/pg/persister/state
 
 ```javascript
 {
@@ -306,7 +334,7 @@ With a Status `200 OK`, the return body looks like this:
     "status": "DEPLOYING",
     "_links": {
         "self": {
-            "href": "https://<hostname>/harvesters/instances/snowplow-customer-se/state"
+            "href": "https://<hostname>/event-types/cust-sess-<yourName>/eventstores/pg/persister/state"
         }
     }
 }
@@ -314,16 +342,20 @@ With a Status `200 OK`, the return body looks like this:
 
 The deployment can take up to two minutes. You can check the current state like so:
 
-![Harvester API: GET /event-types/customer-session/eventstores/pg/persister/state](<../../../.gitbook/assets/image (25).png>)
+![](<../../../.gitbook/assets/image (25).png>)
+
+Harvester API request:&#x20;
+
+> **GET /event-types/cust-sess-\<yourName>/eventstores/pg/persister/state**
 
 With a Status `200 OK`, the return body looks like this:
 
 ```javascript
 {
-    "status": "DEPLOYING",
+    "status": "RUNNING",
     "_links": {
         "self": {
-            "href": "https://<hostname>/event-types/customer-session/eventstores/pg/persister/state"
+            "href": "https://<hostname>/event-types/cust-sess-<yourName>/eventstores/pg/persister/state"
         }
     }
 }

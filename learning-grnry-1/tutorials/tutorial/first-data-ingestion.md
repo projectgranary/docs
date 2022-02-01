@@ -12,7 +12,11 @@ description: >-
 
 With the harvester in place and deployed, we can now send out first event to Granary's [Snowplow](../../../developer-reference/api-reference/snowplow-api-endpoints.md) HTTP endpoint. For this is a public endpoint, no special authorization is needed. Simply send this event:
 
-![Snowplow API: POST /api/com.snowplowanalytics.snowplow/tp2](<../../../.gitbook/assets/image (37).png>)
+![](<../../../.gitbook/assets/image (37).png>)
+
+Snowplow API request:
+
+> **POST /api/com.snowplowanalytics.snowplow/tp2**
 
 For the body (look for the tab with the green dot) use this JSON:
 
@@ -44,58 +48,23 @@ ok
 
 ## 2. Verify successful Data Ingestion
 
-### Using Event Store API
+For easy data retrieval, Granary offers an [SQLPad](https://getsqlpad.com/#/) instance as web-based SQL editor for each project.
 
-For retrieving raw events, Granary ships an API called [Event Store API](../../../developer-reference/api-reference/event-store-api.md). To interact with it, you need a authentication token.
+For `global` project, in your web browser, you can reach it at&#x20;
 
-To verify that our event above made it to the event store, run this API call:
+> **\<yourHostname>/sqlpad/global/queries/new**
 
-![Event Store API: GET /events/Session4711](<../../../.gitbook/assets/image (17).png>)
+For the event type created in the previous step, a view was created:
 
-With a Status `200 OK`, the return body looks like this:
+`"global"."eventstore_cust-sess-<yourName>"`
 
-```javascript
-{
-    "events": [
-        {
-            "eventId": "223865dd-68eb-491a-b61b-5d70bf31004b",
-            "correlationId": "Session4711",
-            "created": "2020-05-07T11:38:29.717Z",
-            "eventType": "customer-session",
-            "eventTypeVersion": 1,
-            "eventHarvester": "snowplow-customer-se",
-            "_links": {
-                "self": {
-                    "href": "https://demo.grnry.io/events/Session4711/223865dd-68eb-491a-b61b-5d70bf31004b"
-                }
-            }
-        }
-    ],
-    "_links": {
-        "self": {
-            "href": "https://demo.grnry.io/events/Session4711?from=1970-01-01T00:00:00Z&to=2038-01-01T00:00:00Z&expand=&offset=0&pagesize=20{&type}",
-            "templated": true
-        }
-    }
-}
+This view can be easily queried with a SELECT query:
+
+```sql
+select * from "global"."eventstore_cust-sess-<yourName>"
 ```
 
-To receive the full message, you must add the query parameter `expand=message`.
+In the web ui, this looks like this:
 
-{% hint style="warning" %}
-If you named the harvester or the event type differently, you will most likely receive a Status `403 Forbidden`. If so, please open a support request to grant you the needed access rights.
-{% endhint %}
+![SQLPad web ui](<../../../.gitbook/assets/image (73).png>)
 
-### Using Metabase
-
-If you prefer a more UI guided option, head over to `<hostname>/metabase/` and press on the "show data" button on the right hand side of the header menu.
-
-To check if our event made it to the raw event store, go this path:
-
-> Postgres -> public -> Events Tore
-
-and filter the event type column for our event type `customer-session`:
-
-![](<../../../.gitbook/assets/image (30).png>)
-
-That's it. You learned how to ingest simple events via Granary's Snowplow HTTP endpoint. Next up is the tutorial how to apply business logic on each of these raw events and create inter-linked profiles.

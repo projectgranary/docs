@@ -71,12 +71,22 @@ Event type name.
 {% swagger-response status="200" description="" %}
 ```json
 {
-    "eventTypeName": "User-Visit",
+    "eventTypeName": "user-visit",
     "eventstoreType": "live-segment",
-    "tasks.max": "1",
-    "batchSize": "10",
-    "maxRetries": "3",
-    "retryBackoffMs": "1000"
+    "projectName": "global",
+    "config": {
+        "tasksMax": 3,
+        "batchSize": 3000,
+        "maxRetries": 10,
+        "retryBackoffMs": 3000,
+        "errorsDeadletterqueueContextHeadersEnable": false,
+        "errorsTolerance": "none"
+    },
+    "_links": {
+        "self": {
+            "href": "https://https://hostname/projects/global/event-types/user-visit/eventstores/live-segment/persister?expand=&export="
+        }
+    }
 }
 ```
 {% endswagger-response %}
@@ -124,20 +134,8 @@ Requires
  role.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="retryBackoffMs" type="string" %}
-Time to wait until the next retry
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="maxRetries" type="string" %}
-Defines the number of retries Kafka makes to insert data into the database
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="batchSize" type="string" %}
-Specifies how many sets of data are inserted into the database table at the same time 
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="taskMax" type="number" %}
-Sets the maximal number of task that can be scheduled by Kafka. This number can not exceed the number of partitions of the topic
+{% swagger-parameter in="body" name="config" type="json" %}
+Json structure holding the new persister config. All available properties can be found in the table below.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="project-name" type="string" required="false" %}
@@ -174,23 +172,25 @@ Event type name.
 Authentication token.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="errorsTolerance" type="string" %}
-Enables functionality to route messages to a dead letter queue when "all" is specified. By default errorsTolerance is set to "none" which means messages won't be routed to a DLQ
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="errorsDeadletterqueueContextHeadersEnable" type="boolean" %}
-Writes information about the reason for a message’s rejection into the header of the message which will be passed to a DLQ 
-{% endswagger-parameter %}
-
 {% swagger-response status="200" description="" %}
 ```json
 {
-    "eventTypeName": "User-Visit",
+    "eventTypeName": "user-visit",
     "eventstoreType": "live-segment",
-    "tasks.max": "2",
-    "batchSize": "10",
-    "maxRetries": "3",
-    "retryBackoffMs": "1000"
+    "projectName": "global",
+    "config": {
+        "tasksMax": 3,
+        "batchSize": 3000,
+        "maxRetries": 10,
+        "retryBackoffMs": 3000,
+        "errorsDeadletterqueueContextHeadersEnable": false,
+        "errorsTolerance": "none"
+    },
+    "_links": {
+        "self": {
+            "href": "https://https://hostname/projects/global/event-types/user-visit/eventstores/live-segment/persister?expand=&export="
+        }
+    }
 }
 ```
 {% endswagger-response %}
@@ -236,6 +236,15 @@ Writes information about the reason for a message’s rejection into the header 
 ```
 {% endswagger-response %}
 {% endswagger %}
+
+| Config Parameter                            | Type   | Description                                                                                                                                                                       | Optional |
+| ------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `retryBackoffMs`                            | string | Time to wait until the next retry                                                                                                                                                 | yes      |
+| `maxRetries`                                | string | Defines the number of retries Kafka makes to insert data into the database                                                                                                        | yes      |
+| `batchSize`                                 | string | Specifies how many sets of data are inserted into the database table at the same time                                                                                             | yes      |
+| `taskMax`                                   | string | Sets the maximal number of task that can be scheduled by Kafka. This number can not exceed the number of partitions of the topic                                                  | yes      |
+| `errorsTolerance`                           | string | Enables functionality to route messages to a dead letter queue when "all" is specified. By default errorsTolerance is set to "none" which means messages won't be routed to a DLQ | yes      |
+| `errorsDeadletterqueueContextHeadersEnable` | string | Writes information about the reason for a message’s rejection into the header of the message which will be passed to a DLQ                                                        | yes      |
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/:project-name/event-types/:event-type-name/eventstores/live-segment/persister/state" method="get" summary="Get State of Persister" %}
 {% swagger-description %}

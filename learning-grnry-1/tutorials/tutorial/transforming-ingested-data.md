@@ -16,7 +16,11 @@ To run a belt, we need to provide a Python script that transforms the ingested e
 
 Most of the belt configuration is covered by defaults, so creating your first belt goes like this:
 
-![Belt API Request: POST /belts](<../../../.gitbook/assets/image (42).png>)
+![](<../../../.gitbook/assets/image (42).png>)
+
+Belt API request:
+
+> &#x20;POST /belts
 
 For the body (look for the tab with the green dot) use this JSON and add your name in line 7 before sending:
 
@@ -29,10 +33,10 @@ The name of the Event Type in line 17 must match the Event Type's `name` you cre
     "name": "Session Counter",
     "description": "This belt counts the tutorial's sessions.",
     "author": "<your name>",
-    "extractorVersion": "0.8.1",    
-    "extractorFn": "from grnry.beltextractor.update import Update\r\n\r\ndef execute(event_headers, event_payload, profile=None):\r\n    print(profile)\r\n    # Create Profile Update object with correlationId (String) and path (Array<String>)\r\n    update = Update(event_headers['grnry-correlation-id'],[\"session\", \"counter\"])\r\n    # Set value of Profile Update\r\n    update.set_value(\"0|1|1\")\r\n    # Set type of Profile Update\r\n    update.set_type('sessions')\r\n    # Set operation of Profile Update\r\n    update.set_operation('_inc')\r\n    return [update]",
+    "extractorVersion": "2.1.3",    
+    "extractorFn": "def execute(event_headers, event_payload, profile=None):\r\n    print(profile)\r\n    # Create Profile Update object with correlationId (String) and path (Array<String>)\r\n    update = Update(event_headers['grnry-correlation-id'],[\"session\", \"counter\"])\r\n    # Set value of Profile Update\r\n    update.set_value(\"0|1|1\")\r\n    # Set type of Profile Update\r\n    update.set_type('sessions')\r\n    # Set operation of Profile Update\r\n    update.set_operation('_inc')\r\n    return [update]",
     "eventTypes": [
-        "customer-session"
+        "cust-sess-<yourName>"
     ]
 }
 ```
@@ -42,8 +46,6 @@ Find more detailed explanation on each belt parameter in the [Belt API reference
 The extractor function in line 6 of the belt's JSON payload is the Python script mentioned aboved that transforms ingested events to Profile Updates. It looks actually like this:
 
 ```python
-from grnry.beltextractor.update import Update
-
 def execute(event_headers, event_payload, profile=None):
     print(profile)
     # Create Profile Update object with correlationId (String) and path (Array<String>)
@@ -60,10 +62,9 @@ def execute(event_headers, event_payload, profile=None):
 
 This Python script simply counts the incoming events per session. Some explanation:
 
-* Line 1 imports the [Profile Update object](../../../developer-reference/dataflow/belt-extractor.md#configuration)&#x20;
-* Line 3 defines the [callback method](../../../developer-reference/dataflow/belt-extractor.md#callback-signature) `execute()` which is called by the belt framework for each incoming event and carries the event's header metadata and the payload
-* Line 6 creates an Profile Update object with the signature `correlationId` and `path[]`. We can perceive both elements of the signature as the Grain's `key`
-* Line 8 sets the Grain's `value`. In our case this is a special value for Granary's [counter operation](../../../developer-reference/dataflow/profile-store/#counter). See line 12, where we set the update's operation name to `_inc` (increment).
+* Line 1 defines the [callback method](../../../developer-reference/dataflow/belt-extractor.md#callback-signature) `execute()` which is called by the belt framework for each incoming event and carries the event's header metadata and the payload
+* Line 4 creates an [Profile Update object](../../../developer-reference/dataflow/belt-extractor.md#profile-update) with the signature `correlationId` and `path[]`. We can perceive both elements of the signature as the Grain's `key`
+* Line 6 sets the Grain's `value`. In our case this is a special value for Granary's [counter operation](../../../developer-reference/dataflow/profile-store/#counter). See line 10, where we set the update's operation name to `_inc` (increment).
 
 More advanced examples to follow in later chapters. Check this [best practice](../../using-data-in-granary/best-practices/easing-development.md) how to transform it to a one-liner.
 
@@ -74,34 +75,28 @@ With a Status `200 OK`, the return body looks like this:
     "version": "1",
     "name": "Session Counter",
     "description": "This belt counts the tutorial's sessions.",
-    "labels": [],
-    "affectedPaths": [],
     "replicas": 1,
     "millicpu": 200,
     "memory": 512,
-    "author": "<your name>",
-    "reader": [
-        "_auth"
-    ],
-    "editor": [
-        "belt_edit"
-    ],
-    "viewer": [
-        "belt_view"
-    ],
-    "created": 1590746652647,
-    "assumedRole": "",
+    "createdBy": {
+        "name": "Arthur Author",
+        "email": "arthur@author.com"
+    },
+    "createdAt": "2021-09-24T08:38:50.848Z",
+    "modifiedBy": {
+        "name": "Arthur Author",
+        "email": "arthur@author.com"
+    },
+    "modifiedAt": "2021-09-24T08:38:50.848Z",    
     "requirementsPy": "",
-    "extractorVersion": "0.8.1",
-    "extractorFn": "from grnry.beltextractor.update import Update\r\n\r\ndef execute(event_headers, event_payload, profile=None):\r\n    print(profile)\r\n    # Create Profile Update object with correlationId (String) and path (Array<String>)\r\n    update = Update(event_headers['grnry-correlation-id'],[\"session\", \"counter\"])\r\n    # Set value of Profile Update\r\n    update.set_value(\"0|1|1\")\r\n    # Set type of Profile Update\r\n    update.set_type('sessions')\r\n    # Set operation of Profile Update\r\n    update.set_operation('_inc')\r\n    return [update]",
+    "extractorVersion": "2.1.3",
+    "extractorFn": "def execute(event_headers, event_payload, profile=None):\r\n    print(profile)\r\n    # Create Profile Update object with correlationId (String) and path (Array<String>)\r\n    update = Update(event_headers['grnry-correlation-id'],[\"session\", \"counter\"])\r\n    # Set value of Profile Update\r\n    update.set_value(\"0|1|1\")\r\n    # Set type of Profile Update\r\n    update.set_type('sessions')\r\n    # Set operation of Profile Update\r\n    update.set_operation('_inc')\r\n    return [update]",
     "eventTypes": [
-        "customer-session"
+        "cust-sess-<yourName>"
     ],
     "partitionOffsets": {},
     "kafkaDestinationTopic": "profile-update",
-    "beltType": "",
-    "runtime": "",
-    "parameter": "",
+    "beltType": "python-callback",
     "debug": false,
     "fetchProfile": "FALSE",
     "profileType": "_d",
@@ -117,13 +112,17 @@ With a Status `200 OK`, the return body looks like this:
 }
 ```
 
-Again, Granary applied a whole bunch of default configuration. Especially, we got an ID (line 44) for our belt that we need in the followin step. Next up, starting this belt.
+Again, Granary applied a whole bunch of default configuration. Especially, we got a random ID (line 39) for our belt that we need in the followin step. Next up, starting this belt.
 
 ## 2. Start Belt "Session Counter"
 
 Within step 1, we created a belt. In order to be able to transform data, we need to start the belt. This goes like so:
 
-![Belt API: POST /belts/35/state](<../../../.gitbook/assets/image (40).png>)
+![](<../../../.gitbook/assets/image (40).png>)
+
+Belt API request:
+
+> **POST /belts/35/state**
 
 For the body (look for the tab with the green dot) use this JSON:
 
@@ -143,7 +142,11 @@ With a Status `200 OK`, the return body looks like this:
 
 The deployment goes quite quickly. You can check the current state like so:
 
-![Belt API: GET /belts/35/state](<../../../.gitbook/assets/image (41).png>)
+![](<../../../.gitbook/assets/image (41).png>)
+
+Belt API request:
+
+> **GET /belts/35/state**
 
 With a Status `200 OK`, the return body looks like this:
 
@@ -196,3 +199,7 @@ With a Status `200 OK`, the return body looks like this:
     ]
 }
 ```
+
+
+
+That's the end of the tutorial for now. In future, we might add steps that cover [segments](../../../developer-reference/dataflow/segment-store/) as well.

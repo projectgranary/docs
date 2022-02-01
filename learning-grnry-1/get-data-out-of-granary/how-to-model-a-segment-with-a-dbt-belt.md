@@ -155,7 +155,7 @@ where `:project-name` need to be provided as input to the request (we can refer 
 
 The DBT Belt looks like this in Granary UI:
 
-![](<../../.gitbook/assets/image (73).png>)
+![](<../../.gitbook/assets/image (73) (1).png>)
 
 Once the CRON schedule starts, the following DBT logs confirm a successful execution:
 
