@@ -2,15 +2,15 @@
 description: Reference page how data segmentation is done in Granary with DBT
 ---
 
-# DBT Segment
+# dbt Segment
 
 ## Introduction
 
-Granary uses [DBT](https://www.getdbt.com) Framework to define segments and the [Belt API](../../api-reference/belt-api.md#create-and-store-a-belt) to execute their creation.
+Granary uses [dbt](https://www.getdbt.com) Framework to define segments and the [Belt API](../../api-reference/belt-api.md#create-and-store-a-belt) to execute their creation.
 
-DBT performs data transformation using a `select` statements which converts Profile or Raw Event data into segments. Depending upon the configuration, the segment can be accessed as Table/View against Event Store or Profile Store.&#x20;
+dbt performs data transformation using a `select` statements which converts Profile or Raw Event data into segments. Depending upon the configuration, the segment can be accessed as Table/View against Event Store or Profile Store.&#x20;
 
-Each segment will be created in the project's database schema. The user is not responsible to define or configure any DDL statements. Table/Views will be created by DBT Framework. So no extra configuration required. The DBT segment creation is executed with the [project's database user](../../projects.md#docs-internal-guid-06a5e216-7fff-927b-e181-d2437d40037b).
+Each segment will be created in the project's database schema. The user is not responsible to define or configure any DDL statements. Table/Views will be created by DBT Framework. So no extra configuration required. The dbt segment creation is executed with the [project's database user](../../projects.md#docs-internal-guid-06a5e216-7fff-927b-e181-d2437d40037b).
 
 The users can access Views/Tables inside that schema using Granary's built-in SQL web console [SQLPad](https://getsqlpad.com). Users who don't have permission to access that project cannot access the segment.
 
@@ -22,7 +22,7 @@ For practical example, see [How to model a Segment with a DBT Belt](../../../lea
 
 ## Configure Segment Definition
 
-As stated before, DBT Segment are executed via the Belt API. Belt models carrying the property `"beltType": "dbt-segment"` are considered by the API as such.
+As stated before, dbt Segment are executed via the Belt API. Belt models carrying the property `"beltType": "dbt-segment"` are considered by the API as such.
 
 Furthermore, two more mandatory properties for DBT Belt exist:
 
@@ -31,9 +31,9 @@ Furthermore, two more mandatory properties for DBT Belt exist:
 
 ### **Segment Definition**&#x20;
 
-User can Configure Segment definition using DBT SQL syntax.
+User can Configure Segment definition using dbt SQL syntax.
 
-Previously in the [Segment Table Creation](segment-table-creation.md), three different segment generator types where available. Those types do not exist any longer. All of them can be expressed with plain SQL in DBT.
+Previously in the [Segment Table Creation](segment-table-creation.md), three different segment generator types where available. Those types do not exist any longer. All of them can be expressed with plain SQL in dbt.
 
 #### **Pivot Segment**
 
@@ -102,7 +102,7 @@ select 'from_event' as new_column_from_eventtype, * from global."eventstore_snow
 
 #### Materialization mode
 
-DBT allows to provide configuration within the SQL file. See [Materializations](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/materializations).
+dbt allows to provide configuration within the SQL file. See [Materializations](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/materializations).
 
 ```
 // Some #Config to create the View/Table
