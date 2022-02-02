@@ -9,7 +9,7 @@ In order to use Belts with GRNRY, there are two different approaches:
 1. Use the [Belt API](../../developer-reference/api-reference/belt-api.md) via [Postman](https://learning.postman.com) (an API development tool)
 2. Use the "Manage Belts" section of Granary UI available under `<URL to Cluster>/ui/belts`
 
-In the following, we are going to describe the usage of Belt API  a Postman collection.&#x20;
+In the following, we are going to describe the usage of Belt API with a Postman collection.&#x20;
 
 {% hint style="info" %}
 This guide assumes that you have the `editor` role in `global` project. If you want to create the objects in a different project scope, you need to add /projects/{projectName} in front of all your API calls. Exception: Profilestore and Eventstore API calls.
