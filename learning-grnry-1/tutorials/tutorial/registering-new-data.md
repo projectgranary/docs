@@ -319,7 +319,7 @@ For the body (look for the tab with the green dot) use this JSON:
 
 Harvester API request:
 
-> POST /event-types/cust-sess-\<yourName>/eventstores/pg/persister/state
+> &#x20;**PUT /event-types/cust-sess-\<yourName>/eventstores/pg/persister/state**
 
 ```javascript
 {
