@@ -8,14 +8,14 @@ description: Denotes release versions of Granary artifacts.
 
 ### Granary Platform
 
-* [Semantic Release](https://semver.org/) version on `major.minor` level for Granary platform releases and its corresponding features and documentation.
-  * e.g. `1.3` 
+* [Semantic Release](https://semver.org) version on `major.minor` level for Granary platform releases and its corresponding features and documentation.
+  * e.g. `1.3`&#x20;
 * Granary `major.minor.patch` release version defines exactly one combination of Granary components' `patch` level releases.
 
 ### Granary Components
 
 * Semantic Release version on `major.minor.patch` level for Docker Container and Helm Chart.
-  * e.g. `1.3.2` 
+  * e.g. `1.3.2`&#x20;
 * Component release versions can differ from Granary Platform on `major`, `minor`, and `patch` level.
 
 ## Previous Granary Versions
@@ -26,695 +26,147 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
+## Granary 0.9.4 "Marie" - 2022-05-02
+
+Patch release to solve CVE issues discovered in JDK [https://openjdk.java.net/groups/vulnerability/advisories/2022-04-19](https://openjdk.java.net/groups/vulnerability/advisories/2022-04-19)
+
+Patched JDK version is: JDK 322 b09
+
+| Granary Component                                                                                   | Release Version                                                     | Release Notes                      |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------- |
+| [Granary Base](../installation/with-helm/granary-base-deployment.md)                                | 0.9.3                                                               | -                                  |
+| [Ambassador](https://github.com/datawire/ambassador-chart)                                          | 1.0.0                                                               | -                                  |
+| [Snowplow Scala Stream Collector API](../installation/with-helm/snowplow-scala-stream-collector.md) | **0.6.2 (based on Snowplow v0.15.0)**                               | <ul><li>Bump JDK version</li></ul> |
+| [Harvester API](../installation/with-helm/harvester-api/)                                           | **0.9.10**                                                          | <ul><li>Bump JDK version</li></ul> |
+| [Spring Cloud Dataflow Server and Skipper](../installation/with-helm/spring-cloud-data-flow.md)     | **0.6.3 (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)** | <ul><li>Bump JDK version</li></ul> |
+| [Spring Cloud Data Flow Apps](../installation/with-helm/harvester-api/getting-started.md)           | 0.9.4                                                               | <p>-</p><p></p>                    |
+| [Event Store API](../installation/with-helm/event-store-api.md)                                     | **0.8.3**                                                           | <ul><li>Bump JDK version</li></ul> |
+| [Event Feeder](../installation/with-helm/event-feeder.md)                                           | **0.6.8**                                                           | <ul><li>Bump JDK version</li></ul> |
+| [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md)                              | 0.9.2                                                               | -                                  |
+| [Belt API](../installation/with-helm/belt-api.md)                                                   | **0.8.5**                                                           | <ul><li>Bump JDK version</li></ul> |
+| [Profile Updater](../installation/with-helm/profile-updater.md)                                     | **0.6.4**                                                           | <ul><li>Bump JDK version</li></ul> |
+| [Profile Store API](../installation/with-helm/profile-store-api.md)                                 | **0.8.4**                                                           | <ul><li>Bump JDK version</li></ul> |
+| ****[Segment Management API](../installation/with-helm/segment-creation-api.md)                     | 0.9.2                                                               | -                                  |
+| [Segment Manager](../installation/with-helm/segment-manager.md)                                     | 0.8.6                                                               | -                                  |
+| [Segment Table Creator](../../developer-reference/dataflow/segment-store/)                          | 0.8.1                                                               | -                                  |
+| [Segment Store API](../installation/with-helm/segment-store-api.md)                                 | **0.5.2 (based on Presto 0.339)**                                   | <ul><li>Bump JDK version</li></ul> |
+| [GraphQL API](../installation/with-helm/graphql-api.md)                                             | 0.10.1                                                              | -                                  |
+| [Granary UI](../installation/with-helm/granary-ui.md)                                               | 0.10.0                                                              | -                                  |
+| [Reaper](../installation/with-helm/reaper.md)                                                       | **0.8.1**                                                           | <ul><li>Bump JDK version</li></ul> |
+| [Event Explorer UI](../installation/with-helm/event-explorer-ui.md)                                 | 0.2.0                                                               | -                                  |
+| [Citus PostgreSQL](../installation/with-helm/citus-postgresql.md)                                   | 8.1.1                                                               | -                                  |
+| [Confluent Kafka](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)                | 5.1.2                                                               | -                                  |
+| [Confluent Zookeeper](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)            | 5.1.2                                                               | -                                  |
+| [Kafka Manager](../installation/with-helm/kafka-manager.md)                                         | **0.5.4**                                                           | <ul><li>Bump JDK version</li></ul> |
+| [Keycloak](https://github.com/helm/charts/tree/master/stable/keycloak)                              | 4.5.0.Final                                                         | -                                  |
+| [Grafana](https://github.com/helm/charts/tree/master/stable/grafana)                                | 6.6.0                                                               | -                                  |
+| [Zipkin Server](../installation/with-helm/zipkin.md)                                                | 0.6.3 (based on Open Zipkin 2.12)                                   | -                                  |
+| [Data Lineage Report](../../developer-reference/api-reference/lineage-report.md)                    | 0.8.1                                                               | -                                  |
+
 ## Granary 0.9.3 "Marie" - 2021-04-15
 
 Patch release.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Granary Component</th>
-      <th style="text-align:left">Release Version</th>
-      <th style="text-align:left">Release Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/granary-base-deployment.md">Granary Base</a>
-      </td>
-      <td style="text-align:left">0.9.3</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/datawire/ambassador-chart">Ambassador</a>
-      </td>
-      <td style="text-align:left">1.0.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
-      </td>
-      <td style="text-align:left">0.6.1 (based on Snowplow v0.15.0)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
-      </td>
-      <td style="text-align:left">0.9.5</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
-      </td>
-      <td style="text-align:left">0.6.2<b> </b>(based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
-      <td
-      style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
-      </td>
-      <td style="text-align:left">0.9.4</td>
-      <td style="text-align:left">
-        <p>-</p>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-store-api.md">Event Store API</a>
-      </td>
-      <td style="text-align:left">0.8.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
-      </td>
-      <td style="text-align:left">0.6.7</td>
-      <td style="text-align:left">
-        <p>-</p>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/belt-extractor.md">Belt Extractor</a>
-      </td>
-      <td style="text-align:left">0.9.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/belt-api.md">Belt API</a>
-      </td>
-      <td style="text-align:left">0.8.4</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/profile-updater.md">Profile Updater</a>
-      </td>
-      <td style="text-align:left">0.6.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/profile-store-api.md">Profile Store API</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/segment-creation-api.md">Segment Management API</a>
-      </td>
-      <td style="text-align:left">0.9.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/segment-manager.md">Segment Manager</a>
-      </td>
-      <td style="text-align:left">0.8.6</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
-      </td>
-      <td style="text-align:left">0.5.1 (based on Presto 0.339)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/graphql-api.md">GraphQL API</a>
-      </td>
-      <td style="text-align:left"><b>0.10.1</b>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p>Fixes:</p>
-        <ul>
-          <li>Fix memory leak in connections to Kafka broker for Event browser</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/granary-ui.md">Granary UI</a>
-      </td>
-      <td style="text-align:left">0.10.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/reaper.md">Reaper</a>
-      </td>
-      <td style="text-align:left">0.8.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-explorer-ui.md">Event Explorer UI</a>
-      </td>
-      <td style="text-align:left">0.2.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/citus-postgresql.md">Citus PostgreSQL</a>
-      </td>
-      <td style="text-align:left">8.1.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Kafka</a>
-      </td>
-      <td style="text-align:left">5.1.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Zookeeper</a>
-      </td>
-      <td style="text-align:left">5.1.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/kafka-manager.md">Kafka Manager</a>
-      </td>
-      <td style="text-align:left">0.5.3</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
-      </td>
-      <td style="text-align:left">4.5.0.Final</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
-      </td>
-      <td style="text-align:left">6.6.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/zipkin.md">Zipkin Server</a>
-      </td>
-      <td style="text-align:left">0.6.3 (based on Open Zipkin 2.12)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md">Data Lineage Report</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-  </tbody>
-</table>
+| Granary Component                                                                                   | Release Version                                                      | Release Notes                                                                                          |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [Granary Base](../installation/with-helm/granary-base-deployment.md)                                | 0.9.3                                                                | -                                                                                                      |
+| [Ambassador](https://github.com/datawire/ambassador-chart)                                          | 1.0.0                                                                | -                                                                                                      |
+| [Snowplow Scala Stream Collector API](../installation/with-helm/snowplow-scala-stream-collector.md) | 0.6.1 (based on Snowplow v0.15.0)                                    | -                                                                                                      |
+| [Harvester API](../installation/with-helm/harvester-api/)                                           | 0.9.5                                                                | -                                                                                                      |
+| [Spring Cloud Dataflow Server and Skipper](../installation/with-helm/spring-cloud-data-flow.md)     | 0.6.2 **** (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE) | -                                                                                                      |
+| [Spring Cloud Data Flow Apps](../installation/with-helm/harvester-api/getting-started.md)           | 0.9.4                                                                | <p>-</p><p></p>                                                                                        |
+| [Event Store API](../installation/with-helm/event-store-api.md)                                     | 0.8.2                                                                | -                                                                                                      |
+| [Event Feeder](../installation/with-helm/event-feeder.md)                                           | 0.6.7                                                                | <p>-</p><p></p>                                                                                        |
+| [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md)                              | 0.9.2                                                                | -                                                                                                      |
+| [Belt API](../installation/with-helm/belt-api.md)                                                   | 0.8.4                                                                | -                                                                                                      |
+| [Profile Updater](../installation/with-helm/profile-updater.md)                                     | 0.6.2                                                                | -                                                                                                      |
+| [Profile Store API](../installation/with-helm/profile-store-api.md)                                 | 0.8.1                                                                | -                                                                                                      |
+| ****[Segment Management API](../installation/with-helm/segment-creation-api.md)                     | 0.9.2                                                                | -                                                                                                      |
+| [Segment Manager](../installation/with-helm/segment-manager.md)                                     | 0.8.6                                                                | -                                                                                                      |
+| [Segment Table Creator](../../developer-reference/dataflow/segment-store/)                          | 0.8.1                                                                | -                                                                                                      |
+| [Segment Store API](../installation/with-helm/segment-store-api.md)                                 | 0.5.1 (based on Presto 0.339)                                        | -                                                                                                      |
+| [GraphQL API](../installation/with-helm/graphql-api.md)                                             | **0.10.1**                                                           | <p></p><p>Fixes:</p><ul><li>Fix memory leak in connections to Kafka broker for Event browser</li></ul> |
+| [Granary UI](../installation/with-helm/granary-ui.md)                                               | 0.10.0                                                               | -                                                                                                      |
+| [Reaper](../installation/with-helm/reaper.md)                                                       | 0.8.0                                                                | -                                                                                                      |
+| [Event Explorer UI](../installation/with-helm/event-explorer-ui.md)                                 | 0.2.0                                                                | -                                                                                                      |
+| [Citus PostgreSQL](../installation/with-helm/citus-postgresql.md)                                   | 8.1.1                                                                | -                                                                                                      |
+| [Confluent Kafka](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)                | 5.1.2                                                                | -                                                                                                      |
+| [Confluent Zookeeper](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)            | 5.1.2                                                                | -                                                                                                      |
+| [Kafka Manager](../installation/with-helm/kafka-manager.md)                                         | 0.5.3                                                                | -                                                                                                      |
+| [Keycloak](https://github.com/helm/charts/tree/master/stable/keycloak)                              | 4.5.0.Final                                                          | -                                                                                                      |
+| [Grafana](https://github.com/helm/charts/tree/master/stable/grafana)                                | 6.6.0                                                                | -                                                                                                      |
+| [Zipkin Server](../installation/with-helm/zipkin.md)                                                | 0.6.3 (based on Open Zipkin 2.12)                                    | -                                                                                                      |
+| [Data Lineage Report](../../developer-reference/api-reference/lineage-report.md)                    | 0.8.1                                                                | -                                                                                                      |
 
 ## Granary 0.9.2 "Marie" - 2020-12-03
 
 Patch release.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Granary Component</th>
-      <th style="text-align:left">Release Version</th>
-      <th style="text-align:left">Release Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/granary-base-deployment.md">Granary Base</a>
-      </td>
-      <td style="text-align:left">0.9.3</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/datawire/ambassador-chart">Ambassador</a>
-      </td>
-      <td style="text-align:left">1.0.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
-      </td>
-      <td style="text-align:left">0.6.1 (based on Snowplow v0.15.0)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
-      </td>
-      <td style="text-align:left">0.9.5</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
-      </td>
-      <td style="text-align:left">0.6.2<b> </b>(based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
-      <td
-      style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
-      </td>
-      <td style="text-align:left"><b>0.9.4</b>
-      </td>
-      <td style="text-align:left">
-        <p>Fixes:</p>
-        <ul>
-          <li>Fixes abnormally high load that Kafka Health check puts on the Kafka cluster.</li>
-        </ul>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-store-api.md">Event Store API</a>
-      </td>
-      <td style="text-align:left">0.8.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
-      </td>
-      <td style="text-align:left">0.6.7</td>
-      <td style="text-align:left">
-        <p>-</p>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/belt-extractor.md">Belt Extractor</a>
-      </td>
-      <td style="text-align:left">0.9.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/belt-api.md">Belt API</a>
-      </td>
-      <td style="text-align:left">0.8.4</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/profile-updater.md">Profile Updater</a>
-      </td>
-      <td style="text-align:left"><b>0.6.2</b>
-      </td>
-      <td style="text-align:left">
-        <p>Fixes:</p>
-        <ul>
-          <li>Fixes abnormally high load that Kafka Health check puts on the Kafka cluster.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/profile-store-api.md">Profile Store API</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/segment-creation-api.md">Segment Management API</a>
-      </td>
-      <td style="text-align:left">0.9.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/segment-manager.md">Segment Manager</a>
-      </td>
-      <td style="text-align:left">0.8.6</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
-      </td>
-      <td style="text-align:left">0.5.1 (based on Presto 0.339)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/graphql-api.md">GraphQL API</a>
-      </td>
-      <td style="text-align:left">0.10.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/granary-ui.md">Granary UI</a>
-      </td>
-      <td style="text-align:left">0.10.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/reaper.md">Reaper</a>
-      </td>
-      <td style="text-align:left">0.8.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-explorer-ui.md">Event Explorer UI</a>
-      </td>
-      <td style="text-align:left">0.2.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/citus-postgresql.md">Citus PostgreSQL</a>
-      </td>
-      <td style="text-align:left">8.1.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Kafka</a>
-      </td>
-      <td style="text-align:left">5.1.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Zookeeper</a>
-      </td>
-      <td style="text-align:left">5.1.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/kafka-manager.md">Kafka Manager</a>
-      </td>
-      <td style="text-align:left">0.5.3</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
-      </td>
-      <td style="text-align:left">4.5.0.Final</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
-      </td>
-      <td style="text-align:left">6.6.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/zipkin.md">Zipkin Server</a>
-      </td>
-      <td style="text-align:left">0.6.3 (based on Open Zipkin 2.12)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md">Data Lineage Report</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-  </tbody>
-</table>
+| Granary Component                                                                                   | Release Version                                                      | Release Notes                                                                                                       |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| [Granary Base](../installation/with-helm/granary-base-deployment.md)                                | 0.9.3                                                                | -                                                                                                                   |
+| [Ambassador](https://github.com/datawire/ambassador-chart)                                          | 1.0.0                                                                | -                                                                                                                   |
+| [Snowplow Scala Stream Collector API](../installation/with-helm/snowplow-scala-stream-collector.md) | 0.6.1 (based on Snowplow v0.15.0)                                    | -                                                                                                                   |
+| [Harvester API](../installation/with-helm/harvester-api/)                                           | 0.9.5                                                                | -                                                                                                                   |
+| [Spring Cloud Dataflow Server and Skipper](../installation/with-helm/spring-cloud-data-flow.md)     | 0.6.2 **** (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE) | -                                                                                                                   |
+| [Spring Cloud Data Flow Apps](../installation/with-helm/harvester-api/getting-started.md)           | **0.9.4**                                                            | <p>Fixes:</p><ul><li>Fixes abnormally high load that Kafka Health check puts on the Kafka cluster.</li></ul><p></p> |
+| [Event Store API](../installation/with-helm/event-store-api.md)                                     | 0.8.2                                                                | -                                                                                                                   |
+| [Event Feeder](../installation/with-helm/event-feeder.md)                                           | 0.6.7                                                                | <p>-</p><p></p>                                                                                                     |
+| [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md)                              | 0.9.2                                                                | -                                                                                                                   |
+| [Belt API](../installation/with-helm/belt-api.md)                                                   | 0.8.4                                                                | -                                                                                                                   |
+| [Profile Updater](../installation/with-helm/profile-updater.md)                                     | **0.6.2**                                                            | <p>Fixes:</p><ul><li>Fixes abnormally high load that Kafka Health check puts on the Kafka cluster.</li></ul>        |
+| [Profile Store API](../installation/with-helm/profile-store-api.md)                                 | 0.8.1                                                                | -                                                                                                                   |
+| ****[Segment Management API](../installation/with-helm/segment-creation-api.md)                     | 0.9.2                                                                | -                                                                                                                   |
+| [Segment Manager](../installation/with-helm/segment-manager.md)                                     | 0.8.6                                                                | -                                                                                                                   |
+| [Segment Table Creator](../../developer-reference/dataflow/segment-store/)                          | 0.8.1                                                                | -                                                                                                                   |
+| [Segment Store API](../installation/with-helm/segment-store-api.md)                                 | 0.5.1 (based on Presto 0.339)                                        | -                                                                                                                   |
+| [GraphQL API](../installation/with-helm/graphql-api.md)                                             | 0.10.0                                                               | -                                                                                                                   |
+| [Granary UI](../installation/with-helm/granary-ui.md)                                               | 0.10.0                                                               | -                                                                                                                   |
+| [Reaper](../installation/with-helm/reaper.md)                                                       | 0.8.0                                                                | -                                                                                                                   |
+| [Event Explorer UI](../installation/with-helm/event-explorer-ui.md)                                 | 0.2.0                                                                | -                                                                                                                   |
+| [Citus PostgreSQL](../installation/with-helm/citus-postgresql.md)                                   | 8.1.1                                                                | -                                                                                                                   |
+| [Confluent Kafka](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)                | 5.1.2                                                                | -                                                                                                                   |
+| [Confluent Zookeeper](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)            | 5.1.2                                                                | -                                                                                                                   |
+| [Kafka Manager](../installation/with-helm/kafka-manager.md)                                         | 0.5.3                                                                | -                                                                                                                   |
+| [Keycloak](https://github.com/helm/charts/tree/master/stable/keycloak)                              | 4.5.0.Final                                                          | -                                                                                                                   |
+| [Grafana](https://github.com/helm/charts/tree/master/stable/grafana)                                | 6.6.0                                                                | -                                                                                                                   |
+| [Zipkin Server](../installation/with-helm/zipkin.md)                                                | 0.6.3 (based on Open Zipkin 2.12)                                    | -                                                                                                                   |
+| [Data Lineage Report](../../developer-reference/api-reference/lineage-report.md)                    | 0.8.1                                                                | -                                                                                                                   |
 
 ## Granary 0.9.1 "Marie" - 2020-11-17
 
 Patch release.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Granary Component</th>
-      <th style="text-align:left">Release Version</th>
-      <th style="text-align:left">Release Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/granary-base-deployment.md">Granary Base</a>
-      </td>
-      <td style="text-align:left"><b>0.9.3</b>
-      </td>
-      <td style="text-align:left">
-        <p>Fixes:</p>
-        <ul>
-          <li>Improved encryption key generation documentation</li>
-          <li>Added harvester api roles to Keycloak base realm.json</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/datawire/ambassador-chart">Ambassador</a>
-      </td>
-      <td style="text-align:left">1.0.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
-      </td>
-      <td style="text-align:left">0.6.1 (based on Snowplow v0.15.0)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
-      </td>
-      <td style="text-align:left"><b>0.9.5</b>
-      </td>
-      <td style="text-align:left">
-        <p>Fixes:</p>
-        <ul>
-          <li>Fixed issues with lower cases event type names if supplying event type
-            display name with mixed casing.</li>
-        </ul>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
-      </td>
-      <td style="text-align:left">0.6.2<b> </b>(based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
-      <td
-      style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
-      </td>
-      <td style="text-align:left"><b>0.9.3</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Kafka header written correctly to messages in Source Types, Scriptable
-            Transform and Metadata Extractor.</li>
-        </ul>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-store-api.md">Event Store API</a>
-      </td>
-      <td style="text-align:left">0.8.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
-      </td>
-      <td style="text-align:left"><b>0.6.7</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration to skip the validation that latest Kafka offset is
-            present in Event Store.</li>
-        </ul>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/belt-extractor.md">Belt Extractor</a>
-      </td>
-      <td style="text-align:left"><b>0.9.2</b>
-      </td>
-      <td style="text-align:left">
-        <p>Fixes:</p>
-        <ul>
-          <li>Improved exception handling within Belt callback function so that exceptions
-            are written into dead letter queue, logged, and the exception counter is
-            increased.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/belt-api.md">Belt API</a>
-      </td>
-      <td style="text-align:left"><b>0.8.4</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added Kubernetes requests settings for CPU and memory to Belt model.</li>
-          <li>Extended Belt specific log output with Belt ID as context.</li>
-          <li>Added DLQ name to Belt return model.</li>
-          <li>Added FlyWay for database migrations.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/profile-updater.md">Profile Updater</a>
-      </td>
-      <td style="text-align:left">0.6.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/profile-store-api.md">Profile Store API</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/segment-creation-api.md">Segment Management API</a>
-      </td>
-      <td style="text-align:left">0.9.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/segment-manager.md">Segment Manager</a>
-      </td>
-      <td style="text-align:left">0.8.6</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
-      </td>
-      <td style="text-align:left"><b>0.8.1</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added flexibel mode to Segment Creation</li>
-          <li>All modes provide configuration to be persistent or to be using a view</li>
-          <li>Persistent segment creation does not delete old segment while new version
-            is created.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
-      </td>
-      <td style="text-align:left"><b>0.5.1 (based on Presto 0.339)</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Introduced wildcard permissions to view all tables within a DB schema.</li>
-          <li>Introduced write mode (requires specific Keycloak configuration on user
-            level)</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/graphql-api.md">GraphQL API</a>
-      </td>
-      <td style="text-align:left"><b>0.10.0</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added possibility to access Kafka events using GraphQL API.</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li><b>BREAKING CHANGE:</b> Helm chart uses list for docker secrets, see
-            <a
-            href="../migration-guide/">Migration Guide</a>
-          </li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/granary-ui.md">Granary UI</a>
-      </td>
-      <td style="text-align:left"><b>0.10.0</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added Event Browser for Belt and Harvester Detail views.</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li><b>BREAKING CHANGE:</b> Helm chart uses list for docker secrets, see
-            <a
-            href="../migration-guide/">Migration Guide</a>
-          </li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/reaper.md">Reaper</a>
-      </td>
-      <td style="text-align:left"><b>0.8.0</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li><b>BREAKING CHANGE</b>: Reaper now requires a special index on Profile
-            Store. See installation documentation for details.</li>
-          <li>Increased performance to now reap multiple thousands expired grains per
-            sec.</li>
-          <li>Added configuration to restrict reaping to certain Profile Type or Grain
-            paths.</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>Fixed Event Type lookup pagination.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-explorer-ui.md">Event Explorer UI</a>
-      </td>
-      <td style="text-align:left">0.2.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/citus-postgresql.md">Citus PostgreSQL</a>
-      </td>
-      <td style="text-align:left">8.1.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Kafka</a>
-      </td>
-      <td style="text-align:left">5.1.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Zookeeper</a>
-      </td>
-      <td style="text-align:left">5.1.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/kafka-manager.md">Kafka Manager</a>
-      </td>
-      <td style="text-align:left">0.5.3</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
-      </td>
-      <td style="text-align:left">4.5.0.Final</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
-      </td>
-      <td style="text-align:left">6.6.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/zipkin.md">Zipkin Server</a>
-      </td>
-      <td style="text-align:left">0.6.3 (based on Open Zipkin 2.12)</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md">Data Lineage Report</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-  </tbody>
-</table>
+| Granary Component                                                                                   | Release Version                                                      | Release Notes                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Granary Base](../installation/with-helm/granary-base-deployment.md)                                | **0.9.3**                                                            | <p>Fixes:</p><ul><li>Improved encryption key generation documentation</li><li>Added harvester api roles to Keycloak base realm.json</li></ul>                                                                                                                                                                                                                                                                         |
+| [Ambassador](https://github.com/datawire/ambassador-chart)                                          | 1.0.0                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Snowplow Scala Stream Collector API](../installation/with-helm/snowplow-scala-stream-collector.md) | 0.6.1 (based on Snowplow v0.15.0)                                    | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Harvester API](../installation/with-helm/harvester-api/)                                           | **0.9.5**                                                            | <p>Fixes:</p><ul><li>Fixed issues with lower cases event type names if supplying event type display name with mixed casing.</li></ul><p></p>                                                                                                                                                                                                                                                                          |
+| [Spring Cloud Dataflow Server and Skipper](../installation/with-helm/spring-cloud-data-flow.md)     | 0.6.2 **** (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE) | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Spring Cloud Data Flow Apps](../installation/with-helm/harvester-api/getting-started.md)           | **0.9.3**                                                            | <p>Features:</p><ul><li>Kafka header written correctly to messages in Source Types, Scriptable Transform and Metadata Extractor.</li></ul><p></p>                                                                                                                                                                                                                                                                     |
+| [Event Store API](../installation/with-helm/event-store-api.md)                                     | 0.8.2                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Event Feeder](../installation/with-helm/event-feeder.md)                                           | **0.6.7**                                                            | <p>Features:</p><ul><li>Added configuration to skip the validation that latest Kafka offset is present in Event Store.</li></ul><p></p>                                                                                                                                                                                                                                                                               |
+| [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md)                              | **0.9.2**                                                            | <p>Fixes:</p><ul><li>Improved exception handling within Belt callback function so that exceptions are written into dead letter queue, logged, and the exception counter is increased.</li></ul>                                                                                                                                                                                                                       |
+| [Belt API](../installation/with-helm/belt-api.md)                                                   | **0.8.4**                                                            | <p>Features:</p><ul><li>Added Kubernetes requests settings for CPU and memory to Belt model.</li><li>Extended Belt specific log output with Belt ID as context.</li><li>Added DLQ name to Belt return model.</li><li>Added FlyWay for database migrations.</li></ul>                                                                                                                                                  |
+| [Profile Updater](../installation/with-helm/profile-updater.md)                                     | 0.6.1                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Profile Store API](../installation/with-helm/profile-store-api.md)                                 | 0.8.1                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ****[Segment Management API](../installation/with-helm/segment-creation-api.md)                     | 0.9.2                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Segment Manager](../installation/with-helm/segment-manager.md)                                     | 0.8.6                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Segment Table Creator](../../developer-reference/dataflow/segment-store/)                          | **0.8.1**                                                            | <p>Features:</p><ul><li>Added flexibel mode to Segment Creation</li><li>All modes provide configuration to be persistent or to be using a view</li><li>Persistent segment creation does not delete old segment while new version is created.</li></ul>                                                                                                                                                                |
+| [Segment Store API](../installation/with-helm/segment-store-api.md)                                 | **0.5.1 (based on Presto 0.339)**                                    | <p>Features:</p><ul><li>Introduced wildcard permissions to view all tables within a DB schema.</li><li>Introduced write mode (requires specific Keycloak configuration on user level)</li></ul>                                                                                                                                                                                                                       |
+| [GraphQL API](../installation/with-helm/graphql-api.md)                                             | **0.10.0**                                                           | <p>Features:</p><ul><li>Added possibility to access Kafka events using GraphQL API.</li></ul><p>Fixes:</p><ul><li><strong>BREAKING CHANGE:</strong> Helm chart uses list for docker secrets, see <a href="../migration-guide/">Migration Guide</a></li></ul>                                                                                                                                                          |
+| [Granary UI](../installation/with-helm/granary-ui.md)                                               | **0.10.0**                                                           | <p>Features:</p><ul><li>Added Event Browser for Belt and Harvester Detail views.</li></ul><p>Fixes:</p><ul><li><strong>BREAKING CHANGE:</strong> Helm chart uses list for docker secrets, see <a href="../migration-guide/">Migration Guide</a></li></ul>                                                                                                                                                             |
+| [Reaper](../installation/with-helm/reaper.md)                                                       | **0.8.0**                                                            | <p>Features:</p><ul><li><strong>BREAKING CHANGE</strong>: Reaper now requires a special index on Profile Store. See installation documentation for details. </li><li>Increased performance to now reap multiple thousands expired grains per sec.</li><li>Added configuration to restrict reaping to certain Profile Type or Grain paths.</li></ul><p>Fixes:</p><ul><li>Fixed Event Type lookup pagination.</li></ul> |
+| [Event Explorer UI](../installation/with-helm/event-explorer-ui.md)                                 | 0.2.0                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Citus PostgreSQL](../installation/with-helm/citus-postgresql.md)                                   | 8.1.1                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Confluent Kafka](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)                | 5.1.2                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Confluent Zookeeper](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)            | 5.1.2                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Kafka Manager](../installation/with-helm/kafka-manager.md)                                         | 0.5.3                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Keycloak](https://github.com/helm/charts/tree/master/stable/keycloak)                              | 4.5.0.Final                                                          | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Grafana](https://github.com/helm/charts/tree/master/stable/grafana)                                | 6.6.0                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Zipkin Server](../installation/with-helm/zipkin.md)                                                | 0.6.3 (based on Open Zipkin 2.12)                                    | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [Data Lineage Report](../../developer-reference/api-reference/lineage-report.md)                    | 0.8.1                                                                | -                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 
 
@@ -736,369 +188,32 @@ The new platform stability features add self-healing capabilities and help Grana
 
 
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Granary Component</th>
-      <th style="text-align:left">Release Version</th>
-      <th style="text-align:left">Release Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/datawire/ambassador-chart">Ambassador</a>
-      </td>
-      <td style="text-align:left">1.0.0</td>
-      <td style="text-align:left">see <a href="https://github.com/datawire/ambassador/releases/tag/v1.0.0">Ambassador Release Notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/snowplow-scala-stream-collector.md">Snowplow Scala Stream Collector API</a>
-      </td>
-      <td style="text-align:left"><b>0.6.1</b> (based on Snowplow v0.15.0)</td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Probes</li>
-          <li>Added a probe that determines availability of Kafka brokers</li>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/">Harvester API</a>
-      </td>
-      <td style="text-align:left"><b>0.9.4</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Probes</li>
-          <li>Added a probe that determines availability of database</li>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>RUNNING_BUT_OUTDATED state returned in case <em>latest</em> event type version
-            is used and <em>latest</em> was updated</li>
-          <li>Harmonized API return codes with other APIs (GKI_2020_0007, GKI_2020_0008)</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/spring-cloud-data-flow.md">Spring Cloud Dataflow Server and Skipper</a>
-      </td>
-      <td style="text-align:left"><b>0.6.2</b> (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE)</td>
-      <td
-      style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Probes</li>
-          <li>Added a probe that determines availability of database</li>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/harvester-api/getting-started.md">Spring Cloud Data Flow Apps</a>
-      </td>
-      <td style="text-align:left"><b>0.9.2</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Introduced OpenJ9 JVM to save up to 50% memory consumption</li>
-          <li>Added configuration for Kubernetes Probes</li>
-          <li>Added a probe that determines availability of Kafka brokers and database
-            (GKI_2019_0029)</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-store-api.md">Event Store API</a>
-      </td>
-      <td style="text-align:left"><b>0.8.2</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Probes</li>
-          <li>Added a probe that determines availability of database</li>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>Harmonized API return codes with other APIs</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-feeder.md">Event Feeder</a>
-      </td>
-      <td style="text-align:left"><b>0.6.5</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-        <p></p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/belt-extractor.md">Belt Extractor</a>
-      </td>
-      <td style="text-align:left"><b>0.9.1</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Configured Granary&apos;s common log format</li>
-          <li>Configured non-root user to run the belt</li>
-          <li>Added belt-id as Kafka header of output messages</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/belt-api.md">Belt API</a>
-      </td>
-      <td style="text-align:left"><b>0.8.2</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Probes for Belt-API and Belts</li>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget for Belt-API and Belts</li>
-          <li>Configured Granary&apos;s common log format</li>
-          <li>Added logic that Belts are deployed with a non-root user</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>Harmonized API return codes with other APIs (GKI_2020_0009)</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/profile-updater.md">Profile Updater</a>
-      </td>
-      <td style="text-align:left"><b>0.6.1</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Refactored code-base to become a Spring-Boot application</li>
-          <li>Added configuration for Kubernetes Probes</li>
-          <li>Added a probe that determines availability of Kafka Broker and database</li>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>Kafka Profile Updater consumers are considered as dead by broker if the
-            are too slow in event processing (GKI_2020_0010)</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/profile-store-api.md">Profile Store API</a>
-      </td>
-      <td style="text-align:left"><b>0.8.1</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Probes</li>
-          <li>Added a probe that determines availability of database</li>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>Harmonized API return codes with other APIs</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">&lt;b&gt;&lt;/b&gt;<a href="../installation/with-helm/segment-creation-api.md">Segment Management API</a>
-      </td>
-      <td style="text-align:left"><b>0.9.2</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Probes</li>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>Harmonized API return codes with other APIs</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/segment-manager.md">Segment Manager</a>
-      </td>
-      <td style="text-align:left"><b>0.8.6</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/dataflow/segment-store/">Segment Table Creator</a>
-      </td>
-      <td style="text-align:left"><b>0.7.4</b>
-      </td>
-      <td style="text-align:left">
-        <p>Fixes:</p>
-        <ul>
-          <li>Removed restriction of maximum 63 characters in pivot segment by introducing
-            aliases</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/segment-store-api.md">Segment Store API</a>
-      </td>
-      <td style="text-align:left"><b>0.5.0 (based on Presto 0.339)</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Upgraded Presto to version 339</li>
-          <li>Enabled Topic browsing (via Kafka connector)</li>
-          <li>Added headers to Kafka connector</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/graphql-api.md">GraphQL API</a>
-      </td>
-      <td style="text-align:left"><b>0.9.2</b>
-      </td>
-      <td style="text-align:left">See full <a href="https://github.com/syncier/grnry-graphql-api/releases/tag/0.9.0">release notes</a>.</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/granary-ui.md">Granary UI</a>
-      </td>
-      <td style="text-align:left"><b>0.9.2</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added Harvester creation wizard</li>
-          <li>Added Harvester detail &amp; edit view</li>
-          <li>Added Harvester state management</li>
-          <li>Added restart mechanism for Belts</li>
-        </ul>
-        <p>See full <a href="https://github.com/syncier/grnry-react-frontend-admin/releases/tag/0.9.0">release notes</a>.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/reaper.md">Reaper</a>
-      </td>
-      <td style="text-align:left"><b>0.7.8</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-          <li>Configured Granary&apos;s common log format</li>
-          <li>Added configuration for log level</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/event-explorer-ui.md">Event Explorer UI</a>
-      </td>
-      <td style="text-align:left">0.2.0</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/citus-postgresql.md">Citus PostgreSQL</a>
-      </td>
-      <td style="text-align:left">8.1.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Kafka</a>
-      </td>
-      <td style="text-align:left">5.1.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/confluentinc/cp-helm-charts/tree/master/charts">Confluent Zookeeper</a>
-      </td>
-      <td style="text-align:left">5.1.2</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/kafka-manager.md">Kafka Manager</a>
-      </td>
-      <td style="text-align:left"><b>0.5.3</b>
-      </td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/keycloak">Keycloak</a>
-      </td>
-      <td style="text-align:left">4.5.0.Final</td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="https://github.com/helm/charts/tree/master/stable/grafana">Grafana</a>
-      </td>
-      <td style="text-align:left"><b>6.6.0</b>
-      </td>
-      <td style="text-align:left">-</td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../installation/with-helm/zipkin.md">Zipkin Server</a>
-      </td>
-      <td style="text-align:left"><b>0.6.3</b> (based on Open Zipkin 2.12)</td>
-      <td style="text-align:left">
-        <p>Features:</p>
-        <ul>
-          <li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector,
-            Security Context and podDisruptionBudget</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><a href="../../developer-reference/api-reference/lineage-report.md">Data Lineage Report</a>
-      </td>
-      <td style="text-align:left">0.8.1</td>
-      <td style="text-align:left">-</td>
-    </tr>
-  </tbody>
-</table>
-
+| Granary Component                                                                                   | Release Version                                                     | Release Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Ambassador](https://github.com/datawire/ambassador-chart)                                          | 1.0.0                                                               | see [Ambassador Release Notes](https://github.com/datawire/ambassador/releases/tag/v1.0.0)                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [Snowplow Scala Stream Collector API](../installation/with-helm/snowplow-scala-stream-collector.md) | **0.6.1** (based on Snowplow v0.15.0)                               | <p>Features:</p><ul><li>Added configuration for Kubernetes Probes</li><li>Added a probe that determines availability of Kafka brokers</li><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul>                                                                                                                                                                                                                                     |
+| [Harvester API](../installation/with-helm/harvester-api/)                                           | **0.9.4**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Probes</li><li>Added a probe that determines availability of database</li><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul><p>Fixes:</p><ul><li>RUNNING_BUT_OUTDATED state returned in case <em>latest</em> event type version is used and <em>latest</em> was updated</li><li>Harmonized API return codes with other APIs (GKI_2020_0007, GKI_2020_0008)</li></ul>  |
+| [Spring Cloud Dataflow Server and Skipper](../installation/with-helm/spring-cloud-data-flow.md)     | **0.6.2** (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE) | <p>Features:</p><ul><li>Added configuration for Kubernetes Probes</li><li>Added a probe that determines availability of database</li><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul>                                                                                                                                                                                                                                          |
+| [Spring Cloud Data Flow Apps](../installation/with-helm/harvester-api/getting-started.md)           | **0.9.2**                                                           | <p>Features:</p><ul><li>Introduced OpenJ9 JVM to save up to 50% memory consumption</li><li>Added configuration for Kubernetes Probes</li><li>Added a probe that determines availability of Kafka brokers and database (GKI_2019_0029)</li><li>Configured Granary's common log format</li></ul><p></p>                                                                                                                                                                                                                                                       |
+| [Event Store API](../installation/with-helm/event-store-api.md)                                     | **0.8.2**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Probes</li><li>Added a probe that determines availability of database</li><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul><p>Fixes:</p><ul><li>Harmonized API return codes with other APIs</li></ul>                                                                                                                                                                |
+| [Event Feeder](../installation/with-helm/event-feeder.md)                                           | **0.6.5**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul><p></p>                                                                                                                                                                                                                                                                                                                                                    |
+| [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md)                              | **0.9.1**                                                           | <p>Features:</p><ul><li>Configured Granary's common log format</li><li>Configured non-root user to run the belt</li><li>Added belt-id as Kafka header of output messages</li></ul>                                                                                                                                                                                                                                                                                                                                                                          |
+| [Belt API](../installation/with-helm/belt-api.md)                                                   | **0.8.2**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Probes for Belt-API and Belts</li><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget for Belt-API and Belts</li><li>Configured Granary's common log format</li><li>Added logic that Belts are deployed with a non-root user</li></ul><p>Fixes:</p><ul><li>Harmonized API return codes with other APIs (GKI_2020_0009)</li></ul>                                                                                                |
+| [Profile Updater](../installation/with-helm/profile-updater.md)                                     | **0.6.1**                                                           | <p>Features:</p><ul><li>Refactored code-base to become a Spring-Boot application</li><li>Added configuration for Kubernetes Probes</li><li>Added a probe that determines availability of Kafka Broker and database</li><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul><p>Fixes:</p><ul><li>Kafka Profile Updater consumers are considered as dead by broker if the are too slow in event processing (GKI_2020_0010)</li></ul> |
+| [Profile Store API](../installation/with-helm/profile-store-api.md)                                 | **0.8.1**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Probes</li><li>Added a probe that determines availability of database</li><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul><p>Fixes:</p><ul><li>Harmonized API return codes with other APIs</li></ul>                                                                                                                                                                |
+| ****[Segment Management API](../installation/with-helm/segment-creation-api.md)                     | **0.9.2**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Probes</li><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul><p>Fixes:</p><ul><li>Harmonized API return codes with other APIs</li></ul>                                                                                                                                                                                                                               |
+| [Segment Manager](../installation/with-helm/segment-manager.md)                                     | **0.8.6**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li></ul>                                                                                                                                                                                                                                                                                                                                                           |
+| [Segment Table Creator](../../developer-reference/dataflow/segment-store/)                          | **0.7.4**                                                           | <p>Fixes:</p><ul><li>Removed restriction of maximum 63 characters in pivot segment by introducing aliases</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| [Segment Store API](../installation/with-helm/segment-store-api.md)                                 | **0.5.0 (based on Presto 0.339)**                                   | <p>Features:</p><ul><li>Upgraded Presto to version 339</li><li>Enabled Topic browsing (via Kafka connector)</li><li>Added headers to Kafka connector</li></ul>                                                                                                                                                                                                                                                                                                                                                                                              |
+| [GraphQL API](../installation/with-helm/graphql-api.md)                                             | **0.9.2**                                                           | See full [release notes](https://github.com/syncier/grnry-graphql-api/releases/tag/0.9.0).                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [Granary UI](../installation/with-helm/granary-ui.md)                                               | **0.9.2**                                                           | <p>Features:</p><ul><li>Added Harvester creation wizard</li><li>Added Harvester detail &#x26; edit view</li><li>Added Harvester state management</li><li>Added restart mechanism for Belts</li></ul><p>See full <a href="https://github.com/syncier/grnry-react-frontend-admin/releases/tag/0.9.0">release notes</a>.</p>                                                                                                                                                                                                                                   |
+| [Reaper](../installation/with-helm/reaper.md)                                                       | **0.7.8**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li><li>Configured Granary's common log format</li><li>Added configuration for log level</li></ul>                                                                                                                                                                                                                                                                                                                 |
+| [Event Explorer UI](../installation/with-helm/event-explorer-ui.md)                                 | 0.2.0                                                               | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [Citus PostgreSQL](../installation/with-helm/citus-postgresql.md)                                   | 8.1.1                                                               | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [Confluent Kafka](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)                | 5.1.2                                                               | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [Confluent Zookeeper](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)            | 5.1.2                                                               | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [Kafka Manager](../installation/with-helm/kafka-manager.md)                                         | **0.5.3**                                                           | <p>Features:</p><ul><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                          |
+| [Keycloak](https://github.com/helm/charts/tree/master/stable/keycloak)                              | 4.5.0.Final                                                         | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [Grafana](https://github.com/helm/charts/tree/master/stable/grafana)                                | **6.6.0**                                                           | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [Zipkin Server](../installation/with-helm/zipkin.md)                                                | **0.6.3** (based on Open Zipkin 2.12)                               | <p>Features:</p><ul><li>Added configuration for Kubernetes Tolerations, Affinity, NodeSelector, Security Context and podDisruptionBudget</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                          |
+| [Data Lineage Report](../../developer-reference/api-reference/lineage-report.md)                    | 0.8.1                                                               | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
