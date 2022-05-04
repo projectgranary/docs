@@ -452,19 +452,11 @@ Search string for users.
 
 {% swagger baseUrl="https://api.grnry.io" path="/projects/:project-name/users/:user-id" method="post" summary="Add User to Project" %}
 {% swagger-description %}
-Adds the user to the specified project with roles set in request body.
+Adds the user to the specified project with roles set in request body.&#x20;
 
+If `enableJdbcApiAccessToProjectSchema` is enabled for Project API deployment, this additionally adds the keycloak role for the project's database schema to access it via jdbc-api as described in section[#jdbc-api-a.k.a.-segment-store-api](../../operator-reference/identity-and-access-management/granary-access-clients.md#jdbc-api-a.k.a.-segment-store-api "mention").\
 \
-
-
-
-
-\
-
-
-Requires the role 
-
-`data_owner`
+Requires the role `data_owner`
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="user-id" type="string" required="true" %}

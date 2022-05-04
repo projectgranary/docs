@@ -10,7 +10,7 @@ Granary Projects are represented as [Keycloak clients](https://www.keycloak.org/
 
 An example of the project (Keycloak client) entry in [JWT token](projects.md#overview-of-a-project):
 
-![](https://lh3.googleusercontent.com/eM7ljg0ges9EcPqd0p8NVekVtEZGF1h7LaogOjKL4AoKQO0pJ-N\_xdI8j32JqRVFaffuIuDm0YbUE8X9Oqo7hVBzw6C8fO5Fvix6bBsvUQ8usWlIei6VM0ItUZmr8GF6Og)
+<img src="https://lh3.googleusercontent.com/eM7ljg0ges9EcPqd0p8NVekVtEZGF1h7LaogOjKL4AoKQO0pJ-N_xdI8j32JqRVFaffuIuDm0YbUE8X9Oqo7hVBzw6C8fO5Fvix6bBsvUQ8usWlIei6VM0ItUZmr8GF6Og" alt="" data-size="original">
 
 When such JWT is received by a component's endpoint such as Belt API by URL&#x20;
 
@@ -56,5 +56,7 @@ For a better understanding of how projects are organized, let's review the proce
    3. Assign `data_owner` role to the current user&#x20;
 3. Create schema and technical user in PostgreSQL.
 4. Create Kubernetes secret with access credentials to PostgreSQL schema (technical user credentials).
+
+
 
 \
