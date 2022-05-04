@@ -721,7 +721,15 @@ JSON schema for event type data. Escaped string of schema needed. Only for reque
 
 `live_segment`
 
-.
+. The schema must contain an 
+
+`"id"`
+
+ field in the 
+
+`"properties"`
+
+ section.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="physicalLocations" type="array" %}
