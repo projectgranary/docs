@@ -27,6 +27,46 @@ description: Denotes release versions of Granary artifacts.
 * [Granary 0.5 Amy](https://docs.grnry.io/v/0.5-amy/operator-reference/granary-release-notes)
 * [Granary 0.4 Jimi](https://docs.grnry.io/v/0.4-jimi/operator-reference/granary-release-notes)
 
+## Granary 1.0.4 "Aretha" - 2022-05-05
+
+Patch release to solve CVE issues discovered in JDK [https://openjdk.java.net/groups/vulnerability/advisories/2022-04-19](https://openjdk.java.net/groups/vulnerability/advisories/2022-04-19)
+
+Patched JDK version is: JDK 322 b09
+
+| Granary Component                                                                                   | Release Version                                                     | Release Notes                                                                                                               |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [Ambassador](https://github.com/datawire/ambassador-chart)                                          | 1.0.0                                                               | -                                                                                                                           |
+| [Nginx](https://github.com/kubernetes/ingress-nginx)                                                | 0.41.2                                                              | -                                                                                                                           |
+| [Snowplow Scala Stream Collector API](../installation/with-helm/snowplow-scala-stream-collector.md) | **1.0.1** (based on Snowplow v0.15.0)                               | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [Harvester API](../installation/with-helm/harvester-api/)                                           | **1.0.4**                                                           | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [Spring Cloud Dataflow Server and Skipper](../installation/with-helm/spring-cloud-data-flow.md)     | **1.0.1** (based on Server 2.2.3.RELEASE and Skipper 2.1.4.RELEASE) | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [Spring Cloud Data Flow Apps](../installation/with-helm/harvester-api/getting-started.md)           | **1.0.4**                                                           | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [Event Store API](../installation/with-helm/event-store-api.md)                                     | **1.0.2**                                                           | <ul><li>Bump JDK version</li></ul><p>TODO double check version bump</p>                                                     |
+| [Event Feeder](../installation/with-helm/event-feeder.md)                                           | **1.0.2**                                                           | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [Belt Extractor](../../developer-reference/dataflow/belt-extractor.md)                              | 1.0.0                                                               | -                                                                                                                           |
+| [Belt API](../installation/with-helm/belt-api.md)                                                   | **1.0.1**                                                           | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [Profile Updater](../installation/with-helm/profile-updater.md)                                     | **1.0.3**                                                           | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [Profile Store API](../installation/with-helm/profile-store-api.md)                                 | **1.0.3**                                                           | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| ****[Segment Management API](../installation/with-helm/segment-creation-api.md)                     | 1.0.0                                                               | -                                                                                                                           |
+| [Segment Manager](../installation/with-helm/segment-manager.md)                                     | 1.0.0                                                               | -                                                                                                                           |
+| [Segment Table Creator](../../developer-reference/dataflow/segment-store/)                          | 1.0.1                                                               | -                                                                                                                           |
+| [Segment Store API](../installation/with-helm/segment-store-api.md)                                 | **1.0.2** (based on Presto 0.339)                                   | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [GraphQL API](../installation/with-helm/graphql-api.md)                                             | 1.0.1                                                               | -                                                                                                                           |
+| [Granary UI](../installation/with-helm/granary-ui.md)                                               | 1.0.1                                                               | -                                                                                                                           |
+| [Reaper](../installation/with-helm/reaper.md)                                                       | **1.0.2**                                                           | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| ****[Granary GrApp Importer](../installation/with-helm/grapp-importer.md)                           | **1.0.1**                                                           | <ul><li>Bump JDK version</li></ul>                                                                                          |
+| [Granary Base Deployment](../installation/with-helm/granary-base-deployment.md)                     | 1.0.0                                                               | -                                                                                                                           |
+| ****[PostgreSQL](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)                  | 11.10.0                                                             | -                                                                                                                           |
+| [Confluent Kafka](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)                | 5.5.0                                                               | -                                                                                                                           |
+| [Confluent Zookeeper](https://github.com/confluentinc/cp-helm-charts/tree/master/charts)            | 5.5.0                                                               | -                                                                                                                           |
+| [Kafka Manager](../installation/with-helm/kafka-manager.md)                                         | **1.0.3**                                                           | <ul><li>Bump JDK version</li></ul><p>TODO double check version bump</p>                                                     |
+| [Keycloak](https://github.com/helm/charts/tree/master/stable/keycloak)                              | **1.0.0** (based on jboss/keycloak 11.0.3)                          | <ul><li>Still based on external helm chart</li><li>Including patched 11.0.3 keycloak image, with JDK version bump</li></ul> |
+| [Grafana](https://github.com/helm/charts/tree/master/stable/grafana)                                | 6.6.0                                                               | -                                                                                                                           |
+| [Granary Grafana Dashboards](../installation/with-helm/grafana-dashboards.md)                       | 1.0.0                                                               | -                                                                                                                           |
+| [Zipkin Server](../installation/with-helm/zipkin.md)                                                | **1.0.2** (based on Open Zipkin 2.12)                               | <ul><li>Bump JDK version</li></ul>                                                                                          |
+
+##
+
 ## Granary 1.0.3 "Aretha" - 2022-03-08
 
 | Granary Component                                                                                   | Release Version                                                 | Release Notes                                                     |
@@ -61,7 +101,7 @@ description: Denotes release versions of Granary artifacts.
 | [Granary Grafana Dashboards](../installation/with-helm/grafana-dashboards.md)                       | 1.0.0                                                           | -                                                                 |
 | [Zipkin Server](../installation/with-helm/zipkin.md)                                                | 1.0.0 (based on Open Zipkin 2.12)                               | -                                                                 |
 
-##
+
 
 ## Granary 1.0.2 "Aretha" - 2021-08-12
 
