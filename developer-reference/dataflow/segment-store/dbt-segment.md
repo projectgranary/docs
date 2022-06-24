@@ -6,13 +6,13 @@ description: Reference page how data segmentation is done in Granary with DBT
 
 ## Introduction
 
-Granary uses [dbt](https://www.getdbt.com) Framework to define segments and the [Belt API](../../api-reference/belt-api.md#create-and-store-a-belt) to execute their creation.
+Granary uses [dbt](https://www.getdbt.com/) Framework to define segments and the [Belt API](../../api-reference/belt-api.md#create-and-store-a-belt) to execute their creation.
 
 dbt performs data transformation using a `select` statements which converts Profile or Raw Event data into segments. Depending upon the configuration, the segment can be accessed as Table/View against Event Store or Profile Store.&#x20;
 
 Each segment will be created in the project's database schema. The user is not responsible to define or configure any DDL statements. Table/Views will be created by DBT Framework. So no extra configuration required. The dbt segment creation is executed with the [project's database user](../../projects.md#docs-internal-guid-06a5e216-7fff-927b-e181-d2437d40037b).
 
-The users can access Views/Tables inside that schema using Granary's built-in SQL web console [SQLPad](https://getsqlpad.com). Users who don't have permission to access that project cannot access the segment.
+The users can access Views/Tables inside that schema using Granary's built-in SQL web console [SQLPad](https://getsqlpad.com/). Users who don't have permission to access that project cannot access the segment.
 
 The available storage layers are **PostgreSQL** (AWS Aurora / Azure Postgres) that is configured for Granary.
 
@@ -132,8 +132,6 @@ SQL SELECT goes here
 SQL SELECT goes here
 ```
 
-
-
 ### **Cron Expression**
 
 Use CRON syntax to specify when you'd like your job to run. CRON syntax is very expressive, and allows you to completely customize your run schedule.
@@ -148,7 +146,9 @@ Use CRON syntax to specify when you'd like your job to run. CRON syntax is very 
 0 0 * * 1: At midnight UTC every Monday.
 ```
 
-To use cron expression place your syntax in the belt definition as described below.
+To use a cron expression, place your syntax in the belt definition as described below.
+
+
 
 ```json
 {
@@ -168,3 +168,10 @@ To use cron expression place your syntax in the belt definition as described bel
 	"cronExpression": "*/1 * * * *"
 }
 ```
+
+### Testing Trigger
+
+To allow for quicker testing the trigger operation can also be performed, this will cause the cronjob to be triggered immediately, rather than waiting for the cron expression to schedule.
+
+See more details about the trigger in the [API docs](../../api-reference/belt-api.md#manipulate-a-belts-state).
+

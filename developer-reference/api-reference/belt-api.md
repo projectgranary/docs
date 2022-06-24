@@ -1601,13 +1601,17 @@ Possible values for the status attribute in the response body for **"dbt-segment
 | FAILED\_BUT\_OUTDATED    | Last job execution was not successful and belt configuration was updated. The Job will execute again on next schedule based on the old belt configuration.                                               |
 | STOPPED                  | Job is not deployed on the cluster                                                                                                                                                                       |
 
-{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="post" summary="Manipulate a Belt" %}
+{% swagger baseUrl="https://api.grnry.io" path="/projects/{project-name}/belts/:id/state" method="post" summary="Manipulate a Belt's State" %}
 {% swagger-description %}
 Update the status of the Belt's Kubernetes deployment. The Keycloak user needs to have the e_ditor_ roles defined for the Belt.
 
 Body example:
 
 `{"action": "START"}`
+
+`TRIGGER` causes the belt cronjob to schedule immediately,  this allows for testing/evaluation before waiting for the cron expression to schedule. Note: TRIGGER is only allowed when the belt is in `READY` state.
+
+
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="project-name" type="string" required="false" %}
@@ -1633,7 +1637,7 @@ Authentication token
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="action" type="string" required="true" %}
-The action to be performed "START" or "STOP"
+The action to be performed "START", "STOP" or "TRIGGER"
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}
