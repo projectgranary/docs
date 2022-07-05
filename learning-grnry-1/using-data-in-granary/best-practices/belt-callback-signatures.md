@@ -8,7 +8,7 @@ description: Examples for the signature of the callback's mandatory execute() me
 
 `execute(event_headers, event_payload[, profile])`
 
-where `profile` is a profile fetched from [Profile Store](../../../developer-reference/dataflow/profile-store/). This is only provided if `fetchProfile` in [Belt definition](../../../developer-reference/api-reference/belt-api.md#create-and-store-a-belt) is set to `true`.
+where `profile` is a profile fetched from [Profile Store](../../../developer-reference/dataflow/profile-store/). This is only provided if `fetchProfile` in [Belt definition](../../../developer-reference/api-reference/belt-api.md#create-and-store-a-belt) is set to `PREFETCH_WITH_HISTORY` or `PREFETCH`.
 
 #### Event Headers
 
@@ -181,7 +181,7 @@ Given a single request with the following body:
 }
 ```
 
-The belt extractor consuming from a batch Kafka topic can be equipped with the following Python callback function \(see Configuration section\):
+The belt extractor consuming from a batch Kafka topic can be equipped with the following Python callback function (see Configuration section):
 
 {% code title="callback.py" %}
 ```python
@@ -523,7 +523,7 @@ Given multiple requests with the following body:
 }
 ```
 
-the belt extractor consuming from a batch Kafka topic can be equipped with the following Python callback function \(see Configuration section\):
+the belt extractor consuming from a batch Kafka topic can be equipped with the following Python callback function (see Configuration section):
 
 {% code title="callback.py" %}
 ```python
@@ -593,5 +593,4 @@ def execute(event_headers, event_payload, profile=None):
 ```
 {% endcode %}
 
-## 
-
+##

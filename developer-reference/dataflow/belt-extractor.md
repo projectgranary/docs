@@ -4,9 +4,7 @@ description: A function-as-a-service like Python callback runtime
 
 # Python Belt Framework
 
-{% hint style="info" %}
 Since Granary 1.2 there is a second Belt type called dbt-segment available. This page only deals with the Python Belt.
-{% endhint %}
 
 ![Data flow within harmonized data zone of Granary](../../.gitbook/assets/dataflow\_profile.PNG)
 
@@ -264,42 +262,54 @@ Following rules are validated:
 * If `FETCH_PROFILE` is `lazy` or `false`&#x20;
   * The execute method can have only 2 parameters
   * In case of a 3rd parameter a default needs to be provided e.g. `profile=None`&#x20;
-* If `FETCH_PROFILE` is `true`&#x20;
+* If `FETCH_PROFILE` is `prefetch` or `prefetch_with_history`
   * The execute method needs to have exactly 3 parameters
 
 ### Data **Fetching**
 
 #### **Profile Store**
 
-In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` (`FETCH_PROFILE=true`) or by injecting the `profileClient` class into the callback module (`FETCH_PROFILE=lazy`). In case of "lazy fetch" the belt can use the profile client like this:
+In some cases it is necessary to fetch a profile from the Profile Store using the [Profile API](../api-reference/profile-store-api.md). This can be done by fetching the profile for every event based on the `correlation_id` (`FETCH_PROFILE=prefetched or FETCH_PROFILE=prefetch_with_history`) or by injecting the `profileClient` class into the callback module (`FETCH_PROFILE=lazy`). In case of a "lazy fetch" the belt is able to use the `getProfile()` method with the following signature:
 
 ```python
-profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'])
+def getProfile(self, correlation_id, profile_type=None, fragments=None, withHistory=None)
 ```
 
-The profile client uses the `PROFILE_TYPE` environment variable as default. To fetch a profile from another profile type, the type can be passed as a further optional parameter like this `getProfile(cid,profileType)`.
-
-Additionally only specific fragments of a profile can be fetched by adding another optional parameter to `getProfile` like this:
+Required parameters are `correlation_id` of type `str` and `withHistory` of type `bool`.
 
 ```python
-profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'], fragments=['/customer/name','/customer/adress','/invoiceDetails'])
+profile = profileClient.getProfile(correlation_id=event['metadata']['grnry-correlation-id'], withHistory=False)
 ```
 
-Similar to profile retrieval, grains can also be fetched:
+The profile client uses the `PROFILE_TYPE` environment variable as default value for `profile_type`. To fetch a profile of a different profile type, the type can be passed as an optional parameter like this `getProfile(my_cid, my_profileType, withHistory=False)`.
 
-```yaml
-profile = profileClient.getGrain(event['metadata']['grnry-correlation-id'])
+Additionally, it is possible to fetch specific fragments of a profile by setting another optional parameter of `getProfile` like this:
+
+```python
+profile = profileClient.getProfile(event['metadata']['grnry-correlation-id'], fragments=['/customer/name','/customer/adress','/invoiceDetails'], withHistory=False)
 ```
 
-The profile client uses the `PROFILE_TYPE` environment variable as default. To fetch grains of another profile type, the type can be passed as a further optional parameter like this `getGrain(cid,profileType).`
+Similar to profile retrieval, it is possible to fetch single grains using the `getGrain()` method that is defined as follows:
+
+```python
+def getGrain(self, correlation_id, profile_type=None, path='', pagesize=50, offset=0, withHistory=False)
+```
+
+Required parameters are `correlation_id` and `path` of type `str`.
+
+```python
+profile = profileClient.getGrain(event['metadata']['grnry-correlation-id'], '/full/path/to/grain')
+```
+
+The profile client uses the `PROFILE_TYPE` environment variable as default. To fetch grains of another profile type, the type can be passed as a further optional parameter like this `getGrain(correlation_in=my_cid, profile_type=my_profileType).`
 
 Additionally, query parameters can be used in the method: `pageSize`, `offset` and `withHistory`. The latter allows the retrieval of grain for latest point in time or of all grain versions paginated.
 
-```yaml
+```python
 profile = profileClient.getGrain(event['metadata']['grnry-correlation-id'],pageSize=50,offset=0,withHistory=False)
 ```
 
-Also, in order to get results, you must have the required roles as defined in the field reader. Otherwise, you will not get back any results.
+Also, in order to get results, the keycloak user that is available in the belt environment must have the required keycloak roles as defined in the profilestore field `'reader'`. Otherwise, it won't get back any results. If you have an existing keycloak user with their credentials stored in a kubernetes secret, you can make the credentials available to the belt by adding the secret to your belt definition via [belt api](../api-reference/belt-api.md#create-and-store-a-belt-python-callback).
 
 #### Event Store
 
@@ -317,7 +327,7 @@ If not using the [Belt API](../api-reference/belt-api.md) as deployment path, yo
 
 | Environment Variable         | Description                                                                                                                                        | Default |
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `FETCH_PROFILE`              | Enable profile fetching                                                                                                                            | `false` |
+| `FETCH_PROFILE`              | Enable profile fetching. Available values: `false`, `prefetch`, `prefetch_with_history`                                                            | `false` |
 | `PROFILE_URL`                | Profilestore base url                                                                                                                              | -       |
 | `EVENTSTORE_URL`             | Eventstore base url                                                                                                                                | -       |
 | `PROFILE_TYPE`               | Default profile type to fetch                                                                                                                      | `_d`    |

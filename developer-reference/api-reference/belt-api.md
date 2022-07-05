@@ -778,9 +778,9 @@ Determines if belt should be run in debug mode. Defaults to
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="fetchProfile" type="string" required="false" %}
-Determines if belt should fetch profiles from the Profile Store. Defaults to
+Determines whether a belt should fetch profiles from the Profile Store. Defaults to
 
-`FALSE`. Possible values:`["FALSE", "TRUE", "LAZY"]`
+`FALSE`. Possible values:`["FALSE", "PREFETCH_WITH_HISTORY", "PREFETH", "LAZY"]`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="profileType" type="string" required="false" %}

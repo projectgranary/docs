@@ -12,7 +12,7 @@ Granary 1.2 ships with Projects as multi-tenancy concept. To be able to create s
 
 If you do not want to use the Keycloak super-admin user "keycloak", you can create a new user in realm "master" and assign all roles in client `grnry-realm`:
 
-![](<../../.gitbook/assets/image (76).png>)
+<img src="../../.gitbook/assets/image (76).png" alt="" data-size="original">
 
 ### 2) Add `project-api` Keycloak client
 
@@ -236,10 +236,6 @@ Parameters set in `extra.extraEnv` are not taken into account any longer, e.g. `
 ### dbt Segments
 
 As seen in the previous step, the Belt API is now capable to deploy `dbt-segments`. Technically, these are Kubernetes CronJobs executing a dbt Docker image. The old [segment table creation templating language](https://docs.grnry.io/developer-reference/dataflow/segment-store/segment-table-creation) has been deprecated in Granary 1.2. The new dbt Docker image allows to deploy an arbitrary SQL `SELECT` statement as segment. Please refer to the new technical reference for details how to express the former `pivot` and `generic` segments as SQL `SELECT` statements.
-
-### Profile Store API
-
-The method `GET /profiles/:profileType/:correlationId` does not have the parameter `withHistory` anymore. For historic grain retrevial, use `GET /profiles/:profileType/:correlationId/grain/:path`.
 
 ## ArgoCD Setup Related Upgrade Steps
 

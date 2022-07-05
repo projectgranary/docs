@@ -26,3 +26,10 @@ extra:
 ```
 {% endcode %}
 
+### Updated Value Range for fetchProfile Belt Property
+
+{% hint style="danger" %}
+Value range of fetchProfile changed from \["TRUE", "FALSE", "LAZY"] to \["PREFETCH", "PREFETCH\_WITH\_HISTORY", "FALSE", "LAZY"] for Belt Images newer than 2.0.0.
+{% endhint %}
+
+To achieve a behavior equal to `fetchProfile="TRUE"` in older versions, set it to `"PREFETCH_WITH_HISTORY"`. This will prefetch the profile containing all data, including historical grains (not recommended). Otherwise, on `fetchProfile="PREFETCH"`, the profile will be prefetched as well, but will contain the latest grains only (recommended). Setting `fetchProfile="LAZY"` will force you to assign a value to the `withHistory` parameter on a `profileClient.getProfile()` method call.

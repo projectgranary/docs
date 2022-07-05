@@ -56,6 +56,18 @@ Filters the profile by grain/fragment path(s). You can define multiple path as a
 `/customer/name,/customer/adress,/invoiceDetails`
 {% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="withHistory" type="boolean" %}
+Determines if historic grains should be included in the returned JSON profile. Default is set to 
+
+`true`
+
+, but it is recommended to set it to 
+
+`false`
+
+, if the history is not needed (especially for big profiles).
+{% endswagger-parameter %}
+
 {% swagger-response status="200" description="A call for a specific profile, given profile type "_interaction" and correlationId "Session56202":
 
 https://hostname/profiles/_interaction/Session56202" %}
