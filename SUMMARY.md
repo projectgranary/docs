@@ -99,7 +99,7 @@
   * [With ArgoCD (Recommended)](operator-reference/installation/with-argocd-recommended.md)
   * [With Helm](operator-reference/installation/with-helm/README.md)
     * [Granary Base Deployment](operator-reference/installation/with-helm/granary-base-deployment.md)
-    * [Project Management API](operator-reference/installation/with-helm/project-management-api.md)
+    * [Management API](operator-reference/installation/with-helm/project-management-api.md)
     * [Snowplow Scala Stream Collector](operator-reference/installation/with-helm/snowplow-scala-stream-collector.md)
     * [Granary Kafka](operator-reference/installation/with-helm/granary-kafka.md)
     * [Kafka Manager](operator-reference/installation/with-helm/kafka-manager.md)
