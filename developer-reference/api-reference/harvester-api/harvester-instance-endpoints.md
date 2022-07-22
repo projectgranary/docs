@@ -861,7 +861,7 @@ Harvester description
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="displayName" type="string" %}
-Human readable name. Needs to be unique. A technical name will be derived from it.
+Human readable name. Needs to be unique. 
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="" %}
