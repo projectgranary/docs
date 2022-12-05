@@ -68,6 +68,26 @@ Determines if historic grains should be included in the returned JSON profile. D
 , if the history is not needed (especially for big profiles).
 {% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="resolveProfileLinks" type="boolean" %}
+If 
+
+`resolveProfileLinks`
+
+ is 
+
+`true`
+
+ first the DB will be queried to find a ProfileLink for the input 
+
+`correlationId`
+
+. If found, the Profile will be returned for the Linked Correlation Id, otherwise the Profile for the input 
+
+`correlationId`
+
+ will be returned
+{% endswagger-parameter %}
+
 {% swagger-response status="200" description="A call for a specific profile, given profile type "_interaction" and correlationId "Session56202":
 
 https://hostname/profiles/_interaction/Session56202" %}
@@ -269,6 +289,26 @@ Allows retrieval of historic grains not contained in the first page.
 
 {% swagger-parameter in="query" name="withHistory" type="boolean" %}
 Determines if for the grain only the latest version is returned or all version paginated.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" type="boolean" name="resolveProfileLinks" %}
+If 
+
+`resolveProfileLinks`
+
+ is 
+
+`true`
+
+ first the DB will be queried to find a ProfileLink for the input 
+
+`correlationId`
+
+. If found, the Profile will be returned for the Linked Correlation Id, otherwise the Profile for the input 
+
+`correlationId`
+
+ will be returned
 {% endswagger-parameter %}
 
 {% swagger-response status="200" description="A call for multiple versions of a specific grain with given profile type "grainProfile" and correlationId "28072021" and the path "customer/contract".

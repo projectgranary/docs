@@ -391,4 +391,22 @@ extraEnv:
 
 The Belt writes events to dead letter queue in case of exceptions are thrown during event processing within the belt framework, e.g. if an error occurs during the en-/decryption of messages. Exceptions thrown within the callback function are written into dead letter queue, logged and the exception counter is increased. Moreover, if other exceptions other than RetryException are raised, the `RETRY_MAX_RETRIES` is set to `0`, i.e. the message is will not be retried any longer.
 
-##
+## Profile Linking
+
+In Grnry Profile Linking is a feature to allow the resolving of incoming Profiles from the old correlation id to a newer one. This is useful for cases where the correlation id is derived from changing customer data, e.g. the hash of a contract number, which is then changed over time.
+
+The linking means for incoming Profiles, the Profile Store will be checked to see if a \`Profile Link\` grain exists, if so the value (new correlation id) will be retrieved, and instead the operation will be performed instead on the new correlation id.
+
+Furthermore `Kafka Partition Redirection` is implemented inside the Belt Framework. This ensures that when a Profile Link exists, the belt operations set the header of the Kafka message to the new correlationId, this ensure the operations on the Old/New correlation id will be sent to the same Kafka partition. Therefore processed by the same Kafka Profile Updater instance, ensuring greater consistency.
+
+Note: For safety `Profile Operations` & `Kafka Partition Redirection` will not be performed on the `delete` or `profile_update` operations.
+
+In order to create the Profile Link, the `_profile_link` operation should be used from one of the belts, this then creates a Profile Link grain with the following values:
+
+| Profile Store Column Name | Value              |
+| ------------------------- | ------------------ |
+| profile\_type             | profile\_link      |
+| path                      | /new               |
+| pit                       | \_latest           |
+| correlation\_id           | Old correlation id |
+| value                     | New correlation id |
